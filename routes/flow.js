@@ -24,4 +24,8 @@ router.get('/:flow_key', function(req, res, next){
 	res.render('flow', { data: flow._flow});
 });
 
+router.get('/update', function(req, res, next){
+	res.redirect('/flow/iscb')
+});
+
 module.exports = router;
