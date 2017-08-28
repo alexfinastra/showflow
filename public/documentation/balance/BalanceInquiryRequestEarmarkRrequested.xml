@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FndtMsg>
+	<Header>
+		<contextName>BalanceInquiry_with_Earmark</contextName>
+		<contextLocalName>BALINQ</contextLocalName>
+		<credentials>
+			<UserID>String</UserID>
+			<Role>String</Role>
+		</credentials>
+		<D_SKIP_PERSIST_ON_ERROR>0</D_SKIP_PERSIST_ON_ERROR>
+		<Workflow>String</Workflow>
+		<P_MID forCreation="false">11209G4837O30871</P_MID>
+		<deliveryTimestamp>2001-12-17T09:30:47-05:00</deliveryTimestamp>
+		<P_INIT_SRC_ID>GPP</P_INIT_SRC_ID>
+		<EventID>1112223334445556</EventID>
+	</Header>
+	<Msg>
+		<Pmnt>
+						…
+					</Pmnt>
+		<Extn>
+			<ProcessingPersistentInfo>
+				<DebitSide>
+					<P_DBT_MID_RATE>1.67</P_DBT_MID_RATE>
+					<P_DBT_RATE>1.67</P_DBT_RATE>
+					<P_DBT_RATE_USAGE_NM>Regular</P_DBT_RATE_USAGE_NM>
+					<P_DBT_SPREAD>0.5</P_DBT_SPREAD>
+					<P_DBT_CROSS_CONV>0</P_DBT_CROSS_CONV>
+				</DebitSide>
+			</ProcessingPersistentInfo>
+			<BalanceCheckInf>
+				<M_BI_INFO_LINE>
+					<F_BI_INFO_DEBIT_TYPE>MAIN</F_BI_INFO_DEBIT_TYPE>
+					<F_BI_INFO_ACCNO>123456789</F_BI_INFO_ACCNO>
+					<F_BI_INFO_ACC_CURRENCY>GBP</F_BI_INFO_ACC_CURRENCY>
+					<F_BI_INFO_ACC_OFFICE>XXX</F_BI_INFO_ACC_OFFICE>
+					<F_BI_INFO_ACC_TRANS_CD>TRN_DR</F_BI_INFO_ACC_TRANS_CD>
+					<F_BI_INFO_AMOUNT>100.0</F_BI_INFO_AMOUNT>
+					<F_BI_INFO_VALUE_DATE>2010-12-28+02:00</F_BI_INFO_VALUE_DATE>
+				</M_BI_INFO_LINE>
+				<M_BI_INFO_LINE>
+					<F_BI_INFO_DEBIT_TYPE>FEE</F_BI_INFO_DEBIT_TYPE>
+					<F_BI_INFO_ACCNO>26026</F_BI_INFO_ACCNO>
+					<F_BI_INFO_CURRENCY>GBP</F_BI_INFO_CURRENCY>
+					<F_BI_INFO_ACC_OFFICE>XXX</F_BI_INFO_ACC_OFFICE>
+					<F_BI_INFO_ACC_TRANS_CD>TRN_FDR</F_BI_INFO_ACC_TRANS_CD>
+					<F_BI_INFO_AMOUNT>1.0</F_BI_INFO_AMOUNT>
+					<F_BI_INFO_VALUE_DATE>2010-12-31+02:00</F_BI_INFO_VALUE_DATE>
+				</M_BI_INFO_LINE>
+			</BalanceCheckInf>
+		</Extn>
+	</Msg>
+</FndtMsg>

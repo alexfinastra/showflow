@@ -1,0 +1,17 @@
+{
+   "name": "MP Inward Credit Transfer",
+   "flowitems": [
+      {
+         "step": 1,
+         "type": "channel",
+         "interface_type": "FEEDER",
+         "interface_sub_type": ""
+      },
+      {
+         "step": 2,
+         "type": "interface",
+         "interface_type": "BI",
+         "interface_sub_type": "BI_IN"
+      }
+   ]
+}

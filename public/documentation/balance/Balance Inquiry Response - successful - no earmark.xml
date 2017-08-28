@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FndtMsg>
+	<Header>
+		<contextName>BalanceInquiry</contextName>
+		<contextLocalName>BALINQ</contextLocalName>
+		<credentials>
+			<UserID>String</UserID>
+			<Role>String</Role>
+		</credentials>
+		<Workflow>String</Workflow>
+		<P_MID forCreation="false">11209G4837O30871</P_MID>
+		<deliveryTimestamp>2001-12-17T09:30:47-05:00</deliveryTimestamp>
+		<P_INIT_SRC_ID>GPP</P_INIT_SRC_ID>
+	</Header>
+	<Msg>
+		<Pmnt>
+						…
+					</Pmnt>
+		<Extn>
+			<BalanceCheckInf>
+				<M_BI_INFO_LINE>
+					<F_BI_INFO_DEBIT_TYPE>MAIN</F_BI_INFO_DEBIT_TYPE>
+					<F_BI_INFO_ACCNO>123456789</F_BI_INFO_ACCNO>
+					<F_BI_INFO_ACC_CURRENCY>GBP</F_BI_INFO_ACC_CURRENCY>
+					<F_BI_INFO_ACC_OFFICE>XXX</F_BI_INFO_ACC_OFFICE>
+					<F_BI_INFO_ACC_TRANS_CD>TRN_DR</F_BI_INFO_ACC_TRANS_CD>
+					<F_BI_INFO_AMOUNT>100.0</F_BI_INFO_AMOUNT>
+					<F_BI_INFO_VALUE_DATE>2010-12-28+02:00</F_BI_INFO_VALUE_DATE>
+					<F_BI_INFO_BALANCE>160999.34</F_BI_INFO_BALANCE>
+				</M_BI_INFO_LINE>
+				<M_BI_INFO_LINE>
+					<F_BI_INFO_DEBIT_TYPE>FEE</F_BI_INFO_DEBIT_TYPE>
+					<F_BI_INFO_ACCNO>26026</F_BI_INFO_ACCNO>
+					<F_BI_INFO_CURRENCY>GBP</F_BI_INFO_CURRENCY>
+					<F_BI_INFO_ACC_OFFICE>XXX</F_BI_INFO_ACC_OFFICE>
+					<F_BI_INFO_ACC_TRANS_CD>TRN_FDR</F_BI_INFO_ACC_TRANS_CD>
+					<F_BI_INFO_AMOUNT>1.0</F_BI_INFO_AMOUNT>
+					<F_BI_INFO_VALUE_DATE>2010-12-31+02:00</F_BI_INFO_VALUE_DATE>
+					<F_BI_INFO_BALANCE>160.55</F_BI_INFO_BALANCE>
+				</M_BI_INFO_LINE>
+			</BalanceCheckInf>
+		</Extn>
+	</Msg>
+	<ResponseDetails>
+		<returnCode>1</returnCode>
+		<description>Balance Inquiry success</description>
+	</ResponseDetails>
+</FndtMsg>

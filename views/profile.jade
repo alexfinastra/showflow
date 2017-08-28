@@ -1,0 +1,113 @@
+extends layout
+
+block content
+  .container      
+    if record != null
+      if(model._type == 'interface') 
+        include utils/interface_docs
+      else
+        include utils/channel_docs      
+    else
+      .row
+        col-md-2
+          button.btn.btn-link(onclick="goBack()")
+            i.fa.fa-arrow-circle-left.fa-2x.mr-2
+        col-md-10
+           h2.mt-1 Create a new profile
+    br
+    br
+    .container
+      if record != null
+        h5.ml-2 Interface card as it appears in Payment Flows       
+        ul.timeline
+          - var profile = true
+          - var current = model.to_flowitem(record["ROW"], model._type)
+          if (model._type == 'interface')            
+            include flowitems/interface_profile
+          else
+            include flowitems/channel_profile
+        br
+        br
+      form
+        .form-group.row
+          label.col-sm-3.col-form-label(for='inputName') Start here --->
+          .col-sm-6            
+            include utils/interface_types
+            br
+            br 
+            include utils/interface_sub_types
+        br
+        .form-group.row
+          label.col-sm-3.col-form-label(for='inputName') interface name
+          .col-sm-6
+            input#inputName.w-100.form-control(type='text', placeholder='name of the banks application', value=((record != null) ? record["INTERFACE_NAME"] :  "")) 
+        br
+        .form-group.row
+          label.col-sm-3.col-form-label(for='inputName') notes, comments, memo
+          .col-sm-6
+            textarea#interfaceFormControlTextarea.w-100.form-control(rows="3")
+        br
+        .fieldset.form-group.row
+          legend.col-form-legend.col-sm-3 bank will 
+          .col-sm-6
+            .form-check
+              label.form-check-label
+                input#gridDirection1.form-check-input(type='radio', name='gridDirection', value='I', checked = ((record != null) ? (record["REQUEST_DIRECTION"] == "I") :  ""))
+                span Send us messages (IN)
+            .form-check
+                label.form-check-label
+                input#gridDirection2.form-check-input(type='radio', name='gridDirection', value='O', checked = ((record != null) ? (record["REQUEST_DIRECTION"] == "O") :  ""))
+                span Receive our messages (OUT)
+        br
+        .form-group.row.pb-3.pt-3.mt-2
+          label.col-sm-3 
+            b To 
+            span interface [request]
+          .col-sm-6
+            .form-check.w-100
+              label.form-check-label
+                input#gridRequest1.form-check-input(type='radio', name='gridRequest', value='FILE', checked = ((record != null) ? (record["REQUEST_PROTOCOL"] == "FILE") :  "") )
+                span File (shared folder)
+            .form-check.w-100
+                label.form-check-label
+                input#gridRequest2.form-check-input(type='radio', name='gridRequest', value='MQ', checked = ((record != null) ? (record["REQUEST_PROTOCOL"] == "MQ") :  "") )
+                span MQ (Java Message Queue)
+            br            
+            include utils/message_format
+            br
+            br
+            input#inputRequestConnPoint.form-control.w-100(type='text', placeholder='connection point', readonly, value=((record != null) ? record["REQUEST_CONNECTIONS_POINT"] :  "") )
+            br
+            a.btn.btn-link.text-info( href="#") 
+              i.fa.fa-hand-o-up
+              span.ml-2 
+              | Please validate Message Format , for better performance :) (click)
+        br
+        .form-group.row.pb-3.pt-3.mt-2
+          label.col-sm-3 
+            b From 
+            span interface [response]
+          .col-sm-6
+            .form-check
+              label.form-check-label
+                input#gridResponse1.form-check-input(type='radio', name='gridResponse', value='FILE', checked = ((record != null) ? (record["RESPONSE_PROTOCOL"] == "FILE") :  ""))
+                span File (shared folder)
+            .form-check
+                label.form-check-label
+                input#gridResponse2.form-check-input(type='radio', name='gridResponse', value='MQ', checked = ((record != null) ? (record["RESPONSE_PROTOCOL"] == "MQ") :  ""))
+                span MQ (Java Message Queue)
+            br            
+            include utils/message_format
+            br
+            br
+            input#inputResponseConnPoint.form-control.w-100(type='text', placeholder='connection point', readonly, value=((record != null) ? record["RESPONSE_CONNECTIONS_POINT"] :  ""))
+            br
+            a.btn.btn-link.text-info( href="#") 
+              i.fa.fa-hand-o-up
+              span.ml-2 
+              | Please validate Message Format , for better performance :) (click)          
+        br
+        .form-group.row
+          .offset-sm-2.col-sm-10
+            button.btn.btn-primary(type='submit') Save profile
+

@@ -1,0 +1,20 @@
+.modal.fade(id = "ModalSimilars_" + current["id"]  ,tabindex="-1", role="dialog", aria-labelledby="flowModalLabel", aria-hidden="true")
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header.bg-info.text-white
+        h5#flowModalLabel.modal-title Select similars 
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true')&times;
+      .modal-body
+        .row
+          each similar in similars 
+            .list-group.mr-2.ml-2
+              - var uhref = '/flow/update/oscb/channel_feeder_in'
+              a.list-group-item.list-group-item-action.flex-column.align-items-start(href= uhref)
+                .row
+                  h5.mb-1.col-md-3 #{similar["title"]}                  
+                  p.mb-1.col-md-9
+                    | A INTERFACE_TYPES.DESCRIPTION field should be populated with the name and resposibility of the bank system. Coments and Notes will be mostly welcomed in this field also.
+            br
+            
+               

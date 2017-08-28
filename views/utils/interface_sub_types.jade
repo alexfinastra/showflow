@@ -1,0 +1,57 @@
+- var value = (record != null) ? record["INTERFACE_SUB_TYPE"] : ""
+select#interface_subtype.w-100.custom-select(name="INTERFACE_SUB_TYPE")
+  option select Sub Type
+  option.text-success(value="", disabled) ---- Compliance ----              
+  option(value="COMPLIANCE_IN", selected=("COMPLIANCE_IN" == value)) Compliance Incoming
+  option(value="COMPLIANCE_OUT_PREDEBIT", selected=("COMPLIANCE_OUT_PREDEBIT" == value)) Compliance Outgoing Pre Debit
+  option(value="COMPLIANCE_OUT_PREPOSTING", selected=("COMPLIANCE_OUT_PREPOSTING" == value)) Compliance Outgoing Pre Posting
+  option(value="MP_BULK_COMPLIANCE_IN_RESPONSE", selected=("MP_BULK_COMPLIANCE_IN_RESPONSE" == value)) Mass Payment Bulk Compliance Response (IN)
+  option(value="MP_COMPLIANCE_IN_RESPONSE", selected=("MP_COMPLIANCE_IN_RESPONSE" == value)) Mass Payment Compliance Response (IN)
+  option(value="MP_COMPLIANCE_OUT_REQUEST", selected=("MP_COMPLIANCE_OUT_REQUEST" == value)) Mass Payment Compliance Request (OUT)
+  option(value="NPP_COMPLIANCE_OUT_PREDEBIT", selected=("NPP_COMPLIANCE_OUT_PREDEBIT" == value)) NPP Compliance Outgoing Pre Debit
+  option(value="NPP_COMPLIANCE_OUT_PREPOSTING", selected=("NPP_COMPLIANCE_OUT_PREPOSTING" == value)) NPP Compliance Outgoing Pre Posting
+  option(value="UPI_COMPLIANCE", selected=("UPI_COMPLIANCE" == value)) UPI Compliance
+  option.text-success(value="", disabled) ---- Balance Inquiry ----
+  option(value="BI_IN", selected=("BI_IN" == value)) Balance Inquiry Incoming
+  option(value="FNDT_BI_EARMARK_RLS", selected=("FNDT_BI_EARMARK_RLS" == value)) Funding Balance Inquiry Earmark RLS
+  option(value="FNDT_BI_OUT", selected=("FNDT_BI_OUT" == value)) Funding Balance Inquiry Outgoing
+  option(value="FNDT_BI_OUT_EARMARK", selected=("FNDT_BI_OUT_EARMARK" == value)) Funding Balance Inquiry Earmark Outgoing
+  option(value="FNDT_BI_RESPONSE", selected=("FNDT_BI_RESPONSE" == value)) Funding Balance Inquiry Response
+  option(value="MP_BI_OUT_FOR_BLK", selected=("MP_BI_OUT_FOR_BLK" == value)) Mass Payment Balance Inquiry Outgoing for Bulk
+  option(value="MP_BI_OUT_FOR_SNGL", selected=("MP_BI_OUT_FOR_SNGL" == value)) Mass Payment Balance Inquiry Outgoing for Single
+  option(value="MP_BI_OUT_FOR_SNGL_EARMARK", selected=("MP_BI_OUT_FOR_SNGL_EARMARK" == value)) Mass Payment Balance Inquiry Outgoing for Single Earmark
+  option.text-success(value="", disabled) ---- Accounting System ----
+  option(value="BLK_HV_POSTING_OUT", selected=("BLK_HV_POSTING_OUT" == value)) Bulk High Value Posting Outgoing
+  option(value="BLK_MP_POSTING_OUT", selected=("BLK_MP_POSTING_OUT" == value)) Bulk Mass Payment Posting Outgoing
+  option(value="CLEARING_POSTNG_REQ", selected=("CLEARING_POSTNG_REQ" == value)) Clearing Posting Request
+  option(value="CREDIT_POSTNG_REQ", selected=("CREDIT_POSTNG_REQ" == value)) Credit Posting Request
+  option(value="DEBT_POSTNG_REQ", selected=("DEBT_POSTNG_REQ" == value)) Debit Posting Request
+  option(value="EDO_POSTING_NEW", selected=("EDO_POSTING_NEW" == value)) New EDO Posting
+  option(value="EDO_SINGLE_STORE", selected=("EDO_SINGLE_STORE" == value)) EDO Single Store
+  option(value="HV_POST_OUT", selected=("HV_POST_OUT" == value)) High Value Posting Outgoing
+  option(value="INUPI_MSG_POSTING_OUT", selected=("INUPI_MSG_POSTING_OUT" == value)) Incoming UPI Posting Outgoing
+  option(value="MP_POST_OUT", selected=("MP_POST_OUT" == value)) Mass Payment Posting Outgoing
+  option(value="MSG_POSTING_RESPONSE", selected=("MSG_POSTING_RESPONSE" == value)) Message Posting Response
+  option(value="MSG_POSTING_OUT", selected=("MSG_POSTING_OUT" == value)) Message Posting Outgoing
+  option(value="MTFR_POSTING_REQ", selected=("MTFR_POSTING_REQ" == value)) MTFR Posting Request
+  option(value="MTFR_POSTING_RESP", selected=("MTFR_POSTING_RESP" == value)) MTFR Posting Response
+  option(value="NPP_POSTING_REQUEST", selected=("NPP_POSTING_REQUEST" == value)) NPP Posting Request
+  option(value="NPP_POSTING_RESPONSE", selected=("NPP_POSTING_RESPONSE" == value)) NPP Posting Response
+  option(value="POSTING_IN", selected=("POSTING_IN" == value)) Posting Incoming
+  option(value="POSTING_OUT", selected=("POSTING_OUT" == value)) Posting Outgoing
+  option.text-success(value="", disabled) ---- Account Lookup ----
+  option(value="ACCLKP_IN", selected=("ACCLKP_IN" == value)) Incoming CDB
+  option(value="BLKMNDTDBT", selected=("BLKMNDTDBT" == value)) Debit bulk CDB
+  option(value="CR", selected=("CR" == value)) Credit CDB
+  option(value="CR_BLK", selected=("CR_BLK" == value)) Credit bulk CDB
+  option(value="CR_MP_CDB_SYNC", selected=("CR_MP_CDB_SYNC" == value)) Credit Mass Payment CDB Sync
+  option(value="CR_UCPP", selected=("CR_UCPP" == value)) Credit UCPP
+  option(value="DEB_MND", selected=("DEB_MND" == value)) Debit Mandate 
+  option(value="DR", selected=("DR" == value)) Debit CDB
+  option(value="DR_BLK", selected=("DR_BLK" == value)) Debit Bulk CDB
+  option(value="DR_MP_CDB_SYNC", selected=("DR_MP_CDB_SYNC" == value)) Debit Mass Payment CDB Sync
+  option(value="DR_UCPP", selected=("DR_UCPP" == value)) Debit UCPP
+  option(value="MNDT_ACCLKP_IN", selected=("MNDT_ACCLKP_IN" == value)) Mandate CDB Incoming
+  option(value="TCH_ACCLKP_IN", selected=("TCH_ACCLKP_IN" == value)) TCH CDB Incoming
+  option.text-success(value="", disabled,) ---- Advising ----
+  option(value="ADVISING", selected=("ADVISING" == value)) Advising

@@ -1,0 +1,17 @@
+<FndtMsg xmlns="http://fundtech.com/SCL/CommonTypes">
+	<Header>
+		<contextName>Response1</contextName>
+		<credentials>
+			<UserID>EPE</UserID>
+			<Role>EPE</Role>
+		</credentials>
+		<Workflow>SWIFT</Workflow>
+		<P_MID>GACSF41092KB010G</P_MID>
+		<deliveryTimestamp>2016-12-11T21:49:41.371+02:00</deliveryTimestamp>
+		<P_INIT_SRC_ID>GPP</P_INIT_SRC_ID>
+		<EventId>GACSF41092KB010G</EventId>
+	</Header>
+	<ResponseDetails>
+		<returnCode>0</returnCode>
+	</ResponseDetails>
+</FndtMsg>

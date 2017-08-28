@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FndtMsg>
+	<Header>
+		<contextName>Posting</contextName>
+		<contextLocalName>FINANCIAL_POSTING</contextLocalName>
+		<credentials>
+			<UserID>String</UserID>
+			<Role>String</Role>
+		</credentials>
+		<Workflow>String</Workflow>
+		<P_MID forCreation="false">11209G4837O30871</P_MID>
+		<deliveryTimestamp>2001-12-17T09:30:57-05:00</deliveryTimestamp>
+		<P_INIT_SRC_ID>HOST_XXX</P_INIT_SRC_ID>
+	</Header>
+	<Msg>
+		<Pmnt/>
+		<Extn>
+			<ReferenceData>
+				<M_DBT_CUST_PROFILE>
+					<F_DBT_CUST_STOPFLAGFROM>1</F_DBT_CUST_STOPFLAGFROM>
+					<F_DBT_CUST_FROMREASON>Dormant</F_DBT_CUST_FROMREASON>
+					<F_DBT_CUST_STOPFLAGTO>1</F_DBT_CUST_STOPFLAGTO>
+					<F_DBT_CUST_TOREASON>Dormant</F_DBT_CUST_TOREASON>
+				</M_DBT_CUST_PROFILE>
+			</ReferenceData>
+		</Extn>
+	</Msg>
+	<ResponseDetails>
+		<returnCode>996</returnCode>
+		<description>Posting Restriction</description>
+	</ResponseDetails>
+</FndtMsg>

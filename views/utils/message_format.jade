@@ -1,0 +1,12 @@
+- var value = (record != null) ? record["REQUEST_FORMAT_TYPE"] : ""
+select.custom-select.w-100
+  option select Message Format 
+  option(value="CDB_EXT_REQ_CR", selected=("CDB_EXT_REQ_CR" == value)) Extended Credit Account Lookup Request
+  option(value="CDB_EXT_REQ_DR", selected=("CDB_EXT_REQ_DR" == value)) Extended Debit Account Lookup Request
+  option(value="CDB_OUT_CR_DEFAULT", selected=("CDB_OUT_CR_DEFAULT" == value)) Outgoing Credit Account Lookup (default)
+  option(value="CDB_OUT_DR_DEFAULT", selected=("CDB_OUT_DR_DEFAULT" == value)) Outgoing Debit Account Lookup (default)
+  option(value="FLAT_FILE", selected=("FLAT_FILE" == value)) Flat File
+  option(value="FULL", selected=("FULL" == value)) Full FNDT Message
+  option(value="OFAC_REQ", selected=("OFAC_REQ" == value)) Compliance Request
+  option(value="POSTING", selected=("POSTING" == value)) Accounting System
+  option(value="PROPRIETRY", selected=("PROPRIETRY" == value)) Proprietary

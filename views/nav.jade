@@ -1,0 +1,21 @@
+
+- var navmenu = { Channels: '/channel', Interfaces: '/interface' }
+
+nav.navbar.fixed-top.navbar-toggleable-md.navbar-light.bg-faded(style="background-color: #e3f2fd;")
+  .container
+    a.navbar-brand(href='/flow') Payment 
+      b Flows       
+    each href, key in navmenu      
+      a.nav-link.navbar-toggler-right(style="color: black;", href=href)= key      
+    // Example split danger button
+    .btn-group
+      button.btn.btn-primary(type='button')
+        i.fa.fa-cog
+        span.ml-2
+        |Configuration
+      button.btn.btn-primary.dropdown-toggle.dropdown-toggle-split(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+        span.sr-only Toggle Dropdown
+      .dropdown-menu
+        a.dropdown-item(href='/folder/exports') Export setup
+        .dropdown-divider
+        a.dropdown-item(href='/logout') Exit

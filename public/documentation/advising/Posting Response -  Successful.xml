@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FndtMsg>
+	<Header>
+		<contextName>Posting</contextName>
+		<contextLocalName>FINANCIAL_POSTING</contextLocalName>
+		<credentials>
+			<UserID>String</UserID>
+			<Role>String</Role>
+		</credentials>
+		<Workflow>String</Workflow>
+		<P_MID forCreation="false">11209G4837O30871</P_MID>
+		<deliveryTimestamp>2001-12-17T09:30:57-05:00</deliveryTimestamp>
+		<P_INIT_SRC_ID>HOST_XXX</P_INIT_SRC_ID>
+	</Header>
+	<Msg>
+		<Pmnt/>
+	</Msg>
+	<ResponseDetails>
+		<returnCode>1</returnCode>
+		<description>Posting success</description>
+	</ResponseDetails>
+</FndtMsg>

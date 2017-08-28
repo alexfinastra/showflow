@@ -1,0 +1,51 @@
+extends layout
+
+block content
+  .container
+    if type == 'interface'
+      h1 On going standard interfaces
+    else
+      h1 Payments, uploads, notifications, etc...
+    br
+    blockquote.blockquote
+      if type == 'interface'
+        p Standard interfaces gruped by type and ordered by sub type. Auto-refresh, instant monitoring, content validations, documentation reference are applied.
+      else
+        p Data sources or consumers are united into channels. Also grouped by type and ordered by subtype. Auto-refresh, instant monitoring, content validations, documentation reference are applied.   
+      - var href = "/" + type + "/new"
+      a.btn.btn-outline-success.mt-2(href=href, role="button", aria-disabled="true")
+        i.fa.fa-plus
+        span.ml-2 Add new #{type}
+    br
+    -var index = 0
+    each key in keys   
+      br      
+      h3 #{key}            
+      br            
+      table.table.table-hover
+        thead
+          tr.row.text-success
+            th.col-md-1 Office         
+            th.col-md-5 Sub Type
+            th.col-md-4 Name
+            th.col-md-1 Dir
+            th.col-md-1
+        tbody  
+          each obj in values[index++]          
+            tr.row.text-dark(class = obj["INTERFACE_STATUS"] == "ACTIVE" ? "on" : "off")                    
+              th.col-md-1(scope="row") #{obj["OFFICE"]}
+              td.col-md-5 #{obj["DESCRIPTION"]}
+              td.col-md-4 #{obj["INTERFACE_NAME"]}
+              td.col-md-1
+                if obj["REQUEST_DIRECTION"] == "I"
+                  span IN
+                else
+                  span OUT                            
+              td.col-md-1
+                if obj["INTERFACE_STATUS"] == "ACTIVE"
+                  - var href = "/" + type + "/profile/" + obj["ROW"]
+                  a.btn.btn-success.hoverbutton(href= href)
+                    i.fa.fa-pencil-square-o
+                    span.ml-2  Edit
+
+

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FndtMsg>
+	<Header>
+		<contextName>DebitAccountLookup</contextName>
+		<contextLocalName>DRACCLOOK</contextLocalName>
+		<credentials>
+			<UserID>String</UserID>
+			<Role>String</Role>
+		</credentials>
+		<Workflow>String</Workflow>
+		<P_MID forCreation="false">11209G4837O30871</P_MID>
+		<deliveryTimestamp>2001-12-17T09:30:57-05:00</deliveryTimestamp>
+		<P_INIT_SRC_ID>HOST_XXX</P_INIT_SRC_ID>
+	</Header>
+	<Msg>
+		<Pmnt/>
+		<Extn>
+			<ProcessingPersistentInfo>
+				<DebitSide>
+					<P_DBT_ACCT_NB>123456789</P_DBT_ACCT_NB>
+					<P_DBT_ACCT_CCY>GBP</P_DBT_ACCT_CCY>
+					<P_DBT_ACCT_OFFICE>XX1</P_DBT_ACCT_OFFICE>
+				</DebitSide>
+			</ProcessingPersistentInfo>
+			<ReferenceData>
+				<M_DBT_CUST_PROFILE>
+					<F_DBT_CUST_CUST_CATEGORY>YYY</F_DBT_CUST_CUST_CATEGORY>
+					<F_DBT_CUST_CUST_NAME>Katota Inv Sector FZE</F_DBT_CUST_CUST_NAME>
+					<F_DBT_CUST_PROFESSION>ZZZZ</F_DBT_CUST_PROFESSION>
+					<F_DBT_CUST_SWIFT_ID>BISFAEA1</F_DBT_CUST_SWIFT_ID>
+					<F_DBT_CUST_ABA>211122232</F_DBT_CUST_ABA>
+					<F_DBT_CUST_ALIAS>2111</F_DBT_CUST_ALIAS>
+					<F_DBT_CUST_FEE_ACCOUNT_NO>2244667788</F_DBT_CUST_FEE_ACCOUNT_NO>
+					<F_DBT_CUST_FEE_ACCOUNT_CCY>USD</F_DBT_CUST_FEE_ACCOUNT_CCY>
+					<F_DBT_CUST_FEE_ACCOUNT_OFFICE>XX1</F_DBT_CUST_FEE_ACCOUNT_OFFICE>
+					<F_DBT_CUST_COUNTRYCODE>AE</F_DBT_CUST_COUNTRYCODE>
+					<F_DBT_CUST_CITY>RAS AL KHAIMAH</F_DBT_CUST_CITY>
+					<F_DBT_CUST_ADDRESS1>Business Center 04, Floor 6</F_DBT_CUST_ADDRESS1>
+					<F_DBT_CUST_ADDRESS2>Business Park, 610a, Free Trade Zon</F_DBT_CUST_ADDRESS2>
+				</M_DBT_CUST_PROFILE>
+				<M_DBT_ACCOUNT>
+					<F_DBT_ACCT_ASSET>1</F_DBT_ACCT_ASSET>
+					<F_DBT_ACCT_BOOKNG_ENT>xxx</F_DBT_ACCT_BOOKNG_ENT>
+					<F_DBT_ACCT_ACC_TYPE>VOS</F_DBT_ACCT_ACC_TYPE>
+					<F_DBT_ACCT_IS_RESIDENT>1</F_DBT_ACCT_IS_RESIDENT>
+				</M_DBT_ACCOUNT>
+				<M_CONTACT_LINE>
+					<F_CONTACT_OF>DR_ACC</F_CONTACT_OF>
+					<F_CONTACT_NAME>Jack Wilson</F_CONTACT_NAME>
+					<F_CONTACT_DESCRIPTION>Relationship Manager</F_CONTACT_DESCRIPTION>
+					<F_CONTACT_PHONE>97254222334456</F_CONTACT_PHONE>
+					<F_CONTACT_FAX>97254222334111</F_CONTACT_FAX>
+					<F_CONTACT_EMAIL>jack.wilson@katota.com</F_CONTACT_EMAIL>
+					<F_DBT_CUST_ADDRESS1>Business Center 04, Floor 6</F_DBT_CUST_ADDRESS1>
+					<F_DBT_CUST_ADDRESS2>Business Park, 610a, Free Trade Zon</F_DBT_CUST_ADDRESS2>
+					<F_DBT_CUST_ADDRESS3> RAS AL KHAIMAH, AE</F_DBT_CUST_ADDRESS3>
+				</M_CONTACT_LINE>
+				<M_CONTACT_LINE>
+					<F_CONTACT_OF>DR_ACC</F_CONTACT_OF>
+					<F_CONTACT_NAME>Laora Adams</F_CONTACT_NAME>
+					<F_CONTACT_DESCRIPTION>Head Relationship Manager</F_CONTACT_DESCRIPTION>
+					<F_CONTACT_PHONE>97254222334666</F_CONTACT_PHONE>
+					<F_CONTACT_FAX>97254222334111</F_CONTACT_FAX>
+					<F_CONTACT_EMAIL>laora.adams@katota.com</F_CONTACT_EMAIL>
+					<F_DBT_CUST_ADDRESS1>Business Center 04, Floor 6</F_DBT_CUST_ADDRESS1>
+					<F_DBT_CUST_ADDRESS2>Business Park, 610a, Free Trade Zon</F_DBT_CUST_ADDRESS2>
+					<F_DBT_CUST_ADDRESS3> RAS AL KHAIMAH, AE</F_DBT_CUST_ADDRESS3>
+				</M_CONTACT_LINE>
+			</ReferenceData>
+		</Extn>
+	</Msg>
+	<ResponseDetails>
+		<returnCode>1</returnCode>
+		<description>Account Lookup success</description>
+	</ResponseDetails>
+</FndtMsg>
