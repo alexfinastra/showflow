@@ -49,11 +49,10 @@ oracledb.getConnection(
     connection.execute(
       // The statement to execute
       "SELECT * " +
-        "FROM interface_types " +
-        "WHERE office = :office",
+        "FROM interface_types ",
 
       // The "bind value" 180 for the "bind variable" :id
-      ['***'],
+      [],
 
       // Optional execute options argument, such as the query result format
       // or whether to get extra metadata
