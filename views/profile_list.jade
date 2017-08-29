@@ -32,20 +32,21 @@ block content
             th.col-md-1
         tbody  
           each obj in values[index++]          
-            tr.row.text-dark(class = obj["INTERFACE_STATUS"] == "ACTIVE" ? "on" : "off")                    
-              th.col-md-1(scope="row") #{obj["OFFICE"]}
-              td.col-md-5 #{obj["DESCRIPTION"]}
-              td.col-md-4 #{obj["INTERFACE_NAME"]}
-              td.col-md-1
-                if obj["REQUEST_DIRECTION"] == "I"
-                  span IN
-                else
-                  span OUT                            
-              td.col-md-1
-                if obj["INTERFACE_STATUS"] == "ACTIVE"
-                  - var href = "/" + type + "/profile/" + obj["ROW"]
-                  a.btn.btn-success.hoverbutton(href= href)
-                    i.fa.fa-pencil-square-o
-                    span.ml-2  Edit
+            .row
+              tr.text-dark(class = obj["INTERFACE_STATUS"] == "ACTIVE" ? "on" : "off")                                 
+                th.col-md-1(scope="row") #{obj["OFFICE"]}
+                td.col-md-5 #{obj["DESCRIPTION"]}
+                td.col-md-4 #{obj["INTERFACE_NAME"]}
+                td.col-md-1
+                  if obj["REQUEST_DIRECTION"] == "I"
+                    span IN
+                  else
+                    span OUT                            
+                td.col-md-1
+                  if obj["INTERFACE_STATUS"] == "ACTIVE"
+                    - var href = "/" + type + "/profile/" + obj["ROW"]
+                    a.btn.btn-success.hoverbutton(href= href)
+                      i.fa.fa-pencil-square-o
+                      span.ml-2  Edit
 
 
