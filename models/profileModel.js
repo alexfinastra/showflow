@@ -169,6 +169,8 @@ function Profile(type){
       this._collection.push(data[i]);
     }
   }
+
+  console.log(oracledb);
   
 }
 
