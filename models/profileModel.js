@@ -178,7 +178,7 @@ var doquery_data = function (conn, cb) {
         var data = [];
         for (var i = 0; i < result.rows.length; i++){
           var obj = {};
-          for(var k = 0; k< result.metaData.length; k++){
+          for(var k = 0; k < result.metaData.length; k++){
             obj[result.metaData[k]["name"]] = result.rows[i][k];
           }
           data.push(obj);
@@ -217,7 +217,9 @@ function Profile(type){
   this._values = null;
   this._collection = [];  
   this._type = type; 
-  
+}
+
+method.load_data = function(){
   async.waterfall(
   [
     doconnect,    
@@ -229,8 +231,6 @@ function Profile(type){
     if (conn)
       dorelease(conn);
   });
-
-  console.log(this._collection);
 }
 
 method.reset = function(){
