@@ -1,13 +1,5 @@
-var oracledb = require('oracledb');
-var async = require('async');
 var fs = require('fs');
 var method = Profile.prototype
-
-getdatafromfile = function(data){
-  var filePath = './interfaces_list_3.json';
-  data = JSON.parse(fs.readFileSync(filePath, 'utf8')); 
-}
-
 
 interface_type = function(type){
   var types = [ 'OFAC', 
@@ -149,88 +141,35 @@ get_status_class = function(obj){
     return status;
 };
 
-var doconnect = function(cb) {
-  oracledb.getConnection(
-    {
-      user          : "HVPRDT_465_NFT01",
-      password      : "payplus1",
-      connectString : "GPP12C"
-    },
-    cb);
-};
 
-var dorelease = function(conn) {
-  conn.close(function (err) {
-    if (err)
-      console.error(err.message);
-  });
-};
+function Profile(type){
+  this._keys = null; 
+  this._values = null;
+  this._collection = [];  
+  this._type = type;
 
-var selectQuery = "SELECT ROWNUM, OFFICE, INTERFACE_NAME, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, INTERFACE_STATUS, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE FROM interface_types "
-var doquery_data = function (conn, cb) {
-  conn.execute(
-    selectQuery,
-    function(err, result)
-    {
-      if (err) {
-        return cb(err, conn);
-      } else {
-        var data = [];
-        for (var i = 0; i < result.rows.length; i++){
-          var obj = {};
-          for(var k = 0; k < result.metaData.length; k++){
-            obj[result.metaData[k]["name"]] = result.rows[i][k];
-          }
-          data.push(obj);
-        }       
-        return cb(null, conn, data);
-      }
-    });
-};
-
-var populate_collection = function(conn, data, cb){
+  var filePath = './interfaces_list_3.json';
+  var data = JSON.parse(fs.readFileSync(filePath, 'utf8')); 
   for(var i=0; i<data.length; i++){    
-    if(this._type == 'interface'){
+    if(type == 'interface'){
       if( interface_type(data[i]["INTERFACE_TYPE"]) != null ){
         this._collection.push(data[i]);
       }
       continue;
     }
 
-    if(this._type == 'channel'){
+    if(type == 'channel'){
       if( channel_type(data[i]["INTERFACE_TYPE"]) != null ){
         this._collection.push(data[i]);
       }
       continue;
     }
 
-    if(this._type == 'all'){
+    if(type == 'all'){
       this._collection.push(data[i]);
     }
   }
-
-  return cb(null, conn);
-}
-
-function Profile(type){
-  this._keys = null; 
-  this._values = null;
-  this._collection = [];  
-  this._type = type; 
-}
-
-method.load_data = function(){
-  async.waterfall(
-  [
-    doconnect,    
-    doquery_data,
-    populate_collection
-  ],
-  function (err, conn) {
-    if (err) { console.error("In waterfall error cb: ==>", err, "<=="); }
-    if (conn)
-      dorelease(conn);
-  });
+  
 }
 
 method.reset = function(){
