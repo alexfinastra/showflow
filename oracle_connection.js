@@ -37,8 +37,8 @@ var oracledb = require('oracledb');
 // Get a non-pooled connection
 oracledb.getConnection(
   {
-    user          : "HVPRDT465NFT01",
-    password      : "HVPRDT465NFT01",
+    user          : "HVPRDT_465_NFT01",
+    password      : "payplus1",
     connectString : "GPP12C"
   },
   function(err, connection)
@@ -48,7 +48,8 @@ oracledb.getConnection(
       return;
     }
     connection.execute(
-      "SELECT ROWNUM, OFFICE, INTERFACE_NAME, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, INTERFACE_STATUS, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE " + 
+      //"SELECT ROWNUM, OFFICE, INTERFACE_NAME, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, INTERFACE_STATUS, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE " + 
+      "select JSON_OBJECT('ROW' IS ROWNUM, 'OFFICE' IS t.office) interface " + 
       "FROM interface_types ",
       // The "bind value" 180 for the "bind variable" :id
       [],
@@ -67,6 +68,8 @@ oracledb.getConnection(
         }
         console.log(result.metaData); // [ { name: 'DEPARTMENT_ID' }, { name: 'DEPARTMENT_NAME' } ]
         console.log(result.rows);     // [ [ 180, 'Construction' ] ]
+        for (var i = 0; i < result.rows.length; i++)
+          console.log(result.rows[i][0]);
         doRelease(connection);
       });
   });
