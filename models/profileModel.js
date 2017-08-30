@@ -1,5 +1,58 @@
+var oracledb = require('oracledb');
 var fs = require('fs');
 var method = Profile.prototype
+
+var dbConnection = {
+    user          : "HVPRDT_465_NFT01",
+    password      : "payplus1",
+    connectString : "GPP12C"
+  };
+
+var selectQuery = "SELECT ROWNUM, OFFICE, INTERFACE_NAME, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, INTERFACE_STATUS, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE FROM interface_types "
+
+getDBRawData = function(data){
+  oracledb.getConnection(dbConnection,
+    function(err, connection)
+    {
+      if (err) {
+        console.error(err.message);
+        return;
+      }    
+      
+      connection.execute(selectQuery, [],      
+        function(err, result)
+        {
+          if (err) {
+            console.error(err.message);
+            doRelease(connection);
+            return;
+          }          
+          for (var i = 0; i < result.rows.length; i++){
+            var obj = {};
+            for(var k = 0; k< result.metaData.length; k++){
+              obj[result.metaData[k]["name"]] = result.rows[i][k];
+            }
+            data.push(obj);
+          }
+          doRelease(connection);
+        });
+    });    
+}
+
+getFileRawData = function(data){
+  var filePath = './interfaces_list_3.json';
+  data = JSON.parse(fs.readFileSync(filePath, 'utf8')); 
+}
+
+doRelease = function (connection)
+{
+  connection.close(
+    function(err) {
+      if (err) {
+        console.error(err.message);
+      }
+    });
+}
 
 interface_type = function(type){
   var types = [ 'OFAC', 
@@ -148,8 +201,9 @@ function Profile(type){
   this._collection = [];  
   this._type = type;
 
-  var filePath = './interfaces_list_3.json';
-  var data = JSON.parse(fs.readFileSync(filePath, 'utf8')); 
+  var data = [];
+  getDBRawData(data);  
+  
   for(var i=0; i<data.length; i++){    
     if(type == 'interface'){
       if( interface_type(data[i]["INTERFACE_TYPE"]) != null ){
