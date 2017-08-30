@@ -142,6 +142,38 @@ get_status_class = function(obj){
 };
 
 
+
+
+const oracledb = require('oracledb');
+const config = {
+    user          : "HVPRDT_465_NFT01",
+    password      : "payplus1",
+    connectString : "GPP12C"
+  };
+
+var selectQuery = "SELECT ROWNUM, OFFICE, INTERFACE_NAME, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, INTERFACE_STATUS, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE FROM interface_types "
+
+async function getInterfaces() {
+  let conn;
+
+  try {
+    conn = await oracledb.getConnection(config);
+
+    const result = await conn.execute(
+      var selectQuery = "SELECT ROWNUM, OFFICE, INTERFACE_NAME, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, INTERFACE_STATUS, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE FROM interface_types ",
+      []
+    );
+
+    console.log(result.rows[0]);
+  } catch (err) {
+    console.log('Ouch!', err);
+  } finally {
+    if (conn) { // conn assignment worked, need to close
+       await conn.close();
+    }
+  }
+}
+
 function Profile(type){
   this._keys = null; 
   this._values = null;
@@ -170,7 +202,7 @@ function Profile(type){
     }
   }
 
-  console.log(oracledb);
+  getInterfaces();
   
 }
 

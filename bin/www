@@ -7,7 +7,6 @@
 var app = require('../app');
 var debug = require('debug')('integration:server');
 var http = require('http');
-var oracledb = require('oracledb');
 
 /**
  * Get port from environment and store in Express.
@@ -15,31 +14,20 @@ var oracledb = require('oracledb');
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-var server = null;
 
 /**
  * Create HTTP server.
  */
-oracledb.createPool(
-  {
-    user          : "HVPRDT_465_NFT01",
-    password      : "payplus1",
-    connectString : "GPP12C"
-  },
-  function(err, pool) {
-    if (err) {
-      console.error("createPool() error: " + err.message);
-      return;
-    }
 
-    server = http.createServer(app);
-    server.listen(port);
-    server.on('error', onError);
-    server.on('listening', onListening);
-    console.log("created db connection !!!!");
-  }
-);
+var server = http.createServer(app);
 
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.
