@@ -65,9 +65,19 @@ oracledb.getConnection(
           doRelease(connection);
           return;
         }
-        //console.log(result.metaData); // [ { name: 'DEPARTMENT_ID' }, { name: 'DEPARTMENT_NAME' } ]
-        //console.log(result.rows);     // [ [ 180, 'Construction' ] ]
-        console.log(JSON.stringify(result.rows));
+        console.log(result.metaData); // [ { name: 'DEPARTMENT_ID' }, { name: 'DEPARTMENT_NAME' } ]
+        console.log(result.rows);     // [ [ 180, 'Construction' ] ]
+        
+        var data = [];
+        for (var i = 0; i < result.rows.length; i++){
+          var obj = {};
+          for(var k=0; k< result.metaData.length; k++){
+            obj[result.metaData[k]] = result.rows[i][k];
+          }
+          data.push(obj);
+        }
+        console.log("-------------------------------------------------------------------")
+        console.log(data);
         doRelease(connection);
       });
   });
