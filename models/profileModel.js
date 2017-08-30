@@ -34,6 +34,7 @@ getDBRawData = function(data){
             }
             data.push(obj);
           }
+          console.log(data);
           doRelease(connection);
         });
     });    
@@ -204,7 +205,7 @@ function Profile(type){
   var data = [];
   getDBRawData(data);  
   console.log(data);
-  
+
   for(var i=0; i<data.length; i++){    
     if(type == 'interface'){
       if( interface_type(data[i]["INTERFACE_TYPE"]) != null ){
