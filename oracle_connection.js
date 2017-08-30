@@ -71,8 +71,8 @@ oracledb.getConnection(
         var data = [];
         for (var i = 0; i < result.rows.length; i++){
           var obj = {};
-          for(var k=0; k< result.metaData.length; k++){
-            obj[result.metaData[k]] = result.rows[i][k];
+          for(var k = 0; k< result.metaData.length; k++){
+            obj[result.metaData[k]["name"]] = result.rows[i][k];
           }
           data.push(obj);
         }
