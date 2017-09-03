@@ -8,12 +8,13 @@ var async = require('async')
 
 var channel = new Profile('channel'); 
 router.get('/', function(req, res, next) {
-	async.series([
+	async.waterfall([
 			function(callback){
 				channel.load_from_db(callback)	
 			}
 		],
 		function(err, results){
+			console.log("____________ DATA: " + results);
 			res.render('profile_list', { type: 'channel', keys: channel.keys() , values: channel.values() });
 		})
 });
