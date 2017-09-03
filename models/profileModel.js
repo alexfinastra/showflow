@@ -182,7 +182,9 @@ doquery_data = function (conn,cb) {
           for(var k = 0; k< result.metaData.length; k  ){
             obj[result.metaData[k]["name"]] = result.rows[i][k];
           }
+          console.log(obj);
           data.push(obj);
+          console.log(data);
         }
         console.log(data);
         return cb(null, conn, data);
