@@ -1,5 +1,8 @@
 var fs = require('fs');
 var method = Profile.prototype
+var async = require('async');
+var oracledb = require('oracledb');
+
 
 interface_type = function(type){
   var types = [ 'OFAC', 
@@ -141,69 +144,101 @@ get_status_class = function(obj){
     return status;
 };
 
-
-
-
-const oracledb = require('oracledb');
-const config = {
+var dbConfig = {
     user          : "HVPRDT_465_NFT01",
     password      : "payplus1",
     connectString : "GPP12C"
   };
 
-var selectQuery = "SELECT ROWNUM, OFFICE, INTERFACE_NAME, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, INTERFACE_STATUS, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE FROM interface_types "
+doconnect = function(cb) {
+  oracledb.getConnection(
+    {
+      user          : dbConfig.user,
+      password      : dbConfig.password,
+      connectString : dbConfig.connectString
+    },
+    cb);
+};
 
-async function getInterfaces() {
-  let conn;
+dorelease = function(conn) {
+  conn.close(function (err) {
+    if (err)
+      console.error(err.message);
+  });
+};
 
-  try {
-    conn = await oracledb.getConnection(config);
+var query = "SELECT ROWNUM, OFFICE, INTERFACE_NAME, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, INTERFACE_STATUS, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE FROM interface_types "
+doquery_data = function (conn,cb) {
+  conn.execute(
+    query,
+    function(err, result)
+    {
+      if (err) {
+        return cb(err, conn, null);
+      } else {
+        console.log(result.rows);
+        var data = [];
+        for (var i = 0; i < result.rows.length; i  ){
+          var obj = {};
+          for(var k = 0; k< result.metaData.length; k  ){
+            obj[result.metaData[k]["name"]] = result.rows[i][k];
+          }
+          data.push(obj);
+        }
+        return cb(null, conn, data);
+      }
+    });
+};
 
-    const result = await conn.execute(
-      var selectQuery = "SELECT ROWNUM, OFFICE, INTERFACE_NAME, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, INTERFACE_STATUS, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE FROM interface_types ",
-      []
-    );
 
-    console.log(result.rows[0]);
-  } catch (err) {
-    console.log('Ouch!', err);
-  } finally {
-    if (conn) { // conn assignment worked, need to close
-       await conn.close();
-    }
-  }
-}
 
 function Profile(type){
   this._keys = null; 
   this._values = null;
   this._collection = [];  
   this._type = type;
+}
 
-  var filePath = './interfaces_list_3.json';
-  var data = JSON.parse(fs.readFileSync(filePath, 'utf8')); 
-  for(var i=0; i<data.length; i++){    
-    if(type == 'interface'){
+method.ensure_collection = function(data){
+  for(var i=0; i<data.length; i  ){    
+    if(this._type == 'interface'){
       if( interface_type(data[i]["INTERFACE_TYPE"]) != null ){
         this._collection.push(data[i]);
       }
       continue;
     }
 
-    if(type == 'channel'){
+    if(this._type == 'channel'){
       if( channel_type(data[i]["INTERFACE_TYPE"]) != null ){
         this._collection.push(data[i]);
       }
       continue;
     }
 
-    if(type == 'all'){
+    if(this._type == 'all'){
       this._collection.push(data[i]);
     }
   }
+}
 
-  getInterfaces();
-  
+method.load = function(){
+  var filePath = './interfaces_list_3.json';
+  var data = JSON.parse(fs.readFileSync(filePath, 'utf8')); 
+  this.ensure_collection(data);
+}
+
+method.load_from_db = function(cb){
+ async.waterfall(
+  [
+    doconnect,
+    doquery_data
+  ],
+  function (err, conn, data) {
+    if (err) { console.error("In waterfall error cb: ==>", err, "<=="); }
+    if (data != null){ this.ensure_collection(data); }
+    if (conn)
+      dorelease(conn);
+  });
 }
 
 method.reset = function(){
@@ -215,7 +250,7 @@ method.reset = function(){
 method.keys = function(select = 'active') {     
   this._keys = [];     
   var obj = null;
-  for (var i = 0; i< this._collection.length; i++) {      
+  for (var i = 0; i< this._collection.length; i  ) {      
     obj = this._collection[i];
     var key = get_type(select, obj);      
     if (key == null){ continue; }
@@ -232,7 +267,7 @@ method.values = function(select = 'active') {
   var keys = this._keys;
   this._values = new Array(keys.length).fill(null);
   var obj = null;
-  for (var i = 0; i< this._collection.length; i++) {      
+  for (var i = 0; i< this._collection.length; i  ) {      
     var obj = this._collection[i];
     var key = get_type(select, obj);
 
@@ -250,7 +285,7 @@ method.values = function(select = 'active') {
 
 method.folders = function(select = 'active'){
   var folders = [];
-  for (var i = 0; i< this._collection.length; i++) {      
+  for (var i = 0; i< this._collection.length; i  ) {      
     var obj = this._collection[i];
     folders.push(obj["REQUEST_CONNECTIONS_POINT"]);
     folders.push(obj["RESPONSE_CONNECTIONS_POINT"])
@@ -262,7 +297,7 @@ method.select = function(row_id){
   var obj = null;  
   if( row_id == 0 ) { return obj; }
 
-  for (var i = 0; i< this._collection.length; i++) {      
+  for (var i = 0; i< this._collection.length; i  ) {      
     var obj = this._collection[i];
     if(obj["ROW"] == row_id){
       return obj;
@@ -273,7 +308,7 @@ method.select = function(row_id){
 
 method.select_similarIds = function(type, sub_type){    
   var similars = [];  
-  for (var i = 0; i< this._collection.length; i++) {      
+  for (var i = 0; i< this._collection.length; i  ) {      
     var obj = this._collection[i];
     if(obj["INTERFACE_TYPE"] == type && obj["INTERFACE_SUB_TYPE"] == sub_type ){
       similars.push(obj["ROW"]);

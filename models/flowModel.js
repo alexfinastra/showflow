@@ -33,7 +33,6 @@ get_filename = function(file_key){
 }
 
 
-
 function Flow(flow_key){
   var filePath = get_filename(flow_key);
   this._flow_template = JSON.parse(fs.readFileSync(filePath, 'utf8'));  
@@ -52,7 +51,7 @@ method.populate_items = function(){
   for(var j=0; j< template_items.length; j++){
     var item = template_items[j];
     var profile = new Profile(item["type"]);
-
+    profile.load()
     var selected = profile.select_similarIds(item["interface_type"], item["interface_sub_type"]);
     if (selected.length == 0){ continue; }
 
