@@ -175,8 +175,7 @@ doquery_data = function (conn,cb) {
     {
       if (err) {
         return cb(err, conn, null);
-      } else {
-        console.log(result.rows);
+      } else {        
         var data = [];
         for (var i = 0; i < result.rows.length; i  ){
           var obj = {};
@@ -185,6 +184,7 @@ doquery_data = function (conn,cb) {
           }
           data.push(obj);
         }
+        console.log(data);
         return cb(null, conn, data);
       }
     });
