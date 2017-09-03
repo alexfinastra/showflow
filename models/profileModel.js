@@ -234,10 +234,11 @@ method.load_from_db = function(cb){
     doquery_data
   ],
   function (err, conn, data) {
+    console.log("____________ DATA: " + data);
     if (err) { console.error("In waterfall error cb: ==>", err, "<=="); }    
     if (conn){ dorelease(conn); }
     if (data != null){
-     console.log("____________ DATA: " + data);
+     
      return this.ensure_collection(data); 
     }else{
       return null
