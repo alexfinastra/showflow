@@ -10,11 +10,11 @@ var channel = new Profile('channel');
 router.get('/', function(req, res, next) {
 	async.waterfall([
 			function(callback){
-				channel.load_from_db(callback)	
+				channel.load_from_db(channel, callback)	
 			}
 		],
 		function(err, results){
-			console.log("____________ DATA: " + results);
+			console.log("Just before send response: " + results);
 			res.render('profile_list', { type: 'channel', keys: channel.keys() , values: channel.values() });
 		})
 });

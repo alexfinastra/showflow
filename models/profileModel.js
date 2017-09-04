@@ -235,7 +235,7 @@ method.load = function(){
   }
 }
 
-method.load_from_db = function(cb){
+method.load_from_db = function(profile, cb){
  async.waterfall(
   [
     doconnect,
@@ -246,27 +246,28 @@ method.load_from_db = function(cb){
     if (err) { console.error("In waterfall error cb: ==>", err, "<=="); }    
     if (conn){ dorelease(conn); }
     if (data != null){
+     console.log("Current object is " + profile)
      for(var i=0; i<data.length; i++ ){    
-        console.log("Data is " + data[i])
-        if(this._type == 'interface'){
+        console.log("Data iterator " + i)
+        if(profile._type == 'interface'){
           if( interface_type(data[i]["INTERFACE_TYPE"]) != null ){
-            this._collection.push(data[i]);
+            profile._collection.push(data[i]);
           }
           continue;
         }
 
-        if(this._type == 'channel'){
+        if(profile._type == 'channel'){
           if( channel_type(data[i]["INTERFACE_TYPE"]) != null ){
-            this._collection.push(data[i]);
+            profile._collection.push(data[i]);
           }
           continue;
         }
 
-        if(this._type == 'all'){
-          this._collection.push(data[i]);
+        if(profile._type == 'all'){
+          profile._collection.push(data[i]);
         }
       }
-     console.log("Populated "+ this._collection);
+     console.log("Populated "+ profile._collection);
     }
   });
 }
