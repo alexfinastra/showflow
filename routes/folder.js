@@ -40,7 +40,10 @@ humanFileSize = function(bytes, si) {
 
 folderfiles = function(folder, row_id){
   var files = [];
-  fs.readdirSync(folder).forEach(file => {
+  var f = fs.readdirSync(folder)
+  console.log("Folder files " + f)
+  for(var file in f){
+    console.log("current file is "+file)
     const stats = fs.statSync(folder + '/' + file);
     files.push({      
       "name": file,
@@ -48,9 +51,10 @@ folderfiles = function(folder, row_id){
       "created": moment(stats.birthtime).fromNow(),
       "id" : row_id
     });
-  });
+  }
   return files;
 }
+
 
 router.get('/',  function(req, res){
   res.redirect('/folder/exports');

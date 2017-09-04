@@ -40,17 +40,18 @@ humanFileSize = function(bytes, si) {
 
 folderfiles = function(folder, row_id){
   var files = [];
-  console.log("Folder files " + folder)
-  fs.readdir(folder).forEach(file => {
+  var f = fs.readdirSync(folder)
+  console.log("Folder files " + f)
+  for(var file in f){
     console.log("current file is "+file)
-    const stats = fs.stat(folder + '/' + file);
+    const stats = fs.statSync(folder + '/' + file);
     files.push({      
       "name": file,
       "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
       "created": moment(stats.birthtime).fromNow(),
       "id" : row_id
     });
-  });
+  }
   return files;
 }
 
