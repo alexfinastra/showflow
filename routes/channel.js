@@ -13,17 +13,22 @@ router.get('/', function(req, res, next) {
 				channel.load_from_db(channel, callback)	
 			}
 		],
-		function(err, results){
-			console.log("Just before send response: " + results);
+		function(err, results){			
 			res.render('profile_list', { type: 'channel', keys: channel.keys() , values: channel.values() });
 		})
 });
 
-router.get('/profile/:id', function(req, res, next){
-	row_id = req.params["id"]	
-	channel.load()
-	var record = channel.select(row_id)
-	res.render('profile', { title: 'Channel Profile', record: record , model: channel});
+router.get('/profile/:id', function(req, res, next){		
+	async.waterfall([
+		function(callback){
+			channel.load_from_db(channel, callback)	
+		}
+	],
+	function(err, results){		
+		row_id = req.params["id"]
+		var record = channel.select(row_id)
+		res.render('profile', { title: 'Channel Profile', record: record , model: channel});
+	})
 });
 
 router.get('/new', authentication_mdl.is_login, function(req, res, next) {
