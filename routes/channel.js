@@ -7,6 +7,7 @@ var session_store;
 var async = require('async')
 
 var channel = new Profile('channel'); 
+
 router.get('/', function(req, res, next) {
 	async.waterfall([
 			function(callback){
@@ -18,17 +19,10 @@ router.get('/', function(req, res, next) {
 		})
 });
 
-router.get('/profile/:id', function(req, res, next){		
-	async.waterfall([
-		function(callback){
-			channel.load_from_db(channel, callback)	
-		}
-	],
-	function(err, results){		
-		row_id = req.params["id"]
-		var record = channel.select(row_id)
-		res.render('profile', { title: 'Channel Profile', record: record , model: channel});
-	})
+router.get('/profile/:id', function(req, res, next){			
+	row_id = req.params["id"]
+	var record = channel.select(row_id)
+	res.render('profile', { title: 'Channel Profile', record: record , model: channel});
 });
 
 router.get('/new', authentication_mdl.is_login, function(req, res, next) {

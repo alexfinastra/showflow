@@ -179,25 +179,25 @@ doquery_data = function (conn,cb) {
         console.log("NU NAH!!!")
         return cb(err, conn, null);
       } else {        
-        console.log("1 ---------------" + result.metaData)
+        //console.log("1 ---------------" + result.metaData)
         var data = []
-        console.log("2 ---------------" + result.rows.length)
+        //console.log("2 ---------------" + result.rows.length)
         for (var i = 0; i < result.rows.length; i++  ){
-          console.log("3 ---------------" + i)
+          //console.log("3 ---------------" + i)
           var obj = {}
-          console.log("4 ---------------" + result.metaData.length)
+          //console.log("4 ---------------" + result.metaData.length)
           for(var k = 0; k< result.metaData.length; k++ ){
-            console.log("5 ---------------" + k )
-            console.log("5.1 ---------------" + result.rows[i][k])
-            console.log("5.2 ---------------" + result.metaData[k]["name"])
+            //console.log("5 ---------------" + k )
+            //console.log("5.1 ---------------" + result.rows[i][k])
+            //console.log("5.2 ---------------" + result.metaData[k]["name"])
             obj[result.metaData[k]["name"]] = result.rows[i][k];
-            console.log("6 ---------------" + obj)
+            //console.log("6 ---------------" + obj)
           }
-          console.log("7 ---------------" + obj)
+          //console.log("7 ---------------" + obj)
           data.push(obj);
-          console.log("9 ---------------" + data)
+          //console.log("9 ---------------" + data)
         }
-        console.log("10 ---------------" + data)
+        //console.log("10 ---------------" + data)
         return cb(null, conn, data);
       }
     });
