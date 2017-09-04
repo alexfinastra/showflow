@@ -63,51 +63,25 @@ router.get('/',  function(req, res){
 router.get('/download/:id/:file', function(req, res) {
   var row_id = req.params["id"];
   var file = req.params["file"];
+
   console.log(" YES I AM SDA");
-  if( row_id == 0 ){
-    folder = "./exports/";
-  }else{    
+  if( row_id != 0 ){
     var record = model.select(row_id);
     folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
+    res.download(folder+"/"+file);
   }
-  res.download(folder+"/"+file);
-});
-
-router.get('/exports',  function(req, res) {
-  var row_id = 0;
-  var files = queuefiles("exports", row_id);
-  var options = {
-    "exports": true,
-    "upload": false,
-    "row_id" : row_id
-  }
-  res.render('folder', { title: 'Interface setup scripts', files: files , options: options});
-});
-
-router.get('/exports/new', function(req, res){
-  var file_name  = "./exports/integration_script_" + moment().format('YYYY_MM_DD_hh_mm_ss') + ".sql"; 
-  
-  fs.writeFile(file_name, "SELECT * FROM INTERFACE_TYPES; ", function (err,data) {
-    if (err) {
-      return console.log(err);
-    }
-    console.log(data);
-  });
-  
-  res.redirect('/folder/exports');
+  res.send("File could not be downloaded. Sorry ;( ")
 });
 
 router.get('/delete/:id/:file', function(req, res){
   var row_id = req.params["id"];
   var file = req.params["file"];
   
-  if( row_id == 0 ){
-    folder = "./exports/";
-  }else{        
+  if( row_id != 0 ){
     var record = model.select(row_id);
-    folder = "./env/" +  record["REQUEST_CONNECTIONS_POINT"] //path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
+    folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
+    fs.unlinkSync(folder+"/"+file);
   }
-  fs.unlink(folder+"/"+file);
   res.redirect(req.get('referer'));
 })
 
@@ -115,7 +89,7 @@ router.get('/list/:id', function(req, res){
   var row_id = req.params["id"]
   var record = model.select(row_id);
 
-  var folder = "./env/" +  record["REQUEST_CONNECTIONS_POINT"] //path.join('env', record["REQUEST_CONNECTIONS_POINT"]);  
+  var folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);  
   var files = queuefiles(folder, row_id);
   var options = {
     "exports": false,
@@ -129,9 +103,10 @@ router.get('/list/:id', function(req, res){
 
 router.get('/upload/:id', function(req, res){
   var row_id = req.params["id"]
- var record = model.select(row_id);
+  var record = model.select(row_id);
+  console.log("OPA " + path.resolve());
 
-  var folder = "./env/" +  record["REQUEST_CONNECTIONS_POINT"] // path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
+  var folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
   console.log("THE Folder is " + folder)
   var files = queuefiles(folder, row_id);
   var options = {
@@ -153,26 +128,26 @@ router.post('/upload/:id', function(req, res){
   var form = new formidable.IncomingForm();
 
   // specify that we want to allow the user to upload multiple files in a single request
-  //form.multiples = true;
+  form.multiples = true;
 
   // store all uploads in the /uploads directory
-  //form.uploadDir = "./env/" +  record["REQUEST_CONNECTIONS_POINT"] // path.join('env', record["REQUEST_CONNECTIONS_POINT"]);  
+  form.uploadDir = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);  
 
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
-  //form.on('file', function(field, file) {
-    //fs.rename(file.path, form.uploadDir + "/" + file.name);
-  //});
+  form.on('file', function(field, file) {
+    fs.rename(file.path, form.uploadDir + "/" + file.name);
+  });
 
   // log any errors that occur
-  //form.on('error', function(err) {
-    //console.log('Upload error F***ed Up: \n' + err);
-  //});
+  form.on('error', function(err) {
+    console.log('Upload error F***ed Up: \n' + err);
+  });
 
   // once all the files have been uploaded, send a response to the client
-  //form.on('end', function() {
-    //res.end('success');
-  //});
+  form.on('end', function() {
+    res.end('success');
+  });
 
   // parse the incoming request containing the form data
   form.parse(req);
@@ -188,7 +163,7 @@ router.get('/build_folders', function(req, res){
         continue;
       }
 
-      var p = "./env/" + folder;  // path.join('env', folder);
+      var p = path.join('env', folder);
       console.log("  PATH is --> " + p);
       ensureExists(p, 0744, function(err){
         if (err){ console.log("Error") }// handle folder creation error
