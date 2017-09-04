@@ -21,7 +21,7 @@ block content
         h5.ml-2 Interface card as it appears in Payment Flows       
         ul.timeline
           - var profile = true
-          - var current = model.to_flowitem(record["ROW"], model._type)
+          - var current = model.to_flowitem(record["ROWNUM"], model._type)
           if (model._type == 'interface')            
             include flowitems/interface_profile
           else

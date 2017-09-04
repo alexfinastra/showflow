@@ -64,7 +64,7 @@ router.get('/upload/:profileId', function(req, res, next) {
   var collection = JSON.parse(fs.readFileSync(filePath, 'utf8')); 
   var lookup = {};
 	for (var i = 0, len = collection.length; i < len; i++) {
-	    lookup[collection[i]["ROW"]] = collection[i];
+	    lookup[collection[i]["ROWNUM"]] = collection[i];
 	} 
 
   res.render('upload', { profile: lookup[req.params["profileId"]]});
