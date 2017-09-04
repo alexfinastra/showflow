@@ -414,9 +414,9 @@ method.folders = function(select = 'active'){
     console.log("3-----------------"+ obj)
     folders.push(obj["REQUEST_CONNECTIONS_POINT"]);
     folders.push(obj["RESPONSE_CONNECTIONS_POINT"])
-    console.log("4-----------------"+ folders)
+    console.log("4-----------------"+ folders[i])
   }
-  console.log("5-----------------"+ folders)
+  console.log("5-----------------"+ folders.length)
   return folders;
 };
 
