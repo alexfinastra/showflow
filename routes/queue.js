@@ -141,7 +141,7 @@ router.post('/upload/:id', function(req, res){
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function(field, file) {
-    fs.rename(file.path, path.join(form.uploadDir, file.name));
+    //fs.rename(file.path, path.join(form.uploadDir, file.name));
   });
 
   // log any errors that occur
