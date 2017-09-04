@@ -40,12 +40,11 @@ humanFileSize = function(bytes, si) {
 
 folderfiles = function(folder, row_id){
   var files = [];
-  var fls = fs.readdirSync(folder)
-  
-  console.log("Folder files " + fls)
-  for(var file in fls){
+  fs.readdirSync(folder).forEach(function(file) {
     console.log("current file is "+file)
-    const stats = fs.statSync(folder + '/' + file);
+    if (file.length < 2){ continue; }
+
+    var stats = fs.statSync(folder + '/' + file);
     files.push({      
       "name": file,
       "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
