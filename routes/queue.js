@@ -40,10 +40,10 @@ humanFileSize = function(bytes, si) {
 
 folderfiles = function(folder, row_id){
   var files = [];
-  console.log("folder filed " + folder)
-  fs.readdirSync(folder).forEach(file => {
-    console.log(file)
-    const stats = fs.statSync(folder + '/' + file);
+  console.log("Folder files " + folder)
+  fs.readdir(folder).forEach(file => {
+    console.log("current file is "+file)
+    const stats = fs.stat(folder + '/' + file);
     files.push({      
       "name": file,
       "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
@@ -105,7 +105,7 @@ router.get('/delete/:id/:file', function(req, res){
     var record = model.select(row_id);
     folder = "./env/" +  record["REQUEST_CONNECTIONS_POINT"] //path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
   }
-  fs.unlinkSync(folder+"/"+file);
+  fs.unlink(folder+"/"+file);
   res.redirect(req.get('referer'));
 })
 
