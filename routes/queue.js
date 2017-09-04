@@ -40,9 +40,10 @@ humanFileSize = function(bytes, si) {
 
 folderfiles = function(folder, row_id){
   var files = [];
-  var f = fs.readdirSync(folder)
-  console.log("Folder files " + f)
-  for(var file in f){
+  var fls = fs.readdirSync(folder)
+  
+  console.log("Folder files " + fls)
+  for(var file in fls){
     console.log("current file is "+file)
     const stats = fs.statSync(folder + '/' + file);
     files.push({      
@@ -146,7 +147,8 @@ router.get('/upload/:id', function(req, res){
 router.post('/upload/:id', function(req, res){
   var row_id = req.params["id"]
   var record = model.select(row_id);
-
+  
+  console.log("POST Fuile upload!!!")
   // create an incoming form object
   var form = new formidable.IncomingForm();
 
