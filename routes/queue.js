@@ -174,7 +174,7 @@ router.post('/upload/:id', function(req, res){
 
 router.get('/build_folders', function(req, res){
     var folders = model.folders('jms');
-    console.log("Folders are "+folders)
+    console.log("Number of folders are "+ folders.length)
 
     for (var i = folders.length - 1; i >= 0; i--) {
       var folder = folders[i];
