@@ -137,12 +137,11 @@ router.post('/upload/:id', function(req, res){
 
   // store all uploads in the /uploads directory
   var full_path = path.resolve()
-  form.uploadDir = path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);  
-
+  form.uploadDir = path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);    
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function(field, file) {
-    fs.rename(file.path, path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]) + "/" + file.name);
+    fs.rename(file.path, path.join(form.uploadDir, file.name));
   });
 
   // log any errors that occur
