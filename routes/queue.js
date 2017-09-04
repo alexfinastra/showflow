@@ -175,7 +175,7 @@ router.post('/upload/:id', function(req, res){
 router.get('/build_folders', function(req, res){
     var folders = model.folders();
     console.log("Folders are "+folders)
-    
+
     for (var i = folders.length - 1; i >= 0; i--) {
       var folder = folders[i];
       if(folder == "" || folder.indexOf(":") > -1 || folder.indexOf(".") > -1  ){
@@ -186,7 +186,7 @@ router.get('/build_folders', function(req, res){
         continue;
       }
 
-      var p = path.join('env', folder);
+      var p = "./env/" + folder;  // path.join('env', folder);
       console.log("  PATH is --> " + p);
       ensureExists(p, 0744, function(err){
         if (err){ }// handle folder creation error
