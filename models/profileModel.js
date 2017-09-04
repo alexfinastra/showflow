@@ -235,7 +235,7 @@ method.ensure_collection = function(data){
 method.load = function(){
   var filePath = './interfaces_list_3.json';
   var data = JSON.parse(fs.readFileSync(filePath, 'utf8')); 
-  this.ensure_collection(data);
+  ensure_collection(data);
 }
 
 method.load_from_db = function(cb){
@@ -245,16 +245,13 @@ method.load_from_db = function(cb){
     doquery_data
   ],
   function (err, conn, data) {
-    console.log("____________ DATA: " + data);
+    console.log("Load from DB data as Hash: " + data);
     if (err) { console.error("In waterfall error cb: ==>", err, "<=="); }    
     if (conn){ dorelease(conn); }
     if (data != null){
-     
-     return this.ensure_collection(data); 
-    }else{
-      return null
+     ensure_collection(data); 
+     console.log("Populated "+ this._collection);
     }
-
   });
 }
 
