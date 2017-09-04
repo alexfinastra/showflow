@@ -40,7 +40,7 @@ humanFileSize = function(bytes, si) {
 
 folderfiles = function(folder, row_id){
   var files = [];
-  fs.readdirSync(folder).forEach(function(file) {
+  fs.readdirSync(folder).forEach( function(file) {
     console.log("current file is "+file)
     
     if (file.length > 2){ 
@@ -52,7 +52,7 @@ folderfiles = function(folder, row_id){
         "id" : row_id
       })
     }
-  }
+  })
   return files;
 }
 
