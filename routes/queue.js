@@ -40,14 +40,8 @@ humanFileSize = function(bytes, si) {
 
 folderfiles = function(folder, row_id){
   var files = [];
-  //if (row_id == 0){
-    //var fldr = path.join(ROOT_PATH, folder);  
-  //}else{
-    var fldr = folder;
-  //}
-
-  fs.readdirSync(fldr).forEach(file => {
-    const stats = fs.statSync(fldr + '/' + file);
+  fs.readdirSync(folder).forEach(file => {
+    const stats = fs.statSync(folder + '/' + file);
     files.push({      
       "name": file,
       "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
@@ -69,7 +63,6 @@ router.get('/download/:id/:file', function(req, res) {
   if( row_id == 0 ){
     folder = "./exports/";
   }else{    
-    var model = new Profile('all');
     var record = model.select(row_id);
     folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
   }
@@ -106,8 +99,7 @@ router.get('/delete/:id/:file', function(req, res){
   
   if( row_id == 0 ){
     folder = "./exports/";
-  }else{    
-    var model = new Profile('all');
+  }else{        
     var record = model.select(row_id);
     folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
   }
@@ -117,7 +109,6 @@ router.get('/delete/:id/:file', function(req, res){
 
 router.get('/list/:id', function(req, res){
   var row_id = req.params["id"]
-  var model = new Profile('all');
   var record = model.select(row_id);
 
   var folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);  
@@ -134,8 +125,7 @@ router.get('/list/:id', function(req, res){
 
 router.get('/upload/:id', function(req, res){
   var row_id = req.params["id"]
-  var model = new Profile('all');
-  var record = model.select(row_id);
+ var record = model.select(row_id);
 
   var folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
   var files = folderfiles(folder, row_id);
@@ -150,9 +140,7 @@ router.get('/upload/:id', function(req, res){
 
 
 router.post('/upload/:id', function(req, res){
-  
   var row_id = req.params["id"]
-  var model = new Profile('all');
   var record = model.select(row_id);
 
   // create an incoming form object
@@ -186,7 +174,8 @@ router.post('/upload/:id', function(req, res){
 
 router.get('/build_folders', function(req, res){
     var folders = model.folders();
-
+    console.log("Folders are "+folders)
+    
     for (var i = folders.length - 1; i >= 0; i--) {
       var folder = folders[i];
       if(folder == "" || folder.indexOf(":") > -1 || folder.indexOf(".") > -1  ){

@@ -407,11 +407,16 @@ method.values = function(select = 'active') {
 
 method.folders = function(select = 'active'){
   var folders = [];
+  console.log("1-----------------"+ folders)
   for (var i = 0; i< this._collection.length; i++  ) {      
+    console.log("2-----------------"+ i)
     var obj = this._collection[i];
+    console.log("3-----------------"+ obj)
     folders.push(obj["REQUEST_CONNECTIONS_POINT"]);
     folders.push(obj["RESPONSE_CONNECTIONS_POINT"])
+    console.log("4-----------------"+ folders)
   }
+  console.log("5-----------------"+ folders)
   return folders;
 };
 
