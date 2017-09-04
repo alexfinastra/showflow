@@ -1,13 +1,25 @@
 var fs = require('fs');
 var moment = require('moment');
 var express = require('express');
+var router = express.Router();
+
 var path = require('path');
 var formidable = require('formidable');
 var mkdirp = require('mkdirp');
-var router = express.Router();
-var Profile = require('../models/profileModel');
 
-//const ROOT_PATH = "C:/Users/alexp/Documents/integration";
+var async = require('async')
+var Profile = require('../models/profileModel');
+var model = new Profile('all');
+async.waterfall([
+  function(callback){
+    model.load_from_db(model, callback) 
+  }
+],
+function(err, results){     
+  if(err){
+    console.log("WHAT A F*** "+ err)
+  }    
+})
 
 humanFileSize = function(bytes, si) {
     var thresh = si ? 1000 : 1024;
@@ -56,10 +68,9 @@ router.get('/download/:id/:file', function(req, res) {
   console.log(" YES I AM SDA");
   if( row_id == 0 ){
     folder = "./exports/";
-  }else{    
-    var model = new Profile('all');
+  }else{ 
     var record = model.select(row_id);
-    folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
+    folder = path.join(record["REQUEST_CONNECTIONS_POINT"]);
   }
   res.download(folder+"/"+file);
 });
@@ -95,9 +106,8 @@ router.get('/delete/:id/:file', function(req, res){
   if( row_id == 0 ){
     folder = "./exports/";
   }else{    
-    var model = new Profile('all');
     var record = model.select(row_id);
-    folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
+    folder = path.join(record["REQUEST_CONNECTIONS_POINT"]);
   }
   fs.unlinkSync(folder+"/"+file);
   res.redirect(req.get('referer'));
@@ -105,10 +115,9 @@ router.get('/delete/:id/:file', function(req, res){
 
 router.get('/list/:id', function(req, res){
   var row_id = req.params["id"]
-  var model = new Profile('all');
   var record = model.select(row_id);
 
-  var folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);  
+  var folder = path.join(record["REQUEST_CONNECTIONS_POINT"]);  
   var files = folderfiles(folder, row_id);
   var options = {
     "exports": false,
@@ -122,10 +131,10 @@ router.get('/list/:id', function(req, res){
 
 router.get('/upload/:id', function(req, res){
   var row_id = req.params["id"]
-  var model = new Profile('all');
+  
   var record = model.select(row_id);
 
-  var folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
+  var folder = path.join(record["REQUEST_CONNECTIONS_POINT"]);
   var files = folderfiles(folder, row_id);
   var options = {
     "exports": false,
@@ -140,7 +149,6 @@ router.get('/upload/:id', function(req, res){
 router.post('/upload/:id', function(req, res){
   
   var row_id = req.params["id"]
-  var model = new Profile('all');
   var record = model.select(row_id);
 
   // create an incoming form object
@@ -150,7 +158,7 @@ router.post('/upload/:id', function(req, res){
   form.multiples = true;
 
   // store all uploads in the /uploads directory
-  form.uploadDir = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);  
+  form.uploadDir = path.join(record["REQUEST_CONNECTIONS_POINT"]);  
 
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
@@ -173,7 +181,6 @@ router.post('/upload/:id', function(req, res){
 })
 
 router.get('/build_folders', function(req, res){
-    var profile = new Profile('all');
     var folders = profile.folders();
 
     for (var i = folders.length - 1; i >= 0; i--) {
@@ -182,7 +189,7 @@ router.get('/build_folders', function(req, res){
         continue;
       }
 
-      var p = path.join('env', folder);
+      var p = path.join(folder);
       console.log("  PATH is --> " + p);
       ensureExists(p, 0744, function(err){
         if (err){ }// handle folder creation error
