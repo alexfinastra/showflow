@@ -178,8 +178,8 @@ doquery_data = function (conn,cb) {
       if (err) {
         return cb(err, conn, null);
       } else {        
-        console.log(result.rows);
-        console.log(result.metaData);
+        console.log(result[0]);
+        console.log(result[1]);
         var data = [];
         for (var i = 0; i < result.rows.length; i  ){
           var obj = {};
