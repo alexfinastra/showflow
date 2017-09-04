@@ -40,14 +40,8 @@ humanFileSize = function(bytes, si) {
 
 folderfiles = function(folder, row_id){
   var files = [];
-  //if (row_id == 0){
-    //var fldr = path.join(ROOT_PATH, folder);  
-  //}else{
-    var fldr = folder;
-  //}
-
-  fs.readdirSync(fldr).forEach(file => {
-    const stats = fs.statSync(fldr + '/' + file);
+  fs.readdirSync(folder).forEach(file => {
+    const stats = fs.statSync(folder + '/' + file);
     files.push({      
       "name": file,
       "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
@@ -77,7 +71,7 @@ router.get('/download/:id/:file', function(req, res) {
 
 router.get('/exports',  function(req, res) {
   var row_id = 0;
-  var files = folderfiles("exports", row_id);
+  var files = folderfiles("./exports", row_id);
   var options = {
     "exports": true,
     "upload": false,
@@ -130,12 +124,14 @@ router.get('/list/:id', function(req, res){
 
 
 router.get('/upload/:id', function(req, res){
-  var row_id = req.params["id"]
-  
+  var row_id = req.params["id"]  
   var record = model.select(row_id);
 
   var folder = path.join(record["REQUEST_CONNECTIONS_POINT"]);
-  var files = folderfiles(folder, row_id);
+  var files = [] 
+  if (folder.length > 0){
+      files = folderfiles(folder, row_id);
+  }
   var options = {
     "exports": false,
     "upload": true,
@@ -179,38 +175,5 @@ router.post('/upload/:id', function(req, res){
   // parse the incoming request containing the form data
   form.parse(req);
 })
-
-router.get('/build_folders', function(req, res){
-    var folders = profile.folders();
-
-    for (var i = folders.length - 1; i >= 0; i--) {
-      var folder = folders[i];
-      if(folder == "" || folder.indexOf(":") > -1 || folder.indexOf(".") > -1  ){
-        continue;
-      }
-
-      var p = path.join(folder);
-      console.log("  PATH is --> " + p);
-      ensureExists(p, 0744, function(err){
-        if (err){ }// handle folder creation error
-        else { console.log("Creatated ") } // we're all good
-      })
-    }
-    res.send(folders);
-});
-
-ensureExists = function (path, mask, cb) {
-    
-    if (typeof mask == 'function') { // allow the `mask` parameter to be optional
-        cb = mask;
-        mask = 0777;
-    }
-    mkdirp(path, mask, function(err) {
-        if (err) {
-            if (err.code == 'EEXIST') cb(null); // ignore the error if the folder already exists
-            else cb(err); // something else went wrong
-        } else cb(null); // successfully created folder
-    });
-}
 
 module.exports = router;

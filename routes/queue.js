@@ -128,6 +128,7 @@ router.get('/upload/:id', function(req, res){
  var record = model.select(row_id);
 
   var folder = "./env/" +  record["REQUEST_CONNECTIONS_POINT"] // path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
+  console.log("THE Folder is " + folder)
   var files = folderfiles(folder, row_id);
   var options = {
     "exports": false,
