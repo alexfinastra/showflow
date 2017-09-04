@@ -140,7 +140,7 @@ channel_type  = function(type){
     'AC_IN_ONUS': 'With Clearing systems',
     'AC_MND_TT1_ONUS_IN': 'With Clearing systems',
     'AC_MND_TT1_OW_IN': 'With Clearing systems',
-    'AC_MND_TT2_ONUS_IN': 'With Clearing systems'
+    'AC_MND_TT2_ONUS_IN': 'With Clearing systems',
     'AC_OUT': 'With Clearing systems',
     'BULK': 'Bulk payments',
     'BULK_MNDT_FROM_AC': 'Bulk payments',
