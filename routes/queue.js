@@ -1,13 +1,25 @@
 var fs = require('fs');
 var moment = require('moment');
 var express = require('express');
+var router = express.Router();
+
 var path = require('path');
 var formidable = require('formidable');
 var mkdirp = require('mkdirp');
-var router = express.Router();
-var Profile = require('../models/profileModel');
 
-//const ROOT_PATH = "C:/Users/alexp/Documents/integration";
+var async = require('async')
+var Profile = require('../models/profileModel');
+var model = new Profile('all');
+async.waterfall([
+  function(callback){
+    model.load_from_db(model, callback) 
+  }
+],
+function(err, results){     
+  if(err){
+    console.log("WHAT A F*** "+ err)
+  }    
+})
 
 humanFileSize = function(bytes, si) {
     var thresh = si ? 1000 : 1024;
@@ -173,12 +185,15 @@ router.post('/upload/:id', function(req, res){
 })
 
 router.get('/build_folders', function(req, res){
-    var profile = new Profile('all');
-    var folders = profile.folders();
+    var folders = model.folders();
 
     for (var i = folders.length - 1; i >= 0; i--) {
       var folder = folders[i];
       if(folder == "" || folder.indexOf(":") > -1 || folder.indexOf(".") > -1  ){
+        continue;
+      }
+
+      if(folder.indexOf("jms") == -1){
         continue;
       }
 
