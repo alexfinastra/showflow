@@ -203,29 +203,6 @@ doquery_data = function (conn,cb) {
     });
 };
 
-ensure_collection = function(data, obj){
-  console.log("ensure collecction" + data)
-  console.log("ensure collecction" + obj)
-  for(var i=0; i<data.length; i  ){    
-    if(obj._type == 'interface'){
-      if( interface_type(data[i]["INTERFACE_TYPE"]) != null ){
-        obj._collection.push(data[i]);
-      }
-      continue;
-    }
-
-    if(obj._type == 'channel'){
-      if( channel_type(data[i]["INTERFACE_TYPE"]) != null ){
-        obj._collection.push(data[i]);
-      }
-      continue;
-    }
-
-    if(obj._type == 'all'){
-      obj._collection.push(data[i]);
-    }
-  }
-}
 
 function Profile(type){
   this._keys = null; 
@@ -234,12 +211,28 @@ function Profile(type){
   this._type = type;
 }
 
-
-
 method.load = function(){
   var filePath = './interfaces_list_3.json';
   var data = JSON.parse(fs.readFileSync(filePath, 'utf8')); 
-  ensure_collection(data, this);
+  for(var i=0; i<data.length; i  ){    
+    if(this._type == 'interface'){
+      if( interface_type(data[i]["INTERFACE_TYPE"]) != null ){
+        this._collection.push(data[i]);
+      }
+      continue;
+    }
+
+    if(this._type == 'channel'){
+      if( channel_type(data[i]["INTERFACE_TYPE"]) != null ){
+        this._collection.push(data[i]);
+      }
+      continue;
+    }
+
+    if(this._type == 'all'){
+      this._collection.push(data[i]);
+    }
+  }
 }
 
 method.load_from_db = function(cb){
@@ -253,7 +246,26 @@ method.load_from_db = function(cb){
     if (err) { console.error("In waterfall error cb: ==>", err, "<=="); }    
     if (conn){ dorelease(conn); }
     if (data != null){
-     ensure_collection(data, this); 
+     for(var i=0; i<data.length; i  ){    
+        console.log("Data is " + data[i])
+        if(this._type == 'interface'){
+          if( interface_type(data[i]["INTERFACE_TYPE"]) != null ){
+            this._collection.push(data[i]);
+          }
+          continue;
+        }
+
+        if(this._type == 'channel'){
+          if( channel_type(data[i]["INTERFACE_TYPE"]) != null ){
+            this._collection.push(data[i]);
+          }
+          continue;
+        }
+
+        if(this._type == 'all'){
+          this._collection.push(data[i]);
+        }
+      }
      console.log("Populated "+ this._collection);
     }
   });
