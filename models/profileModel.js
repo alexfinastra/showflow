@@ -214,7 +214,7 @@ function Profile(type){
 method.load = function(){
   var filePath = './interfaces_list_3.json';
   var data = JSON.parse(fs.readFileSync(filePath, 'utf8')); 
-  for(var i=0; i<data.length; i  ){    
+  for(var i=0; i<data.length; i++ ){    
     if(this._type == 'interface'){
       if( interface_type(data[i]["INTERFACE_TYPE"]) != null ){
         this._collection.push(data[i]);
@@ -246,7 +246,7 @@ method.load_from_db = function(cb){
     if (err) { console.error("In waterfall error cb: ==>", err, "<=="); }    
     if (conn){ dorelease(conn); }
     if (data != null){
-     for(var i=0; i<data.length; i  ){    
+     for(var i=0; i<data.length; i++ ){    
         console.log("Data is " + data[i])
         if(this._type == 'interface'){
           if( interface_type(data[i]["INTERFACE_TYPE"]) != null ){
@@ -280,7 +280,7 @@ method.reset = function(){
 method.keys = function(select = 'active') {     
   this._keys = [];     
   var obj = null;
-  for (var i = 0; i< this._collection.length; i  ) {      
+  for (var i = 0; i< this._collection.length; i++  ) {      
     obj = this._collection[i];
     var key = get_type(select, obj);      
     if (key == null){ continue; }
@@ -297,7 +297,7 @@ method.values = function(select = 'active') {
   var keys = this._keys;
   this._values = new Array(keys.length).fill(null);
   var obj = null;
-  for (var i = 0; i< this._collection.length; i  ) {      
+  for (var i = 0; i< this._collection.length; i++  ) {      
     var obj = this._collection[i];
     var key = get_type(select, obj);
 
@@ -315,7 +315,7 @@ method.values = function(select = 'active') {
 
 method.folders = function(select = 'active'){
   var folders = [];
-  for (var i = 0; i< this._collection.length; i  ) {      
+  for (var i = 0; i< this._collection.length; i++  ) {      
     var obj = this._collection[i];
     folders.push(obj["REQUEST_CONNECTIONS_POINT"]);
     folders.push(obj["RESPONSE_CONNECTIONS_POINT"])
@@ -327,7 +327,7 @@ method.select = function(row_id){
   var obj = null;  
   if( row_id == 0 ) { return obj; }
 
-  for (var i = 0; i< this._collection.length; i  ) {      
+  for (var i = 0; i< this._collection.length; i++  ) {      
     var obj = this._collection[i];
     if(obj["ROW"] == row_id){
       return obj;
@@ -338,7 +338,7 @@ method.select = function(row_id){
 
 method.select_similarIds = function(type, sub_type){    
   var similars = [];  
-  for (var i = 0; i< this._collection.length; i  ) {      
+  for (var i = 0; i< this._collection.length; i++  ) {      
     var obj = this._collection[i];
     if(obj["INTERFACE_TYPE"] == type && obj["INTERFACE_SUB_TYPE"] == sub_type ){
       similars.push(obj["ROW"]);
