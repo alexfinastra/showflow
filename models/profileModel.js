@@ -140,7 +140,7 @@ channel_type  = function(type){
     'AC_IN_ONUS': 'With Clearing systems',
     'AC_MND_TT1_ONUS_IN': 'With Clearing systems',
     'AC_MND_TT1_OW_IN': 'With Clearing systems',
-    'AC_MND_TT2_ONUS_IN',: 'With Clearing systems'
+    'AC_MND_TT2_ONUS_IN': 'With Clearing systems'
     'AC_OUT': 'With Clearing systems',
     'BULK': 'Bulk payments',
     'BULK_MNDT_FROM_AC': 'Bulk payments',
@@ -161,7 +161,7 @@ channel_type  = function(type){
     'FEEDER': 'Feeder',
     'FEEDER_TCH': 'Feeder',
     'GFMS': 'With different MOPs',
-    'GPP_TOKEN_VAULT',
+    'GPP_TOKEN_VAULT': 'Messaging',
     'IND_MNDT_FROM_AC': 'With Clearing systems',
     'MASSPMNTS': 'Mass Payments',
     'MNDT_AUTH': 'With Clearing systems',
@@ -184,7 +184,7 @@ channel_type  = function(type){
     'SPEI_OUT': 'With Clearing systems',
     'SPI': 'With Clearing systems',
     'SPI_OUT': 'With Clearing systems',
-    'SWIFT_IN': : 'With different MOPs'
+    'SWIFT_IN': 'With different MOPs'
   }
 
   return (types.indexOf(type) > -1) ? type_desc[type] : null;
