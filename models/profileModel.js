@@ -243,8 +243,11 @@ method.load_from_db = function(profile, cb){
   ],
   function (err, conn, data) {
     console.log("Load from DB data as Hash: " + data);
-    if (err) { console.error("In waterfall error cb: ==>", err, "<=="); }    
-    if (conn){ dorelease(conn); }
+    if (err) { console.error("In waterfall error cb: ==>", err, "<=="); 
+      if (conn){ dorelease(conn); }
+      cb(err, null)  
+    }    
+    
     if (data != null){
      console.log("Current object is " + profile)
      for(var i=0; i<data.length; i++ ){    
@@ -267,9 +270,13 @@ method.load_from_db = function(profile, cb){
           profile._collection.push(data[i]);
         }
       }
-     console.log("Populated "+ profile._collection);
+     console.log("Populated "+ profile._collection); 
+     if (conn){ dorelease(conn); }
+     cb(null, profile)    
     }
-  });
+    
+    if (conn){ dorelease(conn); }  
+  })
 }
 
 method.reset = function(){
