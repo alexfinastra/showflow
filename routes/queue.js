@@ -40,19 +40,19 @@ humanFileSize = function(bytes, si) {
 
 queuefiles = function(folder, row_id){
   var files = [];
-  var fls = fs.readdirSync(folder)
-  
-  console.log("Folder files " + fls)
-  for(var file in fls){
+  fs.readdirSync(folder).forEach( function(file) {
     console.log("current file is "+file)
-    const stats = fs.statSync(folder + '/' + file);
-    files.push({      
-      "name": file,
-      "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
-      "created": moment(stats.birthtime).fromNow(),
-      "id" : row_id
-    });
-  }
+    
+    if (file.length > 2){ 
+      var stats = fs.statSync(folder + '/' + file);
+      files.push({      
+        "name": file,
+        "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
+        "created": moment(stats.birthtime).fromNow(),
+        "id" : row_id
+      })
+    }
+  })
   return files;
 }
 
@@ -67,7 +67,8 @@ router.get('/download/:id/:file', function(req, res) {
   console.log(" YES I AM SDA");
   if( row_id != 0 ){
     var record = model.select(row_id);
-    folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
+    var full_path = path.resolve()
+    var folder = path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);
     res.download(folder+"/"+file);
   }
   res.send("File could not be downloaded. Sorry ;( ")
@@ -79,7 +80,8 @@ router.get('/delete/:id/:file', function(req, res){
   
   if( row_id != 0 ){
     var record = model.select(row_id);
-    folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
+    var full_path = path.resolve()
+    var folder = path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);    
     fs.unlinkSync(folder+"/"+file);
   }
   res.redirect(req.get('referer'));
@@ -89,7 +91,9 @@ router.get('/list/:id', function(req, res){
   var row_id = req.params["id"]
   var record = model.select(row_id);
 
-  var folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);  
+  var full_path = path.resolve()
+  var folder = path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);
+  
   var files = queuefiles(folder, row_id);
   var options = {
     "exports": false,
@@ -104,10 +108,11 @@ router.get('/list/:id', function(req, res){
 router.get('/upload/:id', function(req, res){
   var row_id = req.params["id"]
   var record = model.select(row_id);
-  console.log("OPA " + path.resolve());
 
-  var folder = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
-  console.log("THE Folder is " + folder)
+  var full_path = path.resolve()
+  var folder = path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);
+
+  console.log(" --- The Folder is " + folder)
   var files = queuefiles(folder, row_id);
   var options = {
     "exports": false,
@@ -131,7 +136,8 @@ router.post('/upload/:id', function(req, res){
   form.multiples = true;
 
   // store all uploads in the /uploads directory
-  form.uploadDir = path.join('env', record["REQUEST_CONNECTIONS_POINT"]);  
+  var full_path = path.resolve()
+  form.uploadDir = path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);  
 
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
