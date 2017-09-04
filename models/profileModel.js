@@ -176,10 +176,10 @@ doquery_data = function (conn,cb) {
       console.log("Call back from execute" + err);
       console.log("Call back from execute" + result);
       if (err) {
+        console.log("NU NAH!!!")
         return cb(err, conn, null);
       } else {        
-        console.log(result[0]);
-        console.log(result[1]);
+        console.log(result);
         var data = [];
         for (var i = 0; i < result.rows.length; i  ){
           var obj = {};
