@@ -182,11 +182,11 @@ doquery_data = function (conn,cb) {
         console.log("1 ---------------" + result.metaData)
         var data = []
         console.log("2 ---------------" + result.rows.length)
-        for (var i = 0; i < result.rows.length; i  ){
+        for (var i = 0; i < result.rows.length; i++  ){
           console.log("3 ---------------" + i)
           var obj = {}
           console.log("4 ---------------" + result.metaData.length)
-          for(var k = 0; k< result.metaData.length; k  ){
+          for(var k = 0; k< result.metaData.length; k++ ){
             console.log("5 ---------------" + k )
             console.log("5.1 ---------------" + result.rows[i][k])
             console.log("5.2 ---------------" + result.metaData[k]["name"])
