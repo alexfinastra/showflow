@@ -42,15 +42,16 @@ folderfiles = function(folder, row_id){
   var files = [];
   fs.readdirSync(folder).forEach(function(file) {
     console.log("current file is "+file)
-    if (file.length < 2){ continue; }
-
-    var stats = fs.statSync(folder + '/' + file);
-    files.push({      
-      "name": file,
-      "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
-      "created": moment(stats.birthtime).fromNow(),
-      "id" : row_id
-    });
+    
+    if (file.length > 2){ 
+      var stats = fs.statSync(folder + '/' + file);
+      files.push({      
+        "name": file,
+        "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
+        "created": moment(stats.birthtime).fromNow(),
+        "id" : row_id
+      })
+    }
   }
   return files;
 }
