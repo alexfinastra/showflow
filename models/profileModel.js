@@ -413,11 +413,11 @@ method.folders = function(select = ''){
     var obj = this._collection[i];
     console.log("3-----------------"+ obj)
     
-    if(obj["REQUEST_CONNECTIONS_POINT"].indexOf(select) > -1){
+    if(obj["REQUEST_CONNECTIONS_POINT"] && obj["REQUEST_CONNECTIONS_POINT"].indexOf(select) > -1){
       console.log("3.1-----------------")
       folders.push(obj["REQUEST_CONNECTIONS_POINT"]);
     }
-    if(obj["RESPONSE_CONNECTIONS_POINT"].indexOf(select) > -1){
+    if(obj["RESPONSE_CONNECTIONS_POINT"] && obj["RESPONSE_CONNECTIONS_POINT"].indexOf(select) > -1){
       console.log("3.2-----------------")
       folders.push(obj["RESPONSE_CONNECTIONS_POINT"])
     }
