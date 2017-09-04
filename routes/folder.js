@@ -40,9 +40,10 @@ humanFileSize = function(bytes, si) {
 
 folderfiles = function(folder, row_id){
   var files = [];
-  var f = fs.readdirSync(folder)
-  console.log("Folder files " + f)
-  for(var file in f){
+  var fls = fs.readdirSync(folder)
+  
+  console.log("Folder files " + fls)
+  for(var file in fls){
     console.log("current file is "+file)
     const stats = fs.statSync(folder + '/' + file);
     files.push({      
@@ -54,7 +55,6 @@ folderfiles = function(folder, row_id){
   }
   return files;
 }
-
 
 router.get('/',  function(req, res){
   res.redirect('/folder/exports');
@@ -75,7 +75,7 @@ router.get('/download/:id/:file', function(req, res) {
 
 router.get('/exports',  function(req, res) {
   var row_id = 0;
-  var files = folderfiles("./exports", row_id);
+  var files = folderfiles("exports", row_id);
   var options = {
     "exports": true,
     "upload": false,
