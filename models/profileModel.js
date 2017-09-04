@@ -253,6 +253,8 @@ var query = "SELECT ROWNUM, OFFICE, INTERFACE_NAME, INTERFACE_TYPE, INTERFACE_SU
 doquery_data = function (conn,cb) {
   conn.execute(
     query,
+    {},
+    {maxRows: 300},
     function(err, result)
     {
       console.log("Call back from execute" + err);
