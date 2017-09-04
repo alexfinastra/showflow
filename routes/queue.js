@@ -38,7 +38,7 @@ humanFileSize = function(bytes, si) {
 };
 
 
-folderfiles = function(folder, row_id){
+queuefiles = function(folder, row_id){
   var files = [];
   var fls = fs.readdirSync(folder)
   
@@ -75,7 +75,7 @@ router.get('/download/:id/:file', function(req, res) {
 
 router.get('/exports',  function(req, res) {
   var row_id = 0;
-  var files = folderfiles("exports", row_id);
+  var files = queuefiles("exports", row_id);
   var options = {
     "exports": true,
     "upload": false,
@@ -116,7 +116,7 @@ router.get('/list/:id', function(req, res){
   var record = model.select(row_id);
 
   var folder = "./env/" +  record["REQUEST_CONNECTIONS_POINT"] //path.join('env', record["REQUEST_CONNECTIONS_POINT"]);  
-  var files = folderfiles(folder, row_id);
+  var files = queuefiles(folder, row_id);
   var options = {
     "exports": false,
     "upload": false,
@@ -133,7 +133,7 @@ router.get('/upload/:id', function(req, res){
 
   var folder = "./env/" +  record["REQUEST_CONNECTIONS_POINT"] // path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
   console.log("THE Folder is " + folder)
-  var files = folderfiles(folder, row_id);
+  var files = queuefiles(folder, row_id);
   var options = {
     "exports": false,
     "upload": true,
