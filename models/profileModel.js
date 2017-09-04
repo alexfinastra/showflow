@@ -405,16 +405,23 @@ method.values = function(select = 'active') {
   return this._values;
 };
 
-method.folders = function(select = 'active'){
+method.folders = function(select = ''){
   var folders = [];
-  console.log("1-----------------"+ folders)
+  console.log("1-----------------"+ select )
   for (var i = 0; i< this._collection.length; i++  ) {      
     console.log("2-----------------"+ i)
     var obj = this._collection[i];
     console.log("3-----------------"+ obj)
-    folders.push(obj["REQUEST_CONNECTIONS_POINT"]);
-    folders.push(obj["RESPONSE_CONNECTIONS_POINT"])
-    console.log("4-----------------"+ folders[i])
+    
+    if(obj["REQUEST_CONNECTIONS_POINT"].indexOf(select) > -1){
+      console.log("3.1-----------------")
+      folders.push(obj["REQUEST_CONNECTIONS_POINT"]);
+    }
+    if(obj["RESPONSE_CONNECTIONS_POINT"].indexOf(select) > -1){
+      console.log("3.2-----------------")
+      folders.push(obj["RESPONSE_CONNECTIONS_POINT"])
+    }
+    console.log("4 -----------------")
   }
   console.log("5-----------------"+ folders.length)
   return folders;

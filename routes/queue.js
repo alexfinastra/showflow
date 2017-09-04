@@ -173,7 +173,7 @@ router.post('/upload/:id', function(req, res){
 })
 
 router.get('/build_folders', function(req, res){
-    var folders = model.folders();
+    var folders = model.folders('jms');
     console.log("Folders are "+folders)
 
     for (var i = folders.length - 1; i >= 0; i--) {
@@ -182,14 +182,10 @@ router.get('/build_folders', function(req, res){
         continue;
       }
 
-      if(folder.indexOf("jms") == -1){
-        continue;
-      }
-
       var p = "./env/" + folder;  // path.join('env', folder);
       console.log("  PATH is --> " + p);
       ensureExists(p, 0744, function(err){
-        if (err){ }// handle folder creation error
+        if (err){ console.log("Error") }// handle folder creation error
         else { console.log("Creatated ") } // we're all good
       })
     }
