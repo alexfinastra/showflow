@@ -242,16 +242,16 @@ method.load_from_db = function(profile, cb){
     doquery_data
   ],
   function (err, conn, data) {
-    console.log("Load from DB data as Hash: " + data);
+    //console.log("Load from DB data as Hash: " + data);
     if (err) { console.error("In waterfall error cb: ==>", err, "<=="); 
       if (conn){ dorelease(conn); }
       cb(err, null)  
     }    
     
     if (data != null){
-     console.log("Current object is " + profile)
+     //console.log("Current object is " + profile)
      for(var i=0; i<data.length; i++ ){    
-        console.log("Data iterator " + i)
+        //console.log("Data iterator " + i)
         if(profile._type == 'interface'){
           if( interface_type(data[i]["INTERFACE_TYPE"]) != null ){
             profile._collection.push(data[i]);
@@ -270,7 +270,7 @@ method.load_from_db = function(profile, cb){
           profile._collection.push(data[i]);
         }
       }
-     console.log("Populated "+ profile._collection); 
+     //console.log("Populated "+ profile._collection); 
      if (conn){ dorelease(conn); }
      cb(null, profile)    
     }
@@ -337,7 +337,7 @@ method.select = function(row_id){
 
   for (var i = 0; i< this._collection.length; i++  ) {      
     var obj = this._collection[i];
-    if(obj["ROW"] == row_id){
+    if(obj["ROWNUM"] == row_id){
       return obj;
     }
   }  
@@ -349,7 +349,7 @@ method.select_similarIds = function(type, sub_type){
   for (var i = 0; i< this._collection.length; i++  ) {      
     var obj = this._collection[i];
     if(obj["INTERFACE_TYPE"] == type && obj["INTERFACE_SUB_TYPE"] == sub_type ){
-      similars.push(obj["ROW"]);
+      similars.push(obj["ROWNUM"]);
     }
   }  
   return similars;
