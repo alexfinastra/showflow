@@ -173,10 +173,12 @@ doquery_data = function (conn,cb) {
     query,
     function(err, result)
     {
+      console.log("Call back from execute" + err);
+      console.log("Call back from execute" + result);
       if (err) {
         return cb(err, conn, null);
       } else {        
-        console.log(result.rows.length);
+        console.log(result.rows);
         console.log(result.metaData);
         var data = [];
         for (var i = 0; i < result.rows.length; i  ){
@@ -193,8 +195,6 @@ doquery_data = function (conn,cb) {
       }
     });
 };
-
-
 
 function Profile(type){
   this._keys = null; 
