@@ -101,7 +101,7 @@ router.get('/delete/:id/:file', function(req, res){
     folder = "./exports/";
   }else{        
     var record = model.select(row_id);
-    folder = var folder = "./env/" +  record["REQUEST_CONNECTIONS_POINT"] //path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
+    folder = "./env/" +  record["REQUEST_CONNECTIONS_POINT"] //path.join('env', record["REQUEST_CONNECTIONS_POINT"]);
   }
   fs.unlinkSync(folder+"/"+file);
   res.redirect(req.get('referer'));
@@ -111,7 +111,7 @@ router.get('/list/:id', function(req, res){
   var row_id = req.params["id"]
   var record = model.select(row_id);
 
-  var folder = var folder = "./env/" +  record["REQUEST_CONNECTIONS_POINT"] //path.join('env', record["REQUEST_CONNECTIONS_POINT"]);  
+  var folder = "./env/" +  record["REQUEST_CONNECTIONS_POINT"] //path.join('env', record["REQUEST_CONNECTIONS_POINT"]);  
   var files = folderfiles(folder, row_id);
   var options = {
     "exports": false,
@@ -150,7 +150,7 @@ router.post('/upload/:id', function(req, res){
   form.multiples = true;
 
   // store all uploads in the /uploads directory
-  form.uploadDir = var folder = "./env/" +  record["REQUEST_CONNECTIONS_POINT"] // path.join('env', record["REQUEST_CONNECTIONS_POINT"]);  
+  form.uploadDir = "./env/" +  record["REQUEST_CONNECTIONS_POINT"] // path.join('env', record["REQUEST_CONNECTIONS_POINT"]);  
 
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
