@@ -125,10 +125,11 @@ router.get('/upload/:id', function(req, res){
 
 
 router.post('/upload/:id', function(req, res){
+  console.log("POST Fuile upload!!!")
   var row_id = req.params["id"]
   var record = model.select(row_id);
   
-  console.log("POST Fuile upload!!!")
+  
   // create an incoming form object
   var form = new formidable.IncomingForm();
 
@@ -141,6 +142,7 @@ router.post('/upload/:id', function(req, res){
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function(field, file) {
+    console.log("FIle upload" + file)
     fs.rename(file.path, path.join(form.uploadDir, file.name));
   });
 
@@ -151,6 +153,7 @@ router.post('/upload/:id', function(req, res){
 
   // once all the files have been uploaded, send a response to the client
   form.on('end', function() {
+    console.log("File uploaded sucessfully")
     res.end('success');
   });
 
