@@ -47,12 +47,14 @@ folderfiles = function(folder, row_id){
     
     if (file.length > 2){ 
       var stats = fs.statSync(folder + '/' + file);
-      files.push({      
-        "name": file,
-        "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
-        "created": moment(stats.birthtime).fromNow(),
-        "id" : row_id
-      })
+      if(stats.isFile()){
+            files.push({      
+              "name": file,
+              "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
+              "created": moment(stats.birthtime).fromNow(),
+              "id" : row_id
+            })
+          }
     }
   })
   return files;
@@ -171,7 +173,9 @@ router.post('/upload/:id', function(req, res){
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function(field, file) {
-    console.log("FIle upload" + file)
+    
+    var text = fs.readFileSync(file.path, "utf-8");
+    console.log("Read file before rename" + texts)
     fs.rename(file.path, path.join(form.uploadDir, file.name));
   });
 
