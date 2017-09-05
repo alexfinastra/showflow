@@ -5,6 +5,7 @@ var authentication_mdl = require('../middlewares/authentication');
 
 var Profile = require('../models/profileModel');
 var interface = new Profile('interface'); 
+//interface.load()
 
 router.get('/', function(req, res, next) {
 	async.waterfall([

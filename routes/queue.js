@@ -10,6 +10,8 @@ var mkdirp = require('mkdirp');
 var async = require('async')
 var Profile = require('../models/profileModel');
 var model = new Profile('all');
+//model.load()
+
 async.waterfall([
   function(callback){
     model.load_from_db(model, callback) 
@@ -20,6 +22,7 @@ function(err, results){
     console.log("WHAT A F*** "+ err)
   }    
 })
+
 
 humanFileSize = function(bytes, si) {
     var thresh = si ? 1000 : 1024;
@@ -64,11 +67,9 @@ router.get('/download/:id/:file', function(req, res) {
   var row_id = req.params["id"];
   var file = req.params["file"];
 
-  console.log(" YES I AM SDA");
   if( row_id != 0 ){
     var record = model.select(row_id);
-    var full_path = path.resolve()
-    var folder = "/home/was8/nodejs/env/jms/SP_INDEX" //path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);
+    var folder = path.join(appRoot, record["REQUEST_CONNECTIONS_POINT"]);
     res.download(folder+"/"+file);
   }
   res.send("File could not be downloaded. Sorry ;( ")
@@ -80,8 +81,7 @@ router.get('/delete/:id/:file', function(req, res){
   
   if( row_id != 0 ){
     var record = model.select(row_id);
-    var full_path = path.resolve()
-    var folder = "/home/was8/nodejs/env/jms/SP_INDEX" //path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);    
+    var folder = path.join(appRoot, record["REQUEST_CONNECTIONS_POINT"]);    
     fs.unlinkSync(folder+"/"+file);
   }
   res.redirect(req.get('referer'));
@@ -91,9 +91,7 @@ router.get('/list/:id', function(req, res){
   var row_id = req.params["id"]
   var record = model.select(row_id);
 
-  var full_path = path.resolve()
-  var folder = "/home/was8/nodejs/env/jms/SP_INDEX" //path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);
-  
+  var folder = path.join(appRoot, record["REQUEST_CONNECTIONS_POINT"]);  
   var files = queuefiles(folder, row_id);
   var options = {
     "exports": false,
@@ -108,10 +106,8 @@ router.get('/list/:id', function(req, res){
 router.get('/upload/:id', function(req, res){
   var row_id = req.params["id"]
   var record = model.select(row_id);
-
-  var full_path = path.resolve()
-  var folder = "/home/was8/nodejs/env/jms/SP_INDEX" //path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);
-
+  
+  var folder = path.join(appRoot, record["REQUEST_CONNECTIONS_POINT"]);
   console.log(" --- The Folder is " + folder)
   var files = queuefiles(folder, row_id);
   var options = {
@@ -137,12 +133,12 @@ router.post('/upload/:id', function(req, res){
   form.multiples = true;
 
   // store all uploads in the /uploads directory
-  var full_path = path.resolve()
-  form.uploadDir = "/home/was8/nodejs/env/jms/SP_INDEX" //path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);    
+  form.uploadDir = path.join(appRoot, record["REQUEST_CONNECTIONS_POINT"]);    
+  
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function(field, file) {
-    console.log("FIle upload" + file)
+    console.log("File upload" + file)
     fs.rename(file.path, path.join(form.uploadDir, file.name));
   });
 
@@ -171,7 +167,7 @@ router.get('/build_folders', function(req, res){
         continue;
       }
 
-      var p = path.join('env', folder);
+      var p = path.join(folder);
       console.log("  PATH is --> " + p);
       ensureExists(p, 0744, function(err){
         if (err){ console.log("Error") }// handle folder creation error

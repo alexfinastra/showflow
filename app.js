@@ -18,6 +18,7 @@ var expressValidator = require('express-validator');
 var methodOverride = require('method-override');
 
 var app = express();
+global.appRoot = path.resolve(__dirname);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

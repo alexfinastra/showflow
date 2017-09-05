@@ -10,6 +10,8 @@ var mkdirp = require('mkdirp');
 var async = require('async')
 var Profile = require('../models/profileModel');
 var model = new Profile('all');
+//model.load()
+
 async.waterfall([
   function(callback){
     model.load_from_db(model, callback) 
@@ -128,19 +130,27 @@ router.get('/list/:id', function(req, res){
 
 router.get('/upload/:id', function(req, res){
   var row_id = req.params["id"]  
-  var record = model.select(row_id);
+  var files = []
+  var folder = ""
+  var title = "Folder path is incorrect"
+  var record = null
 
-  var folder = path.join(record["REQUEST_CONNECTIONS_POINT"]);
-  var files = [] 
+  if (row_id != undefined && row_id != null && row_id != 'undefined'){
+    record = model.select(row_id);
+    folder = path.join(record["REQUEST_CONNECTIONS_POINT"]);
+    title = "Upload to " + record["INTERFACE_NAME"].split('_').join(" ") ;  
+  } 
+  
   if (folder.length > 0){
       files = folderfiles(folder, row_id);
   }
+  
   var options = {
     "exports": false,
-    "upload": true,
+    "upload": ((folder.length > 0) ? true : false),
     "row_id" : row_id
   }  
-  title = "Upload to " + record["INTERFACE_NAME"].split('_').join(" ") ; 
+   
   res.render('folder', { title: title, files: files , options: options});
 })
 
