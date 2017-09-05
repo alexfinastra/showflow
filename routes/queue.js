@@ -92,7 +92,7 @@ router.get('/list/:id', function(req, res){
   var record = model.select(row_id);
 
   var full_path = path.resolve()
-  var folder = path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);
+  var folder = "/home/was8/nodejs/env/jms/SP_INDEX" //path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);
   
   var files = queuefiles(folder, row_id);
   var options = {
@@ -100,7 +100,7 @@ router.get('/list/:id', function(req, res){
     "upload": false,
     "row_id" : row_id
   }  
-  title = model.get_sub_type_desc(record["INTERFACE_SUB_TYPE"]) ; 
+  title = "List of files related to " + record["INTERFACE_NAME"].split('_').join(" ") ; 
   res.render('folder', { title: title, files: files , options: options});
 })
 
@@ -119,7 +119,7 @@ router.get('/upload/:id', function(req, res){
     "upload": true,
     "row_id" : row_id
   }  
-  title = model.get_sub_type_desc(record["INTERFACE_SUB_TYPE"]) ; 
+  title = "Upload to " + record["INTERFACE_NAME"].split('_').join(" ") ;
   res.render('folder', { title: title, files: files , options: options});
 })
 
