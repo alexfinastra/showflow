@@ -68,7 +68,7 @@ router.get('/download/:id/:file', function(req, res) {
   if( row_id != 0 ){
     var record = model.select(row_id);
     var full_path = path.resolve()
-    var folder = path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);
+    var folder = "/home/was8/nodejs/env/jms/SP_INDEX" //path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);
     res.download(folder+"/"+file);
   }
   res.send("File could not be downloaded. Sorry ;( ")
@@ -81,7 +81,7 @@ router.get('/delete/:id/:file', function(req, res){
   if( row_id != 0 ){
     var record = model.select(row_id);
     var full_path = path.resolve()
-    var folder = path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);    
+    var folder = "/home/was8/nodejs/env/jms/SP_INDEX" //path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);    
     fs.unlinkSync(folder+"/"+file);
   }
   res.redirect(req.get('referer'));
@@ -110,7 +110,7 @@ router.get('/upload/:id', function(req, res){
   var record = model.select(row_id);
 
   var full_path = path.resolve()
-  var folder = path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);
+  var folder = "/home/was8/nodejs/env/jms/SP_INDEX" //path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);
 
   console.log(" --- The Folder is " + folder)
   var files = queuefiles(folder, row_id);
@@ -137,11 +137,11 @@ router.post('/upload/:id', function(req, res){
 
   // store all uploads in the /uploads directory
   var full_path = path.resolve()
-  form.uploadDir = path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);    
+  form.uploadDir = "/home/was8/nodejs/env/jms/SP_INDEX" //path.join(full_path, 'env', record["REQUEST_CONNECTIONS_POINT"]);    
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function(field, file) {
-    //fs.rename(file.path, path.join(form.uploadDir, file.name));
+    fs.rename(file.path, path.join(form.uploadDir, file.name));
   });
 
   // log any errors that occur
