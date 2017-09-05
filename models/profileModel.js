@@ -226,10 +226,6 @@ get_status_class = function(obj){
     return status;
 };
 
-get_title = function(profile){
-  return profile["INTERFACE_SUB_TYPE"].split('_').join(" ")
-}
-
 var dbConfig = {
     user          : "HVPRDT_465_NFT01",
     password      : "payplus1",
@@ -462,7 +458,7 @@ method.to_flowitem = function(row_id, type){
     "type": type,
     "direction": profile["REQUEST_DIRECTION"],
     "status_class": get_status_class(profile),
-    "title" : get_title(profile),
+    "title" : profile["INTERFACE_SUB_TYPE"],
     "request_protocol": profile["REQUEST_PROTOCOL"],
     "request_connections_point": profile["REQUEST_CONNECTIONS_POINT"],
     "response_connections_point": profile["RESPONSE_CONNECTIONS_POINT"]

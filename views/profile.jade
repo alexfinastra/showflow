@@ -40,7 +40,7 @@ block content
         .form-group.row
           label.col-sm-3.col-form-label(for='inputName') interface name
           .col-sm-6
-            input#inputName.w-100.form-control(type='text', placeholder='name of the banks application', value=((record != null) ? record["INTERFACE_NAME"] :  "")) 
+            input#inputName.w-100.form-control(type='text', placeholder='name of the banks application', value=((record != null) ? record["INTERFACE_NAME"].split("_").join(" ") :  "")) 
         br
         .form-group.row
           label.col-sm-3.col-form-label(for='inputName') notes, comments, memo

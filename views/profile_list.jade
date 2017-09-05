@@ -34,7 +34,7 @@ block content
           each obj in values[index++]          
             tr.row.text-dark(class = obj["INTERFACE_STATUS"] == "ACTIVE" ? "on" : "off")                    
               th.col-md-1(scope="row") #{obj["OFFICE"]}              
-              td.col-md-4 #{obj["INTERFACE_NAME"]}
+              td.col-md-4 #{obj["INTERFACE_NAME"].split("_").join(" ")}
               td.col-md-5 #{obj["DESCRIPTION"]}
               td.col-md-1
                 if obj["REQUEST_DIRECTION"] == "I"
