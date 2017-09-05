@@ -173,10 +173,12 @@ router.post('/upload/:id', function(req, res){
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function(field, file) {
-    
-    var text = fs.readFileSync(file.path, "utf-8");
-    console.log("Read file before rename" + texts)
-    fs.rename(file.path, path.join(form.uploadDir, file.name));
+    if (path.existsSync(file.path)) { 
+      console.log("Rename it" + file.path)
+      fs.rename(file.path, path.join(form.uploadDir, file.name));
+    }else{
+      console.log("File was taken" + file)
+    } 
   });
 
   // log any errors that occur
