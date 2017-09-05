@@ -122,10 +122,9 @@ router.get('/list/:id', function(req, res){
     "upload": false,
     "row_id" : row_id
   }  
-  title = model.get_sub_type_desc(record["INTERFACE_SUB_TYPE"]) ; 
+  title = "List of files related to " + record["INTERFACE_NAME"].split('_').join(" ") ;
   res.render('folder', { title: title, files: files , options: options});
 })
-
 
 router.get('/upload/:id', function(req, res){
   var row_id = req.params["id"]  
@@ -141,10 +140,9 @@ router.get('/upload/:id', function(req, res){
     "upload": true,
     "row_id" : row_id
   }  
-  title = model.get_sub_type_desc(record["INTERFACE_SUB_TYPE"]) ; 
+  title = "Upload to " + record["INTERFACE_NAME"].split('_').join(" ") ; 
   res.render('folder', { title: title, files: files , options: options});
 })
-
 
 router.post('/upload/:id', function(req, res){
   
