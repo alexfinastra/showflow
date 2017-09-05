@@ -458,7 +458,7 @@ method.to_flowitem = function(row_id, type){
     "type": type,
     "direction": profile["REQUEST_DIRECTION"],
     "status_class": get_status_class(profile),
-    "title" : profile["INTERFACE_SUB_TYPE"],
+    "title" : profile["INTERFACE_NAME"].split("_").join(" ") ,
     "request_protocol": profile["REQUEST_PROTOCOL"],
     "request_connections_point": profile["REQUEST_CONNECTIONS_POINT"],
     "response_connections_point": profile["RESPONSE_CONNECTIONS_POINT"]
