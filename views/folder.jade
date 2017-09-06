@@ -2,32 +2,31 @@ extends layout
 
 block content
   .container(id="upload-container", data-row = options["row_id"])
-    if options["exports"] != true
-      .row
-        col-md-2
-          button.btn.btn-link(onclick="goBack()")
-            i.fa.fa-arrow-circle-left.fa-2x.mr-2
-        col-md-10
-          h2.mt-1=title
-      br
-    if options["upload"] == true
-      br      
-      .row
-        .col-md-8
-          input.filestyle.col-sm-9(type="file", name="file", data-text="Select file for upload...", data-btnClass="btn-outline-primary", data-buttonBefore="true", data-placeholder="No file")                         
-        
-      br
-      .row
-        .col-md-8
-          .progress.mt-2.invisible
-            .progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100', style='width: 0%; height: 20px;')        
-    else
-      blockquote
-        if options["exports"] == true        
-          a.btn.btn-outline-primary.mt-2( href= "/folder/exports/new")
-            i.fa.fa-cogs
-            span.ml-2 
-            | Create setup script
+    .row
+      col-md-2
+        button.btn.btn-link(onclick="goBack()")
+          i.fa.fa-arrow-circle-left.fa-2x.mr-2
+      col-md-10
+        h2.mt-1=title
+    br
+    blockquote
+      if options["upload"] == true
+        br
+        include docs/message_formats
+        br      
+        .row
+          .col-md-8
+            input.filestyle.col-sm-9(type="file", name="file", data-text="Select file for upload...", data-btnClass="btn-outline-primary", data-buttonBefore="true", data-placeholder="No file")                                 
+        br
+        .row
+          .col-md-8
+            .progress.mt-2.invisible
+              .progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100', style='width: 0%; height: 20px;') 
+      if options["exports"] == true        
+        a.btn.btn-outline-primary.mt-2( href= "/folder/exports/new")
+          i.fa.fa-cogs
+          span.ml-2 
+          | Create setup script
     br
     if files.length == 0
       p The folder is empty ! ;)

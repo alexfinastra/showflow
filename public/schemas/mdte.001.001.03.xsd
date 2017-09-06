@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Group: BankservAfrica
+Collection: BSVA_AC_Mandates-TRS16
+BankservAfrica version : BSVA03 20161007
+-->
+<xs:schema xmlns="urn:bsva:std:tech:xsd:mdte.001.001.03" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:bsva:std:tech:xsd:mdte.001.001.03" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Document" type="Document"/>
+	<xs:complexType name="BranchAndFinancialInstitututionIdentification">
+		<xs:sequence>
+			<xs:element name="FinInstnId" type="FinancialInstitutionIdentification"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BranchAndFinancialInstitututionIdentification_1">
+		<xs:sequence>
+			<xs:element name="FinInstnId" type="FinancialInstitutionIdentification_1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Document">
+		<xs:sequence>
+			<xs:element name="MndtReqMsg" type="MandateRequestMessageV01"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FinancialInstitutionIdentification">
+		<xs:sequence>
+			<xs:element name="ClrSysMmbId" type="ClearingSystemIdentifier"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FinancialInstitutionIdentification_1">
+		<xs:sequence>
+			<xs:element name="Othr" type="GenericFinancialIdentification1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GenericFinancialIdentification1">
+		<xs:sequence>
+			<xs:element name="Id" type="Max6Text"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GenericOrganisationIdentification">
+		<xs:sequence>
+			<xs:element name="Id" type="Max10Text"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GroupHeader">
+		<xs:sequence>
+			<xs:element name="MsgId" type="Max34Text"/>
+			<xs:element name="CreDtTm" type="ISODateTime"/>
+			<xs:element name="InstgAgt" type="BranchAndFinancialInstitututionIdentification"/>
+			<xs:element name="InstdAgt" type="BranchAndFinancialInstitututionIdentification"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ISODateTime">
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:complexType name="MandateRequest">
+		<xs:sequence>
+			<xs:element name="MndtInfRqstId" type="Max35Text"/>
+			<xs:element name="RqstTp" type="RequestTypeCode"/>
+			<xs:element name="CdtrAgt" type="BranchAndFinancialInstitututionIdentification_1"/>
+			<xs:element name="UltmtCdtr" type="PartyIdentification"/>
+			<xs:element name="DbtrAgt" type="BranchAndFinancialInstitututionIdentification_1"/>
+			<xs:element name="MndtRfNbr" type="Max22Text"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MandateRequestMessageV01">
+		<xs:sequence>
+			<xs:element name="GrpHdr" type="GroupHeader"/>
+			<xs:element name="MndtRqst" type="MandateRequest" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Max10Text">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+			<xs:pattern value="[A-Za-z0-9\.\-\*,\(\) %\+$;=@\?:~/]*"/>				
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max140Text">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="140"/>
+			<xs:pattern value="[A-Za-z0-9\.\-\*,\(\) %\+$;=@\?:~/]*"/>				
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max22Text">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="22"/>
+			<xs:pattern value="[A-Za-z0-9\.\-\*,\(\) %\+$;=@\?:~/]*"/>	
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max34Text">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="34"/>
+			<xs:pattern value="[A-Za-z0-9\.\-\*,\(\) %\+$;=@\?:~/]*"/>	
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max35Text">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+			<xs:pattern value="[A-Za-z0-9\.\-\*,\(\) %\+$;=@\?:~/]*"/>	
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max6Text">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="6"/>
+			<xs:pattern value="[A-Za-z0-9\.\-\*,\(\) %\+$;=@\?:~/]*"/>	
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="OrganisationIdentification">
+		<xs:sequence>
+			<xs:element name="Othr" type="GenericOrganisationIdentification"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Party11Choice">
+		<xs:choice>
+			<xs:element name="OrgId" type="OrganisationIdentification"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="PartyIdentification">
+		<xs:sequence>
+			<xs:element name="Id" type="Party11Choice"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartyIdentificationChoice"/>
+	<xs:simpleType name="RequestTypeCode">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MANDATE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ClearingSystemIdentifier">
+		<xs:sequence>
+			<xs:element name="MmbId" type="Max6Text"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

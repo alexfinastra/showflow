@@ -39,6 +39,9 @@ humanFileSize = function(bytes, si) {
     return bytes.toFixed(1)+' '+units[u];
 };
 
+folderformats = function(folder){
+  return ["pain.001.001.06",  "pain.002.001.08", "pain.007.001.02", "pain.008.001.06"]
+}
 
 folderfiles = function(folder, row_id){
   var files = [];
@@ -52,7 +55,8 @@ folderfiles = function(folder, row_id){
               "name": file,
               "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
               "created": moment(stats.birthtime).fromNow(),
-              "id" : row_id
+              "id" : row_id,
+              "formats": folderformats(folder)
             })
           }
     }

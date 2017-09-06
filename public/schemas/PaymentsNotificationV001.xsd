@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+   xmlns:soap="http://www.w3.org/2003/05/soap-envelope" 
+   xmlns:pne="http://payments.fundtech.com/PaymentsNotificationV001" 
+   xmlns:tns="http://fundtech.com/service/PaymentsNotificationV001" 
+   targetNamespace="http://fundtech.com/service/PaymentsNotificationV001" 
+   elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+ <xs:import namespace="http://payments.fundtech.com/PaymentsNotificationV001" 
+            schemaLocation="PaymentsNotificationEventsV001.xsd" />
+
+ <xs:element name="PaymentsNotificationRequest"
+             type="tns:PaymentsNotificationRequest_Type" />
+ <xs:element name="PaymentsNotificationResponse"
+             type="tns:PaymentsNotificationResponse_Type" />
+
+
+ <xs:element name="PaymentsNotifications" 
+             type="tns:PaymentsNotifications_Type" />
+             
+ <xs:complexType name="PaymentsNotifications_Type">
+  <xs:sequence>
+  	<xs:element name="InternalFileId" type="xs:string" />
+   <xs:element ref="tns:PaymentsNotification" 
+               minOccurs="1" maxOccurs="unbounded" />
+  </xs:sequence>
+ </xs:complexType>
+ 
+ <xs:element name="PaymentsNotification" 
+             type="tns:PaymentsNotification_Type" />
+
+ <xs:complexType name="PaymentsNotification_Type">
+  <xs:sequence>
+   <xs:element ref="pne:NotificationEvent"
+               minOccurs="1" maxOccurs="1" />
+  </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="PaymentsNotificationRequest_Type">
+  <xs:sequence>
+   <xs:element ref="pne:NotificationEvent" 
+               minOccurs="1" maxOccurs="1" />
+  </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="PaymentsNotificationResponse_Type">
+  <xs:sequence>
+   <xs:element name="NotificationAcknowledgement" 
+               type="tns:NotificationAcknowledgement_Type"
+	       minOccurs="1" maxOccurs="1" />
+  </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="NotificationAcknowledgement_Type">
+  <xs:sequence>
+   <xs:element name="Timestamp" type="xs:dateTime" 
+               minOccurs="1" maxOccurs="1" />
+  </xs:sequence>
+ </xs:complexType>
+
+</xs:schema>

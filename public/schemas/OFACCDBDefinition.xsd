@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:schema xmlns:tns="http://www.nbg.gr/Online/LEGACY/"
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	targetNamespace="http://www.nbg.gr/Online/LEGACY/" xmlns:s="http://www.w3.org/2001/XMLSchema"
+>
+
+
+      <s:element name="IDATA">
+        
+        <s:complexType>
+          <s:sequence>
+            <s:element maxOccurs="1" minOccurs="0" name="OFAC_REQUEST">
+              <s:complexType>
+                <s:sequence>
+                  <s:element maxOccurs="50" minOccurs="1" name="FIELDS">
+                    <s:complexType>
+                      <s:attribute name="NAME" type="s:string" use="required" />
+                      <s:attribute name="VALUE" type="s:string" use="required" />
+                    </s:complexType>
+                  </s:element>
+                </s:sequence>
+                <s:attribute name="LIST_NAME" type="s:string" use="required" />
+				<s:attribute name="MID" type="s:string" use="optional" />
+				<s:attribute name="EXIT_POINT" type="s:string" use="optional" />
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+          <s:attribute name="CONTEXNAME" type="s:string" use="optional" />
+          <s:attribute name="CONTEXOFFICE" type="s:string" use="optional" />
+          <s:attribute name="DELIVERYTIMESTAMP" type="s:string" use="optional" />
+          <s:attribute name="ACCOUNT_NUMBER" type="s:string" use="optional" />
+          <s:attribute name="ACCOUNT_NUMBER_IBAN" type="s:string" use="optional" />
+          <s:attribute name="CD_FLAG" type="s:string" use="optional" />
+          <s:attribute name="MID" type="s:string" use="optional" />
+          <s:attribute name="PRODUCT_CODE" type="s:string" use="optional" />
+          <s:attribute name="OR_MSG_TYPE" type="s:string" use="optional" />
+          <s:attribute name="PAYMENT_AMOUNT" type="s:decimal" use="optional" />
+          <s:attribute name="PAYMENT_CURRENCY" type="s:string" use="optional" />
+          <s:attribute name="ORIGINAL_COUNTRY" type="s:string" use="optional" />
+          <s:attribute name="LAST_COUNTRY" type="s:string" use="optional" />
+          <s:attribute name="CHARGES_OPTION" type="s:string" use="optional" />
+          <s:attribute name="DEPARTMENT" type="s:string" use="optional" />
+        </s:complexType>
+    </s:element>
+      <s:element name="ODATA">
+        
+        
+        <s:complexType>
+          <s:sequence>
+            <s:element maxOccurs="1" minOccurs="0" name="OFAC_RESPONSE">
+              <s:complexType>
+                <s:sequence>
+                  <s:element maxOccurs="10" minOccurs="1" name="FIELDS">
+                    <s:complexType>
+                      <s:attribute name="FIELD_NAME" type="s:string" use="required" />
+                      <s:attribute name="HIT_TEXT" type="s:string" use="required" />
+                      <s:attribute name="HIT_TYPE" type="s:string" use="required" />
+                    </s:complexType>
+                  </s:element>
+                  <s:element maxOccurs="1" minOccurs="0" name="USER_TEXT"/>
+                </s:sequence>
+                <s:attribute name="OFAC_STATUS" type="s:string" use="required" />
+     			<s:attribute name="MID" type="s:string" use="optional" />
+     			<s:attribute name="EXIT_POINT" type="s:string" use="optional" />
+     			<s:attribute name="STAGE" type="s:string" use="optional" />
+     			<s:attribute name="ERRORTEXT" type="s:string" use="optional" />
+		   </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="4" name="FEES">
+              <s:complexType>
+                <s:attribute name="FEE_TYPE" type="s:string" use="required" />
+                <s:attribute name="FEE_CURRENCY" type="s:string" use="required" />
+                <s:attribute name="FEE_AMOUNT" type="s:decimal" use="required" />
+                <s:attribute name="FEE_PL_ACCOUNT" type="s:string" use="required" />
+                <s:attribute name="FEE_PL_ACCOUNT_CUR" type="s:string" use="required" />
+                <s:attribute name="FEE_PL_ACCOUNT_AM" type="s:decimal" use="required" />
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="20" name="CUSTOMER">
+              <s:complexType>
+                <s:attribute name="CID" type="s:string" use="required" />
+                <s:attribute name="CUSTOMER_NAME" type="s:string" use="required" />
+                <s:attribute name="CUST_ADDR" type="s:string" use="required" />
+                <s:attribute name="RESIDENCE" type="s:string" use="required" />
+                <s:attribute name="CATEGORY" type="s:string" use="required" />
+              </s:complexType>
+            </s:element>            
+          </s:sequence>
+          <s:attribute name="CONTEXNAME" type="s:string" use="optional" />
+          <s:attribute name="CONTEXOFFICE" type="s:string" use="optional" />
+          <s:attribute name="DELIVERYTIMESTAMP" type="s:string" use="optional" />
+          <s:attribute name="MID" type="s:string" use="optional" />
+          <s:attribute name="ACCOUNT_NUMBER_IBAN" type="s:string" use="optional" />
+          <s:attribute name="ERROR_CODE" type="s:string" use="optional" />
+          <s:attribute name="ERROR_TEXT" type="s:string" use="optional" />
+          <s:attribute name="ACCOUNT_CURRENCY" type="s:string" use="optional" />
+          <s:attribute name="ACCOUNT_PROD_CODE" type="s:string" use="optional" />
+          <s:attribute name="ACCOUNT_DEPARTMENT" type="s:string" use="optional" />
+          <s:attribute name="VALUE_DATE_FLAG" type="s:string" use="optional" />
+        </s:complexType>
+    </s:element>
+ </s:schema>

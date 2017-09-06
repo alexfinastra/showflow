@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+   xmlns:tns="http://payments.fundtech.com/PaymentsNotificationV001" 
+   targetNamespace="http://payments.fundtech.com/PaymentsNotificationV001" 
+   elementFormDefault="qualified" attributeFormDefault="unqualified">
+ <xsd:element name="NotificationEvent" type="tns:NotificationEvent_Type" />
+ <xsd:complexType name="NotificationEvent_Type">
+  <xsd:sequence>
+   <xsd:element name="Timestamp" type="xsd:dateTime" minOccurs="1" maxOccurs="1" />
+   <xsd:element name="Name" type="xsd:string" minOccurs="0" maxOccurs="1" />
+   <xsd:element name="Type" type="xsd:string" minOccurs="0" maxOccurs="1" />
+   <xsd:element name="MetaData" type="tns:EventParameters_Type" minOccurs="0" maxOccurs="1"/>
+   <xsd:element name="Parameters" type="tns:EventParameters_Type" minOccurs="0" maxOccurs="1" />
+    <xsd:element name="Errors" type="tns:EventParameters_Type" minOccurs="0" maxOccurs="1" />
+  </xsd:sequence>
+  <xsd:attribute name="EventID" type="xsd:string" use="required"/>
+ </xsd:complexType>
+ <xsd:complexType name="EventParameters_Type">
+  <xsd:sequence>
+   <xsd:element name="Parameter" type="tns:EventParameter_Type" maxOccurs="unbounded"/>
+  </xsd:sequence>
+ </xsd:complexType>
+ <xsd:complexType name="EventParameter_Type">
+  <xsd:attribute name="name" type="xsd:string"/>
+  <xsd:attribute name="value" type="xsd:string"/>
+ </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<INDATA xmlns="http://fundtech.com/SCL/CDB/BOC/"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://fundtech.com/SCL/CDB/BOC/ BOCAccountLookup.xsd">
+    <header>
+		<errorCode>203</errorCode>
+        <errorDescription>This is the error description - please add the requested account number to it!</errorDescription>
+        <uid>XXAA1234</uid> <!-- same as in the request -->
+        <exitType>CR</exitType> <!-- same as in the request -->
+    </header>
+    <accountLookupResponse>
+        <account>
+			<bocsAccountNum>77778888</bocsAccountNum>
+			<accountSubType>EEE</accountSubType>
+			<localClearingAccountNum>7173778888</localClearingAccountNum>
+			<accountCurrency>GBP</accountCurrency>
+			<isOnShoreFlag>2</isOnShoreFlag>
+			<accountIndicator>BGL</accountIndicator>
+        </account>
+        <customer>
+            <customerName>Jonathan Gardi</customerName>
+            <customerName2>Yoni Gardi</customerName2>
+            <customerAddress>Kalevankatu 26 A 35</customerAddress>
+            <documentType>PASS</documentType>
+            <documentNumber>77665544</documentNumber>
+            <birthDate>1972-08-06</birthDate>
+            <nationality>GB</nationality>
+            <customerID>3322445</customerID>
+            <isResident>1</isResident>
+            <isBocStaff>0</isBocStaff>
+            <isChineseInstStaff>1</isChineseInstStaff>
+            <isVIP>1</isVIP>
+            <isOfficerInEmbassy>0</isOfficerInEmbassy>
+            <isAbroadStudent>0</isAbroadStudent>
+            <customerType>CU</customerType>
+            <PhoneResident>0445452222</PhoneResident>
+            <PhoneBusiness>60770776</PhoneBusiness>
+        </customer>
+		<institution>
+            <instID>11223</instID>
+            <instName>BeijingUni</instName>
+            <instTelNumber>3366754</instTelNumber>
+		</institution>
+		<product>
+            <prodType>GPP</prodType>
+            <prodSubtype>SP</prodSubtype>
+		</product>
+	</accountLookupResponse>
+</INDATA>

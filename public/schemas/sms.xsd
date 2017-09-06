@@ -1,0 +1,217 @@
+<xs:schema elementFormDefault="qualified" xmlns="http://www.smscenter.co.il/" targetNamespace="http://www.smscenter.co.il/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="SendMessage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="UserName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="Password" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="SenderName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="SendToPhoneNumber" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="Message" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="CCToEmail" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="SMSOperation" type="SMSOperation" />
+            <xs:element minOccurs="0" maxOccurs="1" name="DeliveryReportURL" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="DeliveryReportMask" type="DeliveryReportMask" />
+            <xs:element minOccurs="1" maxOccurs="1" name="DeliveryDelayInMinutes" type="xs:long" />
+            <xs:element minOccurs="1" maxOccurs="1" name="ExpirationDelayInMinutes" type="xs:long" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:simpleType name="SMSOperation">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Push" />
+          <xs:enumeration value="Pull" />
+          <xs:enumeration value="ReverseBilling" />
+          <xs:enumeration value="WAPPush" />
+          <xs:enumeration value="BinaryDCS_F7" />
+          <xs:enumeration value="WapQuestion_OC" />
+          <xs:enumeration value="WapMessage_OC" />
+          <xs:enumeration value="IVR" />
+          <xs:enumeration value="MMS" />
+          <xs:enumeration value="Flash" />
+          <xs:enumeration value="IVRConference" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="DeliveryReportMask">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="MessageSentToSMSC" />
+          <xs:enumeration value="DeliveryFailedToSMSC" />
+          <xs:enumeration value="MessageExpired" />
+          <xs:enumeration value="MessageDeliveredToMobileDevice" />
+          <xs:enumeration value="MessageBufferedAtSMSC" />
+          <xs:enumeration value="DeliveryFailedBySMSC" />
+          <xs:enumeration value="GeneralErrorInMessage" />
+          <xs:enumeration value="GeneralErrorInCompanySettings" />
+          <xs:enumeration value="All" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="SendMessageResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="SendMessageResult" type="SendMessageReturnValues" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:simpleType name="SendMessageReturnValues">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="OK" />
+          <xs:enumeration value="InvalidUserNameOrPassword" />
+          <xs:enumeration value="CompanyNotAllowedToSendToSpecifiedProvider" />
+          <xs:enumeration value="SomeMessagesSent" />
+          <xs:enumeration value="NoMessagesSent" />
+          <xs:enumeration value="InternalError" />
+          <xs:enumeration value="InvalidPhoneNumber" />
+          <xs:enumeration value="ThePhoneNumberListMustContainAtLeastOneNumber" />
+          <xs:enumeration value="ThePhoneNumberListAndTheCCListMustHaveTheSameNumberOfItems" />
+          <xs:enumeration value="CompanyIsDisabled" />
+          <xs:enumeration value="UserIsDisabledOrDeleted" />
+          <xs:enumeration value="CompanyIsNotAllowedToPushAnymoreMessages" />
+          <xs:enumeration value="InvalidIPAddress" />
+          <xs:enumeration value="CompanyIsNotAllowedToSendReverseBillingMessages" />
+          <xs:enumeration value="PriceForReverseBillingCantBeZero" />
+          <xs:enumeration value="MessageCanNotBeEmpty" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="SendMessageWithPrice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="UserName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="Password" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="SenderName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="SendToPhoneNumber" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="Message" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="CCToEmail" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="SMSOperation" type="SMSOperation" />
+            <xs:element minOccurs="0" maxOccurs="1" name="DeliveryReportURL" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="DeliveryReportMask" type="DeliveryReportMask" />
+            <xs:element minOccurs="1" maxOccurs="1" name="DeliveryDelayInMinutes" type="xs:long" />
+            <xs:element minOccurs="1" maxOccurs="1" name="ExpirationDelayInMinutes" type="xs:long" />
+            <xs:element minOccurs="1" maxOccurs="1" name="Price" type="xs:double" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendMessageWithPriceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="SendMessageWithPriceResult" type="SendMessageReturnValues" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendMessages">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="UserName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="Password" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="SenderName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="SendToPhoneNumbers" type="ArrayOfAnyType" />
+            <xs:element minOccurs="0" maxOccurs="1" name="Message" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="CCToEmails" type="ArrayOfAnyType" />
+            <xs:element minOccurs="1" maxOccurs="1" name="SMSOperation" type="SMSOperation" />
+            <xs:element minOccurs="0" maxOccurs="1" name="DeliveryReportURL" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="DeliveryReportMask" type="DeliveryReportMask" />
+            <xs:element minOccurs="1" maxOccurs="1" name="DeliveryDelayInMinutes" type="xs:long" />
+            <xs:element minOccurs="1" maxOccurs="1" name="ExpirationDelayInMinutes" type="xs:long" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="ArrayOfAnyType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="anyType" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="SendMessagesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="SendMessagesResult" type="SendMessageReturnValues" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendMessagesWithPrice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="UserName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="Password" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="SenderName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="SendToPhoneNumbers" type="ArrayOfAnyType" />
+            <xs:element minOccurs="0" maxOccurs="1" name="Message" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="CCToEmails" type="ArrayOfAnyType" />
+            <xs:element minOccurs="1" maxOccurs="1" name="SMSOperation" type="SMSOperation" />
+            <xs:element minOccurs="0" maxOccurs="1" name="DeliveryReportURL" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="DeliveryReportMask" type="DeliveryReportMask" />
+            <xs:element minOccurs="1" maxOccurs="1" name="DeliveryDelayInMinutes" type="xs:long" />
+            <xs:element minOccurs="1" maxOccurs="1" name="ExpirationDelayInMinutes" type="xs:long" />
+            <xs:element minOccurs="1" maxOccurs="1" name="Price" type="xs:double" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendMessagesWithPriceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="SendMessagesWithPriceResult" type="SendMessageReturnValues" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendMessagesV2">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="UserName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="Password" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="SenderName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="SendToPhoneNumbers" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="CCToEmail" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="Message" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="SMSOperation" type="SMSOperation" />
+            <xs:element minOccurs="1" maxOccurs="1" name="DeliveryDelayInMinutes" type="xs:long" />
+            <xs:element minOccurs="1" maxOccurs="1" name="ExpirationDelayInMinutes" type="xs:long" />
+            <xs:element minOccurs="1" maxOccurs="1" name="MessageOption" type="MessageOptions" />
+            <xs:element minOccurs="1" maxOccurs="1" name="Price" type="xs:double" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:simpleType name="MessageOptions">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Regular" />
+          <xs:enumeration value="Concatenated" />
+          <xs:enumeration value="Reply" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="SendMessagesV2Response">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="SendMessagesV2Result" type="SendMessageReturnValues" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendMessagesReturenMessageID">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="UserName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="Password" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="SenderName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="SendToPhoneNumbers" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="CCToEmail" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="Message" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="SMSOperation" type="SMSOperation" />
+            <xs:element minOccurs="1" maxOccurs="1" name="DeliveryDelayInMinutes" type="xs:long" />
+            <xs:element minOccurs="1" maxOccurs="1" name="ExpirationDelayInMinutes" type="xs:long" />
+            <xs:element minOccurs="1" maxOccurs="1" name="MessageOption" type="MessageOptions" />
+            <xs:element minOccurs="0" maxOccurs="1" name="GroupCodes" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="Price" type="xs:double" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="SendSMSMessagesReturenMessageID">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Response" type="SendMessageReturnValues" />
+          <xs:element minOccurs="1" maxOccurs="1" name="MessageID" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="SendMessagesReturenMessageIDResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="SendMessagesReturenMessageIDResult" type="SendSMSMessagesReturenMessageID" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendMessageReturnValues" type="SendMessageReturnValues" />
+      <xs:element name="SendSMSMessagesReturenMessageID" nillable="true" type="SendSMSMessagesReturenMessageID" />
+    </xs:schema>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- STEP2 SDD Schema, pacs.002.001.03S2, Dec 4th 2015, Release November 2016 -->
+<!-- 2010-06-16 Add new simpleType for DtldSts with enumeration "RJCT", "ACSC", "ACCP", June 16th 2010 -->
+<!-- STEP2 Renamed pacs.002.001.03S2 to FIToFIPmtStsRptS2, March 29th 2010 -->
+<!-- STEP2 Renamed DdtrAgt to DbtrAgt, March 29th 2010 -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:iso:std:iso:20022:tech:xsd:pacs.002.001.03S2" targetNamespace="urn:iso:std:iso:20022:tech:xsd:pacs.002.001.03S2" elementFormDefault="qualified">
+	<xs:element name="Document" type="Document"/>
+	<xs:simpleType name="BICIdentifier">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="S2SDDBranchAndFinancialInstitutionIdentification3">
+		<xs:sequence>
+			<xs:element name="FinInstnId" type="S2SDDFinancialInstitutionIdentification5Choice"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="S2SDDCurrencyAndAmount_SimpleType">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0"/>
+			<xs:fractionDigits value="2"/>
+			<xs:totalDigits value="18"/>
+			<xs:pattern value="[0-9]{0,15}([\.]([0-9]{0,2})){0,1}"/>
+			<!--xs:pattern added on 29-11-07-->
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="S2SDDCurrencyAndAmount">
+		<xs:simpleContent>
+			<xs:extension base="S2SDDCurrencyAndAmount_SimpleType">
+				<xs:attribute name="Ccy" type="S2SDDCurrencyCode" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="S2SDDCurrencyCode">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EUR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DecimalNumber">
+		<xs:restriction base="xs:decimal">
+			<xs:fractionDigits value="2"/>
+			<xs:totalDigits value="18"/>
+			<xs:pattern value="[0-9]{0,15}([\.]([0-9]{0,2})){0,1}"/>
+			<!--xs:pattern added on 29-11-07-->
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Document">
+		<xs:sequence>
+			<!-- STEP2 Renamed FIToFIPmtStsRptS2, April 23th 2010 -->
+			<xs:element name="FIToFIPmtStsRptS2" type="FIToFIPaymentStatusReportV03"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="S2SDDGroupHeader5">
+		<xs:sequence>
+			<xs:element name="MsgId" type="S2SDDId7"/>
+			<xs:element name="CreDtTm" type="ISODateTime"/>
+			<xs:element name="InstgAgt" type="S2SDDBranchAndFinancialInstitutionIdentification3" minOccurs="0"/>
+			<xs:element name="InstdAgt" type="S2SDDBranchAndFinancialInstitutionIdentification3" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ISODate">
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="ISODateTime">
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="Max15NumericText">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{1,15}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max16Text">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="16"/>
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="\S+.*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max35Text">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="S2SDDNumberOfTransactionsPerStatus1">
+		<xs:sequence>
+			<xs:element name="DtldNbOfTxs" type="Max15NumericText"/>
+			<xs:element name="DtldSts" type="S2SDDTransactionIndividualStatus2Code"/>
+			<xs:element name="DtldCtrlSum" type="DecimalNumber"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="S2SDDOriginalGroupInformation1S2">
+		<xs:sequence>
+			<xs:element name="OrgnlMsgId" type="S2SDDId7"/>
+			<xs:element name="OrgnlMsgNmId" type="Max35Text"/>
+			<xs:element name="OrgnlNbOfTxs" type="Max15NumericText"/>
+			<xs:element name="OrgnlCtrlSum" type="DecimalNumber"/>
+			<xs:element name="GrpSts" type="S2SDDTransactionGroupStatus1Code"/>
+			<xs:element name="StsRsnInf" type="S2SDDStatusReasonInformation1"/>
+			<xs:element name="NbOfTxsPerSts" type="S2SDDNumberOfTransactionsPerStatus1" minOccurs="0" maxOccurs="2"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="S2SDDOriginalTransactionReference1">
+		<xs:sequence>
+			<xs:element name="IntrBkSttlmAmt" type="S2SDDCurrencyAndAmount"/>
+			<xs:element name="IntrBkSttlmDt" type="ISODate"/>
+			<xs:element name="DbtrAgt" type="S2SDDBranchAndFinancialInstitutionIdentification3"/>
+			<xs:element name="CdtrAgt" type="S2SDDBranchAndFinancialInstitutionIdentification3"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="S2SDDPaymentTransactionInformation1">
+		<xs:sequence>
+			<xs:element name="StsId" type="S2SDDId7"/>
+			<!--OrgnlInstrId & OrgnlEndToEndId are now Max35Text (UTF-8) on 08-03-07-->
+			<!--OrgnlInstrId is now S2SDDId7 on 05-06-07-->
+			<xs:element name="OrgnlInstrId" type="S2SDDId7" minOccurs="0"/>
+			<xs:element name="OrgnlEndToEndId" type="Max35Text"/>
+			<xs:element name="OrgnlTxId" type="S2SDDId7"/>
+			<xs:element name="TxSts" type="S2SDDTransactionIndividualStatus1Code"/>
+			<!--StsRsnInf is now S2SDDStatusReasonInformation2 on 05-06-07-->
+			<xs:element name="StsRsnInf" type="S2SDDStatusReasonInformation2"/>
+			<xs:element name="InstgAgt" type="S2SDDBranchAndFinancialInstitutionIdentification3" minOccurs="0"/>
+			<xs:element name="InstdAgt" type="S2SDDBranchAndFinancialInstitutionIdentification3" minOccurs="0"/>
+			<xs:element name="OrgnlTxRef" type="S2SDDOriginalTransactionReference1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="S2SDDStatusReason1Choice">
+		<xs:sequence>
+			<xs:choice>
+				<!-- Cd is now  S2SDDTransactionRejectReason4Code since 05-06-07 (before was S2SDDTransactionRejectReason2Code) -->
+				<xs:element name="Cd" type="S2SDDTransactionRejectReason4Code"/>
+				<xs:element name="Prtry" type="Max35Text"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<!--new type S2SDDStatusReason2Choice since 05-06-07-->
+	<xs:complexType name="S2SDDStatusReason2Choice">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="Cd" type="S2SDDTransactionRejectReason3Code"/>
+				<xs:element name="Prtry" type="Max35Text"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- new Return Reason Information 2010-01-27 -->
+	<xs:complexType name="S2SDDStatusReasonInformation1">
+		<xs:sequence>
+			<xs:element name="Orgtr" type="S2DDId5"/>
+			<xs:element name="Rsn" type="S2SDDStatusReason1Choice"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- 20100302 - BICorBei changed in BICOrBEI -->
+	<xs:complexType name="S2SDDOrganisationIdentification2">
+		<xs:sequence>
+			<xs:element name="BICOrBEI" type="BICIdentifier"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--new type S2SDDStatusReasonInformation2 since 2010-01-27 -->
+	<xs:complexType name="S2SDDStatusReasonInformation2">
+		<xs:sequence>
+			<xs:element name="Orgtr" type="S2DDId5"/>
+			<xs:element name="Rsn" type="S2SDDStatusReason2Choice"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- 2010-03-05 Removed some coded according to the Interface Specs -->
+	<xs:simpleType name="S2SDDTransactionGroupStatus1Code">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ACCP"/>
+			<xs:enumeration value="PART"/>
+			<xs:enumeration value="RJCT"/>
+			<xs:enumeration value="ACSC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- 2010-03-05 Removed some coded according to the Interface Specs -->
+	<xs:simpleType name="S2SDDTransactionIndividualStatus1Code">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RJCT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- 2010-06-16 Add new simpleType for DtldSts-->
+	<xs:simpleType name="S2SDDTransactionIndividualStatus2Code">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RJCT"/>
+			<xs:enumeration value="ACSC"/>
+			<xs:enumeration value="ACCP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--new type S2SDDTransactionRejectReason3Code since 05-06-07-->
+	<xs:simpleType name="S2SDDTransactionRejectReason3Code">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AM01"/>
+			<xs:enumeration value="AM02"/>
+			<xs:enumeration value="AM05"/>
+			<xs:enumeration value="DT01"/>
+			<xs:enumeration value="ED05"/>
+			<xs:enumeration value="MD01"/>
+			<xs:enumeration value="MD02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--new type S2SDDTransactionRejectReason4Code since 05-06-07-->
+	<xs:simpleType name="S2SDDTransactionRejectReason4Code">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ED05"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="FIToFIPaymentStatusReportV03">
+		<xs:sequence>
+			<xs:element name="GrpHdr" type="S2SDDGroupHeader5"/>
+			<xs:element name="OrgnlGrpInfAndSts" type="S2SDDOriginalGroupInformation1S2"/>
+			<xs:element name="TxInfAndSts" type="S2SDDPaymentTransactionInformation1" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="S2SDDFinancialInstitutionIdentification5Choice">
+		<xs:sequence>
+			<xs:element name="BIC" type="BICIdentifier"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="S2DDId5">
+		<xs:sequence>
+			<xs:element name="Id" type="S2SDDParty3Choice"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="S2SDDParty3Choice">
+		<xs:sequence>
+			<xs:element name="OrgId" type="S2SDDOrganisationIdentification2"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="S2SDDId7">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([A-Za-z0-9]|[+|\?|/|\-|:|\(|\)|\.|,|']){1,35}"/>
+			<!--TxId and MsgId extended to support full character "+" on 05-06-07-->
+			<!--TxId and MsgId extended to support full Latin character set on 08-03-07-->
+			<!--xs:pattern value="([A-Za-z0-9]|[\?|/|\-|:|\(|\)|\.|,|']){1,35}"/-->
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="AlertsNotification" type="AlertT" />
+	<xs:complexType name="AlertT">
+		<xs:sequence>
+			<xs:element name="AlertMetadata" type="MetaDataItemListT"/>
+			<xs:element name="AlertParameters" type="AlertParametersItemListT"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MetaDataItemListT">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="Name" type="xs:string"/>
+			<xs:element minOccurs="1" maxOccurs="1" name="Type" type="AlertEnumerationT"/>
+			<xs:element minOccurs="1" maxOccurs="1" name="GPPOfficeID" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AlertParametersItemListT">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="DateTime" type="xs:dateTime"/>
+			<xs:element minOccurs="1" maxOccurs="1" name="Description" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="AlertEnumerationT">
+   		<xs:restriction base="xs:string">
+     		<xs:enumeration value="Message Queue"/>
+     		<xs:enumeration value="Position Figure"/>
+   		</xs:restriction>
+ 	</xs:simpleType> 
+</xs:schema>

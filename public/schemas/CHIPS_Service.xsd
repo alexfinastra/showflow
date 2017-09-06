@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema 
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified"
+	targetNamespace="urn:fundtech:scl:CHIPS_SVC"
+	xmlns:tns="urn:fundtech:scl:CHIPS_SVC" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"  >
+	
+  <xs:element name="CHIPS_SVC">
+    <xs:complexType>
+      <xs:sequence>
+       <xs:element name="header" type="tns:header"/>
+       <xs:element name="request_type" type="xs:string"/>
+       <xs:element minOccurs="0" name="preference_234" type="tns:preference"/>
+       <xs:element minOccurs="0" name="retrieval" type="tns:retrieval"/>
+       <xs:element minOccurs="0" name="queue_report_285" type="tns:qreport"/>
+       <xs:element minOccurs="0" name="supervisory_56" type="tns:supervisory_msg"/>
+       <xs:element minOccurs="0" name="reserve_preference_42" type="xs:decimal"/>
+       <xs:element minOccurs="0" name="participant_withdrawal_43" type="xs:decimal"/>
+       <xs:element minOccurs="0" name="linedata" type="tns:PDF"/>
+     </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="header">
+    <xs:sequence>
+     <xs:element name="trancode" type="xs:string"/>
+     <xs:element name="sendpn" type="tns:PNType"/>
+     <xs:element name="receivepn" type="tns:PNType"/>
+     <xs:element name="date" type="xs:date"/>
+     <xs:element minOccurs="0" name="isn" type="xs:string"/>
+     <xs:element minOccurs="0" name="ssn" type="xs:string"/>
+     <xs:element minOccurs="0" name="osn" type="xs:string"/>
+     <xs:element minOccurs="0" name="cls_sys_delivery_time" type="xs:dateTime"/>
+     <xs:element minOccurs="0" name="request_amount" type="xs:decimal"/>
+     <xs:element minOccurs="0" name="request_id" type="xs:string"/>
+     <xs:element minOccurs="0" name="request_sort_order" type="tns:sortorder"/>
+     <xs:element minOccurs="0" name="seqtp" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="retrieval">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="startseqno" type="xs:string"/>
+     <xs:element minOccurs="0" name="endseqno" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+    
+  <xs:complexType name="preference">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="priority">
+      <xs:simpleType>
+       <xs:restriction base="xs:string">
+        <xs:enumeration value="1"/>
+        <xs:enumeration value="2"/>
+        <xs:enumeration value="3"/>
+       </xs:restriction>
+      </xs:simpleType>
+     </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="qreport">
+    <xs:sequence>
+     <xs:element name="request_sort_field" type="tns:sortfield"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="supervisory_msg">
+    <xs:sequence>
+     <xs:element name="request_term_id" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:simpleType name="sortfield">
+    <xs:restriction base="xs:string">
+     <xs:enumeration value="1"/>
+     <xs:enumeration value="2"/>
+     <xs:enumeration value="3"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="sortorder">
+    <xs:restriction base="xs:string">
+     <xs:enumeration value="A"/>
+     <xs:enumeration value="D"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+   <xs:complexType name="PNType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ClrSysCode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="5"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="PN">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:length value="4"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+ <xs:complexType name="PDF">
+   <xs:sequence>
+    <xs:element maxOccurs="unbounded" minOccurs="0" name="Data" type="tns:LineData"/>
+   </xs:sequence>
+  </xs:complexType>
+  
+    <xs:simpleType name="LineData">
+     <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="132"/>
+     </xs:restriction>
+  </xs:simpleType>
+
+ </xs:schema>

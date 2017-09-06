@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema 
+	elementFormDefault="qualified" 
+	attributeFormDefault="unqualified"
+	targetNamespace="urn:fundtech/scl/SWIFT" 
+	xmlns:tns="urn:fundtech/scl/SWIFT"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ 
+  <xsd:include schemaLocation="swift-common.xsd" />
+  
+  <xsd:complexType name="Data_103">
+  	<xsd:complexContent> 
+  		<xsd:extension base="tns:AbstractDataType"> 
+		    <xsd:sequence>
+		      <xsd:element minOccurs="1" maxOccurs="1" name="F20" type="tns:F20" />
+		      <!--<xsd:element minOccurs="1" maxOccurs="1" name="F21" type="tns:F21" /> -->
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F13C" type="tns:TimeIndication" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F23B" type="tns:BankOperCode" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="F23E" type="tns:F23E_InstructionCode" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="InstrForAgents" type="tns:InstrForAgentsType" />		      
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F26T" type="tns:Type_3" />
+		      <xsd:element minOccurs="1" maxOccurs="1" name="F32A" type="tns:F32A" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F33B" type="tns:CurrencyAndAmountType" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F36" type="tns:F36" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="F50a" type="tns:ExtendedPartyInfoType" />
+              <!-- <xsd:element minOccurs="1" maxOccurs="1" name="F50F" type="tns:DebtorType" />	-->
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F51A" type="tns:PartyInfoType" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F52a" type="tns:PartyInfoType" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F53a" type="tns:PartyInfoType" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F54a" type="tns:PartyInfoType" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F55a" type="tns:PartyInfoType" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F56a" type="tns:PartyInfoType" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F57a" type="tns:PartyInfoType" />
+		      <xsd:element minOccurs="1" maxOccurs="1" name="Cdrt_F58a_F59a" type="tns:PartyInfoType" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F70" type="tns:RemittanceInformation" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F71A" type="tns:F71A" />
+		      <xsd:element minOccurs="0" maxOccurs="unbounded" name="ChrgsInf" type="tns:CurrencyAndAmountType" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F72" type="tns:SenderToReceiverInfo" />
+		      <xsd:element minOccurs="0" maxOccurs="unbounded" name="F77B" type="tns:RegulatoryReporting" /> <!-- X_RGLTRY_RPTG -->
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F77T" type="tns:F77T" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="ClrChannel" type="xsd:string" />		      
+		    </xsd:sequence>
+		 </xsd:extension>
+  	</xsd:complexContent>
+  </xsd:complexType>
+    
+</xsd:schema>
+

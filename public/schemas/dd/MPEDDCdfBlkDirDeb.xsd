@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- STEP2 SDD Schema, MPEDDCdfBlkDirDeb, Jun 01 2011,  Release November 2011  -->
+<!-- STEP2 Renamed pacs.002.001.03S2 to FIToFIPmtStsRptS2, March 29th 2010 -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sw5="urn:iso:std:iso:20022:tech:xsd:pacs.002.001.03S2" xmlns:S2SDDCdf="urn:S2SDDCdf:xsd:$MPEDDCdfBlkDirDeb" targetNamespace="urn:S2SDDCdf:xsd:$MPEDDCdfBlkDirDeb" elementFormDefault="qualified">
+	<xs:import namespace="urn:iso:std:iso:20022:tech:xsd:pacs.002.001.03S2" schemaLocation="pacs.002.001.03S2.xsd"/>
+	<xs:element name="MPEDDCdfBlkDirDeb">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SndgInst" type="sw5:BICIdentifier"/>
+				<xs:element name="RcvgInst" type="sw5:BICIdentifier"/>
+				<xs:element name="SrvcId" type="S2SDDCdf:SrvcID"/>
+				<xs:element name="TstCode" type="S2SDDCdf:TestCodeType"/>
+				<xs:element name="FType" type="S2SDDCdf:FTpType"/>
+				<xs:element name="FileRef" type="sw5:Max16Text"/>
+				<xs:element name="FileBusDt" type="sw5:ISODate"/>
+				<xs:element name="FileCycleNo" type="S2SDDCdf:Max2NumericText"/>
+				<xs:element name="FIToFIPmtStsRptS2" type="sw5:FIToFIPaymentStatusReportV03" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="FTpType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CDF"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TestCodeType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="T"/>
+			<xs:enumeration value="P"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SrvcID">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="COR"/>
+			<xs:enumeration value="B2B"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max2NumericText">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{2,2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

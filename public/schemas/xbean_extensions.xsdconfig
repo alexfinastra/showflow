@@ -1,0 +1,19 @@
+<xb:config xmlns:xb="http://xml.apache.org/xmlbeans/2004/02/xbean/config">
+    <xb:extension for="com.fundtech.scl.commonTypes.ForwardContractLineType">
+        <xb:interface name="com.fundtech.xbean_extensions.ForwardContractLineTypeInterface">
+            <xb:staticHandler>com.fundtech.xbean_extensions.ForwardContractLineTypeHandler</xb:staticHandler>
+        </xb:interface>
+    </xb:extension>
+    <xb:extension for="com.fundtech.scl.commonTypes.QaInfoType">
+        <xb:interface name="com.fundtech.xbean_extensions.XbeanSelfPopulationHandlerInterface">
+            <xb:staticHandler>com.fundtech.xbean_extensions.XbeanSelfPopulationHandler</xb:staticHandler>
+        </xb:interface>
+    </xb:extension>
+    
+    <xb:extension for="*">
+        <xb:interface name="java.io.Serializable">
+            <xb:staticHandler>com.fundtech.xbean_extensions.SerializableHandler</xb:staticHandler>
+        </xb:interface>
+    </xb:extension>
+    
+</xb:config>

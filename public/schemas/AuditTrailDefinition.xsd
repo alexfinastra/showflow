@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	xmlns:msgTable="http://fundtech.com/SCL/MsgTable"
+	xmlns:tns="http://fundtech.com/SCL/AuditTrail" 
+	targetNamespace="http://fundtech.com/SCL/AuditTrail">
+	
+	<xsd:import namespace="http://fundtech.com/SCL/MsgTable" schemaLocation="MsgTableDefinition.xsd" />
+	
+	<xsd:element name="fields" type="tns:FieldSetType" />
+	
+	<xsd:complexType name="FieldSetType">
+		<xsd:sequence>
+			<xsd:element name="field" type="tns:FieldRecordType" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType> 
+	
+	<xsd:complexType name="FieldRecordType">
+		<xsd:sequence>
+			<xsd:element name="FIELD_LOGICAL_ID" type="xsd:string" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="OLD_VALUE" type="tns:FieldValueType" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="NEW_VALUE" type="tns:FieldValueType" minOccurs="1" maxOccurs="1" />			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="FieldValueType"> 
+		<xsd:choice>
+			<xsd:element name="primitive" type="xsd:string" minOccurs="1" maxOccurs="1" />			
+			<xsd:element name="msgGrid" type="msgTable:MsgTablesType" />
+		</xsd:choice>
+	</xsd:complexType>
+	
+</xsd:schema>

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:acmt="urn:iso:std:iso:20022:tech:xsd:acmt.024.001.01" xmlns:fnt="http://fundtech.com/SCL/CommonTypes" xmlns:tns="http://fundtech.com/service/VerifyAccountIdentityReplyV001" targetNamespace="http://fundtech.com/service/VerifyAccountIdentityReplyV001" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://fundtech.com/SCL/CommonTypes" schemaLocation="FundTech_ACMT.xsd"/>
+		<xs:element name="FndtMsg" type="fnt:FndtMsgType"/>
+</xs:schema>

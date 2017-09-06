@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+	elementFormDefault="qualified" 
+	attributeFormDefault="unqualified"
+	targetNamespace="urn:fundtech/scl/SWIFT" 
+	xmlns:tns="urn:fundtech/scl/SWIFT"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ 
+  <xsd:include schemaLocation="swift-common.xsd" />
+  
+  <xsd:complexType name="Data_203">
+  	<xsd:complexContent> 
+  		<xsd:extension base="tns:AbstractDataType"> 
+	  	 	<xsd:sequence>	            
+	            <xsd:element minOccurs="1" maxOccurs="1" name="F19" type="tns:F19"/>
+			  	<xsd:element minOccurs="1" maxOccurs="1" name="F30" type="tns:RequestedExecutionDate" />
+			  	<xsd:element minOccurs="0" maxOccurs="1" name="F52a" type="tns:PartyInfoType" />
+			  	<xsd:element minOccurs="0" maxOccurs="1" name="F53a" type="tns:PartyInfoType" />
+			  	<xsd:element minOccurs="0" maxOccurs="1" name="F54a" type="tns:PartyInfoType" />
+			  	<xsd:element minOccurs="0" maxOccurs="1" name="F72" type="tns:F72"/>
+			  	<xsd:element minOccurs="1" maxOccurs="1" name="F20" type="tns:F20"/>
+			  	<xsd:element minOccurs="1" maxOccurs="1" name="F21" type="tns:F21" />
+			  	<xsd:element minOccurs="1" maxOccurs="1" name="F32B" type="tns:CurrencyAndAmountType" />
+			  	<xsd:element minOccurs="0" maxOccurs="1" name="F56a" type="tns:PartyInfoType" />
+		      	<xsd:element minOccurs="0" maxOccurs="1" name="F57a" type="tns:PartyInfoType" />	            
+	            <xsd:element minOccurs="1" maxOccurs="1" name="Cdrt_F58a_F59a" type="tns:PartyInfoType"/>
+	            <xsd:element minOccurs="0" maxOccurs="1" name="F72" type="tns:F72"/>
+	        </xsd:sequence> 
+	    </xsd:extension>
+	 </xsd:complexContent>
+  </xsd:complexType>
+    
+</xsd:schema>

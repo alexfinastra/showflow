@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema 
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified"
+	targetNamespace="urn:fundtech:scl:FED_SVC"
+	xmlns:tns="urn:fundtech:scl:FED_SVC" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="FED_SVC">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="URC" type="tns:URC"/>
+        <xs:element name="ServiceMsg" type="tns:ServiceMsgType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType  name="URC">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="8"/>
+    </xs:restriction>
+  </xs:simpleType>  
+
+  <xs:simpleType name="SequenceNumber">
+     <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="6"/>
+     </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="LogicalTerminal">
+     <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="8"/>
+     </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="LineData">
+     <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="132"/>
+     </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ABA">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(([0][0-9])|[1][0-2]|[2][1-9]|[3][0-2]|[6][1-9]|[7][0-2]|[8][0]|[9][0-1])[0-9]{7}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="AccountBalanceRequest">
+   <xs:sequence>
+    <xs:element name="InquiryABA" type="tns:ABA"/>
+    <xs:element name="BalanceType" type="xs:string"/>
+   </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GrandTotalRequest">
+   <xs:sequence>
+    <xs:element name="LTERM" type="tns:LogicalTerminal"/>
+   </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="FundsDataRequest">
+   <xs:sequence>
+    <xs:element name="LTERM" type="tns:LogicalTerminal"/>
+    <xs:element name="TrafficType" type="xs:string"/>
+    <xs:element name="StartSeqNumber" type="tns:SequenceNumber"/>
+    <xs:element name="StopSeqNumber" type="tns:SequenceNumber"/>
+   </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RetrievalRequestType">
+   <xs:sequence>
+    <xs:element name="FundsData" type="tns:FundsDataRequest"/>
+    <xs:element name="CycleDate" type="xs:date"/>
+   </xs:sequence>
+  </xs:complexType>
+
+<xs:complexType name="PDF">
+   <xs:sequence>
+    <xs:element maxOccurs="unbounded" minOccurs="0" name="Data" type="tns:LineData"/>
+   </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ServiceMsgType">
+    <xs:sequence>
+      <xs:choice minOccurs="1" maxOccurs="1">
+        <xs:element minOccurs="0" maxOccurs="1" name="AccBalReq" type="tns:AccountBalanceRequest"/>
+        <xs:element minOccurs="0" maxOccurs="1" name="GrandTotalReq" type="tns:GrandTotalRequest"/>
+        <xs:element minOccurs="0" maxOccurs="1" name="DetailSumReq" type="tns:FundsDataRequest"/>
+        <xs:element minOccurs="0" maxOccurs="1" name="ErrCdDescReq" type="xs:string"/>
+        <xs:element minOccurs="0" maxOccurs="1" name="RetrievalReq" type="tns:RetrievalRequestType"/>
+        <xs:element minOccurs="0" maxOccurs="1" name="ServiceReceipt" type="tns:PDF"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

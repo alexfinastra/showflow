@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rp.baml.com/service/FXOrdersV001" xmlns:fml="http://www.fixprotocol.org/FIXML-4-4" xmlns:fxtml="http://rp.baml.com/fxt/FIXML-4-4" xmlns:soap="http://www.w3.org/2003/05/soap-envelope" targetNamespace="http://rp.baml.com/service/FXOrdersV001" elementFormDefault="qualified">
+	
+	<xs:import namespace="http://www.fixprotocol.org/FIXML-4-4" schemaLocation="FIXML-4.4-Container.xsd"/>
+	<xs:import namespace="http://rp.baml.com/fxt/FIXML-4-4" schemaLocation="FXT-FIXML-4-4.xsd"/>
+	<xs:complexType name="FXOrderMessage_Type">
+		<xs:sequence>
+			<xs:element name="FIXML" type="fxtml:FIXML_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FXOrderBaseRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="tns:FXOrderMessage_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FXOrderBaseResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="tns:FXOrderMessage_Type">
+				<xs:choice>
+					<xs:element ref="fxtml:ExecRpt"/>
+					<xs:element ref="fxtml:Rej"/>
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="FXOrderInitiation">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:FXOrderBaseRequest_Type">
+					<xs:sequence>
+						<xs:element ref="fxtml:OrderReq"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FXOrderRequest">
+			<xs:complexType>
+				<xs:complexContent>
+					<xs:extension base="tns:FXOrderBaseRequest_Type">
+						<xs:sequence>
+							<xs:element ref="fxtml:OrderReq"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+	</xs:element>
+	<xs:element name="FXOrderConfirmation">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:FXOrderBaseResponse_Type"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FXOrderResponse">
+			<xs:complexType>
+				<xs:complexContent>
+					<xs:extension base="tns:FXOrderBaseResponse_Type"/>
+				</xs:complexContent>
+			</xs:complexType>
+	</xs:element>
+	<xs:element name="FXOrderStatusInitiation">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:FXOrderBaseRequest_Type">
+					<xs:sequence>
+						<xs:element ref="fml:OrdStatReq"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FXOrderStatusRequest">
+			<xs:complexType>
+				<xs:complexContent>
+					<xs:extension base="tns:FXOrderBaseRequest_Type">
+						<xs:sequence>
+							<xs:element ref="fml:OrdStatReq"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+	</xs:element>
+	<xs:element name="FXOrderStatusConfirmation">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:FXOrderBaseResponse_Type"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FXOrderStatusResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:FXOrderBaseResponse_Type"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

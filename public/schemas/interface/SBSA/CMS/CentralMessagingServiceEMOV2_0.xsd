@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Daniel Martin (Standard Bank of SA Ltd) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:emo="http://standardbank.co.za/sa/services/global/CentralMessagingV2" targetNamespace="http://standardbank.co.za/sa/services/global/CentralMessagingV2">
+	<xsd:complexType name="MessageProcessingType">
+		<xsd:annotation>
+			<xsd:documentation>Identifies how the message must be processed</xsd:documentation>
+		</xsd:annotation>
+        <xsd:sequence maxOccurs="1" minOccurs="1">
+			<xsd:element form="unqualified" name="route">
+				<xsd:annotation>
+					<xsd:documentation>This can be set to "Direct" or "RulesEngine" to instruct message processing</xsd:documentation>
+				<xsd:documentation source="WMQI_DOCUMENTATION">This\scan\sbe\sset\sto\s"Direct",\s"RulesEngine",\s"InternalTemplate",\s"ExternalTemplate"\sto\sinstruct\smessage\sprocessing</xsd:documentation>
+        </xsd:annotation>
+				<xsd:simpleType>
+					<xsd:annotation>
+						<xsd:documentation>Direct means you force the message destination
+                      RulesEngine means a rules engine will be used if available (this should the default) 
+                      and will be treated as Direct if a rules engine doesn't exist</xsd:documentation>
+					<xsd:documentation source="WMQI_DOCUMENTATION">Direct\smeans\syou\sforce\sthe\smessage\sdestination.\nRulesEngine\smeans\sa\srules\sengine\swill\sbe\sused\sif\savailable\s(this\sshould\sthe\sdefault)\s\sand\swill\sbe\streated\sas\sDirect\sif\sa\srules\sengine\sdoesn't\sexist\nInternalTemplate\smeans\sthat\sESB\swill\stemplate\sthe\smessage.\nExternalTemplate\smeans\sthat\sthe\s3rd\sparty\swill\stemplate\sthe\smessage.</xsd:documentation>
+          </xsd:annotation>
+					<xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="Direct"/>
+                        <xsd:enumeration value="RulesEngine"/>
+                        <xsd:enumeration value="InternalTemplate"/>
+                        <xsd:enumeration value="ExternalTemplate"/>
+                    </xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element form="unqualified" name="messageProtocol">
+				<xsd:annotation>
+					<xsd:documentation>This sets the message type -  SMS, Email, etc</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:annotation>
+						<xsd:documentation>This is only processed if: 
+                      The route element is set to Direct
+                      or
+                      The route element is set to RulesEngine and the rules engine doesn't exist                      
+                      </xsd:documentation>
+					<xsd:documentation source="WMQI_DOCUMENTATION">This\sis\sonly\sprocessed\sif:\s\nThe\sroute\selement\sis\sset\sto\sDirect\sor\s\nThe\sroute\selement\sis\sset\sto\sRulesEngine\sand\sthe\srules\sengine\sdoesn't\sexist</xsd:documentation>
+          </xsd:annotation>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="SMS"/>
+						<xsd:enumeration value="Email"/>
+						<xsd:enumeration value="Fax"/>
+						<xsd:enumeration value="MMS"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element form="unqualified" minOccurs="0" name="securityType">
+				<xsd:annotation>
+					<xsd:documentation>This sets the messageblock security processing requirements - None, Encrypted, etc</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:annotation>
+						<xsd:documentation>This is only processed if the service engine supports encryption or security tools      
+                        </xsd:documentation>
+					</xsd:annotation>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="None"/>
+						<xsd:enumeration value="EncryptAttach"/>
+						<xsd:enumeration value="EncryptMessage"/>
+						<xsd:enumeration value="EncryptAll"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element form="unqualified" minOccurs="0" name="priority">
+				<xsd:annotation>
+					<xsd:documentation>Internal use only, consumers settings will be ignored</xsd:documentation>
+				
+        </xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="1"/>
+						<xsd:maxInclusive value="3"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element form="unqualified" minOccurs="0" name="schedule" type="emo:MessageScheduleType"/>
+			<xsd:element form="unqualified" name="sourceCountry" type="xsd:string"/>
+			<xsd:element form="unqualified" name="sourceFunction" type="xsd:string"/>
+			<xsd:element form="unqualified" minOccurs="1" name="senderParty" type="emo:SenderType">
+				<xsd:annotation>
+					<xsd:documentation>This is an optional sender address</xsd:documentation>
+				<xsd:documentation source="WMQI_DOCUMENTATION">The\ssender\saddress\sdetails\swhich\sinclude\ssenderAddress,\sreplyAddress\sand\sfriendlyFromAddress.</xsd:documentation>
+        </xsd:annotation>
+			</xsd:element>
+            <xsd:element minOccurs="0" name="template" type="emo:TemplateType"/>
+        </xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MessageType">
+        <xsd:sequence maxOccurs="1" minOccurs="1">
+			<xsd:element form="unqualified" minOccurs="0" name="header" type="emo:MessageHeaderType">
+				<xsd:annotation>
+					<xsd:documentation>Message header</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element form="unqualified" name="body" type="emo:MessageBodyType">
+				<xsd:annotation>
+					<xsd:documentation>Message body</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element form="unqualified" maxOccurs="unbounded" name="destinationParty" type="emo:DestinationPartyType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MessageHeaderType">
+        <xsd:sequence maxOccurs="1" minOccurs="1">
+			<xsd:element form="unqualified" minOccurs="0" name="content">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">This\selement\sis\sused\sfor\sthe\ssubject\sline\sin\san\semail.</xsd:documentation>
+        </xsd:annotation>
+                <xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="200"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MessageScheduleType">
+		<xsd:annotation>
+			<xsd:documentation>Sets a schedule for the processing of the message toexecute</xsd:documentation>
+		</xsd:annotation>
+        <xsd:sequence maxOccurs="1" minOccurs="1">
+			<xsd:element form="unqualified" minOccurs="0" name="scheduleDateTime" nillable="true" type="xsd:dateTime"/>
+			<xsd:element form="unqualified" minOccurs="0" name="expiryDateTime" nillable="true" type="xsd:dateTime"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SenderType">
+        <xsd:sequence maxOccurs="1" minOccurs="1">
+			<xsd:element form="unqualified" minOccurs="1" name="senderAddress" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">Mandatory\ssender\saddress.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+			<xsd:element form="unqualified" minOccurs="0" name="replyAddress" type="xsd:string"/>
+			<xsd:element form="unqualified" minOccurs="0" name="friendlyFromAddress" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MessageBodyType">
+        <xsd:sequence maxOccurs="1" minOccurs="1">
+			<xsd:element form="unqualified" minOccurs="0" name="bodyHeader" type="emo:TextSectionType">
+				<xsd:annotation>
+					<xsd:documentation>If the body is formatted text and has a text header on each body page</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element form="unqualified" maxOccurs="4" minOccurs="0" name="textSection" type="emo:TextSectionType"/>
+			<xsd:element form="unqualified" minOccurs="0" name="bodyFooter" type="emo:TextSectionType">
+				<xsd:annotation>
+					<xsd:documentation>If the body is formatted text and has a text footer on each body page</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element form="unqualified" minOccurs="0" name="data" type="emo:DataType">
+				<xsd:annotation>
+					<xsd:documentation>Data for a template that requires data to process or filter the template</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element form="unqualified" maxOccurs="1" minOccurs="0" name="attachments">
+                <xsd:complexType>
+          <xsd:sequence maxOccurs="1" minOccurs="1">
+            <xsd:element maxOccurs="unbounded" name="attachment" type="emo:AttachmentType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+            </xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DataType">
+        <xsd:sequence maxOccurs="1" minOccurs="1">
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="item" type="emo:ItemType">
+        <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">Item\sis\sthe\sdata\sitem.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+        </xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TextSectionType">
+        <xsd:sequence maxOccurs="1" minOccurs="1">
+			<xsd:element form="unqualified" name="content" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The content embedded here must comply to the following rules:
+                    If it is simple content it can be embedded directly
+                    If it is content containing HTML, XML or and other non parsable elements it must be embedded in a CDATA tag and will not be parsed by the ESB</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="textType" use="required">
+			<xsd:annotation>
+				<xsd:documentation>Optional, tells the destination how the content was formulated  - HTML, XML, Text</xsd:documentation>
+			<xsd:documentation source="WMQI_DOCUMENTATION">Optional,\stells\sthe\sdestination\show\sthe\scontent\swas\sformulated\s\s-\s\sHTML,\sXML,\sText,\sBase64.\nThe\ssame\smessage\scan\sbe\srepresented\sin\svarious\sformats.</xsd:documentation>
+      </xsd:annotation>
+			<xsd:simpleType>
+				<xsd:annotation>
+					<xsd:documentation>This is the type of content for information only</xsd:documentation>
+				<xsd:documentation source="WMQI_DOCUMENTATION">This\sis\sthe\stype\sof\scontent\sfor\sinformation\sonly.\s\sUsed\sto\srepresent\sthe\ssame\smessage\scontent\sin\sseveral\sformats.</xsd:documentation>
+        </xsd:annotation>
+				<xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="HTML"/>
+                    <xsd:enumeration value="Text"/>
+                    <xsd:enumeration value="XML"/>
+                    <xsd:enumeration value="Base64"/>
+                </xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="AttachmentType">    <xsd:simpleContent>
+      <xsd:extension base="xsd:base64Binary">
+        <xsd:attribute name="outputName" type="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation>This is the name of the file that the attachment must be output to.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+        <xsd:attribute name="docType" type="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation>This is the MIME type of the  attachment ie TEXT/PDF</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>                			                                    </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+	<xsd:complexType name="DestinationPartyType">
+		<xsd:sequence>
+			<xsd:annotation>
+				<xsd:documentation>The structure supports one destination per message or multiple destinations per message, it does not support multiple messages per destination</xsd:documentation>
+			</xsd:annotation>
+			<xsd:element form="unqualified" maxOccurs="unbounded" name="address" type="emo:AddressType">
+				<xsd:annotation>
+					<xsd:documentation>The address of the destination (email, fax, sms, etc)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MessageBlockType">
+		<xsd:annotation>
+			<xsd:documentation>The message block is a collection of messages and destinations. It represents on message transaction on the messaging service</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="emo:MessageProcessingType">
+				<xsd:sequence>
+					<xsd:element form="unqualified" maxOccurs="unbounded" name="messageContent" type="emo:MessageType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SendMessageRequestType">
+		<xsd:annotation>
+			<xsd:documentation>The request message structure for the send message operation </xsd:documentation>
+		</xsd:annotation>
+        <xsd:sequence maxOccurs="1" minOccurs="1">
+			<xsd:element form="unqualified" maxOccurs="unbounded" minOccurs="1" name="message" type="emo:MessageBlockType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SendMessageResponseType">
+		<xsd:annotation>
+			<xsd:documentation>The response from the send message request operation</xsd:documentation>
+		</xsd:annotation>
+        <xsd:sequence maxOccurs="1" minOccurs="1"/>
+	</xsd:complexType>
+    <xsd:element name="sendMessageRequest" type="emo:SendMessageRequestType">
+    </xsd:element>
+    <xsd:element name="sendMessageResponse" type="emo:SendMessageResponseType">
+    </xsd:element>
+    <xsd:complexType name="ItemType">
+    <xsd:sequence maxOccurs="1" minOccurs="1">
+      <xsd:element form="unqualified" maxOccurs="unbounded" minOccurs="0" name="item" type="emo:ItemType">
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="key" type="xsd:string">
+    </xsd:attribute>
+    <xsd:attribute name="name" type="xsd:string" use="required">
+    </xsd:attribute>
+    <xsd:attribute name="value" type="xsd:string" use="optional">
+    </xsd:attribute>
+  </xsd:complexType>
+    <xsd:complexType name="AddressType">
+    <xsd:sequence maxOccurs="1" minOccurs="1"/>
+    <xsd:attribute name="type" use="required">
+      <xsd:annotation>
+        
+        <xsd:documentation source="WMQI_DOCUMENTATION">The\stype\sof\sthe\saddress:\s"to",\s"cc",\s"bcc".\s\s\nUse\s"to"\sfor\sSMS,\sFax,\sMMS</xsd:documentation>
+      </xsd:annotation>
+            <xsd:simpleType>
+        <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">The\stype\sof\sthe\saddress:\s"to",\s"cc",\s"bcc".\s\s\nUse\s"to"\sfor\sSMS,\sFax,\sMMS</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="to"/>
+          <xsd:enumeration value="cc"/>
+          <xsd:enumeration value="bcc"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+        </xsd:attribute>
+    <xsd:attribute name="partyId" type="xsd:string">
+      <xsd:annotation>
+        
+      <xsd:documentation source="WMQI_DOCUMENTATION">BusinessPartnerID\sif\savailable\sfor\sthe\scustomer.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="uniqueId" type="xsd:string" use="required">
+      <xsd:annotation>
+        <xsd:documentation source="WMQI_DOCUMENTATION">UniqueId\sper\srecipient.\s\sWill\sbe\sused\sin\sthe\sfuture\sto\strace\sthe\smessage\sstatus.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+        <xsd:attribute name="value" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:element name="data" type="emo:DataType"/>
+    <xsd:complexType name="TemplateType">
+    <xsd:sequence>
+      <xsd:element name="templateSystem">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">The\sname\sof\sthe\ssystem\sthe\stemplate\sbelongs\sto.\sExample,\sMyUpdates,\sPredefined.</xsd:documentation>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:length value="25"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="templateName">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">The\sname\sof\sthe\stemplate\sexcluding\sany\sfile\sextension.\se.g\sMU_BAL</xsd:documentation>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:length value="30"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="templateVersion">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">The\sversion\sof\sthe\stemplate.\sA\sversion\snumber\sof\s'0'\smeans\sthat\sthe\slatest\sversion\sof\sthe\stemplate\swill\sbe\sused.</xsd:documentation>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:int"/>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="templateLanguage">
+                <xsd:annotation>
+          <xsd:documentation source="WMQI_DOCUMENTATION">The\slanguage\sof\sthe\stemplate.\sThis\sis\sa\stwo\scharacter\sISO\s639-1\sstandard\sfor\slanguage\scodes.\se.g\sEN,\sAF,\sDE</xsd:documentation>
+        </xsd:annotation>
+                <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:length value="2"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

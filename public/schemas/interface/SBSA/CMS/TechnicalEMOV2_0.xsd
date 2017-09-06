@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by Paul (Standard Bank of SA Ltd) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:emt="http://standardbank.co.za/sa/services/global/tech" targetNamespace="http://standardbank.co.za/sa/services/global/tech">
+	<xsd:complexType name="StandardRequestHeaderType">
+		<xsd:annotation>
+			<xsd:documentation>Standardised request header for inclusion in SOAP header.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="emt:HeaderType">
+				<xsd:sequence>
+					<xsd:element name="sender" nillable="false">
+						<xsd:annotation>
+							<xsd:documentation>This structure describes sender information.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="senderId">
+									<xsd:annotation>
+										<xsd:documentation>The identity of the user or system making this request. This could be the initiating user or teller's credentials. i.e. 'A' number or 'C' number if available. If not available the system user, mainframe user or calling program name.</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="20"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="sourceSystem">
+									<xsd:annotation>
+										<xsd:documentation>Source System Identifier as per the GTS tables(IBIS.PRTNR_SYSTM_GRP).</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="10"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element default=" " minOccurs="0" name="sourceApplication" nillable="false">
+									<xsd:annotation>
+										<xsd:appinfo source="http://www.wsadie.com/appinfo"/>
+
+										<xsd:documentation>Source Application identifier as per the GTS table(IBIS.SORCE_SYSTM).</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="10"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element default=" " name="applicationSessionId" nillable="false">
+									<xsd:annotation>
+										<xsd:appinfo source="http://www.wsadie.com/appinfo"/>
+										<xsd:documentation>Application correlation or session id.</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="36"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element minOccurs="0" name="sourceLocation">
+									<xsd:annotation>
+										<xsd:documentation>The branch or centre number that originiated the request.</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:length value="10"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element minOccurs="0" name="originatorProcessingMode">
+									<xsd:annotation>
+										<xsd:documentation>This element defines if there are specific processing requirements based on the originator system. The initial usage will be for processing the Business partner validation. If it is a new system then the validation must be as per the new requirements, then the indicator must be "A". If the calling system is a legacy system, or the message must be processed as part of batch process then the indicator must be "B".</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:length value="1"/>
+											<xsd:enumeration value="A"/>
+											<xsd:enumeration value="B"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="interfaceName">
+						<xsd:annotation>
+							<xsd:documentation>This identifies the requesting or responding interface. To the mainframe this is the 4 byte interface name.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="50"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element default=" " minOccurs="0" name="version" nillable="false">
+						<xsd:annotation>
+							<xsd:appinfo source="http://www.wsadie.com/appinfo">
+								<initialValue kind="SPACE"/>
+							</xsd:appinfo>
+
+							<xsd:documentation>The version of the interface. Mainly used for COBOL interfaces.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="6"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="StandardResponseHeaderType">
+		<xsd:annotation>
+			<xsd:documentation>Standardised response header for inclusion in SOAP header.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="emt:HeaderType">
+				<xsd:sequence>
+					<xsd:element name="integrationServer">
+						<xsd:annotation>
+							<xsd:documentation>This identifies the service provider or integration server sending the response.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="10"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="businessScope">
+						<xsd:annotation>
+							<xsd:documentation>This defines the business sector or server grouping that processes the request message.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="10"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element form="unqualified" maxOccurs="unbounded" name="message" type="emt:MessageStatusType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="StandardFaultType">
+		<xsd:annotation>
+			<xsd:documentation>This message is sent to notify any message publisher of errors that were generated during the processing of that message. It is also used wherever a message would require action on an error return generated by a message subscriber. The error return message will carry the specific message instance causing the error as an “attachment” including descriptive information on the actual error encountered. The intention of this model is to be foundational for enablement of consistent error handling across integration products within the current landscape. Note the common header will form part of the body of this data object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="emt:HeaderType">
+				<xsd:sequence>
+					<xsd:element name="faultId">
+						<xsd:annotation>
+							<xsd:documentation>The error code used to identify the instance of error that occurred.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="20"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="highLevelFaultType">
+						<xsd:annotation>
+							<xsd:documentation>The type of error that occurred, e.g. processing error or system error. See enumeration for this field.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="20"/>
+								<xsd:enumeration value="Technical"/>
+								<xsd:enumeration value="BusinessOrData"/>
+								<xsd:enumeration value="Mixed"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element maxOccurs="unbounded" name="faultDetails">
+						<xsd:annotation>
+							<xsd:documentation>This message is sent to notify any message publisher of errors that were generated during the processing of that message. It is also used wherever a message would require action on an error return generated by a message subscriber. The error return message will carry the specific message instance causing the error as an “attachment” including descriptive information on the actual error encountered. The intention of this model is to be foundational for enablement of consistent error handling across integration products within the current landscape. Note the common header will form part of the body of this data object.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="faultCategory">
+									<xsd:annotation>
+										<xsd:documentation>Describes if the fault is technical, business or data related. See enumeration for this field.</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="100"/>
+											<xsd:enumeration value="Technical_Provider_Fault"/>
+											<xsd:enumeration value="Technical_Network_Fault"/>
+											<xsd:enumeration value="Data_Schema_Fault"/>
+											<xsd:enumeration value="Data_Validation_Fault"/>
+											<xsd:enumeration value="Business_Fault"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="message" type="emt:MessageStatusType">
+									<xsd:annotation>
+										<xsd:documentation>Describes the nature of error.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element minOccurs="0" name="attachMessage" type="xsd:string">
+						<xsd:annotation>
+							<xsd:documentation>The attached message that resulted in the error being encountered. Base64 encoded.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="HeaderType">
+		<xsd:annotation>
+			<xsd:documentation>Standardised base header for inclusion in SOAP header.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="timestamp" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>Timestamp created by message sender at message creation.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="traceMessageId">
+				<xsd:annotation>
+					<xsd:documentation>Unique id for this specific message. Preferably a UUID. Used for tracing the message through the system.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="36"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element default=" " name="enterpriseTraceUUId" nillable="false">
+				<xsd:annotation>
+					<xsd:appinfo source="http://www.wsadie.com/appinfo">
+						<initialValue kind="SPACE"/>
+					</xsd:appinfo>
+					<xsd:documentation>A UUID. It is the same for all service calls belonging to a specific process. It is unique per process not per service call. It is a process correlation Id.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="36"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="contentType">
+				<xsd:annotation>
+					<xsd:documentation>Defines the message content type. Normally "TEXT/UTF-8", "TEXT/XML" or "TEXT/EBCDIC". For requests from mainframe consumers it will normally be "METAKEY=&lt;4 byte interface name&gt;;TEXT/EBCDIC". For requests to a Partner System via the Mainframe Common Components the following format should be used: "EVENT=&lt;event_category&gt;,&lt;event_type&gt;;TEXT/EBCDIC".</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="50"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MessageStatusType">
+		<xsd:sequence maxOccurs="1" minOccurs="1">
+			<xsd:element minOccurs="1" name="messageType">
+				<xsd:annotation>
+					<xsd:documentation>Gives a message response code or status. See enumeration for this field.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="E"/>
+						<xsd:enumeration value="I"/>
+						<xsd:enumeration value="W"/>
+						<xsd:enumeration value="P"/>
+						<xsd:enumeration value="X"/>
+						<xsd:enumeration value="V"/>
+						<xsd:enumeration value="F"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="messageId">
+				<xsd:annotation>
+					<xsd:documentation>The message id or message category.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="20"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="messageNumber">
+				<xsd:annotation>
+					<xsd:documentation>The message number.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="10"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element minOccurs="1" name="messageText">
+				<xsd:annotation>
+					<xsd:documentation>A textual description of the message.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="220"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="requestHeader" type="emt:StandardRequestHeaderType">
+  </xsd:element>
+	<xsd:element name="responseHeader" type="emt:StandardResponseHeaderType">
+  </xsd:element>
+	<xsd:element name="fault" type="emt:StandardFaultType">
+  </xsd:element>
+</xsd:schema>

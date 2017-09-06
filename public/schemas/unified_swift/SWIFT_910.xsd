@@ -1,0 +1,24 @@
+<xsd:schema xmlns:tns="urn:fundtech/scl/SWIFT" elementFormDefault="qualified" 
+	targetNamespace="urn:fundtech/scl/SWIFT" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="swift-common.xsd" />
+
+  <xsd:complexType name="Data_910">
+  <xsd:complexContent> 
+  		<xsd:extension base="tns:AbstractDataType"> 
+		    <xsd:sequence>
+			  <xsd:element minOccurs="0" maxOccurs="1" name="F13D" type="tns:F13D"/>
+		      <xsd:element minOccurs="1" maxOccurs="1" name="F20" type="tns:F20" />
+		      <xsd:element minOccurs="1" maxOccurs="1" name="F21" type="tns:F21" />    
+		      <xsd:element minOccurs="1" maxOccurs="1" name="F25a" type="tns:F25"/> 
+		      <xsd:element minOccurs="1" maxOccurs="1" name="F32A" type="tns:F32A" />
+		      <xsd:element minOccurs="1" maxOccurs="1" name="F50a" type="tns:PartyInfoType" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F52a" type="tns:PartyInfoType" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F56a" type="tns:PartyInfoType" />
+		      <xsd:element minOccurs="0" maxOccurs="1" name="InstrForAgents" type="tns:InstrForAgentsType" />	     
+		      <xsd:element minOccurs="0" maxOccurs="1" name="F72" type="tns:SenderToReceiverInfo" />
+		    </xsd:sequence>
+	    </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>

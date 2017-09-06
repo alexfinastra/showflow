@@ -1,0 +1,1508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2010 rel. 3 sp1 (http://www.altova.com) by Michael McQuillan (Bank of America) -->
+<xsd:schema 
+xmlns:tns="http://fundtech.com/SCL/CommonTypes" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xmlns:ns1="urn:iso:std:iso:20022:tech:xsd:acmt.023.001.01" 
+xmlns:ns2="urn:iso:std:iso:20022:tech:xsd:acmt.024.001.01" 
+targetNamespace="http://fundtech.com/SCL/CommonTypes" 
+elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="urn:iso:std:iso:20022:tech:xsd:acmt.023.001.01" schemaLocation="acmt.023.001.01.xsd"/>
+	<xsd:import namespace="urn:iso:std:iso:20022:tech:xsd:acmt.024.001.01" schemaLocation="acmt.024.001.01.xsd"/>
+	<xsd:element name="FndtMsg" type="tns:FndtMsgType"/>
+	<xsd:element name="FndtMsgBatch" type="tns:FndtBatchMsgType"/>
+	<xsd:element name="FndtBatchMsgResp" type="tns:FndtBatchMsgType"/>
+	<xsd:element name="Extn" type="tns:FndtMsgExtensionType"/>
+	<xsd:element name="FndtHeader" type="tns:FndtMsgHeaderType"/>
+	<xsd:element name="PostingInfo" type="tns:PostingInfoType"/>
+	<xsd:element name="FndtMsgSubset" type="tns:FndtMsgSubsetType"/>
+	<xsd:element name="mtables" type="tns:MsgTablesType">
+		<xsd:annotation>
+			<xsd:documentation>
+				NOT APPLICABLE FOR Feeder Messages
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="mtable" type="tns:MsgTableType">
+		<xsd:annotation>
+			<xsd:documentation>
+				NOT APPLICABLE FOR Feeder Messages
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FreeFormTextPayment" type="tns:FreeFormTextType">
+		<xsd:annotation>
+			<xsd:documentation>
+				NOT APPLICABLE FOR Feeder Messages
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="InternalRequest" type="tns:InternalRequestType">
+		<xsd:annotation>
+			<xsd:documentation>
+				NOT APPLICABLE 
+		</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="InternalResponse" type="tns:InternalResponseType">
+		<xsd:annotation>
+			<xsd:documentation>
+				NOT APPLICABLE 
+		</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MessageProcessingRequest" type="tns:MessageProcessingRequestType">
+		<xsd:annotation>
+			<xsd:documentation>
+				NOT APPLICABLE
+		</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="WsResult" type="tns:ResponseDetailsType">
+		<xsd:annotation>
+			<xsd:documentation>
+				NOT APPLICABLE
+		</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MIDListResponse" type="tns:MIDListResponseType">
+		<xsd:annotation>
+			<xsd:documentation>
+				NOT APPLICABLE
+		</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RuleResult" type="tns:RuleResultType">
+		<xsd:annotation>
+			<xsd:documentation>
+				NOT APPLICABLE
+		</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IBANResponse" type="tns:IBANResponseType">
+		<xsd:annotation>
+			<xsd:documentation>
+				NOT APPLICABLE FOR Feeder Messages
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IBANRequest" type="tns:IBANRequestType">
+		<xsd:annotation>
+			<xsd:documentation>
+				NOT APPLICABLE FOR Feeder Messages
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="FndtBatchMsgType">
+		<xsd:sequence>
+			<xsd:element name="FndtHeader" type="tns:BaseHeaderType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:sequence>
+					<xsd:element name="BatchHeader" type="tns:AnyTypeContainer"/>
+					<xsd:element name="PmntTxInf" type="tns:PmntTxInfType" maxOccurs="unbounded"/>
+				</xsd:sequence>
+				<xsd:sequence>
+					<xsd:element name="FndtPmntTxInf" type="tns:PmntTxInfType"/>
+				</xsd:sequence>
+			</xsd:choice>
+			<xsd:element name="ResponseDetails" type="tns:ResponseDetailsType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PmntTxInfType">
+		<xsd:choice>
+			<xsd:sequence>
+				<xsd:element name="PmntHeader" type="tns:AnyTypeContainer"/>
+				<xsd:element name="TxInf" type="tns:TxInfType"/>
+			</xsd:sequence>
+			<xsd:sequence>
+				<xsd:element name="FndtMsg" type="tns:FndtMsgType" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="TxInfType">
+		<xsd:sequence>
+			<xsd:element name="FndtMsg" type="tns:FndtMsgType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AnyTypeContainer">
+		<xsd:sequence>
+			<xsd:any namespace="##any" processContents="lax"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="IsoTypeContainer">
+		<xsd:choice>
+			<xsd:element ref="ns1:Document"/>
+			<xsd:element ref="ns2:Document"/>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="BaseHeaderType">
+		<xsd:sequence>
+			<xsd:element name="contextName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="contextLocalName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="deliveryTimestamp" type="tns:ISODateTime" minOccurs="0"/>
+			<xsd:element name="credentials" type="tns:UserContextType" minOccurs="0"/>
+			<xsd:element name="D_SKIP_PERSIST_ON_ERROR" type="xsd:boolean" default="false" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FndtMsgHeaderType">
+		<xsd:complexContent>
+			<xsd:extension base="tns:BaseHeaderType">
+				<xsd:sequence>
+					<xsd:element name="P_MID" type="tns:P_MIDType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="FndtMsgType">
+		<xsd:sequence>
+			<xsd:element name="Header" type="tns:FndtMsgHeaderType" minOccurs="0"/>
+			<xsd:element name="Msg" type="tns:MsgType" minOccurs="0"/>
+			<xsd:element name="OrigMsg" type="tns:MsgType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						NOT APPLICABLE FOR Feeder Messages
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ResponseDetails" type="tns:ResponseDetailsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Applicable for Interface Responses only
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MsgType">
+		<xsd:sequence>
+			<xsd:element name="Pmnt" type="tns:IsoTypeContainer" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Feeder messages support only ISO 20022 payments
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Extn" type="tns:FndtMsgExtensionType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="PmntType" type="tns:IsoTypeContainer"/>
+	<xsd:complexType name="FndtMsgExtensionType">
+		<xsd:all>
+			<xsd:element name="MsgFees" type="tns:MsgFeesType" minOccurs="0"/>
+			<xsd:element name="MsgNotes" type="tns:MsgNotesType" minOccurs="0"/>
+			<xsd:element name="MsgRates" type="tns:ForwardContractType" minOccurs="0"/>
+			<xsd:element name="Advising" type="tns:AdvisingType" minOccurs="0"/>
+			<xsd:element name="MsgErrors" type="tns:MsgErrorsType" minOccurs="0"/>
+			<xsd:element name="AuditTrail" type="tns:AuditTrailType" minOccurs="0"/>
+			<xsd:element name="PostingRestrictions" type="tns:PostingRestrictionsType" minOccurs="0"/>
+			<xsd:element name="SpecialInstructions" type="tns:SpecialInstructionsType" minOccurs="0"/>
+			<!-- TODO: add mfamily -->
+			<xsd:element name="ProcessingPersistentInfo" type="tns:ProcessingPersistentInfoType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Most elements are not applicable for Feeder
+						Messages
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="XMLPersistentInfo" type="tns:XMLPersistentInfoType" minOccurs="0"/>
+			<xsd:element name="CutoffInfo" type="tns:CutoffInfoType" minOccurs="0"/>
+			<xsd:element name="OperationalSection" type="tns:OperationalSectionType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Applicable for services/interfaces that handle
+						actions on payments
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MsgPosting" type="tns:PostingInfoType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						APPLICABLE for Posting and Advising Services
+						only 
+		   </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UserDefinedFields" type="tns:UserDefinedFieldsType" minOccurs="0"/>
+			<xsd:element name="InterfacesSection" type="tns:InterfacesSectionType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						NOT APPLICABLE for Feeder Messages
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="QaInfo" type="tns:QaInfoType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						NOT APPLICABLE 
+					 </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProcessingTransientInfo" type="tns:ProcessingTransientInfoType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						NOT APPLICABLE 
+			</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Monitors" type="tns:MonitorsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Applicable only for posting in events the user
+						forces from NSF
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReferenceData" type="tns:ReferenceDataType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						NOT APPLICABLE for Feeder Messages
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="OperationalSectionType">
+		<xsd:all>
+			<xsd:element name="D_BUTTON_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_SCREENSET_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="TemplateSection" type="tns:TemplateSectionType" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="TemplateSectionType">
+		<xsd:all>
+			<xsd:element name="D_TEMPLATE_UNCHANGED_FIELDS" type="xsd:string" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="UserDefinedFieldsType">
+		<xsd:annotation>
+			<xsd:documentation>
+				User Defined fields section.
+				May include the
+				following elements:
+				1. System wide user defined fields section encapsulated in a 'System' element. 
+				2. Bank user defined fields section encapsulated in an 'Office' element 
+				   Note: The bank's code value must be provided in the parent 'Office' code attribute.
+				1. Bank clients user defined fields section encapsulated in a 'Customer' element. 
+				   Note: The payment's proprietory id value element must be provided in the parent 'Customer' code attribute.
+
+				Both sections shall contain a sequence of logical field id tags encapsulating inner text values 
+		</xsd:documentation>
+			<xsd:documentation>
+				Example:
+				<UserDefinedFields>
+					<System>
+						<UDF5>Value</UDF5>
+					</System>
+					<Office code="OFFICE DEFAULT CUST CODE">
+						<UDF1>Value</UDF1>
+						<BANK_REPORTING_CD>Value</BANK_REPORTING_CD>
+						<UDF2>Value</UDF2>
+					</Office>
+					<Customer code="PAYMENT PROPRIETORY ID">
+						<LOGICAL_FIELD_NAME4>Value</LOGICAL_FIELD_NAME4>
+						<CUSTROMER_REPORTING_CD>Value</CUSTROMER_REPORTING_CD>
+						<LOGICAL_FIELD_NAME6>Value</LOGICAL_FIELD_NAME6>
+					</Customer>
+				</UserDefinedFields>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element name="System" type="tns:SystemUDFContainerType" minOccurs="0"/>
+			<xsd:element name="Office" type="tns:OfficeUDFContainerType" minOccurs="0"/>
+			<xsd:element name="Customer" type="tns:UDFContainerType" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="UDFContainerType">
+		<xsd:sequence>
+			<xsd:any namespace="##any" processContents="lax" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="code" type="xsd:string" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="OfficeUDFContainerType">
+		<xsd:complexContent>
+			<xsd:restriction base="tns:UDFContainerType">
+				<xsd:sequence>
+					<xsd:any namespace="##any" processContents="lax" maxOccurs="unbounded"/>
+				</xsd:sequence>
+				<xsd:attribute name="code" type="tns:OfficeType" use="required"/>
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SystemUDFContainerType">
+		<xsd:complexContent>
+			<xsd:restriction base="tns:UDFContainerType">
+				<xsd:sequence>
+					<xsd:any namespace="##any" processContents="lax" maxOccurs="unbounded"/>
+				</xsd:sequence>
+				<xsd:attribute name="code" type="xsd:string" use="required" fixed="***"/>
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="InterfacesSectionType">
+		<xsd:sequence>
+			<xsd:any namespace="##any" processContents="lax"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PostingInfoType">
+		<xsd:sequence>
+			<xsd:element name="M_POSTING_INFO_LINE" type="tns:PostingInfoRecord" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PostingInfoRecord">
+		<xsd:sequence>
+			<xsd:element name="F_POSTING_INFO_MOVEMENT_TYPE" type="tns:PostingMovementType" minOccurs="0"/>
+			<xsd:element name="F_POSTING_INFO_OFFICE" type="tns:OfficeType" minOccurs="0"/>
+			<xsd:element name="F_POSTING_INFO_ACCNO" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_POSTING_INFO_ACCT_TP" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_POSTING_INFO_ACCT_COST_CTR" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_POSTING_INFO_ACCT_EXT_CODE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_POSTING_INFO_FEE_TP" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_POSTING_INFO_CURRENCY" type="tns:CurrencyType" minOccurs="0"/>
+			<xsd:element name="F_POSTING_INFO_AMOUNT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="F_POSTING_INFO_VALUE_DATE" type="tns:ISODate" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="PostingMovementType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Debit"/>
+			<xsd:enumeration value="Credit"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PostingStatusType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="P">
+				<xsd:annotation>
+					<xsd:documentation>Posted</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="R">
+				<xsd:annotation>
+					<xsd:documentation>Reversed</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="AuditTrailType">
+		<xsd:sequence>
+			<xsd:element name="M_AUDIT_TRAIL" type="tns:AuditTrailLineType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AuditTrailLineType">
+		<xsd:sequence>
+			<xsd:element name="F_AUDIT_ERROR_CODE" type="xsd:int"/>
+			<xsd:element name="F_AUDIT_USER_NAME" type="xsd:string"/>
+			<xsd:element name="F_AUDIT_TIME_STAMP" type="xsd:string"/>
+			<xsd:element name="F_AUDIT_END_DATE" type="tns:ISODateTime" minOccurs="0"/>
+			<xsd:element name="F_AUDIT_UPDATE_DATE" type="tns:ISODateTime" minOccurs="0"/>
+			<xsd:element name="F_AUDIT_ZONE_CODE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_AUDIT_HIT_INFO" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_AUDIT_ERROR_PARAMS" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						For Compliance and Fraud only
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="F_AUDIT_RELATED_FIELDS_DATA" type="tns:MsgTableType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SpecialInstructionsType">
+		<xsd:sequence>
+			<xsd:element name="M_MSG_SPECIAL_INSTR_LINE" type="tns:MsgSpecialInstructionsLine" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MsgSpecialInstructionsLine">
+		<xsd:sequence>
+			<xsd:element name="F_SI_ERROR_CODE" type="xsd:int"/>
+			<xsd:element name="F_SI_ERROR_PARAMS" type="xsd:string"/>
+			<xsd:element name="F_SI_STATUS" type="xsd:string"/>
+			<xsd:element name="F_SI_PARTY_TYPE" type="xsd:string"/>
+			<xsd:element name="F_SI_OBJECT_ID" type="xsd:string"/>
+			<xsd:element name="F_SI_CREATE_DT" type="tns:ISODateTime"/>
+			<xsd:element name="F_SI_ZONE_CODE" type="xsd:string"/>
+			<xsd:element name="F_SI_TIME_STAMP" type="xsd:string"/>
+			<xsd:element name="F_SI_PREVENT_STP_UID" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PostingRestrictionsType">
+		<xsd:sequence>
+			<xsd:element name="M_MSG_STOP_FLAGS_LINE" type="tns:MsgStopFlagsLine" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MsgStopFlagsLine">
+		<xsd:sequence>
+			<xsd:element name="F_STOP_FLAGS_UID" type="xsd:string"/>
+			<xsd:element name="F_STOP_FLAGS_STATUS" type="xsd:int"/>
+			<xsd:element name="F_STOP_FLAGS_OBJECT_TYPE" type="xsd:string"/>
+			<xsd:element name="F_STOP_FLAGS_DIR" type="xsd:string"/>
+			<xsd:element name="F_STOP_FLAGS_OBJCET_UID" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MsgErrorsType">
+		<xsd:sequence>
+			<xsd:element name="M_MSGERR_LINE" type="tns:MsgErrLineType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MsgErrLineType">
+		<xsd:sequence>
+			<xsd:element name="F_MSGERR_CODE" type="xsd:int"/>
+			<xsd:element name="F_MSGERR_TIME_STAMP" type="xsd:string"/>
+			<xsd:element name="F_MSGERR_SEVERITY" type="xsd:int"/>
+			<xsd:element name="F_MSGERR_CREATE_DATE" type="tns:ISODateTime"/>
+			<xsd:element name="F_MSGERR_TIME_ZONE" type="xsd:string"/>
+			<xsd:element name="F_MSGERR_FAULT" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSGERR_PARAMS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSGERR_DISPLAY" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="F_MSGERR_FIELD_LOGICAL_ID" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MsgNotesType">
+		<xsd:sequence>
+			<xsd:element name="M_MSG_NOTES_GRID" type="tns:MsgNotesLineType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MsgNotesLineType">
+		<xsd:annotation>
+			<xsd:appinfo>
+				map("TIME_STAMP", "F_MSG_NOTES_TIMESTAMP");
+				map("USER_ID", "F_MSG_NOTES_USER_ID");
+				map("CREATE_DATE", "F_MSG_NOTES_CREATE_DATE");
+				map("TEXT", "F_MSG_NOTES_TEXT");map("EXTERNAL_NOTE_IND", "F_MSG_NOTES_EXTERNAL_NOTE_IND");
+				map("REC_STATUS", "F_MSG_NOTES_REC_STATUS");
+				map("UPDATED_USER_ID", "F_MSG_NOTES_UPDATED_USER_ID");
+				map("UPDATED_DATE", "F_MSG_NOTES_UPDATED_DATE");
+				map("UPDATED_DATE_ZONE_CODE", "F_MSG_NOTES_UPDATED_DT_ZONE_CD");
+				map("ATTACHED_FILE_LINK", "F_MSG_NOTES_ATTACHED_FILE_LINK");
+		</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element name="F_MSG_NOTES_TIMESTAMP" type="xsd:string" default="false" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						if new timetamp shall be empty 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="F_MSG_NOTES_USER_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_NOTES_CREATE_DATE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_NOTES_TEXT" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_NOTES_EXTERNAL_NOTE_IND" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="F_MSG_NOTES_REC_STATUS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_NOTES_UPDATED_USER_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_NOTES_UPDATED_DATE" type="tns:ISODateTime" minOccurs="0"/>
+			<xsd:element name="F_MSG_NOTES_UPDATED_DT_ZONE_CD" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_NOTES_ATTACHED_FILE_LINK" type="xsd:string" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="MsgFeesType">
+		<xsd:sequence>
+			<xsd:element name="M_MSG_FEES_LINE" type="tns:MsgFeesLineType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MsgFeesLineType">
+		<xsd:annotation>
+			<xsd:documentation>
+				map("MANUAL_FEE", "F_MSG_FEES_MANUAL_FEE");
+				map("DEDUCT_FROM", "F_MSG_FEES_DEDUCT_FROM");
+				map("FEE_ACC_AMOUNT", "F_MSG_FEES_FEE_ACC_AMOUNT");
+				map("FEE_AMOUNT", "F_MSG_FEES_FEE_AMOUNT");
+				map("FEE_AMOUNT_IN_PMT_CCY", "F_MSG_FEES_FEE_AMT_IN_PMT_CCY");
+				map("APPLY", "F_MSG_FEES_FEE_APPLY");
+				map("FEE_BASE_AMOUNT", "F_MSG_FEES_FEE_BASE_AMOUNT");
+				map("FEE_CURRENCY", "F_MSG_FEES_FEE_CURRENCY");
+				map("FEE_FORMULA_UID", "F_MSG_FEES_FEE_FORMULA_UID");
+				map("FEE_MONITOR", "F_MSG_FEES_FEE_MONITOR");
+				map("FEE_PNL_ACCOUNT_CURRENCY", "F_MSG_FEES_FEE_PNL_ACC_CUR");
+				map("FEE_PNL_ACC_NO", "F_MSG_FEES_FEE_PNL_ACC_NO ");
+ 				map("FEE_PNL_AMOUNT", "F_MSG_FEES_FEE_PNL_AMOUNT");
+				map("FEE_TYPE_UID", "F_MSG_FEES_FEE_TYPE_UID");
+				map("ORIG_FEE_AMOUNT", "F_MSG_FEES_ORIG_FEE_AMOUNT");
+				map("PAYING_PARTY", "F_MSG_FEES_PAYING_PARTY");
+				map("FEE_PNL_ACC_OFFICE", "F_MSG_FEES_PNL_ACC_OFFICE");
+				map("PNL_POSTING_STS", "F_MSG_FEES_PNL_POSTING_STS");
+				map("UNWIND_FEE", "F_MSG_FEES_UNWIND_FEE") ;
+				
+				transient: 
+				F_MSG_FEES_FEE_TYPE_NAME
+				F_MSG_FEES_FEE_FORMULA_NAME
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element name="F_MSG_FEES_MANUAL_FEE" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_FEE_FORMULA_NAME" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_FEE_TYPE_NAME" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_DEDUCT_FROM" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_FEE_ACC_AMOUNT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_FEE_AMOUNT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_FEE_AMT_IN_PMT_CCY" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_FEE_APPLY" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_FEE_BASE_AMOUNT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_FEE_CURRENCY" type="tns:CurrencyType" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_FEE_FORMULA_UID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_FEE_MONITOR" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_FEE_PNL_ACC_CUR" type="tns:CurrencyType" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_FEE_PNL_ACC_NO" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_FEE_PNL_AMOUNT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_FEE_TYPE_UID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_ORIG_FEE_AMOUNT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_PAYING_PARTY" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_PNL_ACC_OFFICE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_PNL_POSTING_STS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MSG_FEES_UNWIND_FEE" type="xsd:boolean" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:simpleType name="ManualFeeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="M">
+				<xsd:annotation>
+					<xsd:documentation>Manual</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="D">
+				<xsd:annotation>
+					<xsd:documentation>Derived</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="E">
+				<xsd:annotation>
+					<xsd:documentation>External</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="ProcessingTransientInfoType">
+		<xsd:all>
+			<xsd:element name="D_1ST_IN_CDT_CHA_ACCNUM_FLD_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_1ST_IN_CDT_CHA_IBAN_FLD_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_1ST_IN_DBT_CHA_ACCNUM_FLD_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_1ST_IN_DBT_CHA_BIC_FLD_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_1ST_IN_DBT_CHA_IBAN_FLD_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_ACCOUNT_DERIVATION_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_AF_MATCHED_MID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_CDTR_IBAN_CUST_CD" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_CONFIRMATION_FLOW" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_CURRENCY_CONVERSION_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_DIRECT_RECEIVER_INDEX" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_FIND_FIRST_IN_CHAIN_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_FEE_CALCULATION_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_FIRST_IN_CDT_CHAIN_ACC_NUM" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_FIRST_IN_CDT_CHAIN_IBAN" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_FIRST_IN_DBT_CHAIN_ACC_NUM" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_FIRST_IN_DBT_CHAIN_BIC" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_FIRST_IN_DBT_CHAIN_IBAN" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_LOAD_CUSTOMER_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_MOP_SELECTION_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_MT191AUTOGEN" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="D_STOP_FLAGS_PROCESS_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_AVAILABLE_MOPS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_CDT_CURR1_UNITS" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="D_CDT_CURR2_UNITS" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="D_DBT_CURR1_UNITS" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="D_DBT_CURR2_UNITS" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="D_DEBIT_AUTHORIZATION" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_MOP_VALID" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="D_CDT_FEE_ACCT_AMT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_CDT_FEE_ACCT_BASEEQVT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_CDT_FEE_PMT_DEDUCT_AMT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_CDT_FEE_PMT_DEDUCT_BASEEQVT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_CDT_AF_FEE_PMT_AMT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_CDT_FEE_ACCT_AMT_LATER" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_IN_AF_CDT_ACCT_AMT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_DBT_FEE_ACCT_AMT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_DBT_FEE_ACCT_BASEEQVT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_DBT_FEE_ACCT_CCY" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_DBT_FEE_PMT_DEDUCT_AMT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_DBT_FEE_PMT_DEDUCT_BASEEQVT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_DBT_MAIN_POST_AMT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_TOT_FEE_PMT_DEDUCT_AMT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_TOT_FEE_PMT_DEDUCT_BASEEQVT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_DBT_FEE_PMT_AMT_REQUEST" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_CDT_FEE_ACCT_AMT_NOW" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_DBT_FEE_AMT_PMT_PRE_IN_AF" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_RULE_TYPE_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_RULE_SUB_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_EVENT_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_DBT_AF_FEE_ACCT_AMT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="D_BANK_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_BRANCH_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_IBAN_STS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_VD_MONTH_CALENDAR" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_PD_MONTH_CALENDAR" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_STP_FIELDS_TO_VALID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_STP_RULE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_STANDARD_VD" type="tns:ISODate" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="ProcessingPersistentInfoType">
+		<xsd:all>
+			<xsd:element name="P_OFFICE" type="tns:OfficeType" minOccurs="0"/>
+			<xsd:element name="P_DEPARTMENT" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_MSG_CLASS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_TEMPLATE_MID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_PRODUCT_CD" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_MSG_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_USER_MSG_TYPE" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="P_DISPLAY_MSG_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_MSG_SUB_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_BATCH_MSG_TP" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_BASE_MSG_STS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_MSG_STS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_ORIG_MSG_SUB_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_ORIG_MSG_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_CHARGES_PAID" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="P_BA_CD" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_BASE_AMT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="P_BASE_CCY" type="tns:CurrencyType" minOccurs="0"/>
+			<xsd:element name="P_BASE_RATE_USAGE_NM" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_PREFERRED_CDT_MOP" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_PRIORITY" type="xsd:long" minOccurs="0"/>
+			<xsd:element name="P_BULKING_PROFILE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_IN_BULK_MSGID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_OUT_BULK_MSGID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_IN_INTERNAL_FILEID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_CHUNK_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_FC_INFO_IND" type="xsd:int" default="0" minOccurs="0"/>
+			<xsd:element name="P_TIME_STAMP" type="xsd:string" default="0" minOccurs="0"/>
+			<xsd:element name="P_NON_ACC" type="xsd:boolean" default="0" minOccurs="0"/>
+			<xsd:element name="P_IS_HISTORY" type="tns:MessasgePartitionType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Contains the Message Partition Type. 
+						Valid Values: 
+						0 - Active Partition
+						1 - Historical Partition 
+						2 - Templates Partition  
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="P_PAYMENT_TP" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_TEMPLATE_NM" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_TEMPLATE_CD" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_TEMPLATE_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_PROC_DT" type="tns:ISODate" minOccurs="0"/>
+			<xsd:element name="CreditSide" type="tns:CreditSideType" minOccurs="0"/>
+			<xsd:element name="DebitSide" type="tns:DebitSideType" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:simpleType name="MessasgePartitionType">
+		<xsd:restriction base="xsd:int">
+			<xsd:enumeration value="0">
+				<xsd:annotation>
+					<xsd:documentation>0 - Active Partition</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="1">
+				<xsd:annotation>
+					<xsd:documentation>1 - Historical Partition</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="2">
+				<xsd:annotation>
+					<xsd:documentation>2 - Templates Partition</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="XMLPersistentInfoType">
+		<xsd:all>
+			<xsd:element name="X_MSG_USER_REF" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="X_DBT_CDT_IND" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="X_EPMT_REF" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="D_FIRST_IN_CDT_CHAIN_BIC" type="tns:BICType" minOccurs="0"/>
+			<xsd:element name="D_DIRECT_RECEIVER" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="InstrNxtAgtOtherCodes" type="tns:InstrNxtAgtOtherCodeContainerType" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="InstrNxtAgtOtherCodeContainerType">
+		<xsd:sequence>
+			<xsd:element name="InstrNxtAgtOtherCode" type="tns:InstrNxtAgtOtherCodeType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InstrNxtAgtOtherCodeType">
+		<xsd:all>
+			<xsd:element name="X_INSTR_NXT_AGT_OTHER_CD" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="X_INSTR_NXT_AGT_OTHER_INF" type="xsd:string" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="CutoffInfoType">
+		<xsd:all>
+			<xsd:element name="P_TREASURY_CUTOFF_TM" type="tns:ISODateTime" minOccurs="0"/>
+			<xsd:element name="P_TREASURY_CUTOFF_NM" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_TREASURY_CUTOFF_STS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_CLEARING_CUTOFF_TM" type="tns:ISODateTime" minOccurs="0"/>
+			<xsd:element name="P_CLEARING_CUTOFF_NM" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_CLEARING_CUTOFF_STS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_PROC_CUTOFF_TM" type="tns:ISODateTime" minOccurs="0"/>
+			<xsd:element name="P_PROC_CUTOFF_NM" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_PROC_CUTOFF_STS" type="xsd:string" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="CreditSideType">
+		<xsd:all>
+			<xsd:element name="P_CDT_FEE_ACCT_NB" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_CDT_FEE_ACCT_CCY" type="tns:CurrencyType" minOccurs="0"/>
+			<xsd:element name="P_CDT_FEE_ACCT_OFFICE" type="tns:OfficeType" minOccurs="0"/>
+			<xsd:element name="P_CDT_FEE_PMT_CCY" type="tns:CurrencyType" minOccurs="0"/>
+			<xsd:element name="P_CDT_FEE_POSTING_STS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_CDT_AMT_STEP1" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="P_CDT_ACCT_NB" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_CDT_ACCT_OFFICE" type="tns:OfficeType" minOccurs="0"/>
+			<xsd:element name="P_CDT_RATE_USAGE_NM" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_CDT_RATE" type="tns:BaseOneRate" minOccurs="0"/>
+			<xsd:element name="P_CDT_MOP" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_CDT_APPLY_FEE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_CDT_CROSS_CONV" type="xsd:boolean" default="0" minOccurs="0"/>
+			<xsd:element name="P_CDT_MID_RATE" type="tns:BaseOneRate" minOccurs="0"/>
+			<xsd:element name="P_CDT_POSTING_STS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_CDT_SPREAD" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="P_CDT_TX_CD" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_CDT_RATE_STEP1" type="tns:BaseOneRate" minOccurs="0"/>
+			<xsd:element name="P_CDT_RATE_STEP2" type="tns:BaseOneRate" minOccurs="0"/>
+			<xsd:element name="P_CDT_TRIANGULATION_CCY" type="tns:CurrencyType" minOccurs="0"/>
+			<xsd:element name="P_CDT_ACCT_CCY" type="tns:CurrencyType" minOccurs="0"/>
+			<xsd:element name="P_CDT_AMT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="P_CDT_CUST_CD" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_CDT_VD" type="tns:ISODate" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="PlaceHolderType">
+		<xsd:all/>
+	</xsd:complexType>
+	<xsd:complexType name="DebitSideType">
+		<xsd:all>
+			<xsd:element name="P_DBT_MOP" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_DBT_AMT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="P_DBT_ACCT_NB" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_DBT_FEE_ACCT_NB" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_DBT_CROSS_CONV" type="xsd:boolean" default="0" minOccurs="0"/>
+			<xsd:element name="P_DBT_CUST_CD" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_DBT_FEE_ACCT_OFFICE" type="tns:OfficeType" minOccurs="0"/>
+			<xsd:element name="P_DBT_FEE_PMT_CCY" type="tns:CurrencyType" minOccurs="0"/>
+			<xsd:element name="P_DBT_FEE_POSTING_STS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_DBT_MID_RATE" type="tns:BaseOneRate" minOccurs="0"/>
+			<xsd:element name="P_DBT_RATE" type="tns:BaseOneRate" minOccurs="0"/>
+			<xsd:element name="P_DBT_RATE_USAGE_NM" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_DBT_SPREAD" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="P_DBT_TX_CD" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_DBT_AMT_STEP1" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="P_DBT_FEE_ACCT_CCY" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="P_DBT_RATE_STEP1" type="tns:BaseOneRate" minOccurs="0"/>
+			<xsd:element name="P_DBT_ACCT_CCY" type="tns:CurrencyType" minOccurs="0"/>
+			<xsd:element name="P_DBT_RATE_STEP2" type="tns:BaseOneRate" minOccurs="0"/>
+			<xsd:element name="P_DBT_ACCT_OFFICE" type="tns:OfficeType" minOccurs="0"/>
+			<xsd:element name="P_DBT_TRIANGULATION_CCY" type="tns:CurrencyType" minOccurs="0"/>
+			<xsd:element name="P_DBT_VD" type="tns:ISODate" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="MonitorsType">
+		<xsd:all>
+			<xsd:element name="UserMonitors" type="tns:UserMonitorType" minOccurs="0"/>
+			<xsd:element name="ServiceMonitors" type="tns:ServiceStateType" minOccurs="0"/>
+			<xsd:element name="InterfaceMonitors" type="tns:PlaceHolderType" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="UserMonitorType">
+		<xsd:all>
+			<xsd:element name="MU_REQ_FOR_CHARGES_FORCE_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MU_STOP_FLAGS_OVERRIDE_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MU_MISSED_CUTOFF" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MU_SPECIAL_INST_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MU_PI_FORCE_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MU_HANDLE_71G_GAP" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MU_COMPLIANCE_FORCE_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MU_NSF_FORCE_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MU_FORCE_STANDARD_VD" type="tns:MonitorFieldType" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="ServiceStateType">
+		<xsd:all>
+			<xsd:element name="MF_DBT_STOP_FLAGS_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_CDT_STOP_FLAGS_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_MOP_SELECTION_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_SPECIAL_INST_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_INITIAL_CREATE" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_OUT_REQ_FOR_CHRG_MATCH_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_GENERATE_REQ_CHARGES" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_TIME_HOLD" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_GENERATED_ANSWER_MESSAGE" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_GENERATED_CANCEL_REQUEST" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_REQ_FOR_CHARGES_MATCH_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_COMPLIANCE_VALIDATION_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_DIRECT_COVER_GENERATED" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_REQ_FOR_CHARGES_VALID_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_PISN_MATCH_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_PISN_PROCESS_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_CANCEL_MATCH_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_CANCEL_REQUEST_VALID_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_N_MESSAGES_MATCH_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_FEE_PROC_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+			<xsd:element name="MF_POSTING_STS" type="tns:MonitorFieldType" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="ReferenceDataType">
+		<xsd:all>
+			<xsd:element name="M_DBT_CUST_PROFILE" type="tns:M_DBT_CUST_PROFILEType" minOccurs="0"/>
+			<xsd:element name="M_CDT_CUST_PROFILE" type="tns:M_CDT_CUST_PROFILEType" minOccurs="0"/>
+			<xsd:element name="M_STTLM_CCY_PROFILE" type="tns:M_STTLM_CCY_PROFILEType" minOccurs="0"/>
+			<xsd:element name="M_DBT_MOP_PROFILE" type="tns:M_DBT_MOP_PROFILEType" minOccurs="0"/>
+			<xsd:element name="M_CDT_MOP_PROFILE" type="tns:M_CDT_MOP_PROFILEType" minOccurs="0"/>
+			<xsd:element name="M_DBT_ACCOUNT" type="tns:M_DBT_ACCOUNTType" minOccurs="0"/>
+			<xsd:element name="M_CDT_ACCOUNT" type="tns:M_CDT_ACCOUNTType" minOccurs="0"/>
+			<xsd:element name="M_INSTG_AGT_PROFILE" type="tns:M_INSTG_AGT_PROFILEType" minOccurs="0"/>
+			<xsd:element name="M_LOCAL_OFFICE_PROFILE" type="tns:M_LOCAL_OFFICE_PROFILEType" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="M_DBT_CUST_PROFILEType">
+		<xsd:all>
+			<xsd:element name="F_DBT_CUST_ABA" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_ALIAS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_BASE_NO" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_CLEARING_CODE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_COUNTRYCODE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_CUST_CATEGORY" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_CUST_CODE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_CUST_NAME" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_CUST_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_DEPARTMENT" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_FEE_ACCOUNT_NO" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_FROMREASON" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_IBAN_BANK_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_OWNERSHIP" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_PROFESSION" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_REG_REPORT1" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_REG_REPORT2" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_STOPFLAGFROM" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_STOPFLAGTO" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_SWIFT_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_TOREASON" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_DBT_CUST_CITY" type="xsd:string" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="M_CDT_CUST_PROFILEType">
+		<xsd:all>
+			<xsd:element name="F_CDT_CUST_ABA" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_BASE_NO" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_CLEARING_CODE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_COUNTRYCODE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_CUST_CATEGORY" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_CUST_CODE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_CUST_NAME" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_CUST_TYPE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_DEPARTMENT" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_FEE_ACCOUNT_NO" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_FROMREASON" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_IBAN_BANK_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_OWNERSHIP" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_PROFESSION" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_REG_REPORT1" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_REG_REPORT2" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_ALIAS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_STOPFLAGFROM" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_STOPFLAGTO" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_SWIFT_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_TOREASON" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_STATE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_CITY" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_ZIP" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_ADDRESS1" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_ADDRESS2" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_ADDRESS3" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_CUST_ADDRESS4" type="xsd:string" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="M_DBT_ACCOUNTType">
+		<xsd:all>
+			<xsd:element name="F_DBT_ACCT_ASSET" type="xsd:boolean" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="M_CDT_ACCOUNTType">
+		<xsd:all>
+			<xsd:element name="F_CDT_ACCT_ASSET" type="xsd:boolean" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="M_STTLM_CCY_PROFILEType">
+		<xsd:all>
+			<xsd:element name="F_INSTR_CCY_DRAFT" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="F_INSTR_CCY_EURO" type="xsd:string" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="M_INSTG_AGT_PROFILEType">
+		<xsd:all>
+			<xsd:element name="F_INSTG_CUST_ABA" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_INSTG_CUST_SWIFT_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_INSTG_CUST_ALIAS" type="xsd:string" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="M_CDT_MOP_PROFILEType">
+		<xsd:all>
+			<xsd:element name="F_CDT_MOP_CCY" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_MOP_CHK_DRAFT_CCY" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="F_CDT_MOP_MIN_AMT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="F_CDT_MOP_SENDOUTMSG" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="F_CDT_MOP_SEND_REC_IDCODE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_MOP_SETT_ACC_EXISTS" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="F_INSTG_CUST_ALIAS" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="F_CDT_MOP_SNDR_BIC" type="tns:BICType" minOccurs="0"/>
+			<xsd:element name="F_CDT_MOP_SPLIT_OVER_MAX" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="F_CDT_MOP_FIN_COPY" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_MOP_DOWN" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="F_CDT_MOP_NCC_TP" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_MOP_MAX_AMT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="F_CDT_MOP_ALLOW_NAC_MSG" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="F_CDT_MOP_GRP" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_CDT_MOP_NM" type="xsd:string" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="M_LOCAL_OFFICE_PROFILEType">
+		<xsd:all>
+			<xsd:element name="F_OFFICE_CUST_SWIFT_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_OFFICE_BDT" type="xsd:dateTime" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:complexType name="M_DBT_MOP_PROFILEType">
+		<xsd:all>
+			<xsd:element name="F_MOP_MAXAMOUNT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="F_MOP_CHK_DRAFT_CURRENCY" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="F_MOP_CURRENCY" type="tns:CurrencyType" minOccurs="0"/>
+			<xsd:element name="F_MOP_MOPDOWN" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="F_MOP_ALLOW_NAC_MSG" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="F_MOP_SENDOUTMSG" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="F_MOP_MINAMOUNT" type="tns:AmountType" minOccurs="0"/>
+			<xsd:element name="F_MOP_SEND_REC_IDCODE" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MOP_SETT_ACC_EXISTS" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="F_MOP_SPLIT_OVER_MAX" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="F_MOP_NM" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MOP_GROUP" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_MOP_NCC_TYPE" type="xsd:string" minOccurs="0"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:simpleType name="MonitorFieldType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="\w{1}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="IBANRequestType">
+		<xsd:sequence>
+			<xsd:element name="office" type="xsd:string"/>
+			<xsd:element name="potentialIBAN" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ibanMethod" type="tns:IBANMethod" minOccurs="0"/>
+			<xsd:element name="partyName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="countryCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="receiverIBANBankID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="branchID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="accountNumber" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="IBANResponseType">
+		<xsd:sequence>
+			<xsd:element name="formattedIBAN" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ibanStatus" type="xsd:string"/>
+			<xsd:element name="countryCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="branchID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="accountNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="derivedBIC" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="bankID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="WsResult" type="tns:ResponseDetailsType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="IBANMethod">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Validation"/>
+			<xsd:enumeration value="Construction"/>
+			<xsd:enumeration value="Deconstruction"/>
+			<xsd:enumeration value="ValidationAndDeconstruction"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="InternalResponseType">
+		<xsd:sequence>
+			<xsd:element name="Extn" type="tns:FndtMsgExtensionType" minOccurs="0"/>
+			<xsd:element name="ResponseDetails" type="tns:ResponseDetailsType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InternalRequestType">
+		<xsd:sequence>
+			<xsd:element name="sessionId" type="xsd:string"/>
+			<xsd:element name="MID" type="xsd:string"/>
+			<xsd:element name="Extn" type="tns:FndtMsgExtensionType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MessageProcessingRequestType">
+		<xsd:sequence>
+			<xsd:element name="fromService" type="xsd:string"/>
+			<xsd:element name="MID" type="xsd:string"/>
+			<xsd:element name="priority" type="xsd:long" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MIDListResponseType">
+		<xsd:sequence>
+			<xsd:element name="MID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="WsResult" type="tns:ResponseDetailsType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AdvisingType">
+		<xsd:sequence>
+			<xsd:element name="M_ADVISING_LINE" type="tns:AdvisingTypeLineType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AdvisingTypeLineType">
+		<xsd:annotation>
+			<xsd:appinfo>
+                 map("UID_ADVISING", "F_ADVISING_UID_ADVISING");
+                 map("CONTACT_DETAILS", "F_ADVISING_CONTACT_DETAILS");
+                 map("CONTACT_TYPE", "F_ADVISING_CONTACT_TYPE");
+                 map("CONTACT_NAME", "F_ADVISING_CONTACT_NAME");
+                 map("MIN_AMT", "F_ADVISING_MIN_AMT");
+                 map("ADVICE_SUB_TYPE", "F_ADVISING_ADVICE_SUB_TYPE");
+                 map("ADVICE_TYPE", "F_ADVISING_ADVICE_TYPE");
+                 map("FEE_ADVICE_IND", "F_ADVISING_FEE_ADVICE_IND");
+                 map("CR_ADVICE_IND", "F_ADVISING_CR_ADVICE_IND");
+                 map("DR_ADVICE_IND", "F_ADVISING_DR_ADVICE_IND");
+                 map("TEMP_ID", "F_ADVISING_TEMP_ID");
+                 map("ADVC_VEHICLE" , "F_ADVISING_ADVC_VEHICLE");
+            </xsd:appinfo>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="F_ADVISING_UID_ADVISING" type="xsd:string"/>
+			<xsd:element name="F_ADVISING_CONTACT_DETAILS" type="xsd:string"/>
+			<xsd:element name="F_ADVISING_CONTACT_TYPE" type="xsd:string"/>
+			<xsd:element name="F_ADVISING_CONTACT_NAME" type="xsd:string"/>
+			<xsd:element name="F_ADVISING_MIN_AMT" type="tns:AmountType"/>
+			<xsd:element name="F_ADVISING_ADVICE_SUB_TYPE" type="xsd:string"/>
+			<xsd:element name="F_ADVISING_ADVICE_TYPE" type="xsd:string"/>
+			<xsd:element name="F_ADVISING_FEE_ADVICE_IND" type="xsd:boolean"/>
+			<xsd:element name="F_ADVISING_CR_ADVICE_IND" type="xsd:boolean"/>
+			<xsd:element name="F_ADVISING_DR_ADVICE_IND" type="xsd:boolean"/>
+			<xsd:element name="F_ADVISING_ADVICE_TO_PARTY" type="tns:AdviceToPartyType"/>
+			<xsd:element name="F_ADVISING_ADVC_VEHICLE" type="xsd:string"/>
+			<xsd:element name="F_ADVISING_TEMP_ID" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="AdviceToPartyType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="C"/>
+			<xsd:enumeration value="D"/>
+			<xsd:enumeration value="FC"/>
+			<xsd:enumeration value="FD"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="ForwardContractType">
+		<xsd:sequence>
+			<xsd:element name="M_FC_LINE" type="tns:ForwardContractLineType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ForwardContractLineType">
+		<xsd:annotation>
+			<xsd:appinfo>
+				map("CONTRACT", "F_FC_CONTRACT");
+				map("AMOUNT", "F_FC_AMOUNT");
+				map("RATE", "F_FC_RATE");
+				map("CCY1", "F_FC_CURRENCY1");
+				map("CCY2", "F_FC_CURRENCY2");
+				map("SPREAD", "F_FC_SPREAD");
+				map("MID", "F_FC_MID");
+				map("CONVERSION_TYPE", "F_FC_CONVERSION_TYPE");
+				map("FORWARD_CONTRACT", "F_FC_FORWARD_CONTRACT");
+				map("CUSTOMER_ID", "F_FC_CUSTOMER_ID");
+				map("MANUAL_SPREAD", "F_FC_MANUAL_SPREAD");
+		</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="F_FC_CONTRACT" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_FC_AMOUNT" type="tns:AmountType"/>
+			<xsd:element name="F_FC_RATE" type="tns:BaseOneRate"/>
+			<xsd:element name="F_FC_SPREAD" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="F_FC_CURRENCY1" type="tns:CurrencyType"/>
+			<xsd:element name="F_FC_CURRENCY2" type="tns:CurrencyType"/>
+			<xsd:element name="F_FC_MID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_FC_FORWARD_CONTRACT" type="xsd:long" minOccurs="0"/>
+			<xsd:element name="F_FC_CONVERSION_TYPE" type="tns:FCConversionType"/>
+			<xsd:element name="F_FC_CUSTOMER_ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="F_FC_MANUAL_SPREAD" type="xsd:decimal" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="FCConversionType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="CR"/>
+			<xsd:enumeration value="DR"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="OfficeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="\w{3}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="AmountType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:minInclusive value="0"/>
+			<xsd:fractionDigits value="5"/>
+			<xsd:totalDigits value="18"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="BaseOneRate">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:fractionDigits value="10"/>
+			<xsd:totalDigits value="11"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Max70Text">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="70"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Max35Text">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="35"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Max15NumericText">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9]{1,15}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Max34Text">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="34"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Max140Text">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="140"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CurrencyType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="\w{3}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="P_MIDType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="forCreation" type="xsd:boolean" use="optional" default="false"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="ChargeBearerType1Code">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="DEBT"/>
+			<xsd:enumeration value="CRED"/>
+			<xsd:enumeration value="SHAR"/>
+			<xsd:enumeration value="SLEV"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ISODateTime">
+		<xsd:restriction base="xsd:dateTime"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="ISODate">
+		<xsd:restriction base="xsd:date"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="SettlementMethod1Code">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="INDA"/>
+			<xsd:enumeration value="INGA"/>
+			<xsd:enumeration value="COVE"/>
+			<xsd:enumeration value="CLRG"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="BICType">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="11"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="ResponseDetailsType">
+		<xsd:sequence>
+			<xsd:element name="returnCode" type="xsd:int" default="0"/>
+			<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="errorsList" type="tns:ErrorType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="dataArray" type="tns:AnySimpleDataType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ErrorType">
+		<xsd:sequence>
+			<xsd:element name="code" type="xsd:int"/>
+			<xsd:element name="description" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RuleResultsType">
+		<xsd:sequence>
+			<xsd:element name="ruleResult" type="tns:RuleResultType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RuleResultType">
+		<xsd:sequence>
+			<xsd:element name="action" type="xsd:string"/>
+			<xsd:element name="ruleUID" type="xsd:string"/>
+			<xsd:element name="ruleSequence" type="xsd:string"/>
+			<xsd:element name="ruleTypeId" type="xsd:int"/>
+			<xsd:element name="objectUID" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="QaInfoType">
+		<xsd:annotation>
+			<xsd:documentation>
+				NOT APPLICABLE
+		</xsd:documentation>
+			<xsd:documentation>
+				QA Section is for internal use only
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="D_ELAPSED_TIME_MS" type="xsd:decimal"/>
+			<xsd:element name="QATest2" type="xsd:string"/>
+			<xsd:element name="QATest3" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AnySimpleDataType">
+		<xsd:sequence>
+			<xsd:element name="data" type="xsd:anySimpleType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FreeFormTextType">
+		<xsd:sequence>
+			<xsd:element name="payload" type="xsd:string"/>
+		</xsd:sequence>
+		<xsd:attribute name="type" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="MsgTablesType">
+		<xsd:sequence>
+			<xsd:element name="mtable" type="tns:MsgTableType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="MsgTableType">
+		<xsd:sequence>
+			<xsd:element name="record" type="tns:RecordType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RecordType">
+		<xsd:sequence>
+			<xsd:element ref="tns:column" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="isNew" type="xsd:boolean" default="false"/>
+	</xsd:complexType>
+	<xsd:element name="column" type="tns:MsgTableEntryBaseType"/>
+	<xsd:element name="STRING" type="tns:STRING" substitutionGroup="tns:column"/>
+	<xsd:element name="FLOAT" type="tns:FLOAT" substitutionGroup="tns:column"/>
+	<xsd:element name="BOOL" type="tns:BOOL" substitutionGroup="tns:column"/>
+	<xsd:element name="DATE" type="tns:DATE" substitutionGroup="tns:column"/>
+	<xsd:element name="DATE_TIME" type="tns:DATE_TIME" substitutionGroup="tns:column"/>
+	<xsd:element name="INTEGER" type="tns:INTEGER" substitutionGroup="tns:column"/>
+	<xsd:element name="DOUBLE" type="tns:DOUBLE" substitutionGroup="tns:column"/>
+	<xsd:element name="NUMBER" type="tns:NUMBER" substitutionGroup="tns:column"/>
+	<xsd:element name="NUM_NO_DEC" type="tns:NUM_NO_DEC" substitutionGroup="tns:column"/>
+	<xsd:element name="CHAR" type="tns:STRING" substitutionGroup="tns:column"/>
+	<xsd:element name="DECIMAL" type="tns:DOUBLE" substitutionGroup="tns:column"/>
+	<xsd:element name="OBJECT" type="tns:STRING" substitutionGroup="tns:column"/>
+	<xsd:element name="TABLE" type="tns:TABLE" substitutionGroup="tns:column"/>
+	<xsd:complexType name="MsgTableEntryBaseType">
+		<xsd:sequence/>
+		<xsd:attribute name="id" type="xsd:string" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="STRING">
+		<xsd:complexContent>
+			<xsd:extension base="tns:MsgTableEntryBaseType">
+				<xsd:sequence>
+					<xsd:element name="OLD_VALUE" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="NEW_VALUE" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="value" type="xsd:string" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="FLOAT">
+		<xsd:complexContent>
+			<xsd:extension base="tns:MsgTableEntryBaseType">
+				<xsd:sequence>
+					<xsd:element name="OLD_VALUE" type="xsd:decimal" minOccurs="0"/>
+					<xsd:element name="NEW_VALUE" type="xsd:decimal" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="value" type="xsd:decimal" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="BOOL">
+		<xsd:complexContent>
+			<xsd:extension base="tns:MsgTableEntryBaseType">
+				<xsd:sequence>
+					<xsd:element name="OLD_VALUE" type="xsd:boolean" minOccurs="0"/>
+					<xsd:element name="NEW_VALUE" type="xsd:boolean" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="value" type="xsd:boolean" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="NUMBER">
+		<xsd:complexContent>
+			<xsd:extension base="tns:MsgTableEntryBaseType">
+				<xsd:sequence>
+					<xsd:element name="OLD_VALUE" type="xsd:long" minOccurs="0"/>
+					<xsd:element name="NEW_VALUE" type="xsd:long" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="value" type="xsd:long" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="DATE">
+		<xsd:complexContent>
+			<xsd:extension base="tns:MsgTableEntryBaseType">
+				<xsd:sequence>
+					<xsd:element name="OLD_VALUE" type="xsd:date" minOccurs="0"/>
+					<xsd:element name="NEW_VALUE" type="xsd:date" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="value" type="xsd:date" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="DATE_TIME">
+		<xsd:complexContent>
+			<xsd:extension base="tns:MsgTableEntryBaseType">
+				<xsd:sequence>
+					<xsd:element name="OLD_VALUE" type="xsd:dateTime" minOccurs="0"/>
+					<xsd:element name="NEW_VALUE" type="xsd:dateTime" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="value" type="xsd:dateTime" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="INTEGER">
+		<xsd:complexContent>
+			<xsd:extension base="tns:MsgTableEntryBaseType">
+				<xsd:sequence>
+					<xsd:element name="OLD_VALUE" type="xsd:int" minOccurs="0"/>
+					<xsd:element name="NEW_VALUE" type="xsd:int" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="value" type="xsd:int" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="DOUBLE">
+		<xsd:complexContent>
+			<xsd:extension base="tns:MsgTableEntryBaseType">
+				<xsd:sequence>
+					<xsd:element name="OLD_VALUE" type="xsd:double" minOccurs="0"/>
+					<xsd:element name="NEW_VALUE" type="xsd:double" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="value" type="xsd:double" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="NUM_NO_DEC">
+		<xsd:complexContent>
+			<xsd:extension base="tns:MsgTableEntryBaseType">
+				<xsd:sequence>
+					<xsd:element name="OLD_VALUE" type="xsd:long" minOccurs="0"/>
+					<xsd:element name="NEW_VALUE" type="xsd:long" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="value" type="xsd:long" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="TABLE">
+		<xsd:complexContent>
+			<xsd:extension base="tns:MsgTableEntryBaseType">
+				<xsd:sequence>
+					<xsd:element name="OLD_VALUE" type="tns:MsgTableType" minOccurs="0"/>
+					<xsd:element name="NEW_VALUE" type="tns:MsgTableType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:simpleType name="IncomingMsgContextType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="GENERIC_XML_MSG"/>
+			<xsd:enumeration value="INCOMING_SWIFT"/>
+			<xsd:enumeration value="INCOMING_INTERFACE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="UserContextType">
+		<xsd:sequence>
+			<xsd:element name="UserID" type="xsd:string"/>
+			<xsd:element name="Role" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="MIDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="\w{16}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="XmlType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="FULL">
+				<xsd:annotation>
+					<xsd:documentation>
+							Includes the following data in the output XML: 
+								- ALL MINF Relational columns 
+								- All Monitor Fields 
+								- All User Defined Fields 
+								- Updated Xml pmnt Section 
+								- Related Static data 
+								- Interfaces Section 
+								- Msg Notes 
+								- Msg Fees 
+								- Msg Posting 
+								- Msg Rates 
+								- Msg Special Instructions 
+								- Msg Errors 
+								- Msg Audit Trail 
+								- Msg Advising
+								- Msg Stop Flags
+								- Orig Xml 
+ Section 
+								- Orig Xml Extension Section 
+						</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PERSISTENT_DATA">
+				<xsd:annotation>
+					<xsd:documentation>
+						Includes the following data in the output XML: 
+							- ALL MINF Relational columns 
+							- All Monitor Fields 
+							- All User Defined Fields 
+							- Updated Xml pmnt Section 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ORIG_PERSISTENT_DATA">
+				<xsd:annotation>
+					<xsd:documentation>
+						Includes the following data in the output XML: 
+							- Original feeded Message and Extension (if provided)  
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="ParseOutputModeType">
+		<xsd:simpleContent>
+			<xsd:extension base="tns:XmlType">
+				<xsd:attribute name="pmntConversionType" type="xsd:string" use="optional" default="AS-IS"/>
+				<xsd:attribute name="origPmntConversionType" type="xsd:string" use="optional" default="AS-IS"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="FndtMsgSubsetType">
+		<xsd:sequence>
+			<xsd:element name="document" type="tns:LogicalFieldDocument" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LogicalFieldType">
+		<xsd:sequence>
+			<xsd:element name="field" type="tns:LogicalFieldType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="LogicalFieldDocument">
+		<xsd:complexContent>
+			<xsd:extension base="tns:LogicalFieldType">
+				<xsd:sequence/>
+				<xsd:attribute name="conversionType" type="xsd:string" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

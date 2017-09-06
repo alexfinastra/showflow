@@ -1,0 +1,40 @@
+<xsd:schema xmlns:tns="http://fundtech.com/SCL/MessageUnifiedGateway" targetNamespace="http://fundtech.com/SCL/MessageUnifiedGateway"
+	xmlns:commonTypes="http://fundtech.com/SCL/CommonTypes"  
+	attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema"> 
+	
+	<xsd:import namespace="http://fundtech.com/SCL/CommonTypes" schemaLocation="CommonTypes.xsd" />
+	
+	<xsd:element name="MessageUnifiedGatewayRequest" type="tns:MessageUnifiedGatewayRequestType" />
+	<xsd:element name="MessageUnifiedGatewayResponse" type="tns:MessageUnifiedGatewayResponseType" />
+	
+	<xsd:complexType name="MsgContextType"> 
+		<xsd:sequence> 
+			<xsd:element name="sessionID" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="P_MID" type="commonTypes:P_MIDType" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="pmntSrc" type="xsd:string"  minOccurs="0" maxOccurs="1" />
+			<xsd:element name="context" type="xsd:string"  minOccurs="1" maxOccurs="1" />
+			<xsd:element name="scrapServiceOutput" type="xsd:boolean" minOccurs="0" maxOccurs="1"/> 
+			<xsd:element name="orchstrationContext" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="P_MSG_STS" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="MessageUnifiedGatewayRequestType"> 
+		<xsd:sequence> 
+			<xsd:element name="MsgContext" type="tns:MsgContextType" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="Pmnt" type="commonTypes:PmntType" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="MergeData" type="commonTypes:FndtMsgType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="OutputStructure" type="commonTypes:FndtMsgSubsetType" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="MessageUnifiedGatewayResponseType"> 
+		<xsd:sequence> 
+			<xsd:element name="MsgContext" type="tns:MsgContextType" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="subsetOutput" type="commonTypes:FndtMsgType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="targetServiceResponse" type="commonTypes:AnyTypeContainer" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="commonTypes:WsResult" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>  

@@ -1,0 +1,59 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" targetNamespace="http://rp.baml.com/service/FXQuotesV001"
+	xmlns:tns="http://rp.baml.com/service/FXQuotesV001" xmlns:fml="http://www.fixprotocol.org/FIXML-4-4"
+	xmlns:fxtml="http://rp.baml.com/fxt/FIXML-4-4">
+
+	<xs:import namespace="http://www.fixprotocol.org/FIXML-4-4"
+		schemaLocation="fixml-quotation-impl-4-4.xsd" />
+	<xs:import namespace="http://rp.baml.com/fxt/FIXML-4-4"
+		schemaLocation="FXT-FIXML-4-4.xsd" />
+
+	<xs:element name="FXQuoteInitiation">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FIXML" type="fxtml:FIXML_Type"/>
+				<xs:element ref="fxtml:QuotReq"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FXQuoteRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FIXML" type="fxtml:FIXML_Type"/>
+				<xs:element ref="fxtml:QuotReq"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FXQuoteConfirmation">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FIXML" type="fxtml:FIXML_Type"/>
+				<xs:choice>
+					<xs:element ref="fxtml:Quot"/>
+					<xs:element ref="fxtml:QuotReqRej"/>
+					<xs:element ref="fxtml:Rej"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FXQuoteResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FIXML" type="fxtml:FIXML_Type"/>
+				<xs:choice>
+					<xs:element ref="fxtml:Quot"/>
+					<xs:element ref="fxtml:QuotReqRej"/>
+					<xs:element ref="fxtml:Rej"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FXQuoteCancelNotification">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FIXML" type="fxtml:FIXML_Type"/>
+				<xs:element ref="fml:QuotCxl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

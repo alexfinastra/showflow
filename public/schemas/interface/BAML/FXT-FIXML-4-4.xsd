@@ -1,0 +1,126 @@
+<!-- edited with XMLSpy v2010 rel. 3 (http://www.altova.com) by BANK OF AMERICA (BANK OF AMERICA) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rp.baml.com/fxt/FIXML-4-4" xmlns:fml="http://www.fixprotocol.org/FIXML-4-4" targetNamespace="http://rp.baml.com/fxt/FIXML-4-4" elementFormDefault="qualified">
+	<xs:import namespace="http://www.fixprotocol.org/FIXML-4-4" schemaLocation="FIXML-4.4-Container.xsd"/>
+	<xs:element name="OrderReq">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="fml:Order"/>
+				<xs:element name="OrderReqMetaData" type="tns:OrderReqMetaData_Type"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Rej" type="tns:Rej_Type"/>
+	<xs:element name="QuotReq">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="fml:QuotReq"/>
+				<xs:element name="QuotReqMetaData" type="tns:QuotReqMetaData_Type"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="QuotReqMetaData_Type">
+		<xs:sequence>
+			<xs:element name="ReqTyp" type="tns:ReqTyp_Type"/>
+			<xs:element name="TenorValue" type="xs:string" minOccurs="0"/>
+			<xs:element name="TenorValue2" type="xs:string" minOccurs="0"/>
+			<xs:element name="SettlDtChar" type="xs:string" minOccurs="0"/>
+			<xs:element name="SettlDt2Char" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Quot">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="fml:Quot"/>
+				<xs:element name="QuotMetaData" type="tns:QuotMetaData_Type"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="QuotMetaData_Type">
+		<xs:sequence>
+			<xs:element name="BidPx2" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="OfrPx2" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="BidSz2" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="OfrSz2" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="BidSpotRt2" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="OfrSpotRt2" type="xs:decimal" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="QuotReqRej">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="fml:QuotReqRej"/>
+				<!--renamed QuotReqMetaData to QuotReqRejMetaData -->
+				<xs:element name="QuotReqRejMetaData" type="tns:QuotReqRejMetaData_Type"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ExecRpt">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="fml:ExecRpt"/>
+				<xs:element name="ExecRptMetaData" type="tns:ExecRptMetaData_Type"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ExecRptMetaData_Type">
+		<xs:sequence>
+			<xs:element name="USDEquiv" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="Px2" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="LastPx2" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="LastSpotRt2" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="LeavesQty2" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="CumQty2" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="USDEquiv2" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="AvgPx2" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="HomeCcy" type="xs:string" minOccurs="0"/>
+			<xs:element name="HomeCcyEquivRt" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="HomeCcyEquivQty" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="HomeCcyEquivRt2" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="HomeCcyEquivQty2" type="xs:decimal" minOccurs="0"/>
+			<!--Added SettleDtChar-->
+			<xs:element name="SettlDtChar" type="xs:string" minOccurs="0"/>
+			<xs:element name="SettlDt2Char" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Rej_Type">
+		<xs:complexContent>
+			<xs:extension base="fml:Abstract_message_t">
+				<xs:attribute name="RefSeqNum" type="xs:decimal" use="required"/>
+				<xs:attribute name="RefTagID" type="xs:decimal" use="optional"/>
+				<xs:attribute name="RefMsgType" type="xs:string" use="optional"/>
+				<xs:attribute name="SessionRejReason" type="xs:string" use="optional"/>
+				<xs:attribute name="Txt" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FIXML_Type">
+		<xs:attribute name="v" type="xs:string"/>
+		<xs:attribute name="r" type="xs:string"/>
+		<xs:attribute name="s" type="xs:string"/>
+		<xs:attribute name="namespace" type="xs:anyURI"/>
+	</xs:complexType>
+	<!--added types    -->
+	<xs:complexType name="QuotReqRejMetaData_Type">
+		<xs:sequence>
+			<xs:element name="ReqTyp" type="tns:ReqTyp_Type" minOccurs="0"/>
+			<xs:element name="TenorValue" type="xs:string" minOccurs="0"/>
+			<xs:element name="TenorValue2" type="xs:string" minOccurs="0"/>
+			<xs:element name="SettlDtChar" type="xs:string" minOccurs="0"/>
+			<xs:element name="SettlDt2Char" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OrderReqMetaData_Type">
+		<xs:sequence>
+			<xs:element name="TenorValue" type="xs:string" minOccurs="0"/>
+			<xs:element name="SettlDtChar" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ReqTyp_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="101"/>
+			<xs:enumeration value="102"/>
+			<xs:enumeration value="103"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

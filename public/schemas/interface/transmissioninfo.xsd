@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:schema xmlns:tns="http://fundtech.com/SCL/MessageExternalInteraction/TransmissionInfo/"
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	targetNamespace="http://fundtech.com/SCL/MessageExternalInteraction/TransmissionInfo/" xmlns:s="http://www.w3.org/2001/XMLSchema">
+    <s:element name="transmission-info">
+		<s:complexType>
+			<s:all>
+				<s:element name="parameters" minOccurs="0">
+					<s:complexType>
+						<s:sequence>
+							<s:element name="key" minOccurs="0" maxOccurs="unbounded">
+							  <s:complexType>
+							    <s:simpleContent>
+							      <s:extension base="s:string">
+							        <s:attribute name="name" type="s:string"/>
+							      </s:extension>
+							    </s:simpleContent>
+							  </s:complexType>
+							</s:element>
+						</s:sequence>
+				    </s:complexType>
+				</s:element>
+			</s:all>
+		</s:complexType>
+	</s:element>
+
+
+</s:schema>

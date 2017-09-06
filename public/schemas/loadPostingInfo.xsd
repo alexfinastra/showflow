@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio 1.0.8.0 (http://www.liquid-technologies.com) -->
+<xs:schema elementFormDefault="qualified" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://fundtech.com/SCL/LoadPostingInfoSchema"
+	xmlns:tns="http://fundtech.com/SCL/LoadPostingInfoSchema" >
+	
+
+  <xs:element name="postingInfo" type="tns:PostingInfoType" />
+  
+  <xs:complexType name="PostingInfoType">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="row">
+          <xs:complexType>
+            <xs:attribute name="movementType" type="xs:string" use="optional" />
+            <xs:attribute name="office" type="xs:string" use="optional" />
+            <xs:attribute name="accNo" type="xs:string" use="optional" />
+            <xs:attribute name="currency" type="xs:string" use="optional" />
+            <xs:attribute name="amount" type="xs:string" use="optional" />
+            <xs:attribute name="postingStatus" type="xs:string" use="optional" />
+            <xs:attribute name="processingDate" type="xs:string" use="optional" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  
+</xs:schema>

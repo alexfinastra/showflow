@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- STEP2 SDD Schema, MPEDDSdfBlkDirDeb, Jun 01 2011, Release November 2011  -->
+<!-- pacs.004.002.01 Removed, January 30 2009 -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sw4="urn:iso:std:iso:20022:tech:xsd:pacs.004.001.02" xmlns:sw7="urn:iso:std:iso:20022:tech:xsd:pacs.007.001.02" xmlns:S2SDDSdf="urn:S2SDDSdf:xsd:$MPEDDSdfBlkDirDeb" targetNamespace="urn:S2SDDSdf:xsd:$MPEDDSdfBlkDirDeb" elementFormDefault="qualified">
+	<xs:import namespace="urn:iso:std:iso:20022:tech:xsd:pacs.007.001.02" schemaLocation="pacs.007.001.02.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:20022:tech:xsd:pacs.004.001.02" schemaLocation="pacs.004.001.02.xsd"/>
+	<xs:element name="MPEDDSdfBlkDirDeb">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SndgInst" type="sw7:BICIdentifier"/>
+				<xs:element name="RcvgInst" type="sw7:BICIdentifier"/>
+				<xs:element name="SrvcId" type="S2SDDSdf:SrvcID"/>
+				<xs:element name="TstCode" type="S2SDDSdf:TestCodeType"/>
+				<xs:element name="FType" type="S2SDDSdf:FTpType"/>
+				<xs:element name="FileRef" type="sw7:Max16Text"/>
+				<xs:element name="RoutingInd" type="S2SDDSdf:RoutingInd"/>
+				<xs:element name="FileBusDt" type="sw7:ISODate"/>
+				<xs:element name="FileCycleNo" type="S2SDDSdf:Max2NumericText"/>
+				<xs:element name="PmtRtr" type="sw4:PaymentReturnV02" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="FIToFIPmtRvsl" type="sw7:FIToFIPaymentReversalV02" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="RoutingInd">
+		<xs:restriction base="xs:string">
+			<xs:length value="3" fixed="true"/>
+			<xs:enumeration value="DIR"/>
+			<xs:enumeration value="IND"/>
+			<xs:enumeration value="ALL"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FTpType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SDF"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TestCodeType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="T"/>
+			<xs:enumeration value="P"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SrvcID">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="COR"/>
+			<xs:enumeration value="B2B"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max2NumericText">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{2,2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

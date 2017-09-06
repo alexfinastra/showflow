@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema 
+	elementFormDefault="qualified" 
+	attributeFormDefault="unqualified"
+	targetNamespace="urn:fundtech/scl/SWIFT" 
+	xmlns:tns="urn:fundtech/scl/SWIFT"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ 
+  <xsd:include schemaLocation="swift-common.xsd" />
+  
+  <xsd:complexType name="Data_971">
+  	<xsd:complexContent> 
+  		<xsd:extension base="tns:AbstractDataType"> 
+		    <xsd:sequence>
+		      <xsd:element minOccurs="1" maxOccurs="1" name="F20" type="tns:F20" />
+		      <xsd:element minOccurs="1" maxOccurs="unbounded" name="F25" type="tns:PartyInfoType" />
+		      <xsd:element minOccurs="1" maxOccurs="unbounded" name="F60a_F62a_F64_F65" type="tns:BalanceInfoType" />		      
+		    </xsd:sequence>
+		 </xsd:extension>
+  	</xsd:complexContent>
+  </xsd:complexType>
+    
+</xsd:schema>
+

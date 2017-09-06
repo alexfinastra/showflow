@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			targetNamespace="http://Fundtech.com/ExchRateUploadRequest.xsd" 
+			xmlns:tns="http://Fundtech.com/ExchRateUploadRequest.xsd" 
+			xmlns:commTypes="http://fundtech.com/SCL/CommonTypes" 
+			elementFormDefault="qualified">
+			
+	<xsd:import namespace="http://fundtech.com/SCL/CommonTypes" schemaLocation="CommonTypes.xsd" />
+	
+	<xsd:element name="ExchRateUpload" type="tns:ExchRateUploadRecordSeq" />
+	
+	  <xsd:simpleType name="CurrencyCodeType">
+	    <xsd:restriction base="xsd:string">
+	      <xsd:minLength value="3" />
+	      <xsd:maxLength value="3" />
+	      <xsd:pattern value="[A-Z][A-Z][A-Z]" />
+	    </xsd:restriction>
+	  </xsd:simpleType>
+	  
+	  <xsd:simpleType name="FXRateRange">
+	    <xsd:restriction base="xsd:decimal">
+	      <xsd:minExclusive value="0.0" />
+	      <xsd:totalDigits value="16" />
+	      <xsd:fractionDigits value="8" />
+	    </xsd:restriction>
+	  </xsd:simpleType>
+	  
+	  <xsd:simpleType name="RateTypeList">
+		<xsd:restriction base="xsd:string">
+		      <xsd:enumeration value="STANDARD" />
+		</xsd:restriction>
+	 </xsd:simpleType>
+	
+	<xsd:complexType name="ExchRateUploadRecord">
+		<xsd:sequence>
+		      <xsd:element minOccurs="1" maxOccurs="1" name="Ccy1" type="tns:CurrencyCodeType" />
+		      <xsd:element minOccurs="1" maxOccurs="1" name="Ccy2" type="tns:CurrencyCodeType" />
+		      <xsd:element minOccurs="1" maxOccurs="1" name="DecNo">
+		        <xsd:simpleType>
+		          <xsd:restriction base="xsd:int">
+		            <xsd:minInclusive value="0" />
+		            <xsd:maxInclusive value="8" />
+		          </xsd:restriction>
+		        </xsd:simpleType>
+		      </xsd:element>
+		      <xsd:element minOccurs="1" maxOccurs="1" name="LowRate" type="tns:FXRateRange" />
+		      <xsd:element minOccurs="1" maxOccurs="1" name="HighRate" type="tns:FXRateRange" />
+		      <xsd:element minOccurs="1" maxOccurs="1" default="STANDARD" name="RateType" type="tns:RateTypeList" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ExchRateUploadRecordSeq">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="header" type="commTypes:FndtMsgHeaderType" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="details" type="tns:ExchRateUploadRecord" />
+		</xsd:sequence>
+	</xsd:complexType>
+			
+</xsd:schema>

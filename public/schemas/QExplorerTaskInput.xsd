@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:tns="http://fundtech.com/SCL/QExplorerTaskInput"
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	targetNamespace="http://fundtech.com/SCL/QExplorerTaskInput" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
+
+	<xsd:element name="QExplorerTaskInputRequset" type="tns:QExplorerTaskInputRequsetType"/>
+
+	<xsd:complexType name="QExplorerTaskInputRequsetType">
+		<xsd:sequence>
+				<xsd:element name="qExplorerSubTaskType" minOccurs="0" maxOccurs="1" type="xsd:string" />
+				<xsd:element name="office" minOccurs="0" maxOccurs="1" type="xsd:string" />
+				<xsd:element name="dateHistoryProcessingDate" minOccurs="0" maxOccurs="1" type="xsd:long" />
+				<xsd:element name="GlobalCountersDelta"  minOccurs="0" maxOccurs="1" type="tns:CountersDeltaMapList"/>
+				<xsd:element name="countersPerMIDHolder"  minOccurs="0" maxOccurs="unbounded" type="tns:countersPerMIDHolderMap"/>
+				<xsd:element name="qExplorerIdentifier"  minOccurs="0" maxOccurs="1" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	
+	<xsd:complexType name="CountersDeltaMap">
+		<xsd:sequence>
+				<xsd:element name="countersDeltaKey" minOccurs="0" maxOccurs="1" type="xsd:string" />
+				<xsd:element name="couneterdeltaValues"  minOccurs="0" maxOccurs="1" type="tns:CounterDelta"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="CountersDeltaMapList">
+		<xsd:sequence>
+				<xsd:element name="ListOfCountersDeltaMap" minOccurs="0" maxOccurs="unbounded" type="tns:CountersDeltaMap" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	<xsd:complexType name="countersPerMIDHolderMap">
+		<xsd:sequence>
+				<xsd:element name="mid" minOccurs="0" maxOccurs="1" type="xsd:string" />
+				<xsd:element name="timeStamp" minOccurs="0" maxOccurs="1" type="xsd:string" />
+				<xsd:element name="countersPerMIDHolderMap" minOccurs="0" maxOccurs="1" type="tns:CountersDeltaMapList" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+
+	
+	
+	<xsd:complexType name="CounterDelta">
+		<xsd:sequence>
+					<xsd:element name="counter" minOccurs="0" maxOccurs="1" type="xsd:int"/>
+					<xsd:element name="amount" minOccurs="0" maxOccurs="1" type="xsd:double"/>
+					<xsd:element name="parentKey" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+					<xsd:element name="processDate" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+					<xsd:element name="ruleUid"  minOccurs="0" maxOccurs="1" type="xsd:string"/>
+					<xsd:element name="office" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+					<xsd:element name="partition" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+					<xsd:element name="status"  minOccurs="0" maxOccurs="1" type="xsd:string"/>
+			</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

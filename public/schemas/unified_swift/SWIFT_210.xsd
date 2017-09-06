@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+	elementFormDefault="qualified" 
+	attributeFormDefault="unqualified"
+	targetNamespace="urn:fundtech/scl/SWIFT" 
+	xmlns:tns="urn:fundtech/scl/SWIFT"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ 
+  <xsd:include schemaLocation="swift-common.xsd" />   
+        
+  <xsd:complexType name="Data_210">
+  	<xsd:complexContent> 
+  		<xsd:extension base="tns:AbstractDataType"> 
+		    <xsd:sequence>
+		 		<xsd:element maxOccurs="1" minOccurs="1" name="F20" type="tns:F20"/>
+		 		<xsd:element name="F21" minOccurs="1" maxOccurs="1" type="tns:F21"/>
+		 		<xsd:element maxOccurs="1" minOccurs="1" name="F25" type="tns:PartyInfoType"/>
+		 		<xsd:element maxOccurs="1" minOccurs="1" name="F32B" type="tns:CurrencyAndAmountType"/>
+		 		<xsd:element maxOccurs="1" minOccurs="1" name="F30" type="xsd:date"/>
+		 		<xsd:element minOccurs="0" maxOccurs="1" name="F50a" type="tns:ExtendedPartyInfoType" />
+		 		<xsd:element maxOccurs="1" minOccurs="0" name="F52a" type="tns:PartyInfoType"/>
+		 		<xsd:element maxOccurs="1" minOccurs="0" name="F56a" type="tns:PartyInfoType"/>
+	      </xsd:sequence>
+	     </xsd:extension>
+	  </xsd:complexContent>
+  </xsd:complexType>
+    
+</xsd:schema>

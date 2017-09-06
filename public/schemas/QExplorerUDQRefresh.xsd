@@ -1,0 +1,13 @@
+<xsd:schema xmlns:tns="http://fundtech.com/SCL/QExplorerUDQRefresh"
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	targetNamespace="http://fundtech.com/SCL/QExplorerUDQRefresh" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
+
+	<xsd:element name="updateUDQMessage" type="tns:UpdateUDQMessageType" />
+	
+	<xsd:complexType name="UpdateUDQMessageType"> 
+		<xsd:attribute name="udqName" type="xsd:string" use="required" />
+		<xsd:attribute name="eventTime" type="xsd:dateTime" use="required" />
+	</xsd:complexType>
+
+</xsd:schema>

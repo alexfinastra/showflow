@@ -1,0 +1,104 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://fundtech.com/SCL/StaticDataCommonTypes"
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	targetNamespace="http://fundtech.com/SCL/StaticDataCommonTypes">
+	
+	<xsd:element name="feedback" type="tns:ProfileFeedbackType" />
+	<xsd:element name="header" type="tns:StaticDataHeaderType" />
+	
+	<xsd:complexType name="StaticDataHeaderType"> 
+		<xsd:sequence>
+			<xsd:element name="UserID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ProfileFeedbackType">
+		<xsd:sequence>
+			<xsd:element name="compCode" type="xsd:int" />
+			<xsd:element name="info" type="xsd:string" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="StaticDataFieldType">
+      <xsd:simpleContent>
+         <xsd:extension base="xsd:string">
+            <xsd:attribute name="name" type="xsd:string" use="optional"/>
+            <xsd:attribute name="dataType" type="xsd:string" use="optional"/>
+         </xsd:extension>
+      </xsd:simpleContent>
+  </xsd:complexType>
+  
+  <xsd:complexType name="StaticDataResponseType">
+      <xsd:sequence>
+         <xsd:element minOccurs="0" name="records" type="tns:StaticDataRecordsContainerType"/>
+         <xsd:element minOccurs="1" ref="tns:feedback"/>
+      </xsd:sequence>
+  </xsd:complexType>
+ 
+  <xsd:complexType name="StaticDataRecordsContainerType">
+      <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" minOccurs="1" name="record" type="tns:StaticDataRecordType"/>
+      </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="StaticDataRecordType">
+      <xsd:sequence>
+          <xsd:element minOccurs="0" name="effectiveDate" type="xsd:string" />
+          <xsd:element minOccurs="0" name="note" type="xsd:string" />
+          <xsd:element minOccurs="0" name="timeStamp" type="xsd:string" />
+          <xsd:element maxOccurs="unbounded" minOccurs="1" name="field" type="tns:StaticDataFieldType"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="related-record" type="tns:StaticDataRelatedRecordType"/>
+      </xsd:sequence>
+      <xsd:attribute name="action" type="tns:profileActionType" use="optional"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="StaticDataRelatedRecordType">
+    <xsd:complexContent>
+      <xsd:extension base="tns:StaticDataRecordType">
+          <xsd:attribute name="profileID" type="xsd:string" use="optional"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!--  Copied from CommonTypes  -->
+  <xsd:complexType name="ResponseDetailsType">
+      <xsd:sequence>
+          <xsd:element minOccurs="1" default="0" name="returnCode"
+              type="xsd:int" />
+          <xsd:element minOccurs="0" name="description" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="errorsList" type="tns:ErrorsListType" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="dataArray" type="tns:AnySimpleDataType" />
+      </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ErrorsListType"> 
+      <xsd:sequence> 
+          <xsd:element name="error" type="tns:ErrorType" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ErrorType">
+      <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="code" type="xsd:int"/>
+          <xsd:element minOccurs="1" maxOccurs="1" name="description" type="xsd:string"/>
+      </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="AnySimpleDataType">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="data" type="xsd:anySimpleType" />
+        </xsd:sequence>
+  </xsd:complexType>
+    
+  <xsd:simpleType name="profileActionType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="SV"/>
+      <xsd:enumeration value="AC"/>
+      <xsd:enumeration value="HD"/>
+      <xsd:enumeration value="DL"/>
+      <xsd:enumeration value="AP"/>
+      <xsd:enumeration value="DC"/>
+    </xsd:restriction>
+  </xsd:simpleType> 
+
+</xsd:schema>
