@@ -16,7 +16,7 @@ block content
         br      
         .row
           .col-md-10
-            input.filestyle.col-sm-9(type="file", style="background-color: white;", name="file", data-text="Select file for upload...", data-btnClass="btn-outline-primary", data-buttonBefore="true", data-placeholder="")                                 
+            input.filestyle.col-sm-9(type="file", name="file", data-text="Select file for upload...", data-btnClass="btn-outline-primary", data-buttonBefore="true", data-placeholder="")                                 
         br
         .row
           .col-md-10
@@ -36,7 +36,10 @@ block content
           tr.row
             th.col-md-5 Name
             th.col-md-2 Size
-            th.col-md-2 Created
+            if options["exports"] == true 
+              th.col-md-2 Created
+            else
+              th.col-md-2 Uploaded
             th.col-md-3 
         tbody
           for file in files      
