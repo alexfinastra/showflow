@@ -23,29 +23,30 @@ block content
       h3 #{key}            
       br            
       table.table.table-hover
-        thead
-          tr.row.text-success
-            th.col-md-1 Office         
-            th.col-md-4 Name
-            th.col-md-5 Description
-            th.col-md-1 Dir
-            th.col-md-1
-        tbody  
-          each obj in values[index++]          
-            tr.row.text-dark(class = obj["INTERFACE_STATUS"] == "ACTIVE" ? "on" : "off")                    
-              th.col-md-1(scope="row") #{obj["OFFICE"]}              
-              td.col-md-4 #{obj["INTERFACE_NAME"].split("_").join(" ")}
-              td.col-md-5 #{obj["DESCRIPTION"]}
-              td.col-md-1
-                if obj["REQUEST_DIRECTION"] == "I"
-                  span IN
-                else
-                  span OUT                            
-              td.col-md-1
-                if obj["INTERFACE_STATUS"] == "ACTIVE"
-                  - var href = "/" + type + "/profile/" + obj["ROWNUM"]
-                  a.btn.btn-success.hoverbutton(href= href)
-                    i.fa.fa-pencil-square-o
-                    span.ml-2  Edit
+        .container
+          thead
+            tr.row.text-success
+              th.col.col-md-1 Office         
+              th.col.col-md-4 Name
+              th.col.col-md-5 Description
+              th.col.col-md-1 Dir
+              th.col.col-md-1
+          tbody  
+            each obj in values[index++]          
+              tr.row.text-dark(class = obj["INTERFACE_STATUS"] == "ACTIVE" ? "on" : "off")                    
+                th.col.col-md-1(scope="row") #{obj["OFFICE"]}              
+                td.col.col-md-4 #{obj["INTERFACE_NAME"].split("_").join(" ")}
+                td.col.col-md-5 #{obj["DESCRIPTION"]}
+                td.col.col-md-1
+                  if obj["REQUEST_DIRECTION"] == "I"
+                    span IN
+                  else
+                    span OUT                            
+                td.col.col-md-1
+                  if obj["INTERFACE_STATUS"] == "ACTIVE"
+                    - var href = "/" + type + "/profile/" + obj["ROWNUM"]
+                    a.btn.btn-success.hoverbutton(href= href)
+                      i.fa.fa-pencil-square-o
+                      span.ml-2  Edit
 
 
