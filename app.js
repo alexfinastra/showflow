@@ -44,7 +44,7 @@ app.use(methodOverride(function(req, res){
 
 app.use(express.static(path.join(__dirname, 'public'))); 
 app.use(express.static(path.join(__dirname, 'exports'))); 
-app.use(express.static(path.join(__dirname, 'env')));
+app.use(express.static(path.join(__dirname, 'jms')));
 
 app.use('/', index);
 app.use('/interface', interface);

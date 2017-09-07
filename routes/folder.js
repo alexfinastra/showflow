@@ -10,17 +10,21 @@ var mkdirp = require('mkdirp');
 var async = require('async')
 var Profile = require('../models/profileModel');
 var model = new Profile('all');
-//model.load()
+
 
 async.waterfall([
-  function(callback){
-    model.load_from_db(model, callback) 
-  }
-],
-function(err, results){     
-  if(err){
-    console.log("WHAT A F*** "+ err)
-  }    
+    function(callback){
+      if( 1==1 ){
+        model.load_from_db(model, callback) 
+      }else{
+        model.load()
+      }
+    }
+  ],
+  function(err, results){     
+    if(err){
+      console.log("WHAT A F*** "+ err)
+    }    
 })
 
 humanFileSize = function(bytes, si) {

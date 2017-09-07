@@ -10,11 +10,14 @@ var mkdirp = require('mkdirp');
 var async = require('async')
 var Profile = require('../models/profileModel');
 var model = new Profile('all');
-//model.load()
 
 async.waterfall([
   function(callback){
-    model.load_from_db(model, callback) 
+    if( 1==1 ){
+      model.load_from_db(model, callback) 
+    }else{
+      model.load()
+    } 
   }
 ],
 function(err, results){     

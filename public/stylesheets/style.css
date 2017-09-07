@@ -71,3 +71,12 @@ table.table tr:hover td a.hoverbutton {
   font-weight: 600;
   /*color: #5cb85c;*/
 }
+
+.alert-fixed {
+  position:fixed; 
+  top: 0px; 
+  left: 0px; 
+  width: 100%;
+  z-index:9999; 
+  border-radius:0px
+}

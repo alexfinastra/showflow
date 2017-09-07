@@ -5,12 +5,16 @@ var authentication_mdl = require('../middlewares/authentication');
 
 var Profile = require('../models/profileModel');
 var channel = new Profile('channel'); 
-//channel.load()
+
 
 router.get('/', function(req, res, next) {
 	async.waterfall([
 			function(callback){
-				channel.load_from_db(channel, callback)	
+				if(1 == 1 ){
+								channel.load_from_db(channel, callback)	
+							}else{
+								channel.load()
+							}
 			}
 		],
 		function(err, results){			
