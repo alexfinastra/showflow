@@ -33,7 +33,8 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-const pathToWatch = appRoot + '/jms'
+const pathToJMS = appRoot + '/jms'
+const pathToFiles = '/home/was8/dh/profiles/PRDTHV_465_LR/data/'
 let ignoredPaths = [
   /[/\\]\./,
   // Ignore relative, top-level dotfiles as well (e.g. '.gitignore').
@@ -45,9 +46,7 @@ let chokidarOpts = Object.assign({
   ignoreInitial: true  
 })
 
-
-log('chokidar watching ', path.resolve(pathToWatch))
-var watcher = chokidar.watch(pathToWatch, chokidarOpts).on('all', (event, onPath) => {
+var watcher = chokidar.watch([pathToJMS, pathToFiles], chokidarOpts).on('all', (event, onPath) => {
   let absolutePath = path.join(process.cwd(), onPath)      
   socketsConnected.forEach((socket) => {    
     socket.emit(event, {path: onPath, absolutePath})
