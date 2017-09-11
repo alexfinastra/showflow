@@ -42,25 +42,24 @@ let ignoredPaths = [
 
 let chokidarOpts = Object.assign({
   ignored: ignoredPaths,
-  ignoreInitial: true
+  ignoreInitial: true  
 })
 
 
 log('chokidar watching ', path.resolve(pathToWatch))
 var watcher = chokidar.watch(pathToWatch, chokidarOpts).on('all', (event, onPath) => {
-  let absolutePath = path.join(process.cwd(), onPath)  
-  log('File ', onPath, ' emitted: ' + event)
-  
-  socketsConnected.forEach((socket) => {
+  let absolutePath = path.join(process.cwd(), onPath)      
+  socketsConnected.forEach((socket) => {    
     socket.emit(event, {path: onPath, absolutePath})
   })
 })
+
 
 io.on('connection', (socket) => {
   let index = socketsConnected.push(socket)
   log("We have connections : " + socketsConnected.length )
   socket.on('disconnect', () => {
-    socketsConnected.splice(index - 1, 1)
+    socketsConnected.splice(index - 1, 1)      
   })
 
   socket.on('identification', (name) => {

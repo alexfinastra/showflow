@@ -11,36 +11,37 @@ $(document).ready(function(){
 				$('.progress').removeClass("invisible");
 				$('.progress-bar').html("");
 				$('.progress-bar').width(0);
+				$(".table").load(" .table");
 			},
 			progress: function(progress){
 				//received progress
 				$('.progress-bar').html("Progress: " + Math.round(progress) + "%");
 				$('.progress-bar').width(progress + "%");
+				$(".table").load(" .table");
 			},
 			success: function(data){
 				//upload successful				
-				$('#progress').addClass("invisible");
-				location.reload();
+				$('.progress').addClass("invisible");
+				$('.progress-bar').html("");				
+				$('.form-control').val('');
+				$(".table").load(" .table");
 			},
 			error: function(error){
 				//upload failed
 				$('.progress').html("Failure!<br>" + error.name + ": " + error.message);
+				$(".table").load(" .table");
 			}
 		});
 	});
-});
 
-
-$(function () {
-	var socket = io.connect('http://localhost:3000');
-  socket.on('add', function(msg){          
-    alertify.success(" File added ");
-  });
-  socket.on('change', function(msg){          
-    alertify.log(" File updated ");
-  });
-  socket.on('unlink', function(msg){          
-    alertify.error(" File removed ");
-  });
+	var socket = io();
+	socket.on('add', function(msg){ 
+		$(".table").load(" .table");
+		alertify.success(" File added to the folder.");
+	});
+	socket.on('unlink', function(msg){          
+		$(".table").load(" .table");
+		alertify.error(" File removed from the folder.");
+	});
 });
 
