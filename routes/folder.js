@@ -54,13 +54,15 @@ folderfiles = function(folder, row_id){
     
     if (file.length > 2){ 
       var stats = fs.statSync(folder + '/' + file);
+      var puref = (folder.indexOf("/") == -1) ? folder : folder.split("/")[folder.split("/").length - 1]
       if(stats.isFile()){
             files.push({      
               "name": file,
               "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
               "created": moment(stats.birthtime).fromNow(),
               "id" : row_id,
-              "formats": folderformats(folder)
+              "formats": folderformats(folder),
+              "folder": puref
             })
           }
     }
@@ -72,12 +74,15 @@ router.get('/',  function(req, res){
   res.redirect('/folder/exports');
 });
 
-router.get('/download/:id/:file', function(req, res) {
+router.get('/download/:id/:file/:folder', function(req, res) {
   var row_id = req.params["id"];
   var file = req.params["file"];
-  console.log(" YES I AM SDA");
+  var f = req.params["folder"];
+
   if( row_id == 0 ){
     folder = "./exports/";
+  } else if (row_id== 99999999){
+    folder = "./flows/" + f; 
   }else{ 
     var record = model.select(row_id);
     folder = path.join(record["REQUEST_CONNECTIONS_POINT"]);
@@ -109,13 +114,17 @@ router.get('/exports/new', function(req, res){
   res.redirect('/folder/exports');
 });
 
-router.get('/delete/:id/:file', function(req, res){
+router.get('/delete/:id/:file/:folder', function(req, res){
   var row_id = req.params["id"];
   var file = req.params["file"];
-  
+  var f = req.params["folder"];
+
   if( row_id == 0 ){
     folder = "./exports/";
-  }else{    
+  } else if (row_id== 99999999){
+    folder = "./flows/" + f;
+  }
+  else{    
     var record = model.select(row_id);
     folder = path.join(record["REQUEST_CONNECTIONS_POINT"]);
   }
@@ -124,15 +133,16 @@ router.get('/delete/:id/:file', function(req, res){
 })
 
 
-router.get('/show/:folder', function(req, res){
-  var folder = req.params["folder"] 
-  var files = folderfiles(folder, row_id);
+router.get('/flows/:folder', function(req, res){
+ console.log("Flows folder " + req.params["folder"] )
+  var folder = "flows/" + req.params["folder"] 
+  var files = folderfiles(folder, 99999999);
   var options = {
     "exports": false,
     "upload": true,
-    "row_id" : 0
+    "row_id" : 99999999
   }  
-  title = "List of files from  " + folder;
+  title = "List of files related to " + req.params["folder"];
   res.render('folder', { title: title, files: files , options: options});
 })
 

@@ -57,9 +57,4 @@ router.get('/tree', function(req, res){
 	res.json({tree: files});
 });
 
-router.get('/show/:folder', function(req, res){
- var folder = "views/flows/" + req.params["folder"] 
-	res.redirect('/folder/show/' + folder);
-})
-
 module.exports = router;

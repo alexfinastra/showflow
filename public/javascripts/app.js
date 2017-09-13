@@ -60,8 +60,8 @@ $(document).ready(function(){
 			  },
 			  onNodeUnchecked: function(event, data) {
       		if(data["nodes"] != null && data["nodes"] != undefined){
-      			//location.href = "/flow/show/" + data["folder"]
-      			alertify.alert("One sec Sir ! ")
+      			location.href = "/folder/flows/" + data["folder"]
+      			//alertify.alert("One sec Sir ! ")
       		}			    
 			  }
       });
