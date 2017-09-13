@@ -43,5 +43,40 @@ $(document).ready(function(){
 		$(".table").load(" .table");
 		alertify.error(" File removed from the folder.");
 	});
+
+  $.ajax({
+      type: 'GET',
+      url: '/flow/tree',
+      dataType: "json",
+  })
+  .done(function (response) {
+      $('#tree').treeview({data:response.tree});
+  })
+  .fail(function (response) {
+      console.log(response);
+  });
+
+  $('#tree').on('nodeSelected', function(event, data) {
+	  console.log(data);
+  });
+
+  $("#sidebar").niceScroll({
+     cursorcolor: '#53619d',
+     cursorwidth: 4,
+     cursorborder: 'none'
+ });
+
+ $('#dismiss, .overlay').on('click', function () {
+    $('#sidebar').removeClass('active');
+    $('.overlay').fadeOut();
+ });
+
+ $('#sidebarCollapse').on('click', function () {
+     $('#sidebar').addClass('active');
+     $('.overlay').fadeIn();
+     $('.collapse.in').toggleClass('in');
+     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+ });
+  
 });
 

@@ -8,6 +8,7 @@ var app = require('../app');
 var debug = require('debug')('integration:server');
 var http = require('http');
 var chokidar = require('chokidar');
+var fs = require('fs');
 const path = require('path');
 const socketsConnected = []
 let log = console.log.bind(console)
@@ -43,16 +44,64 @@ let ignoredPaths = [
 
 let chokidarOpts = Object.assign({
   ignored: ignoredPaths,
-  ignoreInitial: true  
+  ignoreInitial: true,
+  persistent: true,
+  followSymlinks: false,
+  usePolling: true,
+  depth: undefined,
+  interval: 100,
+  ignorePermissionErrors: false
 })
 
-var watcher = chokidar.watch([pathToJMS, pathToFiles], chokidarOpts).on('all', (event, onPath) => {
+//var watcher = chokidar.watch([pathToJMS, pathToFiles], chokidarOpts).on('all', (event, onPath) => {
+  //let absolutePath = path.join(process.cwd(), onPath)      
+  //socketsConnected.forEach((socket) => {    
+    //socket.emit(event, {path: onPath, absolutePath})
+  //})
+//})
+
+var watcher = chokidar.watch([pathToJMS, pathToFiles], chokidarOpts);
+var fileCopyDelaySeconds = 5;
+
+watcher.on('add', function(path) {
+    fs.stat(path, function (err, stat) {
+        if (err){
+            console.log('Error watching file for copy completion. ERR: ' + err.message);
+        } else {
+            setTimeout(checkFileCopyComplete, fileCopyDelaySeconds*1000, path, stat);
+        }
+    });
+});
+
+watcher.on('unlink', function(onPath) { 
   let absolutePath = path.join(process.cwd(), onPath)      
   socketsConnected.forEach((socket) => {    
-    socket.emit(event, {path: onPath, absolutePath})
+    socket.emit('unlink', {path: onPath, absolutePath})
   })
-})
+});
 
+// Makes sure that the file added to the directory, but may not have been completely copied yet by the
+// Operating System, finishes being copied before it attempts to do anything with the file.
+function checkFileCopyComplete(onPath, prev) {
+    fs.stat(onPath, function (err, stat) {
+        if (err) {
+            throw err;
+        }
+        if (stat.mtime.getTime() === prev.mtime.getTime()) {
+            console.log('File copy complete => beginning processing');
+            //------------------------------------- 
+            // CALL A FUNCTION TO PROCESS FILE HERE
+            //------------------------------------- 
+            let absolutePath = path.join(process.cwd(), onPath)      
+            socketsConnected.forEach((socket) => {    
+              socket.emit('add', {path: onPath, absolutePath})
+            })
+        }
+        else {
+            setTimeout(checkFileCopyComplete, fileCopyDelaySeconds*1000, onPath, stat);
+        }
+    });
+}
 
 io.on('connection', (socket) => {
   let index = socketsConnected.push(socket)

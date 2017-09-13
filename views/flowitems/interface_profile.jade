@@ -4,27 +4,20 @@ li.timeline-item
   .timeline-panel
     .timeline-heading
       if profile == null
-        .row        
+        .row
+          h5.timeline-title.mt-2.col-auto.mr-auto #{current["title"]}
           - var purl = "/interface/profile/" + current["id"]
-          a.btn.btn-link.col-md-1(href=purl)
-            span.mr-2
-              | ...
-            i.fa.fa-pencil
-          h4.timeline-title.mt-1.col-md-9 #{current["title"]}           
-          if similars != null
-            - var id = "#ModalSimilars_" + current["id"] 
-            include modal_similars            
-            button.btn.btn-outline-info.col-md-1(type="button", data-toggle="modal", data-target=id)
-              i.fa.fa-cog
+          a.btn.btn-link.col-auto(href=purl)
+            i.fa.fa-pencil                     
       else
-        h4.timeline-title #{current["title"]}      
+        h5.timeline-title #{current["title"]}      
       p
         small.text-muted
           i.fa.fa-certificate
           span.ml-2 
           | not certified
     .timeline-body
-      p
+      p.small
         | A INTERFACE_TYPES.DESCRIPTION field should be populated with the name and resposibility of the bank system. Coments and Notes will be mostly welcomed in this field also.
       br
       - var target = (current["request_protocol"] == "MQ") ? 'queue' : 'folder'

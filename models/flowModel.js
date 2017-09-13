@@ -9,7 +9,7 @@ var method = Flow.prototype
 get_filename = function(file_key){
   const files = {
       'oscb': './views/flows/outward_single_customer_bank.json',
-      'iscb': './views/flows/inward_single_customer_bank.json',
+      'iscb': './views/flows/HV inward single customer bank/inward_single_customer_bank.json',
       'or': './views/flows/outwards_returns.json',        
       'ir': './views/flows/inwards_returns.json',
       'ibp': './views/flows/inward_bulk_payments.json',
@@ -34,7 +34,9 @@ get_filename = function(file_key){
 
 
 function Flow(flow_key){
+
   var filePath = get_filename(flow_key);
+  console.log("File Path for the flow: " + filePath)
   this._flow_template = JSON.parse(fs.readFileSync(filePath, 'utf8'));  
   
   this._flow = {};

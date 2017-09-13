@@ -8,6 +8,7 @@ html(lang="en")
     link(rel='stylesheet', href='/stylesheets/alertify.core.css')
     link(rel='stylesheet', href='/stylesheets/alertify.bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/style.css') 
+    link(rel='stylesheet', href='/stylesheets/style3.css')
     link(rel='stylesheet', href='/stylesheets/flow.css')
     script(src="/javascripts/jquery-3.2.1.min.js")
     script(src="/javascripts/popper.min.js")
@@ -16,8 +17,19 @@ html(lang="en")
     script(src="/javascripts/simpleUpload.min.js")
     script(src="/javascripts/socket.io.js")
     script(src='/javascripts/alertify.min.js')
+    script(src='/javascripts/bootstrap-treeview.js')
+    script(src='/javascripts/jquery.nicescroll.min.js')
     script(src='/javascripts/app.js')
   body
-    include nav      
+    include nav
     .page-top-offset
-      block content
+    .wrapper
+      nav#sidebar
+        #dismiss
+          i.fa.fa-arrow-left
+        .sidebar-header
+          h5 List of flows
+        #tree.treeview
+      #content
+        block content
+      .overlay

@@ -1,40 +1,29 @@
 extends layout
 
-block content
-  .container
-    h1 Paymnet 
-      b Flows
-    br
-    blockquote.blockquote
-      p.mb-0  
-        | The basic out of the box payment flows are flavoured with multiple sources and recievers of payments. A standard interfcaes are triggered during payment.
-      br
-      br      
-      form.form-inline(action="/flow", method="POST", role="form")
-        .form-group.container
-            label.mr-sm-2.col-form-label-lg.col-sm-3(for="inlineFormFlow") Select payment flow
-            include utils/flow_types
-            button.btn.btn-primary.col-sm-1(type='submit')              
-              i.fa.fa-play              
-      br
-      .row.my-lg-4
-        .col-md-12
-          .page-header
-            center
-              h3=data["name"]
+block content  
+  .container    
+    .row
+      .col-md-12.mt-5
+        center.mt-5
+          h3=data["name"]
           br
-          ul.timeline
-            if data["items"] != null && data["items"] != undefined
-              each item in data["items"] 
-                - var current = item["current"]
-                - var similars = item["similars"]              
-                case current["type"]
-                  when "channel"
-                    include flowitems/channel_profile
-                  when "interface"
-                    include flowitems/interface_profile
-                  default
-                    include flowitems/interface_profile
+          button.btn.btn-outline-secondary(type='button')
+            i.fa.fa-repeat
+            span.ml-2    
+            | Reset connections
+        br
+        
+        ul.timeline
+          if data["items"] != null && data["items"] != undefined
+            each item in data["items"] 
+              - var current = item["current"]              
+              case current["type"]
+                when "channel"
+                  include flowitems/channel_profile
+                when "interface"
+                  include flowitems/interface_profile
+                default
+                  include flowitems/interface_profile
 
 
 
