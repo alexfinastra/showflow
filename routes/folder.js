@@ -123,6 +123,19 @@ router.get('/delete/:id/:file', function(req, res){
   res.redirect(req.get('referer'));
 })
 
+
+router.get('/show/:folder', function(req, res){
+  var folder = req.params["folder"] 
+  var files = folderfiles(folder, row_id);
+  var options = {
+    "exports": false,
+    "upload": true,
+    "row_id" : 0
+  }  
+  title = "List of files from  " + folder;
+  res.render('folder', { title: title, files: files , options: options});
+})
+
 router.get('/list/:id', function(req, res){
   var row_id = req.params["id"]
   var record = model.select(row_id);
@@ -180,13 +193,13 @@ router.post('/upload/:id', function(req, res){
 
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
-  form.on('file', function(field, file) {
-    if (fs.existsSync(file.path)) {       
-      fs.rename(file.path, path.join(form.uploadDir, file.name));
-    }else{
-      console.log("File was taken" + file)
-    } 
-  });
+  //form.on('file', function(field, file) {
+  //  if (fs.existsSync(file.path)) {       
+  //    fs.rename(file.path, path.join(form.uploadDir, file.name));
+  //  }else{
+  //    console.log("File was taken" + file)
+  //  } 
+  //});
 
   // log any errors that occur
   form.on('error', function(err) {
