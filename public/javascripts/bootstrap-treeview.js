@@ -38,7 +38,7 @@
 		emptyIcon: 'fa',
 		nodeIcon: '',
 		selectedIcon: '',
-		checkedIcon: 'fa fa-check',
+		checkedIcon: 'fa fa-folder',
 		uncheckedIcon: 'fa fa-unchecked',
 
 		color: '#000000',

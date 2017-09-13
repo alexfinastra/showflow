@@ -50,15 +50,29 @@ $(document).ready(function(){
       dataType: "json",
   })
   .done(function (response) {
-      $('#tree').treeview({data:response.tree});
+      $('#tree').treeview({
+      	data: response.tree,
+      	showCheckbox: true,
+      	onNodeSelected: function(event, data) {
+      		if(data["nodes"] == null || data["nodes"] == undefined){
+      			location.href = "/flow/load/" + data["folder"] + "/" + data["text"]
+      		}			    
+			  },
+			  onNodeUnchecked: function(event, data) {
+      		if(data["nodes"] != null && data["nodes"] != undefined){
+      			//location.href = "/flow/show/" + data["folder"]
+      			alertify.alert("One sec Sir ! ")
+      		}			    
+			  }
+      });
   })
   .fail(function (response) {
       console.log(response);
   });
 
-  $('#tree').on('nodeSelected', function(event, data) {
-	  console.log(data);
-  });
+  //$('#tree').on('nodeSelected', function(event, data) {
+	//  console.log(data);
+  //});
 
   $("#sidebar").niceScroll({
      cursorcolor: '#53619d',

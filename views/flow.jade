@@ -2,28 +2,36 @@ extends layout
 
 block content  
   .container    
-    .row
-      .col-md-12.mt-5
-        center.mt-5
-          h3=data["name"]
-          br
-          button.btn.btn-outline-secondary(type='button')
-            i.fa.fa-repeat
-            span.ml-2    
-            | Reset connections
-        br
-        
-        ul.timeline
-          if data["items"] != null && data["items"] != undefined
-            each item in data["items"] 
-              - var current = item["current"]              
-              case current["type"]
-                when "channel"
-                  include flowitems/channel_profile
-                when "interface"
-                  include flowitems/interface_profile
-                default
-                  include flowitems/interface_profile
+    if data == null
+      .row.mt-5
+        .col-md-12.mt-5
+          center.mt-5
+            h3.mt-5 Please select Flow by pressing on 
+            br
+            button.btn.btn-outline-dark.disabled(type='button') Payment 
+              b Flows    
+    else
+      .row
+        .col-md-12.mt-5
+          center.mt-5
+            h3=data["name"]
+            br
+            button.btn.btn-outline-secondary(type='button')
+              i.fa.fa-repeat
+              span.ml-2    
+              | Reset connections
+          br        
+          ul.timeline
+            if data["items"] != null && data["items"] != undefined
+              each item in data["items"] 
+                - var current = item["current"]              
+                case current["type"]
+                  when "channel"
+                    include flowitems/channel_profile
+                  when "interface"
+                    include flowitems/interface_profile
+                  default
+                    include flowitems/interface_profile
 
 
 

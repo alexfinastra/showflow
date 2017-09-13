@@ -13,10 +13,13 @@ to_tree = function(folder, files){
     	//console.log("Sub folder -> " + f);
     	ref = '/flow/upload/' + file
     	files.push({
-    	    		"text" : "<span class= 'font-weight-bold'>" + file + "</span>",
+    	    		"text" : "<span class= 'font-weight-bold ml-2'>" + file + "</span>",
+						  "selectable": false,
     	    		"state": {
 						    "expanded": false,
+						    "checked": true
 						  },
+              "folder": file,
     	    		"nodes" : []
     	    	})
     	to_tree(folder + "/" + file, files)
@@ -24,7 +27,11 @@ to_tree = function(folder, files){
     
     if(stats.isFile()){
       files[files.length -1]["nodes"].push({      
-        "text": file.replace(".json", "")
+        "text": file.replace(".json", ""),
+        "state": {
+						    "checked": false
+						  },
+        "folder": folder.split("/")[folder.split("/").length - 1]
       })
     }    
   })
@@ -33,12 +40,13 @@ to_tree = function(folder, files){
 
 /* GET home page. */
 router.get('/', authentication_mdl.is_login, function(req, res, next) {		
-	res.redirect('/flow/load/iscb')
+	res.render('flow', { data: null});
 });
 
-router.get('/load/:flow_key', function(req, res, next){
-	var flow_key = req.params["flow_key"];
-	var flow = new Flow(flow_key); 
+router.get('/load/:folder/:file', function(req, res, next){	
+	var filepath = "views/flows/" + req.params["folder"] + "/" + req.params["file"] + ".json";
+	console.log(filepath);
+	var flow = new Flow(filepath); 
 	console.log(flow._flow);
 	res.render('flow', { data: flow._flow});
 });
@@ -48,5 +56,10 @@ router.get('/tree', function(req, res){
   to_tree("views/flows", files);
 	res.json({tree: files});
 });
+
+router.get('/show/:folder', function(req, res){
+ var folder = "views/flows/" + req.params["folder"] 
+	res.redirect('/folder/show/' + folder);
+})
 
 module.exports = router;

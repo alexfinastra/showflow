@@ -61,8 +61,7 @@ let chokidarOpts = Object.assign({
 //})
 
 var watcher = chokidar.watch([pathToJMS, pathToFiles], chokidarOpts);
-var fileCopyDelaySeconds = 5;
-
+var fileCopyDelaySeconds = 10;
 watcher.on('add', function(path) {
     fs.stat(path, function (err, stat) {
         if (err){
@@ -80,18 +79,10 @@ watcher.on('unlink', function(onPath) {
   })
 });
 
-// Makes sure that the file added to the directory, but may not have been completely copied yet by the
-// Operating System, finishes being copied before it attempts to do anything with the file.
 function checkFileCopyComplete(onPath, prev) {
     fs.stat(onPath, function (err, stat) {
-        if (err) {
-            throw err;
-        }
+        if (err) { throw err; }
         if (stat.mtime.getTime() === prev.mtime.getTime()) {
-            console.log('File copy complete => beginning processing');
-            //------------------------------------- 
-            // CALL A FUNCTION TO PROCESS FILE HERE
-            //------------------------------------- 
             let absolutePath = path.join(process.cwd(), onPath)      
             socketsConnected.forEach((socket) => {    
               socket.emit('add', {path: onPath, absolutePath})
