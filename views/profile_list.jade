@@ -1,11 +1,11 @@
 extends layout
 
-block content
-  .container
+block content.mt-5
+  .container.mt-5
     if type == 'interface'
-      h1 On going standard interfaces
+      h1.mt-5 On going standard interfaces
     else
-      h1 Payments, uploads, notifications, etc...
+      h1.mt-5 Payments, uploads, notifications, etc...
     br
     blockquote.blockquote
       if type == 'interface'

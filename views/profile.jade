@@ -1,9 +1,9 @@
 extends layout
 
-block content
+block content.mt-5
   .container.mt-5      
     if record != null
-      .col-md-auto
+      .col-md-auto.mt-5
         if(model._type == 'interface') 
           include utils/interface_docs
         else
