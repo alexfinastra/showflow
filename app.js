@@ -13,12 +13,16 @@ var channel = require('./routes/channel');
 var flow = require('./routes/flow');
 var folder = require('./routes/folder');
 var queue = require('./routes/queue');
+var onboard = require('./routes/onboard');
+var webservices = require('./routes/webservices');
 
 var expressValidator = require('express-validator');
 var methodOverride = require('method-override');
 
 var app = express();
 global.appRoot = path.resolve(__dirname);
+global.oracle = true;
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -53,6 +57,8 @@ app.use('/channel', channel);
 app.use('/flow', flow);
 app.use('/folder', folder);
 app.use('/queue', queue);
+app.use('/onboard', onboard);
+app.use('/webservices', webservices);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

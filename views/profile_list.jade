@@ -1,52 +1,54 @@
 extends layout
 
-block content.mt-5
+block content
   .container.mt-5
-    if type == 'interface'
-      h1.mt-5 On going standard interfaces
-    else
-      h1.mt-5 Payments, uploads, notifications, etc...
+    h3.mt-5=identity["title"]
     br
     blockquote.blockquote
-      if type == 'interface'
-        p Standard interfaces gruped by type and ordered by sub type. Auto-refresh, instant monitoring, content validations, documentation reference are applied.
-      else
-        p Data sources or consumers are united into channels. Also grouped by type and ordered by subtype. Auto-refresh, instant monitoring, content validations, documentation reference are applied.   
-      - var href = "/" + type + "/new"
-      a.btn.btn-outline-success.mt-2(href=href, role="button", aria-disabled="true")
-        i.fa.fa-plus
-        span.ml-2 Add new #{type}
+      p.small=identity["description"] 
+      if keys != null && values != null
+        - var href = "/" + identity["type"] + "/new"
+        a.btn.btn-outline-success.mt-2(href=href, role="button", aria-disabled="true")
+          i.fa.fa-plus
+          span.ml-2 Add new #{identity["type"] }
     br
-    -var index = 0
-    each key in keys   
-      br      
-      h3 #{key}            
-      br            
-      table.table.table-hover
-        .container
-          thead
-            tr.row.text-success
-              th.col.col-md-1 Office         
-              th.col.col-md-4 Name
-              th.col.col-md-5 Description
-              th.col.col-md-1 Dir
-              th.col.col-md-1
-          tbody  
-            each obj in values[index++]          
-              tr.row.text-dark(class = obj["INTERFACE_STATUS"] == "ACTIVE" ? "on" : "off")                    
-                th.col.col-md-1(scope="row") #{obj["OFFICE"]}              
-                td.col.col-md-4 #{obj["INTERFACE_NAME"].split("_").join(" ")}
-                td.col.col-md-5 #{obj["DESCRIPTION"]}
-                td.col.col-md-1
-                  if obj["REQUEST_DIRECTION"] == "I"
-                    span IN
-                  else
-                    span OUT                            
-                td.col.col-md-1
-                  if obj["INTERFACE_STATUS"] == "ACTIVE"
-                    - var href = "/" + type + "/profile/" + obj["ROWNUM"]
-                    a.btn.btn-success.hoverbutton(href= href)
-                      i.fa.fa-pencil-square-o
-                      span.ml-2  Edit
+    if keys == null || values == null
+      .row.mt-5
+        .col-md-12.mt-5
+          center.mt-5
+            h3.mt-5 Comming very very  very soon 
+            br             
+    else
+      -var index = 0
+      each key in keys   
+        br      
+        h4 #{key}            
+        br            
+        table.table.table-hover
+          .container
+            thead
+              tr.row.text-dark
+                th.col.col-md-1 Office         
+                th.col.col-md-4 Name
+                th.col.col-md-5 Description
+                th.col.col-md-1 Dir
+                th.col.col-md-1
+            tbody  
+              each obj in values[index++]          
+                tr.row.text-dark(class = obj["INTERFACE_STATUS"] == "ACTIVE" ? "on" : "off")                    
+                  th.col.col-md-1(scope="row") #{obj["OFFICE"]}              
+                  td.col.col-md-4 #{obj["INTERFACE_NAME"].split("_").join(" ")}
+                  td.col.col-md-5 #{obj["DESCRIPTION"]}
+                  td.col.col-md-1
+                    if obj["REQUEST_DIRECTION"] == "I"
+                      span IN
+                    else
+                      span OUT                            
+                  td.col.col-md-1
+                    if obj["INTERFACE_STATUS"] == "ACTIVE"
+                      - var href = "/" + identity["type"] + "/profile/" + obj["ROWNUM"]
+                      a.btn.btn-outline-success.hoverbutton(href= href)
+                        i.fa.fa-pencil-square-o
+                        span.ml-2  Edit
 
 

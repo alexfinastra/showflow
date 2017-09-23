@@ -2,12 +2,12 @@ extends layout
 
 block content
   .container(id="upload-container", data-row = options["row_id"]).mt-5
-    .row.mt-5
-      col-md-2.mt-5
+    .row
+      .col-md-1
         button.btn.btn-link(onclick="goBack()")
-          i.fa.fa-arrow-circle-left.fa-2x.mr-2
-      col-md-10.mt-5
-        h2.mt-1=title
+          i.fa.fa-angle-double-left.fa-2x.mr-2
+      .col-md-11.mdoc
+        h3.mt-1=title
     br
     blockquote
       if options["upload"] == true
@@ -20,24 +20,32 @@ block content
             .col-md-12
               .progress.mt-1.invisible
                 .progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100', style='width: 0%; height: 20px;') 
-        include docs/message_formats        
-      if options["exports"] == true        
+        if options["formats"] != null && options["formats"].length > 0
+          - var formats = options["formats"]
+          include docs/message_formats        
+      if options["button"] == "exports"      
         a.btn.btn-outline-primary.mt-2( href= "/folder/exports/new")
           i.fa.fa-cogs
           span.ml-2 
           | Create setup script
-        br    
+        br
+      if options["button"] == "flow"      
+        a.btn.btn-outline-primary.mt-2( href= "/folder/clone/"+ options["name"])
+          i.fa.fa-share-alt
+          span.ml-2 
+          | Clone flow template
+        br     
     br
     br
-    table.table.mt-5(style="background-color: transparent;")
+    table.table(style="background-color: transparent;")
       thead
         tr.row
           th.col-md-5 Name
           th.col-md-2 Size
-          if options["exports"] == true 
-            th.col-md-2 Created
-          else
+          if options["upload"] == true 
             th.col-md-2 Uploaded
+          else
+            th.col-md-2 Created
           th.col-md-3 
       tbody
         for file in files      

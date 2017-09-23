@@ -104,4 +104,7 @@ table.table tr:hover td a.hoverbutton {
   background-color:#F5F5F5;
 } 
 
-
+.mdoc {
+  margin-top: 10px;
+  margin-left: -35px;
+}

@@ -1,6 +1,8 @@
 var fs = require('fs');
 var method = Profile.prototype
 var async = require('async');
+var path = require('path');
+var json = require('json-file');
 var oracledb = require('oracledb');
 
 
@@ -249,7 +251,7 @@ dorelease = function(conn) {
   });
 };
 
-var query = "SELECT ROWNUM, OFFICE, INTERFACE_NAME, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, INTERFACE_STATUS, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE FROM interface_types "
+var query = "SELECT ROWNUM, OFFICE, INTERFACE_NAME, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, INTERFACE_STATUS, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE, UID_ FROM interface_types "
 doquery_data = function (conn,cb) {
   conn.execute(
     query,
@@ -476,5 +478,31 @@ method.get_channel_type = function(type){
 method.get_sub_type_desc = function(sub_type){
   return interface_sub_type(sub_type);
 };
+
+method.populate_properties = function(){
+  var file = new json.File(path.resolve( __dirname, "./profileProperties.json" ));
+  file.readSync();
+
+  var data = JSON.parse(fs.readFileSync('./interfaces_list_3.json', 'utf8')); 
+  for(var i=0; i<data.length; i++ ){ 
+    var type = '';
+    if(interface_type(data[i]["INTERFACE_TYPE"]) != null ){ type = 'interface' }
+    if(channel_type(data[i]["INTERFACE_TYPE"]) != null ){ type = 'channel' }
+
+    file.set(data[i]["UID_INTERFACE_TYPES"], {
+      active: true,
+      to_schemas: "",
+      from_schemas: "",
+      flow_item: {
+                    step: 1,
+                    type: type,
+                    uid: data[i]["UID_INTERFACE_TYPES"]
+                 },
+      rule: null,
+      audit: []
+    })
+  }
+  file.writeSync();
+}
 
 module.exports = Profile;

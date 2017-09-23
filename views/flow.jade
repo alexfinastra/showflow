@@ -14,12 +14,18 @@ block content
       .row
         .col-md-12.mt-5
           center.mt-5
-            h3=data["name"]
-            br
-            button.btn.btn-outline-secondary(type='button')
-              i.fa.fa-repeat
-              span.ml-2    
-              | Reset connections
+            h3.col-auto=data["name"]
+            .row.justify-content-center.mt-5  
+              button#reset-flow.btn.btn-outline-secondary.mr-2(type='button')
+                i.fa.fa-repeat
+                span.ml-2    
+                | Reset connections
+              button#edit-flow.btn.btn-outline-success.ml-2(type='button')
+                i.fa.fa-plus
+                span.ml-2    
+                | Add 
+                b Flow  
+                | item
           br        
           ul.timeline
             if data["items"] != null && data["items"] != undefined

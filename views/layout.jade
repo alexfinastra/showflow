@@ -9,6 +9,8 @@ html(lang="en")
     link(rel='stylesheet', href='/stylesheets/alertify.bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/style.css') 
     link(rel='stylesheet', href='/stylesheets/style3.css')
+    link(rel='stylesheet', href='/stylesheets/select2.min.css')
+    link(rel='stylesheet', href='/stylesheets/select2-bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/flow.css')
     script(src="/javascripts/jquery-3.2.1.min.js")
     script(src="/javascripts/popper.min.js")
@@ -19,6 +21,7 @@ html(lang="en")
     script(src='/javascripts/alertify.min.js')
     script(src='/javascripts/bootstrap-treeview.js')
     script(src='/javascripts/jquery.nicescroll.min.js')
+    script(src='/javascripts/select2.full.js')
     script(src='/javascripts/app.js')
   body
     include nav
@@ -28,8 +31,9 @@ html(lang="en")
         #dismiss
           i.fa.fa-arrow-left
         .sidebar-header
-          h5 List of flows
+          h5.mt-5 
         #tree.treeview
-      #content
+        include utils/edit_flow
+      #content.mt-5
         block content
       .overlay

@@ -1,18 +1,17 @@
 
-- var navmenu = { Channels: '/channel', Interfaces: '/interface' }
+- var navmenu = { Channels: '/channel', Interfaces: '/interface' } //, OnBoarding: '/onboard', WebServices: '/webservices' }
 nav.navbar.fixed-top.navbar-toggleable-md.navbar-light.bg-faded
   .container
-    button#sidebarCollapse.btn.btn-outline-dark(type='button') Payment 
+    button#listFlows.btn.btn-outline-dark(type='button') Payment 
       b Flows
     each href, key in navmenu      
       a.nav-link.navbar-toggler-right(style="color: black;", href=href)= key      
     // Example split danger button
     .btn-group
-      button.btn.btn-outline-primary(type='button')
+      button#editFlow.btn.btn-outline-dark(type='button')
         i.fa.fa-cog
-        span.ml-2
-        |Configuration
-      button.btn.btn-outline-primary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+        span.ml-2 Configuration
+      button.btn.btn-outline-dark.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
         span.sr-only Toggle Dropdown
       .dropdown-menu
         a.dropdown-item(href='/folder/exports') Export setup

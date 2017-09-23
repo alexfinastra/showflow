@@ -1,6 +1,6 @@
 extends layout
 
-block content.mt-5
+block content
   .container.mt-5      
     if record != null
       .col-md-auto.mt-5
@@ -9,10 +9,10 @@ block content.mt-5
         else
           include utils/channel_docs      
     else
-      .row
-        col-md-2.mt-5
+      .row.align-items-end
+        col-md-2
           button.btn.btn-link(onclick="goBack()")
-            i.fa.fa-arrow-circle-left.fa-2x.mr-2
+            i.fa.fa-angle-double-left.fa-2x.mr-2
         col-md-10.mt-5
            h2.mt-1 Create a new profile
     br
@@ -28,37 +28,45 @@ block content.mt-5
           else
             include flowitems/channel_profile
         br
-        br
-      form
+        br      
+      - var update = ((model._type == 'interface') ? "/interface" : "/channel" ) + "/update/" + ((record != null) ? record["ROWNUM"] : 0)
+      form(action = update , method="POST")
         .form-group.row
-          label.col-sm-3.col-form-label(for='inputName') Start here --->
+          label.col-sm-3.col-form-label(for='inputName') type and sub-type          
           .col-sm-6            
-            include utils/interface_types
-            br
-            br 
-            include utils/interface_sub_types
+            if (model._type == 'interface') 
+              include utils/interface_types
+              br
+              br 
+              include utils/interface_sub_types
+            else
+              include utils/channel_types
+              br
+              br 
+              include utils/channel_sub_types
         br
         .form-group.row
-          label.col-sm-3.col-form-label(for='inputName') interface name
+          label.col-sm-3.col-form-label(for='inputName') name
           .col-sm-6
-            input#inputName.w-100.form-control(type='text', placeholder='name of the banks application', value=((record != null) ? record["INTERFACE_NAME"].split("_").join(" ") :  "")) 
+            input#inputName.w-100.form-control(name="INTERFACE_NAME", type='text', placeholder='name of the banks application', value=((record != null) ? record["INTERFACE_NAME"].split("_").join(" ") :  "")) 
         br
         .form-group.row
           label.col-sm-3.col-form-label(for='inputName') notes, comments, memo
           .col-sm-6
-            textarea#interfaceFormControlTextarea.w-100.form-control(rows="3")
+            textarea#interfaceFormControlTextarea.w-100.form-control(rows="3", name="DESCRIPTION")
         br
         .fieldset.form-group.row
           legend.col-form-legend.col-sm-3 bank will 
           .col-sm-6
             .form-check
               label.form-check-label
-                input#gridDirection1.form-check-input(type='radio', name='gridDirection', value='I', checked = ((record != null) ? (record["REQUEST_DIRECTION"] == "I") :  ""))
+                input#gridDirection1.form-check-input(type='radio', name='REQUEST_DIRECTION', value='I', checked = ((record != null) ? (record["REQUEST_DIRECTION"] == "I") :  ""))
                 span Send us messages (IN)
             .form-check
                 label.form-check-label
-                input#gridDirection2.form-check-input(type='radio', name='gridDirection', value='O', checked = ((record != null) ? (record["REQUEST_DIRECTION"] == "O") :  ""))
+                input#gridDirection2.form-check-input(type='radio', name='REQUEST_DIRECTION', value='O', checked = ((record != null) ? (record["REQUEST_DIRECTION"] == "O") :  ""))
                 span Receive our messages (OUT)
+        br
         br
         .form-group.row.pb-3.pt-3.mt-2
           label.col-sm-3 
@@ -67,22 +75,27 @@ block content.mt-5
           .col-sm-6
             .form-check.w-100
               label.form-check-label
-                input#gridRequest1.form-check-input(type='radio', name='gridRequest', value='FILE', checked = ((record != null) ? (record["REQUEST_PROTOCOL"] == "FILE") :  "") )
+                input#gridRequest1.form-check-input(type='radio', name='REQUEST_PROTOCOL', value='FILE', checked = ((record != null) ? (record["REQUEST_PROTOCOL"] == "FILE") :  "") )
                 span File (shared folder)
             .form-check.w-100
                 label.form-check-label
-                input#gridRequest2.form-check-input(type='radio', name='gridRequest', value='MQ', checked = ((record != null) ? (record["REQUEST_PROTOCOL"] == "MQ") :  "") )
+                input#gridRequest2.form-check-input(type='radio', name='REQUEST_PROTOCOL', value='MQ', checked = ((record != null) ? (record["REQUEST_PROTOCOL"] == "MQ") :  "") )
                 span MQ (Java Message Queue)
-            br            
+            br
+            label 
+            i.small message format            
+            - var value = (record != null) ? record["REQUEST_FORMAT_TYPE"] : ""
+            - var name = "REQUEST_FORMAT_TYPE"
             include utils/message_format
+            br 
+            br                       
+            label 
+            i.small schemas certificates
+            select#to_schemas.w-100(multiple="multiple", name="REQUEST_SCHEMA")
+              include utils/message_schemas          
             br
-            br
-            input#inputRequestConnPoint.form-control.w-100(type='text', placeholder='connection point', readonly, value=((record != null) ? record["REQUEST_CONNECTIONS_POINT"] :  "") )
-            //br
-            //a.btn.btn-link.text-info( href="#") 
-              //i.fa.fa-hand-o-up
-              //span.ml-2 
-              //| Please validate Message Format , for better performance :) (click)
+            input#inputRequestConnPoint.form-control.w-100(name="REQUEST_CONNECTIONS_POINT", type='text', placeholder='connection point', readonly, value=((record != null) ? record["REQUEST_CONNECTIONS_POINT"] :  "") )
+        br
         br
         .form-group.row.pb-3.pt-3.mt-2
           label.col-sm-3 
@@ -91,24 +104,28 @@ block content.mt-5
           .col-sm-6
             .form-check
               label.form-check-label
-                input#gridResponse1.form-check-input(type='radio', name='gridResponse', value='FILE', checked = ((record != null) ? (record["RESPONSE_PROTOCOL"] == "FILE") :  ""))
+                input#gridResponse1.form-check-input(type='radio', name='RESPONSE_PROTOCOL', value='FILE', checked = ((record != null) ? (record["RESPONSE_PROTOCOL"] == "FILE") :  ""))
                 span File (shared folder)
             .form-check
                 label.form-check-label
-                input#gridResponse2.form-check-input(type='radio', name='gridResponse', value='MQ', checked = ((record != null) ? (record["RESPONSE_PROTOCOL"] == "MQ") :  ""))
+                input#gridResponse2.form-check-input(type='radio', name='RESPONSE_PROTOCOL', value='MQ', checked = ((record != null) ? (record["RESPONSE_PROTOCOL"] == "MQ") :  ""))
                 span MQ (Java Message Queue)
-            br            
+            br
+            label 
+            i.small message format
+            - var value = (record != null) ? record["RESPONSE_FORMAT_TYPE"] : ""
+            - var name = "RESPONSE_FORMAT_TYPE"
             include utils/message_format
             br
             br
-            input#inputResponseConnPoint.form-control.w-100(type='text', placeholder='connection point', readonly, value=((record != null) ? record["RESPONSE_CONNECTIONS_POINT"] :  ""))
-            //br
-            //a.btn.btn-link.text-info( href="#") 
-              //i.fa.fa-hand-o-up
-              //span.ml-2 
-              //| Please validate Message Format , for better performance :) (click)          
+            label 
+            i.small schemas certificates
+            select#from_schemas.w-100(multiple="multiple", name="RESPONSE_SCHEMA")
+              include utils/message_schemas                  
+            br
+            input#inputResponseConnPoint.form-control.w-100(type='text', name="RESPONSE_CONNECTIONS_POINT", placeholder='connection point', readonly, value=((record != null) ? record["RESPONSE_CONNECTIONS_POINT"] :  ""))
         br
-        .form-group.row
-          .offset-sm-2.col-sm-10
-            button.btn.btn-primary(type='submit') Save profile
+        .form-group.row.justify-content-center
+          .col-sm-2
+            button.btn.btn-outline-primary(type='submit') Save all changes
 

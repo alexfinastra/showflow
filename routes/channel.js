@@ -6,20 +6,26 @@ var authentication_mdl = require('../middlewares/authentication');
 var Profile = require('../models/profileModel');
 var channel = new Profile('channel'); 
 
+var identity = {
+	type: 'channel', 
+	title: 'Payments, uploads, notifications, etc...', 
+	description: 'Data sources or consumers are united into channels. Also grouped by type and ordered by subtype. Auto-refresh, instant monitoring, content validations, documentation reference are applied.'
+}
 
 router.get('/', function(req, res, next) {
-	async.waterfall([
+	if(oracle == true){
+		async.waterfall([
 			function(callback){
-				if(1 == 1 ){
-								channel.load_from_db(channel, callback)	
-							}else{
-								channel.load()
-							}
+				channel.load_from_db(channel, callback)	
 			}
 		],
 		function(err, results){			
-			res.render('profile_list', { type: 'channel', keys: channel.keys() , values: channel.values() });
+			res.render('profile_list', { identity: identity, keys: channel.keys() , values: channel.values() });
 		})
+	}else{
+		channel.load()
+		res.render('profile_list', { identity: identity, keys: channel.keys() , values: channel.values() });	  
+	}
 });
 
 router.get('/profile/:id', function(req, res, next){			

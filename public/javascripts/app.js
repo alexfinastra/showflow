@@ -2,7 +2,6 @@ function goBack() {
   window.history.back();
 }
 
-
 $(document).ready(function(){
 	$('input[type=file]').change(function(){
 		$(this).simpleUpload("/folder/upload/" + $("#upload-container").data().row , {
@@ -44,53 +43,75 @@ $(document).ready(function(){
 		alertify.error(" File removed from the folder.");
 	});
 
-  $.ajax({
-      type: 'GET',
-      url: '/flow/tree',
-      dataType: "json",
-  })
-  .done(function (response) {
-      $('#tree').treeview({
-      	data: response.tree,
-      	showCheckbox: true,
-      	onNodeSelected: function(event, data) {
-      		if(data["nodes"] == null || data["nodes"] == undefined){
-      			location.href = "/flow/load/" + data["folder"] + "/" + data["text"]
-      		}			    
-			  },
-			  onNodeUnchecked: function(event, data) {
-      		if(data["nodes"] != null && data["nodes"] != undefined){
-      			location.href = "/folder/flows/" + data["folder"]
-      			//alertify.alert("One sec Sir ! ")
-      		}			    
-			  }
-      });
-  })
-  .fail(function (response) {
-      console.log(response);
-  });
-
   //$('#tree').on('nodeSelected', function(event, data) {
 	//  console.log(data);
   //});
 
   $("#sidebar").niceScroll({
-     cursorcolor: '#53619d',
+     cursorcolor: '#FFFFFF',
      cursorwidth: 4,
      cursorborder: 'none'
- });
+  });
 
- $('#dismiss, .overlay').on('click', function () {
-    $('#sidebar').removeClass('active');
-    $('.overlay').fadeOut();
- });
+	$('#dismiss, .overlay').on('click', function () {
+	  $('#sidebar').removeClass('active');
+	  $('.overlay').fadeOut();
+	});
 
- $('#sidebarCollapse').on('click', function () {
-     $('#sidebar').addClass('active');
-     $('.overlay').fadeIn();
-     $('.collapse.in').toggleClass('in');
-     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
- });
-  
+	$('#listFlows').on('click', function () {
+ 	  if($('#sidebar').hasClass('active') == false){
+ 	  	$('#sidebar').addClass('active');
+	    $('.overlay').fadeIn();
+	    $('.collapse.in').toggleClass('in');
+	    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+ 	  } 
+
+ 	  $.ajax({
+      type: 'GET',
+      url: '/flow/tree',
+      dataType: "json",
+	  })
+	  .done(function (response) {
+	      $('#tree').treeview({
+	      	data: response.tree,
+	      	showCheckbox: true,
+	      	onNodeSelected: function(event, data) {
+	      		if(data["nodes"] == null || data["nodes"] == undefined){
+	      			location.href = "/flow/load/" + data["folder"] + "/" + data["text"]
+	      		}			    
+				  },
+				  onNodeUnchecked: function(event, data) {
+	      		if(data["nodes"] != null && data["nodes"] != undefined){
+	      			location.href = "/folder/flows/" + data["folder"]
+	      			//alertify.alert("One sec Sir ! ")
+	      		}			    
+				  }
+	      });
+	      $("#tree.treeview").show();
+        $("#editflow").hide();
+	  })
+	  .fail(function (response) {
+	      console.log(response);
+	  });
+	});
+
+	$('#edit-flow').on('click', function () {
+    if($('#sidebar').hasClass('active') == false){
+ 	  	$('#sidebar').addClass('active');
+	    $('.overlay').fadeIn();
+	    $('.collapse.in').toggleClass('in');
+	    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+ 	  }      
+    $("#tree.treeview").hide();
+    $("#editflow").show();
+	});
+	 
+	$("#to_schemas").select2({
+	    theme: "bootstrap"
+	});
+
+	$("#from_schemas").select2({
+	    theme: "bootstrap"
+	});
 });
 

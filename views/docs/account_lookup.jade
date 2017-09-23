@@ -1,12 +1,12 @@
 .row
-  col-md-2
+  .col-md-1
     button.btn.btn-link(onclick="goBack()")
-      i.fa.fa-arrow-circle-left.fa-2x.mr-2
-  col-md-10
-    h2.mt-1 Account Lookup
+      i.fa.fa-angle-double-left.fa-2x.mr-2
+  .col-md-11.mdoc
+    h3.mt-1 Account Lookup
 br
 blockquote.blockquote
-  p.mb-0
+  p.mb-0.small
     | This guide describes GPP’s standard Account Lookup interface between GPP and the Financial Institution HOST system responsible for providing account and customer information. GPP Standard Account Lookup is an XML interface based on GPP’s Fndt (FuNDs Transfer) message format. Account Lookup interface is typically using MQ (or web service) for communication with the host system (in many cases via a message mediation layer).
     br
     a.btn.btn-outline-info.mt-3.mr-2(role="button", href="/documentation/GPP Technical Guide - Fndt Message Usage for Account Lookup Interface.pdf") Technical Guide

@@ -13,7 +13,7 @@ var model = new Profile('all');
 
 async.waterfall([
   function(callback){
-    if( 1==1 ){
+    if( 1==0 ){
       model.load_from_db(model, callback) 
     }else{
       model.load()
@@ -113,7 +113,7 @@ router.get('/upload/:id', function(req, res){
   var record = model.select(row_id);
   
   var folder = path.join(appRoot, record["REQUEST_CONNECTIONS_POINT"]);
-  console.log(" --- The Folder is " + folder)
+//  console.log(" --- The Folder is " + folder)
   var files = queuefiles(folder, row_id);
   var options = {
     "exports": false,
@@ -123,7 +123,6 @@ router.get('/upload/:id', function(req, res){
   title = "Upload to " + record["INTERFACE_NAME"].split('_').join(" ") ;
   res.render('folder', { title: title, files: files , options: options});
 })
-
 
 router.post('/upload/:id', function(req, res){
   console.log("POST Fuile upload!!!")

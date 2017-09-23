@@ -25,7 +25,8 @@ to_tree = function(folder, files){
     	to_tree(folder + "/" + file, files)
     }
     
-    if(stats.isFile()){
+    if(stats.isFile() && file.indexOf("template") == -1 ){
+    	//console.log("Files -> " + file);
       files[files.length -1]["nodes"].push({      
         "text": file.replace(".json", ""),
         "state": {
@@ -44,7 +45,7 @@ router.get('/', authentication_mdl.is_login, function(req, res, next) {
 });
 
 router.get('/load/:folder/:file', function(req, res, next){	
-	var filepath = "views/flows/" + req.params["folder"] + "/" + req.params["file"] + ".json";
+	var filepath = "flows/" + req.params["folder"] + "/" + req.params["file"] + ".json";
 	console.log(filepath);
 	var flow = new Flow(filepath); 
 	console.log(flow._flow);
@@ -53,7 +54,7 @@ router.get('/load/:folder/:file', function(req, res, next){
 
 router.get('/tree', function(req, res){
   let files = []
-  to_tree("views/flows", files);
+  to_tree("flows", files);
 	res.json({tree: files});
 });
 

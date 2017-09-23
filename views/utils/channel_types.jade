@@ -1,0 +1,53 @@
+- var value = (record != null) ? record["INTERFACE_TYPE"] : ""
+select#interface_type.w-100.custom-select(name="INTERFACE_TYPE")
+  option select Type
+  option(value="ACK", selected=("ACK" == value)) Acknowledgment channel
+  option(value="AC_IN", selected=("AC_IN" == value))  AC In
+  option(value="AC_IN_ONUS", selected=("AC_IN_ONUS" == value))  AC In ONUS
+  option(value="AC_MND_TT1_ONUS_IN", selected=("AC_MND_TT1_ONUS_IN" == value))  AC Mandate ONUS In
+  option(value="AC_MND_TT1_OW_IN", selected=("AC_MND_TT1_OW_IN" == value))  AC Mandate ONUS In
+  option(value="AC_MND_TT2_ONUS_IN", selected=("AC_MND_TT2_ONUS_IN" == value))  AC Mandate ONUS In
+  option(value="AC_OUT", selected=("AC_OUT" == value))  AC out
+  option(value="BULK", selected=("BULK" == value))  Bulk payments
+  option(value="BULK_MNDT_FROM_AC", selected=("BULK_MNDT_FROM_AC" == value))  Bulk mandates from AC
+  option(value="CEQ", selected=("CEQ" == value))  CEQ
+  option(value="CLEARING", selected=("CLEARING" == value))  Clearing systems
+  option(value="CLEARING_ACK_IP_DBTR", selected=("CLEARING_ACK_IP_DBTR" == value))  Clearing Acknowledgement IP debit
+  option(value="CLEAR_ACK", selected=("CLEAR_ACK" == value))  Clearing Acknowledgement
+  option(value="CLEAR_ACK_IP", selected=("CLEAR_ACK_IP" == value))  Clearing Acknowledgement IP
+  option(value="CLEAR_ACK_SNM", selected=("CLEAR_ACK_SNM" == value)) Clearing Acknowledgement
+  option(value="COMPL_SNM", selected=("COMPL_SNM" == value)) Compliance 
+  option(value="CRQ", selected=("CRQ" == value)) CRQ
+  option(value="CUST_ACK", selected=("CUST_ACK" == value)) Customer Acknowledgment channel
+  option(value="DBLCHECK", selected=("DBLCHECK" == value)) De-Bulk check
+  option(value="DBLCHECK_COMPL", selected=("DBLCHECK_COMPL" == value)) De-Bulk check compliance
+  option(value="DEBULK_MSG_IN", selected=("DEBULK_MSG_IN" == value)) De-Bulk payments in
+  option(value="DEBULK_MSG_OUT", selected=("DEBULK_MSG_OUT" == value)) De-Bulk payments out
+  option(value="FD_SWIFT", selected=("FD_SWIFT" == value)) Feeder SWIFT
+  option(value="FEEDER", selected=("FEEDER" == value)) Feeder
+  option(value="FEEDER_TCH", selected=("FEEDER_TCH" == value)) Feeder technical
+  option(value="GFMS", selected=("GFMS" == value)) GFMS
+  option(value="GPP_TOKEN_VAULT", selected=("GPP_TOKEN_VAULT" == value)) Messaging
+  option(value="IND_MNDT_FROM_AC", selected=("IND_MNDT_FROM_AC" == value)) Mandate from AC
+  option(value="MASSPMNTS", selected=("MASSPMNTS" == value)) Mass Payments
+  option(value="MNDT_AUTH", selected=("MNDT_AUTH" == value)) Mandate Auth
+  option(value="MNDT_AUTH_IN", selected=("MNDT_AUTH_IN" == value)) Mandate Auth In
+  option(value="MOP", selected=("MOP" == value)) With different MOPs
+  option(value="MQ", selected=("MQ" == value)) Messaging
+  option(value="NAK", selected=("NAK" == value)) Not Acknowledgment channel
+  option(value="NOTIFY", selected=("NOTIFY" == value)) Notfication channel
+  option(value="NPPMSG_IN", selected=("NPPMSG_IN" == value)) NPP Messages
+  option(value="NPRTY_MNDT_FR_CHNL", selected=("NPRTY_MNDT_FR_CHNL" == value)) Non party Mandate 
+  option(value="PRFL_ACTNS", selected=("PRFL_ACTNS" == value)) Prefalence Actions
+  option(value="PRTY_MNDT_FR_CHNL", selected=("PRTY_MNDT_FR_CHNL" == value)) Party Mandate 
+  option(value="REBULK", selected=("REBULK" == value)) Re-Bulk payments
+  option(value="RENTAS2MYR_IN", selected=("RENTAS2MYR_IN" == value)) RENTAS to MYR In
+  option(value="RETURN_FUNDS", selected=("RETURN_FUNDS" == value)) Return Funds
+  option(value="RITS", selected=("RITS" == value)) RITS
+  option(value="SPBI", selected=("SPBI" == value)) SPBI
+  option(value="SPBI_OUT", selected=("SPBI_OUT" == value)) SPBI Out
+  option(value="SPEI", selected=("SPEI" == value)) SPEI
+  option(value="SPEI_OUT", selected=("SPEI_OUT" == value)) SPEI out
+  option(value="SPI", selected=("SPI" == value)) SPI
+  option(value="SPI_OUT", selected=("SPI_OUT" == value)) SPI Out
+  option(value="SWIFT_IN", selected=("SWIFT_IN" == value)) SWIFT In   

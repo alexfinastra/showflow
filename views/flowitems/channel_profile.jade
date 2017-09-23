@@ -7,11 +7,18 @@ li.timeline-item
   .timeline-panel
     .timeline-heading
       if profile == null
-        .row
-          h5.timeline-title.mt-2.col-auto.mr-auto #{current["title"]}
+        .row.justify-content-end         
           - var purl = "/channel/profile/" + current["id"]
           a.btn.btn-link.col-auto(href=purl)
-            i.fa.fa-pencil    
+            i.fa.fa-pencil
+          a.btn.btn-link.col-auto(href=purl)
+            i.fa.fa-arrow-down 
+          a.btn.btn-link.col-auto(href=purl)
+            i.fa.fa-arrow-up 
+          a.btn.btn-link.col-auto(href=purl)
+            i.fa.fa-trash-o     
+        .row
+          h5.timeline-title.mt-2.col-auto.mr-auto #{current["title"]}
       else
         h5.timeline-title #{current["title"]}
       p
@@ -37,3 +44,9 @@ li.timeline-item
           span 
             b From 
             | channel
+
+
+
+
+
+

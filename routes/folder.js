@@ -1,4 +1,5 @@
 var fs = require('fs');
+var fse = require('fs-extra');
 var moment = require('moment');
 var express = require('express');
 var router = express.Router();
@@ -11,10 +12,9 @@ var async = require('async')
 var Profile = require('../models/profileModel');
 var model = new Profile('all');
 
-
 async.waterfall([
     function(callback){
-      if( 1==1 ){
+      if(global.oracle == true ){
         model.load_from_db(model, callback) 
       }else{
         model.load()
@@ -52,7 +52,7 @@ folderfiles = function(folder, row_id){
   fs.readdirSync(folder).forEach( function(file) {
     console.log("current file is "+file)
     
-    if (file.length > 2){ 
+    if (file.length > 2 && file.indexOf("template") == -1){ 
       var stats = fs.statSync(folder + '/' + file);
       var puref = (folder.indexOf("/") == -1) ? folder : folder.split("/")[folder.split("/").length - 1]
       if(stats.isFile()){
@@ -69,6 +69,20 @@ folderfiles = function(folder, row_id){
   })
   return files;
 }
+
+get_filename_folder = function(folder){
+  var files = fs.readdirSync(folder);
+  
+  var index = files.indexOf("template.json");
+  files.splice(index, 1);
+  files.sort(function(a, b) {
+               return fs.statSync(folder + '/' + b).mtime.getTime() - 
+                      fs.statSync(folder + '/' + a).mtime.getTime();
+           }); 
+  var filename = files[0].split('_')[0] + "_" + (parseInt(files[0].split('_')[1]) + 1).toString() + ".json"
+  return filename;
+}
+
 
 router.get('/',  function(req, res){
   res.redirect('/folder/exports');
@@ -94,9 +108,10 @@ router.get('/exports',  function(req, res) {
   var row_id = 0;
   var files = folderfiles("exports", row_id);
   var options = {
-    "exports": true,
+    "button": "exports",
     "upload": false,
-    "row_id" : row_id
+    "row_id" : row_id,
+    "formats" : ""
   }
   res.render('folder', { title: 'Interface setup scripts', files: files , options: options});
 });
@@ -138,9 +153,11 @@ router.get('/flows/:folder', function(req, res){
   var folder = "flows/" + req.params["folder"] 
   var files = folderfiles(folder, 99999999);
   var options = {
-    "exports": false,
-    "upload": true,
-    "row_id" : 99999999
+    "button": "flow",
+    "name": req.params["folder"],
+    "upload": false,
+    "row_id" : 99999999,
+    "formats" : ""
   }  
   title = "List of files related to " + req.params["folder"];
   res.render('folder', { title: title, files: files , options: options});
@@ -153,9 +170,10 @@ router.get('/list/:id', function(req, res){
   var folder = path.join(record["REQUEST_CONNECTIONS_POINT"]);  
   var files = folderfiles(folder, row_id);
   var options = {
-    "exports": false,
+    "button": "",
     "upload": false,
-    "row_id" : row_id
+    "row_id" : row_id,
+    "formats" : ""
   }  
   title = "List of files related to " + record["INTERFACE_NAME"].split('_').join(" ") ;
   res.render('folder', { title: title, files: files , options: options});
@@ -179,12 +197,22 @@ router.get('/upload/:id', function(req, res){
   }
   
   var options = {
-    "exports": false,
+    "button": "",
     "upload": ((folder.length > 0) ? true : false),
-    "row_id" : row_id
+    "row_id" : row_id,
+    "formats" : ""
   }  
    
   res.render('folder', { title: title, files: files , options: options});
+})
+
+router.get('/clone/:folder', function(req, res){
+  var folder = "flows/" + req.params["folder"]
+  var file_name = get_filename_folder(folder)
+  fse.copySync(folder + '/' + 'template.json' , folder + '/' +  file_name);
+  
+  //res.redirect('/flows/' + req.params["folder"])
+  res.redirect(req.get('referer'));
 })
 
 router.post('/upload/:id', function(req, res){
@@ -207,7 +235,7 @@ router.post('/upload/:id', function(req, res){
   //  if (fs.existsSync(file.path)) {       
   //    fs.rename(file.path, path.join(form.uploadDir, file.name));
   //  }else{
-  //    console.log("File was taken" + file)
+      console.log("File was taken" + socketsConnected)
   //  } 
   //});
 

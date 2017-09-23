@@ -1,0 +1,156 @@
+- var value = (record != null) ? record["INTERFACE_SUB_TYPE"] : ""
+select#interface_subtype.w-100.custom-select(name="INTERFACE_SUB_TYPE")
+  option select Sub Type
+  option(value="ACK_ACTC", selected=("ACK_ACTC" == value))   ACK  ACTC
+  option(value="ACK_RJCT", selected=("ACK_RJCT" == value))   ACK  RJCT
+  option(value="ACK_TO_EMANDATE_ONUS", selected=("ACK_TO_EMANDATE_ONUS" == value))   ACK  TO  EMANDATE  ONUS
+  option(value="AC_MND_MP_AUTHEN_ASYNC_IN", selected=("AC_MND_MP_AUTHEN_ASYNC_IN" == value))   AC  MND  MP  AUTHEN  ASYNC  IN
+  option(value="AC_MND_MP_AUTHEN_ASYNC_OUT", selected=("AC_MND_MP_AUTHEN_ASYNC_OUT" == value))   AC  MND  MP  AUTHEN  ASYNC  OUT
+  option(value="AC_MND_MP_AUTHORIZE_ASYNC_IN", selected=("AC_MND_MP_AUTHORIZE_ASYNC_IN" == value))   AC  MND  MP  AUTHORIZE  ASYNC  IN
+  option(value="AC_MND_MP_AUTHORIZE_ASYNC_OUT", selected=("AC_MND_MP_AUTHORIZE_ASYNC_OUT" == value))   AC  MND  MP  AUTHORIZE  ASYNC  OUT
+  option(value="AC_MND_MP_AUTHOR_ASYNC_OUT_RT", selected=("AC_MND_MP_AUTHOR_ASYNC_OUT_RT" == value))   AC  MND  MP  AUTHOR  ASYNC  OUT  RT
+  option(value="AC_MND_MP_CUST_ADV_DBTR_PAIN12", selected=("AC_MND_MP_CUST_ADV_DBTR_PAIN12" == value))   AC  MND  MP  CUST  ADV  DBTR  PAIN12
+  option(value="AC_MND_MP_CUST_ADV_TXN_MDTE2", selected=("AC_MND_MP_CUST_ADV_TXN_MDTE2" == value))   AC  MND  MP  CUST  ADV  TXN  MDTE2
+  option(value="AC_MND_MP_CUST_ADV_TXN_PN12", selected=("AC_MND_MP_CUST_ADV_TXN_PN12" == value))   AC  MND  MP  CUST  ADV  TXN  PN12
+  option(value="AC_MND_TT1", selected=("AC_MND_TT1" == value))   AC  MND  TT1
+  option(value="AC_MND_TT1_ONUS", selected=("AC_MND_TT1_ONUS" == value))   AC  MND  TT1  ONUS
+  option(value="AC_MND_TT1_ONUS_IN", selected=("AC_MND_TT1_ONUS_IN" == value))   AC  MND  TT1  ONUS  IN
+  option(value="AC_MND_TT1_OW_IN", selected=("AC_MND_TT1_OW_IN" == value))   AC  MND  TT1  OW  IN
+  option(value="BATCH_PDNG", selected=("BATCH_PDNG" == value))   BATCH  PDNG
+  option(value="BATCH_RJCT", selected=("BATCH_RJCT" == value))   BATCH  RJCT
+  option(value="BATCH_RJCT_DETAILED", selected=("BATCH_RJCT_DETAILED" == value))   BATCH  RJCT  DETAILED
+  option(value="BLKPST", selected=("BLKPST" == value))   BLKPST
+  option(value="BULK", selected=("BULK" == value))   BULK
+  option(value="BULK_INTERFACE", selected=("BULK_INTERFACE" == value))   BULK  INTERFACE
+  option(value="CAN", selected=("CAN" == value))   CAN
+  option(value="CANC", selected=("CANC" == value))   CANC
+  option(value="CANCEL", selected=("CANCEL" == value))   CANCEL
+  option(value="CAN_CHK", selected=("CAN_CHK" == value))   CAN  CHK
+  option(value="CDBIN", selected=("CDBIN" == value))   CDBIN
+  option(value="CDBOUT", selected=("CDBOUT" == value))   CDBOUT
+  option(value="CEQ", selected=("CEQ" == value))   CEQ
+  option(value="CLR_CH_N", selected=("CLR_CH_N" == value))   CLR  CH  N
+  option(value="CLR_CH_O", selected=("CLR_CH_O" == value))   CLR  CH  O
+  option(value="COM", selected=("COM" == value))   COM
+  option(value="COMP", selected=("COMP" == value))   COMP
+  option(value="COMPLETE", selected=("COMPLETE" == value))   COMPLETE
+  option(value="COMP_IN", selected=("COMP_IN" == value))   COMP  IN
+  option(value="COMP_IN1", selected=("COMP_IN1" == value))   COMP  IN1
+  option(value="COMP_W", selected=("COMP_W" == value))   COMP  W
+  option(value="COM_IN", selected=("COM_IN" == value))   COM  IN
+  option(value="COM_W_IN", selected=("COM_W_IN" == value))   COM  W  IN
+  option(value="CRQ", selected=("CRQ" == value))   CRQ
+  option(value="C_NCW", selected=("C_NCW" == value))   C  NCW
+  option(value="C_NCW_IN", selected=("C_NCW_IN" == value))   C  NCW  IN
+  option(value="C_NCW_NO_ACC_IN", selected=("C_NCW_NO_ACC_IN" == value))   C  NCW  NO  ACC  IN
+  option(value="C_NCW_NO_ACC_OUT", selected=("C_NCW_NO_ACC_OUT" == value))   C  NCW  NO  ACC  OUT
+  option(value="DEB", selected=("DEB" == value))   DEB
+  option(value="DEBULK", selected=("DEBULK" == value))   DEBULK
+  option(value="DEBULKG", selected=("DEBULKG" == value))   DEBULKG
+  option(value="DEBULKG2", selected=("DEBULKG2" == value))   DEBULKG2
+  option(value="DEB_ACK", selected=("DEB_ACK" == value))   DEB  ACK
+  option(value="DEB_ACK_INDX", selected=("DEB_ACK_INDX" == value))   DEB  ACK  INDX
+  option(value="DEB_NOACC", selected=("DEB_NOACC" == value))   DEB  NOACC
+  option(value="DEB_R", selected=("DEB_R" == value))   DEB  R
+  option(value="DEB_R_IN", selected=("DEB_R_IN" == value))   DEB  R  IN
+  option(value="DEB_W", selected=("DEB_W" == value))   DEB  W
+  option(value="DEB_W_IN", selected=("DEB_W_IN" == value))   DEB  W  IN
+  option(value="DETOKENIZE", selected=("DETOKENIZE" == value))   DETOKENIZE
+  option(value="DISP_NOACC", selected=("DISP_NOACC" == value))   DISP  NOACC
+  option(value="DIST", selected=("DIST" == value))   DIST
+  option(value="DIST_ACK", selected=("DIST_ACK" == value))   DIST  ACK
+  option(value="DIST_ACK_INDX", selected=("DIST_ACK_INDX" == value))   DIST  ACK  INDX
+  option(value="END_TRANS", selected=("END_TRANS" == value))   END  TRANS
+  option(value="EURO1", selected=("EURO1" == value))   EURO1
+  option(value="FCLOSE", selected=("FCLOSE" == value))   FCLOSE
+  option(value="FCLOSE_O", selected=("FCLOSE_O" == value))   FCLOSE  O
+  option(value="FILEDBLK", selected=("FILEDBLK" == value))   FILEDBLK
+  option(value="FILE_ACK", selected=("FILE_ACK" == value))   FILE  ACK
+  option(value="FILE_DEBULK_CT", selected=("FILE_DEBULK_CT" == value))   FILE  DEBULK  CT
+  option(value="FILE_RJCT", selected=("FILE_RJCT" == value))   FILE  RJCT
+  option(value="FSEND", selected=("FSEND" == value))   FSEND
+  option(value="FSEND_O", selected=("FSEND_O" == value))   FSEND  O
+  option(value="GEN", selected=("GEN" == value))   GEN
+  option(value="GEN_ACK", selected=("GEN_ACK" == value))   GEN  ACK
+  option(value="GEN_OUT", selected=("GEN_OUT" == value))   GEN  OUT
+  option(value="GEN_OUTA", selected=("GEN_OUTA" == value))   GEN  OUTA
+  option(value="HV_POST_IN", selected=("HV_POST_IN" == value))   HV  POST  IN
+  option(value="HV_POST_OUT", selected=("HV_POST_OUT" == value))   HV  POST  OUT
+  option(value="IN", selected=("IN" == value))   IN
+  option(value="IND_MNDT_FROM_AC", selected=("IND_MNDT_FROM_AC" == value))   IND  MNDT  FROM  AC
+  option(value="INUPI", selected=("INUPI" == value))   INUPI
+  option(value="IP_OUT_CUST_ACK", selected=("IP_OUT_CUST_ACK" == value))   IP  OUT  CUST  ACK
+  option(value="IP_OUT_CUST_NAK", selected=("IP_OUT_CUST_NAK" == value))   IP  OUT  CUST  NAK
+  option(value="MEPSPLUS", selected=("MEPSPLUS" == value))   MEPSPLUS
+  option(value="MNDTCDBIN", selected=("MNDTCDBIN" == value))   MNDTCDBIN
+  option(value="MNDTCDBOUT", selected=("MNDTCDBOUT" == value))   MNDTCDBOUT
+  option(value="MP_POST_IN", selected=("MP_POST_IN" == value))   MP  POST  IN
+  option(value="MP_POST_OUT", selected=("MP_POST_OUT" == value))   MP  POST  OUT
+  option(value="MP_SEPA_BULK", selected=("MP_SEPA_BULK" == value))   MP  SEPA  BULK
+  option(value="MP_SEPA_CUST_TXN_NOTIFY", selected=("MP_SEPA_CUST_TXN_NOTIFY" == value))   MP  SEPA  CUST  TXN  NOTIFY
+  option(value="MP_SEPA_CUST_TXN_STOR", selected=("MP_SEPA_CUST_TXN_STOR" == value))   MP  SEPA  CUST  TXN  STOR
+  option(value="MP_SEPA_FILE_ACK_NAK", selected=("MP_SEPA_FILE_ACK_NAK" == value))   MP  SEPA  FILE  ACK  NAK
+  option(value="MYIBG_CT_MP_TRANSMITTAL_FILE", selected=("MYIBG_CT_MP_TRANSMITTAL_FILE" == value))   MYIBG  CT  MP  TRANSMITTAL  FILE
+  option(value="MYIBG_DD_MP_TRANSMITTAL_FILE", selected=("MYIBG_DD_MP_TRANSMITTAL_FILE" == value))   MYIBG  DD  MP  TRANSMITTAL  FILE
+  option(value="MYIBG_MP_BULK", selected=("MYIBG_MP_BULK" == value))   MYIBG  MP  BULK
+  option(value="NAK_TO_EMANDATE", selected=("NAK_TO_EMANDATE" == value))   NAK  TO  EMANDATE
+  option(value="NAK_TO_EMANDATE_ONUS", selected=("NAK_TO_EMANDATE_ONUS" == value))   NAK  TO  EMANDATE  ONUS
+  option(value="NPP", selected=("NPP" == value))   NPP
+  option(value="NPPMSG_IN", selected=("NPPMSG_IN" == value))   NPPMSG  IN
+  option(value="NPP_ACK_ACCP", selected=("NPP_ACK_ACCP" == value))   NPP  ACK  ACCP
+  option(value="NPP_ACK_ACSC", selected=("NPP_ACK_ACSC" == value))   NPP  ACK  ACSC
+  option(value="NPP_ACK_ACSP", selected=("NPP_ACK_ACSP" == value))   NPP  ACK  ACSP
+  option(value="NPP_ACK_ACTC", selected=("NPP_ACK_ACTC" == value))   NPP  ACK  ACTC
+  option(value="NPP_ACK_RJCT", selected=("NPP_ACK_RJCT" == value))   NPP  ACK  RJCT
+  option(value="NPP_IP_INWARD_CUST_ACK", selected=("NPP_IP_INWARD_CUST_ACK" == value))   NPP  IP  INWARD  CUST  ACK
+  option(value="NPP_IP_IN_CN_ACK", selected=("NPP_IP_IN_CN_ACK" == value))   NPP  IP  IN  CN  ACK
+  option(value="NPP_IP_IN_CN_NAK", selected=("NPP_IP_IN_CN_NAK" == value))   NPP  IP  IN  CN  NAK
+  option(value="NPP_IP_OUT_CUST_ACK", selected=("NPP_IP_OUT_CUST_ACK" == value))   NPP  IP  OUT  CUST  ACK
+  option(value="NPP_IP_OUT_CUST_NAK", selected=("NPP_IP_OUT_CUST_NAK" == value))   NPP  IP  OUT  CUST  NAK
+  option(value="NPP_IP_OUT_CUST_PDNG", selected=("NPP_IP_OUT_CUST_PDNG" == value))   NPP  IP  OUT  CUST  PDNG
+  option(value="NPP_IP_OUT_CUST_WAIT_REL", selected=("NPP_IP_OUT_CUST_WAIT_REL" == value))   NPP  IP  OUT  CUST  WAIT  REL
+  option(value="NPRTY_MNDT_FR_CHNL", selected=("NPRTY_MNDT_FR_CHNL" == value))   NPRTY  MNDT  FR  CHNL
+  option(value="NZSCP", selected=("NZSCP" == value))   NZSCP
+  option(value="OFAC", selected=("OFAC" == value))   OFAC
+  option(value="OFFRCSFT", selected=("OFFRCSFT" == value))   OFFRCSFT
+  option(value="PAIN_BULKING", selected=("PAIN_BULKING" == value))   PAIN  BULKING
+  option(value="PDS", selected=("PDS" == value))   PDS
+  option(value="POSTING", selected=("POSTING" == value))   POSTING
+  option(value="PRO", selected=("PRO" == value))   PRO
+  option(value="PRO_IN", selected=("PRO_IN" == value))   PRO  IN
+  option(value="PRTY_MNDT_FR_CHNL", selected=("PRTY_MNDT_FR_CHNL" == value))   PRTY  MNDT  FR  CHNL
+  option(value="REMIT_TO_CHANNEL", selected=("REMIT_TO_CHANNEL" == value))   REMIT  TO  CHANNEL
+  option(value="REMT_TO_CHANNEL", selected=("REMT_TO_CHANNEL" == value))   REMT  TO  CHANNEL
+  option(value="RENTAS2MYR", selected=("RENTAS2MYR" == value))   RENTAS2MYR
+  option(value="REP", selected=("REP" == value))   REP
+  option(value="RES_RFINF_TO_CHANNEL", selected=("RES_RFINF_TO_CHANNEL" == value))   RES  RFINF  TO  CHANNEL
+  option(value="RES_RFP_TO_CHANNEL", selected=("RES_RFP_TO_CHANNEL" == value))   RES  RFP  TO  CHANNEL
+  option(value="RE_IN", selected=("RE_IN" == value))   RE  IN
+  option(value="RE_OUT", selected=("RE_OUT" == value))   RE  OUT
+  option(value="RFP_TO_CHANNEL", selected=("RFP_TO_CHANNEL" == value))   RFP  TO  CHANNEL
+  option(value="RFRF_TO_CHANNEL", selected=("RFRF_TO_CHANNEL" == value))   RFRF  TO  CHANNEL
+  option(value="RITS_IN", selected=("RITS_IN" == value))   RITS  IN
+  option(value="RITS_OUT", selected=("RITS_OUT" == value))   RITS  OUT
+  option(value="RTGS", selected=("RTGS" == value))   RTGS
+  option(value="SCHED_IN", selected=("SCHED_IN" == value))   SCHED  IN
+  option(value="SENTNIAL", selected=("SENTNIAL" == value))   SENTNIAL
+  option(value="SUBATCH", selected=("SUBATCH" == value))   SUBATCH
+  option(value="SUBOUT", selected=("SUBOUT" == value))   SUBOUT
+  option(value="SWIFT", selected=("SWIFT" == value))   SWIFT
+  option(value="TARGET2", selected=("TARGET2" == value))   TARGET2
+  option(value="TCH_IP_INWARD_CUST_ADV_ACK", selected=("TCH_IP_INWARD_CUST_ADV_ACK" == value))   TCH  IP  INWARD  CUST  ADV  ACK
+  option(value="TCH_OUT_ACK", selected=("TCH_OUT_ACK" == value))   TCH  OUT  ACK
+  option(value="TCH_OUT_NAK", selected=("TCH_OUT_NAK" == value))   TCH  OUT  NAK
+  option(value="TCH_RTPS", selected=("TCH_RTPS" == value))   TCH  RTPS
+  option(value="TCH_RTPS_IP_CLR_NTF_RCVD", selected=("TCH_RTPS_IP_CLR_NTF_RCVD" == value))   TCH  RTPS  IP  CLR  NTF  RCVD
+  option(value="TCH_RTPS_IP_IN", selected=("TCH_RTPS_IP_IN" == value))   TCH  RTPS  IP  IN
+  option(value="TCH_RTPS_IP_IN_ACK", selected=("TCH_RTPS_IP_IN_ACK" == value))   TCH  RTPS  IP  IN  ACK
+  option(value="TCH_RTPS_IP_OUT_ACK", selected=("TCH_RTPS_IP_OUT_ACK" == value))   TCH  RTPS  IP  OUT  ACK
+  option(value="TCH_RTPS_IP_OUT_ACWP", selected=("TCH_RTPS_IP_OUT_ACWP" == value))   TCH  RTPS  IP  OUT  ACWP
+  option(value="TCH_RTPS_IP_OUT_CUST_ACK", selected=("TCH_RTPS_IP_OUT_CUST_ACK" == value))   TCH  RTPS  IP  OUT  CUST  ACK
+  option(value="TCH_RTPS_IP_OUT_CUST_NAK", selected=("TCH_RTPS_IP_OUT_CUST_NAK" == value))   TCH  RTPS  IP  OUT  CUST  NAK
+  option(value="TCH_RTPS_IP_OUT_RJCT", selected=("TCH_RTPS_IP_OUT_RJCT" == value))   TCH  RTPS  IP  OUT  RJCT
+  option(value="TOKENIZE", selected=("TOKENIZE" == value))   TOKENIZE
+  option(value="TO_SEND", selected=("TO_SEND" == value))   TO  SEND
+  option(value="WAIT_CONFIRMATION", selected=("WAIT_CONFIRMATION" == value))   WAIT  CONFIRMATION
+  option(value="WTCHDBLK", selected=("WTCHDBLK" == value))   WTCHDBLK
