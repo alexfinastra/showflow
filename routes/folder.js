@@ -44,7 +44,7 @@ humanFileSize = function(bytes, si) {
 };
 
 folderformats = function(folder){
-  return ["pain.001.001.06",  "pain.002.001.08", "pain.007.001.02", "pain.008.001.06"]
+  return "pain.001.001.06, pain.002.001.08,pain.007.001.02,pain.008.001.06"
 }
 
 folderfiles = function(folder, row_id){
@@ -116,10 +116,38 @@ router.get('/exports',  function(req, res) {
   res.render('folder', { title: 'Interface setup scripts', files: files , options: options});
 });
 
+
+//insert into INTERFACE_TYPES (INTERFACE_NAME, OFFICE, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, MESSAGE_WAIT_STATUS, INTERFACE_STATUS, MESSAGE_STOP_STATUS, STOP_AFTER_CONN_EXCEPTION, INTERFACE_MONITOR_INDEX, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, REQUEST_SKELETON_XML, REQUEST_STORE_IND, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE, RESPONSE_SKELETON_XML, RESPONSE_STORE_IND, UID_INTERFACE_TYPES, TIME_STAMP, NOT_ACTIVE_BEHAVIOUR, EFFECTIVE_DATE, PROFILE_CHANGE_STATUS, REC_STATUS, PENDING_ACTION, ASSOCIATED_SERVICE_NAME, NO_OF_LISTENERS, NON_JMS_RECEPIENT_IND, HANDLER_CLASS, BUSINESS_OBJECT_CLASS, BUSINESS_OPERATION, PMNT_SRC, CUSTOM_PROPERTIES, WAIT_BEHAVIOUR, BATCH_SIZE, SUPPORTED_APP_IDS, BACKOUT_INTERFACE_NAME, BULK_INTERFACE_NAME, APPLICATION_PROTOCOL_TP, REQUEST_GROUP_NM, SEQUENCE_HANDLER_CLASS, RESPONSE_INTERFACE, RESPONSE_TIMEOUT_MILLIS, RESPONSE_TIMEOUT_RETRY_NUM, HEARTBEAT_INTERFACE_NAME, INTERFACE_STOPPED_SOURCE, RESEND_ALLOWED, DESCRIPTION, THROTTLING_TX, THROTTLING_MILLIS, BULKING_PURPOSE, ENABLED_GROUPS, RESUME_SUPPORTED, EVENT_ID_GENERATION, BULK_RESPONSE_BY_ORIG_CHUNK, INVALID_RESPONSE_IN, PCI_DSS_COMPLIANT, BULKING_TRIGGER_METHOD, IS_BULK)
+//values ('AC_MND_TT1_RJCT', '***', 'ACK', 'NAK_TO_EMANDATE', 'O', null, 'ACTIVE', null, 5, -1, 'MQ', 'jms/Q_ACK_AC_MND_TT1', 'Pacs_002', null, 1, null, null, null, null, 0, '***^AC_MND_TT1_RJCT', '2017-02-27 14:32:23.695', 'STOP', to_date('12-07-2015', 'dd-mm-yyyy'), 'NO', 'AC', 'UP', 'BusinessFlowSelectorService', 0, 1, 'backend.paymentprocess.interfaces.handlers.AckNotificationInterfaceHandler', 'gpp.webservices.businessflowselector.external.BusinessFlowSelectorServiceImpl', 'executeBusinessFlow', null, null, null, null, '1,2', null, null, null, null, null, null, null, null, null, null, '0', null, null, null, null, null, '0', null, null, null, null, null, null);
 router.get('/exports/new', function(req, res){
+  model.reload();
+
   var file_name  = "./exports/integration_script_" + moment().format('YYYY_MM_DD_hh_mm_ss') + ".sql"; 
-  
-  fs.writeFile(file_name, "SELECT * FROM INTERFACE_TYPES; ", function (err,data) {
+  var all = "INTERFACE_NAME, OFFICE, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, MESSAGE_WAIT_STATUS, INTERFACE_STATUS, MESSAGE_STOP_STATUS, STOP_AFTER_CONN_EXCEPTION, INTERFACE_MONITOR_INDEX, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, REQUEST_STORE_IND, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE, RESPONSE_STORE_IND, UID_INTERFACE_TYPES, NOT_ACTIVE_BEHAVIOUR, REC_STATUS, ASSOCIATED_SERVICE_NAME, NO_OF_LISTENERS, NON_JMS_RECEPIENT_IND, HANDLER_CLASS, BUSINESS_OBJECT_CLASS, BUSINESS_OPERATION, PMNT_SRC, CUSTOM_PROPERTIES, WAIT_BEHAVIOUR, BATCH_SIZE, SUPPORTED_APP_IDS, BACKOUT_INTERFACE_NAME, BULK_INTERFACE_NAME, APPLICATION_PROTOCOL_TP, REQUEST_GROUP_NM, SEQUENCE_HANDLER_CLASS, RESPONSE_INTERFACE, RESPONSE_TIMEOUT_MILLIS, RESPONSE_TIMEOUT_RETRY_NUM, HEARTBEAT_INTERFACE_NAME, INTERFACE_STOPPED_SOURCE, RESEND_ALLOWED, DESCRIPTION, THROTTLING_TX, THROTTLING_MILLIS, BULKING_PURPOSE, ENABLED_GROUPS,RESUME_SUPPORTED, EVENT_ID_GENERATION, BULK_RESPONSE_BY_ORIG_CHUNK, INVALID_RESPONSE_IN, PCI_DSS_COMPLIANT, BULKING_TRIGGER_METHOD, IS_BULK"  
+  var arr = all.split(",");
+
+  var script = "prompt This is for demo usage only... \n set feedback off \n set define off \n\n";
+  for (var i = 0; i< model._collection.length; i++  ) { 
+    var item = model._collection[i];
+    var values = [];
+    var fields = [];
+    
+    for(var f=0; f<arr.length; f++){
+      var field = arr[f];
+      fields.push(field)
+      if(item[field] != null && item[field] != undefined){        
+        values.push("'" + item[field] + "'")
+      } else {
+        values.push(null);
+      }
+    }
+    
+    script += "delete from INTERFACE_TYPES where uid_interface_types ='" + item["UID_INTERFACE_TYPES"] + "';\n\n"
+    script += "insert into INTERFACE_TYPES ("+ fields.join(',') +") \n"
+    script += "values ("+ values.join(',') +"); \n\n" 
+  }
+
+  fs.writeFile(file_name, script , function (err,data) {
     if (err) {
       return console.log(err);
     }
@@ -146,7 +174,6 @@ router.get('/delete/:id/:file/:folder', function(req, res){
   fs.unlinkSync(folder+"/"+file);
   res.redirect(req.get('referer'));
 })
-
 
 router.get('/flows/:folder', function(req, res){
  console.log("Flows folder " + req.params["folder"] )
@@ -200,7 +227,7 @@ router.get('/upload/:id', function(req, res){
     "button": "",
     "upload": ((folder.length > 0) ? true : false),
     "row_id" : row_id,
-    "formats" : ""
+    "formats" : model._properties.get(record["UID_INTERFACE_TYPES"])["to_schemas"]
   }  
    
   res.render('folder', { title: title, files: files , options: options});
@@ -210,8 +237,7 @@ router.get('/clone/:folder', function(req, res){
   var folder = "flows/" + req.params["folder"]
   var file_name = get_filename_folder(folder)
   fse.copySync(folder + '/' + 'template.json' , folder + '/' +  file_name);
-  
-  //res.redirect('/flows/' + req.params["folder"])
+   
   res.redirect(req.get('referer'));
 })
 
@@ -235,7 +261,7 @@ router.post('/upload/:id', function(req, res){
   //  if (fs.existsSync(file.path)) {       
   //    fs.rename(file.path, path.join(form.uploadDir, file.name));
   //  }else{
-      console.log("File was taken" + socketsConnected)
+  //    console.log("File was taken" + socketsConnected)
   //  } 
   //});
 

@@ -6,11 +6,11 @@ block content
     br
     blockquote.blockquote
       p.small=identity["description"] 
-      if keys != null && values != null
-        - var href = "/" + identity["type"] + "/new"
-        a.btn.btn-outline-success.mt-2(href=href, role="button", aria-disabled="true")
-          i.fa.fa-plus
-          span.ml-2 Add new #{identity["type"] }
+      //if keys != null && values != null
+      // - var href = "/" + identity["type"] + "/new"
+      //  a.btn.btn-outline-success.mt-2(href=href, role="button", aria-disabled="true")
+      //    i.fa.fa-plus
+      //    span.ml-2 Add new #{identity["type"] }
     br
     if keys == null || values == null
       .row.mt-5

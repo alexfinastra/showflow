@@ -1,5 +1,5 @@
 - var value = (record != null) ? record["INTERFACE_TYPE"] : ""
-select#interface_type.w-100.custom-select(name="INTERFACE_TYPE")
+select#interface_type.w-100.custom-select(name="INTERFACE_TYPE", disabled)
   option select Type
   option(value="ACK", selected=("ACK" == value)) Acknowledgment channel
   option(value="AC_IN", selected=("AC_IN" == value))  AC In

@@ -1,5 +1,5 @@
 - var value = (record != null) ? record["INTERFACE_SUB_TYPE"] : ""
-select#interface_subtype.w-100.custom-select(name="INTERFACE_SUB_TYPE")
+select#interface_subtype.w-100.custom-select(name="INTERFACE_SUB_TYPE", disabled)
   option select Sub Type
   option(value="ACK_ACTC", selected=("ACK_ACTC" == value))   ACK  ACTC
   option(value="ACK_RJCT", selected=("ACK_RJCT" == value))   ACK  RJCT

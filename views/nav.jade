@@ -1,8 +1,8 @@
 
-- var navmenu = { Channels: '/channel', Interfaces: '/interface' } //, OnBoarding: '/onboard', WebServices: '/webservices' }
+- var navmenu = { Channels: '/channel', Interfaces: '/interface' , OnBoarding: '/onboard', WebServices: '/webservices' }
 nav.navbar.fixed-top.navbar-toggleable-md.navbar-light.bg-faded
   .container
-    button#listFlows.btn.btn-outline-dark(type='button') Payment 
+    button#listFlows.btn.btn-outline-dark(type='button') Payments & 
       b Flows
     each href, key in navmenu      
       a.nav-link.navbar-toggler-right(style="color: black;", href=href)= key      

@@ -101,25 +101,26 @@ router.get('/list/:id', function(req, res){
   var options = {
     "exports": false,
     "upload": false,
-    "row_id" : row_id
+    "row_id" : row_id,
+    "formats" : ""
   }  
   title = "List of files related to " + record["INTERFACE_NAME"].split('_').join(" ") ; 
   res.render('folder', { title: title, files: files , options: options});
 })
-
 
 router.get('/upload/:id', function(req, res){
   var row_id = req.params["id"]
   var record = model.select(row_id);
   
   var folder = path.join(appRoot, record["REQUEST_CONNECTIONS_POINT"]);
-//  console.log(" --- The Folder is " + folder)
   var files = queuefiles(folder, row_id);
   var options = {
     "exports": false,
     "upload": true,
-    "row_id" : row_id
+    "row_id" : row_id,
+    "formats" : model._properties.get(record["UID_INTERFACE_TYPES"])["to_schemas"]
   }  
+  
   title = "Upload to " + record["INTERFACE_NAME"].split('_').join(" ") ;
   res.render('folder', { title: title, files: files , options: options});
 })

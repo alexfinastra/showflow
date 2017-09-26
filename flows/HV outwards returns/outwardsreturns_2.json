@@ -1,0 +1,48 @@
+{
+   "name": "Inward Bulk Payments",
+   "mid": [],
+   "flowitems": [
+      {
+         "step": 1,
+         "type": "channel",
+         "uid": "***^SWIFT_IN"
+      },
+      {
+         "step": 2,
+         "type": "channel",
+         "uid": "***^REMT_TO_CHANNEL"
+      },
+      {
+         "step": 3,
+         "type": "interface",
+         "uid": "***^COMPLIANCE_IN"
+      },      
+      {
+         "step": 5,
+         "type": "interface",
+         "uid": "***^CDB_IN"
+      },
+      {
+         "step": 6,
+         "type": "channel",
+         "uid": "***^ADV_FILE_ACK"
+      },
+      {
+         "step": 7,
+         "type": "interface",
+         "uid": "***^BLK_BI_IN"
+      },
+      {
+         "step": 8,
+         "type": "interface",
+         "uid": "***^BLK_HV_POSTING_IN"
+      },
+      {
+         "step": 9,
+         "type": "channel",
+         "uid": "***^SWIFT_IN"
+      }
+   ]
+}
+
+

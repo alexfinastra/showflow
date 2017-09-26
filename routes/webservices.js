@@ -13,19 +13,7 @@ var identity = {
 }
 
 router.get('/', function(req, res, next) {
-	if(oracle == true){
-		async.waterfall([
-			function(callback){
-				channel.load_from_db(channel, callback)	
-			}
-		],
-		function(err, results){			
-			res.render('profile_list', { identity: identity, keys: null , values: null });
-		})
-	}else{
-		channel.load()
-		res.render('profile_list', { identity: identity, keys: null , values: null });	  
-	}
+	res.render('profile_list', { identity: identity, keys: null , values: null });	  	
 });
 
 router.get('/profile/:id', function(req, res, next){			

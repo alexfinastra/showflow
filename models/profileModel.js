@@ -208,23 +208,17 @@ get_type = function(select, obj){
   return desc;
 };
 
-get_status_class = function(obj){
+get_status_class = function(properties, obj){
     var status = "secondary"; 
-    var alles_gut = true;
 
-    if (obj["INTERFACE_TYPE"] == 'ACK'){
-      return status;
-    }
-
-    if (obj["INTERFACE_SUB_TYPE"] == "EFX_IN"){
-      alles_gut = false;
-    }
-
-    if (alles_gut){
+    if(properties.get(obj["UID_INTERFACE_TYPES"])["connected"] == true){
       status = "success"
-    }else{
+    }
+
+    if(properties.get(obj["UID_INTERFACE_TYPES"])["connected"] == "error") {
       status = "danger";
     }
+
     return status;
 };
 
@@ -251,7 +245,8 @@ dorelease = function(conn) {
   });
 };
 
-var query = "SELECT ROWNUM, OFFICE, INTERFACE_NAME, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, INTERFACE_STATUS, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE, UID_ FROM interface_types "
+//var query = "SELECT ROWNUM, OFFICE, INTERFACE_NAME, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, INTERFACE_STATUS, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE, UID_ FROM interface_types "
+var query = "SELECT ROWNUM, INTERFACE_NAME, OFFICE, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, MESSAGE_WAIT_STATUS, INTERFACE_STATUS, MESSAGE_STOP_STATUS, STOP_AFTER_CONN_EXCEPTION, INTERFACE_MONITOR_INDEX, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, REQUEST_STORE_IND, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE, RESPONSE_STORE_IND, UID_INTERFACE_TYPES, NOT_ACTIVE_BEHAVIOUR, REC_STATUS, ASSOCIATED_SERVICE_NAME, NO_OF_LISTENERS, NON_JMS_RECEPIENT_IND, HANDLER_CLASS, BUSINESS_OBJECT_CLASS, BUSINESS_OPERATION, PMNT_SRC, CUSTOM_PROPERTIES, WAIT_BEHAVIOUR, BATCH_SIZE, SUPPORTED_APP_IDS, BACKOUT_INTERFACE_NAME, BULK_INTERFACE_NAME, APPLICATION_PROTOCOL_TP, REQUEST_GROUP_NM, SEQUENCE_HANDLER_CLASS, RESPONSE_INTERFACE, RESPONSE_TIMEOUT_MILLIS, RESPONSE_TIMEOUT_RETRY_NUM, HEARTBEAT_INTERFACE_NAME, INTERFACE_STOPPED_SOURCE, RESEND_ALLOWED, DESCRIPTION, THROTTLING_TX, THROTTLING_MILLIS, BULKING_PURPOSE, ENABLED_GROUPS,RESUME_SUPPORTED, EVENT_ID_GENERATION, BULK_RESPONSE_BY_ORIG_CHUNK, INVALID_RESPONSE_IN, PCI_DSS_COMPLIANT, BULKING_TRIGGER_METHOD, IS_BULK FROM INTERFACE_TYPES"
 doquery_data = function (conn,cb) {
   conn.execute(
     query,
@@ -259,31 +254,19 @@ doquery_data = function (conn,cb) {
     {maxRows: 300},
     function(err, result)
     {
-      console.log("Call back from execute" + err);
-      console.log("Call back from execute" + result.metaData);
-      if (err) {
+       if (err) {
         console.log("NU NAH!!!")
         return cb(err, conn, null);
       } else {        
-        //console.log("1 ---------------" + result.metaData)
         var data = []
         console.log("2 ---------------" + result.rows.length)
         for (var i = 0; i < result.rows.length; i++  ){
-          //console.log("3 ---------------" + i)
           var obj = {}
-          //console.log("4 ---------------" + result.metaData.length)
           for(var k = 0; k< result.metaData.length; k++ ){
-            //console.log("5 ---------------" + k )
-            //console.log("5.1 ---------------" + result.rows[i][k])
-            //console.log("5.2 ---------------" + result.metaData[k]["name"])
             obj[result.metaData[k]["name"]] = result.rows[i][k];
-            //console.log("6 ---------------" + obj)
           }
-          //console.log("7 ---------------" + obj)
           data.push(obj);
-          //console.log("9 ---------------" + data)
         }
-        //console.log("10 ---------------" + data)
         return cb(null, conn, data);
       }
     });
@@ -295,12 +278,30 @@ function Profile(type){
   this._values = null;
   this._collection = [];  
   this._type = type;
+  this._properties = new json.File(path.resolve( __dirname, "./profileProperties.json" ));
+  this._properties.readSync();
+
+}
+
+method.reload = function(){
+  this._properties.readSync();
+  if(oracle == true){
+    this.load_from_db(this, function(){})
+  }else{
+    this.load();
+  }
 }
 
 method.load = function(){
   var filePath = './interfaces_list_3.json';
   var data = JSON.parse(fs.readFileSync(filePath, 'utf8')); 
+  this.reset();
+
   for(var i=0; i<data.length; i++ ){    
+    if (this._properties.get(data[i]["UID_INTERFACE_TYPES"])["active"] == false){
+      continue;
+    }
+
     if(this._type == 'interface'){
       if( interface_type(data[i]["INTERFACE_TYPE"]) != null ){
         this._collection.push(data[i]);
@@ -321,7 +322,37 @@ method.load = function(){
   }
 }
 
-method.load_from_db = function(profile, cb){
+method.update_db = function(query){
+  oracledb.getConnection(
+  {
+    user          : dbConfig.user,
+    password      : dbConfig.password,
+    connectString : dbConfig.connectString
+  },
+  function(err, connection)
+  {
+    if (err)
+    {
+      console.error(err);
+      return;
+    }
+
+    connection.execute(
+      query,
+      { autoCommit: true },
+      function(err, result)
+      {
+        if (err)
+        {
+          console.error(err);
+          return;
+        }
+        console.log(result.outBinds);
+      });
+  });
+}
+
+method.load_from_db = function(profile, cb){ 
  async.waterfall(
   [
     doconnect,
@@ -332,11 +363,15 @@ method.load_from_db = function(profile, cb){
     if (err) { console.error("In waterfall error cb: ==>", err, "<=="); 
       if (conn){ dorelease(conn); }
       cb(err, null)  
-    }    
-    
+    }      
     if (data != null){
-     //console.log("Current object is " + profile)
+     profile.reset();
+     //console.log("Current object is " + profile)    
      for(var i=0; i<data.length; i++ ){    
+        if (profile._properties.get(data[i]["UID_INTERFACE_TYPES"])["active"] == false){
+          continue;
+        }
+
         //console.log("Data iterator " + i)
         if(profile._type == 'interface'){
           if( interface_type(data[i]["INTERFACE_TYPE"]) != null ){
@@ -368,12 +403,15 @@ method.load_from_db = function(profile, cb){
 method.reset = function(){
   this._keys = null; 
   this._values = null;
-  this._collection = null;    
+  this._collection = [];
+  this._properties = new json.File(path.resolve( __dirname, "./profileProperties.json" ));
+  this._properties.readSync();   
 };
 
 method.keys = function(select = 'active') {     
   this._keys = [];     
   var obj = null;
+  console.log("Collection LEngth " + this._collection.length)
   for (var i = 0; i< this._collection.length; i++  ) {      
     obj = this._collection[i];
     var key = get_type(select, obj);      
@@ -409,23 +447,16 @@ method.values = function(select = 'active') {
 
 method.folders = function(select = ''){
   var folders = [];
-  console.log("1-----------------"+ select )
   for (var i = 0; i< this._collection.length; i++  ) {      
-    console.log("2-----------------"+ i)
     var obj = this._collection[i];
-    console.log("3-----------------"+ obj)
     
     if(obj["REQUEST_CONNECTIONS_POINT"] && obj["REQUEST_CONNECTIONS_POINT"].indexOf(select) > -1){
-      console.log("3.1-----------------")
       folders.push(obj["REQUEST_CONNECTIONS_POINT"]);
     }
     if(obj["RESPONSE_CONNECTIONS_POINT"] && obj["RESPONSE_CONNECTIONS_POINT"].indexOf(select) > -1){
-      console.log("3.2-----------------")
       folders.push(obj["RESPONSE_CONNECTIONS_POINT"])
     }
-    console.log("4 -----------------")
   }
-  console.log("5-----------------"+ folders.length)
   return folders;
 };
 
@@ -442,6 +473,19 @@ method.select = function(row_id){
   return obj;
 };
 
+method.select_by_uid = function(uid){
+  var obj = null;  
+  if( uid == 0 ) { return obj; }
+
+  for (var i = 0; i< this._collection.length; i++  ) {      
+    var obj = this._collection[i];
+    if(obj["UID_INTERFACE_TYPES"] == uid){
+      return obj;
+    }
+  }  
+  return obj;
+}
+
 method.select_similarIds = function(type, sub_type){    
   var similars = [];  
   for (var i = 0; i< this._collection.length; i++  ) {      
@@ -453,13 +497,12 @@ method.select_similarIds = function(type, sub_type){
   return similars;
 };
 
-method.to_flowitem = function(row_id, type){
-  var profile = this.select(row_id);
+method.to_flowitem = function(profile, type){ 
   return {
-    "id": row_id,
+    "id": profile["ROWNUM"],
     "type": type,
     "direction": profile["REQUEST_DIRECTION"],
-    "status_class": get_status_class(profile),
+    "status_class": get_status_class(this._properties, profile),
     "title" : profile["INTERFACE_NAME"].split("_").join(" ") ,
     "request_protocol": profile["REQUEST_PROTOCOL"],
     "request_connections_point": profile["REQUEST_CONNECTIONS_POINT"],
@@ -487,10 +530,11 @@ method.populate_properties = function(){
   for(var i=0; i<data.length; i++ ){ 
     var type = '';
     if(interface_type(data[i]["INTERFACE_TYPE"]) != null ){ type = 'interface' }
-    if(channel_type(data[i]["INTERFACE_TYPE"]) != null ){ type = 'channel' }
+    else if(channel_type(data[i]["INTERFACE_TYPE"]) != null ){ type = 'channel' }
 
     file.set(data[i]["UID_INTERFACE_TYPES"], {
-      active: true,
+      active: false,
+      connected: false,
       to_schemas: "",
       from_schemas: "",
       flow_item: {
@@ -498,8 +542,10 @@ method.populate_properties = function(){
                     type: type,
                     uid: data[i]["UID_INTERFACE_TYPES"]
                  },
-      rule: null,
-      audit: []
+      rule: [],
+      auditmsg: [],
+      logpattern: [],
+      mid: []
     })
   }
   file.writeSync();

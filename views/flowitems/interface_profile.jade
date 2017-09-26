@@ -1,23 +1,26 @@
 li.timeline-item
-  .timeline-badge(class=current["status_class"])
+  .timeline-badge(class=item["status_class"])
     i.fa.fa-exchange
   .timeline-panel
     .timeline-heading
       if profile == null
-        .row.justify-content-end         
-          - var purl = "/interface/profile/" + current["id"]
+        //.row.justify-content-end         
+        //  - var purl = "/interface/profile/" + item["id"]
+        //  a.btn.btn-link.col-auto(href=purl)
+        //    i.fa.fa-pencil
+        //  a.btn.btn-link.col-auto(href=purl)
+        //    i.fa.fa-arrow-down 
+        //  a.btn.btn-link.col-auto(href=purl)
+        //    i.fa.fa-arrow-up 
+        //  a.btn.btn-link.col-auto(href=purl)
+        //    i.fa.fa-trash-o     
+        .row
+          - var purl = "/interface/profile/" + item["id"]
           a.btn.btn-link.col-auto(href=purl)
             i.fa.fa-pencil
-          a.btn.btn-link.col-auto(href=purl)
-            i.fa.fa-arrow-down 
-          a.btn.btn-link.col-auto(href=purl)
-            i.fa.fa-arrow-up 
-          a.btn.btn-link.col-auto(href=purl)
-            i.fa.fa-trash-o     
-        .row
-          h5.timeline-title.mt-2.col-auto.mr-auto #{current["title"]}                   
+          h5.timeline-title.mt-2.col-auto.mr-auto #{item["title"]}                   
       else
-        h5.timeline-title #{current["title"]}      
+        h5.timeline-title #{item["title"]}      
       p
         small.text-muted
           i.fa.fa-certificate
@@ -27,10 +30,10 @@ li.timeline-item
       p.small
         | A INTERFACE_TYPES.DESCRIPTION field should be populated with the name and resposibility of the bank system. Coments and Notes will be mostly welcomed in this field also.
       br
-      - var target = (current["request_protocol"] == "MQ") ? 'queue' : 'folder'
-      - var dhref = "/"+ target +"/list/" + current["id"]
-      - var uhref = "/" + target + "/upload/" + current["id"]
-      - var btn_class = "btn-outline-" + current["status_class"] 
+      - var target = (item["request_protocol"] == "MQ") ? 'queue' : 'folder'
+      - var dhref = "/"+ target +"/list/" + item["id"]
+      - var uhref = "/" + target + "/upload/" + item["id"]
+      - var btn_class = "btn-outline-" + item["status_class"] 
       a.btn.float-left(href=uhref, class=btn_class)
           span 
             b From 

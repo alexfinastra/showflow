@@ -22,7 +22,7 @@ block content
         h5.ml-2 Interface card as it appears in Payment Flows       
         ul.timeline
           - var profile = true
-          - var current = model.to_flowitem(record["ROWNUM"], model._type)
+          - var item = model.to_flowitem(record, model._type)
           if (model._type == 'interface')            
             include flowitems/interface_profile
           else
@@ -48,7 +48,7 @@ block content
         .form-group.row
           label.col-sm-3.col-form-label(for='inputName') name
           .col-sm-6
-            input#inputName.w-100.form-control(name="INTERFACE_NAME", type='text', placeholder='name of the banks application', value=((record != null) ? record["INTERFACE_NAME"].split("_").join(" ") :  "")) 
+            input#inputName.w-100.form-control(name="INTERFACE_NAME", type='text', readonly, placeholder='name of the banks application', value=((record != null) ? record["INTERFACE_NAME"].split("_").join(" ") :  "")) 
         br
         .form-group.row
           label.col-sm-3.col-form-label(for='inputName') notes, comments, memo
@@ -92,6 +92,7 @@ block content
             label 
             i.small schemas certificates
             select#to_schemas.w-100(multiple="multiple", name="REQUEST_SCHEMA")
+              - var schemas = model._properties.get(record["UID_INTERFACE_TYPES"] + ".to_schemas") || ""
               include utils/message_schemas          
             br
             input#inputRequestConnPoint.form-control.w-100(name="REQUEST_CONNECTIONS_POINT", type='text', placeholder='connection point', readonly, value=((record != null) ? record["REQUEST_CONNECTIONS_POINT"] :  "") )
@@ -121,6 +122,7 @@ block content
             label 
             i.small schemas certificates
             select#from_schemas.w-100(multiple="multiple", name="RESPONSE_SCHEMA")
+              - var schemas = model._properties.get(record["UID_INTERFACE_TYPES"] + ".from_schemas") || ""
               include utils/message_schemas                  
             br
             input#inputResponseConnPoint.form-control.w-100(type='text', name="RESPONSE_CONNECTIONS_POINT", placeholder='connection point', readonly, value=((record != null) ? record["RESPONSE_CONNECTIONS_POINT"] :  ""))

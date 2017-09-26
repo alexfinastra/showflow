@@ -8,7 +8,7 @@ block content
           center.mt-5
             h3.mt-5 Please select Flow by pressing on 
             br
-            button.btn.btn-outline-dark.disabled(type='button') Payment 
+            button.btn.btn-outline-dark.disabled(type='button') Payments & 
               b Flows    
     else
       .row
@@ -20,18 +20,17 @@ block content
                 i.fa.fa-repeat
                 span.ml-2    
                 | Reset connections
-              button#edit-flow.btn.btn-outline-success.ml-2(type='button')
-                i.fa.fa-plus
-                span.ml-2    
-                | Add 
-                b Flow  
-                | item
+              //button#edit-flow.btn.btn-outline-success.ml-2(type='button', data-filepath=data["filepath"])
+              //  i.fa.fa-plus
+              //  span.ml-2    
+              //  | Add 
+              //  b Flow  
+              //  | item
           br        
           ul.timeline
             if data["items"] != null && data["items"] != undefined
-              each item in data["items"] 
-                - var current = item["current"]              
-                case current["type"]
+              each item in data["items"]                            
+                case item["type"]
                   when "channel"
                     include flowitems/channel_profile
                   when "interface"

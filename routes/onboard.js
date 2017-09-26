@@ -24,8 +24,8 @@ router.get('/', function(req, res, next) {
 	//	})
 	//}else{
 		//channel.load()
-		all = new Profile('all');		
-		all.populate_properties();
+		//all = new Profile('all');		
+		//all.populate_properties();
 		res.render('profile_list', { identity: identity, keys: null , values: null });	  
 	//}
 });

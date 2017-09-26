@@ -43,7 +43,7 @@ router.get('/new', authentication_mdl.is_login, function(req, res, next) {
 router.post('/update/:id', function(req, res){
 	row_id = req.params["id"]
 	var record = interface.select(row_id)
-	//console.log(" ---------- > BODY " + req.body.TO_MQ)
+	console.log(" ---------- > REQUEST_SCHEMA " + req.body.REQUEST_SCHEMA)
 	//INTERFACE_TYPE:OFAC
 	//INTERFACE_SUB_TYPE:MP_COMPLIANCE_IN_RESPONSE
 	//INTERFACE_NAME:MP COMPLIANCE IN

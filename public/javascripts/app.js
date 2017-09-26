@@ -88,24 +88,45 @@ $(document).ready(function(){
 				  }
 	      });
 	      $("#tree.treeview").show();
-        $("#editflow").hide();
+        $("#editflow.treeview").hide();
 	  })
 	  .fail(function (response) {
 	      console.log(response);
 	  });
 	});
-
+/*
 	$('#edit-flow').on('click', function () {
     if($('#sidebar').hasClass('active') == false){
  	  	$('#sidebar').addClass('active');
 	    $('.overlay').fadeIn();
 	    $('.collapse.in').toggleClass('in');
 	    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
- 	  }      
-    $("#tree.treeview").hide();
-    $("#editflow").show();
+ 	  } 
+
+ 	  $.ajax({
+      type: 'GET',
+      url: '/flow/edittree',
+      dataType: "json",
+	  })
+	  .done(function (response) {
+	      $('#editflow').treeview({
+	      	data: response.tree,
+	      	showCheckbox: false,
+	      	onNodeSelected: function(event, data) {
+	      		if(data["nodes"] == null || data["nodes"] == undefined){
+	      			//$('#edit-flow').data().filepath
+	      			//location.href = "/flow/load/" + data["folder"] + "/" + data["text"]
+	      		}			    
+				  }
+	      });
+	      $("#tree.treeview").hide();
+        $("#editflow.treeview").show();
+	  })
+	  .fail(function (response) {
+	      console.log(response);
+	  });
 	});
-	 
+*/	 
 	$("#to_schemas").select2({
 	    theme: "bootstrap"
 	});

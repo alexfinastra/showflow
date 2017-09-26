@@ -97,7 +97,7 @@ table.table tr:hover td a.hoverbutton {
   cursor:not-allowed
 }
 
-.node-tree{  
+.node-tree, .node-editflow{  
   border:none;
 }
 .node-tree:not(.node-disabled):hover{
@@ -107,4 +107,9 @@ table.table tr:hover td a.hoverbutton {
 .mdoc {
   margin-top: 10px;
   margin-left: -35px;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
 }

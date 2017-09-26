@@ -12,6 +12,9 @@ block content
     blockquote
       if options["upload"] == true
         br      
+        if options["formats"] != null && options["formats"].length > 0          
+          include docs/message_formats
+        br
         .container
           .row
             .col-md-12
@@ -20,9 +23,7 @@ block content
             .col-md-12
               .progress.mt-1.invisible
                 .progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100', style='width: 0%; height: 20px;') 
-        if options["formats"] != null && options["formats"].length > 0
-          - var formats = options["formats"]
-          include docs/message_formats        
+               
       if options["button"] == "exports"      
         a.btn.btn-outline-primary.mt-2( href= "/folder/exports/new")
           i.fa.fa-cogs
@@ -30,10 +31,12 @@ block content
           | Create setup script
         br
       if options["button"] == "flow"      
-        a.btn.btn-outline-primary.mt-2( href= "/folder/clone/"+ options["name"])
-          i.fa.fa-share-alt
-          span.ml-2 
-          | Clone flow template
+        //a.btn.btn-outline-primary.mt-2( href= "/folder/clone/"+ options["name"])
+        //  i.fa.fa-share-alt
+        //  span.ml-2 
+        //  | Clone flow template
+        blockquote.blockquote
+          p.small A list of flows was generated automatically as a result of payments process and reflect data exchange with perimeter systems.
         br     
     br
     br
