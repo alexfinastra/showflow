@@ -330,6 +330,7 @@ method.update_db = function(query){
     if (err)
     {
       console.error(err);
+      if (connection){ dorelease(connection); }
       return;
     }
     console.log(" 2. Connection "+ connection + " and query "+ query);
@@ -338,16 +339,16 @@ method.update_db = function(query){
       {},
       { autoCommit: true },
       function(err, result)
-      {
-        
+      {        
         if (err)
         {
           console.error(err);
+          if (connection){ dorelease(connection); }
           return;
         }
         console.log(" 3. Executed and "+ result);
-        return;
       });
+      if (connection){ dorelease(connection); }
   });
 }
 
@@ -364,7 +365,7 @@ method.load_from_db = function(profile, cb){
       cb(err, null)  
     }      
     if (data != null){
-     profile.reset();
+     //profile.reset();
      //console.log("Current object is " + profile)    
      for(var i=0; i<data.length; i++ ){
         console.log("Load from DB data as Hash: " + data[i]);    
@@ -395,8 +396,7 @@ method.load_from_db = function(profile, cb){
      //console.log("Populated "+ profile._collection); 
      if (conn){ dorelease(conn); }
      cb(null, profile)    
-    }
-    
+    }    
     if (conn){ dorelease(conn); }  
   })
 }
