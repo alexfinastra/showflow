@@ -270,7 +270,7 @@ router.post('/upload/:id', function(req, res){
     console.log("File uploaded sucessfully");
     console.log("Uploaded to --> " + form.uploadDir);
     var isWin = /^win/.test(process.platform);
-    if (isWin && form.uploadDir.indexOf('jms') > -1){
+    if (!isWin && form.uploadDir.indexOf('jms') > -1){
       var sys = require('sys');
       var exec = require('child_process').exec;
       var queue = form.uploadDir.substring(4, form.uploadDir.length)
