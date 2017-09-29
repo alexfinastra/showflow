@@ -318,6 +318,7 @@ method.load = function(){
 }
 
 method.update_db = function(query){
+  console.log(" 1. Receive query "+query)
   oracledb.getConnection(
   {
     user          : dbConfig.user,
@@ -331,19 +332,20 @@ method.update_db = function(query){
       console.error(err);
       return;
     }
-
+    console.log(" 2. Connection "+ connection + " and query "+ query);
     connection.execute(
       query,
       {},
       { autoCommit: true },
       function(err, result)
       {
+        console.log(" 3. Executed and "+ result)
         if (err)
         {
           console.error(err);
           return;
         }
-        console.log(result.outBinds);
+        console.log(result);
       });
   });
 }
