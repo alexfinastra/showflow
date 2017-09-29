@@ -334,7 +334,7 @@ method.load_db = function(){
             } else {
               for(var i=0; i<result.rows.length; i++ ){
                 var obj = result.rows[i]
-                console.log("Load from DB data as Hash: " + result[i]);    
+                console.log("Load object is: " + obj);    
                 if (current._properties.get(obj["UID_INTERFACE_TYPES"]) == null ||
                     current._properties.get(obj["UID_INTERFACE_TYPES"])["active"] == false){
                   continue;
@@ -424,7 +424,7 @@ method.load_from_db = function(profile, cb){
      //profile.reset();
      //console.log("Current object is " + profile)    
      for(var i=0; i<data.length; i++ ){
-        console.log("Load from DB data as Hash: " + data[i]);    
+        //console.log("Load from DB data as Hash: " + data[i]);    
         if (profile._properties.get(data[i]["UID_INTERFACE_TYPES"]) == null ||
             profile._properties.get(data[i]["UID_INTERFACE_TYPES"])["active"] == false){
           continue;
