@@ -31,7 +31,6 @@ router.get('/', function(req, res, next) {
 
 router.get('/profile/:id', function(req, res, next){			
 	row_id = req.params["id"]	
-	channel.reload();
 	var record = channel.select(row_id);
 	res.render('profile', { title: 'Channel Profile', record: record , model: channel});
 });
