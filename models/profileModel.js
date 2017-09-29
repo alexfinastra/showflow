@@ -330,7 +330,34 @@ method.load_db = function(){
             if (err) {
                console.log("Query results error " + err.message);
             } else {
-                console.log("Load from DB data as Hash: " + JSON.stringify(result.rows));
+              for(var i=0; i<result.rows.length; i++ ){
+                var obj = result.rows[i]
+                console.log("Load from DB data as Hash: " + result[i]);    
+                if (this._properties.get(obj["UID_INTERFACE_TYPES"]) == null ||
+                    this._properties.get(obj["UID_INTERFACE_TYPES"])["active"] == false){
+                  continue;
+                }
+
+                //console.log("Data iterator " + i)
+                if(this._type == 'interface'){
+                  if( interface_type(obj["INTERFACE_TYPE"]) != null ){
+                    this._collection.push(obj);
+                  }
+                  continue;
+                }
+
+                if(this._type == 'channel'){
+                  if( channel_type(obj["INTERFACE_TYPE"]) != null ){
+                    this._collection.push(obj);
+                  }
+                  continue;
+                }
+
+                if(this._type == 'all'){
+                  this._collection.push(obj);
+                }
+              }
+              console.log("Load from DB data as Hash: " + JSON.stringify(result.rows.length));
             }
             // Release the connection
             connection.release(
