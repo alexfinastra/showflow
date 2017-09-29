@@ -78,7 +78,7 @@ router.post('/update/:id', function(req, res){
 			set += " RESPONSE_FORMAT_TYPE = '" + req.body.RESPONSE_FORMAT_TYPE + "'";
 		}
 
-		var query = update + " set " + set + where;
+		var query = update + " set " + set + " " + where;
 		console.log("== Update query: " + query)
 		channel.update_db(query);
 	}
