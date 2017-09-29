@@ -43,7 +43,6 @@ router.get('/new', authentication_mdl.is_login, function(req, res, next) {
 
 router.post('/update/:id', function(req, res){
 	row_id = req.params["id"]
-	channel.reload();
 	var record = channel.select(row_id)
 	
 	var key = record["UID_INTERFACE_TYPES"] + ".to_schemas";	
