@@ -317,6 +317,35 @@ method.load = function(){
   }
 }
 
+method.load_db = function(){
+   oracledb.getConnection(dbConfig, function (err, connection) {
+        if (err) {
+          console.log("Connection error " + err.message);          
+          return;
+        }
+
+        connection.execute(query, {}, {
+            outFormat: oracledb.OBJECT // Return the result as Object
+        }, function (err, result) {
+            if (err) {
+               console.log("Query results error " + err.message);
+            } else {
+                console.log("Load from DB data as Hash: " + JSON.stringify(result.rows));
+            }
+            // Release the connection
+            connection.release(
+              function (err) {
+                  if (err) {
+                      console.error(err.message);
+                  } else {
+                      console.log(" Connection released");
+                  }
+            });
+        });
+    });
+}
+
+
 method.update_db = function(query){
   console.log(" 1. Receive query " + query)
 
