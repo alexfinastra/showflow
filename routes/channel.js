@@ -46,8 +46,10 @@ router.post('/update/:id', function(req, res){
 	
 	var key = record["UID_INTERFACE_TYPES"] + ".to_schemas";	
 	channel._properties.set(key, req.body.REQUEST_SCHEMA);	
+	
 	key = record["UID_INTERFACE_TYPES"] + ".from_schemas";	
 	channel._properties.set(key, req.body.RESPONSE_SCHEMA);
+	
 	channel._properties.writeSync();
 
 	if(oracle){

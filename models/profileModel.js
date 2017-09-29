@@ -383,7 +383,7 @@ method.update_db = function(query){
           console.log("Connection error " + err.message);          
           return;
         }
-        
+        console.log(" 2. Connection " + connection)
         connection.execute(query, [], {
                 autoCommit: true,
                 outFormat: oracledb.OBJECT // Return the result as Object
