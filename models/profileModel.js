@@ -334,6 +334,7 @@ method.update_db = function(query){
 
     connection.execute(
       query,
+      {},
       { autoCommit: true },
       function(err, result)
       {
