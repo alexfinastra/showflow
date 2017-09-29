@@ -362,8 +362,10 @@ method.load_from_db = function(profile, cb){
     if (data != null){
      profile.reset();
      //console.log("Current object is " + profile)    
-     for(var i=0; i<data.length; i++ ){    
-        if (profile._properties.get(data[i]["UID_INTERFACE_TYPES"])["active"] == false){
+     for(var i=0; i<data.length; i++ ){
+        console.log("Load from DB data as Hash: " + data[i]);    
+        if (this._properties.get(data[i]["UID_INTERFACE_TYPES"]) == null ||
+           this._properties.get(data[i]["UID_INTERFACE_TYPES"])["active"] == false){
           continue;
         }
 
