@@ -246,6 +246,7 @@ router.post('/upload/:id', function(req, res){
   var row_id = req.params["id"]
   var record = model.select(row_id);
   var form = new formidable.IncomingForm();
+  var filename = ""
 
   form.multiples = true;
   form.uploadDir = path.join(record["REQUEST_CONNECTIONS_POINT"]);  
@@ -254,6 +255,7 @@ router.post('/upload/:id', function(req, res){
   form.on('file', function(field, file) {
     if (fs.existsSync(file.path)) {       
       fs.rename(file.path, path.join(form.uploadDir, file.name));
+      filename = file.name;
     }else{
       console.log("File was taken" + socketsConnected)
     } 
@@ -268,11 +270,13 @@ router.post('/upload/:id', function(req, res){
     console.log("File uploaded sucessfully");
     console.log("Uploaded to --> " + form.uploadDir);
     var isWin = /^win/.test(process.platform);
-    if (!isWin && form.uploadDir.indexOf('jms') > -1){
+    if (isWin && form.uploadDir.indexOf('jms') > -1){
       var sys = require('sys');
       var exec = require('child_process').exec;
-      exec('~/dh/scripts/util/putMQMessage.ksh PRDTHV_465_LR ' + form.uploadDir.split('/')[1] + ' ' +  file.path,
-        function (error, stdout, stderr) {
+      var queue = form.uploadDir.substring(4, form.uploadDir.length)
+      var cmd = '~/dh/scripts/util/putMQMessage.ksh PRDTHV_465_LR ' + queue + ' ' +  appRoot + '/' + form.uploadDir + '/' + filename;
+      console.log("Execute cmd --> " + cmd);
+      exec(cmd, function (error, stdout, stderr) {
           console.log('stdout: ' + stdout);
           console.log('stderr: ' + stderr);
           if (error !== null) {

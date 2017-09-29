@@ -1,5 +1,5 @@
 {
-	"keys": ["Task Service", "Actions on payments", "STP Validation", "Static Data", "Queue List", "IBAN Validation" ],
+	"keys": ["Tasks", "Actions on payments", "STP Validation", "Static Data", "Queue List", "IBAN Validation" ],
 	"values" : [[
 								{
 			            "step": 1,
