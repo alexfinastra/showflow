@@ -125,43 +125,6 @@ router.get('/upload/:id', function(req, res){
   res.render('folder', { title: title, files: files , options: options});
 })
 
-router.post('/upload/:id', function(req, res){
-  console.log("POST Fuile upload!!!")
-  var row_id = req.params["id"]
-  var record = model.select(row_id);
-  
-  
-  // create an incoming form object
-  var form = new formidable.IncomingForm();
-
-  // specify that we want to allow the user to upload multiple files in a single request
-  form.multiples = true;
-
-  // store all uploads in the /uploads directory
-  form.uploadDir = path.join(appRoot, record["REQUEST_CONNECTIONS_POINT"]);    
-  
-  // every time a file has been uploaded successfully,
-  // rename it to it's orignal name
-  form.on('file', function(field, file) {
-    console.log("File upload" + file)
-    fs.rename(file.path, path.join(form.uploadDir, file.name));
-  });
-
-  // log any errors that occur
-  form.on('error', function(err) {
-    console.log('Upload error F***ed Up: \n' + err);
-  });
-
-  // once all the files have been uploaded, send a response to the client
-  form.on('end', function() {
-    console.log("File uploaded sucessfully")
-    res.end('success');
-  });
-
-  // parse the incoming request containing the form data
-  form.parse(req);
-})
-
 router.get('/build_folders', function(req, res){
     var folders = model.folders('jms');
     console.log("Number of folders are "+ folders.length)

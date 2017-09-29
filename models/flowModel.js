@@ -47,4 +47,16 @@ method.populate_items = function(){
   }
 };
 
+method.reset_connections = function(){
+  if (this._flow.length != 0){
+    var profile = new Profile("all");
+    
+    for(var i; i<this._flow.length; i++){
+      var item = this._flow[i];
+      var key = item["uid"] + ".connected";
+      profile._properties.set(key, false);
+    }
+  }
+}
+
 module.exports = Flow;

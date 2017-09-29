@@ -1,6 +1,9 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
 body {
-  min-height: 2000px;
   padding-top: 70px;
+  font-family: 'Poppins', sans-serif;
+  background: #fafafa;
 }
 
 /****** LOGIN MODAL ******/
@@ -8,7 +11,7 @@ body {
   padding: 30px;
   max-width: 350px;
   width: 100% !important;
-  background-color: #F7F7F7;
+  background-color: white;
   margin: 0 auto;
   border-radius: 2px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
@@ -53,7 +56,7 @@ body {
 .loginmodal {
   text-align: center;
   font-size: 14px;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 700;
   height: 36px;
   padding: 0 8px;
@@ -101,7 +104,7 @@ body {
 
 .bg { 
     /* The image used */
-    background-image: url("../img/bg_no.jpg");
+    background-image: url("../img/money.jpg");
     /* Full height */
     max-width: 100%;
     max-height: 100%;

@@ -12,6 +12,7 @@ var fs = require('fs');
 const path = require('path');
 const socketsConnected = []
 let log = console.log.bind(console)
+Tail = require('tail').Tail;
 
 /**
  * Get port from environment and store in Express.
@@ -100,6 +101,24 @@ io.on('connection', (socket) => {
     log('connected client: ' + name)
   }) 
 })
+
+
+
+const pathToTraces =  appRoot +  '/gppserver*';  // '/home/was8/dh/profiles/PRDTHV_465_LR/trace/gppserver/gppserver*'
+var traceswatcher = chokidar.watch(pathToTraces, chokidarOpts);
+tail = new Tail("gppserver_trace.45.2017-09-26.log");
+tail.on("line", function(data) {
+      //buildFlows(data);
+      
+      console.log(data);
+ });
+
+traceswatcher.on('add', function(path) {
+    // should switch tails -f reader to the new files
+    // 1. select file to tails the last 
+    
+    //tail = new Tail("");
+});
 
 /**
  * Normalize a port into a number, string, or false.

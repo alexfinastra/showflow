@@ -1,0 +1,51 @@
+extends layout
+
+block content
+  .container.mt-5
+    h3.mt-5=identity["title"]
+    br
+    blockquote.blockquote
+      p.small=identity["description"]       
+    br
+    if keys == null || values == null
+      .row.mt-5
+        .col-md-12.mt-5
+          center.mt-5
+            h3.mt-5 Comming very very  very soon 
+            br             
+    else
+      -var index = 0
+      each key in keys   
+        br
+        .row      
+          .col-md-3
+            h4.mt-2 #{key}            
+          .col-auto
+            a.btn.btn-outline-primary.btn-sm.mt-1(href= "/" + identity["type"] + "/run/0")
+              i.fa.fa-align-left
+              span.mt-1.ml-2  Run all scripts
+        br            
+        table.table.table-hover
+          .container
+            thead
+              tr.row.text-dark
+                th.col.col-md-1 #
+                th.col.col-md-3 Script
+                th.col.col-md-5 Description
+                th.col.col-md-3 
+            tbody  
+              each obj in values[index++] 
+                tr.row.text-dark
+                  td.col.col-md-1 #{obj["step"]}
+                  td.col.col-md-3 
+                    i #{obj["name"] + ".sql"}
+                  td.col.col-md-5 #{obj["description"]}
+                  td.col.col-md-3
+                    - var rhref = "/" + identity["type"] + "/rollback/" + obj["step"]
+                    - var ehref = "/" + identity["type"] + "/run/" + obj["step"]                    
+                    a.btn.btn-outline-danger.mt-2.btn-sm.float-right.hoverbutton( href= rhref )
+                      i.fa.fa-reply
+                      span.ml-2  revert   
+                    a.btn.btn-outline-primary.mr-3.btn-sm.mt-2.float-right.hoverbutton( href= ehref)
+                      i.fa.fa-play
+                      span.ml-2  run script

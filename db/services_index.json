@@ -1,0 +1,138 @@
+{
+	"keys": ["Task Service", "Actions on payments", "STP Validation", "Static Data", "Queue List", "IBAN Validation" ],
+	"values" : [[
+								{
+			            "step": 1,
+			            "type": "service",
+			            "name": "Activate mature profile changes",
+			            "description": "Activates approved profile changes when selected office business date reaches profile's effective date"
+			          },
+			          {
+			            "step": 2,
+			            "type": "service",
+			            "name": "Clean delete entries",
+			            "description": "Clean profile entries  marked for deletion, clean old non-profile entries over a date range"
+			          },
+			          {
+			            "step": 3,
+			            "type": "service",
+			            "name": "Clean profile audit entries",
+			            "description": "Delete audit entries for profiles belonging to the selected office with a date that is older than a present time period"
+			          },
+			          {
+			            "step": 4,
+			            "type": "service",
+			            "name": "Next business date",
+			            "description": "Advances the business date of specific office, office and all its active MOP's or specific MOP belongs to specific office"
+			          },
+			          {
+			            "step": 5,
+			            "type": "service",
+			            "name": "Release from schedule",
+			            "description": "Checks whether messages with Schedulle and Wait Release statuses for specific offic and specific MOP could be released for processing"
+			          },
+			          {
+			            "step": 6,
+			            "type": "service",
+			            "name": "Suspend inactive users",
+			            "description": "Suspends all users for the specified office, that have not logged into system for defined period of time"
+			          },
+			          {
+			            "step": 7,
+			            "type": "service",
+			            "name": "Move to history",
+			            "description": "Sets payments with a final status such as Complete ot Cancelled and payments that are matured to a history status"
+			          },
+			          {
+			            "step": 8,
+			            "type": "service",
+			            "name": "Delete from history",
+			            "description": "Permanently deletes matured payments and templates from the system"
+			          },
+			          {
+			            "step": 9,
+			            "type": "service",
+			            "name": "Refresh message snapshot",
+			            "description": "Uses the Materializes Query Table (db2 feature) which takes a snapshot of MINF message table and enables run queries against it"
+			          }
+							],
+							[
+								{
+			            "step": 10,
+			            "type": "service",
+			            "name": "Message load",
+			            "description": "Loads a specific payment, i.e. the third party application gets all payment"
+			          },
+			          {
+			            "step": 11,
+			            "type": "service",
+			            "name": "Message submit",
+			            "description": "Takes a manual action on a specific payment, such as Submit or Cancel"
+			          }
+							],
+							[
+								{
+			            "step": 12,
+			            "type": "service",
+			            "name": "Validate STP rules",
+			            "description": "Perform either the Validate STP rules fine grain service or Load STP rule fine grain service"
+			          },
+			          {
+			            "step": 13,
+			            "type": "service",
+			            "name": "Load STP rules",
+			            "description": "Returns the related reference data (STP Validation and Char Set profiles) so that the information is available for the 3rd party for validation"
+			          }
+							],
+							[
+								{
+			            "step": 14,
+			            "type": "service",
+			            "name": "Apply changes",
+			            "description": "Applies recent updates made to static data"
+			          },
+			          {
+			            "step": 15,
+			            "type": "service",
+			            "name": "Load profile",
+			            "description": "Loads a specific profile entry acording to the service request"
+			          },
+			          {
+			            "step": 16,
+			            "type": "service",
+			            "name": "Profile actions",
+			            "description": "Takes an action such as Delete or Create on a profile"
+			          },
+			          {
+			            "step": 17,
+			            "type": "service",
+			            "name": "Profile list",
+			            "description": "Loads a list of applicable profile attributes per search criteria"
+			          }
+							],
+							[
+								{
+			            "step": 18,
+			            "type": "service",
+			            "name": "Queue list",
+			            "description": "Provides list of payments whic meet a given selection criteria and are filtered by user restrictions"
+			          }
+							],
+							[
+								{
+			            "step": 19,
+			            "type": "service",
+			            "name": "IBAN Validation",
+			            "description": "Account identifier used by system to process debit or credit party identification when an IBAN is provided"
+			          }
+							]
+    ]
+	}
+
+
+
+
+
+
+
+

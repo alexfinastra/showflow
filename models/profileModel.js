@@ -4,7 +4,7 @@ var async = require('async');
 var path = require('path');
 var json = require('json-file');
 var oracledb = require('oracledb');
-
+var dbConfig = require('../db/dbconfig.js');
 
 interface_type = function(type){
   var types = [ 'OFAC', 
@@ -222,12 +222,6 @@ get_status_class = function(properties, obj){
     return status;
 };
 
-var dbConfig = {
-    user          : "HVPRDT_465_NFT01",
-    password      : "payplus1",
-    connectString : "GPP12C"
-  };
-
 doconnect = function(cb) {
   oracledb.getConnection(
     {
@@ -298,7 +292,8 @@ method.load = function(){
   this.reset();
 
   for(var i=0; i<data.length; i++ ){    
-    if (this._properties.get(data[i]["UID_INTERFACE_TYPES"])["active"] == false){
+    if (this._properties.get(data[i]["UID_INTERFACE_TYPES"]) == null ||
+        this._properties.get(data[i]["UID_INTERFACE_TYPES"])["active"] == false){
       continue;
     }
 
@@ -532,21 +527,23 @@ method.populate_properties = function(){
     if(interface_type(data[i]["INTERFACE_TYPE"]) != null ){ type = 'interface' }
     else if(channel_type(data[i]["INTERFACE_TYPE"]) != null ){ type = 'channel' }
 
-    file.set(data[i]["UID_INTERFACE_TYPES"], {
-      active: false,
-      connected: false,
-      to_schemas: "",
-      from_schemas: "",
-      flow_item: {
-                    step: 1,
-                    type: type,
-                    uid: data[i]["UID_INTERFACE_TYPES"]
-                 },
-      rule: [],
-      auditmsg: [],
-      logpattern: [],
-      mid: []
-    })
+    if (file.get(data[i]["UID_INTERFACE_TYPES"]) == null){
+      file.set(data[i]["UID_INTERFACE_TYPES"], {
+        active: false,
+        connected: false,
+        to_schemas: "",
+        from_schemas: "",
+        flow_item: {
+                      step: 1,
+                      type: type,
+                      uid: data[i]["UID_INTERFACE_TYPES"]
+                   },
+        rule: [],
+        auditmsg: [],
+        logpattern: [],
+        mid: []
+      })
+    }
   }
   file.writeSync();
 }

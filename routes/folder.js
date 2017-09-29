@@ -94,7 +94,7 @@ router.get('/download/:id/:file/:folder', function(req, res) {
   var f = req.params["folder"];
 
   if( row_id == 0 ){
-    folder = "./exports/";
+    folder = "./db/exports/";
   } else if (row_id== 99999999){
     folder = "./flows/" + f; 
   }else{ 
@@ -106,7 +106,7 @@ router.get('/download/:id/:file/:folder', function(req, res) {
 
 router.get('/exports',  function(req, res) {
   var row_id = 0;
-  var files = folderfiles("exports", row_id);
+  var files = folderfiles("db/exports", row_id);
   var options = {
     "button": "exports",
     "upload": false,
@@ -122,7 +122,7 @@ router.get('/exports',  function(req, res) {
 router.get('/exports/new', function(req, res){
   model.reload();
 
-  var file_name  = "./exports/integration_script_" + moment().format('YYYY_MM_DD_hh_mm_ss') + ".sql"; 
+  var file_name  = "./db/exports/integration_script_" + moment().format('YYYY_MM_DD_hh_mm_ss') + ".sql"; 
   var all = "INTERFACE_NAME, OFFICE, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, MESSAGE_WAIT_STATUS, INTERFACE_STATUS, MESSAGE_STOP_STATUS, STOP_AFTER_CONN_EXCEPTION, INTERFACE_MONITOR_INDEX, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, REQUEST_STORE_IND, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE, RESPONSE_STORE_IND, UID_INTERFACE_TYPES, NOT_ACTIVE_BEHAVIOUR, REC_STATUS, ASSOCIATED_SERVICE_NAME, NO_OF_LISTENERS, NON_JMS_RECEPIENT_IND, HANDLER_CLASS, BUSINESS_OBJECT_CLASS, BUSINESS_OPERATION, PMNT_SRC, CUSTOM_PROPERTIES, WAIT_BEHAVIOUR, BATCH_SIZE, SUPPORTED_APP_IDS, BACKOUT_INTERFACE_NAME, BULK_INTERFACE_NAME, APPLICATION_PROTOCOL_TP, REQUEST_GROUP_NM, SEQUENCE_HANDLER_CLASS, RESPONSE_INTERFACE, RESPONSE_TIMEOUT_MILLIS, RESPONSE_TIMEOUT_RETRY_NUM, HEARTBEAT_INTERFACE_NAME, INTERFACE_STOPPED_SOURCE, RESEND_ALLOWED, DESCRIPTION, THROTTLING_TX, THROTTLING_MILLIS, BULKING_PURPOSE, ENABLED_GROUPS,RESUME_SUPPORTED, EVENT_ID_GENERATION, BULK_RESPONSE_BY_ORIG_CHUNK, INVALID_RESPONSE_IN, PCI_DSS_COMPLIANT, BULKING_TRIGGER_METHOD, IS_BULK"  
   var arr = all.split(",");
 
@@ -163,7 +163,7 @@ router.get('/delete/:id/:file/:folder', function(req, res){
   var f = req.params["folder"];
 
   if( row_id == 0 ){
-    folder = "./exports/";
+    folder = "./db/exports/";
   } else if (row_id== 99999999){
     folder = "./flows/" + f;
   }
@@ -245,38 +245,45 @@ router.post('/upload/:id', function(req, res){
   
   var row_id = req.params["id"]
   var record = model.select(row_id);
-
-  // create an incoming form object
   var form = new formidable.IncomingForm();
 
-  // specify that we want to allow the user to upload multiple files in a single request
   form.multiples = true;
-
-  // store all uploads in the /uploads directory
   form.uploadDir = path.join(record["REQUEST_CONNECTIONS_POINT"]);  
 
-  // every time a file has been uploaded successfully,
   // rename it to it's orignal name
-  //form.on('file', function(field, file) {
-  //  if (fs.existsSync(file.path)) {       
-  //    fs.rename(file.path, path.join(form.uploadDir, file.name));
-  //  }else{
-  //    console.log("File was taken" + socketsConnected)
-  //  } 
-  //});
+  form.on('file', function(field, file) {
+    if (fs.existsSync(file.path)) {       
+      fs.rename(file.path, path.join(form.uploadDir, file.name));
+    }else{
+      console.log("File was taken" + socketsConnected)
+    } 
+  });
 
-  // log any errors that occur
   form.on('error', function(err) {
     console.log('Upload to folder Error: \n' + err);
   });
 
   // once all the files have been uploaded, send a response to the client
   form.on('end', function() {
-    console.log("File uploaded sucessfully")
+    console.log("File uploaded sucessfully");
+    console.log("Uploaded to --> " + form.uploadDir);
+    var isWin = /^win/.test(process.platform);
+    if (!isWin && form.uploadDir.indexOf('jms') > -1){
+      var sys = require('sys');
+      var exec = require('child_process').exec;
+      exec('~/dh/scripts/util/putMQMessage.ksh PRDTHV_465_LR ' + form.uploadDir.split('/')[1] + ' ' +  file.path,
+        function (error, stdout, stderr) {
+          console.log('stdout: ' + stdout);
+          console.log('stderr: ' + stderr);
+          if (error !== null) {
+            console.log('exec error: ' + error);
+          }
+      });
+
+    }
     res.end('success');
   });
-
-  // parse the incoming request containing the form data
+  
   form.parse(req);
 })
 

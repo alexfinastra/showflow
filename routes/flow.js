@@ -10,7 +10,6 @@ to_tree = function(folder, files){
   	var stats = fs.statSync(folder + '/' + file);    
     if(stats.isDirectory()){      	
     	let f = folder + "/" + file;
-    	//console.log("Sub folder -> " + f);
     	ref = '/flow/upload/' + file
     	files.push({
     	    		"text" : "<span class= 'font-weight-bold ml-2'>" + file + "</span>",
@@ -25,25 +24,25 @@ to_tree = function(folder, files){
     	to_tree(folder + "/" + file, files)
     }
     
-    if(stats.isFile() && file.indexOf("template") == -1 ){
-    	//console.log("Files -> " + file);
-      files[files.length -1]["nodes"].push({      
-        "text": file.replace(".json", ""),
-        "state": {
-						    "checked": false
-						  },
-        "folder": folder.split("/")[folder.split("/").length - 1]
-      })
+    if(stats.isFile() && file.indexOf("template") == -1 ){    	
+      if (files.length > 0){
+        files[files.length -1]["nodes"].push({      
+          "text": file.replace(".json", ""),
+          "state": {
+                  "checked": false
+                },
+          "folder": folder.split("/")[folder.split("/").length - 1]
+        })
+      }
     }    
   })
   return
 }
 
 to_edittree = function(folder, files){  
+  var branch = "";
   var model = new Profile('all');
-  model.load()
-  var branch = ""
-  console.log(" Collection length :" + model._collection.length)
+  model.reload();  
   for (var i = 0; i< model._collection.length; i++  ) { 
     var obj = model._collection[i];
     if (branch != obj["INTERFACE_TYPE"]){
@@ -67,11 +66,7 @@ to_edittree = function(folder, files){
               "checked": false
             } 
     })
-
   }
- 
-
-  return
 }
 
 /* GET home page. */
@@ -79,11 +74,10 @@ router.get('/', authentication_mdl.is_login, function(req, res, next) {
 	res.render('flow', { data: null});
 });
 
+// need to add a flow index as input 
 router.get('/load/:folder/:file', function(req, res, next){	
 	var filepath = "flows/" + req.params["folder"] + "/" + req.params["file"] + ".json";
-	console.log(filepath);
 	var flow = new Flow(filepath); 
-	console.log(flow._flow);
 	res.render('flow', { data: flow._flow});
 });
 
@@ -98,5 +92,7 @@ router.get('/edittree', function(req, res){
   to_edittree("flows", files);
   res.json({tree: files});
 });
+
+router.get('/reset/:flow')
 
 module.exports = router;

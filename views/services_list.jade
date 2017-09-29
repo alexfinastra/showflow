@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  .container.mt-5
+    h3.mt-5=identity["title"]
+    br
+    blockquote.blockquote
+      p.small=identity["description"]       
+    br
+    if keys == null || values == null
+      .row.mt-5
+        .col-md-12.mt-5
+          center.mt-5
+            h3.mt-5 Comming very very  very soon 
+            br             
+    else
+      -var index = 0
+      each key in keys   
+        br
+        br
+        h4 #{key} 
+        br            
+        table.table.table-hover
+          .container
+            thead
+              tr.row.text-dark
+                th.col.col-md-4 Service
+                th.col.col-md-6 Description
+                th.col.col-md-2 
+            tbody  
+              each obj in values[index++] 
+                tr.row.text-dark
+                  td.col.col-md-4
+                    b #{obj["name"]}
+                  td.col.col-md-6 #{obj["description"]}
+                  td.col.col-md-2                    
+                    - var href = "/" + identity["type"] + "/profile/" + obj["step"]
+                    a.btn.btn-outline-success.hoverbutton(href= href)
+                      i.fa.fa-external-link
+                      span.ml-2  Open
