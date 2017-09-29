@@ -339,13 +339,14 @@ method.update_db = function(query){
       { autoCommit: true },
       function(err, result)
       {
-        console.log(" 3. Executed and "+ result)
+        
         if (err)
         {
           console.error(err);
           return;
         }
-        console.log(result);
+        console.log(" 3. Executed and "+ result);
+        return;
       });
   });
 }
