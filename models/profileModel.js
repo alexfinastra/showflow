@@ -326,6 +326,7 @@ method.load_db = function(){
         }
 
         connection.execute(query, {}, {
+            maxRows: 300,
             outFormat: oracledb.OBJECT // Return the result as Object
         }, function (err, result) {
             if (err) {
