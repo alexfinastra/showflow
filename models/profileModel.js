@@ -364,8 +364,8 @@ method.load_from_db = function(profile, cb){
      //console.log("Current object is " + profile)    
      for(var i=0; i<data.length; i++ ){
         console.log("Load from DB data as Hash: " + data[i]);    
-        if (this._properties.get(data[i]["UID_INTERFACE_TYPES"]) == null ||
-           this._properties.get(data[i]["UID_INTERFACE_TYPES"])["active"] == false){
+        if (profile._properties.get(data[i]["UID_INTERFACE_TYPES"]) == null ||
+            profile._properties.get(data[i]["UID_INTERFACE_TYPES"])["active"] == false){
           continue;
         }
 
