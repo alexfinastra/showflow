@@ -318,6 +318,7 @@ method.load = function(){
 }
 
 method.load_db = function(){
+   var current = this;
    oracledb.getConnection(dbConfig, function (err, connection) {
         if (err) {
           console.log("Connection error " + err.message);          
@@ -333,28 +334,28 @@ method.load_db = function(){
               for(var i=0; i<result.rows.length; i++ ){
                 var obj = result.rows[i]
                 console.log("Load from DB data as Hash: " + result[i]);    
-                if (this._properties.get(obj["UID_INTERFACE_TYPES"]) == null ||
-                    this._properties.get(obj["UID_INTERFACE_TYPES"])["active"] == false){
+                if (current._properties.get(obj["UID_INTERFACE_TYPES"]) == null ||
+                    current._properties.get(obj["UID_INTERFACE_TYPES"])["active"] == false){
                   continue;
                 }
 
                 //console.log("Data iterator " + i)
-                if(this._type == 'interface'){
+                if(current._type == 'interface'){
                   if( interface_type(obj["INTERFACE_TYPE"]) != null ){
-                    this._collection.push(obj);
+                    current._collection.push(obj);
                   }
                   continue;
                 }
 
-                if(this._type == 'channel'){
+                if(current._type == 'channel'){
                   if( channel_type(obj["INTERFACE_TYPE"]) != null ){
-                    this._collection.push(obj);
+                    current._collection.push(obj);
                   }
                   continue;
                 }
 
-                if(this._type == 'all'){
-                  this._collection.push(obj);
+                if(current._type == 'all'){
+                  current._collection.push(obj);
                 }
               }
               console.log("Load from DB data as Hash: " + JSON.stringify(result.rows.length));
