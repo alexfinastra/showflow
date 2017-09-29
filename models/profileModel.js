@@ -1,3 +1,5 @@
+"use strict";
+
 var fs = require('fs');
 var method = Profile.prototype
 var async = require('async');
@@ -318,38 +320,36 @@ method.load = function(){
 }
 
 method.update_db = function(query){
-  console.log(" 1. Receive query "+query)
-  oracledb.getConnection(
-  {
-    user          : dbConfig.user,
-    password      : dbConfig.password,
-    connectString : dbConfig.connectString
-  },
-  function(err, connection)
-  {
-    if (err)
-    {
-      console.error(err);
-      if (connection){ dorelease(connection); }
-      return;
-    }
-    console.log(" 2. Connection "+ connection + " and query "+ query);
-    connection.execute(
-      query,
-      {},
-      { autoCommit: true },
-      function(err, result)
-      {        
-        if (err)
-        {
-          console.error(err);
-          if (connection){ dorelease(connection); }
+  console.log(" 1. Receive query " + query)
+
+  oracledb.getConnection(dbConfig, function (err, connection) {
+        if (err) {
+          console.log("Connection error " + err.message);          
           return;
         }
-        console.log(" 3. Executed and "+ result);
-      });
-      if (connection){ dorelease(connection); }
-  });
+        
+        connection.execute(query, [], {
+                autoCommit: true,
+                outFormat: oracledb.OBJECT // Return the result as Object
+            },
+            function (err, result) {
+                if (err || result.rowsAffected === 0) {
+                  console.log("Error resuts from query " + err ? "Input Error" : "Profile doesn't exist")
+                  console.log("Query results error " + err.message); 
+                } else {
+                    console.log("Query results successfully ");
+                }
+                // Release the connection
+                connection.release(
+                    function (err) {
+                        if (err) {
+                            console.error(err.message);
+                        } else {
+                            console.log("Walla connection released ");
+                        }
+                    });
+            });
+    });
 }
 
 method.load_from_db = function(profile, cb){ 
