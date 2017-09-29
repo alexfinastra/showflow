@@ -103,15 +103,15 @@ io.on('connection', (socket) => {
 })
 
 
-
-const pathToTraces =  appRoot +  '/gppserver*';  // '/home/was8/dh/profiles/PRDTHV_465_LR/trace/gppserver/gppserver*'
+//appRoot +  '/gppserver*';
+const pathToTraces = '/home/was8/dh/profiles/PRDTHV_465_LR/trace/gppserver/gppserver*'
 var traceswatcher = chokidar.watch(pathToTraces, chokidarOpts);
-tail = new Tail("gppserver_trace.45.2017-09-26.log");
-tail.on("line", function(data) {
+//tail = new Tail("gppserver_trace.45.2017-09-26.log");
+//tail.on("line", function(data) {
       //buildFlows(data);
-      
-      console.log(data);
- });
+
+      //console.log(data);
+ //});
 
 traceswatcher.on('add', function(path) {
     // should switch tails -f reader to the new files
