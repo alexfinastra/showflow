@@ -101,7 +101,7 @@ var buildUpdateStatement = function buildUpdateStatement(req) {
 
 router.post('/update/:id', function (req, res) {
     "use strict";
-    
+    /*
     if ("application/json" !== req.get('Content-Type')) {
         res.set('Content-Type', 'application/json').status(415).send(JSON.stringify({
             status: 415,
@@ -110,7 +110,7 @@ router.post('/update/:id', function (req, res) {
         }));
         return;
     }
-
+		*/
     oracledb.getConnection(connAttrs, function (err, connection) {
         if (err) {
             // Error connecting to DB
