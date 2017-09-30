@@ -71,7 +71,7 @@ var channel_types = ['ACK',
                 'STAT_DATA'];
 
 var where = " WHERE INTERFACE_TYPE in ("+ channel_types.join(",") +") "
-router.get('/',, function (req, res) {
+router.get('/', function (req, res) {
     "use strict";
 
     oracledb.getConnection(dbConfig, function (err, connection) {
