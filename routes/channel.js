@@ -99,7 +99,7 @@ var buildUpdateStatement = function buildUpdateStatement(req) {
     };
 };
 
-app.post('/update/:id', function (req, res) {
+router.post('/update/:id', function (req, res) {
     "use strict";
     
     if ("application/json" !== req.get('Content-Type')) {
