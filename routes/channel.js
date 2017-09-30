@@ -111,7 +111,7 @@ router.post('/update/:id', function (req, res) {
         return;
     }
 		*/
-    oracledb.getConnection(connAttrs, function (err, connection) {
+    oracledb.getConnection(dbConfig, function (err, connection) {
         if (err) {
             // Error connecting to DB
             res.set('Content-Type', 'application/json').status(500).send(JSON.stringify({
