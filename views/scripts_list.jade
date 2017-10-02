@@ -7,45 +7,58 @@ block content
     blockquote.blockquote
       p.small=identity["description"]       
     br
-    if keys == null || values == null
+    if data == null 
       .row.mt-5
         .col-md-12.mt-5
           center.mt-5
             h3.mt-5 Comming very very  very soon 
             br             
-    else
-      -var index = 0
-      each key in keys   
-        br
-        .row      
-          .col-md-3
-            h4.mt-2 #{key}            
-          .col-auto
-            a.btn.btn-outline-primary.btn-sm.mt-1(href= "/" + identity["type"] + "/run/0")
-              i.fa.fa-align-left
-              span.mt-1.ml-2  Run all scripts
-        br            
-        table.table.table-hover
-          .container
-            thead
-              tr.row.text-dark
-                th.col.col-md-1 #
-                th.col.col-md-3 Script
-                th.col.col-md-5 Description
-                th.col.col-md-3 
-            tbody  
-              each obj in values[index++] 
-                tr.row.text-dark
-                  td.col.col-md-1 #{obj["step"]}
-                  td.col.col-md-3 
-                    i #{obj["name"] + ".sql"}
-                  td.col.col-md-5 #{obj["description"]}
-                  td.col.col-md-3
-                    - var rhref = "/" + identity["type"] + "/rollback/" + obj["step"]
-                    - var ehref = "/" + identity["type"] + "/run/" + obj["step"]                    
-                    a.btn.btn-outline-danger.mt-2.btn-sm.float-right.hoverbutton( href= rhref )
-                      i.fa.fa-reply
-                      span.ml-2  revert   
-                    a.btn.btn-outline-primary.mr-3.btn-sm.mt-2.float-right.hoverbutton( href= ehref)
-                      i.fa.fa-play
-                      span.ml-2  run script
+    else         
+      br
+      .row      
+        .col-md-3
+          h4 #{data.key}            
+        .col-md-9
+          include scripts/script_modal
+          if options["properties"] == true  
+            button.btn.mt-2.btn-outline-dark.float-right.ml-4(type="button", data-toggle="modal", data-target=".script-modal")
+              i.fa.fa-sign-in
+              span.mt-1.ml-2  Set parameters
+          if options["allrun"] == true 
+            a.btn.btn-outline-primary.mt-2.float-right( href= "/" + identity["type"] + "/run/0")
+              i.fa.fa-forward
+              span.mt-1.ml-2  Execute all
+          if options["allroll"] == true 
+            a.btn.btn-outline-danger.mt-2.float-right.mr-4( href= "/" + identity["type"] + "/rollback/0")
+              i.fa.fa-backward
+              span.mt-1.ml-2  Rollback all          
+      br            
+      table.table.table-hover
+        .container
+          thead
+            tr.row.text-dark
+              th.col.col-md-1 #
+              th.col.col-md-3 Script
+              th.col.col-md-5 Description
+              th.col.col-md-3 
+          tbody  
+            for k in Object.keys(data.values)
+              tr.row.text-dark 
+                -var obj = data.values[k]               
+                td.col.col-md-1
+                  if obj["status"] == "success"
+                    i.fa.fa-check.fa-lg.text-success
+                  else
+                    span=k
+                td.col.col-md-3 
+                  i #{obj["name"]}
+                td.col.col-md-5 #{obj["description"]}
+                td.col.col-md-3
+                  if obj["action"] == "rollback"
+                    - var rhref = "/" + identity["type"] + "/rollback/" + k
+                    a.btn.btn-danger.mt-2.btn-sm.float-right( href= rhref )
+                      |  rollback                     
+                  if obj["action"] == "run"
+                    - var ehref = "/" + identity["type"] + "/run/" + k
+                    a.btn.btn-primary.mt-2.btn-sm.float-right( href= ehref)
+                      |  execute

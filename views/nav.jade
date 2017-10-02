@@ -4,16 +4,20 @@ nav.navbar.fixed-top.navbar-toggleable-md.navbar-light.bg-faded
   .container
     button#listFlows.btn.btn-outline-dark(type='button') Payments & 
       b Flows
-    each href, key in navmenu      
-      a.nav-link.navbar-toggler-right(style="color: black;", href=href)= key      
-    // Example split danger button
+    a.nav-link.navbar-toggler-right(style="color: black;", href='/onboard') OnBoarding
     .btn-group
-      button#editFlow.btn.btn-outline-dark(type='button')
-        i.fa.fa-cog
-        span.ml-2 Configuration
-      button.btn.btn-outline-dark.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-        span.sr-only Toggle Dropdown
+      button.btn.btn-link.text-dark.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+        | Connectivity 
+      .dropdown-menu
+        a.dropdown-item(href='#') Channels
+        a.dropdown-item(href='#') Interfaces
+    a.nav-link.navbar-toggler-right(style="color: black;", href='/webservices') WebServices
+    .btn-group
+      button.btn.btn-link.text-dark.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+        | Configuration 
       .dropdown-menu
         a.dropdown-item(href='/folder/exports') Export setup
         .dropdown-divider
         a.dropdown-item(href='/logout') Exit
+         
+    

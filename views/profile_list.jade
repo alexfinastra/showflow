@@ -6,21 +6,20 @@ block content
     br
     blockquote.blockquote
       p.small=identity["description"] 
-      //if keys != null && values != null
+      //if data != null 
       // - var href = "/" + identity["type"] + "/new"
       //  a.btn.btn-outline-success.mt-2(href=href, role="button", aria-disabled="true")
       //    i.fa.fa-plus
       //    span.ml-2 Add new #{identity["type"] }
     br
-    if keys == null || values == null
+    if data == null 
       .row.mt-5
         .col-md-12.mt-5
           center.mt-5
             h3.mt-5 Comming very very  very soon 
             br             
-    else
-      -var index = 0
-      each key in keys   
+    else      
+      each key in data   
         br      
         h4 #{key}            
         br            
@@ -34,7 +33,7 @@ block content
                 th.col.col-md-1 Dir
                 th.col.col-md-1
             tbody  
-              each obj in values[index++]          
+              each obj in data[key]          
                 tr.row.text-dark(class = obj["INTERFACE_STATUS"] == "ACTIVE" ? "on" : "off")                    
                   th.col.col-md-1(scope="row") #{obj["OFFICE"]}              
                   td.col.col-md-4 #{obj["INTERFACE_NAME"].split("_").join(" ")}
@@ -46,7 +45,7 @@ block content
                       span OUT                            
                   td.col.col-md-1
                     if obj["INTERFACE_STATUS"] == "ACTIVE"
-                      - var href = "/" + identity["type"] + "/profile/" + obj["ROWNUM"]
+                      - var href = "/" + identity["type"] + "/profile/" + obj["UID_INTERFACE_TYPES"]
                       a.btn.btn-outline-success.hoverbutton(href= href)
                         i.fa.fa-pencil-square-o
                         span.ml-2  Edit

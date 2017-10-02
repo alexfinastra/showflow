@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var authentication_mdl = require('../middlewares/authentication');
-var Flow = require('../models/flowModel');
+var Flow = require('../models/flow_type');
 var fs = require('fs');
-var Profile = require('../models/profileModel');
 
 to_tree = function(folder, files){  
   fs.readdirSync(folder).forEach( function(file) {
@@ -38,7 +37,7 @@ to_tree = function(folder, files){
   })
   return
 }
-
+/*
 to_edittree = function(folder, files){  
   var branch = "";
   var model = new Profile('all');
@@ -68,7 +67,7 @@ to_edittree = function(folder, files){
     })
   }
 }
-
+*/
 /* GET home page. */
 router.get('/', authentication_mdl.is_login, function(req, res, next) {		
 	res.render('flow', { data: null});
@@ -87,12 +86,17 @@ router.get('/tree', function(req, res){
 	res.json({tree: files});
 });
 
+/*
 router.get('/edittree', function(req, res){
   let files = []
   to_edittree("flows", files);
   res.json({tree: files});
 });
+*/
 
-router.get('/reset/:flow')
+
+router.get('/reset/:flow', function(req, res){
+  res.send("OK !!!")
+});
 
 module.exports = router;

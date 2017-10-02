@@ -8,24 +8,8 @@ var path = require('path');
 var formidable = require('formidable');
 var mkdirp = require('mkdirp');
 
-var async = require('async')
-var Profile = require('../models/profileModel');
-var model = new Profile('all');
+//var async = require('async')
 
-async.waterfall([
-    function(callback){
-      if(global.oracle == true ){
-        model.load_from_db(model, callback) 
-      }else{
-        model.load()
-      }
-    }
-  ],
-  function(err, results){     
-    if(err){
-      console.log("WHAT A F*** "+ err)
-    }    
-})
 
 humanFileSize = function(bytes, si) {
     var thresh = si ? 1000 : 1024;
@@ -98,8 +82,8 @@ router.get('/download/:id/:file/:folder', function(req, res) {
   } else if (row_id== 99999999){
     folder = "./flows/" + f; 
   }else{ 
-    var record = model.select(row_id);
-    folder = path.join(record["REQUEST_CONNECTIONS_POINT"]);
+    //var record = model.select(row_id);
+    folder = "./flows/" + f //path.join(record["REQUEST_CONNECTIONS_POINT"]);
   }
   res.download(folder+"/"+file);
 });
@@ -120,7 +104,7 @@ router.get('/exports',  function(req, res) {
 //insert into INTERFACE_TYPES (INTERFACE_NAME, OFFICE, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, MESSAGE_WAIT_STATUS, INTERFACE_STATUS, MESSAGE_STOP_STATUS, STOP_AFTER_CONN_EXCEPTION, INTERFACE_MONITOR_INDEX, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, REQUEST_SKELETON_XML, REQUEST_STORE_IND, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE, RESPONSE_SKELETON_XML, RESPONSE_STORE_IND, UID_INTERFACE_TYPES, TIME_STAMP, NOT_ACTIVE_BEHAVIOUR, EFFECTIVE_DATE, PROFILE_CHANGE_STATUS, REC_STATUS, PENDING_ACTION, ASSOCIATED_SERVICE_NAME, NO_OF_LISTENERS, NON_JMS_RECEPIENT_IND, HANDLER_CLASS, BUSINESS_OBJECT_CLASS, BUSINESS_OPERATION, PMNT_SRC, CUSTOM_PROPERTIES, WAIT_BEHAVIOUR, BATCH_SIZE, SUPPORTED_APP_IDS, BACKOUT_INTERFACE_NAME, BULK_INTERFACE_NAME, APPLICATION_PROTOCOL_TP, REQUEST_GROUP_NM, SEQUENCE_HANDLER_CLASS, RESPONSE_INTERFACE, RESPONSE_TIMEOUT_MILLIS, RESPONSE_TIMEOUT_RETRY_NUM, HEARTBEAT_INTERFACE_NAME, INTERFACE_STOPPED_SOURCE, RESEND_ALLOWED, DESCRIPTION, THROTTLING_TX, THROTTLING_MILLIS, BULKING_PURPOSE, ENABLED_GROUPS, RESUME_SUPPORTED, EVENT_ID_GENERATION, BULK_RESPONSE_BY_ORIG_CHUNK, INVALID_RESPONSE_IN, PCI_DSS_COMPLIANT, BULKING_TRIGGER_METHOD, IS_BULK)
 //values ('AC_MND_TT1_RJCT', '***', 'ACK', 'NAK_TO_EMANDATE', 'O', null, 'ACTIVE', null, 5, -1, 'MQ', 'jms/Q_ACK_AC_MND_TT1', 'Pacs_002', null, 1, null, null, null, null, 0, '***^AC_MND_TT1_RJCT', '2017-02-27 14:32:23.695', 'STOP', to_date('12-07-2015', 'dd-mm-yyyy'), 'NO', 'AC', 'UP', 'BusinessFlowSelectorService', 0, 1, 'backend.paymentprocess.interfaces.handlers.AckNotificationInterfaceHandler', 'gpp.webservices.businessflowselector.external.BusinessFlowSelectorServiceImpl', 'executeBusinessFlow', null, null, null, null, '1,2', null, null, null, null, null, null, null, null, null, null, '0', null, null, null, null, null, '0', null, null, null, null, null, null);
 router.get('/exports/new', function(req, res){
-  model.reload();
+  //model.reload();
 
   var file_name  = "./db/exports/integration_script_" + moment().format('YYYY_MM_DD_hh_mm_ss') + ".sql"; 
   var all = "INTERFACE_NAME, OFFICE, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, MESSAGE_WAIT_STATUS, INTERFACE_STATUS, MESSAGE_STOP_STATUS, STOP_AFTER_CONN_EXCEPTION, INTERFACE_MONITOR_INDEX, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, REQUEST_STORE_IND, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE, RESPONSE_STORE_IND, UID_INTERFACE_TYPES, NOT_ACTIVE_BEHAVIOUR, REC_STATUS, ASSOCIATED_SERVICE_NAME, NO_OF_LISTENERS, NON_JMS_RECEPIENT_IND, HANDLER_CLASS, BUSINESS_OBJECT_CLASS, BUSINESS_OPERATION, PMNT_SRC, CUSTOM_PROPERTIES, WAIT_BEHAVIOUR, BATCH_SIZE, SUPPORTED_APP_IDS, BACKOUT_INTERFACE_NAME, BULK_INTERFACE_NAME, APPLICATION_PROTOCOL_TP, REQUEST_GROUP_NM, SEQUENCE_HANDLER_CLASS, RESPONSE_INTERFACE, RESPONSE_TIMEOUT_MILLIS, RESPONSE_TIMEOUT_RETRY_NUM, HEARTBEAT_INTERFACE_NAME, INTERFACE_STOPPED_SOURCE, RESEND_ALLOWED, DESCRIPTION, THROTTLING_TX, THROTTLING_MILLIS, BULKING_PURPOSE, ENABLED_GROUPS,RESUME_SUPPORTED, EVENT_ID_GENERATION, BULK_RESPONSE_BY_ORIG_CHUNK, INVALID_RESPONSE_IN, PCI_DSS_COMPLIANT, BULKING_TRIGGER_METHOD, IS_BULK"  

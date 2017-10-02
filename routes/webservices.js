@@ -17,7 +17,7 @@ var services = {
 };
 
 loadservices = function(){
-	services["file"] = new json.File(appRoot + "/db/services_index.json" );
+	services["file"] = new json.File(appRoot + "/db/properties/services_index.json" );
 	services["file"].readSync();
 	services["keys"] = services["file"].get("keys");
 	services["values"]= services["file"].get("values");	
@@ -30,38 +30,15 @@ router.get('/', function(req, res, next) {
   res.render('services_list', { identity: identity, keys: services["keys"]  , values: services["values"] });	  
 });
 
-router.get('/run/:id', function(req, res, next){			
-	step = req.params["id"];
+router.get('/profile/:id', function(req, res){
+	row_id = req.params["id"]
+	var service = "STATIC_DATA"
+	res.render('service_profile', { title: 'interface Profile', service: service });
+})
 
-	var script = null;
-	loadservices();
-	for(var i=0; i<services["values"].length; i++){
-		if(script != null){ continue;}
-
-		if (services["values"][i]["step"] == step){
-			script = services["values"][i]["name"] + ".sql"
-		}
-	}
-
-	console.log("Should Run : " + script)
-	res.redirect('/webservices');		 
-});
-
-router.get('/rollback/:id', function(req, res, next) {
-	step = req.params["id"];
-
-	var script = null;
-	loadservices();
-	for(var i=0; i<services["values"].length; i++){
-		if(script != null){ continue;}
-
-		if (services["values"][i]["step"] == step){
-			script = services["values"][i]["name"] + ".sql"
-		}
-	}
-
-	console.log("Should Rolback : " + script)
-	res.redirect('/webservices');		 
-});
+router.post('/execute/:id', function(req, res){
+	row_id = req.params["id"]
+	res.redirect('/webservices/profile/'+row_id);
+})
 
 module.exports = router;
