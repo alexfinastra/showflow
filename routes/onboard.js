@@ -4,7 +4,7 @@ var async = require('async')
 var json = require('json-file');
 var authentication_mdl = require('../middlewares/authentication');
 var fs = require('fs');
-var oracledb = require('oracledb');
+//var oracledb = require('oracledb');
 var dbConfig = require('../db/dbconfig.js');
 
 var identity = {
