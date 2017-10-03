@@ -3,6 +3,7 @@ var router = express.Router();
 var oracledb = require('oracledb');
 var dbConfig = require('../db/dbconfig.js');
 var profile = require('../models/interface_type.js')
+var json = require('json-file');
 
 var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
 properties.readSync(); 
