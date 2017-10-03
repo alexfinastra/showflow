@@ -123,8 +123,7 @@ var execute = function(file, ind, prefix = ''){
             console.log("Error connecting to DB" + err.message);
             return;
         }
-        console.log( " 00 ========>>>> S Q L :" + line_new.length );
-        /*
+        console.log( " 00 ========>>>> S Q L :" + line_new.length );        
         connection.execute(line_new, [], {
                 autoCommit: true,
                 outFormat: oracledb.OBJECT // Return the result as Object
@@ -135,7 +134,7 @@ var execute = function(file, ind, prefix = ''){
                 	console.log("Error connecting to DB" + err.message + " -- "+ err.message.indexOf("ORA-00001") > -1 ? "User already exists" : "Input Error");
                 } else {
                     // Successfully created the resource
-                    // res.status(201).set('Location', '/user_profiles/' + req.body.USER_NAME).end();                    
+                    res.status(201).set('Location', '/onboard/').end();                    
                 }
                 // Release the connection
                 connection.release(
@@ -148,7 +147,7 @@ var execute = function(file, ind, prefix = ''){
                         }
                     });
             });
-            */
+            
     });
 		}
 	});
