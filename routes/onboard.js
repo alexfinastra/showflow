@@ -117,18 +117,12 @@ var execute = function(file, ind, prefix = ''){
 		if(line.indexOf('--REM') == -1 ){			
 			var line_new = sql_tatement(line, input);
 			console.log( " ========>>>> S Q L :" + line_new );
-			run(line_new);
-		}
-	});
-}
-
-var run = function(sql_stmt){
-	oracledb.getConnection(dbConfig, function (err, connection) {
+			oracledb.getConnection(dbConfig, function (err, connection) {
         if (err) {
             console.log("Error connecting to DB" + err.message);
             return;
         }
-        connection.execute(sql_stmt, [], {
+        connection.execute(line_new, [], {
                 autoCommit: true,
                 outFormat: oracledb.OBJECT // Return the result as Object
             },
@@ -151,6 +145,8 @@ var run = function(sql_stmt){
                     });
             });
     });
+		}
+	});
 }
 
 var update_execute = function(file, size, step){
