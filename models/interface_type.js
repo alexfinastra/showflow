@@ -193,7 +193,7 @@ channel_type_desc  = function(type){
 
 
 description = function(obj){
-	var type = obj.INTERFACE_TYPE,
+	var type = obj["INTERFACE_TYPE"],
       desc = null;	
 	
   if(obj["REQUEST_PROTOCOL"] == "STORE_REQUEST" || 
