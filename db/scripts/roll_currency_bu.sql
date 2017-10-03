@@ -1,0 +1,5 @@
+---REM INSERTING into CURRENCY_BU
+delete from CURRENCY_BU where UID_CURRENCY_BU = '--OFFICE--^--CURRENCY--';
+delete from CURRENCY_BU where UID_CURRENCY_BU = '--OFFICE--^EUR';
+delete from CURRENCY_BU where UID_CURRENCY_BU = '--OFFICE--^USD';
+delete from CURRENCY_BU where UID_CURRENCY_BU = '--OFFICE--^CNY';

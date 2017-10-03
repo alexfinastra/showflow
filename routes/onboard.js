@@ -4,7 +4,8 @@ var async = require('async')
 var json = require('json-file');
 var authentication_mdl = require('../middlewares/authentication');
 var fs = require('fs');
-
+var oracledb = require('oracledb');
+var dbConfig = require('../db/dbconfig.js');
 
 var identity = {
 	type: 'onboard', 
@@ -15,27 +16,30 @@ var identity = {
 const readline = require('readline');
 var generate_scripts = function(){
 	var lineReader = require('readline').createInterface({
-	  input: require('fs').createReadStream('./db/scripts/template_create_new_office.sql')
+	  input: require('fs').createReadStream('./db/scripts/templates/template_create_new_office.sql')
 	});
-
+	var filename = null, roll_filename = null;
 	lineReader.on('line', function (line) {
-		if(line.indexOf('---REM') > -1 ){
-		  var arr = line.split(" ") 		  
- 		  filename = './db/scripts/' + arr[arr.length -1].toLowerCase() + ".sql" ;
- 		  
+		var uid = '--UID--';		
+		var arr = line.split(" ") 
+		var table = 'table'
+		if(line.indexOf('--REM') > -1 ){
+		  table = arr[arr.length -1].toLowerCase();
+ 		  filename = './db/scripts/' + table + ".sql" ;
+ 		  roll_filename = './db/scripts/roll_' + table + ".sql" ;
+ 		  var rollback = 'delete from ' + table + ' where uid_'+ table + " = '"+uid+"';"
+
  		  if (fs.existsSync(filename)) {
-			  fs.appendFile(filename, line + '\n', function (err) {
-				  console.log('Saved!');
-				});
+			  fs.appendFile(filename, line + '\n', function (err) {	});
+				fs.appendFile(roll_filename, rollback + '\n', function (err) {});
 			} else {
-				fs.writeFile(filename, line+'\n' , function(err) {
-	    		console.log("The file was saved!");
-	    	})	
+				fs.writeFile(filename, line+'\n' , function(err) {})	
+				fs.writeFile(roll_filename, line+'\n' , function(err) { })
 			}
  		} else {
- 			fs.appendFile(filename, line + '\n', function (err) {
-				console.log('Saved!');				
-			})			
+ 			var rollback = 'delete from ' + table + ' where uid_'+ table + " = '"+uid+"';"
+ 			fs.appendFile(filename, line + '\n', function (err) {})			
+ 			fs.appendFile(roll_filename, rollback + '\n', function (err) {})			
  		}
 	  console.log('Line from file:', line);
 	});
@@ -44,7 +48,7 @@ var generate_scripts = function(){
 
 
 router.get('/', function(req, res, next) {
-	
+	//generate_scripts(); // require 5 manula updates !!!!
 	var file = new json.File(appRoot + "/db/properties/scripts_index.json" );
 	file.readSync();
 	data = file.get("scripts")
@@ -102,55 +106,105 @@ var sql_tatement = function(line, input){
 	return line;
 }
 
-var execute = function(file, ind){
-	filename = file.get("scripts.values."+ ind +".name")
+var execute = function(file, ind, prefix = ''){
+	filename = prefix + file.get("scripts.values."+ ind +".name");
 	var lineRead = require('readline').createInterface({
 		input: require('fs').createReadStream("./db/scripts/"+filename+".sql")
 	});
 
 	var input = inputs(file);
-	console.log(" ))))) inputs " + input);
 	lineRead.on('line', function (line) {
-		if(line.indexOf('---REM') == -1 ){			
+		if(line.indexOf('--REM') == -1 ){			
 			var line_new = sql_tatement(line, input);
 			console.log( " ========>>>> S Q L :" + line_new );
+			run(line_new);
 		}
 	});
 }
 
-var update_results = function(file, size, step){
+var run = function(sql_stmt){
+	oracledb.getConnection(dbConfig, function (err, connection) {
+        if (err) {
+            console.log("Error connecting to DB" + err.message);
+            return;
+        }
+        connection.execute(sql_stmt, [], {
+                autoCommit: true,
+                outFormat: oracledb.OBJECT // Return the result as Object
+            },
+            function (err, result) {
+                if (err) {
+                	console.log("Error connecting to DB" + err.message + " -- "+ err.message.indexOf("ORA-00001") > -1 ? "User already exists" : "Input Error");
+                } else {
+                    // Successfully created the resource
+                    // res.status(201).set('Location', '/user_profiles/' + req.body.USER_NAME).end();
+                    return true;
+                }
+                // Release the connection
+                connection.release(
+                    function (err) {
+                        if (err) {
+                            console.error(err.message);                       
+                        } else {
+                            console.log("Run sql query from script : Connection released");
+                        }
+                    });
+            });
+    });
+}
+
+var update_execute = function(file, size, step){
 	status = "scripts.values."+ step +".status"
 	file.set(status , "success")	;
 
-		if (step > 1){
-			clean = "scripts.values."+ (step-1) +".action"
-			file.set(clean , "")	;
-		}
+	if (step > 1){
+		clean = "scripts.values."+ (step-1) +".action"
+		file.set(clean , "")	;
+	}
 
-		rollback = "scripts.values."+ step +".action"
-		file.set(rollback , "rollback")	;
-	  
-	  if ( (step+1) <= size)	{
-			run = "scripts.values."+ (step+1) +".action"
-			file.set(run , "run")	;
-		}
+	rollback = "scripts.values."+ step +".action"
+	file.set(rollback , "rollback")	;
+  
+  if ( (step+1) <= size)	{
+		run = "scripts.values."+ (step+1) +".action"
+		file.set(run , "run")	;
+	}
+}
+
+var update_rollback = function(file, size, step){
+	status = "scripts.values."+ step +".status"
+	file.set(status , "")	;
+
+	if (step > 1){
+		rollback = "scripts.values."+ (step-1) +".action"
+	  file.set(rollback , "rollback")	;
+	}
+	
+	run = "scripts.values."+ step +".action"
+	file.set(run , "run")	;
+  
+  if ( (step+1) <= size)	{
+		clean = "scripts.values."+ (step+1) +".action"
+		file.set(clean , "")	;
+	}
 }
 
 router.get('/run/:id', function(req, res, next){			
 	step = parseInt(req.params["id"]);
 	var file = new json.File(appRoot + "/db/properties/scripts_index.json" );
 	file.readSync();
-	var size = Object.keys(file.get("scripts.values")).length;
-	// apply to all 
+
+	var size = Object.keys(file.get("scripts.values")).length;	
 	if (step == 0){
 		for(var i=1; i<=size; i++){			
 			execute(file, i);
-			update_results(file, size, i);
+			update_execute(file, size, i);
 		}
 	} else {
 		execute(file, step);
-		update_results(file, size, step);
+		update_execute(file, size, step);
 	}
+
 	file.writeSync();
 	res.redirect('/onboard');		 
 });
@@ -159,36 +213,18 @@ router.get('/rollback/:id', function(req, res, next) {
 	step = parseInt(req.params["id"]);
 	var file = new json.File(appRoot + "/db/properties/scripts_index.json" );
 	file.readSync();
-	var size = Object.keys(file.get("scripts.values")).length;
 
+	var size = Object.keys(file.get("scripts.values")).length;
 	if (step == 0){
-		for(var i=1; i<=size; i++){
-			status = "scripts.values."+ i +".status"
-	  	file.set(status , "")	;
-	  	action = "scripts.values."+ i +".action"
-	  	if(i == 1){
-	  		file.set(action , "run")	;
-	  	}else{
-	  		file.set(action , "")	;
-	  	}
+		for(var i=1; i<=size; i++){			
+			execute(file, i, 'roll_');
+			update_rollback(file, size, i);
 		}
 	} else {
-		status = "scripts.values."+ step +".status"
-	  file.set(status , "")	;
-
-		if (step > 1){
-			rollback = "scripts.values."+ (step-1) +".action"
-		  file.set(rollback , "rollback")	;
-		}
-		
-		run = "scripts.values."+ step +".action"
-		file.set(run , "run")	;
-	  
-	  if ( (step+1) <= size)	{
-			clean = "scripts.values."+ (step+1) +".action"
-			file.set(clean , "")	;
-		}
+		execute(file, step, 'roll_');
+		update_rollback(file, size, step);
 	}
+	
 	file.writeSync();
 	res.redirect('/onboard');
 });
@@ -203,7 +239,8 @@ router.post('/input', function (req, res) {
 	  file.set("scripts.input.country", req.body.COUNTRY);
 	  file.set("scripts.input.currency", req.body.CURRENCY);
 	  file.set("scripts.input.mop", req.body.MOP);
-	  file.set("scripts.values.1.action", "run")	;
+	  file.set("scripts.values.1.action", "run");
+
 	  file.writeSync();	
     res.redirect('/onboard');
 });
@@ -219,12 +256,14 @@ router.get('/reset', function (req, res) {
 	  file.set("scripts.input.currency", "");
 	  file.set("scripts.input.mop", "");
 
-	  for(var i=1; i<24; i++){
+	  var size = Object.keys(file.get("scripts.values")).length;
+	  for(var i=1; i<size; i++){
       clean = "scripts.values."+ i +".action"
   	  file.set(clean , "")	;
   	  status = "scripts.values."+ i +".status"
       file.set(status , "")	;
 	  }
+
 	  file.writeSync();	
     res.redirect('/onboard');
 });

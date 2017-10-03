@@ -1,0 +1,1 @@
+delete from  BANKS where UID_BANKS='--OFFICE--'
