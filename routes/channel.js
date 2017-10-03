@@ -2,11 +2,8 @@ var express = require('express');
 var router = express.Router();
 var oracledb = require('oracledb');
 var dbConfig = require('../db/dbconfig.js');
-var profile = require('../models/interface_type.js')
+var model = require('../models/interface_type.js')
 var json = require('json-file');
-
-var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
-properties.readSync(); 
 
 var identity = {
 	type: 'channel', 
@@ -21,7 +18,7 @@ var group_profiles = function(rows){
         key = profile.description(obj)
         
         if(!(key in res)){ res[key] = []}
-        obj["DESCRIPTION"] = profile.interface_subtype_desc(obj["INTERFACE_SUB_TYPE"])
+        obj["DESCRIPTION"] = model.interface_subtype_desc(obj["INTERFACE_SUB_TYPE"])
         res[key].push(obj);
     }
     return res;
@@ -104,12 +101,14 @@ router.get('/', function(req, res, next) {
 });
 */
 
-
-//router.get('/profile/:id', function(req, res, next){			
-//	row_id = req.params["id"]	
-//	var record = channel.select(row_id);
-//	res.render('profile', { title: 'Channel Profile', record: record , model: channel});
-//});
+router.get('/profile/:uid', function(req, res, next){			
+	var uid = req.params["uid"]	
+  var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+  properties.readSync();
+	
+  var record = properties.get(uid);
+	res.render('profile', { title: 'Channel Profile', record: record["flow_item"] , model: model});
+});
 
 //router.get('/new', function(req, res, next) {
 	//var record = channel.select(0);
@@ -118,17 +117,19 @@ router.get('/', function(req, res, next) {
 
 
 // Build UPDATE statement and prepare bind variables
-var buildUpdateStatement = function buildUpdateStatement(req) {
+var buildUpdateStatement = function buildUpdateStatement(req, uid) {
     "use strict";
     var statement = "",
         bindValues = {};
-   
-		var record = channel.select(req.params.id)
+    var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+    properties.readSync(); 
 		
-		var key = record["UID_INTERFACE_TYPES"] + ".to_schemas";	
+    var record = channel.select(req.params.id)
+		
+		var key = uid + ".to_schemas";	
 		properties.set(key, req.body.REQUEST_SCHEMA);	
 		
-		key = record["UID_INTERFACE_TYPES"] + ".from_schemas";	
+		key = uid + ".from_schemas";	
 		properties.set(key, req.body.RESPONSE_SCHEMA);
 		properties.writeSync();
 
@@ -164,7 +165,7 @@ var buildUpdateStatement = function buildUpdateStatement(req) {
     }
 
     statement += " WHERE UID_INTERFACE_TYPES = :UID_INTERFACE_TYPES";
-    bindValues.UID_INTERFACE_TYPES = record["UID_INTERFACE_TYPES"];
+    bindValues.UID_INTERFACE_TYPES = uid;
     statement = "UPDATE INTERFACE_TYPES SET " + statement;
 
     return {
@@ -185,8 +186,8 @@ router.post('/update/:id', function (req, res) {
             }));
             return;
         }
-
-        var updateStatement = buildUpdateStatement(req);
+        var uid = req.params["id"]
+        var updateStatement = buildUpdateStatement(req, uid);
         connection.execute(updateStatement.statement, updateStatement.bindValues, {
                 autoCommit: true,
                 outFormat: oracledb.OBJECT // Return the result as Object
@@ -202,7 +203,7 @@ router.post('/update/:id', function (req, res) {
                     }));
                 } else {
                     // Resource successfully updated. Sending an empty response body. 
-                    res.redirect("/channel/profile/" + row_id);
+                    res.redirect("/channel/profile/" + uid);
                 }
                 // Release the connection
                 connection.release(

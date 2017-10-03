@@ -207,7 +207,18 @@ description = function(obj){
 };
 
 
-
+to_flowitem = function(profile, type){ 
+  return {
+    "id": profile["uid"],
+    "type": type,
+    "direction": profile["direction"],
+    "status_class": profile["status_class"],
+    "title" : profile["interface_name"].split("_").join(" ") ,
+    "request_protocol": profile["request_protocol"],
+    "request_connections_point": profile["request_connections_point"],
+    "response_connections_point": profile["response_connections_point"]
+  }
+};
 
 /*
 var load = function(){
@@ -280,10 +291,17 @@ var populate_properties = function(idata = null){
                       type: type,
                       uid: data[i]["UID_INTERFACE_TYPES"],
                       request_protocol: data[i]["REQUEST_PROTOCOL"],
-                      direction: data[i]["DIRECTION"],
+                      direction: data[i]["REQUEST_DIRECTION"],
                       request_connections_point: data[i]["REQUEST_CONNECTIONS_POINT"],
                       response_connections_point: data[i]["RESPONSE_CONNECTIONS_POINT"],
-                      status_class: "secondary"
+                      interface_name: data[i]["INTERFACE_NAME"],
+                      status_class: "secondary",
+                      office: ["OFFICE"], 
+                      interface_type: ["INTERFACE_TYPE"], 
+                      interface_sub_type: ["INTERFACE_SUB_TYPE"],  
+                      request_format_type: ["REQUEST_FORMAT_TYPE"], 
+                      response_protocol: ["RESPONSE_PROTOCOL"], 
+                      response_format_type: ["RESPONSE_FORMAT_TYPE"]
                    },
         rule: [],
         auditmsg: [],
@@ -295,3 +313,5 @@ var populate_properties = function(idata = null){
   file.writeSync();
 }
 module.exports  = { populate_properties, interface_type_desc, interface_subtype_desc, channel_type_desc, description};
+
+

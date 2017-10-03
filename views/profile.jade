@@ -4,7 +4,7 @@ block content
   .container.mt-5      
     if record != null
       .col-md-auto.mt-5
-        if(model._type == 'interface') 
+        if(record.type == 'interface') 
           include utils/interface_docs
         else
           include utils/channel_docs      
@@ -22,19 +22,19 @@ block content
         h5.ml-2 Interface card as it appears in Payment Flows       
         ul.timeline
           - var profile = true
-          - var item = model.to_flowitem(record, model._type)
-          if (model._type == 'interface')            
+          - var item = model.to_flowitem(record, record.type)
+          if (record.type == 'interface')            
             include flowitems/interface_profile
           else
             include flowitems/channel_profile
         br
         br      
-      - var update = ((model._type == 'interface') ? "/interface" : "/channel" ) + "/update/" + ((record != null) ? record["ROWNUM"] : 0)
+      - var update = ((record.type == 'interface') ? "/interface" : "/channel" ) + "/update/" + ((record != null) ? record["id"] : 0)
       form(action = update , method="POST")
         .form-group.row
           label.col-sm-3.col-form-label(for='inputName') type and sub-type          
           .col-sm-6            
-            if (model._type == 'interface') 
+            if (record.type == 'interface') 
               include utils/interface_types
               br
               br 
@@ -48,7 +48,7 @@ block content
         .form-group.row
           label.col-sm-3.col-form-label(for='inputName') name
           .col-sm-6
-            input#inputName.w-100.form-control(name="INTERFACE_NAME", type='text', readonly, placeholder='name of the banks application', value=((record != null) ? record["INTERFACE_NAME"].split("_").join(" ") :  "")) 
+            input#inputName.w-100.form-control(name="INTERFACE_NAME", type='text', readonly, placeholder='name of the banks application', value=((record != null) ? record["interface_name"].split("_").join(" ") :  "")) 
         br
         .form-group.row
           label.col-sm-3.col-form-label(for='inputName') notes, comments, memo
@@ -60,11 +60,11 @@ block content
           .col-sm-6
             .form-check
               label.form-check-label
-                input#gridDirection1.form-check-input(type='radio', name='REQUEST_DIRECTION', value='I', checked = ((record != null) ? (record["REQUEST_DIRECTION"] == "I") :  ""))
+                input#gridDirection1.form-check-input(type='radio', name='REQUEST_DIRECTION', value='I', checked = ((record != null) ? (record["request_direction"] == "I") :  ""))
                 span Send us messages (IN)
             .form-check
                 label.form-check-label
-                input#gridDirection2.form-check-input(type='radio', name='REQUEST_DIRECTION', value='O', checked = ((record != null) ? (record["REQUEST_DIRECTION"] == "O") :  ""))
+                input#gridDirection2.form-check-input(type='radio', name='REQUEST_DIRECTION', value='O', checked = ((record != null) ? (record["request_direction"] == "O") :  ""))
                 span Receive our messages (OUT)
         br
         br
@@ -75,16 +75,16 @@ block content
           .col-sm-6
             .form-check.w-100
               label.form-check-label
-                input#gridRequest1.form-check-input(type='radio', name='REQUEST_PROTOCOL', value='FILE', checked = ((record != null) ? (record["REQUEST_PROTOCOL"] == "FILE") :  "") )
+                input#gridRequest1.form-check-input(type='radio', name='REQUEST_PROTOCOL', value='FILE', checked = ((record != null) ? (record["request_protocol"] == "FILE") :  "") )
                 span File (shared folder)
             .form-check.w-100
                 label.form-check-label
-                input#gridRequest2.form-check-input(type='radio', name='REQUEST_PROTOCOL', value='MQ', checked = ((record != null) ? (record["REQUEST_PROTOCOL"] == "MQ") :  "") )
+                input#gridRequest2.form-check-input(type='radio', name='REQUEST_PROTOCOL', value='MQ', checked = ((record != null) ? (record["request_protocol"] == "MQ") :  "") )
                 span MQ (Java Message Queue)
             br
             label 
             i.small message format            
-            - var value = (record != null) ? record["REQUEST_FORMAT_TYPE"] : ""
+            - var value = (record != null) ? record["request_format_type"] : ""
             - var name = "REQUEST_FORMAT_TYPE"
             include utils/message_format
             br 
@@ -92,10 +92,10 @@ block content
             label 
             i.small schemas certificates
             select#to_schemas.w-100(multiple="multiple", name="REQUEST_SCHEMA")
-              - var schemas = model._properties.get(record["UID_INTERFACE_TYPES"] + ".to_schemas") || ""
+              - var schemas = model._properties.get(record["uid_interface_types"] + ".to_schemas") || ""
               include utils/message_schemas          
             br
-            input#inputRequestConnPoint.form-control.w-100(name="REQUEST_CONNECTIONS_POINT", type='text', placeholder='connection point', readonly, value=((record != null) ? record["REQUEST_CONNECTIONS_POINT"] :  "") )
+            input#inputRequestConnPoint.form-control.w-100(name="REQUEST_CONNECTIONS_POINT", type='text', placeholder='connection point', readonly, value=((record != null) ? record["request_connections_point"] :  "") )
         br
         br
         .form-group.row.pb-3.pt-3.mt-2
@@ -105,11 +105,11 @@ block content
           .col-sm-6
             .form-check
               label.form-check-label
-                input#gridResponse1.form-check-input(type='radio', name='RESPONSE_PROTOCOL', value='FILE', checked = ((record != null) ? (record["RESPONSE_PROTOCOL"] == "FILE") :  ""))
+                input#gridResponse1.form-check-input(type='radio', name='RESPONSE_PROTOCOL', value='FILE', checked = ((record != null) ? (record["response_protocol"] == "FILE") :  ""))
                 span File (shared folder)
             .form-check
                 label.form-check-label
-                input#gridResponse2.form-check-input(type='radio', name='RESPONSE_PROTOCOL', value='MQ', checked = ((record != null) ? (record["RESPONSE_PROTOCOL"] == "MQ") :  ""))
+                input#gridResponse2.form-check-input(type='radio', name='RESPONSE_PROTOCOL', value='MQ', checked = ((record != null) ? (record["response_protocol"] == "MQ") :  ""))
                 span MQ (Java Message Queue)
             br
             label 
@@ -122,10 +122,10 @@ block content
             label 
             i.small schemas certificates
             select#from_schemas.w-100(multiple="multiple", name="RESPONSE_SCHEMA")
-              - var schemas = model._properties.get(record["UID_INTERFACE_TYPES"] + ".from_schemas") || ""
+              - var schemas = model._properties.get(record["uid_interface_types"] + ".from_schemas") || ""
               include utils/message_schemas                  
             br
-            input#inputResponseConnPoint.form-control.w-100(type='text', name="RESPONSE_CONNECTIONS_POINT", placeholder='connection point', readonly, value=((record != null) ? record["RESPONSE_CONNECTIONS_POINT"] :  ""))
+            input#inputResponseConnPoint.form-control.w-100(type='text', name="RESPONSE_CONNECTIONS_POINT", placeholder='connection point', readonly, value=((record != null) ? record["response_connections_point"] :  ""))
         br
         .form-group.row.justify-content-center
           .col-sm-2
