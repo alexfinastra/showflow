@@ -125,12 +125,11 @@ var buildUpdateStatement = function buildUpdateStatement(req) {
 		var record = channel.select(req.params.id)
 		
 		var key = record["UID_INTERFACE_TYPES"] + ".to_schemas";	
-		channel._properties.set(key, req.body.REQUEST_SCHEMA);	
+		properties.set(key, req.body.REQUEST_SCHEMA);	
 		
 		key = record["UID_INTERFACE_TYPES"] + ".from_schemas";	
-		channel._properties.set(key, req.body.RESPONSE_SCHEMA);
-		
-		channel._properties.writeSync();
+		properties.set(key, req.body.RESPONSE_SCHEMA);
+		properties.writeSync();
 
 
     if (req.body.DESCRIPTION) {

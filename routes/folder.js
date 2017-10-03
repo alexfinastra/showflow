@@ -83,6 +83,7 @@ router.get('/download/:id/:file/:folder', function(req, res) {
     folder = "./flows/" + f; 
   }else{ 
     //var record = model.select(row_id);
+    
     folder = "./flows/" + f //path.join(record["REQUEST_CONNECTIONS_POINT"]);
   }
   res.download(folder+"/"+file);

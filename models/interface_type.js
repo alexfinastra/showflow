@@ -8,7 +8,7 @@ interface_type = [ 'OFAC',
                 'EXT_FX',
                 'POSTING',
                 'ADVISING'];
-module.exports = interface_type;
+
 
 interface_type_desc = function(type){
   var type_desc = {
@@ -21,7 +21,7 @@ interface_type_desc = function(type){
   }
   return type_desc[type];
 }
-module.exports = interface_type_desc;
+
 
 interface_subtype_desc = function(sub_type){
   var sub_type_desc = {   
@@ -78,7 +78,6 @@ interface_subtype_desc = function(sub_type){
 
     return  sub_type_desc[sub_type]; 
 }
-module.exports = interface_subtype_desc;
 
 channel_type  =  [ 'ACK',
                 'AC_IN',
@@ -134,7 +133,6 @@ channel_type  =  [ 'ACK',
                 'SWIFT_IN',
                 'TCH_RTPS_IP_IN',
                 'STAT_DATA'];
-module.exports = channel_type;
 
 channel_type_desc  = function(type){
   var type_desc = {
@@ -192,7 +190,7 @@ channel_type_desc  = function(type){
 
   return type_desc[type]
 }
-module.exports = channel_type_desc;
+
 
 description = function(obj){
 	var type = obj.INTERFACE_TYPE,
@@ -207,11 +205,6 @@ description = function(obj){
   if(desc == null) {desc = channel_type_desc(type);}
   return desc;
 };
-module.exports = description;
-
-
-
-
 
 
 
@@ -288,8 +281,8 @@ var populate_properties = function(idata = null){
                       uid: data[i]["UID_INTERFACE_TYPES"],
                       request_protocol: data[i]["REQUEST_PROTOCOL"],
                       direction: data[i]["DIRECTION"],
-                      request_connections_point: ["REQUEST_CONNECTIONS_POINT"],
-                      response_connections_point: ["RESPONSE_CONNECTIONS_POINT"],
+                      request_connections_point: data[i]["REQUEST_CONNECTIONS_POINT"],
+                      response_connections_point: data[i]["RESPONSE_CONNECTIONS_POINT"],
                       status_class: "secondary"
                    },
         rule: [],
@@ -301,4 +294,4 @@ var populate_properties = function(idata = null){
   }
   file.writeSync();
 }
-export { populate_properties} 
+module.exports  = { populate_properties, interface_type_desc, interface_subtype_desc, channel_type_desc, description};

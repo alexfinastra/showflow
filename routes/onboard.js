@@ -4,7 +4,7 @@ var async = require('async')
 var json = require('json-file');
 var authentication_mdl = require('../middlewares/authentication');
 var fs = require('fs');
-//var oracledb = require('oracledb');
+var oracledb = require('oracledb');
 var dbConfig = require('../db/dbconfig.js');
 
 var identity = {
@@ -116,8 +116,8 @@ var execute = function(file, ind, prefix = ''){
 	lineRead.on('line', function (line) {
 		if(line.indexOf('--REM') == -1 ){			
 			var line_new = sql_tatement(line, input);
-			console.log( " ========>>>> S Q L :" + line_new.length );
-			/*
+			//console.log( " ========>>>> S Q L :" + line_new.length );
+			
 			oracledb.getConnection(dbConfig, function (err, connection) {
         if (err) {
             console.log("Error connecting to DB" + err.message);
@@ -148,7 +148,7 @@ var execute = function(file, ind, prefix = ''){
                     });
             });
             
-    });*/
+    });
 		}
 	});
 }
@@ -197,8 +197,12 @@ router.get('/run/:id', function(req, res, next){
 	var size = Object.keys(file.get("scripts.values")).length;	
 	if (step == 0){
 		for(var i=1; i<=size; i++){			
-			execute(file, i);
-			update_execute(file, size, i);
+			status = "scripts.values."+ i +".status"
+			if (file.get(status) == ""){
+				console.log("Execute Iteration "+i)
+				execute(file, i);
+			  update_execute(file, size, i);	
+			}
 		}
 	} else {
 		execute(file, step);
@@ -216,9 +220,13 @@ router.get('/rollback/:id', function(req, res, next) {
 
 	var size = Object.keys(file.get("scripts.values")).length;
 	if (step == 0){
-		for(var i=1; i<=size; i++){			
-			execute(file, i, 'roll_');
-			update_rollback(file, size, i);
+		for(var i=size; i>0; i--){			
+			status = "scripts.values."+ i +".status"			
+			if (file.get(status) == "success"){
+				console.log("Rollback Iteration "+i)
+				execute(file, i, 'roll_');
+				update_rollback(file, size, i);
+			}
 		}
 	} else {
 		execute(file, step, 'roll_');
