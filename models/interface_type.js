@@ -312,6 +312,6 @@ var populate_properties = function(idata = null){
   }
   file.writeSync();
 }
-module.exports  = { populate_properties, interface_type_desc, interface_subtype_desc, channel_type_desc, description, to_flowitem};
+module.exports  = { populate_properties, interface_type_desc, interface_subtype_desc, channel_type_desc, description, to_flowitem, interface_type, channel_type};
 
 

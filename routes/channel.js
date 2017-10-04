@@ -72,35 +72,6 @@ router.get('/', function (req, res) {
     });
 });
 
-
-
-
-
-
-
-
-
-
-
-/*
-router.get('/', function(req, res, next) {
-	if(oracle == true){
-		channel.load_db();
-		//async.waterfall([
-		//	function(callback){
-		//		channel.load_from_db(channel, callback)	
-		//	}
-		//],
-		//function(err, results){			
-			res.render('profile_list', { identity: identity, keys: channel.keys() , values: channel.values() });
-		//})
-	}else{
-		channel.load();
-		res.render('profile_list', { identity: identity, keys: channel.keys() , values: channel.values() });	  
-	}
-});
-*/
-
 router.get('/profile/:uid', function(req, res, next){			
 	var uid = req.params["uid"]	
   var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
@@ -109,12 +80,6 @@ router.get('/profile/:uid', function(req, res, next){
   var record = properties.get(uid);
 	res.render('profile', { title: 'Channel Profile', record: record , model: model});
 });
-
-//router.get('/new', function(req, res, next) {
-	//var record = channel.select(0);
-	//res.render('profile', { title: 'Channel Profile', record: record , model: channel});
-//});
-
 
 // Build UPDATE statement and prepare bind variables
 var buildUpdateStatement = function buildUpdateStatement(req, uid) {
@@ -217,7 +182,5 @@ router.post('/update/:id', function (req, res) {
             });
     });
 });
-
-
 
 module.exports = router;
