@@ -107,9 +107,8 @@ var sql_tatement = function(line, input){
 	return line;
 }
 
+
 var execute = function(file, ind, prefix = ''){
-	"use strict";
-	
 	console.log( "1 EXECUTE >>>> S Q L :" + ind );
 	filename = prefix + file.get("scripts.values."+ ind +".name");
 	console.log( "2 EXECUTE >>>> S Q L :" + filename );
@@ -123,6 +122,7 @@ var execute = function(file, ind, prefix = ''){
 		if(line.indexOf('--REM') == -1 ){			
 			var line_new = sql_tatement(line, input);			
 			console.log( "4 EXECUTE >>>> S Q L :" + line_new );
+			"use strict";
 			oracledb.getConnection(dbConfig, function (err, connection) {
         if (err) {
             console.log("Error connecting to DB" + err.message);
