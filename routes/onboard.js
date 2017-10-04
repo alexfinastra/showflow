@@ -107,23 +107,9 @@ var sql_tatement = function(line, input){
 	return line;
 }
 
-
-var execute = function(file, ind, prefix = ''){
-	console.log( "1 EXECUTE >>>> S Q L :" + ind );
-	filename = prefix + file.get("scripts.values."+ ind +".name");
-	console.log( "2 EXECUTE >>>> S Q L :" + filename );
-	var lineRead = require('readline').createInterface({
-		input: require('fs').createReadStream("./db/scripts/"+filename+".sql")
-	});
-
-	var input = inputs(file);
-	console.log( "3 EXECUTE >>>> S Q L :" + inputs );
-	lineRead.on('line', function (line) {
-		if(line.indexOf('--REM') == -1 ){			
-			var line_new = sql_tatement(line, input);			
-			console.log( "4 EXECUTE >>>> S Q L :" + line_new );
-			"use strict";
-			oracledb.getConnection(dbConfig, function (err, connection) {
+var run_sql = function(sql){
+		"use strict";
+		oracledb.getConnection(dbConfig, function (err, connection) {
         if (err) {
             console.log("Error connecting to DB" + err.message);
             return;
@@ -138,10 +124,11 @@ var execute = function(file, ind, prefix = ''){
             	  console.log( " 6 ========>>>> S Q L :" + line_new.length );
                 if (err) {
                 	console.log("Error connecting to DB" + err.message + " -- "+ err.message.indexOf("ORA-00001") > -1 ? "User already exists" : "Input Error");
-                } else {
+                } 
+                //else {
                     // Successfully created the resource
-                    res.status(201).set('Location', '/onboard/').end();                    
-                }
+                   // res.status(201).set('Location', '/onboard/').end();                    
+                //}
                 // Release the connection
                 connection.release(
                     function (err) {
@@ -154,6 +141,25 @@ var execute = function(file, ind, prefix = ''){
                     });
             });            
     });
+}
+
+var execute = function(file, ind, prefix = ''){
+	console.log( "1 EXECUTE >>>> S Q L :" + ind );
+	filename = prefix + file.get("scripts.values."+ ind +".name");
+	
+	console.log( "2 EXECUTE >>>> S Q L :" + filename );
+	var lineRead = require('readline').createInterface({
+		input: require('fs').createReadStream("./db/scripts/"+filename+".sql")
+	});
+
+	var input = inputs(file);
+	console.log( "3 EXECUTE >>>> S Q L :" + inputs );
+
+	lineRead.on('line', function (line) {
+		if(line.indexOf('--REM') == -1 ){			
+			var line_new = sql_tatement(line, input);			
+			console.log( "4 EXECUTE >>>> S Q L :" + line_new );
+			run_sql(line_new);			
 		}
 	});
 }
