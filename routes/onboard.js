@@ -108,6 +108,8 @@ var sql_tatement = function(line, input){
 }
 
 var execute = function(file, ind, prefix = ''){
+	"use strict";
+	
 	console.log( "1 EXECUTE >>>> S Q L :" + ind );
 	filename = prefix + file.get("scripts.values."+ ind +".name");
 	console.log( "2 EXECUTE >>>> S Q L :" + filename );
