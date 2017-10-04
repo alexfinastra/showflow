@@ -265,7 +265,7 @@ router.get('/reset', function (req, res) {
 	  file.set("scripts.input.mop", "");
 
 	  var size = Object.keys(file.get("scripts.values")).length;
-	  for(var i=1; i<size; i++){
+	  for(var i=1; i<=size; i++){
       clean = "scripts.values."+ i +".action"
   	  file.set(clean , "")	;
   	  status = "scripts.values."+ i +".status"
