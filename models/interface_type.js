@@ -207,10 +207,10 @@ description = function(obj){
 };
 
 
-to_flowitem = function(profile, type){ 
+to_flowitem = function(profile){ 
   return {
     "id": profile["uid"],
-    "type": type,
+    "type": profile["type"],
     "direction": profile["direction"],
     "status_class": profile["status_class"],
     "title" : profile["interface_name"].split("_").join(" ") ,
@@ -220,38 +220,6 @@ to_flowitem = function(profile, type){
   }
 };
 
-/*
-var load = function(){
-  var filePath = './interfaces_list_3.json';
-  var data = JSON.parse(fs.readFileSync(filePath, 'utf8')); 
-  this.reset();
-
-  for(var i=0; i<data.length; i++ ){    
-    if (this._properties.get(data[i]["UID_INTERFACE_TYPES"]) == null ||
-        this._properties.get(data[i]["UID_INTERFACE_TYPES"])["active"] == false){
-      continue;
-    }
-
-    if(this._type == 'interface'){
-      if( interface_type(data[i]["INTERFACE_TYPE"]) != null ){
-        this._collection.push(data[i]);
-      }
-      continue;
-    }
-
-    if(this._type == 'channel'){
-      if( channel_type(data[i]["INTERFACE_TYPE"]) != null ){
-        this._collection.push(data[i]);
-      }
-      continue;
-    }
-
-    if(this._type == 'all'){
-      this._collection.push(data[i]);
-    }
-  }
-}
-*/
 
 var folders = function(data, select=''){
   var folders = [];
@@ -315,3 +283,35 @@ var populate_properties = function(idata = null){
 module.exports  = { populate_properties, interface_type_desc, interface_subtype_desc, channel_type_desc, description, to_flowitem, interface_type, channel_type};
 
 
+/*
+var load = function(){
+  var filePath = './interfaces_list_3.json';
+  var data = JSON.parse(fs.readFileSync(filePath, 'utf8')); 
+  this.reset();
+
+  for(var i=0; i<data.length; i++ ){    
+    if (this._properties.get(data[i]["UID_INTERFACE_TYPES"]) == null ||
+        this._properties.get(data[i]["UID_INTERFACE_TYPES"])["active"] == false){
+      continue;
+    }
+
+    if(this._type == 'interface'){
+      if( interface_type(data[i]["INTERFACE_TYPE"]) != null ){
+        this._collection.push(data[i]);
+      }
+      continue;
+    }
+
+    if(this._type == 'channel'){
+      if( channel_type(data[i]["INTERFACE_TYPE"]) != null ){
+        this._collection.push(data[i]);
+      }
+      continue;
+    }
+
+    if(this._type == 'all'){
+      this._collection.push(data[i]);
+    }
+  }
+}
+*/

@@ -17,7 +17,8 @@ var group_profiles = function(rows){
     for(var i=0; i<rows.length; i++){
         obj = rows[i];
         key = model.description(obj)
-        
+        if(key == null || key == undefined) { continue;}    
+
         if(!(key in res)){ res[key] = []}
         obj["DESCRIPTION"] = model.interface_subtype_desc(obj["INTERFACE_SUB_TYPE"])
         res[key].push(obj);
@@ -74,14 +75,63 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/profile/:uid', function(req, res, next){			
-	var uid = req.params["uid"]	
-  var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
-  properties.readSync();
+//router.get('/profile/:uid', function(req, res, next){			
+//	var uid = req.params["uid"]	
+//  var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+//  properties.readSync();
 	
-  var record = properties.get(uid);
-	res.render('profile', { title: 'Interface Profile', record: record , model: model});
+//  var record = properties.get(uid);
+//	res.render('profile', { title: 'Interface Profile', record: record , model: model});
+//});
+
+app.get('/profile/:uid', function (req, res) {
+    "use strict";
+
+    oracledb.getConnection(dbConfig, function (err, connection) {
+        if (err) {
+            // Error connecting to DB
+            res.set('Content-Type', 'application/json');
+            res.status(500).send(JSON.stringify({
+                status: 500,
+                message: "Error connecting to DB",
+                detailed_message: err.message
+            }));
+            return;
+        }
+
+        connection.execute("SELECT * FROM INTERFACE_TYPES WHERE UID_INTERFACE_TYPES = :uid", [req.params.uid], {
+            outFormat: oracledb.OBJECT // Return the result as Object
+        }, function (err, result) {
+            if (err || result.rows.length < 1) {
+                res.set('Content-Type', 'application/json');
+                var status = err ? 500 : 404;
+                res.status(status).send(JSON.stringify({
+                    status: status,
+                    message: err ? "Error getting the user profile" : "User doesn't exist",
+                    detailed_message: err ? err.message : ""
+                }));
+            } else {
+                //res.contentType('application/json').status(200).send(JSON.stringify(result.rows));
+                var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+								properties.readSync();
+								var config = properties.get(uid);
+                res.render('profile', { title: 'Interface Profile', record: result.rows[0] , config: config });
+            }
+            // Release the connection
+            connection.release(
+                function (err) {
+                    if (err) {
+                        console.error(err.message);
+                    } else {
+                        console.log("GET interface/profile/" + req.params.uid + " : Connection released");
+                    }
+                });
+        });
+    });
 });
+
+
+
 
 // Build UPDATE statement and prepare bind variables
 var buildUpdateStatement = function buildUpdateStatement(req, uid) {
