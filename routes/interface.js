@@ -114,7 +114,7 @@ router.get('/profile/:uid', function (req, res) {
                 //res.contentType('application/json').status(200).send(JSON.stringify(result.rows));
                 var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
 								properties.readSync();
-								var config = properties.get(uid);
+								var config = properties.get(req.params.uid);
                 res.render('profile', { title: 'Interface Profile', record: result.rows[0] , config: config });
             }
             // Release the connection
