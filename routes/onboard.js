@@ -6,6 +6,7 @@ var authentication_mdl = require('../middlewares/authentication');
 var fs = require('fs');
 var oracledb = require('oracledb');
 var dbConfig = require('../db/dbconfig.js');
+var async = require('async');
 
 var identity = {
 	type: 'onboard', 
@@ -126,7 +127,7 @@ var execute = function(file, ind, prefix = ''){
             return;
         }
         console.log( " 5 ========>>>> S Q L :" + line_new.length ); 
-        /*       
+               
         connection.execute(line_new, [], {
                 autoCommit: true,
                 outFormat: oracledb.OBJECT // Return the result as Object
@@ -149,8 +150,7 @@ var execute = function(file, ind, prefix = ''){
                             console.log("Run sql query from script : Connection released");
                         }
                     });
-            });
-            */
+            });            
     });
 		}
 	});
