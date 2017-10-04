@@ -83,7 +83,7 @@ router.get('/download/:id/:file/:folder', function(req, res) {
     folder = "./flows/" + f; 
   }else{ 
     //var record = model.select(row_id);
-    
+
     folder = "./flows/" + f //path.join(record["REQUEST_CONNECTIONS_POINT"]);
   }
   res.download(folder+"/"+file);
@@ -91,7 +91,7 @@ router.get('/download/:id/:file/:folder', function(req, res) {
 
 router.get('/exports',  function(req, res) {
   var row_id = 0;
-  var files = folderfiles("db/exports", row_id);
+  var files = folderfiles(appRoot + "/db/exports", row_id);
   var options = {
     "button": "exports",
     "upload": false,
