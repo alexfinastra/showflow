@@ -107,7 +107,7 @@ router.get('/profile/:uid', function(req, res, next){
   properties.readSync();
 	
   var record = properties.get(uid);
-	res.render('profile', { title: 'Channel Profile', record: record["flow_item"] , model: model});
+	res.render('profile', { title: 'Channel Profile', record: record , model: model});
 });
 
 //router.get('/new', function(req, res, next) {
