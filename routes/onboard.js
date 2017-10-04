@@ -145,6 +145,39 @@ var run_sql = function(sql){
     });
 }
 
+var doconnect = function(cb) {
+  oracledb.getConnection(
+    {
+      user          : dbConfig.user,
+      password      : dbConfig.password,
+      connectString : dbConfig.connectString
+    },
+    cb);
+};
+
+var dorelease = function(conn) {
+  conn.close(function (err) {
+    if (err)
+      console.error(err.message);
+  });
+};
+
+var doinsert_autocommit = function (conn, cb) {
+  conn.execute(
+    "Insert into VALUE_DATE_INFO (NAME,DESCRIPTION,PROCESSING_DATE,OFFSET_DAYS,CALENDARS,RELEASE_DATE,DEBIT_DATE,CREDIT_DATE,SOONEST_VALUE_DATE,ADJUST_TO_COMBINED,OFFICE,DEPARTMENT,REC_STATUS,PROFILE_CHANGE_STATUS,PENDING_ACTION,EFFECTIVE_DATE,TIME_STAMP,UID_VALUE_DATE_INFO) values ('DEF','Default local office value date','ALAP',null,null,'ALAP','OnValueDate','OnValueDate','IGNORE',null,'QWE','QWS','AC','NO','CR',to_date('18-AUG-15','DD-MON-RR'),'2016-03-04 06:21:48.725','QWE^DEF');",
+    [],  // Bind values
+    { autoCommit: true},  // Override the default non-autocommit behavior
+    function(err, result)
+    {
+      if (err) {
+        return cb(err, conn);
+      } else {
+        console.log("Rows inserted: " + result.rowsAffected);  // 1
+        return cb(null, conn);
+      }
+    });
+};
+
 var execute = function(file, ind, prefix = ''){
 	console.log( "1 EXECUTE >>>> S Q L :" + ind );
 	filename = prefix + file.get("scripts.values."+ ind +".name");
@@ -161,7 +194,16 @@ var execute = function(file, ind, prefix = ''){
 		if(line.indexOf('--REM') == -1 ){			
 			var line_new = sql_tatement(line, input);			
 			console.log( "4 EXECUTE >>>> S Q L :" + line_new );
-			run_sql(line_new);			
+			async.waterfall(
+			  [
+			    doconnect,
+			    doinsert_autocommit
+			  ],
+			  function (err, conn) {
+			    if (err) { console.error("In waterfall error cb: ==>", err, "<=="); }
+			    if (conn)
+			      dorelease(conn);			    
+			  });	
 		}
 	});
 }
