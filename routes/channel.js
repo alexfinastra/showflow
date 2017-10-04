@@ -14,12 +14,13 @@ var identity = {
 var group_profiles = function(rows){
     var res = {};
     for(var i=0; i<rows.length; i++){
-        obj = rows[i];
-        key = model.description(obj)
-        
-        if(!(key in res)){ res[key] = []}
-        obj["DESCRIPTION"] = model.interface_subtype_desc(obj["INTERFACE_SUB_TYPE"])
-        res[key].push(obj);
+      obj = rows[i];
+      key = model.description(obj)
+      if(key == null || key == undefined) { continue;}        
+      
+      if(!(key in res)){ res[key] = []}
+      obj["DESCRIPTION"] = model.interface_subtype_desc(obj["INTERFACE_SUB_TYPE"])
+      res[key].push(obj);
     }
     return res;
 }
