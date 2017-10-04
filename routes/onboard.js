@@ -107,29 +107,31 @@ var sql_tatement = function(line, input){
 }
 
 var execute = function(file, ind, prefix = ''){
+	console.log( "1 EXECUTE >>>> S Q L :" + ind );
 	filename = prefix + file.get("scripts.values."+ ind +".name");
+	console.log( "2 EXECUTE >>>> S Q L :" + filename );
 	var lineRead = require('readline').createInterface({
 		input: require('fs').createReadStream("./db/scripts/"+filename+".sql")
 	});
 
 	var input = inputs(file);
+	console.log( "3 EXECUTE >>>> S Q L :" + inputs );
 	lineRead.on('line', function (line) {
 		if(line.indexOf('--REM') == -1 ){			
-			var line_new = sql_tatement(line, input);
-			//console.log( " ========>>>> S Q L :" + line_new.length );
-			
+			var line_new = sql_tatement(line, input);			
+			console.log( "4 EXECUTE >>>> S Q L :" + line_new );
 			oracledb.getConnection(dbConfig, function (err, connection) {
         if (err) {
             console.log("Error connecting to DB" + err.message);
             return;
         }
-        console.log( " 00 ========>>>> S Q L :" + line_new.length );        
+        console.log( " 5 ========>>>> S Q L :" + line_new.length );        
         connection.execute(line_new, [], {
                 autoCommit: true,
                 outFormat: oracledb.OBJECT // Return the result as Object
             },
             function (err, result) {
-            	  console.log( " 2 ========>>>> S Q L :" + line_new.length );
+            	  console.log( " 6 ========>>>> S Q L :" + line_new.length );
                 if (err) {
                 	console.log("Error connecting to DB" + err.message + " -- "+ err.message.indexOf("ORA-00001") > -1 ? "User already exists" : "Input Error");
                 } else {
@@ -139,7 +141,7 @@ var execute = function(file, ind, prefix = ''){
                 // Release the connection
                 connection.release(
                     function (err) {
-                    	  console.log( " 3 ========>>>> S Q L :" + line_new.length );
+                    	  console.log( " 7 ========>>>> S Q L :" + line_new.length );
                         if (err) {
                             console.error(err.message);                       
                         } else {
