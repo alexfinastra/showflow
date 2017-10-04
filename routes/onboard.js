@@ -69,7 +69,7 @@ router.get('/', function(req, res, next) {
 		opt["allroll"] = false
 	}
 	if(file.get("scripts.values."+size+".status") == "success"){
-		opt["properties"] = false
+		opt["properties"] = true
 		opt["allrun"] = false
 		opt["allroll"] = true
 	}
