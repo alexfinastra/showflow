@@ -19,7 +19,7 @@ block content
             h3.mt-5 Comming very very  very soon 
             br             
     else      
-      each key in data   
+      each key in Object.keys(data)   
         br      
         h4 #{key}            
         br            
@@ -33,6 +33,5 @@ block content
                 th.col.col-md-1 Dir
                 th.col.col-md-1
             tbody  
-              
-
+             
 
