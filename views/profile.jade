@@ -22,7 +22,7 @@ block content
         h5.ml-2 Interface card as it appears in Payment Flows       
         ul.timeline
           - var profile = true
-          - var item = model.to_flowitem(record, config.flow_item.type)
+          - var item = config.flow_item
           if (config.flow_item.type == 'interface')            
             include flowitems/interface_profile
           else
