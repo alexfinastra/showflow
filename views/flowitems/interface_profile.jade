@@ -31,8 +31,8 @@ li.timeline-item
         | A INTERFACE_TYPES.DESCRIPTION field should be populated with the name and resposibility of the bank system. Coments and Notes will be mostly welcomed in this field also.
       br
       - var target = (item["request_protocol"] == "MQ") ? 'queue' : 'folder'
-      - var dhref = "/"+ target +"/list/" + item["id"]
-      - var uhref = "/" + target + "/upload/" + item["id"]
+      - var dhref = "/"+ target +"/list/" + item["uid"]
+      - var uhref = "/" + target + "/upload/" + item["uid"]
       - var btn_class = "btn-outline-" + item["status_class"] 
       a.btn.float-left(href=uhref, class=btn_class)
           span 
