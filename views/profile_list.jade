@@ -33,21 +33,6 @@ block content
                 th.col.col-md-1 Dir
                 th.col.col-md-1
             tbody  
-              each obj in data[key]          
-                tr.row.text-dark(class = obj["INTERFACE_STATUS"] == "ACTIVE" ? "on" : "off")                    
-                  th.col.col-md-1(scope="row") #{obj["OFFICE"]}              
-                  td.col.col-md-4 #{obj["INTERFACE_NAME"].split("_").join(" ")}
-                  td.col.col-md-5 #{obj["DESCRIPTION"]}
-                  td.col.col-md-1
-                    if obj["REQUEST_DIRECTION"] == "I"
-                      span IN
-                    else
-                      span OUT                            
-                  td.col.col-md-1
-                    if obj["INTERFACE_STATUS"] == "ACTIVE"
-                      - var href = "/" + identity["type"] + "/profile/" + obj["UID_INTERFACE_TYPES"]
-                      a.btn.btn-outline-success.hoverbutton(href= href)
-                        i.fa.fa-pencil-square-o
-                        span.ml-2  Edit
+              
 
 

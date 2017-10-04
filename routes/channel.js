@@ -15,15 +15,12 @@ var group_profiles = function(rows){
     var res = {};
     for(var i=0; i<rows.length; i++){
         obj = rows[i];
-        console.log(" 1 --- Object is "+obj)
         key = model.description(obj)
-        console.log(" 2 --- Key is "+key)
+        
         if(!(key in res)){ res[key] = []}
         obj["DESCRIPTION"] = model.interface_subtype_desc(obj["INTERFACE_SUB_TYPE"])
-        console.log(" 3 --- res[key] "+ res[key])
         res[key].push(obj);
     }
-    console.log(" 4 --- res " + res)
     return res;
 }
 
@@ -59,7 +56,6 @@ router.get('/', function (req, res) {
             } else {
                 //res.contentType('application/json').status(200);
                 //res.send(JSON.stringify(result.rows));
-                console.log("==== > RESULTS "+result.rows)
                 var data = group_profiles(result.rows);
                 res.render('profile_list', { identity: identity, data: data });
             }
