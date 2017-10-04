@@ -85,14 +85,14 @@ router.get('/list/:id', function(req, res){
   properties.readSync();
   var record = properties.get(req.params.id);     
   folder = path.join(record.flow_item.request_connections_point); 
-  var files = queuefiles(folder, row_id);
+  var files = queuefiles(folder, req.params.id);
   var options = {
     "exports": false,
     "upload": false,
-    "row_id" : row_id,
+    "row_id" : req.params.id,
     "formats" : ""
   }  
-  title = "List of files related to " + record["INTERFACE_NAME"].split('_').join(" ") ; 
+  title = "List of files related to " + record.flow_item.interface_name.split('_').join(" ") ; 
   res.render('folder', { title: title, files: files , options: options});
 })
 
@@ -101,15 +101,15 @@ router.get('/upload/:id', function(req, res){
     properties.readSync();
     var record = properties.get(req.params.id);     
     folder = path.join(record.flow_item.request_connections_point);
-  var files = queuefiles(folder, row_id);
+  var files = queuefiles(folder, req.params.id);
   var options = {
     "exports": false,
     "upload": true,
-    "row_id" : row_id,
-    "formats" : model._properties.get(record["UID_INTERFACE_TYPES"])["to_schemas"]
+    "row_id" : req.params.id,
+    "formats" : record.to_schemas
   }  
   
-  title = "Upload to " + record["INTERFACE_NAME"].split('_').join(" ") ;
+  title = "Upload to " + record.flow_item.interface_name.split('_').join(" ") ;
   res.render('folder', { title: title, files: files , options: options});
 })
 
