@@ -180,7 +180,7 @@ router.get('/list/:id', function(req, res){
   properties.readSync();
   var record = properties.get(req.params.id);     
   var folder = path.join(record.flow_item.request_connections_point);
-  var files = folderfiles(folder, row_id);
+  var files = folderfiles(folder, req.params.id);
   var options = {
     "button": "",
     "upload": false,
@@ -201,7 +201,7 @@ router.get('/upload/:id', function(req, res){
   var title = "Upload to " + record.flow_item.interface_name.split('_').join(" ") ;  
 
   if (folder.length > 0){
-    files = folderfiles(folder, row_id);
+    files = folderfiles(folder, req.params.id);
   }
   
   var options = {
