@@ -12,7 +12,7 @@ var interface = require('./routes/interface');
 var channel = require('./routes/channel');
 var flow = require('./routes/flow');
 var folder = require('./routes/folder');
-//var queue = require('./routes/queue');
+var queue = require('./routes/queue');
 var onboard = require('./routes/onboard');
 var webservices = require('./routes/webservices');
 
@@ -56,7 +56,7 @@ app.use('/interface', interface);
 app.use('/channel', channel);
 app.use('/flow', flow);
 app.use('/folder', folder);
-//app.use('/queue', queue);
+app.use('/queue', queue);
 app.use('/onboard', onboard);
 app.use('/webservices', webservices);
 
