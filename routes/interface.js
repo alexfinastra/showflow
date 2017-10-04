@@ -141,7 +141,7 @@ var buildUpdateStatement = function buildUpdateStatement(req, uid) {
     var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
     properties.readSync(); 
 		
-    var record = channel.select(req.params.id)
+    //var record = channel.select(req.params.id)
 		
 		var key = uid + ".to_schemas";	
 		properties.set(key, req.body.REQUEST_SCHEMA);	
