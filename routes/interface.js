@@ -99,7 +99,7 @@ router.get('/profile/:uid', function (req, res) {
             return;
         }
 
-        connection.execute("SELECT * FROM INTERFACE_TYPES WHERE UID_INTERFACE_TYPES = :uid", [req.params.uid], {
+        connection.execute("SELECT * FROM INTERFACE_TYPES WHERE UID_INTERFACE_TYPES = '" + req.params.uid + "'", [], {
             outFormat: oracledb.OBJECT // Return the result as Object
         }, function (err, result) {
             if (err || result.rows.length < 1) {
