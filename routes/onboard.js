@@ -108,6 +108,8 @@ var sql_tatement = function(line, input){
 }
 
 var run_sql = function(sql){
+		console.log("-------------------- CONNECTIONS ------------------------------------")
+		console.log(" dbConfig " + dbConfig + " and oracledb" + oracledb);
 		"use strict";
 		oracledb.getConnection(dbConfig, function (err, connection) {
         if (err) {
