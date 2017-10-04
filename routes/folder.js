@@ -3,13 +3,11 @@ var fse = require('fs-extra');
 var moment = require('moment');
 var express = require('express');
 var router = express.Router();
+var json = require('json-file');
 
 var path = require('path');
 var formidable = require('formidable');
 var mkdirp = require('mkdirp');
-
-//var async = require('async')
-
 
 humanFileSize = function(bytes, si) {
     var thresh = si ? 1000 : 1024;
@@ -112,7 +110,7 @@ router.get('/exports/new', function(req, res){
   var script = "prompt This is for demo usage only... \n set feedback off \n set define off \n\n";
   var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
   properties.readSync();
-  for (var i = 0; i< model._collection.length; i++  ) { 
+  /*for (var i = 0; i< model._collection.length; i++  ) { 
     var item = model._collection[i];
     var values = [];
     var fields = [];
@@ -131,7 +129,7 @@ router.get('/exports/new', function(req, res){
     script += "insert into INTERFACE_TYPES ("+ fields.join(',') +") \n"
     script += "values ("+ values.join(',') +"); \n\n" 
   }
-
+*/
   fs.writeFile(file_name, script , function (err,data) {
     if (err) {
       return console.log(err);
@@ -153,8 +151,10 @@ router.get('/delete/:id/:file/:folder', function(req, res){
     folder = "./flows/" + f;
   }
   else{    
-    var record = model.select(row_id);
-    folder = path.join(record["REQUEST_CONNECTIONS_POINT"]);
+    var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+    properties.readSync();
+    var record = properties.get(req.params.id);     
+    folder = path.join(record.flow_item.request_connections_point);
   }
   fs.unlinkSync(folder+"/"+file);
   res.redirect(req.get('referer'));
@@ -176,10 +176,10 @@ router.get('/flows/:folder', function(req, res){
 })
 
 router.get('/list/:id', function(req, res){
-  var row_id = req.params["id"]
-  var record = model.select(row_id);
-
-  var folder = path.join(record["REQUEST_CONNECTIONS_POINT"]);  
+  var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+  properties.readSync();
+  var record = properties.get(req.params.id);     
+  var folder = path.join(record.flow_item.request_connections_point);
   var files = folderfiles(folder, row_id);
   var options = {
     "button": "",
@@ -187,32 +187,28 @@ router.get('/list/:id', function(req, res){
     "row_id" : row_id,
     "formats" : ""
   }  
-  title = "List of files related to " + record["INTERFACE_NAME"].split('_').join(" ") ;
+  title = "List of files related to " + record.flow_item.interface_name.split('_').join(" ") ;
   res.render('folder', { title: title, files: files , options: options});
 })
 
 router.get('/upload/:id', function(req, res){
-  var row_id = req.params["id"]  
-  var files = []
-  var folder = ""
-  var title = "Folder path is incorrect"
-  var record = null
-
-  if (row_id != undefined && row_id != null && row_id != 'undefined'){
-    record = model.select(row_id);
-    folder = path.join(record["REQUEST_CONNECTIONS_POINT"]);
-    title = "Upload to " + record["INTERFACE_NAME"].split('_').join(" ") ;  
-  } 
+  var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+  properties.readSync();
   
+  var files = []
+  var record = properties.get(req.params.id);      
+  var folder = path.join(record.flow_item.request_connections_point);
+  var title = "Upload to " + record.flow_item.interface_name.split('_').join(" ") ;  
+
   if (folder.length > 0){
-      files = folderfiles(folder, row_id);
+    files = folderfiles(folder, row_id);
   }
   
   var options = {
     "button": "",
     "upload": ((folder.length > 0) ? true : false),
     "row_id" : row_id,
-    "formats" : model._properties.get(record["UID_INTERFACE_TYPES"])["to_schemas"]
+    "formats" : record.to_schemas
   }  
    
   res.render('folder', { title: title, files: files , options: options});
@@ -227,14 +223,15 @@ router.get('/clone/:folder', function(req, res){
 })
 
 router.post('/upload/:id', function(req, res){
+  var properties = new json.File(appRoot + "/db/properties/profile_index.json" );
+  properties.readSync();
+  var record = properties.get(req.params.id);
   
-  var row_id = req.params["id"]
-  var record = model.select(row_id);
   var form = new formidable.IncomingForm();
   var filename = ""
 
   form.multiples = true;
-  form.uploadDir = path.join(record["REQUEST_CONNECTIONS_POINT"]);  
+  form.uploadDir = path.join(record.flow_item.request_connections_point);  
 
   // rename it to it's orignal name
   form.on('file', function(field, file) {

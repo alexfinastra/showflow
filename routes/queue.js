@@ -2,29 +2,13 @@ var fs = require('fs');
 var moment = require('moment');
 var express = require('express');
 var router = express.Router();
+var json = require('json-file');
 
 var path = require('path');
 var formidable = require('formidable');
 var mkdirp = require('mkdirp');
 
 var async = require('async')
-var Profile = require('../models/profileModel');
-var model = new Profile('all');
-
-async.waterfall([
-  function(callback){
-    if( 1==0 ){
-      model.load_from_db(model, callback) 
-    }else{
-      model.load()
-    } 
-  }
-],
-function(err, results){     
-  if(err){
-    console.log("WHAT A F*** "+ err)
-  }    
-})
 
 
 humanFileSize = function(bytes, si) {
@@ -73,8 +57,10 @@ router.get('/download/:id/:file', function(req, res) {
   var file = req.params["file"];
 
   if( row_id != 0 ){
-    var record = model.select(row_id);
-    var folder = path.join(appRoot, record["REQUEST_CONNECTIONS_POINT"]);
+    var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+    properties.readSync();
+    var record = properties.get(req.params.id);     
+    folder = path.join(record.flow_item.request_connections_point);
     res.download(folder+"/"+file);
   }
   res.send("File could not be downloaded. Sorry ;( ")
@@ -85,18 +71,20 @@ router.get('/delete/:id/:file', function(req, res){
   var file = req.params["file"];
   
   if( row_id != 0 ){
-    var record = model.select(row_id);
-    var folder = path.join(appRoot, record["REQUEST_CONNECTIONS_POINT"]);    
+    var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+    properties.readSync();
+    var record = properties.get(req.params.id);     
+    folder = path.join(record.flow_item.request_connections_point);   
     fs.unlinkSync(folder+"/"+file);
   }
   res.redirect(req.get('referer'));
 })
 
 router.get('/list/:id', function(req, res){
-  var row_id = req.params["id"]
-  var record = model.select(row_id);
-
-  var folder = path.join(appRoot, record["REQUEST_CONNECTIONS_POINT"]);  
+  var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+  properties.readSync();
+  var record = properties.get(req.params.id);     
+  folder = path.join(record.flow_item.request_connections_point); 
   var files = queuefiles(folder, row_id);
   var options = {
     "exports": false,
@@ -109,10 +97,10 @@ router.get('/list/:id', function(req, res){
 })
 
 router.get('/upload/:id', function(req, res){
-  var row_id = req.params["id"]
-  var record = model.select(row_id);
-  
-  var folder = path.join(appRoot, record["REQUEST_CONNECTIONS_POINT"]);
+  var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+    properties.readSync();
+    var record = properties.get(req.params.id);     
+    folder = path.join(record.flow_item.request_connections_point);
   var files = queuefiles(folder, row_id);
   var options = {
     "exports": false,
@@ -126,7 +114,7 @@ router.get('/upload/:id', function(req, res){
 })
 
 router.get('/build_folders', function(req, res){
-    var folders = model.folders('jms');
+    var folders = [] // model.folders('jms');
     console.log("Number of folders are "+ folders.length)
 
     for (var i = folders.length - 1; i >= 0; i--) {
