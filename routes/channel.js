@@ -56,6 +56,7 @@ router.get('/', function (req, res) {
             } else {
                 //res.contentType('application/json').status(200);
                 //res.send(JSON.stringify(result.rows));
+                console.log("==== > RESULTS "+result.rows)
                 var data = group_profiles(result.rows);
                 res.render('profile_list', { identity: identity, data: data });
             }
