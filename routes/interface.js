@@ -84,7 +84,7 @@ router.get('/', function (req, res) {
 //	res.render('profile', { title: 'Interface Profile', record: record , model: model});
 //});
 
-app.get('/profile/:uid', function (req, res) {
+router.get('/profile/:uid', function (req, res) {
     "use strict";
 
     oracledb.getConnection(dbConfig, function (err, connection) {
