@@ -10,7 +10,7 @@ block content
       form#needs-validation(action='/webservices/execute' , method="POST", novalidate)
           .form-group.row
             label.col-sm-3.col-form-label(for='inputuserid') User Id
-            .col-sm-8
+            .col-sm-6
               input#inputOffice.w-100.form-control(name="USER_ID", type='text', placeholder='', value='' , required)                            
           .form-group.row
             label.col-sm-3.col-form-label(for='inputprofileid') Profile Id
@@ -18,7 +18,7 @@ block content
               input#inputDepartment.w-100.form-control(name="PROFILE_ID", type='text', placeholder='', value='', required) 
           .form-group.row
             label.col-sm-3.col-form-label(for='inputprofileuid') Profile Uid
-            .col-sm-8
+            .col-sm-6
               input#inputBIC.w-100.form-control(name="PROFILE_UID", type='text', placeholder='', value='', required)  
           br
           .form-group.row.justify-content-end

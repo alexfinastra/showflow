@@ -58,4 +58,5 @@ block content
             td.col-md-2 #{file["created"]}
             td.col-md-3
               a.btn.btn-outline-danger.btn-sm.mt-0.float-right( href= "/folder/delete/" + file["id"] +"/" + file["name"] + "/" + file["folder"]) Delete
-              a.btn.btn-outline-primary.mr-3.mt-0.btn-sm.float-right( href= "/folder/download/"  + file["id"] +"/" + file["name"] + "/" + file["folder"] ) Download 
+              if options["button"] != "flow"
+                a.btn.btn-outline-primary.mr-3.mt-0.btn-sm.float-right( href= "/folder/download/"  + file["id"] +"/" + file["name"] + "/" + file["folder"] ) Download 
