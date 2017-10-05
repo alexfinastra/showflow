@@ -13,8 +13,8 @@ const path = require('path');
 const socketsConnected = []
 let log = console.log.bind(console)
 Tail = require('tail').Tail;
-var dbconfig = require('./db/dbconfig.js');
-var database = require('./db/database.js');
+var dbconfig = require('../db/dbconfig.js');
+var database = require('../db/database.js');
 /**
  * Get port from environment and store in Express.
  */
