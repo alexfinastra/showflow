@@ -157,12 +157,12 @@ var execute = function(file, ind, prefix = ''){
 	});
 
 	var input = inputs(file);
-	console.log( "3 EXECUTE >>>> S Q L :" + inputs );
+	//console.log( "3 EXECUTE >>>> S Q L :" + inputs );
 
 	lineRead.on('line', function (line) {
 		if(line.indexOf('--REM') == -1 ){			
 			var line_new = sql_tatement(line, input);			
-			console.log( "4 EXECUTE >>>> S Q L :" + line_new );
+			//console.log( "4 EXECUTE >>>> S Q L :" + line_new );
 			database.simpleExecute(line_new,
 	        {}, //no binds
 	        {
@@ -172,6 +172,7 @@ var execute = function(file, ind, prefix = ''){
     		)
         .then(function(results) {
             //res.send(results);
+            console.log("Results " + results);
             return;
         })
         .catch(function(err) {
