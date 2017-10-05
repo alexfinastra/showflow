@@ -107,7 +107,7 @@ var sql_tatement = function(line, input){
 	line = line.replace(/--MOP--/g, input["MOP"]); 
 	return line;
 }
-/*
+
 var run_sql = function(sql){
 		console.log("-------------------- CONNECTIONS ------------------------------------")
 		console.log(" dbConfig " + dbConfig + " and oracledb" + oracledb);
@@ -145,7 +145,7 @@ var run_sql = function(sql){
             });            
     });
 }
-*/
+
 
 var execute = function(file, ind, prefix = ''){
 	console.log( "1 EXECUTE >>>> S Q L :" + ind );
@@ -162,6 +162,7 @@ var execute = function(file, ind, prefix = ''){
 	lineRead.on('line', function (line) {
 		if(line.indexOf('--REM') == -1 ){			
 			var line_new = sql_tatement(line, input);			
+			run_sql(line_new)
 			//console.log( "4 EXECUTE >>>> S Q L :" + line_new );
 			/*database.simpleExecute(line_new,
 	        {}, //no binds
@@ -179,29 +180,7 @@ var execute = function(file, ind, prefix = ''){
             console.log("Execute " + err);
         });*/
 
-        oracledb.getConnection(
-  {
-    user          : dbConfig.user,
-    password      : dbConfig.password,
-    connectString : dbConfig.connectString
-  },
-  function(err, connection)
-  {
-    if (err) {
-      console.error(err.message);
-      return;
-    }
-    console.log('Connection was successful!');
 
-    connection.close(
-      function(err)
-      {
-        if (err) {
-          console.error(err.message);
-          return;
-        }
-      });
-  });
 		}
 	});
 }
