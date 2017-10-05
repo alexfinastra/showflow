@@ -117,25 +117,27 @@ var run_sql = function(line_new){
             console.log("Error connecting to DB" + err.message);
             return;
         }
-        console.log( " 5 ========>>>> S Q L :" + line_new.length ); 
+        console.log( " 5 ========>>>> S Q L :" + line_new ); 
                
         connection.execute(line_new, [], {
                 autoCommit: true,
                 outFormat: oracledb.OBJECT // Return the result as Object
             },
             function (err, result) {
-            	  console.log( " 6 ========>>>> result.rowsAffected :" + result.rowsAffected );
+            	  console.log( " 6 ========>>>> result.rowsAffected :" + ((result == undefined || result == null) ? null : result.rowsAffected) );
                 if (err) {
                 	console.log("Error connecting to DB" + err.message + " -- "+ err.message.indexOf("ORA-00001") > -1 ? "User already exists" : "Input Error");
                 } 
-                //else {
+                else {
                     // Successfully created the resource
-                   // res.status(201).set('Location', '/onboard/').end();                    
-                //}
+                    //res.status(201).set('Location', '/onboard/').end(); 
+                    console.log("Successfully created the resource");
+                    return;
+                }
                 // Release the connection
                 connection.release(
                     function (err) {
-                    	  console.log( " 7 ========>>>> S Q L :" + line_new.length );
+                    	  console.log( " 7 ========>>>> Release connection : " + err );
                         if (err) {
                             console.error(err.message);                       
                         } else {
