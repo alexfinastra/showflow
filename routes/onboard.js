@@ -124,7 +124,7 @@ var run_sql = function(line_new){
                 outFormat: oracledb.OBJECT // Return the result as Object
             },
             function (err, result) {
-            	  console.log( " 6 ========>>>> S Q L :" + line_new.length );
+            	  console.log( " 6 ========>>>> result.rowsAffected :" + result.rowsAffected );
                 if (err) {
                 	console.log("Error connecting to DB" + err.message + " -- "+ err.message.indexOf("ORA-00001") > -1 ? "User already exists" : "Input Error");
                 } 
