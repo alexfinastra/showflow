@@ -125,6 +125,7 @@ var run_sql = function(line_new){
             },
             function (err, result) {
             	  console.log( " 6 ========>>>> result.rowsAffected :" + ((result == undefined || result == null) ? null : result.rowsAffected) );
+                console.log( " 6.5 ------------ >> err " + err);
                 if (err) {
                 	console.log("Error connecting to DB" + err.message + " -- "+ err.message.indexOf("ORA-00001") > -1 ? "User already exists" : "Input Error");
                 } 
