@@ -4,9 +4,9 @@ var async = require('async')
 var json = require('json-file');
 var authentication_mdl = require('../middlewares/authentication');
 var fs = require('fs');
-//var oracledb = require('oracledb');
+var oracledb = require('oracledb');
 var database = require('../db/database.js')
-//var dbConfig = require('../db/dbconfig.js');
+var dbConfig = require('../db/dbconfig.js');
 var async = require('async');
 
 var identity = {
@@ -163,7 +163,7 @@ var execute = function(file, ind, prefix = ''){
 		if(line.indexOf('--REM') == -1 ){			
 			var line_new = sql_tatement(line, input);			
 			//console.log( "4 EXECUTE >>>> S Q L :" + line_new );
-			database.simpleExecute(line_new,
+			/*database.simpleExecute(line_new,
 	        {}, //no binds
 	        {
 	            autoCommit: true,
@@ -177,7 +177,31 @@ var execute = function(file, ind, prefix = ''){
         })
         .catch(function(err) {
             console.log("Execute " + err);
-        });
+        });*/
+
+        oracledb.getConnection(
+  {
+    user          : dbConfig.user,
+    password      : dbConfig.password,
+    connectString : dbConfig.connectString
+  },
+  function(err, connection)
+  {
+    if (err) {
+      console.error(err.message);
+      return;
+    }
+    console.log('Connection was successful!');
+
+    connection.close(
+      function(err)
+      {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+      });
+  });
 		}
 	});
 }
