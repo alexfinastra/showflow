@@ -92,7 +92,7 @@ block content
             label 
             i.small schemas certificates
             select#to_schemas.w-100(multiple="multiple", name="REQUEST_SCHEMA")
-              - var schemas = config.to_schemas
+              - var schemas = config.to_schemas || ""
               include utils/message_schemas          
             br
             input#inputRequestConnPoint.form-control.w-100(name="REQUEST_CONNECTIONS_POINT", type='text', placeholder='connection point', readonly, value=((record != null) ? record["REQUEST_CONNECTIONS_POINT"] :  "") )
@@ -122,7 +122,7 @@ block content
             label 
             i.small schemas certificates
             select#from_schemas.w-100(multiple="multiple", name="RESPONSE_SCHEMA")
-              - var schemas = config.from_schemas
+              - var schemas = config.from_schemas || ""
               include utils/message_schemas                  
             br
             input#inputResponseConnPoint.form-control.w-100(type='text', name="RESPONSE_CONNECTIONS_POINT", placeholder='connection point', readonly, value=((record != null) ? record["RESPONSE_CONNECTIONS_POINT"] :  ""))
