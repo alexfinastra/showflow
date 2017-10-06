@@ -124,6 +124,7 @@ router.get('/exports/new', function(req, res){
               console.log("Error connecting to DB" + err.message + " -- "+ err.message.indexOf("ORA-00001") > -1 ? "User already exists" : "Input Error");
             } 
             else {
+              console.log("----------- > REsults are " + result.rows.length)
               var script = "";  
               for(var i=0; i<result.rows.length; i++){
                 var item = result.rows[i];
