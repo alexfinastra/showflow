@@ -270,8 +270,8 @@ var populate_properties = function(idata = null){
                   if(interface_type.indexOf(profile["INTERFACE_TYPE"]) != -1 ){ type = 'interface' }
                   else if(channel_type.indexOf(profile["INTERFACE_TYPE"]) != -1 ){ type = 'channel' }
 
-                  if (file.get(profile["UID_INTERFACE_TYPES"]) == null){
-                      file.set(profile["UID_INTERFACE_TYPES"], {
+                  if (properties.get(profile["UID_INTERFACE_TYPES"]) == null){
+                      properties.set(profile["UID_INTERFACE_TYPES"], {
                       active: ((profile["INTERFACE_STATUS"] == "ACTIVE") ? true : false),
                       connected: false,
                       to_schemas: "",
