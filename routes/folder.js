@@ -126,8 +126,9 @@ router.get('/exports/new', function(req, res){
             else {
               var script = "";  
               for(var i=0; i<result.rows.length; i++){
-                var row = result.rows[i];
-                if(properties.get(row["UID_INTERFACE_TYPES"]+".active") == true){
+                var item = result.rows[i];
+                var ikey = item["UID_INTERFACE_TYPES"]+".active"
+                if(properties.get(ikey) == true){
                   var values = [];
                   var fields = [];
                   
