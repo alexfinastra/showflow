@@ -263,6 +263,7 @@ var populate_properties = function(idata = null){
               console.log("----------- > REsults are " + result.rows.length)                
               for(var i=0; i<result.rows.length; i++){
                 var profile = result.rows[i];
+                var type = "";
                 var item = properties.get(profile["UID_INTERFACE_TYPES"])
                 if(item != null){
                   properties.set(profile["UID_INTERFACE_TYPES"] + ".active", ((profile["INTERFACE_STATUS"] == "ACTIVE") ? true : false)) 
