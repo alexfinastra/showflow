@@ -1,1 +1,1 @@
-delete from DEPARTMENT where uid_department = '--DEPARTMENT--';
+delete from DEPARTMENT where uid_department = '--DEPARTMENT--' 

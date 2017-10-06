@@ -1,3 +1,3 @@
 ---REM INSERTING into FEE_TYPES
-delete from FEE_TYPES where UID_FEE_TYPES = '--OFFICE--^LEAH';
-delete from FEE_TYPES where UID_FEE_TYPES = '--OFFICE--^TESTFEE';
+delete from FEE_TYPES where UID_FEE_TYPES = '--OFFICE--^LEAH' 
+delete from FEE_TYPES where UID_FEE_TYPES = '--OFFICE--^TESTFEE' 
