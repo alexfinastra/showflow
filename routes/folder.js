@@ -4,6 +4,8 @@ var moment = require('moment');
 var express = require('express');
 var router = express.Router();
 var json = require('json-file');
+var oracledb = require('oracledb');
+var dbConfig = require('../db/dbconfig.js');
 
 var path = require('path');
 var formidable = require('formidable');
@@ -106,10 +108,78 @@ router.get('/exports/new', function(req, res){
   var file_name  = "./db/exports/integration_script_" + moment().format('YYYY_MM_DD_hh_mm_ss') + ".sql"; 
   var all = "INTERFACE_NAME, OFFICE, INTERFACE_TYPE, INTERFACE_SUB_TYPE, REQUEST_DIRECTION, MESSAGE_WAIT_STATUS, INTERFACE_STATUS, MESSAGE_STOP_STATUS, STOP_AFTER_CONN_EXCEPTION, INTERFACE_MONITOR_INDEX, REQUEST_PROTOCOL, REQUEST_CONNECTIONS_POINT, REQUEST_FORMAT_TYPE, REQUEST_STORE_IND, RESPONSE_PROTOCOL, RESPONSE_CONNECTIONS_POINT, RESPONSE_FORMAT_TYPE, RESPONSE_STORE_IND, UID_INTERFACE_TYPES, NOT_ACTIVE_BEHAVIOUR, REC_STATUS, ASSOCIATED_SERVICE_NAME, NO_OF_LISTENERS, NON_JMS_RECEPIENT_IND, HANDLER_CLASS, BUSINESS_OBJECT_CLASS, BUSINESS_OPERATION, PMNT_SRC, CUSTOM_PROPERTIES, WAIT_BEHAVIOUR, BATCH_SIZE, SUPPORTED_APP_IDS, BACKOUT_INTERFACE_NAME, BULK_INTERFACE_NAME, APPLICATION_PROTOCOL_TP, REQUEST_GROUP_NM, SEQUENCE_HANDLER_CLASS, RESPONSE_INTERFACE, RESPONSE_TIMEOUT_MILLIS, RESPONSE_TIMEOUT_RETRY_NUM, HEARTBEAT_INTERFACE_NAME, INTERFACE_STOPPED_SOURCE, RESEND_ALLOWED, DESCRIPTION, THROTTLING_TX, THROTTLING_MILLIS, BULKING_PURPOSE, ENABLED_GROUPS,RESUME_SUPPORTED, EVENT_ID_GENERATION, BULK_RESPONSE_BY_ORIG_CHUNK, INVALID_RESPONSE_IN, PCI_DSS_COMPLIANT, BULKING_TRIGGER_METHOD, IS_BULK"  
   var arr = all.split(",");
-
-  var script = "prompt This is for demo usage only... \n set feedback off \n set define off \n\n";
   var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
   properties.readSync();
+
+  sql = "select " + all + " from INTERFACE_TYPES" ;
+
+
+  "use strict";
+  oracledb.getConnection(dbConfig, function (err, connection) {
+    if (err) {
+        console.log("Error connecting to DB" + err.message);
+        return;
+    }
+    connection.execute(sql, [], {
+            maxRows: 300,
+            outFormat: oracledb.OBJECT // Return the result as Object
+        },
+        function (err, result) {
+            if (err) {
+              console.log("Error connecting to DB" + err.message + " -- "+ err.message.indexOf("ORA-00001") > -1 ? "User already exists" : "Input Error");
+            } 
+            else {
+                
+              for(var i=0; i<result.rows.length; i++){
+                var row = result.rows[i];
+                if(properties.get(row["UID_INTERFACE_TYPES"]+".active")) == true){
+                  
+                }
+              }
+
+
+                fs.writeFile(file_name, script , function (err,data) {
+                  if (err) {
+                    return console.log(err);
+                  }
+                  console.log(data);
+                });
+                
+                res.redirect('/folder/exports');
+            }
+            // Release the connection
+            connection.release(
+                function (err) {
+                    console.log( " 7 ========>>>> Release connection : " + err );
+                    if (err) {
+                        console.error(err.message);                       
+                    } else {
+                        console.log("Run sql query from script : Connection released");
+                    }
+                });
+        });            
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  var script = "prompt This is for demo usage only... \n set feedback off \n set define off \n\n";
+  
   /*for (var i = 0; i< model._collection.length; i++  ) { 
     var item = model._collection[i];
     var values = [];
