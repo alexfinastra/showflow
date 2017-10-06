@@ -163,7 +163,7 @@ var execute = function(file, ind, prefix = ''){
 	//console.log( "3 EXECUTE >>>> S Q L :" + inputs );
 
 	lineRead.on('line', function (line) {
-		if(line.indexOf('--REM') == -1 || line[0] != '-' ){			
+		if(line.indexOf('--REM') == -1 && line.indexOf('--') == -1){			
 			var line_new = sql_tatement(line, input);			
 			run_sql(line_new)
 			//console.log( "4 EXECUTE >>>> S Q L :" + line_new );
