@@ -130,8 +130,6 @@ var run_sql = function(line_new){
                 	console.log("Error connecting to DB" + err.message + " -- "+ err.message.indexOf("ORA-00001") > -1 ? "User already exists" : "Input Error");
                 } 
                 else {
-                    // Successfully created the resource
-                    //res.status(201).set('Location', '/onboard/').end(); 
                     console.log("Successfully created the resource");
                     return;
                 }
@@ -160,30 +158,10 @@ var execute = function(file, ind, prefix = ''){
 	});
 
 	var input = inputs(file);
-	//console.log( "3 EXECUTE >>>> S Q L :" + inputs );
-
 	lineRead.on('line', function (line) {
-		if(line.indexOf('--REM') == -1 && line.indexOf('--') == -1){			
+		if(line.indexOf('--REM') == -1 && line.indexOf('--') != 0){			
 			var line_new = sql_tatement(line, input);			
 			run_sql(line_new)
-			//console.log( "4 EXECUTE >>>> S Q L :" + line_new );
-			/*database.simpleExecute(line_new,
-	        {}, //no binds
-	        {
-	            autoCommit: true,
-	            outFormat: database.OBJECT
-	        }
-    		)
-        .then(function(results) {
-            //res.send(results);
-            console.log("Results " + results);
-            return;
-        })
-        .catch(function(err) {
-            console.log("Execute " + err);
-        });*/
-
-
 		}
 	});
 }
