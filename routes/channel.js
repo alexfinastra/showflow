@@ -19,7 +19,7 @@ var group_profiles = function(rows){
       if(key == null || key == undefined) { continue;}        
       
       if(!(key in res)){ res[key] = []}
-      obj["DESCRIPTION"] = model.interface_subtype_desc(obj["INTERFACE_SUB_TYPE"])
+      //obj["DESCRIPTION"] = model.interface_subtype_desc(obj["INTERFACE_SUB_TYPE"])
       res[key].push(obj);
     }
     return res;
@@ -104,7 +104,7 @@ router.get('/profile/:uid', function (req, res) {
                 var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
                 properties.readSync();
                 var config = properties.get(req.params.uid);
-                res.render('profile', { title: 'Interface Profile', record: result.rows[0] , config: config });
+                res.render('profile', { title: 'Channel Profile', record: result.rows[0] , config: config });
             }
             // Release the connection
             connection.release(
@@ -112,7 +112,7 @@ router.get('/profile/:uid', function (req, res) {
                     if (err) {
                         console.error(err.message);
                     } else {
-                        console.log("GET interface/profile/" + req.params.uid + " : Connection released");
+                        console.log("GET channel/profile/" + req.params.uid + " : Connection released");
                     }
                 });
         });
@@ -192,7 +192,7 @@ router.post('/update/:id', function (req, res) {
             }));
             return;
         }
-        var uid = req.params["id"]
+        var uid = req.params.id
         var updateStatement = buildUpdateStatement(req, uid);
         connection.execute(updateStatement.statement, updateStatement.bindValues, {
                 autoCommit: true,

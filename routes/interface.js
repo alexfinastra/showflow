@@ -20,7 +20,7 @@ var group_profiles = function(rows){
         if(key == null || key == undefined) { continue;}    
 
         if(!(key in res)){ res[key] = []}
-        obj["DESCRIPTION"] = model.interface_subtype_desc(obj["INTERFACE_SUB_TYPE"])
+        //obj["DESCRIPTION"] = model.interface_subtype_desc(obj["INTERFACE_SUB_TYPE"])
         res[key].push(obj);
     }
     return res;
@@ -193,7 +193,7 @@ router.post('/update/:id', function (req, res) {
             }));
             return;
         }
-        var uid = req.params["id"]
+        var uid = req.params.id
         var updateStatement = buildUpdateStatement(req, uid);
         connection.execute(updateStatement.statement, updateStatement.bindValues, {
                 autoCommit: true,
@@ -210,7 +210,7 @@ router.post('/update/:id', function (req, res) {
                     }));
                 } else {
                     // Resource successfully updated. Sending an empty response body. 
-                    res.redirect("/channel/profile/" + uid);
+                    res.redirect("/interface/profile/" + uid);
                 }
                 // Release the connection
                 connection.release(
