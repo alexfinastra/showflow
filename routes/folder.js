@@ -113,12 +113,12 @@ router.get('/',  function(req, res){
 });
 
 router.get('/download/:uid/:file', function(req, res) {
-  var folder = folderPath(req.params.uid); 
+  var folder = appRoot + folderPath(req.params.uid); 
   res.download(folder + "/" + req.params.file);
 });
 
 router.get('/delete/:id/:file', function(req, res){
-  var folder = folderPath(req.params.uid);
+  var folder = appRoot + folderPath(req.params.uid);
   fs.unlinkSync(folder + "/" + req.params.file);
   
   res.redirect(req.get('referer'));
