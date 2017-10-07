@@ -42,7 +42,7 @@ folderFormats = function(uid){
 }
 
 folderPath = function(uid){
-  if(uid == "exports"){
+  if(uid == undefined || uid == null || uid == "exports"){
     return "/db/exports/"; 
   }
 
@@ -160,6 +160,7 @@ router.get('/exports/new', function(req, res){
                   
                   for(var f=0; f<arr.length; f++){
                     var field = arr[f];
+                    console.log(" What we get from DB for " + field + " is " + item[field])
                     fields.push(field)
                     if(item[field] != null && item[field] != undefined){        
                       values.push("'" + item[field] + "'")

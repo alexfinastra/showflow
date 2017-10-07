@@ -18,15 +18,15 @@ flowItem = function(uid){
   return  (item == undefined || item == null) ? null : item[".flow_item"];
 }
 
-folderFormats = function(uid){
+queueFormats = function(uid){
   var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
   properties.readSync();
   var item = properties.get(uid)
   return  (item == undefined || item == null) ? "" : item[".to_schemas"];
 }
 
-folderPath = function(uid){
-  if(uid == "exports"){
+queuePath = function(uid){
+  if(uid == undefined || uid == null || uid == "exports"){
     return "/db/exports/"; 
   }
 
@@ -54,7 +54,7 @@ fileInclude = function(file){
 
 queueFiles = function(uid){
   var files = [];
-  var folder = appRoot + folderPath(uid);
+  var folder = appRoot + queuePath(uid);
 
   fs.readdirSync(folder).forEach( function(file) {
     console.log("current file is "+file)
@@ -69,7 +69,7 @@ queueFiles = function(uid){
               "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
               "created": moment(stats.birthtime).fromNow(),
               "id" : uid,
-              "formats": folderFormats(uid),
+              "formats": queueFormats(uid),
               "folder": folderName
             })
           }
@@ -78,30 +78,18 @@ queueFiles = function(uid){
   return files;
 }
 
-getFilenameFolder = function(folder){
-  var files = fs.readdirSync(folder);
-  
-  var index = files.indexOf("template.json");
-  files.splice(index, 1);
-  files.sort(function(a, b) {
-               return fs.statSync(folder + '/' + b).mtime.getTime() - 
-                      fs.statSync(folder + '/' + a).mtime.getTime();
-           }); 
-  var fileName = files[0].split('_')[0] + "_" + (parseInt(files[0].split('_')[1]) + 1).toString() + ".json"
-  return fileName;
-}
 
 router.get('/',  function(req, res){
   res.redirect('/folder/exports');
 });
 
 router.get('/download/:uid/:file', function(req, res) {
-  var folder = appRoot + folderPath(req.params.uid); 
+  var folder = appRoot + queuePath(req.params.uid); 
   res.download(folder + "/" + req.params.file);
 });
 
 router.get('/delete/:id/:file', function(req, res){
-  var folder = appRoot + folderPath(req.params.uid);
+  var folder = appRoot + queuePath(req.params.uid);
   fs.unlinkSync(folder + "/" + req.params.file);
   
   res.redirect(req.get('referer'));
