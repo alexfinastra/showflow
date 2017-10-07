@@ -88,7 +88,7 @@ router.get('/download/:uid/:file', function(req, res) {
   res.download(folder + "/" + req.params.file);
 });
 
-router.get('/delete/:id/:file', function(req, res){
+router.get('/delete/:uid/:file', function(req, res){
   var folder = appRoot + queuePath(req.params.uid);
   fs.unlinkSync(folder + "/" + req.params.file);
   
@@ -99,7 +99,7 @@ router.get('/list/:uid', function(req, res){
   res.redirect("/folder/list/" + req.params.uid);
 })
 
-router.get('/upload/:id', function(req, res){
+router.get('/upload/:uid', function(req, res){
   res.redirect("/folder/upload/" + req.params.uid);
 })
 

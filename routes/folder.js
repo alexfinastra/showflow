@@ -118,7 +118,7 @@ router.get('/download/:uid/:file', function(req, res) {
   res.download(folder + "/" + req.params.file);
 });
 
-router.get('/delete/:id/:file', function(req, res){
+router.get('/delete/:uid/:file', function(req, res){
   var folder = appRoot + folderPath(req.params.uid);
   fs.unlinkSync(folder + "/" + req.params.file);
   
@@ -233,7 +233,7 @@ router.get('/list/:uid', function(req, res){
   res.render('folder', { title: title, files: folderFiles(uid) , options: options});
 })
 
-router.get('/upload/:id', function(req, res){
+router.get('/upload/:uid', function(req, res){
   var uid = req.params.uid;   
   var item = flowItem(uid)
   var folderName = item == null ? "udefined" : item.interface_name.split('_').join(" ")
