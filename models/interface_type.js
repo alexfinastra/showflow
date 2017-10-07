@@ -260,13 +260,30 @@ var populate_properties = function(idata = null){
               console.log("Error connecting to DB" + err.message + " -- "+ err.message.indexOf("ORA-00001") > -1 ? "User already exists" : "Input Error");
             } 
             else {
-              console.log("----------- > REsults are " + result.rows.length)                
+              console.log("----------- > Results are " + result.rows.length)                
               for(var i=0; i<result.rows.length; i++){
                 var profile = result.rows[i];
                 var type = "";
                 var item = properties.get(profile["UID_INTERFACE_TYPES"])
                 if(item != null){
                   properties.set(profile["UID_INTERFACE_TYPES"] + ".active", ((profile["INTERFACE_STATUS"] == "ACTIVE") ? true : false)) 
+                  properties.set(profile["UID_INTERFACE_TYPES"] + ".flow_item", {
+                                    step: 0,
+                                    type: type,
+                                    uid: profile["UID_INTERFACE_TYPES"],
+                                    request_protocol: profile["REQUEST_PROTOCOL"],
+                                    direction: profile["REQUEST_DIRECTION"],
+                                    request_connections_point: profile["REQUEST_CONNECTIONS_POINT"],
+                                    response_connections_point: profile["RESPONSE_CONNECTIONS_POINT"],
+                                    interface_name: profile["INTERFACE_NAME"],
+                                    status_class: "secondary",
+                                    office: ["OFFICE"], 
+                                    interface_type: profile["INTERFACE_TYPE"], 
+                                    interface_sub_type: profile["INTERFACE_SUB_TYPE"],  
+                                    request_format_type: profile["REQUEST_FORMAT_TYPE"], 
+                                    response_protocol: profile["RESPONSE_PROTOCOL"], 
+                                    response_format_type: profile["RESPONSE_FORMAT_TYPE"]
+                                 }) 
                 }else{
                   if(interface_type.indexOf(profile["INTERFACE_TYPE"]) != -1 ){ type = 'interface' }
                   else if(channel_type.indexOf(profile["INTERFACE_TYPE"]) != -1 ){ type = 'channel' }
