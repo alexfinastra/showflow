@@ -162,7 +162,7 @@ router.get('/exports/new', function(req, res){
                   
                   for(var f=0; f<arr.length; f++){
                     var field = arr[f];
-                    console.log(" What we get from DB for " + field + " is " + item["'" + field + "'"])
+                    console.log(" What we get from DB for " + field + " is " + item[String(field)])
                     fields.push(field)
                     if(item[field] != null && item[field] != undefined){        
                       values.push("'" + item[field] + "'")
@@ -256,13 +256,11 @@ router.get('/clone/:folder', function(req, res){
   res.redirect(req.get('referer'));
 })
 
-router.post('/upload/:uid', function(req, res){
-  var record = flowItem(req.params.uid);  
-  var form = new formidable.IncomingForm();
+router.post('/upload/:uid', function(req, res){    
   var filename = ""
-
   form.multiples = true;
-  form.uploadDir = path.join(record.request_connections_point);  
+  var form = new formidable.IncomingForm();
+  form.uploadDir = appRoot + folderPath(req.params.uid);  
 
   // rename it to it's orignal name
   form.on('file', function(field, file) {
