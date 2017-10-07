@@ -54,7 +54,7 @@ folderPath = function(uid){
   var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
   properties.readSync();
   var connection = properties.get(uid + ".flow_item.request_connections_point")
-  return ((connection.indexOf('jms') != -1) ? ("/" + connection) : connection);
+  return ((connection.indexOf('jms') != -1) ? (appRoot + "/" + connection) : connection);
 }
 
 fileInclude = function(file){
@@ -71,7 +71,7 @@ fileInclude = function(file){
 
 folderFiles = function(uid){
   var files = [];
-  var folder = appRoot + folderPath(uid);
+  var folder =  folderPath(uid);
 
   fs.readdirSync(folder).forEach( function(file) {
     console.log("current file is "+file)
@@ -114,12 +114,12 @@ router.get('/',  function(req, res){
 });
 
 router.get('/download/:uid/:file', function(req, res) {
-  var folder = appRoot + folderPath(req.params.uid); 
+  var folder = folderPath(req.params.uid); 
   res.download(folder + "/" + req.params.file);
 });
 
 router.get('/delete/:uid/:file', function(req, res){
-  var folder = appRoot + folderPath(req.params.uid);
+  var folder = folderPath(req.params.uid);
   fs.unlinkSync(folder + "/" + req.params.file);
   
   res.redirect(req.get('referer'));
