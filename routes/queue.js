@@ -126,11 +126,10 @@ router.get('/build_folders', function(req, res){
               console.log("----------- > Results are " + result.rows.length)               
               for(var i=0; i<result.rows.length; i++){
                 var item = result.rows[i];
-                console.log(" -- Item is " + item);
-                if(item["REQUEST_CONNECTIONS_POINT"].indexOf("jms") != -1){
+                if(item["REQUEST_CONNECTIONS_POINT"] != null && item["REQUEST_CONNECTIONS_POINT"].indexOf("jms") != -1){
                   folders.push(item["REQUEST_CONNECTIONS_POINT"])
                 }
-                if(item["RESPONSE_CONNECTIONS_POINT"].indexOf("jms") != -1){
+                if(item["RESPONSE_CONNECTIONS_POINT"] != null &&  item["RESPONSE_CONNECTIONS_POINT"].indexOf("jms") != -1){
                   folders.push(item["RESPONSE_CONNECTIONS_POINT"])
                 }
               }
