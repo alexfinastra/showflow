@@ -238,6 +238,28 @@ var folders = function(data, select=''){
   return folders;
 };
 
+var to_flowItem = function(profile){
+  return {
+            step: 0,
+            type: type,
+            title: profile["INTERFACE_NAME"].split('_').join(" "),
+            description: profile["DESCRIPTION"],
+            uid: profile["UID_INTERFACE_TYPES"],
+            request_protocol: profile["REQUEST_PROTOCOL"],
+            direction: profile["REQUEST_DIRECTION"],
+            request_connections_point: profile["REQUEST_CONNECTIONS_POINT"],
+            response_connections_point: profile["RESPONSE_CONNECTIONS_POINT"],
+            interface_name: profile["INTERFACE_NAME"],
+            status_class: "secondary",
+            office: ["OFFICE"], 
+            interface_type: profile["INTERFACE_TYPE"], 
+            interface_sub_type: profile["INTERFACE_SUB_TYPE"],  
+            request_format_type: profile["REQUEST_FORMAT_TYPE"], 
+            response_protocol: profile["RESPONSE_PROTOCOL"], 
+            response_format_type: profile["RESPONSE_FORMAT_TYPE"], 
+            response_format_type: profile["RESPONSE_FORMAT_TYPE"]
+         };
+}
 
 var populate_properties = function(idata = null){
   var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
@@ -267,23 +289,7 @@ var populate_properties = function(idata = null){
                 var item = properties.get(profile["UID_INTERFACE_TYPES"])
                 if(item != null){
                   properties.set(profile["UID_INTERFACE_TYPES"] + ".active", ((profile["INTERFACE_STATUS"] == "ACTIVE") ? true : false)) 
-                  properties.set(profile["UID_INTERFACE_TYPES"] + ".flow_item", {
-                                    step: 0,
-                                    type: type,
-                                    uid: profile["UID_INTERFACE_TYPES"],
-                                    request_protocol: profile["REQUEST_PROTOCOL"],
-                                    direction: profile["REQUEST_DIRECTION"],
-                                    request_connections_point: profile["REQUEST_CONNECTIONS_POINT"],
-                                    response_connections_point: profile["RESPONSE_CONNECTIONS_POINT"],
-                                    interface_name: profile["INTERFACE_NAME"],
-                                    status_class: "secondary",
-                                    office: ["OFFICE"], 
-                                    interface_type: profile["INTERFACE_TYPE"], 
-                                    interface_sub_type: profile["INTERFACE_SUB_TYPE"],  
-                                    request_format_type: profile["REQUEST_FORMAT_TYPE"], 
-                                    response_protocol: profile["RESPONSE_PROTOCOL"], 
-                                    response_format_type: profile["RESPONSE_FORMAT_TYPE"]
-                                 }) 
+                  properties.set(profile["UID_INTERFACE_TYPES"] + ".flow_item", to_flowItem(profile)) 
                 }else{
                   if(interface_type.indexOf(profile["INTERFACE_TYPE"]) != -1 ){ type = 'interface' }
                   else if(channel_type.indexOf(profile["INTERFACE_TYPE"]) != -1 ){ type = 'channel' }
@@ -294,23 +300,7 @@ var populate_properties = function(idata = null){
                       connected: false,
                       to_schemas: "",
                       from_schemas: "",
-                      flow_item: {
-                                    step: 0,
-                                    type: type,
-                                    uid: profile["UID_INTERFACE_TYPES"],
-                                    request_protocol: profile["REQUEST_PROTOCOL"],
-                                    direction: profile["REQUEST_DIRECTION"],
-                                    request_connections_point: profile["REQUEST_CONNECTIONS_POINT"],
-                                    response_connections_point: profile["RESPONSE_CONNECTIONS_POINT"],
-                                    interface_name: profile["INTERFACE_NAME"],
-                                    status_class: "secondary",
-                                    office: ["OFFICE"], 
-                                    interface_type: profile["INTERFACE_TYPE"], 
-                                    interface_sub_type: profile["INTERFACE_SUB_TYPE"],  
-                                    request_format_type: profile["REQUEST_FORMAT_TYPE"], 
-                                    response_protocol: profile["RESPONSE_PROTOCOL"], 
-                                    response_format_type: profile["RESPONSE_FORMAT_TYPE"]
-                                 },
+                      flow_item: to_flowItem(profile),
                       rule: [],
                       auditmsg: [],
                       logpattern: [],

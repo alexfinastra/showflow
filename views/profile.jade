@@ -53,7 +53,7 @@ block content
         .form-group.row
           label.col-sm-3.col-form-label(for='inputName') notes, comments, memo
           .col-sm-6
-            textarea#interfaceFormControlTextarea.w-100.form-control(rows="3", name="DESCRIPTION")
+            textarea#interfaceFormControlTextarea.w-100.form-control(rows="3", name="DESCRIPTION", value=((record != null) ? record["DESCRIPTION"] :  ""))
         br
         .fieldset.form-group.row
           legend.col-form-legend.col-sm-3 bank will 

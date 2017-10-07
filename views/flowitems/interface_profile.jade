@@ -15,7 +15,7 @@ li.timeline-item
         //  a.btn.btn-link.col-auto(href=purl)
         //    i.fa.fa-trash-o     
         .row
-          - var purl = "/interface/profile/" + item["id"]
+          - var purl = "/interface/profile/" + item["uid"]
           a.btn.btn-link.col-auto(href=purl)
             i.fa.fa-pencil
           h5.timeline-title.mt-2.col-auto.mr-auto #{item["title"]}                   
@@ -28,7 +28,7 @@ li.timeline-item
           | not certified
     .timeline-body
       p.small
-        | A INTERFACE_TYPES.DESCRIPTION field should be populated with the name and resposibility of the bank system. Coments and Notes will be mostly welcomed in this field also.
+        | #{item["description"]}
       br
       - var target = (item["request_protocol"] == "MQ") ? 'queue' : 'folder'
       - var dhref = "/"+ target +"/list/" + item["uid"]
