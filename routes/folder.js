@@ -208,7 +208,7 @@ router.get('/list/:uid', function(req, res){
   var title = ""
   var options = {
     "button": "",
-    "upload": true,
+    "upload": false,
     "uid" : uid,
     "formats" : folderFormats(uid)
   }
@@ -216,13 +216,11 @@ router.get('/list/:uid', function(req, res){
   if(uid.indexOf('exports') > -1){
     title = 'Interface setup scripts';
     options["button"] = "exports"
-    options["upload"] = false
   }
 
   if(uid.indexOf('flow') > -1){
     title = "List of flows files from " + uid.split('^')[1];
     options["button"] = "flow"
-    options["upload"] = false
   }
 
   if (title == ""){
@@ -236,7 +234,7 @@ router.get('/list/:uid', function(req, res){
 router.get('/upload/:uid', function(req, res){
   var uid = req.params.uid;   
   var item = flowItem(uid)
-  var folderName = item == null ? "udefined" : item.interface_name.split('_').join(" ")
+  var folderName = ((item == null) ? "udefined" : item.interface_name.split('_').join(" "))
   var title = "Upload to " + folderName;
   var options = {
     "button": "",
