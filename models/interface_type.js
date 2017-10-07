@@ -312,6 +312,7 @@ var populate_properties = function(idata = null){
                       console.error(err.message);                       
                   } else {
                       console.log("Run sql query from script : Connection released");
+                      return;
                   }
               });
         });            

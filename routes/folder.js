@@ -31,14 +31,15 @@ folderformats = function(folder){
   return "pain.001.001.06, pain.002.001.08,pain.007.001.02,pain.008.001.06"
 }
 
-folderfiles = function(folder, row_id){
+folderfiles = function(folderfiles, row_id){
   var files = [];
   fs.readdirSync(folder).forEach( function(file) {
     console.log("current file is "+file)
     
     if (file.length > 2 && file.indexOf("template") == -1){ 
       var stats = fs.statSync(folder + '/' + file);
-      var puref = (folder.indexOf("/") == -1) ? folder : folder.split("/")[folder.split("/").length - 1]
+      var folderName = (folder.indexOf("/") == -1) ? folder : folder.split("/")[folder.split("/").length - 1]
+      console.log("--- . >> Upload folder is : " + folderName)
       if(stats.isFile()){
             files.push({      
               "name": file,
@@ -46,7 +47,7 @@ folderfiles = function(folder, row_id){
               "created": moment(stats.birthtime).fromNow(),
               "id" : row_id,
               "formats": folderformats(folder),
-              "folder": puref
+              "folder": folderName
             })
           }
     }
@@ -197,7 +198,7 @@ router.get('/list/:id', function(req, res){
   var options = {
     "button": "",
     "upload": false,
-    "row_id" : row_id,
+    "row_id" : req.params.id,
     "formats" : ""
   }  
   title = "List of files related to " + record.flow_item.interface_name.split('_').join(" ") ;
@@ -220,7 +221,7 @@ router.get('/upload/:id', function(req, res){
   var options = {
     "button": "",
     "upload": ((folder.length > 0) ? true : false),
-    "row_id" : row_id,
+    "row_id" : req.params.id,
     "formats" : record.to_schemas
   }  
    

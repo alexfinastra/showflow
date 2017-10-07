@@ -4,29 +4,34 @@
       <Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
         <CstmrCdtTrfInitn>
           <GrpHdr>
-            <MsgId>223319315</MsgId>
+            <MsgId>1956107176</MsgId>
+            <!--param-->
             <CreDtTm>2016-12-19T06:19:06</CreDtTm>
+            <!--param-->
             <NbOfTxs>1</NbOfTxs>
             <CtrlSum>1000</CtrlSum>
             <InitgPty>
-              <Nm>Fundtech Germany</Nm>
+              <Nm>National DH Bank Plc</Nm>
+              <!--param-->
               <Id>
                 <OrgId>
                   <Othr>
                     <Id>LOCALOFFICEDH1</Id>
+                    <!--param-->
                   </Othr>
                 </OrgId>
               </Id>
             </InitgPty>
           </GrpHdr>
           <PmtInf>
-            <PmtInfId>223319315</PmtInfId>
+            <PmtInfId>1956107176</PmtInfId>
+            <!--param-->
             <PmtMtd>TRF</PmtMtd>
             <BtchBookg>false</BtchBookg>
             <PmtTpInf>
               <SvcLvl>
-                        MAN_AUTH_SIGN_CHK
-                        <Cd>SDVA</Cd>
+            MAN_AUTH_SIGN_CHK
+            <Cd>SDVA</Cd>
               </SvcLvl>
             </PmtTpInf>
             <ReqdExctnDt>2016-12-19</ReqdExctnDt>
@@ -41,6 +46,7 @@
                 <OrgId>
                   <Othr>
                     <Id>LOCALOFFICEDH1</Id>
+                    <!--param-->
                   </Othr>
                 </OrgId>
               </Id>
@@ -52,6 +58,7 @@
                 </Othr>
               </Id>
               <Ccy>ILS</Ccy>
+              <!--param-->
             </DbtrAcct>
             <DbtrAgt>
               <FinInstnId>
@@ -60,20 +67,25 @@
             </DbtrAgt>
             <CdtTrfTxInf>
               <PmtId>
-                <InstrId>223319315</InstrId>
-                <EndToEndId>223319315</EndToEndId>
+                <InstrId>195610717</InstrId>
+                <!--param-->
+                <EndToEndId>195610717</EndToEndId>
+                <!--param-->
               </PmtId>
               <Amt>
-                <InstdAmt Ccy="ILS">300</InstdAmt>
+                <InstdAmt Ccy="ILS">979</InstdAmt>
+                <!--param-->
               </Amt>
               <ChrgBr>SHAR</ChrgBr>
               <CdtrAcct>
                 <Id>
                   <Othr>
                     <Id>7788994411</Id>
+                    <!--param-->
                   </Othr>
                 </Id>
                 <Ccy>ILS</Ccy>
+                <!--param-->
               </CdtrAcct>
               <Cdtr>
                 <Nm>Creditor Name of Full length 35 chars</Nm>
