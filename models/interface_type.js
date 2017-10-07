@@ -239,6 +239,9 @@ var folders = function(data, select=''){
 };
 
 var to_flowItem = function(profile){
+  var type = "";
+  if(interface_type.indexOf(profile["INTERFACE_TYPE"]) != -1 ){ type = 'interface' }
+  else if(channel_type.indexOf(profile["INTERFACE_TYPE"]) != -1 ){ type = 'channel' }
   return {
             step: 0,
             type: type,
@@ -251,7 +254,7 @@ var to_flowItem = function(profile){
             response_connections_point: profile["RESPONSE_CONNECTIONS_POINT"],
             interface_name: profile["INTERFACE_NAME"],
             status_class: "secondary",
-            office: ["OFFICE"], 
+            office: profile["OFFICE"], 
             interface_type: profile["INTERFACE_TYPE"], 
             interface_sub_type: profile["INTERFACE_SUB_TYPE"],  
             request_format_type: profile["REQUEST_FORMAT_TYPE"], 
@@ -284,29 +287,23 @@ var populate_properties = function(idata = null){
             else {
               console.log("----------- > Results are " + result.rows.length)                
               for(var i=0; i<result.rows.length; i++){
-                var profile = result.rows[i];
-                var type = "";
+                var profile = result.rows[i];                
                 var item = properties.get(profile["UID_INTERFACE_TYPES"])
                 if(item != null){
                   properties.set(profile["UID_INTERFACE_TYPES"] + ".active", ((profile["INTERFACE_STATUS"] == "ACTIVE") ? true : false)) 
                   properties.set(profile["UID_INTERFACE_TYPES"] + ".flow_item", to_flowItem(profile)) 
-                }else{
-                  if(interface_type.indexOf(profile["INTERFACE_TYPE"]) != -1 ){ type = 'interface' }
-                  else if(channel_type.indexOf(profile["INTERFACE_TYPE"]) != -1 ){ type = 'channel' }
-
-                  if (properties.get(profile["UID_INTERFACE_TYPES"]) == null){
-                      properties.set(profile["UID_INTERFACE_TYPES"], {
-                      active: ((profile["INTERFACE_STATUS"] == "ACTIVE") ? true : false),
-                      connected: false,
-                      to_schemas: "",
-                      from_schemas: "",
-                      flow_item: to_flowItem(profile),
-                      rule: [],
-                      auditmsg: [],
-                      logpattern: [],
-                      mid: []
-                    })
-                  }
+                }else{                  
+                  properties.set(profile["UID_INTERFACE_TYPES"], {
+                    active: ((profile["INTERFACE_STATUS"] == "ACTIVE") ? true : false),
+                    connected: false,
+                    to_schemas: "",
+                    from_schemas: "",
+                    flow_item: to_flowItem(profile),
+                    rule: [],
+                    auditmsg: [],
+                    logpattern: [],
+                    mid: []
+                  })                  
                 }
               }
               properties.writeSync();
