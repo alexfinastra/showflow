@@ -53,7 +53,8 @@ folderPath = function(uid){
 
   var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
   properties.readSync();
-  return properties.get(uid + ".flow_item.request_connections_point");
+  var connection = properties.get(uid + ".flow_item.request_connections_point")
+  return (connection.indexOf('jms') ? ("/" + connection) : connection);
 }
 
 fileInclude = function(file){
