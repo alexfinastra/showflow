@@ -27,27 +27,65 @@ humanFileSize = function(bytes, si) {
     return bytes.toFixed(1)+' '+units[u];
 };
 
-folderformats = function(folder){
-  return "pain.001.001.06, pain.002.001.08,pain.007.001.02,pain.008.001.06"
+flowItem = function(uid){
+  var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+  properties.readSync();
+  var item = properties.get(uid)
+  return  (item == undefined || item == null) ? null : item[".flow_item"];
 }
 
-folderfiles = function(folderfiles, row_id){
+folderFormats = function(uid){
+  var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+  properties.readSync();
+  var item = properties.get(uid)
+  return  (item == undefined || item == null) ? "" : item[".to_schemas"];
+}
+
+folderPath = function(uid){
+  if(uid == "exports"){
+    return "/db/exports/"; 
+  }
+
+  if(uid.indexOf("flows") != -1 ){
+    var f = uid.split("^")[1]
+    return "/flows/" + f; 
+  }
+
+  var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+  properties.readSync();
+  return properties.get(uid + ".flow_item.request_connections_point");
+}
+
+fileInclude = function(file){
+  var excludeList = ['template']
+
+  for(var i=0; i<excludeList.length; i++){
+    var exclude = excludeList[i];
+    if(file.indexOf(exclude) > -1) {
+      return false;
+    }
+  }
+  return true;
+}
+
+folderFiles = function(uid){
   var files = [];
+  var folder = appRoot + folderPath(uid);
+
   fs.readdirSync(folder).forEach( function(file) {
     console.log("current file is "+file)
     
-    if (file.length > 2 && file.indexOf("template") == -1){ 
+    if (file.length > 2 && fileInclude(file)){ 
       var stats = fs.statSync(folder + '/' + file);
       var folderName = (folder.indexOf("/") == -1) ? folder : folder.split("/")[folder.split("/").length - 1]
-      console.log("--- . >> Upload folder is : " + folderName + " received folder is " + folder)
-
+      
       if(stats.isFile()){
             files.push({      
               "name": file,
               "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
               "created": moment(stats.birthtime).fromNow(),
-              "id" : row_id,
-              "formats": folderformats(folder),
+              "id" : uid,
+              "formats": folderFormats(uid),
               "folder": folderName
             })
           }
@@ -56,7 +94,7 @@ folderfiles = function(folderfiles, row_id){
   return files;
 }
 
-get_filename_folder = function(folder){
+getFilenameFolder = function(folder){
   var files = fs.readdirSync(folder);
   
   var index = files.indexOf("template.json");
@@ -65,8 +103,8 @@ get_filename_folder = function(folder){
                return fs.statSync(folder + '/' + b).mtime.getTime() - 
                       fs.statSync(folder + '/' + a).mtime.getTime();
            }); 
-  var filename = files[0].split('_')[0] + "_" + (parseInt(files[0].split('_')[1]) + 1).toString() + ".json"
-  return filename;
+  var fileName = files[0].split('_')[0] + "_" + (parseInt(files[0].split('_')[1]) + 1).toString() + ".json"
+  return fileName;
 }
 
 
@@ -74,33 +112,20 @@ router.get('/',  function(req, res){
   res.redirect('/folder/exports');
 });
 
-router.get('/download/:id/:file/:folder', function(req, res) {
-  var row_id = req.params["id"];
-  var file = req.params["file"];
-  var f = req.params["folder"];
-
-  if( row_id == 0 ){
-    folder = "./db/exports/";
-  } else if (row_id== 99999999){
-    folder = "./flows/" + f; 
-  }else{ 
-    //var record = model.select(row_id);
-
-    folder = "./flows/" + f //path.join(record["REQUEST_CONNECTIONS_POINT"]);
-  }
-  res.download(folder+"/"+file);
+router.get('/download/:uid/:file', function(req, res) {
+  var folder = folderPath(req.params.uid); 
+  res.download(folder + "/" + req.params.file);
 });
 
+router.get('/delete/:id/:file', function(req, res){
+  var folder = folderPath(req.params.uid);
+  fs.unlinkSync(folder + "/" + req.params.file);
+  
+  res.redirect(req.get('referer'));
+})
+
 router.get('/exports',  function(req, res) {
-  var row_id = 0;
-  var files = folderfiles(appRoot + "/db/exports", row_id);
-  var options = {
-    "button": "exports",
-    "upload": false,
-    "row_id" : row_id,
-    "formats" : ""
-  }
-  res.render('folder', { title: 'Interface setup scripts', files: files , options: options});
+  res.redirect("/folder/list/exports");
 });
 
 router.get('/exports/new', function(req, res){
@@ -126,14 +151,12 @@ router.get('/exports/new', function(req, res){
               console.log("Error connecting to DB" + err.message + " -- "+ err.message.indexOf("ORA-00001") > -1 ? "User already exists" : "Input Error");
             } 
             else {
-              console.log("----------- > REsults are " + result.rows.length)
+              console.log("----------- > Results are " + result.rows.length)
               var script = "";  
               for(var i=0; i<result.rows.length; i++){
                 var item = result.rows[i];
-                var ikey = item["UID_INTERFACE_TYPES"]+".active"
-                if(properties.get(ikey) == true){
-                  var values = [];
-                  var fields = [];
+                if(properties.get(item["UID_INTERFACE_TYPES"]+".active") == true){
+                  var values = [], fields = [];
                   
                   for(var f=0; f<arr.length; f++){
                     var field = arr[f];
@@ -152,9 +175,7 @@ router.get('/exports/new', function(req, res){
               }
 
               fs.writeFile(file_name, script , function (err,data) {
-                if (err) {
-                  return console.log(err);
-                }
+                if (err) { return console.log(err); }
                 console.log(data);
               });
                 
@@ -175,78 +196,70 @@ router.get('/exports/new', function(req, res){
 
 })
 
-router.get('/flows/:folder', function(req, res){
- console.log("Flows folder " + req.params["folder"] )
-  var folder = "flows/" + req.params["folder"] 
-  var files = folderfiles(folder, 99999999);
-  var options = {
-    "button": "flow",
-    "name": req.params["folder"],
-    "upload": false,
-    "row_id" : 99999999,
-    "formats" : ""
-  }  
-  title = "List of files related to " + req.params["folder"];
-  res.render('folder', { title: title, files: files , options: options});
+router.get('/flows/:uid', function(req, res){
+ res.redirect("/folder/list/flow^" + req.params.uid);
 })
 
-router.get('/list/:id', function(req, res){
-  var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
-  properties.readSync();
-  var record = properties.get(req.params.id);     
-  var folder = path.join(record.flow_item.request_connections_point);
-  var files = folderfiles(folder, req.params.id);
+router.get('/list/:uid', function(req, res){
+  var uid = req.params.uid;
+  var title = ""
   var options = {
     "button": "",
-    "upload": false,
-    "row_id" : req.params.id,
-    "formats" : ""
-  }  
-  title = "List of files related to " + record.flow_item.interface_name.split('_').join(" ") ;
-  res.render('folder', { title: title, files: files , options: options});
+    "upload": true,
+    "uid" : uid,
+    "formats" : folderFormats(uid)
+  }
+
+  if(uid.indexOf('exports') > -1){
+    title = 'Interface setup scripts';
+    options["button"] = "exports"
+    options["upload"] = false
+  }
+
+  if(uid.indexOf('flow') > -1){
+    title = "List of flows files from " + uid.split('^')[1];
+    options["button"] = "flow"
+    options["upload"] = false
+  }
+
+  if (title == ""){
+    var item = flowItem(uid)
+    folderName = item == null ? "udefined" : item.interface_name.split('_').join(" ")
+    title = "List of files from " + folderName;
+  }
+  res.render('folder', { title: title, files: folderFiles(uid) , options: options});
 })
 
 router.get('/upload/:id', function(req, res){
-  var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
-  properties.readSync();
-  
-  var files = []
-  var record = properties.get(req.params.id);      
-  var folder = path.join(record.flow_item.request_connections_point);
-  var title = "Upload to " + record.flow_item.interface_name.split('_').join(" ") ;  
-
-  if (folder.length > 0){
-    files = folderfiles(folder, req.params.id);
-  }
-  
+  var uid = req.params.uid;   
+  var item = flowItem(uid)
+  var folderName = item == null ? "udefined" : item.interface_name.split('_').join(" ")
+  var title = "Upload to " + folderName;
   var options = {
     "button": "",
-    "upload": ((folder.length > 0) ? true : false),
-    "row_id" : req.params.id,
-    "formats" : record.to_schemas
-  }  
-   
-  res.render('folder', { title: title, files: files , options: options});
+    "upload": true,
+    "uid" : uid,
+    "formats" : folderFormats(uid)
+  }
+
+  res.render('folder', { title: title, files: folderFiles(uid) , options: options});
 })
 
 router.get('/clone/:folder', function(req, res){
   var folder = "flows/" + req.params["folder"]
-  var file_name = get_filename_folder(folder)
+  var file_name = getFilenameFolder(folder)
   fse.copySync(folder + '/' + 'template.json' , folder + '/' +  file_name);
    
   res.redirect(req.get('referer'));
 })
 
-router.post('/upload/:id', function(req, res){
-  var properties = new json.File(appRoot + "/db/properties/profile_index.json" );
-  properties.readSync();
-  var record = properties.get(req.params.id);
-  
+router.post('/upload/:uid', function(req, res){
+  var record = flowItem(req.params.uid);  
   var form = new formidable.IncomingForm();
   var filename = ""
 
   form.multiples = true;
-  form.uploadDir = path.join(record.flow_item.request_connections_point);  
+  form.uploadDir = path.join(record.request_connections_point);  
 
   // rename it to it's orignal name
   form.on('file', function(field, file) {

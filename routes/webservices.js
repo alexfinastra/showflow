@@ -31,14 +31,14 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/profile/:id', function(req, res){
-	row_id = req.params["id"]
+	uid = req.params["id"]
 	var service = "STATIC_DATA"
 	res.render('service_profile', { title: 'interface Profile', service: service });
 })
 
 router.post('/execute/:id', function(req, res){
-	row_id = req.params["id"]
-	res.redirect('/webservices/profile/'+row_id);
+	uid = req.params["id"]
+	res.redirect('/webservices/profile/'+uid);
 })
 
 module.exports = router;
