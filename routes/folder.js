@@ -257,13 +257,16 @@ router.get('/clone/:folder', function(req, res){
 })
 
 router.post('/upload/:uid', function(req, res){    
-  var filename = ""
-  form.multiples = false;
-  var form = new formidable.IncomingForm();
-  //form.uploadDir = appRoot + folderPath();
-  form.uploadDir = path.join(flowItem(req.params.uid)["request_connections_point"]); 
-  console.log( "---------> Upload to - " + form.uploadDir)
+  var properties = new json.File(appRoot + "/db/properties/profile_index.json" );
+  properties.readSync();
+  var record = properties.get(req.params.uid);
   
+  var form = new formidable.IncomingForm();
+  var filename = ""
+
+  form.multiples = true;
+  form.uploadDir = path.join(record.flow_item.request_connections_point);  
+
   // rename it to it's orignal name
   form.on('file', function(field, file) {
     if (fs.existsSync(file.path)) {       
