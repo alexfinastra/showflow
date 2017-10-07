@@ -257,20 +257,19 @@ router.get('/clone/:folder', function(req, res){
 })
 
 router.post('/upload/:uid', function(req, res){    
-  var filename = ""
   form.multiples = true;
   var form = new formidable.IncomingForm();
   form.uploadDir = appRoot + folderPath(req.params.uid);  
 
   // rename it to it's orignal name
-  form.on('file', function(field, file) {
-    if (fs.existsSync(file.path)) {       
-      fs.rename(file.path, path.join(form.uploadDir, file.name));
-      filename = file.name;
-    }else{
-      console.log("File was taken" + socketsConnected)
-    } 
-  });
+  //form.on('file', function(field, file) {
+  //  if (fs.existsSync(file.path)) {       
+  //    fs.rename(file.path, path.join(form.uploadDir, file.name));
+  //    filename = file.name;
+  //  }else{
+  //    console.log("File was taken" + socketsConnected)
+  //  } 
+  //});
 
   form.on('error', function(err) {
     console.log('Upload to folder Error: \n' + err);
@@ -278,7 +277,8 @@ router.post('/upload/:uid', function(req, res){
 
   // once all the files have been uploaded, send a response to the client
   form.on('end', function() {
-    console.log("File uploaded sucessfully");
+    var filename = this.openedFiles[0].name;
+    console.log("File uploaded sucessfully " + filename);
     console.log("Uploaded to --> " + form.uploadDir);
     var isWin = /^win/.test(process.platform);
     if (!isWin && form.uploadDir.indexOf('jms') > -1){
