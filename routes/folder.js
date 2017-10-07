@@ -39,7 +39,8 @@ folderfiles = function(folderfiles, row_id){
     if (file.length > 2 && file.indexOf("template") == -1){ 
       var stats = fs.statSync(folder + '/' + file);
       var folderName = (folder.indexOf("/") == -1) ? folder : folder.split("/")[folder.split("/").length - 1]
-      console.log("--- . >> Upload folder is : " + folderName)
+      console.log("--- . >> Upload folder is : " + folderName + " received folder is " + folder)
+
       if(stats.isFile()){
             files.push({      
               "name": file,
