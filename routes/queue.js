@@ -30,7 +30,7 @@ queuePath = function(uid){
     return "/db/exports/"; 
   }
 
-  if(uid.indexOf("flows") != -1 ){
+  if(uid.indexOf("flow") != -1 ){
     var f = uid.split("^")[1]
     return "/flows/" + f; 
   }

@@ -46,7 +46,7 @@ folderPath = function(uid){
     return "/db/exports/"; 
   }
 
-  if(uid.indexOf("flows") != -1 ){
+  if(uid.indexOf("flow") != -1 ){
     var f = uid.split("^")[1]
     return "/flows/" + f; 
   }
@@ -155,12 +155,13 @@ router.get('/exports/new', function(req, res){
               var script = "";  
               for(var i=0; i<result.rows.length; i++){
                 var item = result.rows[i];
+                console.log("--> Item is " + item);
                 if(properties.get(item["UID_INTERFACE_TYPES"]+".active") == true){
                   var values = [], fields = [];
                   
                   for(var f=0; f<arr.length; f++){
                     var field = arr[f];
-                    console.log(" What we get from DB for " + field + " is " + item[field])
+                    console.log(" What we get from DB for " + field + " is " + item["'" + field + "'"])
                     fields.push(field)
                     if(item[field] != null && item[field] != undefined){        
                       values.push("'" + item[field] + "'")
