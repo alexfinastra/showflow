@@ -29,7 +29,7 @@ var group_services = function(){
 }
 
 router.get('/', function(req, res, next) {
-  var data = group_services(result.rows);
+  var data = group_services();
   res.render('services_list', { identity: identity, data: data });
 });
 
