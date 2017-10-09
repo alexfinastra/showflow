@@ -10,30 +10,34 @@ var identity = {
 	description: ' GPP service-oriented architecture (SOA) services. Each service is an unassociated, self-supporting functionality. A business flow of messages is a cluster of services set in a predefined order which provide GPPs range of functionality'
 }
 
-var services = {
-	"file" : null,
-	"keys": null,
-	"values" : null
-};
+var group_services = function(){
+    var res = {};
+    var services = new json.File(appRoot + "/db/properties/services_index.json" );
+    services.readSync();
+    var uids = Object.keys(services.data);
 
-loadservices = function(){
-	services["file"] = new json.File(appRoot + "/db/properties/services_index.json" );
-	services["file"].readSync();
-	services["keys"] = services["file"].get("keys");
-	services["values"]= services["file"].get("values");	
+    for(var i=0; i<uids.length; i++){
+        uid = uids[i];
+        obj = services.get(uid + ".floW_item")
+        key = obj["interface_type"]
+
+        if(key == null || key == undefined) { continue;}    
+        if(!(key in res)){ res[key] = []}        
+        res[key].push(obj);
+    }
+    return res;
 }
 
 router.get('/', function(req, res, next) {
-  loadservices();
-
-  console.log(" services " + services["keys"] + " and " + services["values"].length);
-  res.render('services_list', { identity: identity, keys: services["keys"]  , values: services["values"] });	  
+  var data = group_profiles(result.rows);
+  res.render('services_list', { identity: identity, data: data });
 });
 
-router.get('/profile/:id', function(req, res){
-	uid = req.params["id"]
-	var service = "STATIC_DATA"
-	res.render('service_profile', { title: 'interface Profile', service: service });
+router.get('/profile/:uid', function(req, res){
+	uid = req.params.uid
+	var services = new json.File(appRoot + "/db/properties/services_index.json" );
+  services.readSync();
+	res.render('service_profile', { title: 'SOAP Service - ' + services.get(req.params.uid + ".flow_item.interface_type"), service: services.get(req.params.uid) });
 })
 
 router.post('/execute/:id', function(req, res){

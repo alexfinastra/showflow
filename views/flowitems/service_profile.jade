@@ -1,0 +1,33 @@
+li.timeline-item
+  .timeline-badge(class=item["status_class"])    
+      i.fa.fa-expand
+  .timeline-panel
+    .timeline-heading
+      if profile == null       
+        .row
+          - var purl = "/webservice/profile/" + item["uid"]
+          a.btn.btn-link.col-auto(href=purl)
+            i.fa.fa-pencil
+          h5.timeline-title.mt-2.col-auto.mr-auto #{item["title"]}
+      else
+        h5.timeline-title 
+      p
+        small.text-muted
+          i.fa.fa-certificate
+          span.ml-2 
+          | not certified
+    .timeline-body
+      p.small
+        | #{item["description"]}
+      br      
+      - var href = "/webservice/send" + item["uid"]
+      a.btn.float-left(href=href, class=btn_class)
+          span 
+            b Send 
+            | SOAP request      
+      
+
+
+
+
+

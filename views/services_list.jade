@@ -7,15 +7,14 @@ block content
     blockquote.blockquote
       p.small=identity["description"]       
     br
-    if keys == null || values == null
+    if data == null 
       .row.mt-5
         .col-md-12.mt-5
           center.mt-5
             h3.mt-5 Comming very very  very soon 
             br             
     else
-      -var index = 0
-      each key in keys   
+      each key in Object.keys(data) 
         br
         br
         h4 #{key} 
@@ -28,13 +27,13 @@ block content
                 th.col.col-md-6 Description
                 th.col.col-md-2 
             tbody  
-              each obj in values[index++] 
+              each obj in data[key]["flow_item"]
                 tr.row.text-dark
                   td.col.col-md-4
-                    b #{obj["name"]}
+                    b #{obj["title"]}
                   td.col.col-md-6 #{obj["description"]}
                   td.col.col-md-2                    
-                    - var href = "/" + identity["type"] + "/profile/" + obj["step"]
+                    - var href = "/" + identity["type"] + "/profile/" + obj["uid"]
                     a.btn.btn-success.btn-sm.hoverbutton(href= href)
                       i.fa.fa-external-link
-                      span.ml-2  Open
+                      span.ml-2  Edit

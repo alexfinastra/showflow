@@ -1,0 +1,75 @@
+<FndtMsg xmlns="http://fundtech.com/SCL/CommonTypes">
+  <Msg>
+    <Pmnt>
+      <swif:SWIFT MT="103" xmlns:swif="urn:fundtech/scl/SWIFT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <swif:Header>
+          <swif:Input_Output_Identifier>O</swif:Input_Output_Identifier>
+          <swif:Sender_BIC>CHASUS33DIS</swif:Sender_BIC>
+          <swif:Receiver_BIC>DHILDHILXXX</swif:Receiver_BIC>
+          <swif:User_Header>
+            <swif:Message_User_Reference>001382CB03553</swif:Message_User_Reference>
+          </swif:User_Header>
+          <swif:Original_Swift>
+            <swif:Message>{1:F01DHILDHILXXXX0857137152}
+{2:O1031036130401CHASUS33ADIS02182191591304011136N}
+{3:{108:001382CB03553}}
+{4:
+:20:WACKcdb912405697
+:23B:CRED
+:32A:161219EUR158
+:50K:XIAOLIN
+:52A:/8855221133
+WPACIL2WXXX
+:59:/3300330033
+ZHANGSAN
+:71A:BEN
+:71F:ILS100
+-}
+</swif:Message>
+          </swif:Original_Swift>
+          <swif:Create_Date_Time>2013-04-01T10:36:00</swif:Create_Date_Time>
+          <swif:Msg_ID>WACKcdb912405697</swif:Msg_ID>
+          <swif:Sequence_Number>137152</swif:Sequence_Number>
+          <swif:Session_Number>0857</swif:Session_Number>
+        </swif:Header>
+        <swif:Data xsi:type="swif:Data_103">
+          <swif:Message_Priority>NORM</swif:Message_Priority>
+          <swif:F20>
+            <swif:Sender_s_Reference>WACKcdb912405697</swif:Sender_s_Reference>
+          </swif:F20>
+          <swif:F32A>
+            <swif:Currency>EUR</swif:Currency>
+            <swif:Amount>158</swif:Amount>
+            <swif:Date>2016-12-19</swif:Date>
+          </swif:F32A>
+          <swif:F50a>
+            <swif:PartyInfo>
+              <swif:PartyName>XIAOLIN</swif:PartyName>
+            </swif:PartyInfo>
+          </swif:F50a>
+          <swif:F52a>
+            <swif:Account>8855221133</swif:Account>
+            <swif:Identifier_Code>WPACIL2WXXX</swif:Identifier_Code>
+          </swif:F52a>
+          <swif:Cdrt_F58a_F59a>
+            <swif:Account>3300330033</swif:Account>
+            <swif:PartyName>ZHANGSAN</swif:PartyName>
+          </swif:Cdrt_F58a_F59a>
+          <swif:F71A>
+            <swif:Code>CRED</swif:Code>
+          </swif:F71A>
+          <swif:ChrgsInf>
+            <swif:Currency>ILS</swif:Currency>
+            <swif:Amount>100</swif:Amount>
+          </swif:ChrgsInf>
+        </swif:Data>
+      </swif:SWIFT>
+    </Pmnt>
+    <Extn>
+      <XMLPersistentInfo>
+        <D_DEBULKED_MSG>false</D_DEBULKED_MSG>
+        <D_BULK_MSG>false</D_BULK_MSG>
+      </XMLPersistentInfo>
+    </Extn>
+  </Msg>
+</FndtMsg>

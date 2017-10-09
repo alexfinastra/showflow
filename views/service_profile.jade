@@ -4,8 +4,16 @@ block content
   .container.mt-5      
     .col-md-auto.mt-5
       include docs/static_data    
+    br    
     br
-    br
+    .container      
+      h5.ml-2 Web service card as it appears in Payment Flows       
+      ul.timeline
+        - var profile = true
+        - var item = service.flow_item
+        include flowitems/service_profile
+      br
+      br 
     .container          
       form#needs-validation(action='/webservices/execute' , method="POST", novalidate)
           .form-group.row

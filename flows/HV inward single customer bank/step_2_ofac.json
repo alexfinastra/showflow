@@ -1,11 +1,16 @@
 {
    "name": "HV inward single customer bank",
-   "stp" : "89%",
+   "stp" : "73%",
    "flowitems": [
       {
          "step": 1,
          "type": "channel",
          "uid": "***^SWD_SE_SWIFT_SINGLE_OUT"
+      },
+      {
+         "step": 2,
+         "type": "interface",
+         "uid": "***^COMPLIANCE_OUT_PREDEBIT"
       }
    ]
 }
