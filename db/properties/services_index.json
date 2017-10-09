@@ -1,6 +1,6 @@
 {
   "TASKS^ACTIVATE_MATURE_PROFILE_CHANGES" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -26,7 +26,7 @@
     "mid": []
   },
   "TASKS^CLEAN_DELETE_ENTRIES" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -52,7 +52,7 @@
     "mid": []
   },
   "TASKS^CLEAN_PROFILE_AUDIT_ENTRIES" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -78,7 +78,7 @@
     "mid": []
   },
   "TASKS^NEXT_BUSINESS_DATE" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -104,7 +104,7 @@
     "mid": []
   },
   "TASKS^RELEASE_FROM_SCHEDULE" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -130,7 +130,7 @@
     "mid": []
   },
   "TASKS^SUSPEND_INACTIVE_USERS" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -156,7 +156,7 @@
     "mid": []
   },
   "TASKS^MOVE_TO_HISTORY" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -182,7 +182,7 @@
     "mid": []
   },
   "TASKS^DELETE_FROM_HISTORY" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -208,7 +208,7 @@
     "mid": []
   },
   "TASKS^REFRESH_MESSAGE_SNAPSHOT" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -234,7 +234,7 @@
     "mid": []
   },
   "ACTIONS_ON_PAYMENTS^MESSAGE_LOAD" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -260,7 +260,7 @@
     "mid": []
   },
   "ACTIONS_ON_PAYMENTS^MESSAGE_SUBMIT" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -286,7 +286,7 @@
     "mid": []
   },
   "STP_VALIDATION^VALIDATE_STP_RULES" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -312,7 +312,7 @@
     "mid": []
   },
   "STP_VALIDATION^LOAD_STP_RULES" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -338,7 +338,7 @@
     "mid": []
   },
   "STATIC_DATA^APPLY_CHANGES" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -364,7 +364,7 @@
     "mid": []
   },
   "STATIC_DATA^LOAD_PROFILE" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -390,7 +390,7 @@
     "mid": []
   },
   "STATIC_DATA^PROFILE_ACTIONS" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -416,7 +416,7 @@
     "mid": []
   },
   "STP_VALIDATION^PROFILE_LIST" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -442,7 +442,7 @@
     "mid": []
   },
   "QUEUE_LIST^QUEUE_LIST" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",
@@ -468,7 +468,7 @@
     "mid": []
   },
   "IBAN_VALIDATION^IBAN_VALIDATION" : {
-  	"active": false,
+  	"active": true,
     "connected": false,
     "req_fields": "",
     "res_fields": "",

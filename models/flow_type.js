@@ -39,11 +39,14 @@ method.populate_items = function(){
       current = this._properties.get(item["uid"]);
     }
 
+    console.log("Current " + item["type"] + " is " + current);
+
     if(current == null || current["active"] != true){
       continue;
     } 
     var obj = current["flow_item"]  
-   
+    console.log("Current " + item["type"] + " is " + current);
+       
     if (current["connected"] == true){ obj["status_class"] = "success"}
     if (current["connected"] == "error"){ obj["status_class"] = "danger"}
 
