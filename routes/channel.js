@@ -208,7 +208,8 @@ router.post('/update/:id', function (req, res) {
                         detailed_message: err ? err.message : ""
                     }));
                 } else {
-                    // Resource successfully updated. Sending an empty response body. 
+                    // Resource successfully updated. Sending an empty response body.
+                     
                     res.redirect("/channel/profile/" + uid);
                 }
                 // Release the connection
