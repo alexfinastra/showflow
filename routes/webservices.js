@@ -29,7 +29,7 @@ var group_services = function(){
 }
 
 router.get('/', function(req, res, next) {
-  var data = group_profiles(result.rows);
+  var data = group_services(result.rows);
   res.render('services_list', { identity: identity, data: data });
 });
 
