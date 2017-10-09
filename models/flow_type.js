@@ -34,20 +34,21 @@ method.populate_items = function(){
     var current = null;
     
     if (item["type"] == "service"){
-      current = this._services.get(item["uid"] + ".flow_item");
+      current = this._services.get(item["uid"]);
     } else {
-      current = this._properties.get(item["uid"] + ".flow_item");
+      current = this._properties.get(item["uid"]);
     }
 
     if(current == null || current["active"] != true){
       continue;
-    }   
+    } 
+    var obj = current["flow_item"]  
    
-    if (current["connected"] == true){ current["status_class"] = "success"}
-    if (current["connected"] == "error"){ current["status_class"] = "danger"}
+    if (current["connected"] == true){ obj["status_class"] = "success"}
+    if (current["connected"] == "error"){ obj["status_class"] = "danger"}
 
-    console.log("Current Item is " + current["title"]);
-    this._flow["items"].push(current);
+    console.log("Current Item is " + obj["title"]);
+    this._flow["items"].push(obj);
   }
 };
 
