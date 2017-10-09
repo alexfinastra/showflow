@@ -43,12 +43,12 @@ folderFormats = function(uid){
 
 folderPath = function(uid){
   if(uid == undefined || uid == null || uid == "exports"){
-    return "/db/exports/"; 
+    return appRoot + "/db/exports/"; 
   }
 
   if(uid.indexOf("flow") != -1 ){
     var f = uid.split("^")[1]
-    return "/flows/" + f; 
+    return appRoot + "/flows/" + f; 
   }
 
   var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
