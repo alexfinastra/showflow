@@ -27,13 +27,13 @@ block content
                 th.col.col-md-6 Description
                 th.col.col-md-2 
             tbody  
-              each obj in data[key]["flow_item"]
+              each obj in data[key]
                 tr.row.text-dark
                   td.col.col-md-4
-                    b #{obj["title"]}
-                  td.col.col-md-6 #{obj["description"]}
+                    b #{obj["flow_item"]["title"]}
+                  td.col.col-md-6 #{obj["flow_item"]["description"]}
                   td.col.col-md-2                    
-                    - var href = "/" + identity["type"] + "/profile/" + obj["uid"]
+                    - var href = "/" + identity["type"] + "/profile/" + obj["flow_item"]["uid"]
                     a.btn.btn-success.btn-sm.hoverbutton(href= href)
                       i.fa.fa-external-link
                       span.ml-2  Edit
