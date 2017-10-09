@@ -224,7 +224,7 @@ var folders = function(data, select=''){
   return folders;
 };
 
-var to_flowItem = function(profile){
+var to_flowitem = function(profile){
   var type = "";
   if(interface_type.indexOf(profile["INTERFACE_TYPE"]) != -1 ){ type = 'interface' }
   else if(channel_type.indexOf(profile["INTERFACE_TYPE"]) != -1 ){ type = 'channel' }
@@ -277,14 +277,14 @@ var populate_properties = function(idata = null){
                 var item = properties.get(profile["UID_INTERFACE_TYPES"])
                 if(item != null){
                   properties.set(profile["UID_INTERFACE_TYPES"] + ".active", ((profile["INTERFACE_STATUS"] == "ACTIVE") ? true : false)) 
-                  properties.set(profile["UID_INTERFACE_TYPES"] + ".flow_item", to_flowItem(profile)) 
+                  properties.set(profile["UID_INTERFACE_TYPES"] + ".flow_item", to_flowitem(profile)) 
                 }else{                  
                   properties.set(profile["UID_INTERFACE_TYPES"], {
                     active: ((profile["INTERFACE_STATUS"] == "ACTIVE") ? true : false),
                     connected: false,
                     to_schemas: "",
                     from_schemas: "",
-                    flow_item: to_flowItem(profile),
+                    flow_item: to_flowitem(profile),
                     rule: [],
                     auditmsg: [],
                     logpattern: [],

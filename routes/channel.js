@@ -212,7 +212,7 @@ router.post('/update/:id', function (req, res) {
                     var record  = result.rows[0];
                     var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
                     properties.readSync();
-                    properties.set(uid + ".flow_item", model.to_flowItem(record));
+                    properties.set(uid + ".flow_item", model.to_flowitem(record));
                     res.redirect("/channel/profile/" + uid);
                 }
                 // Release the connection
