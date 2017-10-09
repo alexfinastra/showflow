@@ -38,7 +38,15 @@ folderFormats = function(uid){
   var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
   properties.readSync();
   var item = properties.get(uid)
-  return  (item == undefined || item == null) ? "" : item[".to_schemas"];
+  if (item == undefined || item == null){
+    return "";
+  }
+
+  if (item["flow_item"]["direction"] == 'I'){
+    return  item[".to_schemas"];
+  }else{
+    return  item[".to_schemas"];
+  }
 }
 
 folderPath = function(uid){

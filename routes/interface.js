@@ -209,7 +209,11 @@ router.post('/update/:id', function (req, res) {
                         detailed_message: err ? err.message : ""
                     }));
                 } else {
-                    // Resource successfully updated. Sending an empty response body. 
+                    // Resource successfully updated. Sending an empty response body.
+                    var record  = result.rows[0];
+                    var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+                    properties.readSync();
+                    properties.set(uid + ".flow_item", model.to_flowItem(record)); 
                     res.redirect("/interface/profile/" + uid);
                 }
                 // Release the connection

@@ -209,20 +209,6 @@ description = function(obj){
 };
 
 
-to_flowitem = function(profile){ 
-  return {
-    "id": profile["uid"],
-    "type": profile["type"],
-    "direction": profile["direction"],
-    "status_class": profile["status_class"],
-    "title" : profile["interface_name"].split("_").join(" ") ,
-    "request_protocol": profile["request_protocol"],
-    "request_connections_point": profile["request_connections_point"],
-    "response_connections_point": profile["response_connections_point"]
-  }
-};
-
-
 var folders = function(data, select=''){
   var folders = [];
   for (var i = 0; i< data.length; i++  ) {      
