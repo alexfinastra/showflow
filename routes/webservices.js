@@ -18,7 +18,7 @@ var group_services = function(){
 
     for(var i=0; i<uids.length; i++){
         uid = uids[i];
-        obj = services.get(uid + ".floW_item")
+        obj = services.get(uid + ".flow_item")
         key = obj["interface_type"]
 
         if(key == null || key == undefined) { continue;}    
