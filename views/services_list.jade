@@ -30,10 +30,10 @@ block content
               each obj in data[key]
                 tr.row.text-dark
                   td.col.col-md-4
-                    b #{obj["flow_item"]["title"]}
-                  td.col.col-md-6 #{obj["flow_item"]["description"]}
+                    b #{obj["title"]}
+                  td.col.col-md-6 #{obj["description"]}
                   td.col.col-md-2                    
-                    - var href = "/" + identity["type"] + "/profile/" + obj["flow_item"]["uid"]
+                    - var href = "/" + identity["type"] + "/profile/" + obj["uid"]
                     a.btn.btn-success.btn-sm.hoverbutton(href= href)
                       i.fa.fa-external-link
                       span.ml-2  Edit
