@@ -34,9 +34,9 @@ method.populate_items = function(){
     var current = null;
     
     if (item["type"] == "service"){
-      current = this._services.get(item["uid"]);
+      current = this._services.get(item["uid"] + ".flow_item");
     } else {
-      current = this._properties.get(item["uid"]);
+      current = this._properties.get(item["uid"] + ".flow_item");
     }
 
     if(current == null || current["active"] != true){
