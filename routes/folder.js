@@ -93,7 +93,7 @@ folderFiles = function(uid){
               "name": file,
               "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
               "created": moment(stats.birthtime).fromNow(),
-              "id" : uid,
+              "id" : ((uid.indexOf('^') > -1) ? uid.split('^')[1] : uid),
               "formats": folderFormats(uid),
               "folder": folderName
             })
