@@ -280,10 +280,10 @@ router.post('/upload/:uid', function(req, res){
       filename = file.name;
       console.log(" -= -= -  OPA " + appRoot + '/' + currentFlow)
       var flow = new json.File(appRoot + '/' + currentFlow );
-      console.log(" -= -= -  OPA " + current )
+      console.log(" -= -= -  OPA " + flow )
       flow.readSync(); 
      if (currentFlow.length > 0 && flow.get("input").length == 0){                 
-        var fileName = appRoot + '/flows/' +  current.get("name") + '/' + current.get("template") + '_' + moment().format('YYYY_MM_DD_hh_mm_ss') + '.json'
+        var fileName = appRoot + '/flows/' +  flow.get("name") + '/' + flow.get("template") + '_' + moment().format('YYYY_MM_DD_hh_mm_ss') + '.json'
         console.log(" ++++ + ++ Real  File is " + fileName)
         fse.copySync(currentFlow , fileName);
         console.log(" ++++ + ++ Real  File is " + fileName)
