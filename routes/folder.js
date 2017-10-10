@@ -278,19 +278,6 @@ router.post('/upload/:uid', function(req, res){
     if (fs.existsSync(file.path)) {       
       fs.rename(file.path, path.join(form.uploadDir, file.name));
       filename = file.name;
-      console.log(" -= -= -  OPA " + appRoot + '/' + currentFlow)
-      var flow = new json.File(appRoot + '/' + currentFlow );
-      console.log(" -= -= -  OPA " + flow )
-      flow.readSync(); 
-     if (currentFlow.length > 0 && flow.get("input").length == 0){                 
-        var fileName = appRoot + '/flows/' +  flow.get("name") + '/' + flow.get("template") + '_' + moment().format('YYYY_MM_DD_hh_mm_ss') + '.json'
-        console.log(" ++++ + ++ Real  File is " + fileName)
-        fse.copySync(currentFlow , fileName);
-        console.log(" ++++ + ++ Real  File is " + fileName)
-        currentFlow = fileName
-        console.log(" ++++ + ++ Real  File is " + currentFlow)
-        current.set("input", path.join(form.uploadDir, file.name))
-      }
     }else{
       console.log("File was taken" + socketsConnected)
     } 
@@ -320,6 +307,21 @@ router.post('/upload/:uid', function(req, res){
       });
 
     }
+
+    console.log(" -= -= -  OPA " + appRoot + '/' + currentFlow)
+    var flow = new json.File(appRoot + '/' + currentFlow );
+    console.log(" -= -= -  OPA " + flow )
+    flow.readSync(); 
+     if (currentFlow.length > 0 && flow.get("input").length == 0){                 
+        var fileName = appRoot + '/flows/' +  flow.get("name") + '/' + flow.get("template") + '_' + moment().format('YYYY_MM_DD_hh_mm_ss') + '.json'
+        console.log(" 1++++ + ++ Real  File is " + fileName)
+        fse.copySync(currentFlow , fileName);
+        console.log(" 2++++ + ++ Real  File is " + fileName)
+        currentFlow = fileName
+        console.log(" 3++++ + ++ Real  File is " + currentFlow)
+        current.set("input", path.join(form.uploadDir, file.name))
+      }
+
     res.end('success');
   });
   
