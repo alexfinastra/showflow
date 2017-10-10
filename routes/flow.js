@@ -62,7 +62,7 @@ router.get('/load/:folder/:file', function(req, res, next){
     currentFlow = file.path;   
     fse.copySync(template, currentFlow);    
   }else{
-    currentFlow = "flows/" + req.params.folder + "/" + req.params.file + ".json";
+    currentFlow = appRoot + "/flows/" + req.params.folder + "/" + req.params.file ;
   }
 	 
   var flow = new Flow();  
