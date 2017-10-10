@@ -212,13 +212,13 @@ router.get('/flows/:uid', function(req, res){
 })
 
 router.get('/list/:uid', function(req, res){
-  var uid = req.params.uid;
+  var uid = req.params.uid;  
   var title = ""
   var options = {
     "button": "",
     "upload": false,
-    "uid" : uid,
-    "formats" : folderFormats(uid)
+    "uid" : ((uid.indexOf('^') > -1) ? uid.split('^')[1] : uid),
+    "formats" : folderFormats((uid.indexOf('^') > -1) ? uid.split('^')[1] : uid)
   }
 
   if(uid.indexOf('exports') > -1){
@@ -227,7 +227,7 @@ router.get('/list/:uid', function(req, res){
   }
 
   if(uid.indexOf('flow') > -1){
-    title = "List of flows files from " + uid.split('^')[1];
+    title = "List of flows files from " + ((uid.indexOf('^') > -1) ? uid.split('^')[1] : uid);
     options["button"] = "flow"
   }
 
@@ -308,20 +308,22 @@ router.post('/upload/:uid', function(req, res){
 
     }
 
-    console.log(" -= -= -  OPA " + appRoot + '/' + currentFlow)
-    var flow = new json.File(appRoot + '/' + currentFlow );
-    console.log(" -= -= -  OPA " + flow )
-    flow.readSync(); 
-     if (currentFlow.length > 0 && flow.get("input").length == 0){                 
-        var fileName = appRoot + '/flows/' +  flow.get("name") + '/' + flow.get("template") + '_' + moment().format('YYYY_MM_DD_hh_mm_ss') + '.json'
-        console.log(" 1++++ + ++ Real  File is " + fileName)
-        fse.copySync(currentFlow , fileName);
-        console.log(" 2++++ + ++ Real  File is " + fileName)
-        currentFlow = fileName
-        console.log(" 3++++ + ++ Real  File is " + currentFlow)
-        current.set("input", path.join(form.uploadDir, file.name))
-      }
-
+    if(currentFlow.length > 0 ){
+      console.log(" -= -= -  OPA " + appRoot + '/' + currentFlow)
+      var cflow = new json.File( currentFlow );
+      console.log(" -= -= -  OPA " + cflow )
+      cflow.readSync(); 
+      
+      if (cflow.get("input").length == 0){                 
+          var fileName = appRoot + '/flows/' +  cflow.get("name") + '/' + cflow.get("template") + '_' + moment().format('YYYY_MM_DD_hh_mm_ss') + '.json'
+          console.log(" 1++++ + ++ Real  File is " + fileName)
+          fse.copySync(currentFlow , fileName);
+          console.log(" 2++++ + ++ Real  File is " + fileName)
+          currentFlow = fileName
+          console.log(" 3++++ + ++ Real  File is " + currentFlow)
+          cflow.set("input", path.join(form.uploadDir, filename))
+        }
+    }
     res.end('success');
   });
   
