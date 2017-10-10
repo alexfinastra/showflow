@@ -274,14 +274,14 @@ router.post('/upload/:uid', function(req, res){
   form.uploadDir = path.join(record.flow_item.request_connections_point);  
 
   // rename it to it's orignal name
-  //form.on('file', function(field, file) {
-  //  if (fs.existsSync(file.path)) {       
-  //    fs.rename(file.path, path.join(form.uploadDir, file.name));
-  //    filename = file.name;
-  //  }else{
-  //    console.log("File was taken" + socketsConnected)
-  //  } 
-  //});
+  form.on('file', function(field, file) {
+    if (fs.existsSync(file.path)) {       
+      fs.rename(file.path, path.join(form.uploadDir, file.name));
+      filename = file.name;
+    }else{
+      console.log("File was taken" + socketsConnected)
+    } 
+  });
 
   form.on('error', function(err) {
     console.log('Upload to folder Error: \n' + err);
