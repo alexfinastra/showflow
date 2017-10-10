@@ -16,17 +16,18 @@ block content
           center.mt-5
             h3.col-auto=data["name"]
             | STP rate is #{data["stp"]}
-            .row.justify-content-center.mt-5  
-              button#reset-flow.btn.btn-outline-secondary.mr-2(type='button')
-                i.fa.fa-repeat
-                span.ml-2    
-                | Reset connections
+            //.row.justify-content-center.mt-5  
+              //button#reset-flow.btn.btn-outline-secondary.mr-2(type='button')
+                //i.fa.fa-repeat
+                //span.ml-2    
+                //| Reset connections
               //button#edit-flow.btn.btn-outline-success.ml-2(type='button', data-filepath=data["filepath"])
               //  i.fa.fa-plus
               //  span.ml-2    
               //  | Add 
               //  b Flow  
               //  | item
+          br
           br        
           ul.timeline
             if data["items"] != null && data["items"] != undefined
@@ -41,7 +42,7 @@ block content
                   default
                     include flowitems/interface_profile
 
-
+          
 
              
     
