@@ -247,8 +247,8 @@ router.get('/upload/:uid', function(req, res){
   var options = {
     "button": "",
     "upload": true,
-    "uid" : uid,
-    "formats" : folderFormats(uid)
+    "uid" : ((uid.indexOf('^') > -1) ? uid.split('^')[1] : uid),
+    "formats" : folderFormats(((uid.indexOf('^') > -1) ? uid.split('^')[1] : uid))
   }
 
   res.render('folder', { title: title, files: folderFiles(uid) , options: options});
