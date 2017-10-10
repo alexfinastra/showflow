@@ -77,7 +77,7 @@ $(document).ready(function(){
 	      	showCheckbox: true,
 	      	onNodeSelected: function(event, data) {
 	      		if(data["nodes"] == null || data["nodes"] == undefined){
-	      			location.href = "/flow/load/" + data["folder"] + "/" + data["text"]
+	      			location.href = "/flow/load/" + data["folder"] + "/" + "template" + data["text"].split(" ").join("_")
 	      		}			    
 				  },
 				  onNodeUnchecked: function(event, data) {

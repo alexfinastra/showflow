@@ -23,10 +23,10 @@ to_tree = function(folder, files){
     	to_tree(folder + "/" + file, files)
     }
     
-    if(stats.isFile() && file.indexOf("template") == -1 ){    	
+    if(stats.isFile() && file.indexOf("template") > -1 ){    	
       if (files.length > 0){
         files[files.length -1]["nodes"].push({      
-          "text": file.replace(".json", ""),
+          "text": file.replace(".json", "").replace("template","").split("_").join(" "),
           "state": {
                   "checked": false
                 },
@@ -83,6 +83,7 @@ router.get('/load/:folder/:file', function(req, res, next){
 router.get('/tree', function(req, res){
   let files = []
   to_tree("flows", files);
+  console.log("")
 	res.json({tree: files});
 });
 
