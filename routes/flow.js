@@ -3,6 +3,8 @@ var router = express.Router();
 var authentication_mdl = require('../middlewares/authentication');
 var Flow = require('../models/flow_type');
 var fs = require('fs');
+var fse = require('fs-extra');
+var tmp = require('temporary');
 
 to_tree = function(folder, files){  
   fs.readdirSync(folder).forEach( function(file) {
@@ -37,6 +39,53 @@ to_tree = function(folder, files){
   })
   return
 }
+
+/* GET home page. */
+router.get('/', authentication_mdl.is_login, function(req, res, next) {		
+	res.render('flow', { data: null});
+});
+
+router.get('/current', function(req, res){
+  var data = null
+  if (currentFlow != ""){
+    var flow = new Flow();
+    data = flow._flow
+  }
+  res.render('flow', { data: data});
+})
+
+// need to add a flow index as input 
+router.get('/load/:folder/:file', function(req, res, next){		
+  if(req.params.file.indexOf("template") > -1){
+    var file = new tmp.File();
+    var template = "flows/" + req.params.folder + "/" + req.params.file + ".json";
+    currentFlow = file.path;   
+    fse.copySync(template, currentFlow);    
+  }else{
+    currentFlow = "flows/" + req.params.folder + "/" + req.params.file + ".json";
+  }
+	 
+  var flow = new Flow();  
+	res.render('flow', { data: flow._flow});
+});
+
+router.get('/tree', function(req, res){
+  let files = []
+  to_tree("flows", files);
+  console.log("")
+	res.json({tree: files});
+});
+
+
+
+
+router.get('/reset/:flow', function(req, res){
+  res.send("OK !!!")
+});
+
+module.exports = router;
+
+
 /*
 to_edittree = function(folder, files){  
   var branch = "";
@@ -67,37 +116,10 @@ to_edittree = function(folder, files){
     })
   }
 }
-*/
-/* GET home page. */
-router.get('/', authentication_mdl.is_login, function(req, res, next) {		
-	res.render('flow', { data: null});
-});
 
-// need to add a flow index as input 
-router.get('/load/:folder/:file', function(req, res, next){	
-	var filepath = "flows/" + req.params["folder"] + "/" + req.params["file"] + ".json";
-	var flow = new Flow(filepath); 
-	res.render('flow', { data: flow._flow});
-});
-
-router.get('/tree', function(req, res){
-  let files = []
-  to_tree("flows", files);
-  console.log("")
-	res.json({tree: files});
-});
-
-/*
 router.get('/edittree', function(req, res){
   let files = []
   to_edittree("flows", files);
   res.json({tree: files});
 });
 */
-
-
-router.get('/reset/:flow', function(req, res){
-  res.send("OK !!!")
-});
-
-module.exports = router;

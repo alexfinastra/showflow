@@ -21,7 +21,7 @@ var methodOverride = require('method-override');
 
 var app = express();
 global.appRoot = path.resolve(__dirname);
-global.oracle = true;
+global.currentFlow = "";
 
 
 // view engine setup

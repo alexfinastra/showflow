@@ -30,7 +30,8 @@
     "oracledb": "^1.13.1",
     "serve-favicon": "^2.4.3",
     "socket.io": "^2.0.3",
-    "tail": "^1.2.2"
+    "tail": "^1.2.2",
+    "temporary": "0.0.8"
   },
   "devDependencies": {
     "standard": "^10.0.3"

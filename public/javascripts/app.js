@@ -58,6 +58,10 @@ $(document).ready(function(){
 	  $('.overlay').fadeOut();
 	});
 
+	$('#currentFlow').on('click', function(){
+		location.href = '/flow/current'
+	})
+
 	$('#listFlows').on('click', function () {
  	  if($('#sidebar').hasClass('active') == false){
  	  	$('#sidebar').addClass('active');

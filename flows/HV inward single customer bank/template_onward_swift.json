@@ -1,8 +1,8 @@
 {
    "name": "HV inward single customer bank",
    "stp" : "79%",
-   "customization" : "0%",
-   "template": "incoming_swift",
+   "customization" : "0%",   
+   "template": "onward_swift",
    "input" : "",
    "flowitems": [
       {
@@ -34,7 +34,12 @@
         "step": 6,
         "type": "interface",
 	      "uid": "***^MSG_POSTING_OUT"
-      }
+      },
+      {
+	      "step": 7,
+	      "type": "channel",
+	      "uid": "***^SWD_SE_SWIFT_SINGLE_OUT"
+    }    
    ]
 }
 

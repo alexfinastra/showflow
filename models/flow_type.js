@@ -3,16 +3,16 @@ var path = require('path');
 var json = require('json-file');
 var method = Flow.prototype
 
-function Flow(filePath){
-  console.log("File Path for the flow: " + filePath)
-  this._flow_template = new json.File(filePath);
+function Flow(){
+  console.log("File Path for the flow: " + currentFlow)
+  this._flow_template = new json.File(currentFlow);
   this._flow_template.readSync();
 
   this._flow = {};
   this._flow["name"] = this._flow_template.get("name")
   this._flow["stp"] = this._flow_template.get("stp")
   this._flow["items"] = [];
-  this._flow["filepath"] = filePath;
+  //this._flow["filepath"] = filePath;
 
   this._properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
   this._properties.readSync(); 
