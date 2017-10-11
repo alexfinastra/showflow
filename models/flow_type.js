@@ -4,56 +4,62 @@ var json = require('json-file');
 var method = Flow.prototype
 
 function Flow(){
-  console.log("File Path for the flow: " + currentFlow)
+  this.ensureFlow()
+
+  this._flow = {};
   this._flow_template = new json.File(currentFlow);
   this._flow_template.readSync();
 
-  this._flow = {};
   this._flow["name"] = this._flow_template.get("name")
   this._flow["stp"] = this._flow_template.get("stp")
   this._flow["items"] = [];
-  //this._flow["filepath"] = filePath;
-
-  this._properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
-  this._properties.readSync(); 
-
-  this._services = new json.File(appRoot + "/db/properties/services_index.json" ); 
-  this._services.readSync(); 
-
-  this.populate_items();
+  this.loadItems();
 }
 
-method.populate_items = function(){  
+method.loadItems = function(){  
   var flowitems = this._flow_template.get("flowitems");
-  if(flowitems == null  && flowitems.length == 0 ){
-    return;
-  }
+  if(flowitems == null  && flowitems.length == 0 ){ return; }
 
   for(var i=0; i< flowitems.length; i++){
     var item = flowitems[i];
+    if (!("status_class" in item)) {continue;}
+
+    this._flow["items"].push(item);
+  }
+};
+
+method.ensureFlow = function(){
+  console.log("++++ currentFlow " + currentFlow)
+  if(currentFlow == null ) {return;}
+  var cflow = new json.File(currentFlow);
+  cflow.readSync();
+  
+  var flowitems = cflow.get("flowitems");
+  if(flowitems == null || flowitems.length == 0 ){ return; }
+
+  this._properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+  this._services = new json.File(appRoot + "/db/properties/services_index.json" ); 
+  this._properties.readSync(); 
+  this._services.readSync(); 
+
+  for(var i=0; i< flowitems.length; i++){
+    var item = flowitems[i];
+    if ("status_class" in item) {continue;}
+
     var current = null;
-    
     if (item["type"] == "service"){
       current = this._services.get(item["uid"]);
     } else {
       current = this._properties.get(item["uid"]);
     }
-
-    console.log("Current " + item["type"] + " is " + current);
-
-    if(current == null || current["active"] != true){
-      continue;
-    } 
+    if(current == null || current["active"] != true){ continue;} 
+    
     var obj = current["flow_item"]  
-    console.log("Current " + item["type"] + " is " + current);
-       
-    if (current["connected"] == true){ obj["status_class"] = "success"}
-    if (current["connected"] == "error"){ obj["status_class"] = "danger"}
-
-    console.log("Current Item is " + obj["title"]);
-    this._flow["items"].push(obj);
+    obj["step"] = i
+    flowitems[i] = obj    
   }
-};
-
+  cflow.set('flowitems', flowitems)
+  cflow.writeSync(); 
+}
 
 module.exports = Flow;

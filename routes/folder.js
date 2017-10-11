@@ -55,7 +55,7 @@ folderPath = function(uid){
   }
 
   if(uid.indexOf("flow") != -1 ){
-    var f = uid.split("^")[1]
+    var f = uid.split("$")[1]
     return appRoot + "/flows/" + f; 
   }
 
@@ -93,7 +93,7 @@ folderFiles = function(uid){
               "name": file,
               "size": humanFileSize(stats.size, true) , //(stats.size / 1000.0 + " KB"),
               "created": moment(stats.birthtime).fromNow(),
-              "id" : ((uid.indexOf('^') > -1) ? uid.split('^')[1] : uid),
+              "id" : ((uid.indexOf('$') > -1) ? uid.split('$')[1] : uid),
               "formats": folderFormats(uid),
               "folder": folderName
             })
@@ -208,7 +208,7 @@ router.get('/exports/new', function(req, res){
 })
 
 router.get('/flows/:uid', function(req, res){
- res.redirect("/folder/list/flow^" + req.params.uid);
+ res.redirect("/folder/list/flow$" + req.params.uid);
 })
 
 router.get('/list/:uid', function(req, res){
@@ -217,8 +217,8 @@ router.get('/list/:uid', function(req, res){
   var options = {
     "button": "",
     "upload": false,
-    "uid" : ((uid.indexOf('^') > -1) ? uid.split('^')[1] : uid),
-    "formats" : folderFormats((uid.indexOf('^') > -1) ? uid.split('^')[1] : uid)
+    "uid" : ((uid.indexOf('$') > -1) ? uid.split('$')[1] : uid),
+    "formats" : folderFormats((uid.indexOf('$') > -1) ? uid.split('$')[1] : uid)
   }
 
   if(uid.indexOf('exports') > -1){
@@ -227,7 +227,7 @@ router.get('/list/:uid', function(req, res){
   }
 
   if(uid.indexOf('flow') > -1){
-    title = "List of flows files from " + ((uid.indexOf('^') > -1) ? uid.split('^')[1] : uid);
+    title = "List of flows files from " + ((uid.indexOf('$') > -1) ? uid.split('$')[1] : uid);
     options["button"] = "flow"
   }
 
@@ -247,8 +247,8 @@ router.get('/upload/:uid', function(req, res){
   var options = {
     "button": "",
     "upload": true,
-    "uid" : ((uid.indexOf('^') > -1) ? uid.split('^')[1] : uid),
-    "formats" : folderFormats(((uid.indexOf('^') > -1) ? uid.split('^')[1] : uid))
+    "uid" : ((uid.indexOf('$') > -1) ? uid.split('$')[1] : uid),
+    "formats" : folderFormats(((uid.indexOf('$') > -1) ? uid.split('$')[1] : uid))
   }
 
   res.render('folder', { title: title, files: folderFiles(uid) , options: options});
@@ -305,23 +305,17 @@ router.post('/upload/:uid', function(req, res){
             console.log('exec error: ' + error);
           }
       });
-
     }
 
     if(currentFlow.length > 0 ){
-      console.log(" -= -= -  OPA " + appRoot + '/' + currentFlow)
       var cflow = new json.File( currentFlow );
-      console.log(" -= -= -  OPA " + cflow )
       cflow.readSync(); 
-      
       if (cflow.get("input").length == 0){                 
           var fileName = appRoot + '/flows/' +  cflow.get("name") + '/' + cflow.get("template") + '_' + moment().format('YYYY_MM_DD_hh_mm_ss') + '.json'
-          console.log(" 1++++ + ++ Real  File is " + fileName)
           fse.copySync(currentFlow , fileName);
-          console.log(" 2++++ + ++ Real  File is " + fileName)
-          currentFlow = fileName
-          console.log(" 3++++ + ++ Real  File is " + currentFlow)
-          cflow.set("input", path.join(form.uploadDir, filename))
+          currentFlow = fileName;
+          cflow.set("input", fileName)
+          cflow.writeSync();     
         }
     }
     res.end('success');

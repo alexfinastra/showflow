@@ -5,6 +5,7 @@ var Flow = require('../models/flow_type');
 var fs = require('fs');
 var fse = require('fs-extra');
 var tmp = require('temporary');
+var json = require('json-file');
 
 to_tree = function(folder, files){  
   fs.readdirSync(folder).forEach( function(file) {
@@ -58,14 +59,14 @@ router.get('/current', function(req, res){
 router.get('/load/:folder/:file', function(req, res, next){		
   if(req.params.file.indexOf("template") > -1){
     var file = new tmp.File();
-    var template = "flows/" + req.params.folder + "/" + req.params.file + ".json";
-    currentFlow = file.path;   
+    var template = "flows/" + req.params.folder + "/" + req.params.file + ".json";   
+    currentFlow = file.path;    
     fse.copySync(template, currentFlow);    
   }else{
     currentFlow = appRoot + "/flows/" + req.params.folder + "/" + req.params.file ;
   }
 	 
-  var flow = new Flow();  
+  var flow = new Flow();    
 	res.render('flow', { data: flow._flow});
 });
 

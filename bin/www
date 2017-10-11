@@ -45,7 +45,7 @@ database.createPool(dbconfig)
     process.exit(0);
 });
 
-
+/*
 const pathToJMS = appRoot + '/jms'
 const pathToFiles = '/home/was8/dh/profiles/PRDTHV_465_LR/data/'
 
@@ -59,7 +59,7 @@ let chokidarOpts = Object.assign({
   ignored: ignoredPaths,
   ignoreInitial: true,
   persistent: true,
-  followSymlinks: false,
+  followSymlinks: true,
   usePolling: true,
   depth: undefined,
   interval: 100,
@@ -99,7 +99,7 @@ function checkFileCopyComplete(onPath, prev) {
             setTimeout(checkFileCopyComplete, fileCopyDelaySeconds*1000, onPath, stat);
         }
     });
-}
+}*/
 
 io.on('connection', (socket) => {
   let index = socketsConnected.push(socket)
@@ -115,8 +115,8 @@ io.on('connection', (socket) => {
 
 
 //appRoot +  '/gppserver*';
-const pathToTraces = '/home/was8/dh/profiles/PRDTHV_465_LR/trace/gppserver/gppserver*'
-var traceswatcher = chokidar.watch(pathToTraces, chokidarOpts);
+//const pathToTraces = '/home/was8/dh/profiles/PRDTHV_465_LR/trace/gppserver/gppserver*'
+//var traceswatcher = chokidar.watch(pathToTraces, chokidarOpts);
 //tail = new Tail("gppserver_trace.45.2017-09-26.log");
 //tail.on("line", function(data) {
       //buildFlows(data);
@@ -124,12 +124,12 @@ var traceswatcher = chokidar.watch(pathToTraces, chokidarOpts);
       //console.log(data);
  //});
 
-traceswatcher.on('add', function(path) {
+//traceswatcher.on('add', function(path) {
     // should switch tails -f reader to the new files
     // 1. select file to tails the last 
     
     //tail = new Tail("");
-});
+//});
 
 /**
  * Normalize a port into a number, string, or false.
