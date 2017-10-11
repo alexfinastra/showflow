@@ -268,8 +268,7 @@ router.get('/generate/:source/:uid', function(req, res){
   var fileName = req.params.source.split('#')[req.params.source.split('#').length - 1]
   var target = getFlowItem(req.params.uid)["request_connections_point"] + '/' + fileName
   console.log("  9999 --- target " + target);
-  fse.copySync(source , target);
-  
+  fse.copySync(source , target);  
   res.redirect(req.get('referer'));
 })
 
