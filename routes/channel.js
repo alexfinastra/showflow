@@ -209,10 +209,11 @@ router.post('/update/:id', function (req, res) {
                     }));
                 } else {
                     // Resource successfully updated. Sending an empty response body.
-                    var record  = result.outBinds;
-                    var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
-                    properties.readSync();
-                    properties.set(uid + ".flow_item", model.to_flowitem(record));
+                    //var record  = result.outBinds;
+                    //var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
+                    //properties.readSync();
+                    //properties.set(uid + ".flow_item", model.to_flowitem(record));
+                    //properties.writeSync()
                     res.redirect("/channel/profile/" + uid);
                 }
                 // Release the connection
