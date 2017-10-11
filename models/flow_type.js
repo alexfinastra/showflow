@@ -12,6 +12,7 @@ function Flow(){
 
   this._flow["name"] = this._flow_template.get("name")
   this._flow["stp"] = this._flow_template.get("stp")
+  this._flow["customization"] = this._flow_template.get("customization")
   this._flow["items"] = [];
   this.loadItems();
 }
@@ -60,6 +61,20 @@ method.ensureFlow = function(){
   }
   cflow.set('flowitems', flowitems)
   cflow.writeSync(); 
+}
+
+method.updateFlowItem  = function(step, key, value){
+  var cflow = new json.File(currentFlow);
+  cflow.readSync();
+  
+  var flowitems = cflow.get("flowitems");
+  if(flowitems == null || flowitems.length == 0 ){ return; }
+
+  if (key in flowitems[step-1]){
+    flowitems[step-1][key] = value;          
+    cflow.set('flowitems', flowitems)
+    cflow.writeSync();
+  }   
 }
 
 module.exports = Flow;

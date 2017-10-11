@@ -27,11 +27,11 @@ humanFileSize = function(bytes, si) {
     return bytes.toFixed(1)+' '+units[u];
 };
 
-flowItem = function(uid){
+getFlowItem = function(uid){
   var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
   properties.readSync();
-  var item = properties.get(uid)
-  return  (item == undefined || item == null) ? null : item[".flow_item"];
+  var item = properties.get(uid)  
+  return  (item == undefined || item == null) ? null : item["flow_item"];
 }
 
 folderFormats = function(uid){
@@ -43,9 +43,9 @@ folderFormats = function(uid){
   }
 
   if (item["flow_item"]["direction"] == 'I'){
-    return  item[".to_schemas"];
+    return  item["from_schemas"];
   }else{
-    return  item[".to_schemas"];
+    return  item["to_schemas"];
   }
 }
 
@@ -232,8 +232,8 @@ router.get('/list/:uid', function(req, res){
   }
 
   if (title == ""){
-    var item = flowItem(uid)
-    folderName = item == null ? "udefined" : item.interface_name.split('_').join(" ")
+    var item = getFlowItem(uid)
+    folderName = ((item == null) ? "udefined" : item.interface_name.split('_').join(" "))
     title = "List of files from " + folderName;
   }
   res.render('folder', { title: title, files: folderFiles(uid) , options: options});
@@ -241,7 +241,7 @@ router.get('/list/:uid', function(req, res){
 
 router.get('/upload/:uid', function(req, res){
   var uid = req.params.uid;   
-  var item = flowItem(uid)
+  var item = getFlowItem(uid)
   var folderName = ((item == null) ? "udefined" : item.interface_name.split('_').join(" "))
   var title = "Upload to " + folderName;
   var options = {
@@ -259,6 +259,17 @@ router.get('/clone/:folder', function(req, res){
   var file_name = getFilenameFolder(folder)
   fse.copySync(folder + '/' + 'template.json' , folder + '/' +  file_name);
    
+  res.redirect(req.get('referer'));
+})
+
+router.get('/generate/:source/:uid', function(req, res){
+  var source = "public/schemas/" + req.params.source.split('#').join("/")
+  console.log("  9999 --- Source " + source);
+  var fileName = req.params.source.split('#')[req.params.source.split('#').length - 1]
+  var target = getFlowItem(req.params.uid)["request_connections_point"] + '/' + fileName
+  console.log("  9999 --- target " + target);
+  fse.copySync(source , target);
+  
   res.redirect(req.get('referer'));
 })
 
@@ -289,8 +300,6 @@ router.post('/upload/:uid', function(req, res){
 
   // once all the files have been uploaded, send a response to the client
   form.on('end', function() {
-    console.log("File uploaded sucessfully" + this.openedFiles[0].name);
-    console.log("Uploaded to --> " + form.uploadDir);
     var isWin = /^win/.test(process.platform);
     if (!isWin && form.uploadDir.indexOf('jms') > -1){
       var sys = require('sys');
