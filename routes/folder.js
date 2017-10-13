@@ -198,8 +198,8 @@ router.get('/exports/new', function(req, res){
               console.log("----------- > Results are " + result.rows.length)
               var script = "";  
               for(var i=0; i<result.rows.length; i++){
-                var item = result.rows[i];
-                console.log("--> Item is " + JSON.stringify(item));
+                var item = JSON.stringify(result.rows[i]);
+                console.log("--> Item is " + item);
                 if(properties.get(item["UID_INTERFACE_TYPES"]+".active") == true){
                   var values = [], fields = [];
                   
