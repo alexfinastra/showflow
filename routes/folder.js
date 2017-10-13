@@ -198,7 +198,8 @@ router.get('/exports/new', function(req, res){
               console.log("----------- > Results are " + result.rows.length)
               var script = "";  
               for(var i=0; i<result.rows.length; i++){
-                var item = JSON.stringify(result.rows[i]);                
+                var item = JSON.parse(JSON.stringify(result.rows[i]));   
+                console.log("--> Item is " + item ); 
                 var fi = properties.get(item["UID_INTERFACE_TYPES"])
                 console.log("--> Item is " + item + " flow item " + fi);
                 if(fi != undefined && fi != null && fi["active"] == true){
