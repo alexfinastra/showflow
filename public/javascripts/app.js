@@ -42,10 +42,9 @@ $(document).ready(function(){
 		$(".table").load(" .table");
 		alertify.error(" File removed from the folder.");
 	});
-
-  //$('#tree').on('nodeSelected', function(event, data) {
-	//  console.log(data);
-  //});
+	socket.on('reloadflow', function(msg){          
+		$(".table").load(" .table");
+	});
 
   $("#sidebar").niceScroll({
      cursorcolor: '#FFFFFF',

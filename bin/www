@@ -1,16 +1,12 @@
 #!/usr/bin/env node
 
-/**
- * Module dependencies.
- */
-
 var app = require('../app');
 var debug = require('debug')('integration:server');
 var http = require('http');
 var chokidar = require('chokidar');
 var fs = require('fs');
 const path = require('path');
-const socketsConnected = []
+
 let log = console.log.bind(console)
 Tail = require('tail').Tail;
 var dbconfig = require('../db/dbconfig.js');
@@ -27,7 +23,9 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-var io = require('socket.io')(server);
+var io = require('../models/io').initialize(server);
+//var io = require('socket.io')(server);
+
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -99,7 +97,7 @@ function checkFileCopyComplete(onPath, prev) {
             setTimeout(checkFileCopyComplete, fileCopyDelaySeconds*1000, onPath, stat);
         }
     });
-}*/
+}
 
 io.on('connection', (socket) => {
   let index = socketsConnected.push(socket)
@@ -112,7 +110,7 @@ io.on('connection', (socket) => {
     log('connected client: ' + name)
   }) 
 })
-
+*/
 
 //appRoot +  '/gppserver*';
 //const pathToTraces = '/home/was8/dh/profiles/PRDTHV_465_LR/trace/gppserver/gppserver*'

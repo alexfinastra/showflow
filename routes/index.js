@@ -1,11 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var fs = require('fs');
 var authentication_mdl = require('../middlewares/authentication');
 var session_store;
-
-var path = require('path');
-var appDir = path.dirname(require.main.filename);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -58,24 +54,6 @@ router.get('/logout', function(req, res)
 		} 
 	}); 
 });
-
-router.get('/upload/:profileId', function(req, res, next) {
-  var filePath = './interfaces_list_3.json';
-  var collection = JSON.parse(fs.readFileSync(filePath, 'utf8')); 
-  var lookup = {};
-	for (var i = 0, len = collection.length; i < len; i++) {
-	    lookup[collection[i]["ROWNUM"]] = collection[i];
-	} 
-
-  res.render('upload', { profile: lookup[req.params["profileId"]]});
-});
-
-
-router.get('/profile/:id', function(req, res, next) {
-	var model = require('../models/interfaceModel');
-	res.render('profile', { title: 'Connectivity profile', profile: null });
-});
-
 
 
 module.exports = router;

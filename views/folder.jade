@@ -59,7 +59,8 @@ block content
             td.col-md-2 #{file["size"]}
             td.col-md-2 #{file["created"]}
             td.col-md-3
-              a.btn.btn-outline-danger.btn-sm.mt-2.float-right( href= "/folder/delete/" + file["id"] +"/" + file["name"] ) Delete
+              - var prehref = options["button"] == "flow" ? 'flow$' : ''
+              a.btn.btn-outline-danger.btn-sm.mt-2.float-right( href= "/folder/delete/" + prehref + file["id"] +"/" + file["name"] ) Delete
               if options["button"] == "flow"
                 a.btn.btn-outline-success.mr-3.mt-2.btn-sm.float-right( href= "/flow/load/"  + file["id"] +"/" + file["name"] ) Show 
               else

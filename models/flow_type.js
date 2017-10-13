@@ -13,6 +13,7 @@ function Flow(){
   this._flow["name"] = this._flow_template.get("name")
   this._flow["stp"] = this._flow_template.get("stp")
   this._flow["customization"] = this._flow_template.get("customization")
+  this._flow["input"] = this._flow_template.get("input")
   this._flow["items"] = [];
   this.loadItems();
 }

@@ -15,13 +15,17 @@ block content
         .col-md-12.mt-5
           center.mt-5
             h3.col-auto=data["name"]
-            - var c = data["customization"].length ==0 ? "0%" : data["customization"] 
-            br
-            span.mr-2            
-              | Customization rate is #{c}         
-            span.ml-2
-              | STP rate is #{data["stp"]}
-            
+            - var c = data["customization"].length ==0 ? "0%" : data["customization"]             
+            if data["input"].length > 0
+              span.font-italic.text-secondary
+                | Input file is : #{data["input"]}
+              br
+              br      
+              span.mr-4
+                | STP rate is #{data["stp"]}
+              span.ml-4            
+                | Customization rate is #{c}   
+              
             //.row.justify-content-center.mt-5  
               //button#reset-flow.btn.btn-outline-secondary.mr-2(type='button')
                 //i.fa.fa-repeat
@@ -50,16 +54,9 @@ block content
           br
           if data["items"][0]["status_class"] != "secondary"
             .row.justify-content-center.mt-5  
-              button#destroy-flow.btn.btn-outline-danger(type='button')
+              a.btn.btn-outline-danger(href= "/folder/delete/currentflow")
                 i.fa.fa-trash
                 span.ml-2    
                 | Delete 
                 b Flow
               
-
-
-             
-    
-   
-
-    

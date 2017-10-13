@@ -10,6 +10,8 @@ var dbConfig = require('../db/dbconfig.js');
 var path = require('path');
 var formidable = require('formidable');
 var mkdirp = require('mkdirp');
+var Worker = require("tiny-worker");
+var socketsConnected = require('../models/io').socketsConnected;
 
 humanFileSize = function(bytes, si) {
     var thresh = si ? 1000 : 1024;
@@ -116,6 +118,30 @@ getFilenameFolder = function(folder){
   return fileName;
 }
 
+ensureFlow = function(uid, target){
+  if(currentFlow.length > 0 ){
+    var cflow = new json.File( currentFlow );
+    cflow.readSync(); 
+    if (cflow.get("input").length == 0){                 
+      var fileFlow = appRoot + '/flows/' +  cflow.get("name") + '/' + cflow.get("template") + '_' + moment().format('YYYY_MM_DD_hh_mm_ss') + '.json'
+      fse.copySync(currentFlow , fileFlow);
+      currentFlow = fileFlow;
+      cflow = new json.File( currentFlow );
+      cflow.readSync(); 
+     } 
+   
+    // next cycle      
+    var flowitems = cflow.get("flowitems")
+    for(var i=0; i < flowitems.length; i++) {
+      if (flowitems[i]["uid"] == uid){
+        flowitems[i]["status_class"] = "success"
+      }
+    } 
+    cflow.set("flowitems", flowitems)
+    cflow.set("input", target.split('/')[target.split('/').length - 1])
+    cflow.writeSync();       
+  } 
+}
 
 router.get('/',  function(req, res){
   res.redirect('/folder/exports');
@@ -131,6 +157,15 @@ router.get('/delete/:uid/:file', function(req, res){
   fs.unlinkSync(folder + "/" + req.params.file);
   
   res.redirect(req.get('referer'));
+})
+
+router.get('/delete/currentflow', function(req, res){
+  var cfarr = currentFlow.split('/');
+  currentFlow = "";
+  var folder = folderPath('flow$' + cfarr[cfarr.length-2]);
+  fs.unlinkSync(folder + "/" + cfarr[cfarr.length-1]);
+
+  res.redirect('/flow/current');
 })
 
 router.get('/exports',  function(req, res) {
@@ -264,11 +299,11 @@ router.get('/clone/:folder', function(req, res){
 
 router.get('/generate/:source/:uid', function(req, res){
   var source = "public/schemas/" + req.params.source.split('$').join("/")
-  console.log("  9999 --- Source " + source);
   var fileName = req.params.source.split('$')[req.params.source.split('$').length - 1]
-  var target = getFlowItem(req.params.uid)["request_connections_point"] + '/' + fileName
-  console.log("  9999 --- target " + target);
-  fse.copySync(source , target);  
+  var target = getFlowItem(req.params.uid)["request_connections_point"] + '/' + fileName;
+  
+  fse.copySync(source , target); 
+  ensureFlow(req.params.uid, target.split('/')[target.split('/').length - 1]);  
   res.redirect(req.get('referer'));
 })
 
@@ -289,7 +324,7 @@ router.post('/upload/:uid', function(req, res){
       fs.rename(file.path, path.join(form.uploadDir, file.name));
       filename = file.name;
     }else{
-      console.log("File was taken" + socketsConnected)
+      console.log("File was taken")
     } 
   });
 
@@ -299,12 +334,26 @@ router.post('/upload/:uid', function(req, res){
 
   // once all the files have been uploaded, send a response to the client
   form.on('end', function() {
+    if (form.uploadDir.indexOf('jms') > -1){
+      worker.postMessage(filename);
+    }
+    ensureFlow(req.params.uid, filename);
+    res.end('success');
+  });
+  
+  form.parse(req);
+})
+
+
+
+var worker = new Worker(function () {
+  self.onmessage = function (ev) {
     var isWin = /^win/.test(process.platform);
-    if (!isWin && form.uploadDir.indexOf('jms') > -1){
+    if (!isWin){
       var sys = require('sys');
       var exec = require('child_process').exec;
       var queue = form.uploadDir.substring(4, form.uploadDir.length)
-      var cmd = '~/dh/scripts/util/putMQMessage.ksh PRDTHV_465_LR ' + queue + ' ' +  appRoot + '/' + form.uploadDir + '/' + filename;
+      var cmd = '~/dh/scripts/util/putMQMessage.ksh PRDTHV_465_LR ' + queue + ' ' +  appRoot + '/' + form.uploadDir + '/' + ev.data;
       console.log("Execute cmd --> " + cmd);
       exec(cmd, function (error, stdout, stderr) {
           console.log('stdout: ' + stdout);
@@ -314,22 +363,11 @@ router.post('/upload/:uid', function(req, res){
           }
       });
     }
+    //socketsConnected.forEach((socket) => {    
+    //  socket.emit('reloadflow', {filename: filename});
+    //}) 
+  };
+});
 
-    if(currentFlow.length > 0 ){
-      var cflow = new json.File( currentFlow );
-      cflow.readSync(); 
-      if (cflow.get("input").length == 0){                 
-          var fileName = appRoot + '/flows/' +  cflow.get("name") + '/' + cflow.get("template") + '_' + moment().format('YYYY_MM_DD_hh_mm_ss') + '.json'
-          fse.copySync(currentFlow , fileName);
-          currentFlow = fileName;
-          cflow.set("input", fileName)
-          cflow.writeSync();     
-        }
-    }
-    res.end('success');
-  });
-  
-  form.parse(req);
-})
 
 module.exports = router;
