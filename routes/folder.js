@@ -301,8 +301,11 @@ router.get('/clone/:folder', function(req, res){
 
 router.get('/generate/:source/:uid', function(req, res){
   var source = "public/schemas/" + req.params.source.split('$').join("/")
+  console.log("Source " + source)
   var fileName = req.params.source.split('$')[req.params.source.split('$').length - 1]
+  console.log("fileName " + fileName)
   var target = getFlowItem(req.params.uid)["request_connections_point"] + '/' + fileName;
+  console.log("target " + target)
   
   fse.copySync(source , target); 
   ensureFlow(req.params.uid, target.split('/')[target.split('/').length - 1]);  
