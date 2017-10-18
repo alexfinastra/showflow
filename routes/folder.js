@@ -337,7 +337,21 @@ router.post('/upload/:uid', function(req, res){
   // once all the files have been uploaded, send a response to the client
   form.on('end', function() {
     if (form.uploadDir.indexOf('jms') > -1){
-      worker.postMessage(filename);
+      var isWin = /^win/.test(process.platform);
+      if (!isWin){
+        var sys = require('sys');
+        var exec = require('child_process').exec;
+        var queue = form.uploadDir.substring(4, form.uploadDir.length)
+        var cmd = '~/dh/scripts/util/putMQMessage.ksh PRDTHV_465_LR ' + queue + ' ' +  appRoot + '/' + form.uploadDir + '/' + ev.data;
+        console.log("Execute cmd --> " + cmd);
+        exec(cmd, function (error, stdout, stderr) {
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + stderr);
+            if (error !== null) {
+              console.log('exec error: ' + error);
+            }
+        });
+      }
     }
     ensureFlow(req.params.uid, filename);
     res.end('success');
