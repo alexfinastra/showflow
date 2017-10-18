@@ -119,6 +119,7 @@ getFilenameFolder = function(folder){
 }
 
 ensureFlow = function(uid, target){
+  console.log(" ensureFlow - start " + currentFlow)
   if(currentFlow.length > 0 ){
     var cflow = new json.File( currentFlow );
     cflow.readSync(); 
