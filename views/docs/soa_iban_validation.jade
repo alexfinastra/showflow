@@ -1,0 +1,14 @@
+.row
+  .col-md-1
+    button.btn.btn-link(onclick="goBack()")
+      i.fa.fa-angle-double-left.fa-2x.mr-2
+  .col-md-11.mdoc
+    h3.mt-1 IBAN Validation Service
+br
+blockquote.blockquote
+  p.mb-0.small
+    | IBAN (International Bank Account Number) validation is both a standalone service that can be activated by a third party application and a front end application. It is an account identifier used by GPP to process in the Dr and Cr party identification when an IBAN is provided. For more  nformation about IBAN, refer to the IBAN term in Appendix A: Glossary. The alidateAndDeriveCustomerFromIBANService checks whether the received ID is a valid IBAN, invalid BAN or non- IBAN. If the IBAN is valid, the service returns these IBAN elements: • Country code • Bank ID • Branch ID • Account number The service also attempts to identify the customer and  oad the required customer information (BIC, ABA, Name, Address, etc.) 
+    br
+    a.btn.btn-outline-info.mt-3.mr-2(role="button", href="/documentation/GPP SOA Guide IBAN validation.pdf") Technical Guide
+    a.btn.btn-outline-success.mt-3.mr-2(role="button", href="/documentation/cdb/Account Lookup Request - Debit.xml") XML Request
+    a.btn.btn-outline-success.mt-3.mr-2(role="button", href="/documentation/cdb/Account Lookup Response - Debit - Successful.xml") XML Response

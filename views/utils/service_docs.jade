@@ -1,10 +1,13 @@
-if "OFAC" == value
-  include ../docs/actions_on_payments
-if "BI" == value
-  include ../docs/static_data
-if "POSTING" == value
-  include ../docs/queue_list
-if "CDB" == value
-  include ../docs/stp_validation
-if "EXT_FX" == value
-  include ../docs/iban_validation
+- var value = (uid != null) ? uid.split('^')[0] : ""
+if "TASKS" == value
+  include ../docs/soa_tasks
+if "ACTIONS_ON_PAYMENTS" == value
+  include ../docs/soa_actions
+if "STP_VALIDATION" == value
+  include ../docs/soa_stp_validations
+if "STATIC_DATA" == value
+  include ../docs/soa_static_data
+if "QUEUE_LIST" == value
+  include ../docs/soa_queue_list
+if "IBAN_VALIDATION" == value
+  include ../docs/soa_iban_validation

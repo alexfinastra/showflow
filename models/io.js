@@ -9,6 +9,7 @@ exports.io = function () {
 exports.socketsConnected = socketsConnected;
 
 exports.initialize = function(server) {
+  console.log("Something happed!!!")
   io = sio(server);
 
   io.on('connection', (socket) => {

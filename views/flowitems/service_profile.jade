@@ -20,7 +20,7 @@ li.timeline-item
       p.small
         | #{item["description"]}
       br      
-      - var href = "/webservice/send" + item["uid"]
+      - var href = "/webservices/profile/" + item["uid"]
       - var btn_class = "btn-outline-" + item["status_class"] 
       a.btn.float-left(href=href, class=btn_class)
           span 

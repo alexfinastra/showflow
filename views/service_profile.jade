@@ -3,7 +3,7 @@ extends layout
 block content
   .container.mt-5      
     .col-md-auto.mt-5
-      include docs/static_data    
+      include utils/service_docs    
     br    
     br
     .container      
@@ -22,15 +22,16 @@ block content
               input#inputOffice.w-100.form-control(name="USER_ID", type='text', placeholder='', value='' , required)                            
           .form-group.row
             label.col-sm-3.col-form-label(for='inputprofileid') Profile Id
-            .col-sm-8
+            .col-sm-6
               input#inputDepartment.w-100.form-control(name="PROFILE_ID", type='text', placeholder='', value='', required) 
           .form-group.row
             label.col-sm-3.col-form-label(for='inputprofileuid') Profile Uid
             .col-sm-6
               input#inputBIC.w-100.form-control(name="PROFILE_UID", type='text', placeholder='', value='', required)  
           br
-          .form-group.row.justify-content-end
-            .col-sm-9
+          .form-group.row.justify-content-center
+            .col-sm-2
               button.btn.btn-primary.float-left(type='submit') Send SOAP request
+            .col-sm-2
               a.btn.btn-link.float-right( href='/webservice/reset') Reset all
 

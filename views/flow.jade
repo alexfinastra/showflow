@@ -8,8 +8,10 @@ block content
           center.mt-5
             h3.mt-5 Please select Flow by pressing on 
             br
-            button.btn.btn-outline-dark.disabled(type='button') Payments & 
-              b Flows    
+            .btn-group
+              button#currentFlow.btn.btn-outline-dark.disabled(type='button') Payments & 
+                b Flows
+              button#listFlows.btn.btn-outline-dark.dropdown-toggle.dropdown-toggle-split.disabled(type='button', data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")    
     else
       .row#payflow
         .col-md-12.mt-5

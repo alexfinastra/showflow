@@ -117,7 +117,7 @@ var run_sql = function(line_new){
             console.log("Error connecting to DB" + err.message);
             return;
         }
-        console.log( " 5 ========>>>> S Q L :" + line_new ); 
+        console.log(" 5 ========>>>> S Q L :" + line_new ); 
                
         connection.execute(line_new, [], {
                 autoCommit: true,
@@ -284,7 +284,7 @@ router.get('/reset', function (req, res) {
   	  status = "scripts.values."+ i +".status"
       file.set(status , "")	;
 	  }
-
+	  
 	  file.writeSync();	
     res.redirect('/onboard');
 });

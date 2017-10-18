@@ -1,0 +1,14 @@
+.row
+  .col-md-1
+    button.btn.btn-link(onclick="goBack()")
+      i.fa.fa-angle-double-left.fa-2x.mr-2
+  .col-md-11.mdoc
+    h3.mt-1 Queue List Service
+br
+blockquote.blockquote
+  p.mb-0.small
+    | GPP processes and manages payments. As part of the message processing, GPP stores the list of payments where each payment is associated with one message status (msg sts). GPP supports three  ypes of related standalone services: • QueueListService - Provides a list of payments which meet  a given selection criteria and are filtered by user’s restrictions (for example, will nclude a list of all payments that meet the combined criteria of the input, such as payments with same message status that the user has permissions to view).  
+    br
+    a.btn.btn-outline-info.mt-3.mr-2(role="button", href="/documentation/GPP SOA Guide Queue List Service.pdf") Technical Guide
+    a.btn.btn-outline-success.mt-3.mr-2(role="button", href="/documentation/cdb/Account Lookup Request - Debit.xml") XML Request
+    a.btn.btn-outline-success.mt-3.mr-2(role="button", href="/documentation/cdb/Account Lookup Response - Debit - Successful.xml") XML Response

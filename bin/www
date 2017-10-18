@@ -3,14 +3,14 @@
 var app = require('../app');
 var debug = require('debug')('integration:server');
 var http = require('http');
-var chokidar = require('chokidar');
+//var chokidar = require('chokidar');
 var fs = require('fs');
 const path = require('path');
 
 let log = console.log.bind(console)
-Tail = require('tail').Tail;
-var dbconfig = require('../db/dbconfig.js');
-var database = require('../db/database.js');
+//Tail = require('tail').Tail;
+//var dbconfig = require('../db/dbconfig.js');
+//var database = require('../db/database.js');
 /**
  * Get port from environment and store in Express.
  */
@@ -30,18 +30,22 @@ var io = require('../models/io').initialize(server);
  * Listen on provided port, on all network interfaces.
  */
 
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
 
-database.createPool(dbconfig)
-.then(function() {
-    server.listen(port);
-    server.on('error', onError);
-    server.on('listening', onListening);
-})
-.catch(function(err) {
-    console.error('Error occurred creating database connection pool', err);
-    console.log('Exiting process');
-    process.exit(0);
-});
+
+//database.createPool(dbconfig)
+//.then(function() {
+//    server.listen(port);
+//    server.on('error', onError);
+//    server.on('listening', onListening);
+//})
+//.catch(function(err) {
+//    console.error('Error occurred creating database connection pool', err);
+//    console.log('Exiting process');
+//    process.exit(0);
+//});
 
 /*
 const pathToJMS = appRoot + '/jms'
@@ -186,5 +190,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  console.log('Listening on ' + bind);
 }

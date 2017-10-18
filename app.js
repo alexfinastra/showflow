@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+//var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -16,8 +16,8 @@ var queue = require('./routes/queue');
 var onboard = require('./routes/onboard');
 var webservices = require('./routes/webservices');
 
-var expressValidator = require('express-validator');
-var methodOverride = require('method-override');
+//var expressValidator = require('express-validator');
+//var methodOverride = require('method-override');
 
 var app = express();
 global.appRoot = path.resolve(__dirname);
@@ -40,15 +40,15 @@ app.use(session({
     saveUninitialized: false
 }));
 app.use(flash());
-app.use(expressValidator());
-app.use(methodOverride(function(req, res){
- if (req.body && typeof req.body == 'object' && '_method' in req.body) 
- { 
-  var method = req.body._method;
-  delete req.body._method;
-  return method;
-} 
-}));
+///app.use(expressValidator());
+//app.use(methodOverride(function(req, res){
+// if (req.body && typeof req.body == 'object' && '_method' in req.body) 
+// { 
+//  var method = req.body._method;
+//  delete req.body._method;
+//  return method;
+//} 
+//}));
 
 app.use(express.static(path.join(__dirname, 'public'))); 
 app.use(express.static(path.join(__dirname, 'exports'))); 
