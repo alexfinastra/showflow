@@ -16,7 +16,7 @@ var queue = require('./routes/queue');
 var onboard = require('./routes/onboard');
 var webservices = require('./routes/webservices');
 
-//var expressValidator = require('express-validator');
+var expressValidator = require('express-validator');
 //var methodOverride = require('method-override');
 
 var app = express();
@@ -40,7 +40,7 @@ app.use(session({
     saveUninitialized: false
 }));
 app.use(flash());
-///app.use(expressValidator());
+app.use(expressValidator());
 //app.use(methodOverride(function(req, res){
 // if (req.body && typeof req.body == 'object' && '_method' in req.body) 
 // { 
