@@ -119,7 +119,6 @@ getFilenameFolder = function(folder){
 }
 
 ensureFlow = function(uid, target){
-  console.log(" ensureFlow - start " + currentFlow)
   if(currentFlow.length > 0 ){
     var cflow = new json.File( currentFlow );
     cflow.readSync(); 
@@ -302,11 +301,8 @@ router.get('/clone/:folder', function(req, res){
 
 router.get('/generate/:source/:uid', function(req, res){
   var source = "public/schemas/" + req.params.source.split('$').join("/")
-  console.log("Source " + source)
   var fileName = req.params.source.split('$')[req.params.source.split('$').length - 1]
-  console.log("fileName " + fileName)
   var target = getFlowItem(req.params.uid)["request_connections_point"] + '/' + fileName;
-  console.log("target " + target)
   
   fse.copySync(source , target); 
   ensureFlow(req.params.uid, target.split('/')[target.split('/').length - 1]);  
@@ -346,7 +342,7 @@ router.post('/upload/:uid', function(req, res){
         var sys = require('sys');
         var exec = require('child_process').exec;
         var queue = form.uploadDir.substring(4, form.uploadDir.length)
-        var cmd = '~/dh/scripts/util/putMQMessage.ksh PRDTHV_465_LR ' + queue + ' ' +  appRoot + '/' + form.uploadDir + '/' + ev.data;
+        var cmd = '~/dh/scripts/util/putMQMessage.ksh PRDTHV_465_LR ' + queue + ' ' +  appRoot + '/' + form.uploadDir + '/' + filename;
         console.log("Execute cmd --> " + cmd);
         exec(cmd, function (error, stdout, stderr) {
             console.log('stdout: ' + stdout);
@@ -368,21 +364,7 @@ router.post('/upload/:uid', function(req, res){
 
 var worker = new Worker(function () {
   self.onmessage = function (ev) {
-    var isWin = /^win/.test(process.platform);
-    if (!isWin){
-      var sys = require('sys');
-      var exec = require('child_process').exec;
-      var queue = form.uploadDir.substring(4, form.uploadDir.length)
-      var cmd = '~/dh/scripts/util/putMQMessage.ksh PRDTHV_465_LR ' + queue + ' ' +  appRoot + '/' + form.uploadDir + '/' + ev.data;
-      console.log("Execute cmd --> " + cmd);
-      exec(cmd, function (error, stdout, stderr) {
-          console.log('stdout: ' + stdout);
-          console.log('stderr: ' + stderr);
-          if (error !== null) {
-            console.log('exec error: ' + error);
-          }
-      });
-    }
+    
     //socketsConnected.forEach((socket) => {    
     //  socket.emit('reloadflow', {filename: filename});
     //}) 
