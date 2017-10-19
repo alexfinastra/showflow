@@ -25,11 +25,11 @@ block content
               i.fa.fa-sign-in
               span.mt-1.ml-2  Set parameters
           if options["allrun"] == true 
-            a.btn.btn-outline-primary.mt-2.float-right( href= "/" + identity["type"] + "/run/0")
+            a#allrun.btn.btn-outline-primary.mt-2.float-right( href= "/" + identity["type"] + "/run/0")
               i.fa.fa-forward
               span.mt-1.ml-2  Execute all
           if options["allroll"] == true 
-            a.btn.btn-outline-danger.mt-2.float-right.mr-4( href= "/" + identity["type"] + "/rollback/0")
+            a#allback.btn.btn-outline-danger.mt-2.float-right.mr-4( href= "/" + identity["type"] + "/rollback/0")
               i.fa.fa-backward
               span.mt-1.ml-2  Rollback all          
       br            
@@ -39,7 +39,7 @@ block content
             tr.row.text-dark
               th.col.col-md-1 #
               th.col.col-md-3 Script
-              th.col.col-md-5 Description
+              th#spinner.col.col-md-5 Description
               th.col.col-md-3 
           tbody  
             for k in Object.keys(data.values)

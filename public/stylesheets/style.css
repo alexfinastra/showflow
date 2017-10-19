@@ -113,3 +113,8 @@ table.table tr:hover td a.hoverbutton {
   display: none !important;
   visibility: hidden !important;
 }
+
+.loader {
+  left: 50%;
+  margin-left: -4em;
+}

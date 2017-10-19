@@ -2,7 +2,66 @@ function goBack() {
   window.history.back();
 }
 
+
 $(document).ready(function(){
+	
+
+		
+
+	$('#allrun').on('click', function(){
+		var opts = {
+		  lines: 11 // The number of lines to draw
+		, length: 0 // The length of each line
+		, width: 25 // The line thickness
+		, radius: 75 // The radius of the inner circle
+		, scale: 0.5 // Scales overall size of the spinner
+		, corners: 0.7 // Corner roundness (0..1)
+		, color: '#007bff' // #rgb or #rrggbb or array of colors
+		, opacity: 0.25 // Opacity of the lines
+		, rotate: 0 // The rotation offset
+		, direction: 1 // 1: clockwise, -1: counterclockwise
+		, speed: 1.5 // Rounds per second
+		, trail: 54 // Afterglow percentage
+		, fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+		, zIndex: 2e9 // The z-index (defaults to 2000000000)
+		, className: 'spinner' // The CSS class to assign to the spinner
+		, top: '50%' // Top position relative to parent
+		, left: '50%' // Left position relative to parent
+		, shadow: false // Whether to render a shadow
+		, hwaccel: false // Whether to use hardware acceleration
+		, position: 'absolute' // Element positioning
+		}	
+		var target = document.getElementById('loader')
+		var spinner = new Spinner(opts).spin(target);
+	})
+
+	$('#allback').on('click', function(){
+		var opts = {
+		  lines: 11 // The number of lines to draw
+		, length: 0 // The length of each line
+		, width: 25 // The line thickness
+		, radius: 75 // The radius of the inner circle
+		, scale: 0.5 // Scales overall size of the spinner
+		, corners: 0.7 // Corner roundness (0..1)
+		, color: '#dc3545' // #rgb or #rrggbb or array of colors
+		, opacity: 0.25 // Opacity of the lines
+		, rotate: 0 // The rotation offset
+		, direction: -1 // 1: clockwise, -1: counterclockwise
+		, speed: 1.5 // Rounds per second
+		, trail: 54 // Afterglow percentage
+		, fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+		, zIndex: 2e9 // The z-index (defaults to 2000000000)
+		, className: 'spinner' // The CSS class to assign to the spinner
+		, top: '50%' // Top position relative to parent
+		, left: '50%' // Left position relative to parent
+		, shadow: false // Whether to render a shadow
+		, hwaccel: false // Whether to use hardware acceleration
+		, position: 'absolute' // Element positioning
+		}	
+		var target = document.getElementById('loader')
+		var spinner = new Spinner(opts).spin(target);
+	})
+
 	$('input[type=file]').change(function(){
 		$(this).simpleUpload("/folder/upload/" + $("#upload-container").data().row , {
 			start: function(file){
