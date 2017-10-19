@@ -8,16 +8,16 @@ html
     script(src="/javascripts/jquery-3.2.1.min.js")    
   body
     .container
-      .loginmodal-container
-        img.img-responsive.login-img(src="img/logo.png", width="270px")
+      .loginmodal-container.justify-content-center
+        img.img-responsive.login-img.ml-5(src="img/logo.png", width="200px")
         br
         br
-        h1 Payments & 
-          b Flows
+        h1 Self Services 
+          b Platform
         br
         form(action="/login", method="post")
           input(type="text", name="user", placeholder="Username")
           input(type="password", name="pass", placeholder="Password")
           hr
-          input.login.btn-lg.btn-primary(type="submit", name="login", value="Sign In")
+          input.login.btn-outline-primary.btn-lg(type="submit", name="login", value="Sign In")
         .login-help      
