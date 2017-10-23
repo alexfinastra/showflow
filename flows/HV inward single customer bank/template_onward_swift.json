@@ -23,7 +23,7 @@
       {
         "step": 4,
         "type": "service",
-	      "uid": "AcceptRejectRTRQuoteService"
+	      "uid": "ApplyChangesService"
       },
       {
         "step": 5,

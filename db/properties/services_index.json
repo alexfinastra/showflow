@@ -2,7 +2,8 @@
   "ApplyChangesService": {
     "active": true,
     "connected": true,
-    "req_fields": "",
+    "req_fields": "UserID,effectiveDate,profileIDs,",
+    "func_name": "applyChanges,",
     "res_fields": "",
     "flow_item": {
       "step": 0,
@@ -29,7 +30,8 @@
   "LoadProfileService": {
     "active": true,
     "connected": true,
-    "req_fields": "",
+    "req_fields": "UserID,profileID,profileRecordUniqueID,",
+    "func_name":"performLoadProfile,",
     "res_fields": "",
     "flow_item": {
       "step": 0,
@@ -56,7 +58,8 @@
   "MessageLoadService": {
     "active": true,
     "connected": true,
-    "req_fields": "",
+    "req_fields": "UserID,P_MID,",
+    "func_name":"loadMessage,",
     "res_fields": "",
     "flow_item": {
       "step": 0,
@@ -83,7 +86,8 @@
   "MessageSubmitService": {
     "active": true,
     "connected": true,
-    "req_fields": "",
+    "req_fields": "P_OFFICE,P_DEPARTMENT,D_BUTTON_ID,",
+    "func_name":"submitMessage,",
     "res_fields": "",
     "flow_item": {
       "step": 0,
@@ -110,7 +114,8 @@
   "ProfileActionsService": {
     "active": true,
     "connected": true,
-    "req_fields": "",
+    "req_fields": "UserID,profileID,effectiveDate,profileRecordUniqueID,",
+    "func_name": "profileSave,profileHold,profileDelete,profileActivate,profileDecline,profileApprove,profileMultiActions,",
     "res_fields": "",
     "flow_item": {
       "step": 0,
@@ -137,7 +142,8 @@
   "ProfileListService": {
     "active": true,
     "connected": true,
-    "req_fields": "",
+    "req_fields": "UserID,profileID,",
+    "func_name":"getProfileList",
     "res_fields": "",
     "flow_item": {
       "step": 0,
@@ -165,6 +171,7 @@
     "active": true,
     "connected": true,
     "req_fields": "",
+    "func_name":"",
     "res_fields": "",
     "flow_item": {
       "step": 0,
@@ -192,6 +199,7 @@
     "active": true,
     "connected": true,
     "req_fields": "",
+    "func_name":"",
     "res_fields": "",
     "flow_item": {
       "step": 0,
@@ -219,6 +227,7 @@
     "active": true,
     "connected": true,
     "req_fields": "",
+    "func_name":"",
     "res_fields": "",
     "flow_item": {
       "step": 0,
@@ -246,6 +255,7 @@
     "active": true,
     "connected": true,
     "req_fields": "",
+    "func_name":"",
     "res_fields": "",
     "flow_item": {
       "step": 0,
