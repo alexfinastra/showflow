@@ -1,0 +1,25 @@
+if service["req_fields"].length != 0
+  .container.ml-2          
+    h5 Required input parameters 
+    form#needs-validation.mt-5(action='/webservices/execute/' + uid , method="POST", novalidate)
+        if service["req_fields"].indexOf("USER_ID") != -1
+          .form-group.row
+            label.col-sm-3.col-form-label(for='inputuserid') User Id
+            .col-sm-6
+              input#inputOffice.w-100.form-control(name="USER_ID", type='text', placeholder='', value='' , required)                            
+        if service["req_fields"].indexOf("PROFILE_ID") != -1
+          .form-group.row
+            label.col-sm-3.col-form-label(for='inputprofileid') Profile Id
+            .col-sm-6
+              input#inputDepartment.w-100.form-control(name="PROFILE_ID", type='text', placeholder='', value='', required) 
+        if service["req_fields"].indexOf("PROFILE_UID") != -1
+          .form-group.row
+            label.col-sm-3.col-form-label(for='inputprofileuid') Profile Uid
+            .col-sm-6
+              input#inputBIC.w-100.form-control(name="PROFILE_UID", type='text', placeholder='', value='', required)  
+        br
+        .form-group.row.justify-content-center
+          .col-sm-2
+            button.btn.btn-primary.float-left(type='submit') Send SOAP request
+          .col-sm-2
+            a.btn.btn-link.float-right( href='/webservice/reset') Reset all

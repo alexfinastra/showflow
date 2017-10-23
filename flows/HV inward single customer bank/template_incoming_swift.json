@@ -23,7 +23,7 @@
       {
         "step": 4,
         "type": "service",
-	      "uid": "TASKS^RELEASE_FROM_SCHEDULE"
+	      "uid": "AcceptRejectRTRQuoteService"
       },
       {
         "step": 5,

@@ -1,13 +1,13 @@
-- var value = (uid != null) ? uid.split('^')[0] : ""
-if "TASKS" == value
+- var value = item["interface_type"] != null ? item["interface_type"] : ""
+if "Tasks" == value
   include ../docs/soa_tasks
-if "ACTIONS_ON_PAYMENTS" == value
+if "Actions on payments" == value
   include ../docs/soa_actions
-if "STP_VALIDATION" == value
+if "STP Validation" == value
   include ../docs/soa_stp_validations
-if "STATIC_DATA" == value
+if "Static Data" == value
   include ../docs/soa_static_data
-if "QUEUE_LIST" == value
+if "Queue List" == value
   include ../docs/soa_queue_list
-if "IBAN_VALIDATION" == value
+if "IBAN Validation" == value
   include ../docs/soa_iban_validation

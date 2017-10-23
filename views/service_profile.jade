@@ -1,6 +1,8 @@
 extends layout
 
 block content
+  - var profile = true
+  - var item = service.flow_item        
   .container.mt-5      
     .col-md-auto.mt-5
       include utils/service_docs    
@@ -9,29 +11,8 @@ block content
     .container      
       h5.ml-2 Web service card as it appears in Payment Flows       
       ul.timeline
-        - var profile = true
-        - var item = service.flow_item
         include flowitems/service_profile
       br
-      br 
-    .container          
-      form#needs-validation(action='/webservices/execute' , method="POST", novalidate)
-          .form-group.row
-            label.col-sm-3.col-form-label(for='inputuserid') User Id
-            .col-sm-6
-              input#inputOffice.w-100.form-control(name="USER_ID", type='text', placeholder='', value='' , required)                            
-          .form-group.row
-            label.col-sm-3.col-form-label(for='inputprofileid') Profile Id
-            .col-sm-6
-              input#inputDepartment.w-100.form-control(name="PROFILE_ID", type='text', placeholder='', value='', required) 
-          .form-group.row
-            label.col-sm-3.col-form-label(for='inputprofileuid') Profile Uid
-            .col-sm-6
-              input#inputBIC.w-100.form-control(name="PROFILE_UID", type='text', placeholder='', value='', required)  
-          br
-          .form-group.row.justify-content-center
-            .col-sm-2
-              button.btn.btn-primary.float-left(type='submit') Send SOAP request
-            .col-sm-2
-              a.btn.btn-link.float-right( href='/webservice/reset') Reset all
+      br    
+    include utils/service_form
 

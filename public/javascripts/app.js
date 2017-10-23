@@ -4,9 +4,6 @@ function goBack() {
 
 
 $(document).ready(function(){
-	
-
-		
 
 	$('#allrun').on('click', function(){
 		var opts = {

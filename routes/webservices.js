@@ -46,8 +46,12 @@ router.get('/profile/:uid', function(req, res){
 	res.render('service_profile', { title: 'SOAP Service - ' + services.get(req.params.uid + ".flow_item.interface_type"), service: services.get(req.params.uid), uid: req.params.uid });
 })
 
-router.post('/execute/:id', function(req, res){
-	uid = req.params["id"]
+router.post('/execute/:uid', function(req, res){
+	uid = req.params.uid
+  var services = new json.File(appRoot + "/db/properties/services_index.json" );
+  services.readSync();
+
+  
 	res.redirect('/webservices/profile/'+uid);
 })
 
@@ -87,25 +91,26 @@ router.get('/populate/wsdl', function(req, res){
 
 router.get('/populate/soap/:uid', function(req, res){  
   var services = new json.File(appRoot + "/db/properties/services_index.json" );
-  services.readSync(); 
-  var keys = Object.keys(services.data);
-  console.log("Keys are    " + keys.length)
-  
-  for(var i=0; i< keys.length; i++){
-    if (i != req.params.uid) {continue;} 
+  services.readSync();
+  var key = req.params.uid; 
 
-    var key = keys[i];
-    console.log("Current Key is   " + key + " and properties =>>> "+services.get(key + ".description"))
-    var url = services.get(key + ".wsdl")
+  console.log("Current Key is   " + key + " and properties =>>> "+services.get(key + ".description"))
+  var url = services.get(key + ".wsdl")
+  console.log("URL is   " + url)
+  if(url.length != 0)
+  {
     soap.createClient(url, function(err, client) { 
       desc = client.describe()
       console.log("And finally   " + key + " and value " + desc)
       services.set(key+".description",desc)  
       services.set(key+".active", true)  
-      services.writeSync();  
+      services.writeSync(); 
+      res.send("OK") 
     })
   }
-  res.send("OK")
+  else{
+    res.send("URL is empty!!!")
+  }
 })
 
 router.get('/populate/init', function(req, res){
