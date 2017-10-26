@@ -240,14 +240,14 @@ $(document).ready(function(){
 						console.log("I be validatin' now!")
 					},
 					elements: {
-						"xs:restriction": {
+						"GrpHdr": {
 							menu: [{
-								caption: "Append an <xs:enumeration>",
+								caption: "Append an <MsgId>",
 								action: Xonomy.newElementChild,
-								actionParameter: "<xs:enumeration/>"
+								actionParameter: "<MsgId/>"
 							}]
 						},
-						"xs:enumeration": {
+						"MsgId": {
 							menu: [{
 									caption: "Add @label=\"something\"",
 									action: Xonomy.newAttribute,
@@ -256,18 +256,18 @@ $(document).ready(function(){
 										return jsElement.hasAttribute("label");
 									}
 								}, {
-									caption: "Delete this <item>",
+									caption: "Delete this <MsgId>",
 									action: Xonomy.deleteElement
 								}, {
-									caption: "New <item> before this",
+									caption: "New <MsgId> before this",
 									action: Xonomy.newElementBefore,
-									actionParameter: "<item/>"
+									actionParameter: "<MsgId/>"
 								}, {
-									caption: "New <item> after this",
+									caption: "New <MsgId> after this",
 									action: Xonomy.newElementAfter,
-									actionParameter: "<item/>"
+									actionParameter: "<MsgId/>"
 								}],
-							canDropTo: ["xs:restriction"],
+							canDropTo: ["GrpHdr"],
 							attributes: {
 								"value": {
 									asker: Xonomy.askString,
