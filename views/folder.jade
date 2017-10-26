@@ -39,29 +39,44 @@ block content
         //  | Clone flow template
         blockquote.blockquote
           p.small A list of flows was generated automatically as a result of payments process and reflect data exchange with perimeter systems.
-        br     
+        br         
+    br
+    #xml-editor.container.hidden
+      .row
+        .col-md-12
+          h5.mt-3 Review message before send
+      br
+      .row
+        .col-md-12
+          #editor(style="height: 250px; overflow-y: scroll; background: '#e9ecef'")
+      br
+      .row
+        .col-md-12
+          button#canceldmsg.btn.btn-link.ml-2.float-right(type='button') Cancel
+          button#sendmsg.btn.btn-primary.mr-2.float-right(type='button') Send Message          
     br
     br
-    table.table(style="background-color: transparent;")
-      thead
-        tr.row
-          th.col-md-5 Name
-          th.col-md-2 Size
-          if options["upload"] == true 
-            th.col-md-2 Uploaded
-          else
-            th.col-md-2 Created
-          th.col-md-3 
-      tbody
-        for file in files      
-          tr.row        
-            th.col-md-5(scope="row") #{file["name"]}
-            td.col-md-2 #{file["size"]}
-            td.col-md-2 #{file["created"]}
-            td.col-md-3
-              - var prehref = options["button"] == "flow" ? 'flow$' : ''
-              a.btn.btn-outline-danger.btn-sm.mt-2.float-right( href= "/folder/delete/" + prehref + file["id"] +"/" + file["name"] ) Delete
-              if options["button"] == "flow"
-                a.btn.btn-outline-success.mr-3.mt-2.btn-sm.float-right( href= "/flow/load/"  + file["id"] +"/" + file["name"] ) Show 
-              else
-                a.btn.btn-outline-primary.mr-3.mt-2.btn-sm.float-right( href= "/folder/download/"  + file["id"] +"/" + file["name"] ) Download 
+    if options["upload"] != true
+      table.table(style="background-color: transparent;")
+        thead
+          tr.row
+            th.col-md-5 Name
+            th.col-md-2 Size
+            if options["upload"] == true 
+              th.col-md-2 Uploaded
+            else
+              th.col-md-2 Created
+            th.col-md-3 
+        tbody
+          for file in files      
+            tr.row        
+              th.col-md-5(scope="row") #{file["name"]}
+              td.col-md-2 #{file["size"]}
+              td.col-md-2 #{file["created"]}
+              td.col-md-3
+                - var prehref = options["button"] == "flow" ? 'flow$' : ''
+                a.btn.btn-outline-danger.btn-sm.mt-2.float-right( href= "/folder/delete/" + prehref + file["id"] +"/" + file["name"] ) Delete
+                if options["button"] == "flow"
+                  a.btn.btn-outline-success.mr-3.mt-2.btn-sm.float-right( href= "/flow/load/"  + file["id"] +"/" + file["name"] ) Show 
+                else
+                  a.btn.btn-outline-primary.mr-3.mt-2.btn-sm.float-right( href= "/folder/download/"  + file["id"] +"/" + file["name"] ) Download 

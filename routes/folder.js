@@ -281,7 +281,7 @@ router.get('/upload/:uid', function(req, res){
   var uid = req.params.uid;   
   var item = getFlowItem(uid)
   var folderName = ((item == null) ? "udefined" : item.interface_name.split('_').join(" "))
-  var title = "Upload to " + folderName;
+  var title = "Send to " + folderName;
   var options = {
     "button": "",
     "upload": true,
@@ -368,7 +368,11 @@ router.post('/upload/:uid', function(req, res){
       }
     }
     ensureFlow(req.params.uid, filename);
-    res.end('success');
+    fs.readFile(appRoot + '/' + form.uploadDir + '/' + filename, (err, data) => {
+      if (err) throw err;
+      res.end(data);
+    });
+    
   });
   
   form.parse(req);

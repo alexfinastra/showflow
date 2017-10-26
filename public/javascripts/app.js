@@ -66,25 +66,78 @@ $(document).ready(function(){
 				$('.progress').removeClass("invisible");
 				$('.progress-bar').html("");
 				$('.progress-bar').width(0);
-				$(".table").load(" .table");
+				//$(".table").load(" .table");
 			},
 			progress: function(progress){
 				//received progress
 				$('.progress-bar').html("Progress: " + Math.round(progress) + "%");
 				$('.progress-bar').width(progress + "%");
-				$(".table").load(" .table");
+				//$(".table").load(" .table");
 			},
 			success: function(data){
 				//upload successful				
 				$('.progress').addClass("invisible");
 				$('.progress-bar').html("");				
 				$('.form-control').val('');
-				$(".table").load(" .table");
+				//$(".table").load(" .table");
+				console.log("upload success " + data)
+				var editor=document.getElementById("editor");
+	  		var docSpec={
+					onchange: function(){
+						console.log("I been changed now!")
+					},
+					validate: function(obj){
+						console.log("I be validatin' now!")
+					},
+					elements: {
+						"GrpHdr": {
+							menu: [{
+								caption: "Append an <MsgId>",
+								action: Xonomy.newElementChild,
+								actionParameter: "<MsgId/>"
+							}]
+						},
+						"MsgId": {
+							menu: [{
+									caption: "Add @label=\"something\"",
+									action: Xonomy.newAttribute,
+									actionParameter: {name: "label", value: "something"},
+									hideIf: function(jsElement){
+										return jsElement.hasAttribute("label");
+									}
+								}, {
+									caption: "Delete this <MsgId>",
+									action: Xonomy.deleteElement
+								}, {
+									caption: "New <MsgId> before this",
+									action: Xonomy.newElementBefore,
+									actionParameter: "<MsgId/>"
+								}, {
+									caption: "New <MsgId> after this",
+									action: Xonomy.newElementAfter,
+									actionParameter: "<MsgId/>"
+								}],
+							canDropTo: ["GrpHdr"],
+							attributes: {
+								"value": {
+									asker: Xonomy.askString,
+									menu: [{
+										caption: "Delete this @value",
+										action: Xonomy.deleteAttribute
+									}]
+								}
+							}
+						}
+					}
+				};
+
+				Xonomy.render(data, editor, docSpec);
+				$('#xml-editor').removeClass("hidden")
 			},
 			error: function(error){
 				//upload failed
 				$('.progress').html("Failure!<br>" + error.name + ": " + error.message);
-				$(".table").load(" .table");
+				//$(".table").load(" .table");
 			}
 		});
 	});
@@ -105,7 +158,6 @@ $(document).ready(function(){
   $("#sidebar").niceScroll({
      cursorcolor: '#FFFFFF',
      cursorwidth: 4,
-     cursorborder: 'none'
   });
 
 	$('#dismiss, .overlay').on('click', function () {
@@ -212,25 +264,24 @@ $(document).ready(function(){
 	    theme: "bootstrap"
 	});
 
-	//$(".modal-body").niceScroll({
-  //   cursorcolor: '#FFFFFF',
-  //   cursorwidth: 4,
-  //   cursorborder: 'none'
-  //});	
+	$("#editor").niceScroll({
+     cursorcolor: '#FFFFFF',
+     cursorwidth: 4,
+     cursorborder: '1px'
+  });	
+   
+  $('#canceldmsg').on('click', function(){
+  	$('#xml-editor').addClass("hidden")
+  });
 
-	$('#messageModalLong').on('show.bs.modal', function (event) {
-	  var button = $(event.relatedTarget) 
-	  var href = button.data('href') 	
-	  var file = button[0].innerText 
-	  $('.modal-header').attr('data-file', file)
-	  var modal = $(this)	  
+  $('.messageformat').on('click', function(event){  
+	  var button = $(event.currentTarget) 
+	  var href = button.data('href') 		 	  
 	  $.ajax({
       type: 'GET',
       url: href
 	  })
 	  .done(function (response) {	
-	  		modal.find('.modal-title').text("Review " + file + " before send")
-	  		
 	  		var editor=document.getElementById("editor");
 	  		var docSpec={
 					onchange: function(){
@@ -282,6 +333,7 @@ $(document).ready(function(){
 				};
 
 				Xonomy.render(response.data, editor, docSpec);
+				$('#xml-editor').removeClass("hidden")
 	  })
 	  .fail(function (response) {
 	      console.log(response);
