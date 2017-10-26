@@ -4,6 +4,7 @@ var moment = require('moment');
 var express = require('express');
 var router = express.Router();
 var json = require('json-file');
+var tmp = require('temporary');
 var oracledb = require('oracledb');
 var dbConfig = require('../db/dbconfig.js');
 
@@ -300,13 +301,26 @@ router.get('/clone/:folder', function(req, res){
 })
 
 router.get('/generate/:source/:uid', function(req, res){
-  var source = "public/schemas/" + req.params.source.split('$').join("/")
-  var fileName = req.params.source.split('$')[req.params.source.split('$').length - 1]
-  var target = getFlowItem(req.params.uid)["request_connections_point"] + '/' + fileName;
+  var source = "public/schemas/" + req.params.source.split('$').join("/") 
+  var fileName = req.params.source.split('$')[req.params.source.split('$').length - 1] 
+  fs.readFile(source, 'utf8', function (err,data) {
+    if (err) {
+      return console.log(err);
+    }    
+    res.json({data: data, file: fileName});
+  });
   
-  fse.copySync(source , target); 
-  ensureFlow(req.params.uid, target.split('/')[target.split('/').length - 1]);  
-  res.redirect(req.get('referer'));
+})
+
+router.get('/send/:uid', function(req, res){   
+    console.log("XML SSSSSUCHKA " + req.query.xml)
+    var file = new tmp.File();
+    file.writeFileSync(req.query.xml)    
+    var target = getFlowItem(req.params.uid)["request_connections_point"] + '/' + req.query.file;
+    console.log(" -------------------- //// ***** " + target)
+    fse.copySync(file.path , target); 
+    ensureFlow(req.params.uid, target.split('/')[target.split('/').length - 1]);  
+    res.redirect(req.get('referer'));
 })
 
 router.post('/upload/:uid', function(req, res){    

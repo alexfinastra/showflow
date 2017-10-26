@@ -117,6 +117,25 @@ $(document).ready(function(){
 		location.href = '/flow/current'
 	})
 
+	$('#sendmsg').on('click', function(){
+		var len = location.pathname.split('/').length
+		var uid = location.pathname.split('/')[len -1]
+		var editor=document.getElementById("editor");
+		var fileName = $('.modal-header').data("file");
+		$.ajax({
+			type: 'GET',
+			url: '/folder/send/' + uid,
+			data: {file: fileName, xml: Xonomy.harvest()}
+		})
+		.done(function (response) {	
+				location.reload();
+	  		console.log(response);
+	  })
+	  .fail(function (response) {
+	      console.log(response);
+	  });
+	})
+
 	$('#listFlows').on('click', function () {
  	  if($('#sidebar').hasClass('active') == false){
  	  	$('#sidebar').addClass('active');
@@ -192,5 +211,81 @@ $(document).ready(function(){
 	$("#from_schemas").select2({
 	    theme: "bootstrap"
 	});
+
+	//$(".modal-body").niceScroll({
+  //   cursorcolor: '#FFFFFF',
+  //   cursorwidth: 4,
+  //   cursorborder: 'none'
+  //});	
+
+	$('#messageModalLong').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) 
+	  var href = button.data('href') 	
+	  var file = button[0].innerText 
+	  $('.modal-header').attr('data-file', file)
+	  var modal = $(this)	  
+	  $.ajax({
+      type: 'GET',
+      url: href
+	  })
+	  .done(function (response) {	
+	  		modal.find('.modal-title').text("Review " + file + " before send")
+	  		
+	  		var editor=document.getElementById("editor");
+	  		var docSpec={
+					onchange: function(){
+						console.log("I been changed now!")
+					},
+					validate: function(obj){
+						console.log("I be validatin' now!")
+					},
+					elements: {
+						"xs:restriction": {
+							menu: [{
+								caption: "Append an <xs:enumeration>",
+								action: Xonomy.newElementChild,
+								actionParameter: "<xs:enumeration/>"
+							}]
+						},
+						"xs:enumeration": {
+							menu: [{
+									caption: "Add @label=\"something\"",
+									action: Xonomy.newAttribute,
+									actionParameter: {name: "label", value: "something"},
+									hideIf: function(jsElement){
+										return jsElement.hasAttribute("label");
+									}
+								}, {
+									caption: "Delete this <item>",
+									action: Xonomy.deleteElement
+								}, {
+									caption: "New <item> before this",
+									action: Xonomy.newElementBefore,
+									actionParameter: "<item/>"
+								}, {
+									caption: "New <item> after this",
+									action: Xonomy.newElementAfter,
+									actionParameter: "<item/>"
+								}],
+							canDropTo: ["xs:restriction"],
+							attributes: {
+								"value": {
+									asker: Xonomy.askString,
+									menu: [{
+										caption: "Delete this @value",
+										action: Xonomy.deleteAttribute
+									}]
+								}
+							}
+						}
+					}
+				};
+
+				Xonomy.render(response.data, editor, docSpec);
+	  })
+	  .fail(function (response) {
+	      console.log(response);
+	  });
+	})
 });
 
