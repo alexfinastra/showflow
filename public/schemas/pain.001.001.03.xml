@@ -1,0 +1,11 @@
+<FndtMsg xmlns="http://fundtech.com/SCL/CommonTypes">
+  <Msg>
+    <Pmnt>
+      <Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
+        <CstmrCdtTrfInitn>              
+        </CstmrCdtTrfInitn>
+      </Document>
+    </Pmnt>
+    <Extn/>
+  </Msg>
+</FndtMsg>

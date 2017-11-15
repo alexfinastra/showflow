@@ -1,0 +1,39 @@
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.007.001.02">
+	<CstmrPmtRvsl>
+		<GrpHdr>
+			<MsgId>864835557426953</MsgId>
+			<CreDtTm>2009-12-17T09:30:47.0Z</CreDtTm>
+			<NbOfTxs>10</NbOfTxs>
+			<CtrlSum>100</CtrlSum>
+			<GrpRvsl>true</GrpRvsl>
+			<InitgPty>
+				<Nm>Fundtech Germany Testing Pain007</Nm>
+				<Id>
+					<OrgId>
+						<Othr>
+							<Id>DE1CUFNDTDEFF1</Id>
+							<Issr>KBO-BCE</Issr>
+						</Othr>
+					</OrgId>
+				</Id>
+			</InitgPty>
+		</GrpHdr>
+		<OrgnlGrpInf>
+			<OrgnlMsgId>864835550277656</OrgnlMsgId>
+			<OrgnlMsgNmId>pain.001.001.02</OrgnlMsgNmId>
+			<RvslRsnInf>
+				<Rsn>
+					<Cd>MD05</Cd>
+				</Rsn>
+			</RvslRsnInf>
+		</OrgnlGrpInf>
+ <OrgnlPmtInfAndRvsl>
+  <RvslPmtInfId>abc1234567</RvslPmtInfId> 
+  <OrgnlPmtInfId>864835762075179</OrgnlPmtInfId> 
+  <OrgnlNbOfTxs>10</OrgnlNbOfTxs> 
+  <OrgnlCtrlSum>100</OrgnlCtrlSum> 
+  <BtchBookg>true</BtchBookg>  
+ </OrgnlPmtInfAndRvsl>		
+	</CstmrPmtRvsl>
+</Document>
+

@@ -336,9 +336,13 @@ router.post('/upload/:uid', function(req, res){
 
   // rename it to it's orignal name
   form.on('file', function(field, file) {
-    if (fs.existsSync(file.path)) {       
+    console.log("**** Before rename " + file.path);    
+    if (fs.existsSync(file.path)) {
+      if(fs.existsSync( path.join(form.uploadDir, file.name) ) ){
+        fs.unlinkSync(path.join(form.uploadDir, file.name))
+      }
       fs.rename(file.path, path.join(form.uploadDir, file.name));
-      filename = file.name;
+      filename = file.name;     
     }else{
       console.log("File was taken")
     } 
@@ -349,30 +353,37 @@ router.post('/upload/:uid', function(req, res){
   });
 
   // once all the files have been uploaded, send a response to the client
-  form.on('end', function() {
-    if (form.uploadDir.indexOf('jms') > -1){
-      var isWin = /^win/.test(process.platform);
-      if (!isWin){
-        var sys = require('sys');
-        var exec = require('child_process').exec;
-        var queue = form.uploadDir.substring(4, form.uploadDir.length)
-        var cmd = '~/dh/scripts/util/putMQMessage.ksh PRDTHV_465_LR ' + queue + ' ' +  appRoot + '/' + form.uploadDir + '/' + filename;
-        console.log("Execute cmd --> " + cmd);
-        exec(cmd, function (error, stdout, stderr) {
-            console.log('stdout: ' + stdout);
-            console.log('stderr: ' + stderr);
-            if (error !== null) {
-              console.log('exec error: ' + error);
-            }
-        });
-      }
-    }
+  form.on('end', function() {    
     ensureFlow(req.params.uid, filename);
-    fs.readFile(appRoot + '/' + form.uploadDir + '/' + filename, (err, data) => {
-      if (err) throw err;
-      res.end(data);
-    });
+    var filePath =  appRoot + '/' + form.uploadDir + '/' + filename;    
+    // TODO make async call !!!
+    while(!fs.existsSync(filePath)) {
+      console.log("+++++++++++++ " + filePath);
+    }
+    if(fs.existsSync(filePath)) {
+      if (form.uploadDir.indexOf('jms') > -1){
+        var isWin = /^win/.test(process.platform);
+        if (!isWin){
+          var sys = require('sys');
+          var exec = require('child_process').exec;
+          var queue = form.uploadDir.substring(4, form.uploadDir.length)
+          var cmd = '~/dh/scripts/util/putMQMessage.ksh PRDTHV_465_LR ' + queue + ' ' +  filePath;
+          console.log("Execute cmd --> " + cmd);
+          exec(cmd, function (error, stdout, stderr) {
+              console.log('stdout: ' + stdout);
+              console.log('stderr: ' + stderr);
+              if (error !== null) {
+                console.log('exec error: ' + error);
+              }
+          });
+        }
+      }    
     
+      fs.readFile(filePath, (err, data) => {
+        if (err) throw err;
+        res.end(data);
+      });  
+    } 
   });
   
   form.parse(req);

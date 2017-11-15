@@ -82,57 +82,64 @@ $(document).ready(function(){
 				//$(".table").load(" .table");
 				console.log("upload success " + data)
 				var editor=document.getElementById("editor");
-	  		var docSpec={
-					onchange: function(){
-						console.log("I been changed now!")
-					},
-					validate: function(obj){
-						console.log("I be validatin' now!")
-					},
-					elements: {
-						"GrpHdr": {
-							menu: [{
-								caption: "Append an <MsgId>",
-								action: Xonomy.newElementChild,
-								actionParameter: "<MsgId/>"
-							}]
-						},
-						"MsgId": {
-							menu: [{
-									caption: "Add @label=\"something\"",
-									action: Xonomy.newAttribute,
-									actionParameter: {name: "label", value: "something"},
-									hideIf: function(jsElement){
-										return jsElement.hasAttribute("label");
-									}
-								}, {
-									caption: "Delete this <MsgId>",
-									action: Xonomy.deleteElement
-								}, {
-									caption: "New <MsgId> before this",
-									action: Xonomy.newElementBefore,
-									actionParameter: "<MsgId/>"
-								}, {
-									caption: "New <MsgId> after this",
-									action: Xonomy.newElementAfter,
-									actionParameter: "<MsgId/>"
-								}],
-							canDropTo: ["GrpHdr"],
-							attributes: {
-								"value": {
-									asker: Xonomy.askString,
-									menu: [{
-										caption: "Delete this @value",
-										action: Xonomy.deleteAttribute
-									}]
-								}
-							}
-						}
-					}
-				};
-
-				Xonomy.render(data, editor, docSpec);
-				$('#xml-editor').removeClass("hidden")
+	  		
+	  		if(data.indexOf("<") == -1){
+	  			$('#xml-editor').removeClass("hidden")
+	  			$("textarea#txt-editor").val(data);
+	  			$("textarea#txt-editor").data("text", data); 
+	  		}
+	  		else{
+	  			  		var docSpec={
+	  							onchange: function(){
+	  								console.log("I been changed now!")
+	  							},
+	  							validate: function(obj){
+	  								console.log("I be validatin' now!")
+	  							},
+	  							elements: {
+	  								"GrpHdr": {
+	  									menu: [{
+	  										caption: "Append an <MsgId>",
+	  										action: Xonomy.newElementChild,
+	  										actionParameter: "<MsgId/>"
+	  									}]
+	  								},
+	  								"MsgId": {
+	  									menu: [{
+	  											caption: "Add @label=\"something\"",
+	  											action: Xonomy.newAttribute,
+	  											actionParameter: {name: "label", value: "something"},
+	  											hideIf: function(jsElement){
+	  												return jsElement.hasAttribute("label");
+	  											}
+	  										}, {
+	  											caption: "Delete this <MsgId>",
+	  											action: Xonomy.deleteElement
+	  										}, {
+	  											caption: "New <MsgId> before this",
+	  											action: Xonomy.newElementBefore,
+	  											actionParameter: "<MsgId/>"
+	  										}, {
+	  											caption: "New <MsgId> after this",
+	  											action: Xonomy.newElementAfter,
+	  											actionParameter: "<MsgId/>"
+	  										}],
+	  									canDropTo: ["GrpHdr"],
+	  									attributes: {
+	  										"value": {
+	  											asker: Xonomy.askString,
+	  											menu: [{
+	  												caption: "Delete this @value",
+	  												action: Xonomy.deleteAttribute
+	  											}]
+	  										}
+	  									}
+	  								}
+	  							}
+	  						};
+	  		
+	  						Xonomy.render(data, editor, docSpec);
+	  						$('#xml-editor').removeClass("hidden")}
 			},
 			error: function(error){
 				//upload failed
@@ -156,6 +163,11 @@ $(document).ready(function(){
 	});
 
   $("#sidebar").niceScroll({
+     cursorcolor: '#FFFFFF',
+     cursorwidth: 4,
+  });
+
+  $("#txt-editor").niceScroll({
      cursorcolor: '#FFFFFF',
      cursorwidth: 4,
   });
@@ -340,4 +352,3 @@ $(document).ready(function(){
 	  });
 	})
 });
-

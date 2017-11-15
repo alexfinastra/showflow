@@ -47,50 +47,74 @@ var generate_scripts = function(){
 	});
 }
 
-
-
-router.get('/', function(req, res, next) {
-	//generate_scripts(); // require 5 manula updates !!!!
-	var file = new json.File(appRoot + "/db/properties/scripts_index.json" );
-	file.readSync();
-	data = file.get("scripts")
-
-	var size = Object.keys(file.get("scripts.values")).length;
+var getOptions = function(obj){
 	opt = { properties: false, allrun: false, allroll: false}
-	
-	for(var i=1; i<=size; i++){
-		 opt["allrun"] =( opt["allrun"] || data.values[i]["action"].length > 0 ? true : false);		 
-		 opt["allroll"] =( opt["allroll"] || data.values[i]["action"].length > 0 ? true : false);
-  }
+  var keys = Object.keys(obj.values);
+  console.log("****************** Keys ARE : " + keys)
+  for(var i=0; i<=keys.length-1; i++){
+  	key = keys[i];
+		opt["allrun"] =( opt["allrun"] || obj.values[key]["action"].length > 0 ? true : false);		 
+		opt["allroll"] =( opt["allroll"] || obj.values[key]["action"].length > 0 ? true : false);
+	}
 
-	if(file.get("scripts.values.1.status") == ""){
+	if(obj.values[keys[0]].status == ""){
 		opt["properties"] = true
-		if(file.get("scripts.values.1.action") != ""){
+		if(obj.values[keys[0]].action != ""){
 				opt["allrun"] = true
 		}
 		opt["allroll"] = false
 	}
-	if(file.get("scripts.values."+size+".status") == "success"){
+	if(obj.values[keys[keys.length-1]].status == "success"){
 		opt["properties"] = true
 		opt["allrun"] = false
 		opt["allroll"] = true
 	}
-  res.render('scripts_list', { identity: identity, data: data, options: opt  });	
 
+  return opt;
+}
+
+
+var group_scripts = function(){
+  var res = {};
+  var scripts = new json.File(appRoot + "/db/properties/scripts_index.json" );
+  scripts.readSync();
+  var uids = Object.keys(scripts.data);
+  console.log(" UIDS are " + uids)
+  
+  for(var i=0; i<uids.length; i++){
+    uid = uids[i];    
+    obj = scripts.get(uid);
+    key = uid
+
+    if(key == null || key == undefined) { continue;}    
+    if(!(key in res)){ res[key] = []} 
+
+    res[key].push(Object.assign(obj,{options: getOptions(obj)}));
+  }
+  return res;
+}
+
+
+router.get('/', function(req, res, next) {
+	//generate_scripts(); // require 5 manula updates !!!!
+
+	var data = group_scripts();  
+  res.render('scripts_list', { identity: identity, data: data });
 });
 
-var inputs = function(file){
+var inputs = function(file, script_key ){
+	console.log(" **** SKRIPT KEY IS " + script_key);
 	return {
-		"OFFICE": file.get("scripts.input.office"),
-		"DEPARTMENT": file.get("scripts.input.department"),
-		"BIC": file.get("scripts.input.bic"),
-		"COUNTRY": file.get("scripts.input.country"),
-		"CURRENCY": file.get("scripts.input.currency"),
-		"MOP": file.get("scripts.input.mop")
+		"OFFICE": file.get(script_key + ".input.office"),
+		"DEPARTMENT": file.get(script_key + ".input.department"),
+		"BIC": file.get(script_key + ".input.bic"),
+		"COUNTRY": file.get(script_key + ".input.country"),
+		"CURRENCY": file.get(script_key + ".input.currency"),
+		"MOP": file.get(script_key + ".input.mop")
 	}
 }
 
-var sql_tatement = function(line, input){
+var sql_statement = function(line, input){
 	//params = ["BIC", "OFFICE", "DEPARTMENT", "COUNTRY", "CURRENCY", "MOP"];
 	//for(var i = 0; i<params.length; i++){
 	//var param = params[i]		
@@ -148,9 +172,10 @@ var run_sql = function(line_new){
 }
 
 
-var execute = function(file, ind, prefix = ''){
+var execute = function(file, ind, script_key, prefix = ''){
 	console.log( "1 EXECUTE >>>> S Q L :" + ind );
-	filename = prefix + file.get("scripts.values."+ ind +".name");
+	console.log(" **** SKRIPT KEY IS " + script_key);
+	filename = prefix + file.get(script_key + ".values."+ ind +".name");
 	
 	console.log( "2 EXECUTE >>>> S Q L :" + filename );
 	var lineRead = require('readline').createInterface({
@@ -160,81 +185,87 @@ var execute = function(file, ind, prefix = ''){
 	var input = inputs(file);
 	lineRead.on('line', function (line) {
 		if(line.indexOf('--REM') == -1 && line.indexOf('--') != 0){			
-			var line_new = sql_tatement(line, input);			
+			var line_new = sql_statement(line, input);			
 			run_sql(line_new)
 		}
 	});
 }
 
-var update_execute = function(file, size, step){
-	status = "scripts.values."+ step +".status"
+var update_execute = function(file, size, script_key, step){
+		console.log(" **** SKRIPT KEY IS " + script_key);
+	status = script_key + ".values."+ step +".status"
 	file.set(status , "success")	;
 
 	if (step > 1){
-		clean = "scripts.values."+ (step-1) +".action"
+		clean = script_key + ".values."+ (step-1) +".action"
 		file.set(clean , "")	;
 	}
 
-	rollback = "scripts.values."+ step +".action"
+	rollback = script_key + ".values."+ step +".action"
 	file.set(rollback , "rollback")	;
   
   if ( (step+1) <= size)	{
-		run = "scripts.values."+ (step+1) +".action"
+		run = script_key + ".values."+ (step+1) +".action"
 		file.set(run , "run")	;
 	}
 }
 
-var update_rollback = function(file, size, step){
-	status = "scripts.values."+ step +".status"
+var update_rollback = function(file, size, script_key, step){
+		console.log(" **** SKRIPT KEY IS " + script_key);
+	status = script_key + ".values."+ step +".status"
 	file.set(status , "")	;
 
 	if (step > 1){
-		rollback = "scripts.values."+ (step-1) +".action"
+		rollback = script_key + ".values."+ (step-1) +".action"
 	  file.set(rollback , "rollback")	;
 	}
 	
-	run = "scripts.values."+ step +".action"
+	run = script_key + ".values."+ step +".action"
 	file.set(run , "run")	;
   
   if ( (step+1) <= size)	{
-		clean = "scripts.values."+ (step+1) +".action"
+		clean = script_key + ".values."+ (step+1) +".action"
 		file.set(clean , "")	;
 	}
 }
 
-router.get('/run/:id', function(req, res, next){			
+router.get('/run/:script_key/:id', function(req, res, next){			
+	script_key = req.params["script_key"];
+		console.log(" **** SKRIPT KEY IS " + script_key);
 	step = parseInt(req.params["id"]);
 	var file = new json.File(appRoot + "/db/properties/scripts_index.json" );
 	file.readSync();
 
-	var size = Object.keys(file.get("scripts.values")).length;	
+	var size = Object.keys(file.get(script_key + ".values")).length;	
 	if (step == 0){
 		for(var i=1; i<=size; i++){			
-			status = "scripts.values."+ i +".status"
+			status = script_key + ".values."+ i +".status"
 			if (file.get(status) == ""){
 				console.log("Execute Iteration "+i)
-				execute(file, i);
-			  update_execute(file, size, i);	
+				execute(file, script_key, i);
+			  update_execute(file, size, script_key, i);	
 			}
 		}
 	} else {
-		execute(file, step);
-		update_execute(file, size, step);
+		execute(file, script_key, step);
+		update_execute(file, size, script_key, step);
 	}
 
 	file.writeSync();
 	res.redirect('/onboard');		 
 });
 
-router.get('/rollback/:id', function(req, res, next) {
+router.get('/rollback/:script_key/:id', function(req, res, next) {
+	script_key = req.params["script_key"];
+		console.log(" **** SKRIPT KEY IS " + script_key);
 	step = parseInt(req.params["id"]);
 	var file = new json.File(appRoot + "/db/properties/scripts_index.json" );
 	file.readSync();
 
-	var size = Object.keys(file.get("scripts.values")).length;
+	var size = Object.keys(file.get(script_key + ".values")).length;
 	if (step == 0){
 		for(var i=size; i>0; i--){			
-			status = "scripts.values."+ i +".status"			
+			status = script_key + ".values."+ i +".status"			
 			if (file.get(status) == "success"){
 				console.log("Rollback Iteration "+i)
 				execute(file, i, 'roll_');
@@ -250,38 +281,42 @@ router.get('/rollback/:id', function(req, res, next) {
 	res.redirect('/onboard');
 });
 
-router.post('/input', function (req, res) {
+router.post('/input/:script_key', function (req, res) {
+		script_key = req.params["script_key"];
+		console.log(" **** SKRIPT KEY IS " + script_key);
     var file = new json.File(appRoot + "/db/properties/scripts_index.json" );
 	  file.readSync();
 
-	  file.set("scripts.input.office", req.body.OFFICE);
-	  file.set("scripts.input.department", req.body.DEPARTMENT);
-	  file.set("scripts.input.bic", req.body.BIC);
-	  file.set("scripts.input.country", req.body.COUNTRY);
-	  file.set("scripts.input.currency", req.body.CURRENCY);
-	  file.set("scripts.input.mop", req.body.MOP);
-	  file.set("scripts.values.1.action", "run");
+	  file.set(script_key + ".input.office", req.body.OFFICE);
+	  file.set(script_key + ".input.department", req.body.DEPARTMENT);
+	  file.set(script_key + ".input.bic", req.body.BIC);
+	  file.set(script_key + ".input.country", req.body.COUNTRY);
+	  file.set(script_key + ".input.currency", req.body.CURRENCY);
+	  file.set(script_key + ".input.mop", req.body.MOP);
+	  file.set(script_key + ".values.1.action", "run");
 
 	  file.writeSync();	
     res.redirect('/onboard');
 });
 
-router.get('/reset', function (req, res) {
+router.get('/reset/:script_key', function (req, res) {
+    script_key = req.params["script_key"];
+		console.log(" **** SKRIPT KEY IS " + script_key);
     var file = new json.File(appRoot + "/db/properties/scripts_index.json" );
 	  file.readSync();
 
-	  file.set("scripts.input.office", "");
-	  file.set("scripts.input.department", "");
-	  file.set("scripts.input.bic", "");
-	  file.set("scripts.input.country", "");
-	  file.set("scripts.input.currency", "");
-	  file.set("scripts.input.mop", "");
+	  file.set(script_key + ".input.office", "");
+	  file.set(script_key + ".input.department", "");
+	  file.set(script_key + ".input.bic", "");
+	  file.set(script_key + ".input.country", "");
+	  file.set(script_key + ".input.currency", "");
+	  file.set(script_key + ".input.mop", "");
 
-	  var size = Object.keys(file.get("scripts.values")).length;
+	  var size = Object.keys(file.get(script_key + ".values")).length;
 	  for(var i=1; i<=size; i++){
-      clean = "scripts.values."+ i +".action"
+      clean = script_key + ".values."+ i +".action"
   	  file.set(clean , "")	;
-  	  status = "scripts.values."+ i +".status"
+  	  status = script_key + ".values."+ i +".status"
       file.set(status , "")	;
 	  }
 	  

@@ -18,40 +18,40 @@ script.
   .modal-dialog(role='document')
     .modal-content
       .modal-header.text-light.bg-dark
-        h5#exampleModalLabel.modal-title #{data.key} 
+        h5#exampleModalLabel.modal-title #{script.name} 
         button.close(type='button', data-dismiss='modal', aria-label='Close')
           span.text-light(aria-hidden='true') ×
       br
       .modal-body
-        form#needs-validation(action='/onboard/input' , method="POST", novalidate)
+        form#needs-validation(action='/onboard/input/' + key , method="POST", novalidate)
           .form-group.row
             label.col-sm-3.col-form-label(for='inputOffice') Office
             .col-sm-8
-              input#inputOffice.w-100.form-control(name="OFFICE", type='text', placeholder='', value=data["input"]["office"] , required)                            
+              input#inputOffice.w-100.form-control(name="OFFICE", type='text', placeholder='', value=script["input"]["office"] , required)                            
           .form-group.row
             label.col-sm-3.col-form-label(for='inputDepartment') Department
             .col-sm-8
-              input#inputDepartment.w-100.form-control(name="DEPARTMENT", type='text', placeholder='', value=data["input"]["department"], required) 
+              input#inputDepartment.w-100.form-control(name="DEPARTMENT", type='text', placeholder='', value=script["input"]["department"], required) 
           .form-group.row
             label.col-sm-3.col-form-label(for='inputBIC') BIC
             .col-sm-8
-              input#inputBIC.w-100.form-control(name="BIC", type='text', placeholder='', value=data["input"]["bic"], required)  
+              input#inputBIC.w-100.form-control(name="BIC", type='text', placeholder='', value=script["input"]["bic"], required)  
           .form-group.row
             label.col-sm-3.col-form-label(for='inputCountry') Country
             .col-sm-8
-              input#inputCountry.w-100.form-control(name="COUNTRY", type='text', placeholder='', value=data["input"]["country"], required)
+              input#inputCountry.w-100.form-control(name="COUNTRY", type='text', placeholder='', value=script["input"]["country"], required)
           .form-group.row
             label.col-sm-3.col-form-label(for='inputCurrency') Currency
             .col-sm-8
-              input#inputCurrency.w-100.form-control(name="CURRENCY", type='text', placeholder='', value=data["input"]["currency"], required) 
+              input#inputCurrency.w-100.form-control(name="CURRENCY", type='text', placeholder='', value=script["input"]["currency"], required) 
           .form-group.row
             label.col-sm-3.col-form-label(for='inputMOP') MOP
             .col-sm-8
-              input#inputMOP.w-100.form-control(name="MOP", type='text', placeholder='', value=data["input"]["mop"], required)
+              input#inputMOP.w-100.form-control(name="MOP", type='text', placeholder='', value=script["input"]["mop"], required)
           br
           .form-group.row.justify-content-end
             .col-sm-9
               button.btn.btn-primary.float-left(type='submit') Save parameters
-              a.btn.btn-link.float-right( href='/onboard/reset') Reset all
+              a.btn.btn-link.float-right( href='/onboard/reset/' + key) Reset all
 
     
