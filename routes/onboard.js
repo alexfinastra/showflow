@@ -96,8 +96,7 @@ var group_scripts = function(){
 
 
 router.get('/', function(req, res, next) {
-	//generate_scripts(); // require 5 manula updates !!!!
-	console.log(" ----- Nu che suka s Poolom " + database.getPool());
+	//generate_scripts(); // require 5 manula updates !!!!	
 	var data = group_scripts();  
   res.render('scripts_list', { identity: identity, data: data });
 });
@@ -133,6 +132,20 @@ var sql_statement = function(line, input){
 }
 
 var run_sql = function(line_new){
+	database.simpleExecute(line_new, [], {
+                autoCommit: true,
+                outFormat: database.OBJECT
+            })
+	.then(function(results){
+  	console.log( " --- - - result.rowsAffected :" + ((result == undefined || result == null) ? null : result.rowsAffected) );                
+  })
+	.catch(function(err){
+		console.log("Error connecting to DB" + err.message + " -- "+ err.message.indexOf("ORA-00001") > -1 ? "User already exists" : "Input Error");
+	})
+}
+
+
+var run_sql_old = function(line_new){
 		console.log("-------------------- CONNECTIONS ------------------------------------")
 		console.log(" dbConfig " + dbConfig + " and oracledb" + oracledb);
 		"use strict";

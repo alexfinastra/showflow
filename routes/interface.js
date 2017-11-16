@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var oracledb = require('oracledb');
+var database = require('../db/database.js')
 var dbConfig = require('../db/dbconfig.js');
 var model = require('../models/interface_type.js')
 var json = require('json-file');
@@ -30,6 +31,24 @@ var select = "SELECT INTERFACE_NAME, OFFICE, INTERFACE_TYPE, INTERFACE_SUB_TYPE,
 var where = "WHERE INTERFACE_TYPE in ( 'OFAC', 'BI', 'CDB','EXT_FX','POSTING','ADVISING') ";
 var query = select + " " + where;
 router.get('/', function (req, res) {
+  database.simpleExecute(query, [], {
+                maxRows: 300,
+                outFormat: database.OBJECT
+            })
+  .then(function(results){
+    var data = group_profiles(results.rows);
+    res.render('profile_list', { identity: identity, data: data });
+  })
+  .catch(function(err){
+    res.set('Content-Type', 'application/json');
+    res.status(500).send(JSON.stringify({
+        status: 500,
+        message: "Error getting the interfaces profile",
+        detailed_message: err.message
+    }));
+  })
+
+/*
     "use strict";
 
     oracledb.getConnection(dbConfig, function (err, connection) {
@@ -71,7 +90,7 @@ router.get('/', function (req, res) {
                     }
                 });
         });
-    });
+    });*/
 });
 
 router.get('/profile/:uid', function (req, res) {
