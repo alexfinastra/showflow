@@ -97,7 +97,7 @@ var group_scripts = function(){
 
 router.get('/', function(req, res, next) {
 	//generate_scripts(); // require 5 manula updates !!!!
-
+	console.log(" ----- Nu che suka s Poolom " + database.getPool());
 	var data = group_scripts();  
   res.render('scripts_list', { identity: identity, data: data });
 });
