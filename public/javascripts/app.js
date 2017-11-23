@@ -2,6 +2,9 @@ function goBack() {
   window.history.back();
 }
 
+function handleClick(cb) {
+	  alertify.success("Clicked, " + cb.id + " new value = " + cb.checked);
+}
 
 $(document).ready(function(){
 
@@ -172,6 +175,11 @@ $(document).ready(function(){
      cursorwidth: 4,
   });
 
+  $("#treecots").niceScroll({
+     cursorcolor: '#FFFFFF',
+     cursorwidth: 4,
+  });
+
 	$('#dismiss, .overlay').on('click', function () {
 	  $('#sidebar').removeClass('active');
 	  $('.overlay').fadeOut();
@@ -200,6 +208,41 @@ $(document).ready(function(){
 	  });
 	})
 
+	if($('#treecots').is(':visible')){
+		$.ajax({
+	    type: 'GET',
+	    url: '/onboard/tree',
+	    dataType: "json",
+	  })
+	  .done(function (response) {
+	    $('#treecots').treeview({
+	      data: response.tree,
+	      showCheckbox: true,
+	      showIcon: false,
+        backColor: "#fafafa",
+        showBorder: false,
+        checkedIcon: 'fa fa-check-square-o',
+        uncheckedIcon: 'fa fa-square-o',
+	      onNodeChecked : function(event, data) {
+	        if(data["nodes"] == null || data["nodes"] == undefined){
+	        	parent = $('#treecots').treeview('getParent', data)              
+	        	location.href = "/onboard/check/" + parent["key"] + "/" +  data["key"]
+	        }        
+	      },
+	      onNodeUnchecked: function(event, data) {
+	        if(data["nodes"] == null && data["nodes"] == undefined){
+	        	parent = $('#treecots').treeview('getParent', data)    
+	        	location.href = "/onboard/uncheck/" + parent["key"] + "/" + data["key"]
+	        }         
+	      }
+	    });
+	    $("#treecots.treeview").show();
+	  })
+	  .fail(function (response) {
+	      console.log(response);
+	  });
+	}
+
 	$('#listFlows').on('click', function () {
  	  if($('#sidebar').hasClass('active') == false){
  	  	$('#sidebar').addClass('active');
@@ -216,7 +259,9 @@ $(document).ready(function(){
 	  .done(function (response) {
 	      $('#tree').treeview({
 	      	data: response.tree,
-	      	showCheckbox: true,
+	      	showIcon: false,
+          showCheckbox: true,
+          showBorder: false,	      	
 	      	onNodeSelected: function(event, data) {
 	      		if(data["nodes"] == null || data["nodes"] == undefined){
 	      			location.href = "/flow/load/" + data["folder"] + "/" + "template" + data["text"].split(" ").join("_")
@@ -351,4 +396,178 @@ $(document).ready(function(){
 	      console.log(response);
 	  });
 	})
+
+
 });
+
+
+
+
+/*
+  		$(function() {
+
+       
+
+
+
+
+       
+
+
+        
+       
+
+       
+
+
+
+        var $expandibleTree = $('#treeview-expandible').treeview({
+          data: defaultData,
+          onNodeCollapsed: function(event, node) {
+            $('#expandible-output').prepend('<p>' + node.text + ' was collapsed</p>');
+          },
+          onNodeExpanded: function (event, node) {
+            $('#expandible-output').prepend('<p>' + node.text + ' was expanded</p>');
+          }
+        });
+
+        var findExpandibleNodess = function() {
+          return $expandibleTree.treeview('search', [ $('#input-expand-node').val(), { ignoreCase: false, exactMatch: false } ]);
+        };
+        var expandibleNodes = findExpandibleNodess();
+
+        // Expand/collapse/toggle nodes
+        $('#input-expand-node').on('keyup', function (e) {
+          expandibleNodes = findExpandibleNodess();
+          $('.expand-node').prop('disabled', !(expandibleNodes.length >= 1));
+        });
+
+        $('#btn-expand-node.expand-node').on('click', function (e) {
+          var levels = $('#select-expand-node-levels').val();
+          $expandibleTree.treeview('expandNode', [ expandibleNodes, { levels: levels, silent: $('#chk-expand-silent').is(':checked') }]);
+        });
+
+        $('#btn-collapse-node.expand-node').on('click', function (e) {
+          $expandibleTree.treeview('collapseNode', [ expandibleNodes, { silent: $('#chk-expand-silent').is(':checked') }]);
+        });
+
+        $('#btn-toggle-expanded.expand-node').on('click', function (e) {
+          $expandibleTree.treeview('toggleNodeExpanded', [ expandibleNodes, { silent: $('#chk-expand-silent').is(':checked') }]);
+        });
+
+        // Expand/collapse all
+        $('#btn-expand-all').on('click', function (e) {
+          var levels = $('#select-expand-all-levels').val();
+          $expandibleTree.treeview('expandAll', { levels: levels, silent: $('#chk-expand-silent').is(':checked') });
+        });
+
+        $('#btn-collapse-all').on('click', function (e) {
+          $expandibleTree.treeview('collapseAll', { silent: $('#chk-expand-silent').is(':checked') });
+        });
+
+
+
+        var $checkableTree = $('#treeview-checkable').treeview({
+          data: defaultData,
+          showIcon: false,
+          showCheckbox: true,
+          onNodeChecked: function(event, node) {
+            $('#checkable-output').prepend('<p>' + node.text + ' was checked</p>');
+          },
+          onNodeUnchecked: function (event, node) {
+            $('#checkable-output').prepend('<p>' + node.text + ' was unchecked</p>');
+          }
+        });
+
+        var findCheckableNodess = function() {
+          return $checkableTree.treeview('search', [ $('#input-check-node').val(), { ignoreCase: false, exactMatch: false } ]);
+        };
+        var checkableNodes = findCheckableNodess();
+
+        // Check/uncheck/toggle nodes
+        $('#input-check-node').on('keyup', function (e) {
+          checkableNodes = findCheckableNodess();
+          $('.check-node').prop('disabled', !(checkableNodes.length >= 1));
+        });
+
+        $('#btn-check-node.check-node').on('click', function (e) {
+          $checkableTree.treeview('checkNode', [ checkableNodes, { silent: $('#chk-check-silent').is(':checked') }]);
+        });
+
+        $('#btn-uncheck-node.check-node').on('click', function (e) {
+          $checkableTree.treeview('uncheckNode', [ checkableNodes, { silent: $('#chk-check-silent').is(':checked') }]);
+        });
+
+        $('#btn-toggle-checked.check-node').on('click', function (e) {
+          $checkableTree.treeview('toggleNodeChecked', [ checkableNodes, { silent: $('#chk-check-silent').is(':checked') }]);
+        });
+
+        // Check/uncheck all
+        $('#btn-check-all').on('click', function (e) {
+          $checkableTree.treeview('checkAll', { silent: $('#chk-check-silent').is(':checked') });
+        });
+
+        $('#btn-uncheck-all').on('click', function (e) {
+          $checkableTree.treeview('uncheckAll', { silent: $('#chk-check-silent').is(':checked') });
+        });
+
+
+
+        var $disabledTree = $('#treeview-disabled').treeview({
+          data: defaultData,
+          onNodeDisabled: function(event, node) {
+            $('#disabled-output').prepend('<p>' + node.text + ' was disabled</p>');
+          },
+          onNodeEnabled: function (event, node) {
+            $('#disabled-output').prepend('<p>' + node.text + ' was enabled</p>');
+          },
+          onNodeCollapsed: function(event, node) {
+            $('#disabled-output').prepend('<p>' + node.text + ' was collapsed</p>');
+          },
+          onNodeUnchecked: function (event, node) {
+            $('#disabled-output').prepend('<p>' + node.text + ' was unchecked</p>');
+          },
+          onNodeUnselected: function (event, node) {
+            $('#disabled-output').prepend('<p>' + node.text + ' was unselected</p>');
+          }
+        });
+
+        var findDisabledNodes = function() {
+          return $disabledTree.treeview('search', [ $('#input-disable-node').val(), { ignoreCase: false, exactMatch: false } ]);
+        };
+        var disabledNodes = findDisabledNodes();
+
+        // Expand/collapse/toggle nodes
+        $('#input-disable-node').on('keyup', function (e) {
+          disabledNodes = findDisabledNodes();
+          $('.disable-node').prop('disabled', !(disabledNodes.length >= 1));
+        });
+
+        $('#btn-disable-node.disable-node').on('click', function (e) {
+          $disabledTree.treeview('disableNode', [ disabledNodes, { silent: $('#chk-disable-silent').is(':checked') }]);
+        });
+
+        $('#btn-enable-node.disable-node').on('click', function (e) {
+          $disabledTree.treeview('enableNode', [ disabledNodes, { silent: $('#chk-disable-silent').is(':checked') }]);
+        });
+
+        $('#btn-toggle-disabled.disable-node').on('click', function (e) {
+          $disabledTree.treeview('toggleNodeDisabled', [ disabledNodes, { silent: $('#chk-disable-silent').is(':checked') }]);
+        });
+
+        // Expand/collapse all
+        $('#btn-disable-all').on('click', function (e) {
+          $disabledTree.treeview('disableAll', { silent: $('#chk-disable-silent').is(':checked') });
+        });
+
+        $('#btn-enable-all').on('click', function (e) {
+          $disabledTree.treeview('enableAll', { silent: $('#chk-disable-silent').is(':checked') });
+        });
+
+
+
+        var $tree = $('#treeview12').treeview({
+          data: json
+        });
+  		});*/
+  	

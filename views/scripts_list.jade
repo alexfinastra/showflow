@@ -1,12 +1,13 @@
 extends layout
 
-block content
+block content  
   .container.mt-5
     h3.mt-5=identity["title"]
     br
     blockquote.blockquote
       p.small=identity["description"]       
     br
+    
     if data == null 
       .row.mt-5
         .col-md-12.mt-5
@@ -14,59 +15,65 @@ block content
             h3.mt-5 Comming very very  very soon 
             br             
     else
-      each key in Object.keys(data)          
-        - var script = data[key][0]
-        br
-        br
-        br
-        .row      
-          .col-md-7
-            h4  #{key}
-            p  #{script.name}                       
-          .col-md-5
-            include scripts/script_modal
-            if script.options["properties"] == true  
-              button.btn.mt-2.btn-outline-dark.float-right.ml-4(type="button", data-toggle="modal", data-target=".script-modal")
-                i.fa.fa-sign-in
-                span.mt-1.ml-2  Set parameters
-            if script.options["allrun"] == true 
-              a#allrun.btn.btn-outline-primary.mt-2.float-right( href= "/" + identity["type"] + "/run/"+ key +"/0")
-                i.fa.fa-forward
-                span.mt-1.ml-2  Execute all
-            if script.options["allroll"] == true 
-              a#allback.btn.btn-outline-danger.mt-2.float-right.mr-4( href= "/" + identity["type"] + "/rollback/"+ key +"/0")
-                i.fa.fa-backward
-                span.mt-1.ml-2  Rollback all          
-        br            
-        table.table.table-hover
-          .container
-            thead
-              tr.row.text-dark
-                th.col.col-md-1 #
-                th.col.col-md-3 Script
-                th#spinner.col.col-md-5 Description
-                th.col.col-md-3 
-            tbody
-              - var steps = data[key][0].values              
-              for k in Object.keys(steps)
-                tr.row.text-dark 
-                  -var obj = steps[k]               
-                  td.col.col-md-1
-                    if obj["status"] == "success"
-                      i.fa.fa-check.fa-lg.text-success
-                    else
-                      span=k
-                  td.col.col-md-3 
-                    i #{obj["name"]}
-                  td.col.col-md-5 #{obj["description"]}
-                  td.col.col-md-3
-                   if obj["action"] == "rollback"
-                      - var rhref = "/" + identity["type"] + "/rollback/"+ key +"/" + k
-                      a.btn.btn-danger.mt-2.btn-sm.float-right( href= rhref )
-                        |  rollback                     
-                    if obj["action"] == "run"
-                      - var ehref = "/" + identity["type"] + "/run/"+ key +"/" + k
-                      a.btn.btn-primary.mt-2.btn-sm.float-right( href= ehref)
-                        |  execute
-              
-        hr
+      .row
+        .col-12.col-md-4
+          br
+          h5
+            | Navigation 
+          #treecots.treeview.mr-1
+        .col-12.col-md-8.bg-white
+          each key in Object.keys(data)          
+            - var script = data[key][0]                   
+            br            
+            .row.ml-1.mr-1      
+              .col-md-8
+                h5.mt-1  #{key}                
+                p #{script.name}                       
+              .col-md-4
+                include scripts/script_modal
+                if script.options["properties"] == true  
+                  button.btn.btn-sm.btn-link.float-right.ml-1(type="button", data-toggle="modal", data-target=".script-modal") Set parameters 
+                br
+                //if script.options["allrun"] == true 
+                  //a#allrun.btn.btn-sm.btn-outline-success.mt-2.float-right( href= "/" + identity["type"] + "/run/"+ key +"/0")
+                    //i.fa.fa-forward
+                    //span.mt-1.ml-2  Execute all
+                //if script.options["allroll"] == true 
+                  //a#allback.btn.btn-sm.btn-outline-danger.mt-2.float-right.ml-4( href= "/" + identity["type"] + "/rollback/"+ key +"/0")
+                    //i.fa.fa-backward
+                    //span.mt-1.ml-2  Rollback all
+            table.table.table-hover.ml-1.mr-1
+              .container
+                thead
+                  tr.row.text-dark.ml-1.mr-1
+                    th.col.col-md-1 
+                    th#spinner.col.col-md-8 description
+                    th.col.col-md-3 
+                tbody
+                  - var steps = data[key][0].values              
+                  for k in Object.keys(steps)
+                    tr.row.text-dark.ml-1.mr-1 
+                      -var obj = steps[k]               
+                      td.col.col-md-1                        
+                        if obj["status"] == "success"
+                          i.fa.fa-check.fa-lg.text-success
+                        else
+                          if obj["action"] != ""
+                            input(id="cb_" + key + "_" + k, type="checkbox", onclick="handleClick(this)", checked)
+                          else
+                            input(id="cb_" + key + "_" + k, type="checkbox", onclick="handleClick(this)")                      
+                      td.col.col-md-8(class=(obj["action"] == "" ? "text-secondary font-weight-light" : "")) #{obj["description"]}
+                      td.col.col-md-3
+                       if obj["action"] == "rollback"
+                          - var rhref = "/" + identity["type"] + "/rollback/"+ key +"/" + k
+                          a.btn.btn-danger.mt-2.btn-sm.float-right( href= rhref )
+                            |  revert                     
+                        if obj["action"] == "run"
+                          - var ehref = "/" + identity["type"] + "/run/"+ key +"/" + k
+                          a.btn.btn-success.mt-2.btn-sm.float-right( href= ehref)
+                            |  apply
+            br
+            br
+                  
+           
+  

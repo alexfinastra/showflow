@@ -52,8 +52,8 @@
             "name":"business area",
             "key":"business_area",
             "description":"Local office business areas",
-            "action":"",
-            "status":""
+            "action":"rollback",
+            "status":"success"
          },
          "8":{
             "type":"script",

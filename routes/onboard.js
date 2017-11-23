@@ -8,11 +8,12 @@ var oracledb = require('oracledb');
 var database = require('../db/database.js')
 var dbConfig = require('../db/dbconfig.js');
 var async = require('async');
+var Promise = require('es6-promise').Promise;
 
 var identity = {
 	type: 'onboard', 
-	title: 'On boarding scripts and tasks', 
-	description: 'A list of scripts which will create a new offices and allow to start processing payments scoping tham in terms of office and departments.'
+	title: 'On boarding and COTS (Commercial off-the-shelf)', 
+	description: 'Although COTS products can be used out of the box, in practice the COTS product must be configured to achieve the needs of the business and integrated to existing organisational systems. Extending the functionality of COTS products via custom development is also an option, however this decision should be carefully considered due to the long term support and maintenance implications. Such customised functionality is not supported by the COTS vendor, so brings its own sets of issues when upgrading the COTS product.'
 }
 
 const readline = require('readline');
@@ -75,12 +76,27 @@ var getOptions = function(obj){
 
 
 var group_scripts = function(){
+	var product = new json.File(appRoot + "/db/properties/product_index.json" );
+  product.readSync();  
+	var uids = [];
+  for(var j=0; j<product.data.length; j++){
+  	var nodes =  product.data[j]["nodes"];
+  	var nlen = nodes.length
+  	if (nlen == 0 ){continue;}
+
+  	for(var k=0; k<nlen; k++){
+  		var node = nodes[k]
+  		if(node.state.checked == true){
+  			uids.push(node.text);
+  		}
+  	}
+  }
+  
+  console.log(" UIDS are " + uids)
   var res = {};
   var scripts = new json.File(appRoot + "/db/properties/scripts_index.json" );
   scripts.readSync();
-  var uids = Object.keys(scripts.data);
-  console.log(" UIDS are " + uids)
-  
+
   for(var i=0; i<uids.length; i++){
     uid = uids[i];    
     obj = scripts.get(uid);
@@ -100,6 +116,43 @@ router.get('/', function(req, res, next) {
 	var data = group_scripts();  
   res.render('scripts_list', { identity: identity, data: data });
 });
+
+var checkNode = function(req, check, callback){
+	parentId = 0, nodeId = 0;
+	parent = req.params["parent"]
+  node = req.params["node"]
+  var product = new json.File(appRoot + "/db/properties/product_index.json" );
+  product.readSync();
+
+  for(var j=0; j<product.data.length; j++){
+  	if (product.data[j].key != parent) {continue;}
+  	parentId = j;
+
+  	var nodes =  product.data[j]["nodes"];  	
+  	for(var k=0; k<nodes.length; k++){  		
+  		if(nodes[k].key != node){ continue;}
+  		nodeId = k
+  	}
+  }
+  console.log( parentId + ".nodes."+ nodeId + ".state.checked")
+
+  product.set( parentId + ".nodes."+ nodeId + ".state.checked", check)
+  product.writeSync();    
+  callback();
+}
+
+router.get("/check/:parent/:node", function(req, res){
+  checkNode(req, true, function(){  	
+  	res.redirect('/onboard'); 
+  });
+})
+
+router.get("/uncheck/:parent/:node", function(req, res){
+	checkNode(req, false, function(){  	
+  	res.redirect('/onboard'); 
+  });
+})
+
 
 var inputs = function(file, script_key ){
 	console.log(" **** SKRIPT KEY IS " + script_key);
@@ -337,5 +390,11 @@ router.get('/reset/:script_key', function (req, res) {
     res.redirect('/onboard');
 });
 
+router.get('/tree', function(req, res){
+  var product = new json.File(appRoot + "/db/properties/product_index.json" );
+  product.readSync();
+  console.log(product.data)
+  res.json({tree: product.data});
+});
 
 module.exports = router;
