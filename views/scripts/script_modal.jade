@@ -22,7 +22,7 @@ script.
         button.close(type='button', data-dismiss='modal', aria-label='Close')
           span.text-light(aria-hidden='true') ×
       br
-      .modal-body
+      #modal-contex.modal-body
         form#needs-validation(action='/onboard/input/' + key , method="POST", novalidate)
           .form-group.row
             label.col-sm-3.col-form-label(for='inputOffice') Office
@@ -50,7 +50,7 @@ script.
               input#inputMOP.w-100.form-control(name="MOP", type='text', placeholder='', value=script["input"]["mop"], required)
           br
           .form-group.row.justify-content-end
-            .col-sm-9
+            .col-sm-8
               button.btn.btn-primary.float-left(type='submit') Save parameters
               a.btn.btn-link.float-right( href='/onboard/reset/' + key) Reset all
 

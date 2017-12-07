@@ -3,7 +3,34 @@ function goBack() {
 }
 
 function handleClick(cb) {
-	  alertify.success("Clicked, " + cb.id + " new value = " + cb.checked);
+		var url = "/onboard/selectrow/" + cb.id + "/" +  cb.checked;
+		var rowId = "#" + cb.id.replace("cb_", "row_").toLowerCase();	  
+	  $.ajax({
+  		type: 'GET',
+  		url: url,
+  		dataType: 'json'
+  	})
+  	.done(function(response){
+  		$(rowId).fadeOut(800, function(){
+        $(rowId).html(response.row).fadeIn().delay(2000);
+      });
+  		//alertify.success("Refresh " + rowId);
+  	})
+}
+
+function handleScript(el) {	
+	var rowId = "#" + el.dataset.rowid.toLocaleLowerCase()
+	$.ajax({
+		type: 'GET',
+		url: el.dataset.href,
+		dataType: 'json'
+	})
+	.done(function(response){
+		$(rowId).fadeOut(800, function(){
+      $(rowId).html(response.row).fadeIn().delay(2000);
+    });
+		//alertify.success("Refresh " + rowId);
+	})
 }
 
 $(document).ready(function(){
@@ -62,27 +89,22 @@ $(document).ready(function(){
 		var spinner = new Spinner(opts).spin(target);
 	})
 
-	$('input[type=file]').change(function(){
+	$('input#msg[type=file]').change(function(){
 		$(this).simpleUpload("/folder/upload/" + $("#upload-container").data().row , {
-			start: function(file){
-				//upload started
+			start: function(file){				
 				$('.progress').removeClass("invisible");
 				$('.progress-bar').html("");
 				$('.progress-bar').width(0);
-				//$(".table").load(" .table");
 			},
 			progress: function(progress){
-				//received progress
 				$('.progress-bar').html("Progress: " + Math.round(progress) + "%");
 				$('.progress-bar').width(progress + "%");
-				//$(".table").load(" .table");
 			},
 			success: function(data){
 				//upload successful				
 				$('.progress').addClass("invisible");
 				$('.progress-bar').html("");				
 				$('.form-control').val('');
-				//$(".table").load(" .table");
 				console.log("upload success " + data)
 				var editor=document.getElementById("editor");
 	  		
@@ -142,7 +164,7 @@ $(document).ready(function(){
 	  						};
 	  		
 	  						Xonomy.render(data, editor, docSpec);
-	  						$('#xml-editor').removeClass("hidden")}
+	  						$('#xml-editor').removeClass("hidden")}	  						
 			},
 			error: function(error){
 				//upload failed
@@ -151,6 +173,30 @@ $(document).ready(function(){
 			}
 		});
 	});
+
+
+	$('input#cots-upload[type=file]').change(function(){
+		$(this).simpleUpload("/onboard/upload/" + $("#cots-container").data().evn , {
+			start: function(file){				
+				$('#cots-progress.progress').removeClass("invisible");
+				$('#cots-progress-bar.progress-bar').html("");
+				$('#cots-progress-bar.progress-bar').width(0);
+			},
+			progress: function(progress){
+				$('#cots-progress-bar.progress-bar').html("Progress: " + Math.round(progress) + "%");
+				$('#cots-progress-bar.progress-bar').width(progress + "%");
+			},
+			success: function(data){		
+				$('#cots-progress.progress').addClass("invisible");
+				$('#cots-progress-bar.progress-bar').html("");				
+				location.href = "/onboard/parsecots/" + data
+			},
+			error: function(error){
+				$('#cots-progress.progress').html("Failure!<br>" + error.name + ": " + error.message);
+			}
+		});
+	});
+
 
 	var socket = io();
 	socket.on('add', function(msg){ 
@@ -176,6 +222,11 @@ $(document).ready(function(){
   });
 
   $("#treecots").niceScroll({
+     cursorcolor: '#FFFFFF',
+     cursorwidth: 4,
+  });
+
+  $("#modal-contex").niceScroll({
      cursorcolor: '#FFFFFF',
      cursorwidth: 4,
   });
@@ -217,23 +268,29 @@ $(document).ready(function(){
 	  .done(function (response) {
 	    $('#treecots').treeview({
 	      data: response.tree,
-	      showCheckbox: true,
-	      showIcon: false,
+	      showCheckbox: false,
+	      showIcon: true,
         backColor: "#fafafa",
         showBorder: false,
-        checkedIcon: 'fa fa-check-square-o',
-        uncheckedIcon: 'fa fa-square-o',
-	      onNodeChecked : function(event, data) {
+        selectable: true,
+        selectedIcon: 'fa fa-open',
+        //checkedIcon: 'fa fa-check-square-o',
+        //uncheckedIcon: 'fa fa-square-o',
+	      onNodeSelected  : function(event, data) {
 	        if(data["nodes"] == null || data["nodes"] == undefined){
 	        	parent = $('#treecots').treeview('getParent', data)              
-	        	location.href = "/onboard/check/" + parent["key"] + "/" +  data["key"]
+	        	$.ajax({
+	        		type: 'GET',
+	        		url: "/onboard/selectnode/" + parent["key"] + "/" +  data["key"],
+	        		dataType: 'json'
+	        	})
+	        	.done(function(response){
+	        		$("#cots").fadeOut(800, function(){
+                $("#cots").html(response.cots).fadeIn().delay(2000);
+                window.scrollTo(0, 0);
+              });
+	        	})
 	        }        
-	      },
-	      onNodeUnchecked: function(event, data) {
-	        if(data["nodes"] == null && data["nodes"] == undefined){
-	        	parent = $('#treecots').treeview('getParent', data)    
-	        	location.href = "/onboard/uncheck/" + parent["key"] + "/" + data["key"]
-	        }         
 	      }
 	    });
 	    $("#treecots.treeview").show();

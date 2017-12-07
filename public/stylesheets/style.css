@@ -131,3 +131,10 @@ table.table tr:hover td a.hoverbutton {
     overflow-y: scroll;
 }
 
+.cut-text { 
+  text-overflow: ellipsis; 
+  overflow: hidden; 
+  width: 160px; 
+  height: 3.2em; 
+  white-space: nowrap; 
+}

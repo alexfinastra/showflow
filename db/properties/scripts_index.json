@@ -1,5 +1,5 @@
-{   
-  "Users and Entitlement":{
+{
+   "User Access":{
       "name":"A list of 10 users with 2 admin roles",
       "input":{
          "office":"WER",
@@ -9,34 +9,36 @@
          "currency":"ASX",
          "mop":"ASSWER"
       },
-      "values":{         
+      "values":{
          "2":{
             "type":"script",
             "name":"users",
             "key":"users",
             "description":"10 user profiles",
             "action":"",
+            "scope":"onboard",
             "status":""
          }
       }
    },
-   "Add new office":{
+   "Payment Initiation":{
       "name":"Create new office profile",
       "input":{
-         "office":"",
-         "department":"",
-         "bic":"",
-         "country":"",
-         "currency":"",
-         "mop":""
+         "office":"QWE",
+         "department":"GBS",
+         "bic":"ASTRGB22XXX",
+         "country":"Israel",
+         "currency":"GBP",
+         "mop":"ASTRGBP"
       },
       "values":{
          "1":{
             "type":"script",
-            "name":"officies",
+            "name":"banks",
             "key":"banks",
             "description":"Local office setup",
             "action":"run",
+            "scope":"onboard",
             "status":""
          },
          "2":{
@@ -44,7 +46,8 @@
             "name":"value date info",
             "key":"value_date_info",
             "description":"VD information for local office",
-            "action":"",
+            "action":"run",
+            "scope":"onboard",
             "status":""
          },
          "5":{
@@ -53,6 +56,7 @@
             "key":"business_area",
             "description":"Local office business areas",
             "action":"rollback",
+            "scope":"onboard",
             "status":"success"
          },
          "8":{
@@ -60,7 +64,8 @@
             "name":"department",
             "key":"department",
             "description":"Departments list",
-            "action":"",
+            "action":"run",
+            "scope":"onboard",
             "status":""
          },
          "17":{
@@ -68,7 +73,8 @@
             "name":"system parameters",
             "key":"syst_par",
             "description":"System parameters",
-            "action":"",
+            "action":"run",
+            "scope":"onboard",
             "status":""
          },
          "23":{
@@ -76,12 +82,321 @@
             "name":"business rules",
             "key":"prules",
             "description":"Script includes rule types, objects, conditions and actions ",
-            "action":"",
+            "action":"run",
+            "scope":"onboard",
             "status":""
          }
       }
    },
-   "Customers and Accounts":{
+   "Payment Enrichment":{
+      "name":"Create new office profile",
+      "input":{
+         "office":"QWE",
+         "department":"GBS",
+         "bic":"ASTRGB22XXX",
+         "country":"Israel",
+         "currency":"GBP",
+         "mop":"ASTRGBP"
+      },
+      "values":{
+         "23":{
+            "type":"script",
+            "name":"business rules",
+            "key":"prules",
+            "description":"Script includes rule types, objects, conditions and actions ",
+            "action":"run",
+            "scope":"onboard",
+            "status":""
+         }
+      }
+   },
+   "Date and Time Handling":{
+      "name":"Create new office profile",
+      "input":{
+         "office":"QWE",
+         "department":"GBS",
+         "bic":"ASTRGB22XXX",
+         "country":"Israel",
+         "currency":"GBP",
+         "mop":"ASTRGBP"
+      },
+      "values":{
+         "23":{
+            "type":"script",
+            "name":"business rules",
+            "key":"prules",
+            "description":"Script includes rule types, objects, conditions and actions ",
+            "action":"run",
+            "scope":"onboard",
+            "status":""
+         }
+      }
+   },
+   "Special Processing":{
+      "name":"Create new office profile",
+      "input":{
+         "office":"QWE",
+         "department":"GBS",
+         "bic":"ASTRGB22XXX",
+         "country":"Israel",
+         "currency":"GBP",
+         "mop":"ASTRGBP"
+      },
+      "values":{
+         "23":{
+            "type":"script",
+            "name":"business rules",
+            "key":"prules",
+            "description":"Script includes rule types, objects, conditions and actions ",
+            "action":"run",
+            "scope":"onboard",
+            "status":""
+         }
+      }
+   },
+   "Accounting":{
+      "name":"Create new office profile",
+      "input":{
+         "office":"QWE",
+         "department":"GBS",
+         "bic":"ASTRGB22XXX",
+         "country":"Israel",
+         "currency":"GBP",
+         "mop":"ASTRGBP"
+      },
+      "values":{
+         "23":{
+            "type":"script",
+            "name":"business rules",
+            "key":"prules",
+            "description":"Script includes rule types, objects, conditions and actions ",
+            "action":"run",
+            "scope":"onboard",
+            "status":""
+         }
+      }
+   },
+   "Balance check":{
+      "name":"Create new office profile",
+      "input":{
+         "office":"QWE",
+         "department":"GBS",
+         "bic":"ASTRGB22XXX",
+         "country":"Israel",
+         "currency":"GBP",
+         "mop":"ASTRGBP"
+      },
+      "values":{
+         "23":{
+            "type":"script",
+            "name":"business rules",
+            "key":"prules",
+            "description":"Script includes rule types, objects, conditions and actions ",
+            "action":"run",
+            "scope":"onboard",
+            "status":""
+         }
+      }
+   },
+   "Risk Management":{
+      "name":"Create new office profile",
+      "input":{
+         "office":"QWE",
+         "department":"GBS",
+         "bic":"ASTRGB22XXX",
+         "country":"Israel",
+         "currency":"GBP",
+         "mop":"ASTRGBP"
+      },
+      "values":{
+         "23":{
+            "type":"script",
+            "name":"business rules",
+            "key":"prules",
+            "description":"Script includes rule types, objects, conditions and actions ",
+            "action":"run",
+            "scope":"onboard",
+            "status":""
+         }
+      }
+   },
+   "Manual Handling":{
+      "name":"Create new office profile",
+      "input":{
+         "office":"QWE",
+         "department":"GBS",
+         "bic":"ASTRGB22XXX",
+         "country":"Israel",
+         "currency":"GBP",
+         "mop":"ASTRGBP"
+      },
+      "values":{
+         "23":{
+            "type":"script",
+            "name":"business rules",
+            "key":"prules",
+            "description":"Script includes rule types, objects, conditions and actions ",
+            "action":"run",
+            "scope":"onboard",
+            "status":""
+         }
+      }
+   },
+   "Maintenance":{
+      "name":"Create new office profile",
+      "input":{
+         "office":"QWE",
+         "department":"GBS",
+         "bic":"ASTRGB22XXX",
+         "country":"Israel",
+         "currency":"GBP",
+         "mop":"ASTRGBP"
+      },
+      "values":{
+         "23":{
+            "type":"script",
+            "name":"business rules",
+            "key":"prules",
+            "description":"Script includes rule types, objects, conditions and actions ",
+            "action":"run",
+            "scope":"onboard",
+            "status":""
+         }
+      }
+   },
+   "EURO1":{
+      "name":"Create new office profile",
+      "input":{
+         "office":"QWE",
+         "department":"GBS",
+         "bic":"ASTRGB22XXX",
+         "country":"Israel",
+         "currency":"GBP",
+         "mop":"ASTRGBP"
+      },
+      "values":{
+         "23":{
+            "type":"script",
+            "name":"business rules",
+            "key":"prules",
+            "description":"Script includes rule types, objects, conditions and actions ",
+            "action":"run",
+            "scope":"onboard",
+            "status":""
+         }
+      }
+   },
+   "Target2":{
+      "name":"Create new office profile",
+      "input":{
+         "office":"QWE",
+         "department":"GBS",
+         "bic":"ASTRGB22XXX",
+         "country":"Israel",
+         "currency":"GBP",
+         "mop":"ASTRGBP"
+      },
+      "values":{
+         "23":{
+            "type":"script",
+            "name":"business rules",
+            "key":"prules",
+            "description":"Script includes rule types, objects, conditions and actions ",
+            "action":"run",
+            "scope":"onboard",
+            "status":""
+         }
+      }
+   },
+   "CHAPS":{
+      "name":"Create new office profile",
+      "input":{
+         "office":"QWE",
+         "department":"GBS",
+         "bic":"ASTRGB22XXX",
+         "country":"Israel",
+         "currency":"GBP",
+         "mop":"ASTRGBP"
+      },
+      "values":{
+         "23":{
+            "type":"script",
+            "name":"business rules",
+            "key":"prules",
+            "description":"Script includes rule types, objects, conditions and actions ",
+            "action":"run",
+            "scope":"onboard",
+            "status":""
+         }
+      }
+   },
+   "SWIFT":{
+      "name":"Create new office profile",
+      "input":{
+         "office":"QWE",
+         "department":"GBS",
+         "bic":"ASTRGB22XXX",
+         "country":"Israel",
+         "currency":"GBP",
+         "mop":"ASTRGBP"
+      },
+      "values":{
+         "23":{
+            "type":"script",
+            "name":"business rules",
+            "key":"prules",
+            "description":"Script includes rule types, objects, conditions and actions ",
+            "action":"run",
+            "scope":"onboard",
+            "status":""
+         }
+      }
+   },
+   "Returns":{
+      "name":"Create new office profile",
+      "input":{
+         "office":"QWE",
+         "department":"GBS",
+         "bic":"ASTRGB22XXX",
+         "country":"Israel",
+         "currency":"GBP",
+         "mop":"ASTRGBP"
+      },
+      "values":{
+         "23":{
+            "type":"script",
+            "name":"business rules",
+            "key":"prules",
+            "description":"Script includes rule types, objects, conditions and actions ",
+            "action":"run",
+            "scope":"onboard",
+            "status":""
+         }
+      }
+   },
+   "Custom Fields":{
+      "name":"Create new office profile",
+      "input":{
+         "office":"QWE",
+         "department":"GBS",
+         "bic":"ASTRGB22XXX",
+         "country":"Israel",
+         "currency":"GBP",
+         "mop":"ASTRGBP"
+      },
+      "values":{
+         "23":{
+            "type":"script",
+            "name":"business rules",
+            "key":"prules",
+            "description":"Script includes rule types, objects, conditions and actions ",
+            "action":"run",
+            "scope":"onboard",
+            "status":""
+         }
+      }
+   },
+   "Accounts and Parties":{
       "name":"Populate with default customers and accounts database",
       "input":{
          "office":"WER",
@@ -91,13 +406,14 @@
          "currency":"ASX",
          "mop":"ASSWER"
       },
-       "values":{         
+      "values":{
          "3":{
             "type":"script",
             "name":"account types",
             "key":"acctypes",
             "description":"Account types",
-            "action":"",
+            "action":"run",
+            "scope":"onboard",
             "status":""
          },
          "4":{
@@ -105,7 +421,8 @@
             "name":"accounts",
             "key":"accounts",
             "description":"A list of accounts",
-            "action":"",
+            "action":"run",
+            "scope":"onboard",
             "status":""
          },
          "6":{
@@ -113,7 +430,8 @@
             "name":"customrs",
             "key":"customrs",
             "description":"List of customers",
-            "action":"",
+            "action":"run",
+            "scope":"onboard",
             "status":""
          },
          "20":{
@@ -121,12 +439,13 @@
             "name":"ncc codes",
             "key":"ncc",
             "description":"National clearing codes as customers attributes",
-            "action":"",
+            "action":"run",
+            "scope":"onboard",
             "status":""
          }
       }
    },
-   "MOPs and channels":{
+   "MOP and Bank Routing":{
       "name":"A standard list of MOPs (SWIFT, FEEDER, BOOK etc.) and channels",
       "input":{
          "office":"WER",
@@ -136,13 +455,14 @@
          "currency":"ASX",
          "mop":"ASSWER"
       },
-       "values":{         
+      "values":{
          "2":{
             "type":"script",
             "name":"value date info",
             "key":"value_date_info",
             "description":"VD information for local office",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "13":{
@@ -151,6 +471,7 @@
             "key":"mop",
             "description":"A list of available methods of payment",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "14":{
@@ -159,6 +480,7 @@
             "key":"msg_type_mop",
             "description":"A list of valid message types for MOP",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "15":{
@@ -167,6 +489,7 @@
             "key":"membership",
             "description":"MOP Memeberships setup",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "16":{
@@ -175,6 +498,7 @@
             "key":"swift_id",
             "description":"BIC identificators for clearing systems",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "17":{
@@ -183,6 +507,7 @@
             "key":"syst_par",
             "description":"System parameters",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "21":{
@@ -199,6 +524,7 @@
             "key":"interface_types",
             "description":"List of standard interfaces and channels",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "23":{
@@ -207,11 +533,12 @@
             "key":"prules",
             "description":"Script includes rule types, objects, conditions and actions ",
             "action":"",
+            "scope":"onboard",
             "status":""
          }
       }
    },
-   "Standard Interfaces":{
+   "Compliance":{
       "name":"Compliance, CDB, Ballance, Accounting FX",
       "input":{
          "office":"WER",
@@ -228,6 +555,7 @@
             "key":"syst_par",
             "description":"System parameters",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "22":{
@@ -236,6 +564,7 @@
             "key":"interface_types",
             "description":"List of standard interfaces and channels",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "23":{
@@ -244,11 +573,12 @@
             "key":"prules",
             "description":"Script includes rule types, objects, conditions and actions ",
             "action":"",
+            "scope":"onboard",
             "status":""
          }
       }
    },
-   "Advices and Ack":{
+   "Acknowledgements":{
       "name":"Out of the box advices/ack mechanism for channels and interfaces monitoring",
       "input":{
          "office":"WER",
@@ -258,13 +588,14 @@
          "currency":"ASX",
          "mop":"ASSWER"
       },
-      "values":{        
+      "values":{
          "17":{
             "type":"script",
             "name":"system parameters",
             "key":"syst_par",
             "description":"System parameters",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "22":{
@@ -273,6 +604,7 @@
             "key":"interface_types",
             "description":"List of standard interfaces and channels",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "23":{
@@ -281,6 +613,7 @@
             "key":"prules",
             "description":"Script includes rule types, objects, conditions and actions ",
             "action":"",
+            "scope":"onboard",
             "status":""
          }
       }
@@ -295,13 +628,14 @@
          "currency":"ASX",
          "mop":"ASSWER"
       },
-      "values":{         
+      "values":{
          "7":{
             "type":"script",
             "name":"currency business",
             "key":"currency_bu",
             "description":"Currency business setup",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "9":{
@@ -309,7 +643,8 @@
             "name":"exchrate bu",
             "key":"exchrate_bu",
             "description":"Exchange rate business setup",
-            "action":"",
+            "action":"run",
+            "scope":"onboard",
             "status":""
          },
          "10":{
@@ -318,6 +653,7 @@
             "key":"exchrate_cfg",
             "description":"Exchange rates configurations",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "17":{
@@ -325,7 +661,8 @@
             "name":"system parameters",
             "key":"syst_par",
             "description":"System parameters",
-            "action":"",
+            "action":"run",
+            "scope":"onboard",
             "status":""
          },
          "23":{
@@ -334,11 +671,12 @@
             "key":"prules",
             "description":"Script includes rule types, objects, conditions and actions ",
             "action":"",
+            "scope":"onboard",
             "status":""
          }
       }
    },
-   "Fees and charges":{
+   "Pricing":{
       "name":"Fees, taxes, changes default setup",
       "input":{
          "office":"WER",
@@ -355,6 +693,7 @@
             "key":"fee_formula",
             "description":"Fee formulas for billing/fees/charges calculations",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "12":{
@@ -363,6 +702,7 @@
             "key":"fee_types",
             "description":"The list of fee types",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "17":{
@@ -371,6 +711,7 @@
             "key":"syst_par",
             "description":"System parameters",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "18":{
@@ -379,6 +720,7 @@
             "key":"transaction_code",
             "description":"Transaction codes for posting",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "19":{
@@ -387,6 +729,7 @@
             "key":"product",
             "description":"Bank products list",
             "action":"",
+            "scope":"onboard",
             "status":""
          },
          "23":{
@@ -395,43 +738,7 @@
             "key":"prules",
             "description":"Script includes rule types, objects, conditions and actions ",
             "action":"",
-            "status":""
-         }
-      }
-   },
-   "Mass Payments":{
-      "name":"Mass Payment channels, interfaces and acks",
-      "input":{
-         "office":"WER",
-         "department":"WSE",
-         "bic":"WSEDXXASD",
-         "country":"ASD",
-         "currency":"ASX",
-         "mop":"ASSWER"
-      },
-      "values":{         
-         "17":{
-            "type":"script",
-            "name":"system parameters",
-            "key":"syst_par",
-            "description":"System parameters",
-            "action":"",
-            "status":""
-         },
-         "22":{
-            "type":"script",
-            "name":"interfaces and channels",
-            "key":"interface_types",
-            "description":"List of standard interfaces and channels",
-            "action":"",
-            "status":""
-         },
-         "23":{
-            "type":"script",
-            "name":"business rules",
-            "key":"prules",
-            "description":"Script includes rule types, objects, conditions and actions ",
-            "action":"",
+            "scope":"onboard",
             "status":""
          }
       }

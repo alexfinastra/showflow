@@ -5,7 +5,13 @@ block content
     h3.mt-5=identity["title"]
     br
     blockquote.blockquote
-      p.small=identity["description"]       
+      p.small=identity["description"]
+      p.small 
+        span
+          | Please download 
+        a.btn-link(href="/documentation/cots/COTS_HV_project_name.xlsx") COTS Template XLS 
+        span 
+          | and copy customer requirements table into the relevant tabs in template, then rename file including a project name and upload it back to server.        
     br
     
     if data == null 
@@ -15,65 +21,20 @@ block content
             h3.mt-5 Comming very very  very soon 
             br             
     else
-      .row
+      .row 
+        .container(id="cots-container", data-evn = "eurobank")                     
+          .row            
+            .col-md-12
+              input#cots-upload.filestyle.col-sm-9(type="file", name="file", data-text="Upload COTS excel document", data-btnClass="btn-outline-primary", data-buttonBefore="true", data-placeholder="", data-source=)                                 
+          .row
+            .col-md-12
+              #cots-progress.progress.mt-1.invisible
+                #cots-progress-bar.progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100', style='width: 0%; height: 20px;') 
+      #cots-ctx.row(class = (Object.keys(data).length == 0 ? "hidden" : ""))
         .col-12.col-md-4
           br
           h5
             | Navigation 
           #treecots.treeview.mr-1
-        .col-12.col-md-8.bg-white
-          each key in Object.keys(data)          
-            - var script = data[key][0]                   
-            br            
-            .row.ml-1.mr-1      
-              .col-md-8
-                h5.mt-1  #{key}                
-                p #{script.name}                       
-              .col-md-4
-                include scripts/script_modal
-                if script.options["properties"] == true  
-                  button.btn.btn-sm.btn-link.float-right.ml-1(type="button", data-toggle="modal", data-target=".script-modal") Set parameters 
-                br
-                //if script.options["allrun"] == true 
-                  //a#allrun.btn.btn-sm.btn-outline-success.mt-2.float-right( href= "/" + identity["type"] + "/run/"+ key +"/0")
-                    //i.fa.fa-forward
-                    //span.mt-1.ml-2  Execute all
-                //if script.options["allroll"] == true 
-                  //a#allback.btn.btn-sm.btn-outline-danger.mt-2.float-right.ml-4( href= "/" + identity["type"] + "/rollback/"+ key +"/0")
-                    //i.fa.fa-backward
-                    //span.mt-1.ml-2  Rollback all
-            table.table.table-hover.ml-1.mr-1
-              .container
-                thead
-                  tr.row.text-dark.ml-1.mr-1
-                    th.col.col-md-1 
-                    th#spinner.col.col-md-8 description
-                    th.col.col-md-3 
-                tbody
-                  - var steps = data[key][0].values              
-                  for k in Object.keys(steps)
-                    tr.row.text-dark.ml-1.mr-1 
-                      -var obj = steps[k]               
-                      td.col.col-md-1                        
-                        if obj["status"] == "success"
-                          i.fa.fa-check.fa-lg.text-success
-                        else
-                          if obj["action"] != ""
-                            input(id="cb_" + key + "_" + k, type="checkbox", onclick="handleClick(this)", checked)
-                          else
-                            input(id="cb_" + key + "_" + k, type="checkbox", onclick="handleClick(this)")                      
-                      td.col.col-md-8(class=(obj["action"] == "" ? "text-secondary font-weight-light" : "")) #{obj["description"]}
-                      td.col.col-md-3
-                       if obj["action"] == "rollback"
-                          - var rhref = "/" + identity["type"] + "/rollback/"+ key +"/" + k
-                          a.btn.btn-danger.mt-2.btn-sm.float-right( href= rhref )
-                            |  revert                     
-                        if obj["action"] == "run"
-                          - var ehref = "/" + identity["type"] + "/run/"+ key +"/" + k
-                          a.btn.btn-success.mt-2.btn-sm.float-right( href= ehref)
-                            |  apply
-            br
-            br
-                  
-           
-  
+        #cots.col-12.col-md-8.bg-white
+          include cotsdoc

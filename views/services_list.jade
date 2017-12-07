@@ -39,7 +39,7 @@ block content
                 tr.row.text-dark
                   td.col.col-md-4
                     b #{obj["title"]}
-                  td.col.col-md-6 #{obj["description"]}
+                  td.col.col-md-6.cut-text #{obj["description"]}
                   td.col.col-md-2                    
                     - var href = "/" + identity["type"] + "/profile/" + obj["uid"]
                     a.btn.btn-success.btn-sm.hoverbutton(href= href)

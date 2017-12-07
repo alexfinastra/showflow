@@ -1,0 +1,19 @@
+td.col.col-md-1                        
+  if node["status"] == "success"
+    i.fa.fa-check.fa-lg.text-success
+  else
+    if node["action"] != ""
+      input(id=checkboxId, type="checkbox", onclick="handleClick(this)", checked)
+    else
+      input(id=checkboxId, type="checkbox", onclick="handleClick(this)")                      
+td.col.col-md-8(class=(node["action"] == "" ? "text-secondary font-weight-light" : "")) #{node["description"]}
+td.col.col-md-2(class=(node["action"] == "" ? "text-secondary font-weight-light" : "")) #{node["scope"]}
+td.col.col-md-1
+  if node["action"] == "run"    
+    button.btn.btn-light.mt-2.btn-sm.float-right( onclick="handleScript(this)", data-href = ehref, data-rowid = checkboxId.replace("cb_", "row_") )
+      i.fa.fa-forward.fa-lg.text-success
+  if node["action"] == "rollback"    
+    button.btn.btn-light.mt-2.btn-sm.float-right( onclick="handleScript(this)", data-href = ehref, data-rowid = checkboxId.replace("cb_", "row_") )
+      i.fa.fa-backward.fa-lg.text-danger  
+
+
