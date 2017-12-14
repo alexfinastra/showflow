@@ -14,6 +14,7 @@ var XLSX = require('xlsx');
 var util = require('util');
 var path = require('path');
 var formidable = require('formidable');
+var readLineFile = require("read-line-file");
 
 var identity = {
 	type: 'onboard', 
@@ -22,7 +23,9 @@ var identity = {
 }
 
 router.get('/', function(req, res, next) {
-	//generate_scripts(); // require 5 manula updates !!!!	
+	//splitSchema()
+
+  //generate_scripts(); // require 5 manula updates !!!!	
 	var data = group_scripts();  
 	console.log("DATA is :" + JSON.stringify(data))
 	res.render('scripts_list', { identity: identity, data: data });    	
@@ -146,10 +149,10 @@ router.get('/reset/:script_key', function (req, res) {
 });
 
 router.get('/tree', function(req, res){
-  var product = new json.File(appRoot + "/cots/eurobank/COTS_Eurobank_product_index.json" );
-  product.readSync();
-  console.log(product.data)
-  res.json({tree: product.data});
+  var products = new json.File(appRoot + "/cots/eurobank/COTS_Eurobank_product_index.json" );
+  products.readSync();
+ 
+  res.json({tree: products.data});
 });
 
 
@@ -259,15 +262,16 @@ var getOptions = function(obj){
 
 var group_scripts = function(){	
   var res = {};
-  var pakcages = appRoot + "/cots/eurobank/COTS_Eurobank_product_index.json";
-  if (!fs.existsSync(pakcages)) {
+  var products = appRoot + "/cots/eurobank/COTS_Eurobank_product_index.json";
+  if (!fs.existsSync(products)) {
   	return res;
   }
 
-	var product = new json.File(pakcages);
+	var product = new json.File(products);
   product.readSync();  
 	var uids = [];
   for(var j=0; j<product.data.length; j++){
+  	var parent_key = product.data[j]["key"];
   	var nodes =  product.data[j]["nodes"];
   	var nlen = nodes.length
   	if (nlen == 0 ){continue;}
@@ -275,7 +279,8 @@ var group_scripts = function(){
   	for(var k=0; k<nlen; k++){
   		var node = nodes[k]
   		if(node.state.selected == true){
-  			uids.push(node.key);
+  			var new_key = parent_key + "_" + node.key;
+  			uids.push(new_key);
   		}
   	}
   }  
@@ -293,6 +298,8 @@ var group_scripts = function(){
 	    if(obj == null || obj == undefined) { continue;}    
 	    
 			res[key].push(Object.assign(obj,{options: getOptions(obj)}));	
+		} else{
+			console.log("File " + file_name + " does not exists")
 		}
   }
   return res;
@@ -307,7 +314,13 @@ var selectNode = function(req, callback){
   console.log("Product " + product.data)
   
   for(var j=0; j<product.data.length; j++){
-  	if (product.data[j].key != parent) {continue;}
+  	if (product.data[j].key != parent) {
+  		var nodes =  product.data[j]["nodes"];  	
+  	  for(var k=0; k<nodes.length; k++){
+  	  	product.set( j + ".nodes."+ k + ".state.selected", false) 
+  	  }  
+  		continue;
+  	}
   	parentId = j;
 
   	var nodes =  product.data[j]["nodes"];  	
@@ -460,15 +473,20 @@ var execute = function(req, callback){
 var parseCOTS = function(filename){
 	var workbook = XLSX.readFile(appRoot + "/cots/eurobank/" + filename);
 	var sheet_name_list = workbook.SheetNames;
-	var nodes = []
-	for(var s=0; s< sheet_name_list.length; s++) {
+	var nodes_features = [], nodes_scenarios = []
+
+	for(var s=0; s< sheet_name_list.length; s++) {		
+		//if(s>10){break}
 		var y = sheet_name_list[s];
 	  console.log(" Retrieve data from " + y + " sheet")
     if("Parameters" == y) {continue;}
     var worksheet = workbook.Sheets[y];
         
-    var headers = {};
-    var data = [];
+    var headers_features = {}, headers_scenarios = {};
+    var features = [], scenarios = [];
+    var isFeauture = true;
+    var features_headers_row = -1, scenarios_headers_row = -1; 
+    var offset = 0;
 
     for(z in worksheet) {
         if(z[0] === '!') continue;
@@ -484,53 +502,63 @@ var parseCOTS = function(filename){
         var col = z.substring(0,tt);
         var row = parseInt(z.substring(tt));
         var value = worksheet[z].v;
-				if ('FX' == y){
-					console.log(" >> Tab: " + y + " row: " + row + " column: " + col + " and value: " + value)
-				}
-        //store header names
-        if(row == 1 && value) {
-            headers[col] = value;
+				//console.log("col :"+col+" row :"+row+" value :"+value)
+        
+        if(value){
+        	if(value == "BG Ref#"){ features_headers_row = row; }
+        	if(features_headers_row == row){
+        		headers_features[col] = value;
             continue;
-        }
+        	}
 
-        if(value && value != ""){
-        	if(!data[row]) data[row]={};
-        	data[row][headers[col]] = ('string' == typeof(value))  ? value.replace("'","\"") : value
+					if(value == "Customer Ref#"){ scenarios_headers_row = row; offset = row;	}
+        	if(scenarios_headers_row == row){
+        		isFeauture = false
+        		headers_scenarios[col] = value;        		
+            continue;
+        	}
+
+        	if(value == null || value == "" || String(value).indexOf("PASTE") !== -1){
+        		continue;
+        	}
+
+        	if(isFeauture == true){
+        		if(!features[row]) features[row]={};
+        		features[row][headers_features[col]] = ('string' == typeof(value))  ? value.replace("'","\"") : value
+        	}else{
+						if(!scenarios[row - offset]) scenarios[row -offset]={};
+        		scenarios[row-offset][headers_scenarios[col]] = ('string' == typeof(value))  ? value.replace("'","\"") : value
+        	}
         }
     }
-    //drop those first two rows which are empty
-    
-    data.shift();
-    data.shift();
-    var jsonStr = JSON.stringify(data).replace(/(\\r\\n|\\n|\\r)/gm, " ");
-    var orig_json = JSON.parse(jsonStr)
 
-    var values = {}
-    var step = 1
-    for(var i = 0; i< orig_json.length; i++){
-    	var node = orig_json[i]
-    	console.log("OPANKI NODE  "+ JSON.stringify(node))
+    //drop those first two rows which are empty 
+    features.shift();features.shift();         
+    var jsonFeaures = JSON.stringify(features).replace(/(\\r\\n|\\n|\\r)/gm, " ");
+    //console.log(" -- jsonFeaures :" + jsonFeaures)
+    var orig_json_features = JSON.parse(jsonFeaures)
+    var values_features = {}
+    var step_features = 1
+    for(var i = 0; i< orig_json_features.length; i++){
+    	var node = orig_json_features[i]
     	if(node != null && node["What"] != null && node["Feature"] != null ){
-	    	values[step] = {
+	    	values_features[step_features] = {
 	    		"type":"script",
 	        "name": node["Feature"],
 	        "key":"users",
 	        "description": node["What"],
 	        "action":"",
-	        "scope":"cots",
+	        "scope": node["Classification"],
 	        "status":""
 	    	}
-	    	step = step+1
+	    	step_features = step_features+1
     	}
-    	
-    } 
+    }
 
-    console.log("Object.keys(values).length " + Object.keys(values).length)
-		if(Object.keys(values).length > 0) {
-
-	    var scriptNodes = {}
+		if(Object.keys(values_features).length > 0) {
+	    var featuresNodes = {}
 	    var new_key = y.split('.').join('').split(' ').join('_')
-	    scriptNodes[new_key] = {
+	    featuresNodes["features_" + new_key] = {
 	    		"name": y,
 	    		"input":{
 	         "office":"",
@@ -540,11 +568,60 @@ var parseCOTS = function(filename){
 	         "currency":"",
 	         "mop":""
 	      },
-	      "values": values
+	      "values": values_features
 	    }  
 
-	    fs.writeFileSync(appRoot + "/cots/eurobank/COTS_Eurobank_"+ new_key +".json", JSON.stringify(scriptNodes) , 'utf-8');	    	
-	    nodes.push({
+	    fs.writeFileSync(appRoot + "/cots/eurobank/COTS_Eurobank_features_"+ new_key +".json", JSON.stringify(featuresNodes) , 'utf-8');	    	
+	    nodes_features.push({
+	    	"text": y,
+	      "selectable":true,
+	      "key": new_key,
+	      "state":{
+	         "selected":false
+	      }
+	    })
+	  }
+
+	  scenarios.shift();
+	  var jsonScenarios = JSON.stringify(scenarios).replace(/(\\r\\n|\\n|\\r)/gm, " ");
+	  //console.log(" -- jsonScenarios :" + jsonScenarios)
+    var orig_json_scenarios = JSON.parse(jsonScenarios)
+    var values_scenarios = {}
+    var step_scenarios = 1
+    for(var i = 0; i< orig_json_scenarios.length; i++){
+    	var node = orig_json_scenarios[i]
+    	if(node != null ){
+	    	values_scenarios[step_scenarios] = {
+	    		"type":"script",
+	        "name": node["Feature "],
+	        "key":"users",
+	        "description": node["Then expected result"],
+	        "action":"",
+	        "scope": node["Phase"],
+	        "status":""
+	    	}
+	    	step_scenarios = step_scenarios+1
+    	}
+    }
+
+		if(Object.keys(values_scenarios).length > 0) {
+	    var scenariosNodes = {}
+	    var new_key = y.split('.').join('').split(' ').join('_')
+	    scenariosNodes["scenarios_" + new_key] = {
+	    		"name": y,
+	    		"input":{
+	         "office":"",
+	         "department":"",
+	         "bic":"",
+	         "country":"",
+	         "currency":"",
+	         "mop":""
+	      },
+	      "values": values_scenarios
+	    }  
+
+	    fs.writeFileSync(appRoot + "/cots/eurobank/COTS_Eurobank_scenarios_"+ new_key +".json", JSON.stringify(scenariosNodes) , 'utf-8');	    	
+	    nodes_scenarios.push({
 	    	"text": y,
 	      "selectable":true,
 	      "key": new_key,
@@ -555,20 +632,59 @@ var parseCOTS = function(filename){
 	  }
 	}
 
-	if (nodes.length > 0 ){	
-		nodes[0]["state"]["selected"] = true
-		var packages = {
-			"text":"<span class= 'ml-2'> Packages </span>",
-	      "key":"cots",
+	var packages = [];
+	if (nodes_features.length > 0 ){	
+		nodes_features[0]["state"]["selected"] = true
+		var features_packages = {
+			"text":"<span class= 'ml-2'> Features </span>",
+	      "key":"features",
 	      "selectable":false,
 	      "state":{
 	         "expanded":true,
 	         "selected":false
 	      },
-	      "nodes":nodes
+	      "nodes":nodes_features
+		}		
+		packages.push(features_packages)
+	}
+
+	if (nodes_scenarios.length > 0 ){	
+		var scenarios_packages = {
+			"text":"<span class= 'ml-2'> Scenarios </span>",
+	      "key":"scenarios",
+	      "selectable":false,
+	      "state":{
+	         "expanded":false,
+	         "selected":false
+	      },
+	      "nodes":nodes_scenarios
 		}
-		fs.writeFileSync(appRoot + "/cots/eurobank/COTS_Eurobank_product_index.json", JSON.stringify([packages]) , 'utf-8');	    	
+		packages.push(scenarios_packages)
+	}
+
+	if(packages.length > 0){
+		fs.writeFileSync(appRoot + "/cots/eurobank/COTS_Eurobank_product_index.json", JSON.stringify(packages) , 'utf-8');	    	
+	}
+	else{
+		console.log("File is empty !!!!")
 	}
 }
 
- 
+
+var filename = ""
+
+var splitSchema = function(){  
+  rlf = readLineFile(appRoot + '/db/scripts/schema.sql',
+    (line) => processLine(line),
+    () => console.log('close'),
+    (err) => console.log('error')
+  )
+}
+
+var processLine = function(line){  
+  if(line.indexOf("prompt Loading") != -1){
+    filename = appRoot + '/db/scripts/' + line.split(' ')[2].split("...")[0] + ".sql"  
+    fs.writeFile(filename, "" , function(err) {})   
+  }
+
+}

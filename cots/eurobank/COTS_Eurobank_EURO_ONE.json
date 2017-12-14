@@ -1,1 +1,0 @@
-{"EURO_ONE":{"name":"EURO ONE","input":{"office":"","department":"","bic":"","country":"","currency":"","mop":""},"values":{"1":{"type":"script","name":"Custom Message Field","key":"users","description":"Create bank-specific fields","action":"","scope":"cots","status":""}}}}
