@@ -230,8 +230,8 @@ var generate_scripts = function(){
 	});
 }
 
-var getOptions = function(obj){
-	opt = { properties: false, allrun: false, allroll: false}
+var getOptions = function(obj, key){
+	opt = { properties: false, allrun: false, allroll: false, feature: (key.indexOf('feature') == -1 ? false : true)}
   //if (obj == null || obj == undefined){
   	return opt;
  // }
@@ -297,7 +297,7 @@ var group_scripts = function(){
 			obj = cots.get(key);
 	    if(obj == null || obj == undefined) { continue;}    
 	    
-			res[key].push(Object.assign(obj,{options: getOptions(obj)}));	
+			res[key].push(Object.assign(obj,{options: getOptions(obj, key)}));	
 		} else{
 			console.log("File " + file_name + " does not exists")
 		}
@@ -532,6 +532,12 @@ var parseCOTS = function(filename){
         }
     }
 
+    var new_key = y.split('.').join('').split(' ').join('_')
+    var dir = appRoot + "/flows/" + new_key;
+    if (!fs.existsSync(dir)){
+      fs.mkdirSync(dir);
+    }
+    
     //drop those first two rows which are empty 
     features.shift();features.shift();         
     var jsonFeaures = JSON.stringify(features).replace(/(\\r\\n|\\n|\\r)/gm, " ");
@@ -541,15 +547,16 @@ var parseCOTS = function(filename){
     var step_features = 1
     for(var i = 0; i< orig_json_features.length; i++){
     	var node = orig_json_features[i]
-    	if(node != null && node["What"] != null && node["Feature"] != null ){
-	    	values_features[step_features] = {
+      if(node != null && node["What"] != null && node["Feature"] != null ){
+        values_features[step_features] = {
 	    		"type":"script",
 	        "name": node["Feature"],
 	        "key":"users",
 	        "description": node["What"],
-	        "action":"",
+	        "action": "rollback",
 	        "scope": node["Classification"],
-	        "status":""
+	        "status": "success",
+          "flow" : null
 	    	}
 	    	step_features = step_features+1
     	}
@@ -588,19 +595,32 @@ var parseCOTS = function(filename){
     var orig_json_scenarios = JSON.parse(jsonScenarios)
     var values_scenarios = {}
     var step_scenarios = 1
+    
+    
     for(var i = 0; i< orig_json_scenarios.length; i++){
     	var node = orig_json_scenarios[i]
     	if(node != null ){
-	    	values_scenarios[step_scenarios] = {
+        var tipaficha = node["Feature "].split("-").join('').split("/").join('_').split("\\").join('_').split(' ').join('_')
+	    	filepath = dir + "/template_" + tipaficha + ".json" 
+        values_scenarios[step_scenarios] = {
 	    		"type":"script",
-	        "name": node["Feature "],
+	        "name": tipaficha,
 	        "key":"users",
 	        "description": node["Then expected result"],
-	        "action":"",
+	        "action": "run",
 	        "scope": node["Phase"],
-	        "status":""
+	        "status": "",
+          "flow" : filepath
 	    	}
-	    	step_scenarios = step_scenarios+1
+        
+        console.log(node["Feature "] + " - " +filepath);
+        const fd = fs.openSync(filepath, 'w+');
+        var flow = getFlow(tipaficha);
+        fs.writeSync(fd, flow);
+        console.log(fs.statSync(filepath).size);
+        console.log(fs.readFileSync(fd, { encoding: 'utf8' }));
+
+        step_scenarios = step_scenarios+1;
     	}
     }
 
@@ -668,6 +688,13 @@ var parseCOTS = function(filename){
 	else{
 		console.log("File is empty !!!!")
 	}
+}
+
+var getFlow =  function(tipaficha){
+  var file = new json.File(appRoot + "/cots/GPP_SP_single_payment_workflow.json" );
+  file.readSync();
+
+  return JSON.stringify(file.data);
 }
 
 

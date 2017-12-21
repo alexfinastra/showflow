@@ -46,8 +46,10 @@ block content
                     include flowitems/interface_profile
                   when "service"
                     include flowitems/service_profile
+                  when "rule"
+                    include flowitems/rule_profile
                   default
-                    include flowitems/interface_profile
+                    include flowitems/default_profile
           br
           if data["items"][0]["status_class"] != "secondary"
             .row.justify-content-center.mt-5  

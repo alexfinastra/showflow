@@ -1,0 +1,16 @@
+li.timeline-item
+  .timeline-badge(class=item["status_class"])    
+    if (item["type"] == "queue")
+      i.fa.fa-sign-out 
+    else
+      i.fa.fa-th-list
+  .timeline-panel
+    .timeline-heading
+      if profile == null       
+        .row
+          h5.timeline-title.mt-2.col-auto.mr-auto #{item["title"]}
+      else
+        h5.timeline-title #{item["title"]}      
+    .timeline-body
+      p.small
+        | #{item["description"]}

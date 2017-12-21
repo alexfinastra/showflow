@@ -1,0 +1,10 @@
+li.timeline-item
+  .timeline-badge(class=item["status_class"])    
+      i.fa.fa-cogs
+  .timeline-panel
+    .timeline-heading
+        h5.timeline-title #{item["title"]}      
+    .timeline-body
+      h6 #{item["interface_type"]}
+      p.small
+        | #{item["description"]}

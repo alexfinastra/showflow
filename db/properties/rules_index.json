@@ -1,0 +1,5117 @@
+{
+   "1":{
+      "name":"Department",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Department",
+         "description":"",
+         "uid":"1",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "2":{
+      "name":"Custom Filter",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Custom Filter",
+         "description":"",
+         "uid":"2",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "3":{
+      "name":"MOP Selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"MOP Selection",
+         "description":"",
+         "uid":"3",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "6":{
+      "name":"Fee formula",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Fee formula",
+         "description":"",
+         "uid":"6",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "12":{
+      "name":"Product",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Product",
+         "description":"",
+         "uid":"12",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "15":{
+      "name":"Workflow Determination - STP",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Workflow Determination - STP",
+         "description":"",
+         "uid":"15",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "18":{
+      "name":"Completion processing",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Completion processing",
+         "description":"",
+         "uid":"18",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "19":{
+      "name":"Daily limit",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Daily limit",
+         "description":"",
+         "uid":"19",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "20":{
+      "name":"Validation",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Validation",
+         "description":"",
+         "uid":"20",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "21":{
+      "name":"Compliance validation",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Compliance validation",
+         "description":"",
+         "uid":"21",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "23":{
+      "name":"Special instruction",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Special instruction",
+         "description":"",
+         "uid":"23",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "24":{
+      "name":"Pricing product",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Pricing product",
+         "description":"",
+         "uid":"24",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "25":{
+      "name":"Fee type",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Fee type",
+         "description":"",
+         "uid":"25",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "26":{
+      "name":"Message filter",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Message filter",
+         "description":"",
+         "uid":"26",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "27":{
+      "name":"Crisis Hold Check",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Crisis Hold Check",
+         "description":"",
+         "uid":"27",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "30":{
+      "name":"Business area",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Business area",
+         "description":"",
+         "uid":"30",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "31":{
+      "name":"Debit Transaction code",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Debit Transaction code",
+         "description":"",
+         "uid":"31",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "32":{
+      "name":"Credit Transaction code",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Credit Transaction code",
+         "description":"",
+         "uid":"32",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "34":{
+      "name":"Timed hold",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Timed hold",
+         "description":"",
+         "uid":"34",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "35":{
+      "name":"Bypass hold",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Bypass hold",
+         "description":"",
+         "uid":"35",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "36":{
+      "name":"Account debit authorization",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Account debit authorization",
+         "description":"",
+         "uid":"36",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "41":{
+      "name":"SLA selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"SLA selection",
+         "description":"",
+         "uid":"41",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "44":{
+      "name":"Prioritization",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Prioritization",
+         "description":"",
+         "uid":"44",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "45":{
+      "name":"Base condition",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Base condition",
+         "description":"",
+         "uid":"45",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "47":{
+      "name":"BI-Bypass",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"BI-Bypass",
+         "description":"",
+         "uid":"47",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "49":{
+      "name":"Message search",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Message search",
+         "description":"",
+         "uid":"49",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "50":{
+      "name":"Fee bypass",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Fee bypass",
+         "description":"",
+         "uid":"50",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "52":{
+      "name":"Liquidity release",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Liquidity release",
+         "description":"",
+         "uid":"52",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "53":{
+      "name":"Outbound mapping profile",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Outbound mapping profile",
+         "description":"",
+         "uid":"53",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "57":{
+      "name":"Fee account determination",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Fee account determination",
+         "description":"",
+         "uid":"57",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "66":{
+      "name":"Direct debit authorization",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Direct debit authorization",
+         "description":"",
+         "uid":"66",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "70":{
+      "name":"Adjust totals counters",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Adjust totals counters",
+         "description":"",
+         "uid":"70",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "99":{
+      "name":"Authorization step selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Authorization step selection",
+         "description":"",
+         "uid":"99",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "100":{
+      "name":"Calendar selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Calendar selection",
+         "description":"",
+         "uid":"100",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "101":{
+      "name":"Processing cutoff",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Processing cutoff",
+         "description":"",
+         "uid":"101",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "102":{
+      "name":"Treasury cutoff",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Treasury cutoff",
+         "description":"",
+         "uid":"102",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "103":{
+      "name":"Clearing cutoff",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Clearing cutoff",
+         "description":"",
+         "uid":"103",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "104":{
+      "name":"Missed processing cutoff",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Missed processing cutoff",
+         "description":"",
+         "uid":"104",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "105":{
+      "name":"Missed treasury cutoff",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Missed treasury cutoff",
+         "description":"",
+         "uid":"105",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "106":{
+      "name":"Missed clearing cut-off",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Missed clearing cut-off",
+         "description":"",
+         "uid":"106",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "107":{
+      "name":"Message screen set selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Message screen set selection",
+         "description":"",
+         "uid":"107",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "108":{
+      "name":"Message fields sets selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Message fields sets selection",
+         "description":"",
+         "uid":"108",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "109":{
+      "name":"Message buttons sets selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Message buttons sets selection",
+         "description":"",
+         "uid":"109",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "110":{
+      "name":"Rate usage for base amount conversion",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Rate usage for base amount conversion",
+         "description":"",
+         "uid":"110",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "111":{
+      "name":"Rate usage for credit side conversion",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Rate usage for credit side conversion",
+         "description":"",
+         "uid":"111",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "112":{
+      "name":"Rate usage for debit side conversion",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Rate usage for debit side conversion",
+         "description":"",
+         "uid":"112",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "114":{
+      "name":"Inbound message type selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Inbound message type selection",
+         "description":"",
+         "uid":"114",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "115":{
+      "name":"MOP validation",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"MOP validation",
+         "description":"",
+         "uid":"115",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "117":{
+      "name":"Message type selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Message type selection",
+         "description":"",
+         "uid":"117",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "121":{
+      "name":"Outgoing format",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Outgoing format",
+         "description":"",
+         "uid":"121",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "122":{
+      "name":"Debit authorization bypass",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Debit authorization bypass",
+         "description":"",
+         "uid":"122",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "123":{
+      "name":"Account lookup",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Account lookup",
+         "description":"",
+         "uid":"123",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "124":{
+      "name":"Field verification profile selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Field verification profile selection",
+         "description":"",
+         "uid":"124",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "125":{
+      "name":"Workflow Determination - Manual",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Workflow Determination - Manual",
+         "description":"",
+         "uid":"125",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "127":{
+      "name":"Incoming batch filter",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Incoming batch filter",
+         "description":"",
+         "uid":"127",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "129":{
+      "name":"Bypass Mandate Check",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Bypass Mandate Check",
+         "description":"",
+         "uid":"129",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "137":{
+      "name":"Bulking sending time",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Bulking sending time",
+         "description":"",
+         "uid":"137",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "138":{
+      "name":"Out bulk grouping ID selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Out bulk grouping ID selection",
+         "description":"",
+         "uid":"138",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "139":{
+      "name":"Sub-batch grouping ID",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Sub-batch grouping ID",
+         "description":"",
+         "uid":"139",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "140":{
+      "name":"Sub-batch grouping ID selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Sub-batch grouping ID selection",
+         "description":"",
+         "uid":"140",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "141":{
+      "name":"Incoming file filter",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Incoming file filter",
+         "description":"",
+         "uid":"141",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "142":{
+      "name":"Outgoing file filter",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Outgoing file filter",
+         "description":"",
+         "uid":"142",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "143":{
+      "name":"Sub-batch filter",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Sub-batch filter",
+         "description":"",
+         "uid":"143",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "144":{
+      "name":"Group ID - Out",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Group ID - Out",
+         "description":"",
+         "uid":"144",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "145":{
+      "name":"Repair and enrichment selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Repair and enrichment selection",
+         "description":"",
+         "uid":"145",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "146":{
+      "name":"Repair and enrichment",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Repair and enrichment",
+         "description":"",
+         "uid":"146",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "147":{
+      "name":"File priority",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"File priority",
+         "description":"",
+         "uid":"147",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "148":{
+      "name":"Payment classification",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Payment classification",
+         "description":"",
+         "uid":"148",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "149":{
+      "name":"Transaction generation mapping rules",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Transaction generation mapping rules",
+         "description":"",
+         "uid":"149",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "150":{
+      "name":"Generate transaction selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Generate transaction selection",
+         "description":"",
+         "uid":"150",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "151":{
+      "name":"Request for charges validation",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Request for charges validation",
+         "description":"",
+         "uid":"151",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "152":{
+      "name":"Matching check profile selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Matching check profile selection",
+         "description":"",
+         "uid":"152",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "153":{
+      "name":"Matching index",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Matching index",
+         "description":"",
+         "uid":"153",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "154":{
+      "name":"Automatic matching algorithm",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Automatic matching algorithm",
+         "description":"",
+         "uid":"154",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "155":{
+      "name":"Manual matching algorithm",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Manual matching algorithm",
+         "description":"",
+         "uid":"155",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "156":{
+      "name":"Matching mapping rules",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Matching mapping rules",
+         "description":"",
+         "uid":"156",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "157":{
+      "name":"Cancellation request validation",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Cancellation request validation",
+         "description":"",
+         "uid":"157",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "158":{
+      "name":"Business flow selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Business flow selection",
+         "description":"",
+         "uid":"158",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"System Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "159":{
+      "name":"Dual control",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Dual control",
+         "description":"",
+         "uid":"159",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "160":{
+      "name":"Mapping out",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Mapping out",
+         "description":"",
+         "uid":"160",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "161":{
+      "name":"Mapping out selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Mapping out selection",
+         "description":"",
+         "uid":"161",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "162":{
+      "name":"Debit hold until time",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Debit hold until time",
+         "description":"",
+         "uid":"162",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "163":{
+      "name":"Credit hold until time",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Credit hold until time",
+         "description":"",
+         "uid":"163",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "164":{
+      "name":"Office hold until time",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Office hold until time",
+         "description":"",
+         "uid":"164",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "165":{
+      "name":"Payment Transformation",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Payment Transformation",
+         "description":"",
+         "uid":"165",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "166":{
+      "name":"Payment transformation",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Payment transformation",
+         "description":"",
+         "uid":"166",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "167":{
+      "name":"Message format validation",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Message format validation",
+         "description":"",
+         "uid":"167",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "168":{
+      "name":"Credit party chain enrichment",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Credit party chain enrichment",
+         "description":"",
+         "uid":"168",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "169":{
+      "name":"Transaction generation mapping selection rules",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Transaction generation mapping selection rules",
+         "description":"",
+         "uid":"169",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "170":{
+      "name":"Credit account enrichment",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Credit account enrichment",
+         "description":"",
+         "uid":"170",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "171":{
+      "name":"Debit account enrichment",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Debit account enrichment",
+         "description":"",
+         "uid":"171",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "172":{
+      "name":"Advising type selection rule",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Advising type selection rule",
+         "description":"",
+         "uid":"172",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "173":{
+      "name":"STP rules selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"STP rules selection",
+         "description":"",
+         "uid":"173",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "174":{
+      "name":"Payment type selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Payment type selection",
+         "description":"",
+         "uid":"174",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "175":{
+      "name":"STP validation",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"STP validation",
+         "description":"",
+         "uid":"175",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "176":{
+      "name":"STP field validation",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"STP field validation",
+         "description":"",
+         "uid":"176",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "177":{
+      "name":"STP field mapping rules",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"STP field mapping rules",
+         "description":"",
+         "uid":"177",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "178":{
+      "name":"STP field mapping selection rules",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"STP field mapping selection rules",
+         "description":"",
+         "uid":"178",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "179":{
+      "name":"Payment type mapping rules",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Payment type mapping rules",
+         "description":"",
+         "uid":"179",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "180":{
+      "name":"STP mapping rules",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"STP mapping rules",
+         "description":"",
+         "uid":"180",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "181":{
+      "name":"STP mapping selection rules",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"STP mapping selection rules",
+         "description":"",
+         "uid":"181",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "182":{
+      "name":"SLA- Generic-office",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"SLA- Generic-office",
+         "description":"",
+         "uid":"182",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "183":{
+      "name":"SLA- Debit party",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"SLA- Debit party",
+         "description":"",
+         "uid":"183",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "184":{
+      "name":"SLA- Credit party",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"SLA- Credit party",
+         "description":"",
+         "uid":"184",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "185":{
+      "name":"Company Limit check",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Company Limit check",
+         "description":"",
+         "uid":"185",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "186":{
+      "name":"Party details enrichment",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Party details enrichment",
+         "description":"",
+         "uid":"186",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "187":{
+      "name":"Interface Initial Reroute",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Interface Initial Reroute",
+         "description":"",
+         "uid":"187",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "188":{
+      "name":"Suspense account Enrichment",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Suspense account Enrichment",
+         "description":"",
+         "uid":"188",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "189":{
+      "name":"Interface Selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Interface Selection",
+         "description":"",
+         "uid":"189",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "190":{
+      "name":"Self Learning Fields control",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Self Learning Fields control",
+         "description":"",
+         "uid":"190",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "191":{
+      "name":"Number of Approval",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Number of Approval",
+         "description":"",
+         "uid":"191",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "192":{
+      "name":"MOP STP Profile Selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"MOP STP Profile Selection",
+         "description":"",
+         "uid":"192",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "193":{
+      "name":"Mandate validation",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Mandate validation",
+         "description":"",
+         "uid":"193",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "194":{
+      "name":"Batch validation",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Batch validation",
+         "description":"",
+         "uid":"194",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "195":{
+      "name":"Own Correspondent Bank Selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Own Correspondent Bank Selection",
+         "description":"",
+         "uid":"195",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "196":{
+      "name":"Value date determination selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Value date determination selection",
+         "description":"",
+         "uid":"196",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "197":{
+      "name":"MOP min-max profile selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"MOP min-max profile selection",
+         "description":"",
+         "uid":"197",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "198":{
+      "name":"Position figure selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Position figure selection",
+         "description":"",
+         "uid":"198",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "199":{
+      "name":"Bypass Bands",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Bypass Bands",
+         "description":"",
+         "uid":"199",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "200":{
+      "name":"Account derivation method",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Account derivation method",
+         "description":"",
+         "uid":"200",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "201":{
+      "name":"Destination department",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Destination department",
+         "description":"",
+         "uid":"201",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "202":{
+      "name":"Interface Group Selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Interface Group Selection",
+         "description":"",
+         "uid":"202",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "203":{
+      "name":"Bypass technical validations",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Bypass technical validations",
+         "description":"",
+         "uid":"203",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "204":{
+      "name":"Output Format Selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Output Format Selection",
+         "description":"",
+         "uid":"204",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "205":{
+      "name":"Bypass Posting",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Bypass Posting",
+         "description":"",
+         "uid":"205",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "206":{
+      "name":"Posting Type Selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Posting Type Selection",
+         "description":"",
+         "uid":"206",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "207":{
+      "name":"Posting Suspense Account Selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Posting Suspense Account Selection",
+         "description":"",
+         "uid":"207",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "208":{
+      "name":"Party limit message filter",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Party limit message filter",
+         "description":"",
+         "uid":"208",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "209":{
+      "name":"Group of parties definition",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Group of parties definition",
+         "description":"",
+         "uid":"209",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "210":{
+      "name":"Party limit bypass validation",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Party limit bypass validation",
+         "description":"",
+         "uid":"210",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "211":{
+      "name":"Bypass party limit",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Bypass party limit",
+         "description":"",
+         "uid":"211",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "212":{
+      "name":"Payment Cap Selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Payment Cap Selection",
+         "description":"",
+         "uid":"212",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "213":{
+      "name":"Adjust Basic Properties",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Adjust Basic Properties",
+         "description":"",
+         "uid":"213",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "214":{
+      "name":"Enrich Basic Properties",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Enrich Basic Properties",
+         "description":"",
+         "uid":"214",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "216":{
+      "name":"MOP release date selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"MOP release date selection",
+         "description":"",
+         "uid":"216",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "217":{
+      "name":"Source MOP STP Profile Selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Source MOP STP Profile Selection",
+         "description":"",
+         "uid":"217",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "219":{
+      "name":"Transfer method selection rule",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Transfer method selection rule",
+         "description":"",
+         "uid":"219",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "220":{
+      "name":"Liquidity Priority Selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Liquidity Priority Selection",
+         "description":"",
+         "uid":"220",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "221":{
+      "name":"Assembly sending time selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Assembly sending time selection",
+         "description":"",
+         "uid":"221",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "222":{
+      "name":"Bypass step",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Bypass step",
+         "description":"",
+         "uid":"222",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "223":{
+      "name":"Assembly profile selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Assembly profile selection",
+         "description":"",
+         "uid":"223",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "224":{
+      "name":"Out file header enrichment selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Out file header enrichment selection",
+         "description":"",
+         "uid":"224",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "225":{
+      "name":"Out file header enrichment",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Out file header enrichment",
+         "description":"",
+         "uid":"225",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "226":{
+      "name":"Tax Code",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Tax Code",
+         "description":"",
+         "uid":"226",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "227":{
+      "name":"Mop bulking profile selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Mop bulking profile selection",
+         "description":"",
+         "uid":"227",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "233":{
+      "name":"Report Sending Preferences profile selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Report Sending Preferences profile selection",
+         "description":"",
+         "uid":"233",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "234":{
+      "name":"Report Sending time selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Report Sending time selection",
+         "description":"",
+         "uid":"234",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "237":{
+      "name":"Channel selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Channel selection",
+         "description":"",
+         "uid":"237",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "238":{
+      "name":"File Workflow determination - Manual@@Obsolete",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"File Workflow determination - Manual@@Obsolete",
+         "description":"",
+         "uid":"238",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "239":{
+      "name":"File Processing Cutoff",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"File Processing Cutoff",
+         "description":"",
+         "uid":"239",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "240":{
+      "name":"File Workflow determination - STP@@Obsolete",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"File Workflow determination - STP@@Obsolete",
+         "description":"",
+         "uid":"240",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "242":{
+      "name":"Override MOP Cycle",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Override MOP Cycle",
+         "description":"",
+         "uid":"242",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "244":{
+      "name":"File Authorization step selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"File Authorization step selection",
+         "description":"",
+         "uid":"244",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "245":{
+      "name":"Channel Settings Selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Channel Settings Selection",
+         "description":"",
+         "uid":"245",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "249":{
+      "name":"Entity Custom Filter",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Entity Custom Filter",
+         "description":"",
+         "uid":"249",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "251":{
+      "name":"Assembly Grouping Out Id",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Assembly Grouping Out Id",
+         "description":"",
+         "uid":"251",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "253":{
+      "name":"DD Stops and Permits ",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"DD Stops and Permits ",
+         "description":"",
+         "uid":"253",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "256":{
+      "name":"Mandate Authorization",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Mandate Authorization",
+         "description":"",
+         "uid":"256",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "258":{
+      "name":"Advising Mapping Selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Advising Mapping Selection",
+         "description":"",
+         "uid":"258",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "259":{
+      "name":"Posting Type Trans Code",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Posting Type Trans Code",
+         "description":"",
+         "uid":"259",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "261":{
+      "name":"Interface Mapping Selection",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Interface Mapping Selection",
+         "description":"",
+         "uid":"261",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "999":{
+      "name":"Search screen filters - Active DB",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Search screen filters - Active DB",
+         "description":"",
+         "uid":"999",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "1000":{
+      "name":"Search screen filters - History DB",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Search screen filters - History DB",
+         "description":"",
+         "uid":"1000",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "1001":{
+      "name":"Search screen filters  -Template ",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Search screen filters  -Template ",
+         "description":"",
+         "uid":"1001",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   },
+   "1002":{
+      "name":"Search screen filters - Mass Payments DB",
+      "active":true,
+      "connected":true,
+      "req_fields":"",
+      "auditmsg":[
+
+      ],
+      "logpattern":[
+
+      ],
+      "mid":[
+
+      ],
+      "flow_item":{
+         "step":0,
+         "type":"rule",
+         "title":"Search screen filters - Mass Payments DB",
+         "description":"",
+         "uid":"1002",
+         "request_protocol":"Java",
+         "direction":"I",
+         "request_connections_point":"",
+         "interface_name":"Rules",
+         "status_class":"secondary",
+         "office":"***",
+         "interface_type":"Business Rule",
+         "interface_sub_type":"",
+         "request_format_type":"PDO"
+      }
+   }
+}

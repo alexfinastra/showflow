@@ -40,20 +40,56 @@ method.ensureFlow = function(){
   if(flowitems == null || flowitems.length == 0 ){ return; }
 
   this._properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
-  this._services = new json.File(appRoot + "/db/properties/services_index.json" ); 
+  this._services = new json.File(appRoot + "/db/properties/services_index.json" );
+  this._rules = new json.File(appRoot + "/db/properties/rules_index.json" );  
   this._properties.readSync(); 
   this._services.readSync(); 
+  this._rules.readSync();
 
   for(var i=0; i< flowitems.length; i++){
     var item = flowitems[i];
     if ("status_class" in item) {continue;}
 
     var current = null;
-    if (item["type"] == "service"){
-      current = this._services.get(item["uid"]);
-    } else {
-      current = this._properties.get(item["uid"]);
-    }
+    switch (item["type"]) {
+      case "service":
+        current = this._services.get(item["uid"]);
+        break;
+      case "interface":
+      case "channel":
+        current = this._properties.get(item["uid"]);
+        break;
+      case "rule":
+        current = this._rules.get(item["uid"]);
+        break;
+      default:
+        current = {
+            "name":"Adjust Basic Properties",
+            "active":true,
+            "connected":true,
+            "req_fields":"",
+            "auditmsg":[],
+            "logpattern":[],
+            "mid":[],
+            "flow_item":{
+               "step":0,
+               "type": item["type"] ,
+               "title": item["uid"],
+               "description": (item["description"] != null ? item["description"] : ""),
+               "uid":"",
+               "request_protocol":"",
+               "direction":"",
+               "request_connections_point":"",
+               "interface_name": item["type"],
+               "status_class":"secondary",
+               "office":"***",
+               "interface_type": item["type"],
+               "interface_sub_type":"",
+               "request_format_type":""
+            }
+          }
+      }
+
     if(current == null || current["active"] != true){ continue;} 
     
     var obj = current["flow_item"]  
