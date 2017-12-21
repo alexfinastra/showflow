@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
 	//splitSchema()
 
   //generate_scripts(); // require 5 manula updates !!!!	
-	console("database has pool : " + JSON.stringify(database.getPool()))
+	console.log("database has pool : " + JSON.stringify(database.getPool()))
   var data = group_scripts();  
 	console.log("DATA is :" + JSON.stringify(data))
 	res.render('scripts_list', { identity: identity, data: data });    	
