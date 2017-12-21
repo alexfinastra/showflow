@@ -46,22 +46,22 @@ router.get('/', function (req, res) {
 });
 
 router.get('/profile/:uid', function (req, res) {
-  var query = select + " WHERE UID_INTERFACE_TYPES = '" + req.params.uid + "'";
-  database.simpleExecute(query, [], { maxRows: 300, outFormat: database.OBJECT })
-  .then(function(results){
+  //var query = select + " WHERE UID_INTERFACE_TYPES = '" + req.params.uid + "'";
+  //database.simpleExecute(query, [], { maxRows: 300, outFormat: database.OBJECT })
+  //.then(function(results){ 
     var properties = new json.File(appRoot + "/db/properties/profile_index.json" ); 
     properties.readSync();
     var config = properties.get(req.params.uid);
     res.render('profile', { title: 'Channel Profile', record: result.rows[0] , config: config });
-  })
-  .catch(function(err){
-    res.set('Content-Type', 'application/json');
-    res.status(500).send(JSON.stringify({
-        status: 500,
-        message: "Error getting the interfaces profile",
-        detailed_message: err.message
-    }));
-  })  
+ // })
+ // .catch(function(err){
+ //   res.set('Content-Type', 'application/json');
+ //   res.status(500).send(JSON.stringify({
+ //       status: 500,
+ //       message: "Error getting the interfaces profile",
+ //       detailed_message: err.message
+ //   }));
+  //})  
 });
 
 // Build UPDATE statement and prepare bind variables
