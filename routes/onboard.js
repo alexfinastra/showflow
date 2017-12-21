@@ -600,6 +600,8 @@ var parseCOTS = function(filename){
     for(var i = 0; i< orig_json_scenarios.length; i++){
     	var node = orig_json_scenarios[i]
     	if(node != null ){
+        if(node["Feature "] ==  undefined || node["Feature "] == null) {continue;}
+        
         var tipaficha = node["Feature "].split("-").join('').split("/").join('_').split("\\").join('_').split(' ').join('_')
 	    	filepath = dir + "/template_" + tipaficha + ".json" 
         values_scenarios[step_scenarios] = {
