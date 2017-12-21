@@ -76,7 +76,7 @@ router.get('/run/:script_key/:id', function(req, res, next){
 	    checkboxId = "cb_" + script_key.replace(/ /g, "-") + "_" + step
 
 	    console.log("NU CHE BLYA run script >> " + JSON.stringify(node) + "\n  ehref >>" + ehref + "\n checkboxId >> " + checkboxId)
-	  	res.json({row: jade.renderFile(appRoot + '/views/row.jade', { node: node, ehref: ehref, checkboxId: checkboxId  }) });	
+	  	res.json({row: jade.renderFile(appRoot + '/views/row.jade', { node: node, ehref: ehref, checkboxId: checkboxId, script_key: script_key, identity: identity  }) });	
 		});
 	//})
 });
@@ -601,7 +601,7 @@ var parseCOTS = function(filename){
     	var node = orig_json_scenarios[i]
     	if(node != null ){
         if(node["Feature "] ==  undefined || node["Feature "] == null) {continue;}
-        
+
         var tipaficha = node["Feature "].split("-").join('').split("/").join('_').split("\\").join('_').split(' ').join('_')
 	    	filepath = dir + "/template_" + tipaficha + ".json" 
         values_scenarios[step_scenarios] = {

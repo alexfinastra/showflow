@@ -11,11 +11,12 @@ td.col.col-md-7(class=(node["action"] == "" ? "text-secondary font-weight-light"
 td.col.col-md-2(class=(node["action"] == "" ? "text-secondary font-weight-light" : "")) #{node["scope"]}
 td.col.col-md-2
   if(node["status"] == "success")
-    - var rhref = "/" + identity["type"] + "/rollback/"+ key +"/" + k
+    //- var rhref = "/" + identity["type"] + "/rollback/"+ script_key +"/" + k
+    - var rhref = "/flow/load/Accounting/template_Inteface_Selection"
     button.btn.btn-outline-success.ml-2.mt-2.btn-sm.float-right( onclick="handleScript(this)", data-href = rhref, data-rowid = ("row_" + key.replace(/ /g, "-") + "_" + k).toLowerCase() )
       b flow
   if obj["action"] == "rollback"
-   - var ehref = "/" + identity["type"] + "/run/"+ key +"/" + k
+   - var ehref = "/" + identity["type"] + "/run/"+ script_key +"/" + k
     button.btn.btn-outline-secondary.mt-2.btn-sm.float-right(onclick="handleScript(this)", data-href = ehref, data-rowid = ("row_" + key.replace(/ /g, "-") + "_" + k).toLowerCase())
       i.fa.fa-undo           
   if obj["action"] == "run"
