@@ -35,6 +35,7 @@ if (isWin){
 } else {
   database.createPool(dbconfig)
   .then(function() {
+      console.log("Connected to db " + database.getPool())
       var port = normalizePort(process.env.PORT || '3000');
       app.set('port', port);
       
