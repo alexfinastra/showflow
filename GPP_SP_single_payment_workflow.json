@@ -1,0 +1,164 @@
+{
+   "name": "Single Payment Workflow",
+   "stp" : "79%",
+   "customization" : "0%",
+   "template": "single_payment_workflow",
+   "input" : "",
+   "flowitems": [
+      {
+        "type": "channel",
+        "stage": "all_stages",
+	      "uid": "***^SWIFT_IN"
+      },
+      {
+        "type": "rule",
+        "description": "Rule Type 158, System rule Business flow selection",
+        "stage" : "Payment_Initiation",
+	      "uid": "158"
+      },
+      {
+        "type": "rule",
+        "description": "Rule Type 114, Inbound Message Type selection",
+        "stage" : "Payment_Initiation",
+        "uid": "114"
+      },
+      {
+        "type": "activity",
+        "description": "Set MID, Msg Status : Received, Msg Class, Offcie, Msg create date, Msg Type. Source MOP",
+        "stage" : "Payment_Initiation",
+	      "uid": "Set Basic Properties"
+      },
+      {
+        "type": "rule",
+        "description": "Rule Type 213, System rule Adjust Basic Properties",        
+        "stage" : "Payment_Initiation",
+	      "uid": "213"
+      },
+      {
+        "type": "rule",
+        "description" : "Rule Type 1, Department",
+        "stage" : "Payment_Initiation",
+        "uid": "1"
+      },
+      {
+        "type": "rule",
+        "description" : "Rule Type 30, Business Area",
+        "stage" : "Payment_Initiation",
+        "uid": "30"
+      },
+      {
+        "type": "rule",
+        "description" : "Rule Type 12, Product",
+        "stage" : "Payment_Initiation",
+        "uid": "12"
+      },
+      {
+        "type": "activity",
+        "description": "Set Department, Business Area and Product Code",        
+        "stage" : "Payment_Initiation",
+	      "uid": "Map Payment Info"
+      },
+      {
+        "type": "rule",
+        "description" : "Rule Type 110, Rate Usage Base Conversion",
+        "stage" : "Payment_Initiation",
+        "uid": "110"
+      },
+      {
+        "type": "rule",
+        "description" : "Rule Type 26, Message Filter",
+        "stage" : "Payment_Initiation",
+        "uid": "26"
+      },
+      {
+        "type": "rule",
+        "description" : "Rule Type 175, STP validation",
+        "stage" : "Payment_Initiation",
+        "uid": "175"
+      },
+      {
+        "type": "rule",
+        "description" : "Rule Type 21, Compliance validation",
+        "stage" : "Payment_Initiation",
+        "uid": "21"
+      },
+      {
+        "type": "rule",
+        "description" : "Rule Type 189, Interface Selection",
+        "stage" : "Payment_Initiation",
+        "uid": "189"
+      },
+      {
+        "type": "interface",
+        "stage": "Payment_Initiation",
+        "uid": "***^COMPLIANCE_OUT_PREDEBIT"
+      },
+      {
+        "type": "rule",
+        "description" : "Rule Type 145, Repair and Enrichment ",
+        "stage" : "Payment_Initiation",
+        "uid": "145"
+      },
+      {
+        "type": "rule",
+        "description" : "Rule Type 186, Party Detail Enrichment",
+        "stage" : "Payment_Initiation",
+        "uid": "186"
+      },
+      {
+        "type": "activity",
+        "description": "",        
+        "stage" : "Payment_Initiation",
+        "uid": "Repair and Enrichment"
+      },
+      {
+        "type": "rule",
+        "description" : "Rule Type 152, Matching Check Profile Selection ",
+        "stage" : "Payment_Initiation",
+        "uid": "152"
+      },
+      {
+        "type": "rule",
+        "description" : "Rule Type 153, Profile - Matching Index",
+        "stage" : "Payment_Initiation",
+        "uid": "153"
+      },
+      {
+        "type": "rule",
+        "description" : "Rule Type 154, Automatic Matching Algorithm",
+        "stage" : "Payment_Initiation",
+        "uid": "154"
+      },
+      {
+        "type": "activity",
+        "description": "",        
+        "stage" : "Payment_Initiation",
+        "uid": "Duplicate Check"
+      },
+      {
+        "type": "rule",
+        "description" : "Rule Type 182, SLA Generic Office",
+        "stage" : "Payment_Initiation",
+        "uid": "182"
+      },
+      {
+        "type": "activity",
+        "description": "",        
+        "stage" : "Payment_Initiation",
+        "uid": "Office SLA"
+      },
+      {
+        "type": "queue",
+        "description" : "Authentication Exception, Compliance Exception, Wait Rate, Filtered, Wait OFAC or Repair queues",
+        "stage" : "Payment_Initiation",
+        "uid": "Manual Handling"
+      },
+      {
+        "type": "service",
+        "stage" : "Payment_Initiation",
+        "uid": "MessageSubmitService"
+      }
+   ]
+}
+
+
