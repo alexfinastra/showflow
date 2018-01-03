@@ -1,8 +1,0 @@
-{
-	"FA1@SWIFT_103@***^SWD_SE_SWIFT_SINGLE_OUT" : "HV inward single customer bank/step_1_swift.json" ,
-	"FA1@SWIFT_103@***^SWD_SE_SWIFT_SINGLE_OUT@***^COMPLIANCE_OUT_PREDEBIT" : "HV inward single customer bank/step_2_ofac.json" ,
-	"FA1@SWIFT_103@***^SWD_SE_SWIFT_SINGLE_OUT@***^COMPLIANCE_OUT_PREDEBIT@***^CDB_OUT_CR" : "HV inward single customer bank/step_3_cdb.json" ,
-	"FA1@SWIFT_103@***^SWD_SE_SWIFT_SINGLE_OUT@***^COMPLIANCE_OUT_PREDEBIT@***^CDB_OUT_CR@Release_from_schedule" : "HV inward single customer bank/step_4_soap.json" ,
-	"FA1@SWIFT_103@***^SWD_SE_SWIFT_SINGLE_OUT@***^COMPLIANCE_OUT_PREDEBIT@***^CDB_OUT_CR@Release_from_schedule@***^FNDT_BI_OUT" : "HV inward single customer bank/step_5_bi.json" ,
-	"FA1@SWIFT_103@***^SWD_SE_SWIFT_SINGLE_OUT@***^COMPLIANCE_OUT_PREDEBIT@***^CDB_OUT_CR@Release_from_schedule@***^FNDT_BI_OUT@***^MSG_POSTING_OUT" : "HV inward single customer bank/step_6_accounting.json" ,
-}

@@ -87,7 +87,7 @@
          "request_connections_point":"jms/Q_IN_SWIFT",
          "response_connections_point":null,
          "interface_name":"SWIFT_IN",
-         "status_class":"secondary",
+         "status_class":"dark",
          "office":"***",
          "interface_type":"SWIFT_IN",
          "interface_sub_type":null,

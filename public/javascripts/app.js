@@ -28,8 +28,9 @@ function handleScript(el) {
 	.done(function(response){
 		$(rowId).fadeOut(800, function(){
       $(rowId).html(response.row).fadeIn().delay(2000);
+      alertify.success(response.action);
     });
-		//alertify.success("Refresh " + rowId);
+		//
 	})
 }
 

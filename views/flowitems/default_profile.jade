@@ -1,5 +1,5 @@
 li.timeline-item
-  .timeline-badge(class=item["status_class"])    
+  .timeline-badge(class=( (item["type"] == "queue") ? "bg-primary" : "bg-warning"))    
     if (item["type"] == "queue")
       i.fa.fa-sign-out 
     else

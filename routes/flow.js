@@ -7,7 +7,43 @@ var fse = require('fs-extra');
 var tmp = require('temporary');
 var json = require('json-file');
 
+
 to_tree = function(folder, files){  
+  fs.readdirSync(folder).forEach( function(file) {
+    var stats = fs.statSync(folder + '/' + file);        
+    if(stats.isDirectory()){        
+      let f = folder + "/" + file;
+      ref = '/flow/upload/' + file
+      files.push({
+              "text" : "<span class= 'font-weight-bold ml-2'>" + file + "</span>",
+              "selectable": false,
+              "state": {
+                "expanded": false,
+                "checked": true
+              },
+              "folder": file,
+              "nodes" : []
+            })
+      to_tree(folder + "/" + file, files)
+    }
+    
+    if(stats.isFile() && file.indexOf("template") > -1 ){     
+      if (files.length > 0){
+        files[files.length -1]["nodes"].push({      
+          "text": file.replace(".json", "").replace("template","").split("_").join(" "),
+          "state": {
+                  "checked": false
+                },
+          "folder": folder.split("/")[folder.split("/").length - 1]
+        })
+      }
+    }    
+  })
+  return
+}
+
+
+to_tree_old = function(folder, files){  
   var products = new json.File(appRoot + "/cots/eurobank/COTS_Eurobank_product_index.json" );
   products.readSync();
   nodes = null
@@ -65,23 +101,25 @@ router.get('/current', function(req, res){
 
 // need to add a flow index as input 
 router.get('/load/:folder/:file', function(req, res, next){		
-  if(req.params.file.indexOf("template") > -1){
-    var file = new tmp.File();
-    var template = "flows/" + req.params.folder + "/" + req.params.file + ".json";   
-    currentFlow = file.path;    
-    fse.copySync(template, currentFlow);    
-  }else{
-    currentFlow = appRoot + "/flows/" + req.params.folder + "/" + req.params.file ;
-  }
-	 
-  var flow = new Flow();    
+  //if(req.params.file.indexOf("template") > -1){
+    //var file = new tmp.File();
+    //var template = "flows/" + req.params.folder + "/" + req.params.file + ".json";   
+    //currentFlow = file.path;    
+    //fse.copySync(template, currentFlow);    
+  //}else{
+    
+  //}
+  
+	currentFlow = appRoot + "/flows/" + req.params.folder + "/" + req.params.file + ".json" ; 
+  var flow = new Flow();  
+  console.log("OPA DATA " + JSON.stringify(flow._flow))  
 	res.render('flow', { data: flow._flow});
 });
 
 router.get('/tree', function(req, res){
   let files = []
   to_tree("flows", files);
-  console.log("")
+  console.log("Files List " + JSON.stringify(files))
 	res.json({tree: files});
 });
 

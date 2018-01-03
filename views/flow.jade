@@ -6,7 +6,7 @@ block content
       .row.mt-5
         .col-md-12.mt-5
           center.mt-5            
-            h3.mt-5 Please select a Integration Self Service from the Navigation Bar.               
+            h3.mt-5 Please select a Flow from the flow list ...
     else
       .row#payflow
         .col-md-12.mt-5
@@ -42,20 +42,23 @@ block content
                 case item["type"]
                   when "channel"
                     include flowitems/channel_profile
+                    //include flowitems/default_profile
                   when "interface"
                     include flowitems/interface_profile
+                    //include flowitems/default_profile
                   when "service"
                     include flowitems/service_profile
+                    //include flowitems/default_profile
                   when "rule"
                     include flowitems/rule_profile
                   default
                     include flowitems/default_profile
           br
-          if data["items"][0]["status_class"] != "secondary"
+          if (data["items"] && data["items"][0] && data["items"][0]["status_class"] != "secondary")
             .row.justify-content-center.mt-5  
               a.btn.btn-outline-danger(href= "/folder/delete/currentflow")
                 i.fa.fa-trash
                 span.ml-2    
                 | Delete 
                 b Flow
-             
+               
