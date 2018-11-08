@@ -1,9 +1,0 @@
-- var value = (record != null) ? record["INTERFACE_TYPE"] : ""
-select#interface_type.w-100.custom-select(name="INTERFACE_TYPE", disabled)
-  option select Type              
-  option(value="OFAC", selected=("OFAC" == value)) Compliance
-  option(value="BI", selected=("BI" == value)) Balance Inquiry
-  option(value="POSTING", selected=("POSTING" == value)) Accounting System
-  option(value="CDB", selected=("CDB" == value)) Account Lookup
-  option(value="EXT_FX", selected=("EXT_FX" == value)) FX Engine
-  option(value="ADVISING", selected=("ADVISING" == value)) Advising 

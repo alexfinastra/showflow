@@ -6,160 +6,80 @@ var jade = require("jade");
 var authentication_mdl = require('../middlewares/authentication');
 var fs = require('fs');
 var fse = require('fs-extra')
-var oracledb = require('oracledb');
-var database = require('../db/database.js')
-var dbConfig = require('../db/dbconfig.js');
-var async = require('async');
-var Promise = require('es6-promise').Promise;
-var XLSX = require('xlsx');
+var es = require('event-stream');
+var moment = require('moment');
+var Flow = require('../models/flow_type');
 var util = require('util');
 var path = require('path');
 var formidable = require('formidable');
 var readLineFile = require("read-line-file");
 
-var identity = {
-	type: 'onboard', 
-	title: 'On boarding and COTS (Commercial off-the-shelf)', 
-	description: 'Although COTS products can be used out of the box, in practice the COTS product must be configured to achieve the needs of the business and integrated to existing organisational systems. Extending the functionality of COTS products via custom development is also an option, however this decision should be carefully considered due to the long term support and maintenance implications. Such customised functionality is not supported by the COTS vendor, so brings its own sets of issues when upgrading the COTS product.'
-}
 
 router.get('/', function(req, res, next) {
-	//splitSchema()
+	res.render('onboard');    	
+});
 
-  //generate_scripts(); // require 5 manula updates !!!!	
-	console.log("database has pool : " + JSON.stringify(database.getPool()))
-  var data = group_scripts();  
-	console.log("DATA is :" + JSON.stringify(data))
-	res.render('scripts_list', { identity: identity, data: data });    	
+router.get('/showflow/:mid/:view', function(req, res, next) {
+  var payment_flow = appRoot + "/traces/global/"+ req.params["mid"] +"/flow.json" 
+  var flow = new Flow(payment_flow);  
+  //console.log("OPA DATA " + JSON.stringify(flow._flow)) 
+  res.render('onboard', { data: flow._flow, view: req.params["view"] });     
 });
 
 router.get("/selectnode/:parent/:node", function(req, res){
-  selectNode(req, function(){  	
-  	var data = group_scripts();  
-  	res.json({cots: jade.renderFile(appRoot + '/views/cotsdoc.jade', { identity: identity, data: data }) });
+  console.log("Query  --< " + JSON.stringify(req.query))
+  
+  var file_activities = new json.File(appRoot + "/traces/global/"+ req.params["node"] +"/activities.json");
+  file_activities.readSync();
+  activities = []
+  file_activities.data.forEach(function(line){ 
+    activities.push({        
+      "time": (new Date(line[0])).toISOString().split('T')[1].split('Z')[0], 
+      "service": line[4],               
+      "activity": line[5]
+    })
+  })
+
+  var query = req.query
+  var total = activities.length    
+  var filtered = 0;
+  data = [];
+  if(query["start"] && query["length"]){      
+    if(query["search"]["value"] == ""){
+      data = activities.slice(parseInt(query["start"]), parseInt(query["start"]) + parseInt(query["length"]))
+      filtered = total
+    } else {
+      searched = []
+      activities.forEach(function(a){
+        if(a["activity"].indexOf(query["search"]["value"]) != -1){
+          searched.push(a)
+        }
+      })
+      data = searched.slice(parseInt(query["start"]), parseInt(query["start"]) + parseInt(query["length"]))
+      filtered = searched.length
+    }
+  }
+
+  res.json({
+    "draw": parseInt(query["draw"]),
+    "recordsTotal": total ,
+    "recordsFiltered": filtered,    
+    "data": data 
   });
 })
-
-router.get("/selectrow/:checkboxId/:checked", function(req, res){  
-  selectRow(req, function(){  	
-  	checkboxId = req.params["checkboxId"]
-  	key = checkboxId.split("_").slice(1, -1).join("_"); 
-  	
-  	checkboxId = req.params["checkboxId"]
-  	item = checkboxId.split("_").pop();
-
-	  var scripts = new json.File(appRoot + "/cots/eurobank/COTS_Eurobank_"+ key +".json" );
-    scripts.readSync();
-    node =  scripts.get(key + ".values."+ item)
-    ehref = "/" + identity["type"] + "/run/"+ key +"/" + item    
-
-    console.log("NU CHE BLYA node >> " + JSON.stringify(node) + "\n  ehref >>" + ehref + "\n checkboxId >> " + checkboxId)
-  	res.json({row: jade.renderFile(appRoot + '/views/row.jade', { node: node, ehref: ehref, checkboxId: checkboxId }) });
-  });
-})
-
-
-router.get('/run/:script_key/:id', function(req, res, next){	
-	//execute(req, function(){
-		console.log("IN RUN")
-		script_key = req.params["script_key"];
-		step = parseInt(req.params["id"]);
-		var scripts = new json.File(appRoot + "/cots/eurobank/COTS_Eurobank_"+ script_key +".json" );
-    scripts.readSync();
-
-    status = script_key + ".values."+ step +".status"
-		scripts.set(status , "success")	;
-		action = script_key + ".values."+ step +".action"
-		scripts.set(action , "rollback")	;
-
-		scripts.write(function(){			
-	    node =  scripts.get(script_key + ".values."+ step)
-	    ehref = "/" + identity["type"] + "/rollback/"+ script_key +"/" + step
-	    checkboxId = "cb_" + script_key.replace(/ /g, "-") + "_" + step
-
-	    console.log("RUN run script >> " + JSON.stringify(node) + "\n  ehref >>" + ehref + "\n checkboxId >> " + checkboxId)
-	  	res.json({action: 'script applied',row: jade.renderFile(appRoot + '/views/row.jade', { node: node, ehref: ehref, checkboxId: checkboxId, script_key: script_key, identity: identity, k: step  }) });	
-		});
-	//})
-});
-
-router.get('/rollback/:script_key/:id', function(req, res, next) {
-	//execute(req, function(){
-		console.log("IN ROLLBACK")
-		script_key = req.params["script_key"];
-		step = parseInt(req.params["id"]);
-		var scripts = new json.File(appRoot + "/cots/eurobank/COTS_Eurobank_"+ script_key +".json" );
-    scripts.readSync();
-
-    status = script_key + ".values."+ step +".status"
-    scripts.set(status , "") ;
-    action = script_key + ".values."+ step +".action"
-    scripts.set(action , "run")  ;
-
-		scripts.write(function(){	
-	    node =  scripts.get(script_key + ".values."+ step)
-	    ehref = "/" + identity["type"] + "/run/"+ script_key +"/" + step
-	    checkboxId = "cb_" + script_key.replace(/ /g, "-") + "_" + step
-
-	    console.log("ROLLBACK run script >> " + JSON.stringify(node) + "\n  ehref >>" + ehref + "\n checkboxId >> " + checkboxId)
-	  	res.json({action: 'script rollbacked',row: jade.renderFile(appRoot + '/views/row.jade', { node: node, ehref: ehref, checkboxId: checkboxId, script_key: script_key, identity: identity, k: step  }) });	
-		});
-	//})
-});
-
-router.post('/input/:script_key', function (req, res) {
-		script_key = req.params["script_key"];
-		console.log(" **** SKRIPT KEY IS " + script_key);
-    var file = new json.File(appRoot + "/db/properties/scripts_index.json" );
-	  file.readSync();
-
-	  file.set(script_key + ".input.office", req.body.OFFICE);
-	  file.set(script_key + ".input.department", req.body.DEPARTMENT);
-	  file.set(script_key + ".input.bic", req.body.BIC);
-	  file.set(script_key + ".input.country", req.body.COUNTRY);
-	  file.set(script_key + ".input.currency", req.body.CURRENCY);
-	  file.set(script_key + ".input.mop", req.body.MOP);
-	  file.set(script_key + ".values.1.action", "run");
-
-	  file.writeSync();	
-    res.redirect('/onboard');
-});
-
-router.get('/reset/:script_key', function (req, res) {
-    script_key = req.params["script_key"];
-		console.log(" **** SKRIPT KEY IS " + script_key);
-    var file = new json.File(appRoot + "/db/properties/scripts_index.json" );
-	  file.readSync();
-
-	  file.set(script_key + ".input.office", "");
-	  file.set(script_key + ".input.department", "");
-	  file.set(script_key + ".input.bic", "");
-	  file.set(script_key + ".input.country", "");
-	  file.set(script_key + ".input.currency", "");
-	  file.set(script_key + ".input.mop", "");
-
-	  var size = Object.keys(file.get(script_key + ".values")).length;
-	  for(var i=1; i<=size; i++){
-      clean = script_key + ".values."+ i +".action"
-  	  file.set(clean , "")	;
-  	  status = script_key + ".values."+ i +".status"
-      file.set(status , "")	;
-	  }
-	  
-	  file.writeSync();	
-    res.redirect('/onboard');
-});
 
 router.get('/tree', function(req, res){
-  var products = new json.File(appRoot + "/cots/eurobank/COTS_Eurobank_product_index.json" );
+  var products = new json.File(appRoot + "/traces/global/mids_index.json" );
   products.readSync();
- 
+  //should be filter here !!! 
   res.json({tree: products.data});
 });
 
 
-router.get("/parsecots/:filename", function(req, res){
-	parseCOTS(req.params.filename)
+router.get("/parsefile/:filename", function(req, res){
+  console.log("Parse File request " + req.params.filename)
+  // TODO should be backgroung task here
+  parseTrace(req.params.filename);
 	res.redirect("/onboard")
 })
 
@@ -168,17 +88,21 @@ router.post('/upload/:uid', function(req, res){
   var filename = ""
 
   form.multiples = true;
-  form.uploadDir = path.join(appRoot + '/cots/' + req.params.uid);  
+  form.uploadDir = path.join(appRoot + '/traces/' + req.params.uid);  
 
   // rename it to it's orignal name
   form.on('file', function(field, file) {
     console.log("**** Before rename " + file.path);    
-    if (fs.existsSync(file.path)) {
-      if(fs.existsSync( path.join(form.uploadDir, file.name) ) ){
-        fs.unlinkSync(path.join(form.uploadDir, file.name))
+    if (fs.existsSync(file.path)) {    
+      date = new Date()
+      datevalues = [date.getFullYear(),date.getMonth()+1,date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds(),];
+      new_filename = file.name.split(".")[0]  + "_" + datevalues.join('_') + "." + file.name.split(".")[1];
+
+      if(fs.existsSync( path.join(form.uploadDir, new_filename) ) ){
+        fs.unlinkSync(path.join(form.uploadDir, new_filename))
       }
-      fs.rename(file.path, path.join(form.uploadDir, file.name));
-      filename = file.name;     
+      fs.rename(file.path, path.join(form.uploadDir, new_filename));
+      filename = new_filename;     
     }else{
       console.log("File was taken")
     } 
@@ -191,448 +115,13 @@ router.post('/upload/:uid', function(req, res){
   // once all the files have been uploaded, send a response to the client
   form.on('end', function() {   	
     console.log("End upload");  
-    res.end(filename);  
+    res.end(filename);
   });
   
   form.parse(req);
 })
 
 module.exports = router;
-
-
-const readline = require('readline');
-var generate_scripts = function(){
-	var lineReader = require('readline').createInterface({
-	  input: require('fs').createReadStream('./db/scripts/templates/template_create_new_office.sql')
-	});
-	var filename = null, roll_filename = null;
-	lineReader.on('line', function (line) {
-		var uid = '--UID--';		
-		var arr = line.split(" ") 
-		var table = 'table'
-		if(line.indexOf('--REM') > -1 ){
-		  table = arr[arr.length -1].toLowerCase();
- 		  filename = './db/scripts/' + table + ".sql" ;
- 		  roll_filename = './db/scripts/roll_' + table + ".sql" ;
- 		  var rollback = 'delete from ' + table + ' where uid_'+ table + " = '"+uid+"';"
-
- 		  if (fs.existsSync(filename)) {
-			  fs.appendFile(filename, line + '\n', function (err) {	});
-				fs.appendFile(roll_filename, rollback + '\n', function (err) {});
-			} else {
-				fs.writeFile(filename, line+'\n' , function(err) {})	
-				fs.writeFile(roll_filename, line+'\n' , function(err) { })
-			}
- 		} else {
- 			var rollback = 'delete from ' + table + ' where uid_'+ table + " = '"+uid+"';"
- 			fs.appendFile(filename, line + '\n', function (err) {})			
- 			fs.appendFile(roll_filename, rollback + '\n', function (err) {})			
- 		}
-	  console.log('Line from file:', line);
-	});
-}
-
-var getOptions = function(obj, key){
-	opt = { properties: false, allrun: false, allroll: false, feature: (key.indexOf('feature') == -1 ? false : true)}
-  //if (obj == null || obj == undefined){
-  	return opt;
- // }
-  var keys = Object.keys(obj.values);
-  console.log("****************** Keys ARE : " + keys)
-  for(var i=0; i<=keys.length-1; i++){
-  	key = keys[i];
-		opt["allrun"] =( opt["allrun"] || obj.values[key]["action"].length > 0 ? true : false);		 
-		opt["allroll"] =( opt["allroll"] || obj.values[key]["action"].length > 0 ? true : false);
-	}
-
-	if(obj.values[keys[0]].status == ""){
-		opt["properties"] = true
-		if(obj.values[keys[0]].action != ""){
-				opt["allrun"] = true
-		}
-		opt["allroll"] = false
-	}
-	if(obj.values[keys[keys.length-1]].status == "success"){
-		opt["properties"] = true
-		opt["allrun"] = false
-		opt["allroll"] = true
-	}
-
-  return opt;
-}
-
-
-var group_scripts = function(){	
-  var res = {};
-  var products = appRoot + "/cots/eurobank/COTS_Eurobank_product_index.json";
-  if (!fs.existsSync(products)) {
-  	return res;
-  }
-
-	var product = new json.File(products);
-  product.readSync();  
-	var uids = [];
-  for(var j=0; j<product.data.length; j++){
-  	var parent_key = product.data[j]["key"];
-  	var nodes =  product.data[j]["nodes"];
-  	var nlen = nodes.length
-  	if (nlen == 0 ){continue;}
-
-  	for(var k=0; k<nlen; k++){
-  		var node = nodes[k]
-  		if(node.state.selected == true){
-  			var new_key = parent_key + "_" + node.key;
-  			uids.push(new_key);
-  		}
-  	}
-  }  
-  console.log(" UIDS are " + uids)
-
-  for(var i=0; i<uids.length; i++){
-    key = uids[i];  
-    if(!(key in res)){ res[key] = []} 
-
-    var file_name = appRoot + "/cots/eurobank/COTS_Eurobank_" + key + ".json";
-  	if (fs.existsSync(file_name)) {
-		  var cots = new json.File(file_name);
-			cots.readSync();
-			obj = cots.get(key);
-	    if(obj == null || obj == undefined) { continue;}    
-	    
-			res[key].push(Object.assign(obj,{options: getOptions(obj, key)}));	
-		} else{
-			console.log("File " + file_name + " does not exists")
-		}
-  }
-  return res;
-}
-
-var selectNode = function(req, callback){
-	parentId = 0, nodeId = 0;
-	parent = req.params["parent"]
-  node = req.params["node"]
-  var product = new json.File(appRoot + "/cots/eurobank/COTS_Eurobank_product_index.json" );
-  product.readSync();
-  console.log("Product " + product.data)
-  
-  for(var j=0; j<product.data.length; j++){
-  	if (product.data[j].key != parent) {
-  		var nodes =  product.data[j]["nodes"];  	
-  	  for(var k=0; k<nodes.length; k++){
-  	  	product.set( j + ".nodes."+ k + ".state.selected", false) 
-  	  }  
-  		continue;
-  	}
-  	parentId = j;
-
-  	var nodes =  product.data[j]["nodes"];  	
-  	for(var k=0; k<nodes.length; k++){  		
-  		console.log(" 1. " +  parentId + ".nodes."+ k + ".state.selected : " + product.get( parentId + ".nodes."+ k + ".state.selected"))
-  		product.set( parentId + ".nodes."+ k + ".state.selected", false)  		
-  		if(nodes[k].key != node){ continue;}
-  		nodeId = k
-  	}
-  }
-  console.log(" 2. " +   parentId + ".nodes."+ nodeId + ".state.selected")
-
-  product.set( parentId + ".nodes."+ nodeId + ".state.selected", true)
-  product.write(callback); 
-}
-
-var selectRow = function(req, callback){		
-	checkboxId = req.params["checkboxId"]
-  checked = req.params["checked"]
-  pathTo = checkboxId.split("_"); 
-  console.log("NU CHE BLYA checked >> " + pathTo )
-  var scripts = new json.File(appRoot + "/cots/eurobank/COTS_Eurobank_"+ pathTo.slice(1, -1).join("_") +".json" );
-  scripts.readSync();
-  
-  action = pathTo.slice(1, -1).join("_") + ".values."+ pathTo.pop() +".action"
-  value = (checked == "true") ? "run" : ""
-  console.log("NU CHE BLYA action >> " + action + "\n  value >>" + value)
-  	
-  scripts.set(action, value)
-  scripts.write(callback);
-}
-
-
-
-var inputs = function(file, script_key ){
-	console.log(" **** SKRIPT KEY IS " + script_key);
-	return {
-		"OFFICE": file.get(script_key + ".input.office"),
-		"DEPARTMENT": file.get(script_key + ".input.department"),
-		"BIC": file.get(script_key + ".input.bic"),
-		"COUNTRY": file.get(script_key + ".input.country"),
-		"CURRENCY": file.get(script_key + ".input.currency"),
-		"MOP": file.get(script_key + ".input.mop")
-	}
-}
-
-var sql_statement = function(line, input){
-	//params = ["BIC", "OFFICE", "DEPARTMENT", "COUNTRY", "CURRENCY", "MOP"];
-	//for(var i = 0; i<params.length; i++){
-	//var param = params[i]		
-	//	if(line.indexOf(param) != -1 ){
-	//		var new_value = input[param];	
-	//		line = line.replace(/OFFICE/g, new_value); 
-	//	}
-	//}
-	line = line.replace(/--BIC--/g, input["BIC"]); 
-	line = line.replace(/--OFFICE--/g, input["OFFICE"]); 
-	line = line.replace(/--DEPARTMENT--/g, input["DEPARTMENT"]); 
-	line = line.replace(/--COUNTRY--/g, input["COUNTRY"]); 
-	line = line.replace(/--CURRENCY--/g, input["CURRENCY"]); 
-	line = line.replace(/--MOP--/g, input["MOP"]); 
-	return line;
-}
-
-var run_sql = function(line_new){
-	var isWin = /^win/.test(process.platform);
-  if(isWin) { return; } 
-
-	database.simpleExecute(line_new, [], {
-                autoCommit: true,
-                outFormat: database.OBJECT
-            })
-	.then(function(results){
-  	console.log( " --- - - result.rowsAffected :" + ((result == undefined || result == null) ? null : result.rowsAffected) );                  		
-  })
-	.catch(function(err){  		
-		console.log("Error connecting to DB" + err.message + " -- "+ err.message.indexOf("ORA-00001") > -1 ? "User already exists" : "Input Error");
-	})
-}
-
-
-var run_sql_old = function(line_new){
-		console.log("-------------------- CONNECTIONS ------------------------------------")
-		console.log(" dbConfig " + dbConfig + " and oracledb" + oracledb);
-		"use strict";
-		oracledb.getConnection(dbConfig, function (err, connection) {
-        if (err) {
-            console.log("Error connecting to DB" + err.message);
-            return;
-        }
-        console.log(" 5 ========>>>> S Q L :" + line_new ); 
-               
-        connection.execute(line_new, [], {
-                autoCommit: true,
-                outFormat: oracledb.OBJECT // Return the result as Object
-            },
-            function (err, result) {
-            	  console.log( " 6 ========>>>> result.rowsAffected :" + ((result == undefined || result == null) ? null : result.rowsAffected) );
-                console.log( " 6.5 ------------ >> err " + err);
-                if (err) {
-                	console.log("Error connecting to DB" + err.message + " -- "+ err.message.indexOf("ORA-00001") > -1 ? "User already exists" : "Input Error");
-                } 
-                else {
-                    console.log("Successfully created the resource");
-                    return;
-                }
-                // Release the connection
-                connection.release(
-                    function (err) {
-                    	  console.log( " 7 ========>>>> Release connection : " + err );
-                        if (err) {
-                            console.error(err.message);                       
-                        } else {
-                            console.log("Run sql query from script : Connection released");
-                        }
-                    });
-            });            
-    });
-}
-
-
-var execute = function(req, callback){
-	console.log("HERE WE ARE IN RUN REQUEST")
-
-	script_key = req.params["script_key"];
-	step = parseInt(req.params["id"]);
-	var file = new json.File(appRoot + "/cots/eurobank/COTS_Eurobank_"+ script_key +".json" );
-	file.readSync();
-	
-	console.log( "1 EXECUTE >>>> S Q L :" + step );
-	console.log(" **** SKRIPT KEY IS " + script_key); // prefix +
-
-	filename = file.get(script_key + ".values."+ step +".key");
-	
-	console.log( "2 EXECUTE >>>> S Q L :" + filename );
-	var lineRead = require('readline').createInterface({
-		input: require('fs').createReadStream("./db/scripts/"+filename+".sql")
-	});
-
-	var input = inputs(file, script_key);
-	lineRead.on('line', function (line) {
-		if(line.indexOf('--REM') == -1 && line.indexOf('--') != 0){			
-			var line_new = sql_statement(line, input);			
-			run_sql(line_new);
-		}
-	});
-	callback;
-}
-
-var parseWorksheet = function(worksheet, features = [], scenarios = []){
-   var headers_features = {}, headers_scenarios = {};
-   var features_headers_row = -1, scenarios_headers_row = -1;
-   var offset = 0;
-   var isFeauture = true;
-
-   for(z in worksheet) {
-        if(z[0] === '!') continue;
-        //parse out the column, row, and value
-        var tt = 0;
-        for (var i = 0; i < z.length; i++) {
-            if (!isNaN(z[i])) {
-                tt = i;
-                break;
-            }
-        };
-
-        var col = z.substring(0,tt);
-        var row = parseInt(z.substring(tt));
-        var value = worksheet[z].v;
-        //console.log("col :"+col+" row :"+row+" value :"+value)
-        
-        if(value){
-          if(value == "BG Ref#"){ features_headers_row = row; }
-          if(features_headers_row == row){
-            headers_features[col] = value;
-            continue;
-          }
-
-          if(value == "Customer Ref#"){ scenarios_headers_row = row; offset = row;  }
-          if(scenarios_headers_row == row){
-            isFeauture = false
-            headers_scenarios[col] = value;           
-            continue;
-          }
-
-          if(value == null || value == "" || String(value).indexOf("PASTE") !== -1){
-            continue;
-          }
-
-          if(isFeauture == true){
-            if(!features[row]) features[row]={};
-            features[row][headers_features[col]] = ('string' == typeof(value))  ? value.replace("'","\"") : value
-          }else{
-            if(!scenarios[row - offset]) scenarios[row -offset]={};
-            scenarios[row-offset][headers_scenarios[col]] = ('string' == typeof(value))  ? value.replace("'","\"") : value
-          }
-        }
-    }
-    return;
-}
-
-var getScriptName = function(feature){
-  return "feature"
-}
-
-var  buildSetup = function(items, nodes, key, type = "features", dir = null){
-  //drop those first two rows which are empty 
-  items.shift();items.shift();         
-  var jsonitems = JSON.stringify(items).replace(/(\\r\\n|\\n|\\r)/gm, " "); 
-  var orig_json_items = JSON.parse(jsonitems)
-  var values_items = {}
-  var step_items = 1
-
-  for(var i = 0; i< orig_json_items.length; i++){
-    var node = orig_json_items[i]
-    if(node != null && node["Feature"] != null ){      
-      var tipaficha = node["Feature"].split("-").join('').split("/").join('_').split("\\").join('_').split(' ').join('_')
-      filepath = dir + "/template_" + tipaficha + ".json" 
-    
-      values_items[step_items] = {
-        "type":"script",
-        "name": (type == "features" ? node["Feature"] : node["When to trigger"]),
-        "key": getScriptName(node["Feature"]),
-        "description": (type == "features" ? node["What"] : node["Then expected result"]),
-        "action": "rollback",
-        "scope": (type == "features" ? node["Classification"] : node["Feature"]),
-        "status": "success",
-        "flow" : (type == "features" ? null : filepath),
-        "scenarios" : (type == "features" ? filepath : null) 
-      }
-
-      if (type == "scenarios"){
-        const fd = fs.openSync(filepath, 'w+');
-        var flow = getFlow(tipaficha);
-        fs.writeSync(fd, flow);
-      }
-      step_items = step_items+1
-    }
-  }
-
-  if(Object.keys(values_items).length > 0) {
-    var itemsNodes = {}    
-    itemsNodes[type + "_" + key] = {
-        "name": key.split('_').join(' '),
-        "input":{
-         "office":"",
-         "department":"",
-         "bic":"",
-         "country":"",
-         "currency":"",
-         "mop":""
-      },
-      "values": values_items
-    }  
-
-    fs.writeFileSync(appRoot + "/cots/eurobank/COTS_Eurobank_" + type + "_"+ key +".json", JSON.stringify(itemsNodes) , 'utf-8');        
-    
-    nodes.push({
-      "text": key.split('_').join(' '),
-      "selectable":true,
-      "key": key,
-      "state":{
-         "selected":false
-      }
-    })
-  }
-  return
-}
-
-
-var buildPackagesList = function(nodes_features = [], nodes_scenarios = []){
-  var packages = [];
-  if (nodes_features.length > 0 ){  
-    nodes_features[0]["state"]["selected"] = true
-    var features_packages = {
-      "text":"<span class= 'ml-2'> Features </span>",
-        "key":"features",
-        "selectable":false,
-        "state":{
-           "expanded":true,
-           "selected":false
-        },
-        "nodes":nodes_features
-    }   
-    packages.push(features_packages)
-  }
-
-  if (nodes_scenarios.length > 0 ){ 
-    var scenarios_packages = {
-      "text":"<span class= 'ml-2'> Scenarios </span>",
-        "key":"scenarios",
-        "selectable":false,
-        "state":{
-           "expanded":false,
-           "selected":false
-        },
-        "nodes":nodes_scenarios
-    }
-    packages.push(scenarios_packages)
-  }
-
-  if(packages.length > 0){
-    fs.writeFileSync(appRoot + "/cots/eurobank/COTS_Eurobank_product_index.json", JSON.stringify(packages) , 'utf-8');        
-  }
-  else{
-    console.log("File is empty !!!!")
-  }
-
-  return;
-}
 
 
 var rmDir = function(dirPath) {
@@ -649,6 +138,314 @@ var rmDir = function(dirPath) {
   fs.rmdirSync(dirPath);
 }
 
+var isDate = function(date) {
+    return ((date.length > 4) && (date.match(/[a-z]/i) == null) && new Date(date) !== "Invalid Date" && !isNaN(new Date(date)) ) ? true : false;
+}
+
+var compose_activity = function(str, ind){
+  activity = ""
+  for(i=ind; i<str.length; i++)
+  {
+    fstr = str[i].replace(/:/g, '');
+    fstr = str[i].replace(/,/g, ' ');            
+    if(fstr.length > 0) {
+      activity = activity + " " + fstr
+    }
+  }
+  return activity
+}
+
+var beautifier = function(str){  
+  if (isDate(str[0]) == false) { return [] }
+
+  new_str = [];
+  len = str.length;
+  for(i=0;i<len;i++){
+    val = str[i]
+
+    vlen = val.length
+    if(vlen > 3 && val[vlen-1] == ":"){
+      new_str.push(val.replace(/:/g, ''))
+      new_str.push(":") 
+      continue; 
+    }
+
+    if((len != i+1) &&
+       (val.indexOf('[') > -1) && (str[i+1].indexOf(']') > -1 )){      
+      new_str.push(val + " " + str[i+1]); 
+      str[i+1] = ""     
+      continue;
+    }
+
+    if(vlen > 0){
+      new_str.push(val) 
+    }
+  }  
+  return new_str
+}
+
+var splitter_index = function(str){
+  ind = 0
+  for(i=0; i< str.length; i++){
+    val = str[i].replace(/:/g, '')
+    if(val.length == 0){
+      ind = i
+      break;
+    }
+  }
+  return ind
+}
+
+var history_mids = function(){
+  mids = [];
+  
+  var hnodes = history_nodes();
+  if(hnodes.length > 0){
+    hnodes.forEach(function(node){
+      mids.push(node["key"]);
+    }); 
+  }
+  return mids;
+}
+
+// List all files in a directory in Node.js recursively in a synchronous fashion
+var walkSync = function(dir, filelist) {
+  var path = path || require('path');
+  var fs = fs || require('fs'),
+  files = fs.readdirSync(dir);
+  filelist = filelist || [];
+  files.forEach(function(file) {
+      if (fs.statSync(path.join(dir, file)).isDirectory()) {
+          console.log("+++++++++++ " + file)
+          file_arr = file.split('\\')
+          filelist.push(file_arr[file_arr.length-1]);
+          filelist = walkSync(path.join(dir, file), filelist);
+      }
+  });
+  return filelist;
+}
+
+var history_nodes = function(cb){
+  nodes = []
+  var existing = walkSync(appRoot + "/traces/global")
+  if(existing.length > 0){
+    for(var i=0; i< existing.length; ++i) {
+      //if(i < 45){
+        nodes.push({
+            "text": existing[i],
+            "selectable":true,
+            "key": existing[i],
+            "state":{
+               "selected":false
+            }
+        });  
+      //} 
+    }
+  }
+  console.log("------ hisotric nodes " + nodes.length);
+  return cb(nodes);     
+}
+
+var buildPaymentFlow = function(flowData = []){
+  var packages = [];
+  var mids = [];
+  var nodes = [];
+  var activities = {};
+  var flowitems = {};
+  var existing_mids = walkSync(appRoot + "/traces/global");
+
+  console.log("------ So we have mids " + existing_mids.length)
+  console.log("------ And flow data length is " + flowData.length)
+  flowData.forEach(function(line){
+    if(line.length > 0 ){
+      mid = line[3];      
+      if(mid == undefined || mid == null){ mid = "NO MID"; }
+
+      if(mid != "NO MID" && mid.length > 5){
+        if(mid.indexOf('_') > -1){mida = mid.split('_'); mid = mida[1]; }
+        
+        if(existing_mids.indexOf(mid) == -1 && mids.indexOf(mid) == -1 ){
+          mids.push(mid);
+          nodes.push({
+              "text": mid,
+              "selectable":true,
+              "key": mid,
+              "state":{
+                 "selected":false
+              }
+          });
+        }
+
+        if (activities[mid] == undefined){ activities[mid] = new Array }
+        activities[mid].push(line)
+
+        if(flowitems[mid] == undefined){ flowitems[mid] = new Array}
+        flowitems[mid].push({
+          "type": "activity",
+          "description": line[4],
+          "uid": line[4],
+          "mid": mid,
+          "rules": "",
+          "features": line[5]
+        });     
+      }
+    }
+  });
+
+  console.log("------ Mids collections is : " + mids.length)
+  if(mids.length > 0){
+    packages.push({
+        "text":"<span class= 'ml-2'>Last upload ("+nodes.length+")</span>",
+        "key": 'latest' ,
+        "selectable":false,
+        "state":{
+           "expanded":false,
+           "selected":false
+        },
+        "nodes": nodes
+    });
+  }
+  
+  history_nodes(function(nodes){
+    if(nodes != undefined && nodes.length > 0){
+      packages.push({
+          "text": "<span class= 'ml-2'> History payments ("+nodes.length+")</span>",
+          "key": 'history' ,
+          "selectable":false,
+          "state":{
+             "expanded":false,
+             "selected":false
+          },
+          "nodes": nodes
+      });
+    }
+  })
+
+  if(packages.length > 0){
+    //packages[0]["state"]["selected"] = true
+    //packages[0]["state"]["expanded"] = true
+    // index filed updated with new mids
+
+    fs.exists(appRoot + "/traces/global/mids_index.json", function(exists) {
+      if(exists) {
+        fs.unlinkSync(appRoot + "/traces/global/mids_index.json");              
+      }
+      fs.writeFileSync(appRoot + "/traces/global/mids_index.json", JSON.stringify(packages) , ['utf-8','as+']);  
+    }); 
+
+    //for each mid create a flow and activities files
+    mids.forEach(function(mid){
+      console.log(" --> Mid: " + mid + " has flowitems : " + flowitems[mid].length + " and  activities : " + activities[mid].length)
+      
+      current_path = appRoot +  "/traces/global/"+ mid;
+      if (!fs.existsSync(current_path)){ fs.mkdirSync(current_path); }
+      
+      fs.writeFileSync(current_path +"/flow.json", JSON.stringify({
+                                                                    "name": "Payment Flow",
+                                                                    "mid": mid,
+                                                                    "stp": "79%",
+                                                                    "customization": "0%",
+                                                                    "template": "single_payment_workflow",
+                                                                    "input": "",
+                                                                    "flowitems": flowitems[mid]
+                                                                  }) , ['utf-8','as+']);
+      fs.writeFileSync(current_path +"/activities.json", JSON.stringify(activities[mid]) , ['utf-8','as+']);
+    })    
+  }
+  else{
+    console.log("File is empty !!!!")
+  }
+
+  return;
+}
+
+var beautify_scope = function(scope){
+  var s = []
+  s.push(scope.split('-')[0])
+
+  scope_arr = scope.split('-')[1].split('_');
+  scope_arr.forEach(function(item){
+    if((item.match(/[0-9]/i) == null) && (item.indexOf('[') == -1) && (item.indexOf(']') == -1)){
+      s.push(item)
+    }
+  })
+
+  return s.join(" ");
+}
+
+var parseTrace = function(filename){ 
+  var lineNr = 0, 
+      flowData = [],
+      context = "";
+
+  var s = fs.createReadStream(appRoot + "/traces/global/" + filename)
+    .pipe(es.split())
+    .pipe(es.mapSync(function(line){
+        // pause the readstream
+        s.pause();
+        lineNr += 1;
+        
+          // formatted mapping is :
+          // 0 - timestamp
+          // 1 - thread
+          // 2 - scope
+          // 3 - MID
+          // 4 - service
+          // 5 - activity
+        formatted = new Array(6) 
+        str = beautifier(line.split(/\s+/) )       
+        len = str.length;
+        if ( len > 0 ){           
+          sind = splitter_index(str)
+          data = str.slice(4, sind)
+          //console.log(" Line " + lineNr + ":  " + data.length + " context: " + data )
+
+          formatted[0] = (str[0] + " " + str[1])
+          formatted[1] = str[3]
+          
+          if(data.length == 1){
+            formatted[2] = "GENERAL"           
+            formatted[3] = "NO MID"
+            formatted[4] = data[0]
+          }
+
+          if(data.length == 2){
+            formatted[2] = data[0]
+            formatted[3] = "NO MID"
+            formatted[4] = data[1]
+          }
+
+          if(data.length == 3){
+            formatted[2] = data[0]          
+            if(data[1].length > 10){formatted[3] = data[1] }else{formatted[3] = "NO MID"}            
+            formatted[4] = data[2]
+          }
+
+          formatted[5] = compose_activity(str, sind)           
+          flowData.push(formatted)          
+          s.resume(); 
+        } else { 
+          len = flowData.length; 
+          if(len > 0){
+            flowData[len-1] =  flowData[len-1] + " " + line.replace(/:/g, '').replace(/,/g, ' '); 
+          }          
+          s.resume();  
+        }
+    })
+    .on('error', function(err){
+        console.log('Error while reading file.', err);
+    })
+    .on('end', function(){
+        if(flowData.length > 0){    
+          console.log("-- Just before Payment Flow --")
+          buildPaymentFlow(flowData)          
+          //fs.writeFileSync(appRoot + "/traces/global/traces_data.csv", flowData.join('\n') , 'utf-8');          
+        }        
+        console.log('Read entire file.')
+    })
+  );
+  
+}
 
 var parseCOTS = function(filename){	
   var workbook = XLSX.readFile(appRoot + "/cots/eurobank/" + filename);
@@ -687,18 +484,44 @@ var parseCOTS = function(filename){
   buildPackagesList(nodes_features, nodes_scenarios)	
 }
 
-var getFlow =  function(tipaficha){
+var getFlow =  function(feature){
   var file = new json.File(appRoot + "/cots/GPP_SP_single_payment_workflow.json" );
   file.readSync();
-  stage = []
-  for(var i=0; i< file.data.length; i++){
-    var item = file.data[i]
+  var flow = file.data
+  var items = []
+
+  var no_more_activity = false
+  var has_activity = false
+  var queue = ""
+  for(var i=0; i< flow["flowitems"].length; i++){
+    var item = flow["flowitems"][i]
     console.log(" ********  get Flow current item : " + item + "\n")
-    if(item && item["stage"] == tipaficha){
-      stage.push(item)
-    }
+
+    switch(item["type"]){
+      case "activity":
+        if(no_more_activity == false){
+          items.push(item)
+          has_activity = true
+        }
+        if(item["features"].indexOf(feature) > -1){
+          no_more_activity = true
+        }
+        break
+      case "queue":
+        if(no_more_activity == true && queue == "" && item["features"].indexOf(feature) > -1){
+          items.push(item)
+        }
+        break
+      default:
+        if(no_more_activity == false){
+          items.push(item)
+        }
+        break
+    }    
   }
-  return JSON.stringify(file.data);
+
+  flow["flowitems"] = items;
+  return (has_activity ? JSON.stringify(flow) : null);
 }
 
 

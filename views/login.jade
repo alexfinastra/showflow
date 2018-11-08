@@ -1,24 +1,35 @@
-
 doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ", crossorigin="anonymous")
-    link(rel='stylesheet', href='/stylesheets/login.css')   
+    link(rel='stylesheet', href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ", crossorigin="anonymous")     
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Spicy+Rice')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Ubuntu:700')
+    link(rel='stylesheet', href='/stylesheets/login.css')  
     script(src="/javascripts/jquery-3.2.1.min.js")    
   body
-    .container
-      .loginmodal-container.justify-content-center
-        img.img-responsive.login-img.ml-5(src="img/logo.png", width="200px")
-        br
-        br
-        h1 Self Services 
-          b Platform
-        br
-        form(action="/login", method="post")
-          input(type="text", name="user", placeholder="Username")
-          input(type="password", name="pass", placeholder="Password")
-          input(type="text", name="env", value="DEMO-BANK", readonly)
-          hr
-          input.login.btn-outline-primary.btn-lg(type="submit", name="login", value="Sign In")
-        .login-help      
+    section.login-block
+      .container
+        .row
+          .col-md-4.login-sec
+            h2.text-center(style="font-family: 'Spicy Rice', cursive;font-size: 3rem;") Show Flow
+            p.text-center.mb-5
+              | Create a visual flow that a payment had undergone.
+            form.login-form(action="/login", method="post")
+              .form-group
+                label(for='exampleInputEmail1') username
+                input.form-control(type='text', placeholder='', name="user")
+              .form-group
+                label(for='exampleInputPassword1') password
+                input.form-control(type='password', placeholder='', name="pass")
+              .form-check
+                label.form-check-label
+                  input.form-check-input(type='checkbox')
+                  small Remember Me
+                button.btn.btn-login.float-right(type='submit') Submit
+            .copy-text
+              | Created with 
+              i.fa.fa-heart
+              |  by 
+              a(href='http://grafreez.com') Grafreez.com
+          .col-md-8.banner-sec

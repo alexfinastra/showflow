@@ -1,3 +1,0 @@
----REM INSERTING into SWIFT_ID
-delete from SWIFT_ID where UID_SWIFT_ID = '--OFFICE--^--DEPARTMENT--ast^ROZAHK33XXX' 
-delete from SWIFT_ID where UID_SWIFT_ID = '--OFFICE--^--DEPARTMENT--ast^DHBKAU2SXXX' 

@@ -2,179 +2,7 @@ function goBack() {
   window.history.back();
 }
 
-function handleClick(cb) {
-		var url = "/onboard/selectrow/" + cb.id + "/" +  cb.checked;
-		var rowId = "#" + cb.id.replace("cb_", "row_").toLowerCase();	  
-	  $.ajax({
-  		type: 'GET',
-  		url: url,
-  		dataType: 'json'
-  	})
-  	.done(function(response){
-  		$(rowId).fadeOut(800, function(){
-        $(rowId).html(response.row).fadeIn().delay(2000);
-      });
-  		//alertify.success("Refresh " + rowId);
-  	})
-}
-
-function handleScript(el) {	
-	var rowId = "#" + el.dataset.rowid.toLocaleLowerCase()
-	$.ajax({
-		type: 'GET',
-		url: el.dataset.href,
-		dataType: 'json'
-	})
-	.done(function(response){
-		$(rowId).fadeOut(800, function(){
-      $(rowId).html(response.row).fadeIn().delay(2000);
-      alertify.success(response.action);
-    });
-		//
-	})
-}
-
 $(document).ready(function(){
-
-	$('#allrun').on('click', function(){
-		var opts = {
-		  lines: 11 // The number of lines to draw
-		, length: 0 // The length of each line
-		, width: 25 // The line thickness
-		, radius: 75 // The radius of the inner circle
-		, scale: 0.5 // Scales overall size of the spinner
-		, corners: 0.7 // Corner roundness (0..1)
-		, color: '#007bff' // #rgb or #rrggbb or array of colors
-		, opacity: 0.25 // Opacity of the lines
-		, rotate: 0 // The rotation offset
-		, direction: 1 // 1: clockwise, -1: counterclockwise
-		, speed: 1.5 // Rounds per second
-		, trail: 54 // Afterglow percentage
-		, fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
-		, zIndex: 2e9 // The z-index (defaults to 2000000000)
-		, className: 'spinner' // The CSS class to assign to the spinner
-		, top: '50%' // Top position relative to parent
-		, left: '50%' // Left position relative to parent
-		, shadow: false // Whether to render a shadow
-		, hwaccel: false // Whether to use hardware acceleration
-		, position: 'absolute' // Element positioning
-		}	
-		var target = document.getElementById('loader')
-		var spinner = new Spinner(opts).spin(target);
-	})
-
-	$('#allback').on('click', function(){
-		var opts = {
-		  lines: 11 // The number of lines to draw
-		, length: 0 // The length of each line
-		, width: 25 // The line thickness
-		, radius: 75 // The radius of the inner circle
-		, scale: 0.5 // Scales overall size of the spinner
-		, corners: 0.7 // Corner roundness (0..1)
-		, color: '#dc3545' // #rgb or #rrggbb or array of colors
-		, opacity: 0.25 // Opacity of the lines
-		, rotate: 0 // The rotation offset
-		, direction: -1 // 1: clockwise, -1: counterclockwise
-		, speed: 1.5 // Rounds per second
-		, trail: 54 // Afterglow percentage
-		, fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
-		, zIndex: 2e9 // The z-index (defaults to 2000000000)
-		, className: 'spinner' // The CSS class to assign to the spinner
-		, top: '50%' // Top position relative to parent
-		, left: '50%' // Left position relative to parent
-		, shadow: false // Whether to render a shadow
-		, hwaccel: false // Whether to use hardware acceleration
-		, position: 'absolute' // Element positioning
-		}	
-		var target = document.getElementById('loader')
-		var spinner = new Spinner(opts).spin(target);
-	})
-
-	$('input#msg[type=file]').change(function(){
-		$(this).simpleUpload("/folder/upload/" + $("#upload-container").data().row , {
-			start: function(file){				
-				$('.progress').removeClass("invisible");
-				$('.progress-bar').html("");
-				$('.progress-bar').width(0);
-			},
-			progress: function(progress){
-				$('.progress-bar').html("Progress: " + Math.round(progress) + "%");
-				$('.progress-bar').width(progress + "%");
-			},
-			success: function(data){
-				//upload successful				
-				$('.progress').addClass("invisible");
-				$('.progress-bar').html("");				
-				$('.form-control').val('');
-				console.log("upload success " + data)
-				var editor=document.getElementById("editor");
-	  		
-	  		if(data.indexOf("<") == -1){
-	  			$('#xml-editor').removeClass("hidden")
-	  			$("textarea#txt-editor").val(data);
-	  			$("textarea#txt-editor").data("text", data); 
-	  		}
-	  		else{
-	  			  		var docSpec={
-	  							onchange: function(){
-	  								console.log("I been changed now!")
-	  							},
-	  							validate: function(obj){
-	  								console.log("I be validatin' now!")
-	  							},
-	  							elements: {
-	  								"GrpHdr": {
-	  									menu: [{
-	  										caption: "Append an <MsgId>",
-	  										action: Xonomy.newElementChild,
-	  										actionParameter: "<MsgId/>"
-	  									}]
-	  								},
-	  								"MsgId": {
-	  									menu: [{
-	  											caption: "Add @label=\"something\"",
-	  											action: Xonomy.newAttribute,
-	  											actionParameter: {name: "label", value: "something"},
-	  											hideIf: function(jsElement){
-	  												return jsElement.hasAttribute("label");
-	  											}
-	  										}, {
-	  											caption: "Delete this <MsgId>",
-	  											action: Xonomy.deleteElement
-	  										}, {
-	  											caption: "New <MsgId> before this",
-	  											action: Xonomy.newElementBefore,
-	  											actionParameter: "<MsgId/>"
-	  										}, {
-	  											caption: "New <MsgId> after this",
-	  											action: Xonomy.newElementAfter,
-	  											actionParameter: "<MsgId/>"
-	  										}],
-	  									canDropTo: ["GrpHdr"],
-	  									attributes: {
-	  										"value": {
-	  											asker: Xonomy.askString,
-	  											menu: [{
-	  												caption: "Delete this @value",
-	  												action: Xonomy.deleteAttribute
-	  											}]
-	  										}
-	  									}
-	  								}
-	  							}
-	  						};
-	  		
-	  						Xonomy.render(data, editor, docSpec);
-	  						$('#xml-editor').removeClass("hidden")}	  						
-			},
-			error: function(error){
-				//upload failed
-				$('.progress').html("Failure!<br>" + error.name + ": " + error.message);
-				//$(".table").load(" .table");
-			}
-		});
-	});
-
 
 	$('input#cots-upload[type=file]').change(function(){
 		$(this).simpleUpload("/onboard/upload/" + $("#cots-container").data().evn , {
@@ -190,7 +18,7 @@ $(document).ready(function(){
 			success: function(data){		
 				$('#cots-progress.progress').addClass("invisible");
 				$('#cots-progress-bar.progress-bar').html("");				
-				location.href = "/onboard/parsecots/" + data
+				location.href = "/onboard/parsefile/" + data
 			},
 			error: function(error){
 				$('#cots-progress.progress').html("Failure!<br>" + error.name + ": " + error.message);
@@ -198,29 +26,13 @@ $(document).ready(function(){
 		});
 	});
 
-
-	var socket = io();
-	socket.on('add', function(msg){ 
-		$(".table").load(" .table");
-		alertify.success(" File added to the folder.");
-	});
-	socket.on('unlink', function(msg){          
-		$(".table").load(" .table");
-		alertify.error(" File removed from the folder.");
-	});
-	socket.on('reloadflow', function(msg){          
-		$(".table").load(" .table");
-	});
-
+	$('#sidebar').css({'top': '68px'});	
+	var height = $('#sidebar').height() - $('#sidebar table thead tr th').height() - 68;
+	$('.table-fixed tbody').css({'height': (height + 'px')});
   $("#sidebar").niceScroll({
      cursorcolor: '#FFFFFF',
      cursorwidth: 4,
-  });
-
-  $("#txt-editor").niceScroll({
-     cursorcolor: '#FFFFFF',
-     cursorwidth: 4,
-  });
+  });  
 
   $("#treecots").niceScroll({
      cursorcolor: '#FFFFFF',
@@ -237,108 +49,182 @@ $(document).ready(function(){
 	  $('.overlay').fadeOut();
 	});
 
-	$('#currentFlow').on('click', function(){
-		location.href = '/flow/current'
-	})
-
-	$('#sendmsg').on('click', function(){
-		var len = location.pathname.split('/').length
-		var uid = location.pathname.split('/')[len -1]
-		var editor=document.getElementById("editor");
-		var fileName = $('.modal-header').data("file");
-		$.ajax({
-			type: 'GET',
-			url: '/folder/send/' + uid,
-			data: {file: fileName, xml: Xonomy.harvest()}
+	if($('#splitview').is(':visible')){
+		Split(['#right', '#left'], {	    
+		    
 		})
-		.done(function (response) {	
-				location.reload();
-	  		console.log(response);
-	  })
-	  .fail(function (response) {
-	      console.log(response);
-	  });
-	})
+	}
+		
+	if($('#activities').is(':visible')){
+		arr = location.href.split("/")
+		if ( $.fn.dataTable.isDataTable( '#activities' ) ) {
+	    table = $('#activities').DataTable();					   
+    	table.ajax.url("/onboard/selectnode/step/" +  arr[5]).load();	        	
+		}
+		else {
+		  table =  $('#activities').DataTable({
+        serverSide: true,
+        ajax : "/onboard/selectnode/step/" +  arr[5],
+        columns: [				            
+            { "data": "time" },
+            { "data": "service" },			            
+            { "data": "activity" }
+        ],        
+        order: [[ 0, 'asc' ],[1, 'asc']],			        
+        displayLength: 50,
+        responsive: true
+    	});
+		}	    	
+	}
 
-	if($('#treecots').is(':visible')){
+	$('#showActivities').on('click', function(){
+		arr = location.href.split("/")
+		arr[6] = "table"
+		location.href = arr.join("/")
+	});
+
+	$('#showFlow').on('click', function(){
+		arr = location.href.split("/")
+		arr[6] = "flow"
+		location.href = arr.join("/")
+	});
+
+	$('#exitFlows').on('click', function(){		
+		location.href = "/logout"
+	});
+
+
+	$('#listFlows').on('click', function () {
+ 	  if($('#sidebar').hasClass('active') == false){
+ 	  	$('#sidebar').addClass('active'); 	  	
+	    $('.overlay').fadeIn();
+	    $('.collapse.in').toggleClass('in');
+	    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+ 	  } 
+		
 		$.ajax({
 	    type: 'GET',
 	    url: '/onboard/tree',
 	    dataType: "json",
 	  })
 	  .done(function (response) {
-	    $('#treecots').treeview({
+	    var $allmids = response.tree;	    
+	    var $searchableTree = $('#treecots').treeview({
 	      data: response.tree,
 	      showCheckbox: false,
 	      showIcon: true,
         backColor: "#fafafa",
         showBorder: false,
         selectable: true,
-        selectedIcon: 'fa fa-open',
+        selectedIcon: 'fas fa-open',
         //checkedIcon: 'fa fa-check-square-o',
         //uncheckedIcon: 'fa fa-square-o',
-	      onNodeSelected  : function(event, data) {
-	        if(data["nodes"] == null || data["nodes"] == undefined){
-	        	parent = $('#treecots').treeview('getParent', data)              
-	        	$.ajax({
-	        		type: 'GET',
-	        		url: "/onboard/selectnode/" + parent["key"] + "/" +  data["key"],
-	        		dataType: 'json'
-	        	})
-	        	.done(function(response){
-	        		$("#cots").fadeOut(800, function(){
-                $("#cots").html(response.cots).fadeIn().delay(1500);
-                window.scrollTo(10, 0);
-              });
-	        	})
-	        }        
+	      onNodeSelected  : function(event, data) {	       
+        	parent = $('#treecots').treeview('getParent', data);         		
+        	//$('.table-responsive').show()
+        	$('#payflow').hide();
+        	$('#activities').show();  
+        	$('#sidebar').removeClass('active');
+
+	  			$('.overlay').fadeOut();
+        	if ( $.fn.dataTable.isDataTable( '#activities' ) ) {
+				    table = $('#activities').DataTable();					   
+	        	table.ajax.url("/onboard/selectnode/" + parent["key"] + "/" +  data["key"]).load();	        	
+					}
+					else {
+					  table =  $('#activities').DataTable({
+			        serverSide: true,
+			        ajax : "/onboard/selectnode/" + parent["key"] + "/" +  data["key"],
+			        columns: [				            
+			            { "data": "time" },
+			            { "data": "service" },			            
+			            { "data": "activity" }
+			        ],        
+			        order: [[ 0, 'asc' ],[1, 'asc']],			        
+			        displayLength: 10,
+			        responsive: true
+			    	});
+					}	             
+					location.href = "/onboard/showflow/" + data["key"] + "/flow";
 	      }
 	    });
-	    $("#treecots.treeview").show();
+
+      var search = function(e) {
+        var pattern = $('#input-search').val();
+        var options = {
+          ignoreCase: true,
+          exactMatch: false,
+          revealResults: true
+        };
+        $searchableTree.treeview({data: $allmids})
+        var results = $searchableTree.treeview('search', [ pattern, options ]);
+        $searchableTree.treeview({data: results,
+        	onNodeSelected  : function(event, data) {	       
+	        	parent = $('#treecots').treeview('getParent', data);         		
+	        	//$('.table-responsive').show()
+	        	$('#payflow').hide();
+	        	$('#activities').show();  
+	        	$('#sidebar').removeClass('active');
+
+		  			$('.overlay').fadeOut();
+	        	if ( $.fn.dataTable.isDataTable( '#activities' ) ) {
+					    table = $('#activities').DataTable();					   
+		        	table.ajax.url("/onboard/selectnode/" + parent["key"] + "/" +  data["key"]).load();	        	
+						}
+						else {
+						  table =  $('#activities').DataTable({
+				        serverSide: true,
+				        ajax : "/onboard/selectnode/" + parent["key"] + "/" +  data["key"],
+				        columns: [				            
+				            { "data": "time" },
+				            { "data": "service" },			            
+				            { "data": "activity" }
+				        ],        
+				        order: [[ 0, 'asc' ],[1, 'asc']],			        
+				        displayLength: 10,
+				        responsive: true
+				    	});
+						}	             
+						location.href = "/onboard/showflow/" + data["key"] + "/flow";
+		      }
+        })
+
+        var output = "<p class='small'>" + results.length + ' matches found</p>';
+        //$.each(results, function (index, result) {
+        //  output += '<p>- ' + result.text + '</p>';
+        //});
+        $('#search-output').html(output);
+      }
+
+      $('#btn-search').on('click', search);
+      $('#input-search').on('keyup', search);
+
+      $('#btn-clear-search').on('click', function (e) {
+        $searchableTree.treeview('clearSearch');
+        $searchableTree.treeview({data: $allmids})
+        $('#input-search').val('');
+        $('#search-output').html('');
+      });
+
 	  })
 	  .fail(function (response) {
 	      console.log(response);
 	  });
-	}
 
-	$('#listFlows').on('click', function () {
- 	  if($('#sidebar').hasClass('active') == false){
- 	  	$('#sidebar').addClass('active');
-	    $('.overlay').fadeIn();
-	    $('.collapse.in').toggleClass('in');
-	    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
- 	  } 
-
- 	  $.ajax({
-      type: 'GET',
-      url: '/flow/tree',
-      dataType: "json",
-	  })
-	  .done(function (response) {
-	      $('#tree').treeview({
-	      	data: response.tree,
-	      	showIcon: false,
-          showCheckbox: true,
-          showBorder: false,	      	
-	      	onNodeSelected: function(event, data) {
-	      		if(data["nodes"] == null || data["nodes"] == undefined){
-	      			location.href = "/flow/load/" + data["folder"] + "/" + "template" + data["text"].split(" ").join("_")
-	      		}			    
-				  },
-				  onNodeUnchecked: function(event, data) {
-	      		if(data["nodes"] != null && data["nodes"] != undefined){
-	      			location.href = "/folder/flows/" + data["folder"]
-	      		}			    
-				  }
-	      });
-	      $("#tree.treeview").show();
-        $("#editflow.treeview").hide();
-	  })
-	  .fail(function (response) {
-	      console.log(response);
-	  });
 	});
-/*
+	
+	$('#compareFlow').on('click', function () {
+ 	 	arr = location.href.split("/")
+		arr[6] = "split"		
+		location.href = arr.join("/")
+	});
+	
+	$('.timeline-item').on('click', function(){
+		arr = location.href.split("/")
+		arr[6] = "table"		
+		location.href = arr.join("/")
+	});
+
 	$('#edit-flow').on('click', function () {
     if($('#sidebar').hasClass('active') == false){
  	  	$('#sidebar').addClass('active');
@@ -370,7 +256,7 @@ $(document).ready(function(){
 	      console.log(response);
 	  });
 	});
-*/	 
+	 
 	$("#to_schemas").select2({
 	    theme: "bootstrap"
 	});
@@ -388,72 +274,5 @@ $(document).ready(function(){
   $('#canceldmsg').on('click', function(){
   	$('#xml-editor').addClass("hidden")
   });
-
-  $('.messageformat').on('click', function(event){  
-	  var button = $(event.currentTarget) 
-	  var href = button.data('href') 		 	  
-	  $.ajax({
-      type: 'GET',
-      url: href
-	  })
-	  .done(function (response) {	
-	  		var editor=document.getElementById("editor");
-	  		var docSpec={
-					onchange: function(){
-						console.log("I been changed now!")
-					},
-					validate: function(obj){
-						console.log("I be validatin' now!")
-					},
-					elements: {
-						"GrpHdr": {
-							menu: [{
-								caption: "Append an <MsgId>",
-								action: Xonomy.newElementChild,
-								actionParameter: "<MsgId/>"
-							}]
-						},
-						"MsgId": {
-							menu: [{
-									caption: "Add @label=\"something\"",
-									action: Xonomy.newAttribute,
-									actionParameter: {name: "label", value: "something"},
-									hideIf: function(jsElement){
-										return jsElement.hasAttribute("label");
-									}
-								}, {
-									caption: "Delete this <MsgId>",
-									action: Xonomy.deleteElement
-								}, {
-									caption: "New <MsgId> before this",
-									action: Xonomy.newElementBefore,
-									actionParameter: "<MsgId/>"
-								}, {
-									caption: "New <MsgId> after this",
-									action: Xonomy.newElementAfter,
-									actionParameter: "<MsgId/>"
-								}],
-							canDropTo: ["GrpHdr"],
-							attributes: {
-								"value": {
-									asker: Xonomy.askString,
-									menu: [{
-										caption: "Delete this @value",
-										action: Xonomy.deleteAttribute
-									}]
-								}
-							}
-						}
-					}
-				};
-
-				Xonomy.render(response.data, editor, docSpec);
-				$('#xml-editor').removeClass("hidden")
-	  })
-	  .fail(function (response) {
-	      console.log(response);
-	  });
-	})
-
 
 });

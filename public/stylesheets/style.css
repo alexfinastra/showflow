@@ -27,14 +27,15 @@ table.table tr:hover td a.hoverbutton {
 }
 
 .table tbody >tr {
-   line-height: 45px;
-   /*min-height: 53px;
+   font-size: 14px;
+   /*line-height: 45px;
+   min-height: 53px;
    height: 53px;*/
 }
 
 .table thead >tr {
-   line-height: 45px;
-   /*min-height: 53px;
+   /*line-height: 45px;
+   min-height: 53px;
    height: 53px;*/
 }
 

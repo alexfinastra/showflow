@@ -1,0 +1,14 @@
+case item["type"]
+  when "channel"
+    include flowitems/channel_profile
+  when "interface"
+    include flowitems/interface_profile
+  when "service"
+    include flowitems/service_profile
+  when "rule"
+    include flowitems/rule_profile
+  when "queue"
+    include flowitems/queue_profile
+  default
+    include flowitems/default_profile
+

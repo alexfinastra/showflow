@@ -2,18 +2,20 @@ var fs = require('fs');
 var path = require('path');
 var json = require('json-file');
 var method = Flow.prototype
-var properties = require("../db/properties/profile_index.json" ); 
-var services = require("../db/properties/services_index.json" );
-var rules = new require("../db/properties/rules_index.json" );  
+var properties = require("../db/profile_index.json" ); 
+var services = require("../db/services_index.json" );
+var rules = new require("../db/rules_index.json" );  
 
-function Flow(){
-  console.log("++++++ Current Flow " + currentFlow)
+function Flow(currentFlow = ""){  
   this._flow = {};
+  if(currentFlow.length==0){return;}
+  console.log("++++++ Current Flow " + currentFlow)
   this._flow_template = new json.File(currentFlow);
   this._flow_template.readSync();
 
   this._flow["name"] = this._flow_template.get("name")
-  this._flow["stp"] = this._flow_template.get("stp")
+  this._flow["mid"] = this._flow_template.get("mid")
+  this._flow["template"] = this._flow_template.get("template")
   this._flow["customization"] = this._flow_template.get("customization")
   this._flow["input"] = this._flow_template.get("input")  
   this._flow["items"] = [];
@@ -42,7 +44,7 @@ method.buildFlow = function(){
   for(var i=0; i< flowitems.length; i++){
     var item = flowitems[i];
 
-    console.log("Selected Item is : "+ JSON.stringify(item) + "\n")
+    //console.log("---> Selected Item is : "+ JSON.stringify(item) + "\n")
     var current = null;
     switch (item["type"]) {
       case "service":
@@ -86,7 +88,7 @@ method.buildFlow = function(){
     if(current == null || current["active"] != true){ continue;} 
     
     current["flow_item"]["step"] = i
-    console.log("Current is : "+ JSON.stringify(current) + "\n")
+    //console.log("Current is : "+ JSON.stringify(current) + "\n")
     this._flow["items"].push(current["flow_item"])
   }  
 }

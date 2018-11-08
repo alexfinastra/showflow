@@ -1,3 +1,0 @@
----REM INSERTING into SYST_PAR
-delete from SYST_PAR where UID_SYST_PAR = '--OFFICE--^TIME ZONE' 
-delete from SYST_PAR where UID_SYST_PAR = '--OFFICE--^SUPPORT_STP_RULE' 

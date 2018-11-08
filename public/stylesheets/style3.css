@@ -49,10 +49,10 @@ a, a:hover, a:focus {
     SIDEBAR STYLE
 ----------------------------------------------------- */
 #sidebar {
-    width: 500px;
+    width: 300px;
     position: fixed;
     top: 0px;
-    left: -500px;
+    left: -300px;
     height: 100vh;
     z-index: 999;
     background: #fff;
@@ -126,6 +126,22 @@ a, a:hover, a:focus {
     background: #000;
 }
 
+.table-fixed thead {
+  width: 97%;
+}
+.table-fixed tbody {
+  height: 900px;
+  overflow-y: auto;
+  width: 100%;
+}
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+  display: block;
+}
+.table-fixed tbody td, .table-fixed thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}
+
 
 a[data-toggle="collapse"] {
     position: relative;
@@ -162,7 +178,12 @@ ul.CTAs a {
     margin-bottom: 5px;
 }
 
-
+.split, .gutter.gutter-horizontal {
+    float: left;
+}
+.gutter.gutter-horizontal {
+    cursor: ew-resize;
+}
 
 /* ---------------------------------------------------
     CONTENT STYLE

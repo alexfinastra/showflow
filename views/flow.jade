@@ -1,64 +1,38 @@
-extends layout
-
 block content  
   .container    
-    if data == null
+    if (data == null) || Object.keys(data).length == 0
       .row.mt-5
         .col-md-12.mt-5
           center.mt-5            
-            h3.mt-5 Please select a Flow from the flow list ...
+            h3.mt-5 Please click on a mid from the mids list ...
     else
       .row#payflow
         .col-md-12.mt-5
           center.mt-5
-            h3.col-auto=data["name"]
-            - var c = data["customization"].length ==0 ? "0%" : data["customization"]             
-            if data["input"].length > 0
-              span.font-italic.text-secondary
-                | Input file is : #{data["input"]}
-              br
-              br      
-              span.mr-4
-                | STP rate is #{data["stp"]}
-              span.ml-4            
-                | Customization rate is #{c}   
-              
-            //.row.justify-content-center.mt-5  
-              //button#reset-flow.btn.btn-outline-secondary.mr-2(type='button')
-                //i.fa.fa-repeat
-                //span.ml-2    
-                //| Reset connections
-              //button#edit-flow.btn.btn-outline-success.ml-2(type='button', data-filepath=data["filepath"])
-              //  i.fa.fa-plus
-              //  span.ml-2    
-              //  | Add 
-              //  b Flow  
-              //  | item
-          br
+            h3.col-auto #{data["name"]} 
+            br 
+            span.font-italic.text-secondary
+              | for MID : #{data["mid"]}
+            br      
+            span
+              | The flow is similar to  
+              b #{data["template"]} 
+              | with 
+              b #{data["customization"]} 
+              | rate
           br        
           ul.timeline
             if data["items"] != null && data["items"] != undefined
-              each item in data["items"]                            
-                case item["type"]
-                  when "channel"
-                    include flowitems/channel_profile
-                    //include flowitems/default_profile
-                  when "interface"
-                    include flowitems/interface_profile
-                    //include flowitems/default_profile
-                  when "service"
-                    include flowitems/service_profile
-                    //include flowitems/default_profile
-                  when "rule"
-                    include flowitems/rule_profile
-                  default
-                    include flowitems/default_profile
+              each item in data["items"]  
+               include flow_item
           br
           if (data["items"] && data["items"][0] && data["items"][0]["status_class"] != "secondary")
-            .row.justify-content-center.mt-5  
+            .row.justify-content-center.mt-5
               a.btn.btn-outline-danger(href= "/folder/delete/currentflow")
                 i.fa.fa-trash
                 span.ml-2    
-                | Delete 
+                | Delete  
                 b Flow
+              
+
                

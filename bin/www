@@ -8,21 +8,11 @@ var fs = require('fs');
 const path = require('path');
 
 let log = console.log.bind(console)
-//Tail = require('tail').Tail;
-var dbconfig = require('../db/dbconfig.js');
-var database = require('../db/database.js');
-/**
- * Get port from environment and store in Express.
- */
 
-var isWin = /^win/.test(process.platform);
-if (isWin){
   var port = normalizePort(process.env.PORT || '3000');
   app.set('port', port);
 
   var server = http.createServer(app);
-  var io = require('../models/io').initialize(server);
-  //var io = require('socket.io')(server);
   
   server.listen(port);
   server.on('error', onError);
@@ -31,120 +21,6 @@ if (isWin){
     var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
     console.log('Listening on ' + bind);
   });
-
-} else {
-  database.createPool(dbconfig)
-  .then(function() {
-      console.log("Connected to db " + database.getPool())
-      var port = normalizePort(process.env.PORT || '3000');
-      app.set('port', port);
-      
-      var server = http.createServer(app);
-      var io = require('../models/io').initialize(server);
-      
-      server.listen(port);
-      server.on('error', onError);
-      server.on('listening', function () {
-        var addr = server.address();
-        var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
-        console.log('Listening on ' + bind);
-      });
-  })
-  .catch(function(err) {
-      console.error('Error occurred creating database connection pool', err);
-      console.log('Exiting process');
-      process.exit(0);
-  });
-
-}
-
-
-
-/*
-const pathToJMS = appRoot + '/jms'
-const pathToFiles = '/home/was8/dh/profiles/PRDTHV_465_LR/data/'
-
-let ignoredPaths = [
-  /[/\\]\./,
-  // Ignore relative, top-level dotfiles as well (e.g. '.gitignore').
-  /^\.[^/\\]/
-]
-
-let chokidarOpts = Object.assign({
-  ignored: ignoredPaths,
-  ignoreInitial: true,
-  persistent: true,
-  followSymlinks: true,
-  usePolling: true,
-  depth: undefined,
-  interval: 100,
-  ignorePermissionErrors: false
-})
-
-var watcher = chokidar.watch([pathToJMS, pathToFiles], chokidarOpts);
-var fileCopyDelaySeconds = 10;
-watcher.on('add', function(path) {
-    fs.stat(path, function (err, stat) {
-        if (err){
-            console.log('Error watching file for copy completion. ERR: ' + err.message);
-        } else {
-            setTimeout(checkFileCopyComplete, fileCopyDelaySeconds*1000, path, stat);
-        }
-    });
-});
-
-watcher.on('unlink', function(onPath) { 
-  let absolutePath = path.join(process.cwd(), onPath)      
-  socketsConnected.forEach((socket) => {    
-    socket.emit('unlink', {path: onPath, absolutePath})
-  })
-});
-
-function checkFileCopyComplete(onPath, prev) {
-    fs.stat(onPath, function (err, stat) {
-        if (err) { throw err; }
-        if (stat.mtime.getTime() === prev.mtime.getTime()) {
-            console.log(" -- TIME IS EQUAL")
-            let absolutePath = path.join(process.cwd(), onPath)      
-            socketsConnected.forEach((socket) => {    
-              socket.emit('add', {path: onPath, absolutePath})
-            })
-        }
-        else {
-            setTimeout(checkFileCopyComplete, fileCopyDelaySeconds*1000, onPath, stat);
-        }
-    });
-}
-
-io.on('connection', (socket) => {
-  let index = socketsConnected.push(socket)
-  log("We have connections : " + socketsConnected.length )
-  socket.on('disconnect', () => {
-    socketsConnected.splice(index - 1, 1)      
-  })
-
-  socket.on('identification', (name) => {
-    log('connected client: ' + name)
-  }) 
-})
-*/
-
-//appRoot +  '/gppserver*';
-//const pathToTraces = '/home/was8/dh/profiles/PRDTHV_465_LR/trace/gppserver/gppserver*'
-//var traceswatcher = chokidar.watch(pathToTraces, chokidarOpts);
-//tail = new Tail("gppserver_trace.45.2017-09-26.log");
-//tail.on("line", function(data) {
-      //buildFlows(data);
-
-      //console.log(data);
- //});
-
-//traceswatcher.on('add', function(path) {
-    // should switch tails -f reader to the new files
-    // 1. select file to tails the last 
-    
-    //tail = new Tail("");
-//});
 
 /**
  * Normalize a port into a number, string, or false.
@@ -193,9 +69,4 @@ function onError(error) {
       throw error;
   }
 }
-
-/**
- * Event listener for HTTP server "listening" event.
- */
-
 

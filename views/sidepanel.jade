@@ -1,0 +1,16 @@
+#sidebar
+  table.table.table-fixed
+    thead
+      tr
+        th
+          .row
+            .col-md-8
+              label.sr-only(for='input-search') Search Tree:
+              input#input-search.form-control(type='input', placeholder='MID to search...', value='')        
+            .col-md-4
+              button#btn-clear-search.btn.btn-default(type='button')
+                i.fas.fa-sync 
+    tbody
+      tr
+        td          
+          #treecots.treeview
