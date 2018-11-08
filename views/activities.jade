@@ -1,25 +1,16 @@
 .container
   .table-responsive
-    center.mt-5.mb-5
+    center(style="margin-top: 6rem; margin-bottom: 4rem;")    
       h3.col-auto
         | Payment Activities
-      - var c = data["customization"].length ==0 ? "0%" : data["customization"]             
-      if data["input"].length > 0
-        span.font-italic.text-secondary
-          | Input file is : #{data["input"]}
-        br
-        br      
-        span.mr-4
-          | STP rate is #{data["stp"]}
-        span.ml-4            
-          | Customization rate is #{c}                 
-    .row.justify-content-center.mt-5.mb-5            
-      a#showFlow.btn.btn-outline-primary
-        i.fas.fa-code-branch
-        span.ml-2    
-        | Show  
-        b Flow
-    table#activities.table.table-striped.table-bordered(style='width:100%')
+      span.font-italic.text-secondary
+      | for MID : #{data["mid"]}
+      br              
+      a#showFlow.btn.btn-dark.mt-3.text-light
+        i.fas.fa-arrow-left
+        span.ml-3    
+        | back to Flow
+    table#activities.table.table-striped.table-bordered(style="width:100%;")
       thead
         tr
           th Time

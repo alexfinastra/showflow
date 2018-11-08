@@ -214,9 +214,87 @@ $(document).ready(function(){
 	});
 	
 	$('#compareFlow').on('click', function () {
- 	 	arr = location.href.split("/")
-		arr[6] = "split"		
-		location.href = arr.join("/")
+ 	 	if($('#sidebar').hasClass('active') == false){
+ 	  	$('#sidebar').addClass('active'); 	  	
+	    $('.overlay').fadeIn();
+	    $('.collapse.in').toggleClass('in');
+	    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+ 	  } 
+
+ 	  $.ajax({
+	    type: 'GET',
+	    url: '/onboard/tree',
+	    dataType: "json",
+	  })
+	  .done(function (response) {
+	    var $allmids = response.tree;	    
+	    var $searchableTree = $('#treecots').treeview({
+	      data: response.tree,
+	      showCheckbox: false,
+	      showIcon: true,
+        backColor: "#fafafa",
+        showBorder: false,
+        selectable: true,
+        selectedIcon: 'fas fa-open',
+        //checkedIcon: 'fa fa-check-square-o',
+        //uncheckedIcon: 'fa fa-square-o',
+	      onNodeSelected  : function(event, data) {	       
+        	parent = $('#treecots').treeview('getParent', data);         		
+        	//$('.table-responsive').show()
+        	//$('#payflow').hide();
+        	//$('#activities').show();  
+        	$('#sidebar').removeClass('active');
+
+	  			$('.overlay').fadeOut();
+        	arr = location.href.split("/")
+					arr[6] = "split"
+					arr[7] = data["key"];	
+					location.href = arr.join("/");
+	      }
+	    });
+	  });
+	});
+	
+	$('#similarFlow').on('click', function () {
+ 	 	if($('#sidebar').hasClass('active') == false){
+ 	  	$('#sidebar').addClass('active'); 	  	
+	    $('.overlay').fadeIn();
+	    $('.collapse.in').toggleClass('in');
+	    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+ 	  } 
+
+ 	  $.ajax({
+	    type: 'GET',
+	    url: '/onboard/tree',
+	    dataType: "json",
+	  })
+	  .done(function (response) {
+	    var $allmids = response.tree;	    
+	    var $searchableTree = $('#treecots').treeview({
+	      data: response.tree,
+	      showCheckbox: false,
+	      showIcon: true,
+        backColor: "#fafafa",
+        showBorder: false,
+        selectable: true,
+        selectedIcon: 'fas fa-open',
+        //checkedIcon: 'fa fa-check-square-o',
+        //uncheckedIcon: 'fa fa-square-o',
+	      onNodeSelected  : function(event, data) {	       
+        	parent = $('#treecots').treeview('getParent', data);         		
+        	//$('.table-responsive').show()
+        	//$('#payflow').hide();
+        	//$('#activities').show();  
+        	$('#sidebar').removeClass('active');
+
+	  			$('.overlay').fadeOut();
+        	arr = location.href.split("/")
+					arr[6] = "split"
+					arr[7] = data["key"];	
+					location.href = arr.join("/");
+	      }
+	    });
+	  });
 	});
 	
 	$('.timeline-item').on('click', function(){

@@ -11,11 +11,11 @@
 					center
 						h4.col-auto Original Flow
 						span.font-italic.text-secondary
-						| with MID : #{data["mid"]}
+						| with MID : #{data_left["mid"]}
 						br 
 					ul.timeline(style="margin-top: 1.5rem;")
-						if data["items"] != null && data["items"] != undefined
-							each item in data["items"]  
+						if data_left["items"] != null && data_left["items"] != undefined
+							each item in data_left["items"]  
 								include flow_item
 		#right.split(style="margin-left: 5px; background-color: lightgrey; border: 1px solid grey;")
 			.row#payflow-right(style="margin: 5px;")
@@ -23,9 +23,9 @@
 					center
 						h4.col-auto Another Flow
 						span.font-italic.text-secondary
-						| with MID : #{data["mid"]}
+						| with MID : #{data_right["mid"]}
 						br 
 					ul.timeline(style="margin-top: 1.5rem;")
-						if data["items"] != null && data["items"] != undefined
-							each item in data["items"]  
+						if data_right["items"] != null && data_right["items"] != undefined
+							each item in data_right["items"]  
 								include flow_item

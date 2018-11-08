@@ -26,6 +26,22 @@ router.get('/showflow/:mid/:view', function(req, res, next) {
   res.render('onboard', { data: flow._flow, view: req.params["view"] });     
 });
 
+router.get('/showflow/:mid/:view/:othermid', function(req, res, next) {
+  console.log("00000000  " + JSON.stringify(req.params))
+  var payment_flow_left = appRoot + "/traces/global/"+ req.params["mid"] +"/flow.json" 
+  var flow_left = new Flow(payment_flow_left);  
+
+  var payment_flow_right = appRoot + "/traces/global/"+ req.params["othermid"] +"/flow.json" 
+  var flow_right = new Flow(payment_flow_right);  
+  //console.log("OPA DATA " + JSON.stringify(flow._flow)) 
+  res.render('onboard', { data_left: flow_left._flow, 
+                          view: req.params["view"],
+                          data_right: flow_right._flow                           
+                        });     
+});
+
+
+
 router.get("/selectnode/:parent/:node", function(req, res){
   console.log("Query  --< " + JSON.stringify(req.query))
   
