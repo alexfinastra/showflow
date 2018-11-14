@@ -11,16 +11,17 @@ block content
           center.mt-5
             h3.col-auto #{data["name"]} 
             br 
-            span.font-italic.text-secondary
-              | for MID : #{data["mid"]}
-            br      
-            span
-              | The flow is similar to  
-              b #{data["template"]} 
-              | with 
-              b #{data["customization"]} 
-              | rate
-          br        
+            if data["mid"] != undefined || data["mid"] != null
+              span.font-italic.text-secondary
+                | for MID : #{data["mid"]}
+              br      
+              span
+                | Current flow is similar to  
+                a.btn-outline-primary(href='/onboard/showflow/template/#{data["template"]}') #{data["template"]}  
+                | with 
+                b #{data["customization"]} 
+                | of similarity
+            br        
           ul.timeline
             if data["items"] != null && data["items"] != undefined
               each item in data["items"]  

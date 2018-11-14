@@ -9,6 +9,7 @@
     "async": "^2.5.0",
     "body-parser": "~1.17.1",
     "bootstrap": "^4.0.0-beta",
+    "bootstrap-slider": "^10.2.3",
     "cheerio": "^1.0.0-rc.2",
     "chokidar": "^1.7.0",
     "cookie-parser": "~1.4.3",
@@ -39,6 +40,7 @@
     "tail": "^1.2.2",
     "temporary": "0.0.8",
     "tiny-worker": "^2.1.1",
+    "underscore": "^1.9.1",
     "xlsx": "^0.11.10",
     "xml-parse": "^0.3.1"
   },

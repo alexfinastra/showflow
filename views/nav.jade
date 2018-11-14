@@ -11,9 +11,9 @@ nav.navbar.fixed-top.bg-light.navbar-light.justify-content-center
         button#compareFlow.btn.dropdown-item Compare to another
         button#similarFlow.btn.dropdown-item Similar Flows
     .btn-group(id="cots-container", data-evn = "global")                           
-      input#cots-upload.filestyle.col-sm-9(type="file", name="file", data-text="upload log file", data-btnClass="btn-secondary", data-buttonBefore="true", data-placeholder="", data-source=)                                    
-      //#cots-progress.progress.mt-1.invisible
-        //#cots-progress-bar.progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100', style='width: 0%; height: 20px;')
+      input#cots-upload.mr-2.filestyle.col-sm-9(type="file", name="file", data-text="upload log file", data-btnClass="btn-secondary", data-buttonBefore="true", data-placeholder="", data-source=)                                            
+      #cots-progress.progress.ml-2.invisible(style="width: 250px;")
+        #cots-progress-bar.progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100', style='width: 0%; height: 35px;')
     .btn-group
       button#exitFlows.btn.btn-secondary(type='button') 
         i.fas.fa-sign-out-alt.mr-2 
