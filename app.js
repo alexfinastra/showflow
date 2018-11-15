@@ -46,8 +46,8 @@ app.use(expressValidator());
 //}));
 
 app.use(express.static(path.join(__dirname, 'public'))); 
-app.use(express.static(path.join(__dirname, 'exports'))); 
-app.use(express.static(path.join(__dirname, 'flows')));
+//app.use(express.static(path.join(__dirname, 'exports'))); 
+//app.use(express.static(path.join(__dirname, 'flows')));
 
 app.use('/', index);
 app.use('/flow', flow);

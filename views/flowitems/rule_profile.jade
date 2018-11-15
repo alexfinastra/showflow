@@ -1,10 +1,21 @@
 li.timeline-item
-  .timeline-badge(class="bg-primary")    
-      i.fa.fa-cogs
-  .timeline-panel
+  .timeline-badge(class='#{item["type"]}') 
+    i.fa.fa-cogs
+  .timeline-panel(class='#{item["type"]}')
     .timeline-heading
-        h5.timeline-title #{item["title"]}      
+      h5.text-dark.timeline-title #{item["name"]}       
     .timeline-body
-      h6 #{item["interface_type"]}
-      p.small
+      p.small.mt-3
+        span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 step : 
+          b #{item["group"]}
+        span.ml-2.rounded.bg-light.text-dark.p-1.pl-2.pr-2 type : 
+          b #{item["type"]}
+      br
+      p.small.text-dark
         | #{item["description"]}
+      br
+      a.btn.btn-dark.float-right(href='#')
+        i.fas.fa-folder-open
+        span.ml-2 
+        | open rule   
+    

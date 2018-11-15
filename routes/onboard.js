@@ -23,7 +23,7 @@ router.get('/showflow/template/:name', function(req, res, next) {
   var payment_flow = appRoot + "/traces/flows/"+ req.params["name"] +".json" 
   var flow = new Flow(payment_flow);  
   //console.log("OPA DATA " + JSON.stringify(flow._flow)) 
-  res.render('onboard', { data: flow._flow, view: "flow"});     
+  res.render('onboard', { data: flow._flow, view: "template"});     
 });
 
 router.get('/showflow/:mid/:view', function(req, res, next) {
@@ -329,10 +329,22 @@ var getType = function(service){
                   'service',
                   'subflow'];
   type = 'activity';
-  if (service.indexOf('ROM') > -1){
+  if (service.indexOf('Rule') > -1){
     type = 'rule'
   }
   return type
+}
+
+var to_flowitem = function(mid, line){
+  return {
+    "type": getType(line[4]), 
+    "timestamp": line[0],
+    "name": line[4].split("_").join(" "),
+    "description": line[4], 
+    "uid": line[4],
+    "features": "" ,
+    "activities": line[5].split("^^^")
+  } 
 }
 
 var paymentFlow = function(mid, activities){
@@ -341,28 +353,28 @@ var paymentFlow = function(mid, activities){
   var flowitem = null;
 
   activities.forEach(function(line){
-    console.log(previous + "-:-" + line[4]);
+    //console.log(previous + "-:-" + line[4]);
     if(activities[activities.length-1] == line ){      
       if(flowitem == null ){
-        flowitem = {"type": 'activity', "description": line[4], "uid": line[4], "mid": mid, "rules": "", "features": line[5]} 
+        flowitem = to_flowitem(mid, line) 
       }
       else if(previous.indexOf(line[4]) == -1 ){
-        console.log("Push the item " + flowitem["uid"]);
+        //console.log("Push the item " + flowitem["uid"]);
         flowitems.push(flowitem) 
-        flowitem = {"type": 'activity', "description": line[4], "uid": line[4], "mid": mid, "rules": "", "features": line[5]} 
+        flowitem = to_flowitem(mid, line)
       } else {
         flowitem["features"] = flowitem["features"] + "^^^"+ line[5];
       }
-      console.log("Push the last item " + flowitem["uid"]);
+      //console.log("Push the last item " + flowitem["uid"]);
       flowitems.push(flowitem) // the last      
     }
     else {
       if(previous.indexOf(line[4]) == -1){
         if(flowitem != null){ 
-          console.log("Push the item " + flowitem["uid"]);
+          //console.log("Push the item " + flowitem["uid"]);
           flowitems.push(flowitem) 
         }
-        flowitem = {"type": 'activity', "description": line[4], "uid": line[4], "mid": mid, "rules": "", "features": line[5]} 
+        flowitem = to_flowitem(mid, line)
         previous = line[4];
       } else {
         flowitem["features"] = flowitem["features"] + "^^^"+ line[5];    

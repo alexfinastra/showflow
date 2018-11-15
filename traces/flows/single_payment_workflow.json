@@ -1,245 +1,589 @@
 {
   "name": "Single Payment Workflow",
-  "stp": "79%",
+  "guide_url": "/docs/GPP Business Guide Single Payments.pdf",
   "customization": "0%",
   "template": "single_payment_workflow",
-  "input": "SWIFT_103.txt",
+  "description": "GPP Single Payments supports the following use cases : Inward and Outward Cross border payments: Serial, and Direct/Cover. Domestic Clearing: Direct/Indirect clearing member financial institutions. On-Us. Cross flows: Single Payments to Mass Payments; Single Payments to Immediate Payments, and vice versa. Multiple payments: Message Types MT101, and MT102",
   "flowitems": [
     {
       "type": "channel",
-      "uid": "***^SWIFT_IN",
-      "status_class": "success"
+      "group": "",
+      "timestamp": "",
+      "name": "Incoming source",
+      "description": "A incoming from channels, clearings or feeder systems", 
+      "uid": "deafult_channel",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "subflow",
+      "group": "Payment Initiation",      
+      "timestamp": "",
+      "name": "Map Payment Info",
+      "description": "GPP derives and identifies fundamental payment attributes, for example, Message ID (uniquely identifies message in GPP), Local Office (for across legal entities or countries implementation), Department, Business Area, and Product. The message type of an incoming payment message may Fusion Global PayPlus | Single Payments | Business Guide Page 33 be set using the Inbound Message Type Selection rules, and the payment priority using the Prioritization business rules", 
+      "uid": "map_payment_info",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "rule-business-mandatory",
+      "group": "Payment Initiation",      
+      "timestamp": "",
+      "name": "Base Currency Conversion",
+      "description": "GPP converts all payments to a base currency equivalent and calculates the base amount in the local office currency equivalent. This base amount is used in GPP processing in various places in the payment workflow, for example, during account posting, amount validation like foreign exchange thresholds.", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "rule-business-optional",
+      "group": "Payment Initiation",      
+      "timestamp": "",
+      "name": "Message Filter",
+      "description": "GPP excludes payments that meet specific rule conditions, which are defined in the Message filter business rule, from being processed at the initial stage in payment processing. For example, the financial institution only processes USD payments, all other currency ayments are stopped (until the filter is removed).", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Set Basic properties",
-      "rules": "114,213,158",
-      "features": ""
-    },
-    {
-      "type": "service",
-      "description": "",
-      "uid": "Map Payment Info",
-      "rules": "1,30,12",
-      "features": "Department assignment,Product categorize ,Business area categorize "
-    },
-    {
-      "type": "rule",
-      "description": "",
-      "uid": "1",
-      "rules": "110",
-      "features": "Base Conversion"
+      "group": "Payment Initiation",      
+      "timestamp": "",
+      "name": "Source MOP STP Validation",
+      "description": "GPP performs the required validation on the payment, which is based on the source of the payment. For example, for incoming clearing ayments, a system rule can be configured to ensure allowed values are only received in certain fields, defining mandatory fields.", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "STP Validation / Message Filtering",
-      "rules": "26,175",
-      "features": "Message Filter"
-    },
-    {
-      "type": "interface",
-      "description": "",
-      "uid": "Compliance",
-      "rules": "21189",
-      "features": "Point of Invocation,Bypass Compliance,Inteface Selection,Interface Wait Behavior,Interface Inactive behavior,Response Handling"
+      "group": "Payment Initiation",      
+      "timestamp": "",
+      "name": "Compliance Check",
+      "description": "GPP determines whether the payment is compliant as per regulations. GPP can interface with external compliance engines to perform he compliance check.", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Repair and Enrichment",
-      "rules": "145,186",
-      "features": "Repair & Enrichment"
+      "group": "Payment Initiation",      
+      "timestamp": "",
+      "name": "Repair and Enrichment",
+      "description": "GPP has the ability to automatically repair payments and enrich specific payment fields by deriving required information, which ncreases STP rates. Payments can be automatically repaired and enriched using the Repair and Enrichment rules, which can derive missing nformation that was not included in the original payment message. GPP can use these rules to do the following: 1. Set values of missing transaction attributes  2. Remove values from transaction attributes 3. Update transaction statuses ", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Duplicate Check",
-      "rules": "152,153,154",
-      "features": "Duplicate Check"
+      "group": "Payment Initiation",      
+      "timestamp": "",
+      "name": "STP Validation",
+      "description": "The STP validation mechanism in GPP provides an ability to apply complex validations and manipulations on the payment.", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Office SLA",
-      "rules": "182",
-      "features": "SLA"
+      "group": "Payment Initiation",      
+      "timestamp": "",
+      "name": "Party Details Enrichment",
+      "description": "To enrich the party’s information, GPP identifies and loads relevant account information for the first in chain party. For example, erives local clearing code from BIC.", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Find 1st in Debit Chain",
-      "rules": "",
-      "features": ""
+      "group": "Payment Initiation",      
+      "timestamp": "",
+      "name": "Message Duplicate Checking",
+      "description": "Duplicate checking is executed on payments that are either: 1. Received by GPP from external networks (ACH) or internal applications 2. Manually entered or handled by a user Based on the selected algorithm (key message fields such as message type, currency, amount and beneficiary), GPP examines every payment for possible duplication. If a payment is a duplicate, GPP routes the payment to the Dupex queue for manual handling.", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Load Debit Party",
-      "rules": "",
-      "features": "Debit Party Derivation"
+      "group": "Payment Initiation",      
+      "timestamp": "",
+      "name": "Office SLA",
+      "description": "In the payment processing flow, GPP checks as early as possible whether the payment is associated with a specific Service Level greement (SLA) profile, which defines payment processing constraints. For example, processing the payment by a specific time (EBA priority ayments processed within 90 minutes), SLA for Continuous Linked Settlement (CLS) payments. GPP can alert a user when the SLA is about to be exceeded. When multiple SLAs are defined, than the earliest or most urgent SLA is considered. SLA can be defined at a local office level.", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Debit Account Derivaton",
-      "rules": "123",
-      "features": "Debit Account Enrichment"
-    },
-    {
-      "type": "interface",
-      "description": "",
-      "uid": "Debit Account Lookup",
-      "rules": "",
-      "features": "Account Lookup"
+      "group": "Payment Initiation",      
+      "timestamp": "",
+      "name": "Incoming Reject return",
+      "description": "GPP matches incoming reject and return payments with the outward payment processed and reverses the accounting. ", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Debit Account Enrichment",
-      "rules": "171",
-      "features": "Debit Account Enrichment"
+      "group": "Debit Side processing",      
+      "timestamp": "",
+      "name": "Find 1st in chain",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Debit Authorization",
-      "rules": "122",
-      "features": "Debit Authorization"
+      "group": "Debit Side processing",      
+      "timestamp": "",
+      "name": "Load Party",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "SLA -Debit Party",
-      "rules": "183",
-      "features": "SLA"
+      "group": "Debit Side processing",      
+      "timestamp": "",
+      "name": "Account Derivation",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Debit Currency Conversion",
-      "rules": "112",
-      "features": "Dr Side Conversion"
-    },
-    {
-      "type": "interface",
-      "description": "",
-      "uid": "FX Interface",
-      "rules": "",
-      "features": ""
+      "group": "Debit Side processing",      
+      "timestamp": "",
+      "name": "Debit Authorization",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Payment Classification",
-      "rules": "148",
-      "features": "Payment Classification"
+      "group": "Debit Side processing",      
+      "timestamp": "",
+      "name": "Debit Side FX Conversion",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "PI/SN matching",
-      "rules": "152,153,154",
-      "features": "PI/SN,Automatic Matching,PI/SN,Manual Matching,Sender Credit Line "
+      "group": "Debit Side processing",      
+      "timestamp": "",
+      "name": "Debit Party SLA",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Priority ",
-      "rules": "44",
-      "features": ""
+      "group": "Debit Side processing",      
+      "timestamp": "",
+      "name": "Payment Classification",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Find 1st in Credit Chain",
-      "rules": "",
-      "features": ""
+      "group": "Debit Side processing",      
+      "timestamp": "",
+      "name": "Incoming Risk Management",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Load Credit Party",
-      "rules": "",
-      "features": "Credit Party Derivation"
+      "group": "Debit Side processing",      
+      "timestamp": "",
+      "name": "Priority",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Party Enrichment",
-      "rules": "168",
-      "features": ""
+      "group": "Credit Side processing",      
+      "timestamp": "",
+      "name": "Find 1st in chain",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Credit Account Derivation",
-      "rules": "123",
-      "features": ""
-    },
-    {
-      "type": "interface",
-      "description": "",
-      "uid": "Credit Account Lookup",
-      "rules": "",
-      "features": "Account Lookup"
+      "group": "Credit Side processing",      
+      "timestamp": "",
+      "name": "Load Party",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Credit Account Enrichnment",
-      "rules": "170",
-      "features": "Credit account enrichment"
+      "group": "Credit Side processing",      
+      "timestamp": "",
+      "name": "Credit Party Chain Enrichment",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "SLA -Credit Party",
-      "rules": "184",
-      "features": "SLA"
+      "group": "Credit Side processing",      
+      "timestamp": "",
+      "name": "Account Derivation",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Credit Currency Conversion",
-      "rules": "111",
-      "features": "Cr Side Conversion,Both Dr and Cr side conversions"
+      "group": "Credit Side processing",      
+      "timestamp": "",
+      "name": "Credit Side FX Conversion",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "FX Interface",
-      "rules": "",
-      "features": ""
+      "group": "Credit Side processing",      
+      "timestamp": "",
+      "name": "Credit Party SLA",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "MOP Selection Service",
-      "rules": "3",
-      "features": "MOP Selection,MOP Calendar,MOP attribute -Advance automatically to day after holiday"
+      "group": "MOP Selection",      
+      "timestamp": "",
+      "name": "MOP Selection",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Message Type Selection",
-      "rules": "117",
-      "features": "MT selection "
+      "group": "MOP Selection",      
+      "timestamp": "",
+      "name": "MOP Identifier",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "Value Date Service",
-      "rules": "195,196,101,102,103",
-      "features": "MOP accepted VD,MOP VD extension,MOP attribute -MOP Default Cutoff,MOP operating hours,Cutoff / Missed Cutoff,Validate the Value Date,MOP Limitations and Release Date,Value Date Determination Selection,Cut-off,Clearing Cutoff,Treasury,Processing,Missed Cut-off"
+      "group": "MOP Selection",      
+      "timestamp": "",
+      "name": "Message Type Slection",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     },
     {
       "type": "activity",
-      "description": "",
-      "uid": "MOP Validation",
-      "rules": "115",
-      "features": "MOP attribute - MOP currency,MOP attribute - MOP Amount,MOP attribute - MOP selected by user,MOP attribute - Force from schedule Q,MOP attribute - MOP FIN copy ,MOP attribute -MOP Identifier,MOP attribute -MOP Default Identifier,MOP attribute -ACK/Confirmation (Communication preferences),MOP attribute -Membership required,MOP attribute - Membership type,MOP attribute -Membership check level,MOP attribute -Main BIC membership ,MOP attribute -Add member to chain ,MOP attribute -RMA required"
+      "group": "MOP Selection",      
+      "timestamp": "",
+      "name": "Value Date",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "MOP Selection",      
+      "timestamp": "",
+      "name": "Membership Check",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "MOP Selection",      
+      "timestamp": "",
+      "name": "RMA Check",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "MOP Selection",      
+      "timestamp": "",
+      "name": "MOP Validation",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "MOP Selection",      
+      "timestamp": "",
+      "name": "Building Correspondent Chain",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Payment Execution",      
+      "timestamp": "",
+      "name": "Debit Transaction Code",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Payment Execution",      
+      "timestamp": "",
+      "name": "Credit Transaction Code",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Payment Execution",      
+      "timestamp": "",
+      "name": "Sender Credit Line Replenishment",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Payment Execution",      
+      "timestamp": "",
+      "name": "Prevent STP",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Payment Execution",      
+      "timestamp": "",
+      "name": "Fees",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Payment Execution",      
+      "timestamp": "",
+      "name": "Hold Until Time",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Payment Execution",      
+      "timestamp": "",
+      "name": "Balance Inquiry",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Payment Execution",      
+      "timestamp": "",
+      "name": "Stop Flags",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Payment Execution",      
+      "timestamp": "",
+      "name": "Generate Direct/Cover",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Payment Execution",      
+      "timestamp": "",
+      "name": "Compliance Check",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Payment Execution",      
+      "timestamp": "",
+      "name": "Warehouse",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Payment Execution",      
+      "timestamp": "",
+      "name": "External FX",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Execution Individual",      
+      "timestamp": "",
+      "name": "Liquidity",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Execution Individual",      
+      "timestamp": "",
+      "name": "Posting (Before Completion)",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Execution Individual",      
+      "timestamp": "",
+      "name": "Format Out and Transmission",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Execution Individual",      
+      "timestamp": "",
+      "name": "Match Response to Payment",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Execution Bulking",      
+      "timestamp": "",
+      "name": "Posting (Customer Leg)",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Execution Bulking",      
+      "timestamp": "",
+      "name": "Out Bulk Grouping ID Selection",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Execution Bulking",      
+      "timestamp": "",
+      "name": "Bulking Sending Time",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Execution Bulking",      
+      "timestamp": "",
+      "name": "Posting (Individual Credit)",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Execution Bulking",      
+      "timestamp": "",
+      "name": "Out File Generation",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Execution Bulking",      
+      "timestamp": "",
+      "name": "Posting (Consolidated Credit)",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "activity",
+      "group": "Execution Bulking",      
+      "timestamp": "",
+      "name": "Response Handling",
+      "description": "", 
+      "uid": "",
+      "features": "",
+      "activities": ""
     }
   ]
 }

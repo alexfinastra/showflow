@@ -216,3 +216,41 @@ ul.CTAs a {
     from { transform: scale(1) rotate(0deg);}
     to { transform: scale(1) rotate(360deg);}
 }
+
+.activity {
+    background: #FF6600;
+}
+.status-outfile {
+    background: #92D050;
+}
+.status-message {
+    background: #138DDF;
+}
+.status-related {
+    background: #969696;
+}
+.rule-business-mandatory {
+    background: #7ECAE3;
+}
+.rule-business-optional {
+    background: #005D82;
+}
+.rule-system {
+    background: #E5B9B5;
+}
+.channel {
+    background: #000000;
+}
+.interface {
+    background: #71B8B5;
+}
+.service {
+    background: #FF6600;
+}
+.subflow {
+    background: #789440;
+}
+.optional {
+    background: #C3C3C3;
+    padding: 10px;
+}

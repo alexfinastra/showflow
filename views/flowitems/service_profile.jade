@@ -1,30 +1,20 @@
 li.timeline-item
-  .timeline-badge(class="bg-danger")    
-      i.fa.fa-expand
-  .timeline-panel
+  .timeline-badge(class='#{item["type"]}') 
+    i.fa.fa-expand
+  .timeline-panel(class='#{item["type"]}')
     .timeline-heading
-      if profile == null       
-        .row
-          - var purl = "/webservice/profile/" + item["uid"]
-          a.btn.btn-link.col-auto(href=purl)
-            i.fa.fa-pencil
-          h5.timeline-title.mt-2.col-auto.mr-auto #{item["title"]}
-      else
-        h5.timeline-title #{item["title"]}
-      p
-        small.text-muted
-          i.fa.fa-certificate
-          span.ml-2 
-          | not certified
+      h5.text-light.timeline-title #{item["name"]}       
     .timeline-body
-      p.small
+      p.small.mt-3
+        span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 step : 
+          b #{item["group"]}
+        span.ml-2.rounded.bg-light.text-dark.p-1.pl-2.pr-2 type : 
+          b #{item["type"]}
+      br
+      p.small.text-light
         | #{item["description"]}
-      br      
-      - var href = "/webservices/profile/" + item["uid"]
-      - var btn_class = "btn-outline-" + item["status_class"] 
-      a.btn.float-left(href=href, class=btn_class)
-          span 
-            b Send 
-            | SOAP request      
-
-
+      br
+      a.btn.btn-dark.float-right(href='#')
+        i.fas.fa-info
+        span.ml-2 
+        | show details 

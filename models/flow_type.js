@@ -17,7 +17,8 @@ function Flow(currentFlow = ""){
   this._flow["mid"] = this._flow_template.get("mid")
   this._flow["template"] = this._flow_template.get("template")
   this._flow["customization"] = this._flow_template.get("customization")
-  this._flow["input"] = this._flow_template.get("input")  
+  this._flow["guide_url"] = this._flow_template.get("guide_url")
+  this._flow["description"] = this._flow_template.get("description")
   this._flow["items"] = [];
   this.buildFlow()
 }
@@ -42,7 +43,7 @@ method.buildFlow = function(){
   if(flowitems == null || flowitems.length == 0 ){ return; }
  
   for(var i=0; i< flowitems.length; i++){
-    var item = flowitems[i];
+    /*var item = flowitems[i];
 
     //console.log("---> Selected Item is : "+ JSON.stringify(item) + "\n")
     var current = null;
@@ -89,7 +90,8 @@ method.buildFlow = function(){
     
     current["flow_item"]["step"] = i
     //console.log("Current is : "+ JSON.stringify(current) + "\n")
-    this._flow["items"].push(current["flow_item"])
+    this._flow["items"].push(current["flow_item"])*/
+    this._flow["items"].push(flowitems[i])
   }  
 }
 

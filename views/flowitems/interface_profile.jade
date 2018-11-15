@@ -1,44 +1,20 @@
 li.timeline-item
-  .timeline-badge(class="bg-info")
+  .timeline-badge.text-dark(class='#{item["type"]}') 
     i.fa.fa-exchange
-  .timeline-panel
+  .timeline-panel(class='#{item["type"]}')
     .timeline-heading
-      if profile == null
-        //.row.justify-content-end         
-        //  - var purl = "/interface/profile/" + item["id"]
-        //  a.btn.btn-link.col-auto(href=purl)
-        //    i.fa.fa-pencil
-        //  a.btn.btn-link.col-auto(href=purl)
-        //    i.fa.fa-arrow-down 
-        //  a.btn.btn-link.col-auto(href=purl)
-        //    i.fa.fa-arrow-up 
-        //  a.btn.btn-link.col-auto(href=purl)
-        //    i.fa.fa-trash-o     
-        .row
-          - var purl = "/interface/profile/" + item["uid"]
-          a.btn.btn-link.col-auto(href=purl)
-            i.fa.fa-pencil
-          h5.timeline-title.mt-2.col-auto.mr-auto #{item["title"]}                   
-      else
-        h5.timeline-title #{item["title"]}      
-      p
-        small.text-muted
-          i.fa.fa-certificate
-          span.ml-2 
-          | not certified
+      h5.text-dark.timeline-title #{item["name"]}       
     .timeline-body
-      p.small
+      p.small.mt-3
+        span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 step : 
+          b #{item["group"]}
+        span.ml-2.rounded.bg-light.text-dark.p-1.pl-2.pr-2 type : 
+          b #{item["type"]}
+      br
+      p.small.text-dark
         | #{item["description"]}
       br
-      - var target = (item["request_protocol"] == "MQ") ? 'queue' : 'folder'
-      - var dhref = "/"+ target +"/list/" + item["uid"]
-      - var uhref = "/" + target + "/upload/" + item["uid"]
-      - var btn_class = "btn-outline-" + item["status_class"] 
-      a.btn.float-left(href=uhref, class=btn_class)
-          span 
-            b From 
-            | interface
-      a.btn.float-right(href=dhref, class=btn_class)
-          span 
-            b To 
-            | interface 
+      a.btn.btn-dark.float-right(href='#')
+        i.fas.fa-file-invoice-dollar
+        span.ml-2 
+        | show messages   
