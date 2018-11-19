@@ -1,4 +1,4 @@
-li.timeline-item.optional
+li.timeline-item
   .timeline-badge(class='#{item["type"]}') 
     i.fa.fa-cogs
   .timeline-panel(class='#{item["type"]}')
@@ -14,7 +14,7 @@ li.timeline-item.optional
       p.small.text-light
         | #{item["description"]}
       br
-      a.btn.btn-dark.float-right(href='#')
+      a.btn.btn-dark.float-right.hidden(href='#')
         i.fas.fa-folder-open
         span.ml-2 
         | open rule   

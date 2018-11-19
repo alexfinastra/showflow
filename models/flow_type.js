@@ -42,55 +42,7 @@ method.buildFlow = function(){
   var flowitems = this._flow_template.get("flowitems");
   if(flowitems == null || flowitems.length == 0 ){ return; }
  
-  for(var i=0; i< flowitems.length; i++){
-    /*var item = flowitems[i];
-
-    //console.log("---> Selected Item is : "+ JSON.stringify(item) + "\n")
-    var current = null;
-    switch (item["type"]) {
-      case "service":
-        current = services[item["uid"]];
-        break;
-      case "interface":
-      case "channel":
-        current = properties[item["uid"]];
-        break;
-      case "rule":
-        current = rules[item["uid"]];
-        break;
-      default:
-        current = {
-            "name":"Adjust Basic Properties",
-            "active":true,
-            "connected":true,
-            "req_fields":"",
-            "auditmsg":[],
-            "logpattern":[],
-            "mid":[],
-            "flow_item":{
-               "step": i,
-               "type": item["type"] ,
-               "title": item["uid"],
-               "description": (item["description"] != null ? item["description"] : ""),
-               "uid":"",
-               "request_protocol":"",
-               "direction":"",
-               "request_connections_point":"",
-               "interface_name": item["type"],
-               "status_class":"secondary",
-               "office":"***",
-               "interface_type": item["type"],
-               "interface_sub_type":"",
-               "request_format_type":""
-             }
-          }
-    }
-      
-    if(current == null || current["active"] != true){ continue;} 
-    
-    current["flow_item"]["step"] = i
-    //console.log("Current is : "+ JSON.stringify(current) + "\n")
-    this._flow["items"].push(current["flow_item"])*/
+  for(var i=0; i< flowitems.length; i++){    
     this._flow["items"].push(flowitems[i])
   }  
 }

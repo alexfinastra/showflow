@@ -1,9 +1,9 @@
 {
-  "name": "Single Payment Workflow",
-  "guide_url": "/docs/GPP Business Guide Single Payments.pdf",
-  "customization": "0%",
-  "template": "single_payment_workflow",
-  "description": "GPP Single Payments supports the following use cases : Inward and Outward Cross border payments: Serial, and Direct/Cover. Domestic Clearing: Direct/Indirect clearing member financial institutions. On-Us. Cross flows: Single Payments to Mass Payments; Single Payments to Immediate Payments, and vice versa. Multiple payments: Message Types MT101, and MT102",
+  "name": "Map Payment Info",
+  "guide_url": "",
+  "customization": "",
+  "template": "mappaymentinfo",
+  "description": "",
   "flowitems": [    
     {
       "type": "subflow",

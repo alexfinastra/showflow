@@ -14,7 +14,8 @@ li.timeline-item
       p.small.small.text-light
         | #{item["description"]}
       br
-      a.btn.btn-dark.float-right(href='#')
+      button.btnSubflow.btn.btn-dark.float-right(type="button", data-uid=item["uid"], id=item["uid"])
         i.fas.fa-box-open
         span.ml-2 
-        | show inner flow    
+        | show inner flow
+      

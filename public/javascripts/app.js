@@ -325,7 +325,14 @@ $(document).ready(function(){
 	  });
 	});
 
-	$('.timeline-item').on('click', function(){
+	$('.btnSubflow').on('click', function(){
+		var uid = this.dataset["uid"];
+		$('.modal-body').load("/onboard/showflow/subflow/mappaymentinfo",function(){
+       $('#subflow').modal({show:true});
+    });
+	});
+
+	$('#showTable').on('click', function(){
 		arr = location.href.split("/")
 		arr[6] = "table"		
 		location.href = arr.join("/")

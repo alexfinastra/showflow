@@ -25,7 +25,12 @@ router.get('/showflow/template/:name', function(req, res, next) {
   //console.log("OPA DATA " + JSON.stringify(flow._flow)) 
   res.render('onboard', { data: flow._flow, view: "template"});     
 });
-
+router.get('/showflow/subflow/:name', function(req, res, next) {
+  var payment_flow = appRoot + "/traces/flows/"+ req.params["name"] +".json" 
+  var flow = new Flow(payment_flow);  
+  //console.log("OPA DATA " + JSON.stringify(flow._flow)) 
+  res.render('subflow', { data: flow._flow});     
+});
 router.get('/showflow/:mid/:view', function(req, res, next) {
   var payment_flow = appRoot + "/traces/global/"+ req.params["mid"] +"/flow.json" 
   var flow = new Flow(payment_flow);  
