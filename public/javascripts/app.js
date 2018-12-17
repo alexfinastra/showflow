@@ -2,35 +2,69 @@ function goBack() {
   window.history.back();
 }
 
+function openSideBar(){
+	if($('#sidebar').hasClass('active') == false){
+	  $('#sidebar').addClass('active'); 	  	
+    $('.overlay').fadeIn();
+    $('.collapse.in').toggleClass('in');
+    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+	} 
+}
+
+function selectPaymentNode(data) {
+  parent = $('#treeflows').treeview('getParent', data);
+  
+  //$('#payflow').hide();
+  //$('#activities').show();
+  $('#sidebar').removeClass('active');
+
+  $('.overlay').fadeOut();
+  //if ( $.fn.dataTable.isDataTable( '#activities' ) ) {
+  //  table = $('#activities').DataTable();
+  //  table.ajax.url("/payments/selectnode/" + parent["key"] + "/" +  data["key"]).load();             
+  //}
+  //else {
+ //   table =  $('#activities').DataTable({
+  //  serverSide: true,
+  //  ajax : "/payments/selectnode/" + parent["key"] + "/" +  data["key"],
+  //   columns: [
+  //       { "data": "time" },
+  //       { "data": "service" },
+  //       { "data": "activity" }
+  //   ],
+  //   order: [[ 0, 'asc' ],[1, 'asc']],
+  //   displayLength: 10,
+  //   responsive: true
+  //   });
+  //}
+  location.href = "/payments/flow/" + parent["key"] + "/" + data["key"];
+}
+
+function rangeSlider(){
+  var slider = $('.slidecontainer'),
+      range = $('#similarityRange'),
+      value = $('.range-slider__value');
+    
+  slider.each(function(){
+
+    value.each(function(){
+      var value = $(this).prev().attr('value');
+      $(this).html(value);
+    });
+
+    range.on('input', function(){
+      $(this).next(value).html(this.value);
+    });
+  });
+};
+
 $(document).ready(function(){	
-	$('#similarity-search').hide()
-
-	$('input#cots-upload[type=file]').change(function(){		
-		$(this).simpleUpload("/onboard/upload/" + $("#cots-container").data().evn , {
-			start: function(file){							
-				$('#cots-progress.progress').removeClass("invisible");
-				$('#cots-progress-bar.progress-bar').html("");
-				$('#cots-progress-bar.progress-bar').width(0);
-			},
-			progress: function(progress){
-				$('#cots-progress-bar.progress-bar').html("  " + Math.round(progress) + " % ");
-				$('#cots-progress-bar.progress-bar').width(progress + "%");
-			},
-			success: function(data){						
-				$('#cots-progress.progress').addClass("invisible");
-				$('#cots-progress-bar.progress-bar').html("");				
-				location.href = "/onboard/parsefile/" + data
-			},
-			error: function(error){
-				$('#cots-progress.progress').html("Failure!<br>" + error.name + ": " + error.message);
-			}
-		});
-	});
-
-	$('#sidebar').css({'top': '68px'});	
+	
+	$('#sidebar').css({'top': '68px'});		
 	var height = $('#sidebar').height() - $('#sidebar table thead tr th').height() - 68;
 	$('.table-fixed tbody').css({'height': (height + 'px')});
-  $("#sidebar").niceScroll({
+	
+	$("#sidebar").niceScroll({
      cursorcolor: '#FFFFFF',
      cursorwidth: 4,
   });  
@@ -40,7 +74,7 @@ $(document).ready(function(){
      cursorwidth: 4,
   });
 
-  $("#modal-contex").niceScroll({
+  $("#subflow").niceScroll({
      cursorcolor: '#FFFFFF',
      cursorwidth: 4,
   });
@@ -55,6 +89,32 @@ $(document).ready(function(){
 		    
 		})
 	}
+
+
+	// upload log file with progress
+	$('input#logs-upload[type=file]').change(function(){		
+		$(this).simpleUpload("/onboard/upload/" + $("#environment :selected").text() , {
+			start: function(file){							
+				$('#logs-progress.progress').removeClass("invisible");
+				$('#logs-progress-bar.progress-bar').html("");
+				$('#logs-progress-bar.progress-bar').width(0);
+			},
+			progress: function(progress){
+				$('#logs-progress-bar.progress-bar').html("  " + Math.round(progress) + " % ");
+				$('#logs-progress-bar.progress-bar').width(progress + "%");
+			},
+			success: function(data){						
+				$('#logs-progress.progress').addClass("invisible");
+				$('#logs-progress-bar.progress-bar').html("");
+				console.log("Before send " + 	data);				
+				location.href = "/onboard/parsefile/" + data
+			},
+			error: function(error){
+				$('#logs-progress.progress').html("Failure!<br>" + error.name + ": " + error.message);
+			}
+		});
+	});
+
 		
 	if($('#activities').is(':visible')){
 		arr = location.href.split("/")
@@ -79,15 +139,11 @@ $(document).ready(function(){
 	}
 
 	$('#showActivities').on('click', function(){
-		arr = location.href.split("/")
-		arr[6] = "table"
-		location.href = arr.join("/")
+		location.href = location.href.replace("flow", "activities")
 	});
 
 	$('#showFlow').on('click', function(){
-		arr = location.href.split("/")
-		arr[6] = "flow"
-		location.href = arr.join("/")
+		location.href = location.href.replace("activities", "flow")
 	});
 
 	$('#exitFlows').on('click', function(){		
@@ -95,145 +151,107 @@ $(document).ready(function(){
 	});
 
 
-	$('#listFlows').on('click', function () {
- 	  if($('#sidebar').hasClass('active') == false){
- 	  	$('#sidebar').addClass('active'); 	  	
-	    $('.overlay').fadeIn();
-	    $('.collapse.in').toggleClass('in');
-	    $('a[aria-expanded=true]').attr('aria-expanded', 'false');	    
- 	  } 
-		
-		$('#similarity-search').hide()
-	  $('#mid-search').show()
+	$('#listFlows').on('click', function () { 	  
+ 	  openSideBar();
+ 	  $('#tree_title').show();
+    $('#mid-search').hide();	
+    $('#similarity-search').hide();  
 		$.ajax({
 	    type: 'GET',
-	    url: '/onboard/tree',
+	    url: '/usecases/tree',
 	    dataType: "json",
 	  })
 	  .done(function (response) {
-	    var $allmids = response.tree;	    
-	    var $searchableTree = $('#treecots').treeview({
+	    var $usecasesTree = $('#treeflows').treeview({
 	      data: response.tree,
 	      showCheckbox: false,
 	      showIcon: true,
         backColor: "#fafafa",
         showBorder: false,
         selectable: true,
-        selectedIcon: 'fas fa-open',
-        //checkedIcon: 'fa fa-check-square-o',
-        //uncheckedIcon: 'fa fa-square-o',
+        selectedIcon: 'fas fa-open',        
 	      onNodeSelected  : function(event, data) {	       
-        	parent = $('#treecots').treeview('getParent', data);         		
-        	//$('.table-responsive').show()
-        	$('#payflow').hide();
-        	$('#activities').show();  
-        	$('#sidebar').removeClass('active');
-
-	  			$('.overlay').fadeOut();
-        	if ( $.fn.dataTable.isDataTable( '#activities' ) ) {
-				    table = $('#activities').DataTable();					   
-	        	table.ajax.url("/onboard/selectnode/" + parent["key"] + "/" +  data["key"]).load();	        	
-					}
-					else {
-					  table =  $('#activities').DataTable({
-			        serverSide: true,
-			        ajax : "/onboard/selectnode/" + parent["key"] + "/" +  data["key"],
-			        columns: [				            
-			            { "data": "time" },
-			            { "data": "service" },			            
-			            { "data": "activity" }
-			        ],        
-			        order: [[ 0, 'asc' ],[1, 'asc']],			        
-			        displayLength: 10,
-			        responsive: true
-			    	});
-					}	             
-					location.href = "/onboard/showflow/" + data["key"] + "/flow";
+        	parent = $('#treeflows').treeview('getParent', data); 
+        	location.href = "/usecases/template/"+ parent["key"]+ "/" + data["key"];        		
 	      }
 	    });
-
-      var search = function(e) {
-        var pattern = $('#input-search').val();
-        var options = {
-          ignoreCase: true,
-          exactMatch: false,
-          revealResults: true
-        };
-        $searchableTree.treeview({data: $allmids})
-        var results = $searchableTree.treeview('search', [ pattern, options ]);
-        $searchableTree.treeview({data: results,
-        	onNodeSelected  : function(event, data) {	       
-	        	parent = $('#treecots').treeview('getParent', data);         		
-	        	//$('.table-responsive').show()
-	        	$('#payflow').hide();
-	        	$('#activities').show();  
-	        	$('#sidebar').removeClass('active');
-
-		  			$('.overlay').fadeOut();
-	        	if ( $.fn.dataTable.isDataTable( '#activities' ) ) {
-					    table = $('#activities').DataTable();					   
-		        	table.ajax.url("/onboard/selectnode/" + parent["key"] + "/" +  data["key"]).load();	        	
-						}
-						else {
-						  table =  $('#activities').DataTable({
-				        serverSide: true,
-				        ajax : "/onboard/selectnode/" + parent["key"] + "/" +  data["key"],
-				        columns: [				            
-				            { "data": "time" },
-				            { "data": "service" },			            
-				            { "data": "activity" }
-				        ],        
-				        order: [[ 0, 'asc' ],[1, 'asc']],			        
-				        displayLength: 10,
-				        responsive: true
-				    	});
-						}	             
-						location.href = "/onboard/showflow/" + data["key"] + "/flow";
-		      }
-        })
-
-        var output = "<p class='small'>" + results.length + ' matches found</p>';
-        //$.each(results, function (index, result) {
-        //  output += '<p>- ' + result.text + '</p>';
-        //});
-        $('#search-output').html(output);
-      }
-
-      $('#btn-search').on('click', search);
-      $('#input-search').on('keyup', search);
-
-      $('#btn-clear-search').on('click', function (e) {
-        $searchableTree.treeview('clearSearch');
-        $searchableTree.treeview({data: $allmids})
-        $('#input-search').val('');
-        $('#search-output').html('');
-      });
-
 	  })
 	  .fail(function (response) {
 	      console.log(response);
 	  });
-
 	});
-	
-	$('#compareFlow').on('click', function () {
- 	 	if($('#sidebar').hasClass('active') == false){
- 	  	$('#sidebar').addClass('active'); 	  	
-	    $('.overlay').fadeIn();
-	    $('.collapse.in').toggleClass('in');
-	    $('a[aria-expanded=true]').attr('aria-expanded', 'false');	    
- 	  } 
 
- 	  $('#similarity-search').hide()
-	  $('#mid-search').show()
- 	  $.ajax({
+	$('#listPayments').on('click', function () {
+ 	  openSideBar();
+ 	  $('#tree_title').hide();
+    $('#mid-search').show();	
+    $('#similarity-search').hide();  
+		$.ajax({
 	    type: 'GET',
-	    url: '/onboard/tree',
+	    url: '/payments/tree',
 	    dataType: "json",
 	  })
 	  .done(function (response) {
 	    var $allmids = response.tree;	    
-	    var $searchableTree = $('#treecots').treeview({
+	    var $paymentsTree = $('#treeflows').treeview({
+	      data: response.tree,
+	      showCheckbox: false,
+	      showIcon: true,
+        backColor: "#fafafa",
+        showBorder: false,
+        selectable: true,
+        selectedIcon: 'fas fa-open',        
+	      onNodeSelected  : function (event, data) { 
+	      	selectPaymentNode(data);
+	      }
+	    });
+
+		  var search = function(e) {
+	      var pattern = $('#inputsearch').val();
+	      var options = {
+	        ignoreCase: true,
+	        exactMatch: false,
+	        revealResults: true
+	      };
+	      $paymentsTree.treeview({data: $allmids})
+	      var results = $paymentsTree.treeview('search', [ pattern, options ]);
+	      $paymentsTree.treeview({data: results,
+	        onNodeSelected  : function (event, data) { 
+		      	selectPaymentNode(data);
+		      }
+	      })
+
+	      var output = "<p class='small'>" + results.length + ' matches found</p>';
+	      $('#searchoutput').html(output);
+      }
+
+      $('#btnsearch').on('click', search);
+      $('#inputsearch').on('keyup', search);
+
+      $('#btnclearsearch').on('click', function (e) {
+        $paymentsTree.treeview('clearSearch');
+        $paymentsTree.treeview({data: $allmids})
+        $('#inputsearch').val('');
+        $('#searchoutput').html('');
+      });
+	  })
+	  .fail(function (response) {
+	      console.log(response);
+	  });
+	});
+	
+	$('#compareFlow').on('click', function () {
+ 	 	openSideBar();
+ 	 	$('#tree_title').hide();
+    $('#mid-search').show();	
+    $('#similarity-search').hide();   	  
+ 	  $.ajax({
+	    type: 'GET',
+	    url: '/payments/tree',
+	    dataType: "json",
+	  })
+	  .done(function (response) {	       
+	    var $searchableTree = $('#treeflows').treeview({
 	      data: response.tree,
 	      showCheckbox: false,
 	      showIcon: true,
@@ -241,26 +259,13 @@ $(document).ready(function(){
         showBorder: false,
         selectable: true,
         selectedIcon: 'fas fa-open',
-        //checkedIcon: 'fa fa-check-square-o',
-        //uncheckedIcon: 'fa fa-square-o',
-	      onNodeSelected  : function(event, data) {	       
-        	parent = $('#treecots').treeview('getParent', data);         		
-        	//$('.table-responsive').show()
-        	//$('#payflow').hide();
-        	//$('#activities').show();  
-        	$('#sidebar').removeClass('active');
-
-	  			$('.overlay').fadeOut();
-        	arr = location.href.split("/")
-					if(arr[5].indexOf('template') > -1){
-						arr[5] = data["key"]
-						arr[6] = "flow"
-					} else{
-						arr[6] = "split"
-						arr[7] = data["key"];		
-					}
-					
-					location.href = arr.join("/");
+	      onNodeSelected  : function(event, data) {	               	
+        	parent = $('#treeflows').treeview('getParent', data); 
+        	if(location.href.indexOf('flow') != -1){
+        		location.href = location.href.replace("flow", "compare") + "/" + parent["key"]+ "/" + data["key"]; 	
+        	} else{
+        		location.href = location.href.replace("activities", "compare") + "/" + parent["key"]+ "/" + data["key"]; 	
+        	}
 	      }
 	    });
 	  });
@@ -268,31 +273,18 @@ $(document).ready(function(){
 
 
 	$('#similarFlow').on('click', function () {
- 	 	if($('#sidebar').hasClass('active') == false){
- 	  	$('#sidebar').addClass('active'); 	  	
-	    $('.overlay').fadeIn();
-	    $('.collapse.in').toggleClass('in');
-	    $('a[aria-expanded=true]').attr('aria-expanded', 'false');	    
- 	  } 
-
- 	  $('#similarity-search').show()
-	  $('#mid-search').hide()
+ 	 	openSideBar();
+ 	  $('#tree_title').hide();
+    $('#mid-search').hide();	
+    $('#similarity-search').show();   
+    rangeSlider();
  	  $.ajax({
 	    type: 'GET',
-	    url: '/onboard/tree',
+	    url: '/payments/tree',
 	    dataType: "json",
 	  })
-	  .done(function (response) {
-	  	var slider = new Slider('#similar',{
-				tooltip: 'always',
-				formatter: function(value) {
-					return  value ;
-				}
-			});
-			
-
-	    var $allmids = response.tree;	    
-	    var $searchableTree = $('#treecots').treeview({
+	  .done(function (response) {	
+	    var $similarTree = $('#treeflows').treeview({
 	      data: response.tree,
 	      showCheckbox: false,
 	      showIcon: true,
@@ -300,35 +292,46 @@ $(document).ready(function(){
         showBorder: false,
         selectable: true,
         selectedIcon: 'fas fa-open',
-        //checkedIcon: 'fa fa-check-square-o',
-        //uncheckedIcon: 'fa fa-square-o',
 	      onNodeSelected  : function(event, data) {	       
-        	parent = $('#treecots').treeview('getParent', data);         		
-        	//$('.table-responsive').show()
-        	//$('#payflow').hide();
-        	//$('#activities').show();  
-        	$('#sidebar').removeClass('active');
-
-	  			$('.overlay').fadeOut();
-        	arr = location.href.split("/")
-					if(arr[5].indexOf('template') > -1){
-						arr[5] = data["key"]
-						arr[6] = "flow"
-					} else{
-						arr[6] = "split"
-						arr[7] = data["key"];		
-					}
-					
-					location.href = arr.join("/");
+        	parent = $('#treeflows').treeview('getParent', data); 
+        	location.href = "/payments/flow/"+ parent["key"]+ "/" + data["key"]; 
 	      }
 	    });
 	  });
 	});
 
-	$('.btnSubflow').on('click', function(){
-		var uid = this.dataset["uid"];
-		$('.modal-body').load("/onboard/showflow/subflow/mappaymentinfo",function(){
-       $('#subflow').modal({show:true});
+
+	var $modal = $('#subflow');
+	var uid = "";
+	var back = ""
+	// Show loader & then get content when modal is shown
+	$modal.on('show.bs.modal', function(e) {
+	  uid = $(e.relatedTarget).data('uid') != undefined ? $(e.relatedTarget).data('uid') : uid;
+	  back = $(e.relatedTarget).data('back') != undefined ? $(e.relatedTarget).data('back') : back;
+	  $(this)
+	    .addClass('modal-scrollfix')
+	    .find('.modal-body')
+	    .html('loading...')
+	    .load("/usecases/subflow/" + uid + "/" + back, function() {
+	      // Use Bootstrap's built-in function to fix scrolling (to no avail)
+	      $modal
+	        .removeClass('modal-scrollfix')
+	        .modal('handleUpdate');
+	    });
+	});
+
+	$(document).on("click", "a[data-target='#subflow']", function(ev){
+    ev.preventDefault();
+    if(this.dataset["back"] == 'nothing'){
+    	uid = back;
+    	back = this.dataset["back"];
+    } else {
+        uid = this.dataset["uid"];
+        back = this.dataset["back"];
+      }
+    // load the url and show modal on success
+    $("#subflow .modal-body").load("/usecases/subflow/" + uid + "/" + back, function() { 
+        setTimeout(function(){$("#subflow").modal("show"); }, 500);  
     });
 	});
 
@@ -337,55 +340,5 @@ $(document).ready(function(){
 		arr[6] = "table"		
 		location.href = arr.join("/")
 	});
-
-	$('#edit-flow').on('click', function () {
-    if($('#sidebar').hasClass('active') == false){
- 	  	$('#sidebar').addClass('active');
-	    $('.overlay').fadeIn();
-	    $('.collapse.in').toggleClass('in');
-	    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
- 	  } 
-
- 	  $.ajax({
-      type: 'GET',
-      url: '/flow/edittree',
-      dataType: "json",
-	  })
-	  .done(function (response) {
-	      $('#editflow').treeview({
-	      	data: response.tree,
-	      	showCheckbox: false,
-	      	onNodeSelected: function(event, data) {
-	      		if(data["nodes"] == null || data["nodes"] == undefined){
-	      			//$('#edit-flow').data().filepath
-	      			//location.href = "/flow/load/" + data["folder"] + "/" + data["text"]
-	      		}			    
-				  }
-	      });
-	      $("#tree.treeview").hide();
-        $("#editflow.treeview").show();
-	  })
-	  .fail(function (response) {
-	      console.log(response);
-	  });
-	});
-	 
-	$("#to_schemas").select2({
-	    theme: "bootstrap"
-	});
-
-	$("#from_schemas").select2({
-	    theme: "bootstrap"
-	});
-
-	$("#editor").niceScroll({
-     cursorcolor: '#FFFFFF',
-     cursorwidth: 4,
-     cursorborder: '1px'
-  });	
-   
-  $('#canceldmsg').on('click', function(){
-  	$('#xml-editor').addClass("hidden")
-  });
 
 });

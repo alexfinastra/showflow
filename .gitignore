@@ -43,6 +43,7 @@ jspm_packages/
 env/
 exports/
 jms/
+temp/
 
 # Typescript v1 declaration files
 typings/

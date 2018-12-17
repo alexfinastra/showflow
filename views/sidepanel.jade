@@ -1,20 +1,17 @@
-#sidebar
-  table.table.table-fixed
-    thead
-      tr
-        th
-          .row#mid-search
-            .col-md-8
-              label.sr-only(for='input-search') Search Tree:
-              input#input-search.form-control(type='input', placeholder='MID to search...', value='')        
-            .col-md-4
-              button#btn-clear-search.btn.btn-default(type='button')
-                i.fas.fa-sync 
-          .row#similarity-search
-            .col-md-12
-              center.mt-5.ml-3                               
-                input#similar(data-slider-id='similarSlider', type="text", data-slider-min="0", data-slider-max="100", data-slider-step="1", data-slider-value="87")
-    tbody
-      tr
-        td          
-          #treecots.treeview
+#sidebar           
+  .mt-2.ml-2.mr-2.p-2(style="background: #ecf0f1;")
+    h5#tree_title.mb-2
+      | List of basic use cases
+    span#mid-search.mr-1
+      p.font-weight-bold.mb-2.text-success Search by MID 
+      .d-flex.justify-content-between
+        input#input-search.text-success.w-100(type='text', placeholder=' MID to search...', value='')
+        button#btn-clear-search.btn.btn-sm.ml-1.mr-1.text-success(type='button')
+          i.fas.fa-sync
+    span#similarity-search.mr-1
+      p.font-weight-bold.mb-2.text-success Similar flows in %
+      .slidecontainer.mt-3
+        input#similarityRange.slider(type="range" min="1" max="100" value="50")
+        span.range-slider__value 0 
+
+  #treeflows.mt-2.treeview

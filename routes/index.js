@@ -5,7 +5,7 @@ var session_store;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.redirect('/onboard');
+	res.redirect('/usecases');
 });
 
 router.get('/login',function(req,res,next){
@@ -23,7 +23,7 @@ router.post('/login',function(req,res,next){
 		
 		if(v_pass == '1' && v_user == '1'){
 			session_store.is_login = true;
-			res.redirect('/onboard');
+			res.redirect('/usecases');
 		}else{
 			req.flash('msg_error', "Wrong email address or password. Try again."); 
 			res.redirect('/login');

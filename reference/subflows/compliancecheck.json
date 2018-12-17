@@ -1,0 +1,119 @@
+{
+  "name": "Compliance Check",
+  "guide_url": "",
+  "customization": "",
+  "template": "compliancecheck",
+  "description": "GPP determines whether the payment is compliant as per regulations. GPP can interface with external compliance engines to perform the compliance check.",
+  "flowitems": [    
+    {
+      "type": "rule-business-mandatory",
+      "group": "Compliance Check",      
+      "timestamp": "",
+      "name": "Compliance Validation",
+      "description": "Stopped payments will be routed to Wait OFAC. Available action is Force", 
+      "uid": "compliancevalidation",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Compliance Check",      
+      "timestamp": "",
+      "name": "Wait OFAC",
+      "description": "For batch interface, sub batch message and for individual interface message will wait in Wait OFAC status", 
+      "uid": "waitofac",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "interface",
+      "group": "Compliance Check",       
+      "timestamp": "",
+      "name": "Compliance Interface",
+      "description": "Compliance interface between GPP and the Financial Institution’s Compliance system",
+      "uid": "complianceinterface",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "interface",
+      "group": "Compliance Check",       
+      "timestamp": "",
+      "name": "1st response No Hit",
+      "description": "Compliance interface between GPP and the Financial Institution’s Compliance system",
+      "uid": "complianceinterface",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "interface",
+      "group": "Compliance Check",       
+      "timestamp": "",
+      "name": "1st Response Possible Hit",
+      "description": "Compliance interface between GPP and the Financial Institution’s Compliance system",
+      "uid": "complianceinterface",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Compliance Check",      
+      "timestamp": "",
+      "name": "Cmpliance Possible Hit",
+      "description": "1st responce possible hit", 
+      "uid": "waitofac",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "interface",
+      "group": "Compliance Check",       
+      "timestamp": "",
+      "name": "Compliance Interface",
+      "description": "Compliance interface between GPP and the Financial Institution’s Compliance system",
+      "uid": "complianceinterface",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "interface",
+      "group": "Compliance Check",       
+      "timestamp": "",
+      "name": "2nd Response No Hit",
+      "description": "Compliance interface between GPP and the Financial Institution’s Compliance system",
+      "uid": "complianceinterface",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "rule-system",
+      "group": "Flow Management",      
+      "timestamp": "",
+      "name": "Business Flow Selection",
+      "description": "",
+      "uid": "businessflowselection",
+      "features": "",
+      "activities": ""
+    } ,
+    {
+      "type": "interface",
+      "group": "Compliance Check",       
+      "timestamp": "",
+      "name": "2nd Response Hit",
+      "description": "Compliance interface between GPP and the Financial Institution’s Compliance system",
+      "uid": "complianceinterface",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Compliance Check",      
+      "timestamp": "",
+      "name": "Cmpliance Hit",
+      "description": "2nd responce hit", 
+      "uid": "waitofac",
+      "features": "",
+      "activities": ""
+    }
+  ]
+}

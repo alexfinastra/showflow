@@ -1,15 +1,35 @@
 .container
   .table-responsive
     center(style="margin-top: 6rem; margin-bottom: 4rem;")    
-      h3.col-auto
-        | Payment Activities
-      span.font-italic.text-secondary
-      | for MID : #{data["mid"]}
-      br              
-      a#showFlow.btn.btn-dark.mt-3.text-light
-        i.fas.fa-arrow-left
-        span.ml-3    
-        | back to Flow
+      h1.display-4.col-auto #{data["mid"]}
+      h5.mt-2.col-auto #{data["name"]} 
+      br
+      blockquote.blockquote.text-center
+        p.mb-0 
+          span
+            | Current flow is similar to to following basic use cases with respective similarity percentage  
+            a.btn-outline-primary(href='/usecases/template/#{data["template"]}') #{data["template"]}  
+            | with 
+            span.font-weight-bold #{data["customization"]} 
+            | of similarity,                   
+            a.btn-outline-primary(href='/usecases/template/#{data["template"]}') #{data["template"]}  
+            | with 
+            span.font-weight-bold #{data["customization"]} 
+            | of similarity,
+            a.btn-outline-primary(href='/usecases/template/#{data["template"]}') #{data["template"]}  
+            | with 
+            span.font-weight-bold #{data["customization"]} 
+            | of similarity.
+        footer.blockquote-footer
+          | build for  
+          cite(title='activities log')           
+            button#showFlow.btn.btn-link Payment flow for MID #{data["mid"]}
+      br
+      .mt-2.p-2(style="background: #ecf0f1;")
+        button#compareFlow.btn.btn-link.text-success.font-weight-bold
+          | Compare payment with MID #{data["mid"]}
+        span to any payment from the payments list
+    br        
     table#activities.table.table-striped.table-bordered(style="width:100%;")
       thead
         tr

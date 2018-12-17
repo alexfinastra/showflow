@@ -1,0 +1,15 @@
+extends layout
+
+block content  
+  if view != null
+    case view
+      when "table"
+        include activities
+      when "split"
+        include splitview
+      when "flow"
+        include payment_flow
+      default
+        include blank
+  else
+    include blank 

@@ -1,10 +1,17 @@
 li.timeline-item
-  .timeline-badge(class="bg-succeed")    
-      i.fa.fa-cogs
-  .timeline-panel
+  .timeline-badge.text-dark(class='#{item["type"]}') 
+    i.fas.fa-spinner
+  .timeline-panel(class='#{item["type"]}')
     .timeline-heading
-        h5.timeline-title #{item["title"]}      
+      h5.text-dark.timeline-title #{item["name"]}       
     .timeline-body
-      h6 #{item["interface_type"]}
-      p.small
+      p.small.mt-3
+        span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 step : 
+          b #{item["group"]}
+      p.small.mt-3
+        span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 type : 
+          b #{item["type"]}
+      br
+      p.small.text-dark
         | #{item["description"]}
+      br

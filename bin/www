@@ -3,7 +3,6 @@
 var app = require('../app');
 var debug = require('debug')('integration:server');
 var http = require('http');
-//var chokidar = require('chokidar');
 var fs = require('fs');
 const path = require('path');
 

@@ -1,0 +1,89 @@
+{
+  "name": "Value Date",
+  "guide_url": "",
+  "customization": "",
+  "template": "valuedate",
+  "description": "Value date determination is an integral part of MOP selection process. GPP calculates the value date and determines the best MOP with the earliest value date to process the payment.",
+  "flowitems": [    
+    {
+      "type": "service",
+      "group": "Value Date",      
+      "timestamp": "",
+      "name": "Set Initial Value Date",
+      "description": "", 
+      "uid": "setinitialvaluedate",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "rule-business-mandatory",
+      "group": "Value Date",      
+      "timestamp": "",
+      "name": "Calendar Selection",
+      "description": "", 
+      "uid": "calendarselection",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "service",
+      "group": "Value Date",      
+      "timestamp": "",
+      "name": "Value Date Validation",
+      "description": "", 
+      "uid": "valuedatevalidation",
+      "features": "",
+      "activities": ""    
+    },
+    {
+      "type": "rule-business-optional",
+      "group": "Value Date",      
+      "timestamp": "",
+      "name": "MOP min-max profile selection",
+      "description": "", 
+      "uid": "mopminmaxprofileselection",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "service",
+      "group": "Value Date",      
+      "timestamp": "",
+      "name": "Set Initial Debit Value Date",
+      "description": "", 
+      "uid": "setinitialdebitvaluedate",
+      "features": "",
+      "activities": ""    
+    },
+    {
+      "type": "rule-business-mandatory",
+      "group": "Value Date",      
+      "timestamp": "",
+      "name": "Value Date Method selection",
+      "description": "", 
+      "uid": "valuedatemethodselection",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "subflow",
+      "group": "Value Date",      
+      "timestamp": "",
+      "name": "Cutoff Assessment",
+      "description": "", 
+      "uid": "cutoffassessment",
+      "features": "",
+      "activities": ""    
+    },
+    {
+      "type": "service",
+      "group": "Value Date",      
+      "timestamp": "",
+      "name": "Advance Value Date",
+      "description": "", 
+      "uid": "advancevaluedate",
+      "features": "",
+      "activities": ""    
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "basic_use_case": "Inward Bulk Book Payments",
+  "guide_url": "/docs/GPP Business Guide Single Payments.pdf",  
+  "template": "/flows/single_payment_workflow.json",
+  "use_case": "Inward Bulk Payments",
+  "description": "GPP supports message types MT101, MT102, MT102 STP, MT203, and MT204, multiple customer, financial transfer, and direct debit messages. These messages are de-bulked and individual MT103 and MT202 messages are created as per the Sequence B information received. These transactions are processed to Complete after de-bulking and no further user actions are required on these messages. GPP creates a link between multiple messages with its single child messages and can also navigate to them.",
+  "flowgroups": ["Payment Initiation","Debit Side processing"]
+}

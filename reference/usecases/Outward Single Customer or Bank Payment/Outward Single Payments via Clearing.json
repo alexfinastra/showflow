@@ -1,0 +1,8 @@
+{
+  "basic_use_case": "Outward Single Payments via Clearing",
+  "guide_url": "/docs/GPP Business Guide Single Payments.pdf",  
+  "template": "/flows/single_payment_workflow.json",
+  "use_case": "Outward Single Customer or Bank Payment",
+  "description": "Defines the outward single payments initiated by Internet banking channels, branch users, and GPP users (manual create) to be settled via local clearing.",
+  "flowgroups": ["Payment Initiation","Debit Side processing"]
+}

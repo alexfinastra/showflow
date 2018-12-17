@@ -1,6 +1,6 @@
 li.timeline-item
   .timeline-badge.text-dark(class='#{item["type"]}') 
-    i.fa.fa-exchange
+    i.fas.fa-exchange-alt
   .timeline-panel(class='#{item["type"]}')
     .timeline-heading
       h5.text-dark.timeline-title #{item["name"]}       
@@ -8,12 +8,15 @@ li.timeline-item
       p.small.mt-3
         span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 step : 
           b #{item["group"]}
-        span.ml-2.rounded.bg-light.text-dark.p-1.pl-2.pr-2 type : 
+      p.small.mt-3
+        span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 type : 
           b #{item["type"]}
       br
       p.small.text-dark
         | #{item["description"]}
       br
+      if item["features"].indexOf("flowmanagement") > -1
+        include flowstopper
       a.btn.btn-dark.float-right.hidden(href='#')
         i.fas.fa-file-invoice-dollar
         span.ml-2 

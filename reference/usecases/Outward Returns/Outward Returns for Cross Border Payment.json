@@ -1,0 +1,8 @@
+{
+  "basic_use_case": "Outward Returns for Cross Border Payment",
+  "guide_url": "/docs/GPP Business Guide Single Payments.pdf",  
+  "template": "/flows/single_payment_workflow.json",
+  "use_case": "Outward Returns",
+  "description": "This use case defines the outward returns initiated by an operation user (GPP user) for an inward SWIFT payment.",
+  "flowgroups": ["Payment Initiation","Debit Side processing"]
+}

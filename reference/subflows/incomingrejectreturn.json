@@ -1,0 +1,39 @@
+{
+  "name": "Incoming Reject Return",
+  "guide_url": "",
+  "customization": "",
+  "template": "incomingrejectreturn",
+  "description": "GPP matches incoming reject and return payments with the outward payment processed and reverses the accounting.",
+  "flowitems": [    
+    {
+      "type": "service",
+      "group": "Incoming Reject Return",      
+      "timestamp": "",
+      "name": "Matching check profile selection",
+      "description": "", 
+      "uid": "matchingcheckprofileselection",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Incoming Reject Return",      
+      "timestamp": "",
+      "name": "Return of Funds Incoming (ROFI)",
+      "description": "", 
+      "uid": "returnoffundsincoming",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "service",
+      "group": "Incoming Reject Return",      
+      "timestamp": "",
+      "name": "Map debit and credit info from original payment",
+      "description": "", 
+      "uid": "mapdebitandcreditinfofromorignalpayment",
+      "features": "",
+      "activities": ""    
+    }
+  ]
+}

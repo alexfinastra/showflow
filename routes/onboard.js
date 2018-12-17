@@ -8,115 +8,35 @@ var fs = require('fs');
 var fse = require('fs-extra')
 var es = require('event-stream');
 var moment = require('moment');
-var Flow = require('../models/flow_type');
+//var Flow = require('../models/flow_type');
 var util = require('util');
 var path = require('path');
 var formidable = require('formidable');
 var readLineFile = require("read-line-file");
 var underscore = require("underscore");
 
-router.get('/', function(req, res, next) {
-	res.render('onboard');    	
-});
-
-router.get('/showflow/template/:name', function(req, res, next) {
-  var payment_flow = appRoot + "/traces/flows/"+ req.params["name"] +".json" 
-  var flow = new Flow(payment_flow);  
-  //console.log("OPA DATA " + JSON.stringify(flow._flow)) 
-  res.render('onboard', { data: flow._flow, view: "template"});     
-});
-router.get('/showflow/subflow/:name', function(req, res, next) {
-  var payment_flow = appRoot + "/traces/flows/"+ req.params["name"] +".json" 
-  var flow = new Flow(payment_flow);  
-  //console.log("OPA DATA " + JSON.stringify(flow._flow)) 
-  res.render('subflow', { data: flow._flow});     
-});
-router.get('/showflow/:mid/:view', function(req, res, next) {
-  var payment_flow = appRoot + "/traces/global/"+ req.params["mid"] +"/flow.json" 
-  var flow = new Flow(payment_flow);  
-  //console.log("OPA DATA " + JSON.stringify(flow._flow)) 
-  res.render('onboard', { data: flow._flow, view: req.params["view"] });     
-});
-
-router.get('/showflow/:mid/:view/:othermid', function(req, res, next) {
-  console.log("00000000  " + JSON.stringify(req.params))
-  var payment_flow_left = appRoot + "/traces/global/"+ req.params["mid"] +"/flow.json" 
-  var flow_left = new Flow(payment_flow_left);  
-
-  var payment_flow_right = appRoot + "/traces/global/"+ req.params["othermid"] +"/flow.json" 
-  var flow_right = new Flow(payment_flow_right);  
-  //console.log("OPA DATA " + JSON.stringify(flow._flow)) 
-  res.render('onboard', { data_left: flow_left._flow, 
-                          view: req.params["view"],
-                          data_right: flow_right._flow                           
-                        });     
-});
-
-
-
-router.get("/selectnode/:parent/:node", function(req, res){
-  console.log("Query  --< " + JSON.stringify(req.query))
-  
-  var file_activities = new json.File(appRoot + "/traces/global/"+ req.params["node"] +"/activities.json");
-  file_activities.readSync();
-  activities = []
-  file_activities.data.forEach(function(line){ 
-    activities.push({        
-      "time": (new Date(line[0])).toISOString().split('T')[1].split('Z')[0], 
-      "service": line[4],               
-      "activity": line[5]
-    })
-  })
-
-  var query = req.query
-  var total = activities.length    
-  var filtered = 0;
-  data = [];
-  if(query["start"] && query["length"]){      
-    if(query["search"]["value"] == ""){
-      data = activities.slice(parseInt(query["start"]), parseInt(query["start"]) + parseInt(query["length"]))
-      filtered = total
-    } else {
-      searched = []
-      activities.forEach(function(a){
-        if(a["activity"].indexOf(query["search"]["value"]) != -1){
-          searched.push(a)
-        }
-      })
-      data = searched.slice(parseInt(query["start"]), parseInt(query["start"]) + parseInt(query["length"]))
-      filtered = searched.length
-    }
-  }
-
-  res.json({
-    "draw": parseInt(query["draw"]),
-    "recordsTotal": total ,
-    "recordsFiltered": filtered,    
-    "data": data 
-  });
-})
-
-router.get('/tree', function(req, res){
-  var products = new json.File(appRoot + "/traces/global/mids_index.json" );
-  products.readSync();
-  //should be filter here !!! 
-  res.json({tree: products.data});
-});
-
 
 router.get("/parsefile/:filename", function(req, res){
   console.log("Parse File request " + req.params.filename)
   // TODO should be backgroung task here
   parseTrace(req.params.filename);
-	res.redirect("/onboard")
+  res.redirect("/usecases")
 })
+
+router.get("/upload", function(req, res, next){
+  res.redirect("usecases")
+});
 
 router.post('/upload/:uid', function(req, res){      
   var form = new formidable.IncomingForm();
   var filename = ""
 
-  form.multiples = true;
-  form.uploadDir = path.join(appRoot + '/traces/' + req.params.uid);  
+  //form.multiples = true;
+  var dir = path.join(appRoot + '/temp/' );
+  if (!fs.existsSync(dir)){   fs.mkdirSync(dir);  }
+  form.uploadDir = dir;  
+  form.env = req.params.uid
+  form.parse(req);
 
   // rename it to it's orignal name
   form.on('file', function(field, file) {
@@ -124,13 +44,13 @@ router.post('/upload/:uid', function(req, res){
     if (fs.existsSync(file.path)) {    
       date = new Date()
       datevalues = [date.getFullYear(),date.getMonth()+1,date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds(),];
-      new_filename = file.name.split(".")[0]  + "_" + datevalues.join('_') + "." + file.name.split(".")[1];
+      new_filename = form.env + "-" + file.name.split(".")[0]  + "_" + datevalues.join('_') + "." + file.name.split(".")[1];
 
       if(fs.existsSync( path.join(form.uploadDir, new_filename) ) ){
         fs.unlinkSync(path.join(form.uploadDir, new_filename))
       }
-      fs.rename(file.path, path.join(form.uploadDir, new_filename));
-      filename = new_filename;     
+      fs.renameSync(file.path, path.join(form.uploadDir, new_filename));
+      filename = new_filename;
     }else{
       console.log("File was taken")
     } 
@@ -141,32 +61,63 @@ router.post('/upload/:uid', function(req, res){
   });
 
   // once all the files have been uploaded, send a response to the client
-  form.on('end', function() {   	
+  form.on('end', function() {     
     console.log("End upload");  
     res.end(filename);
   });
-  
-  form.parse(req);
 })
 
 module.exports = router;
 
-var isDate = function(date) {
-    return ((date.length > 4) && (date.match(/[a-z]/i) == null) && new Date(date) !== "Invalid Date" && !isNaN(new Date(date)) ) ? true : false;
+////////////////////////////////////////////////////////////////////////////////
+// Helper functions
+////////////////////////////////////////////////////////////////////////////////
+var parseTrace = function(filename){ 
+  var lineNr = 0, flowData = [], context = "";
+  var env = filename.split('-')[0]
+  var s = fs.createReadStream(appRoot + "/temp/" + filename)
+    .pipe(es.split())
+    .pipe(es.mapSync(function(line){
+        // pause the readstream
+        s.pause();
+        lineNr += 1;
+        str = beautifier(line.split(/\s+/) );          
+        if ( str.length > 0 ){           
+          formatted = mapSPtrace(str);
+          len = flowData.length; 
+          if(len > 0){
+            if(formatted[4] == flowData[len-1][4]){
+              flowData[len-1][5] =  flowData[len-1][5] + " " + formatted[5];
+            } else {
+              flowData.push(formatted);              
+            }
+          } else {
+            flowData.push(formatted) ;           
+          }
+          s.resume(); 
+        } else { 
+          len = flowData.length; 
+          if(len > 0){
+            l = flowData[len-1].length
+            flowData[len-1][l-1] =  flowData[len-1][l-1] + " " + line.replace(/:/g, '').replace(/,/g, ' '); 
+          }          
+          s.resume();  
+        }
+    })
+    .on('error', function(err){
+        console.log('Error while reading file.', err);
+    })
+    .on('end', function(){
+        if(flowData.length > 0){    
+          console.log("-- Just before Payment Flow --")
+          //storeFlowData(flowData)          
+          fs.writeFileSync(appRoot + "/temp/traces_data.csv", flowData.join('\n') , 'utf-8');          
+        }        
+        console.log('Read entire file.')
+    })
+  );  
 }
 
-var compose_activity = function(str, ind){
-  activity = ""
-  for(i=ind; i<str.length; i++)
-  {
-    fstr = str[i].replace(/:/g, '');
-    fstr = str[i].replace(/,/g, ' ');            
-    if(fstr.length > 0) {
-      activity = activity + " " + fstr
-    }
-  }
-  return activity
-}
 
 var beautifier = function(str){  
   if (isDate(str[0]) == false) { return [] }
@@ -197,6 +148,49 @@ var beautifier = function(str){
   return new_str
 }
 
+var isDate = function(date) {
+    return ((date.length > 4) && (date.match(/[a-z]/i) == null) && new Date(date) !== "Invalid Date" && !isNaN(new Date(date)) ) ? true : false;
+}
+
+
+// formatted mapping is :
+// 0 - timestamp
+// 1 - thread
+// 2 - scope
+// 3 - MID
+// 4 - service
+// 5 - activity
+var mapSPtrace = function(str){
+  formatted = new Array(6)
+  sind = splitter_index(str)
+  data = str.slice(4, sind)  
+
+  formatted[0] = (str[0] + " " + str[1])
+  formatted[1] = str[3]
+  
+  if(data.length == 1){
+    formatted[2] = "GENERAL"           
+    formatted[3] = "NO MID"
+    formatted[4] = data[0]
+  }
+
+  if(data.length == 2){
+    formatted[2] = data[0]
+    formatted[3] = "NO MID"
+    formatted[4] = data[1]
+  }
+
+  if(data.length == 3){
+    formatted[2] = data[0]          
+    if(data[1].length > 10){formatted[3] = data[1] }else{formatted[3] = "NO MID"}            
+    formatted[4] = data[2]
+  }
+
+  formatted[5] = compose_activity(str, sind)   
+  //console.log(" ++++ Formatted :" + formatted);
+  return formatted;
+}
+
 var splitter_index = function(str){
   ind = 0
   for(i=0; i< str.length; i++){
@@ -209,17 +203,92 @@ var splitter_index = function(str){
   return ind
 }
 
-var history_mids = function(){
-  mids = [];
-  
-  var hnodes = history_nodes();
-  if(hnodes.length > 0){
-    hnodes.forEach(function(node){
-      mids.push(node["key"]);
-    }); 
+var compose_activity = function(str, ind){
+  activity = ""
+  for(i=ind; i<str.length; i++)
+  {
+    fstr = str[i].replace(/:/g, '');
+    fstr = str[i].replace(/,/g, ' ');            
+    if(fstr.length > 0) {
+      activity = activity + " " + fstr
+    }
   }
-  return mids;
+  return activity
 }
+
+
+var storeFlowData = function(flowData = []){
+  var mids = [];
+  var activities = {};  
+  
+  console.log("------ And flow data length is " + flowData.length)
+  flowData.forEach(function(line){    
+    var mid = getMid(line);
+    if(mid != "NO MID"){
+      if(mids.indexOf(mid) == -1 ){ 
+        mids.push(mid); 
+      }
+      
+      if(activities[mid] == undefined){ 
+        activities[mid] = new Array 
+      }      
+      activities[mid].push(line);
+    }
+  });
+
+  console.log("------ Mids collections is : " + mids.length)
+  if(mids.length > 0){
+    var existing_mids = walkSync(appRoot + "/temp/global");    
+    console.log("------ Existing MIDs is : " + existing_mids.length);
+    // latest upload from file
+    mids.forEach(function(mid){     
+      current_path = appRoot +  "/traces/global/"+ mid;      
+      var midFlow = null
+
+      console.log("------ Mid is : " + mid + " already existed : " + (existing_mids.indexOf(mid) > -1));
+      if (existing_mids.indexOf(mid) > -1){
+
+        var existing_activities = new json.File(appRoot +  "/traces/global/"+ mid +"/activities.json");
+        existing_activities.readSync();
+        console.log("------ existing_activities is : " + existing_activities.data.length);
+        
+        var full_activities = mergeActivities(existing_activities.data, activities[mid])
+        console.log("------ Accumulated records  : " + full_activities.length )
+        
+        midFlow = paymentFlow(mid, full_activities)
+        fs.writeFileSync(current_path +"/activities.json", JSON.stringify(full_activities) , ['utf-8','w']);
+      } else {
+        console.log("------ New activities records  : " + activities[mid].length)  
+        midFlow = paymentFlow(mid, activities[mid]);
+        if (!fs.existsSync(current_path)){ fs.mkdirSync(current_path); }              
+        fs.writeFileSync(current_path +"/activities.json", JSON.stringify(activities[mid]) , ['utf-8','as+']);
+      }
+
+      console.log("------ And finally flow : " + midFlow.length)
+      fs.writeFileSync(current_path +"/flow.json", JSON.stringify(midFlow) , ['utf-8','as+']);
+    });
+    
+        
+  } else{
+    console.log("File is empty !!!!")
+  }
+
+  return;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // List all files in a directory in Node.js recursively in a synchronous fashion
 var walkSync = function(dir, filelist) {
@@ -442,65 +511,6 @@ var mergeActivities = function(existing_activities, activities){
   return merged;
 }
 
-var storeFlowData = function(flowData = []){
-  var mids = [];
-  var activities = {};  
-  
-  console.log("------ And flow data length is " + flowData.length)
-  flowData.forEach(function(line){    
-    var mid = getMid(line);
-    if(mid != "NO MID"){
-      if(mids.indexOf(mid) == -1 ){ 
-        mids.push(mid); 
-      }
-      
-      if(activities[mid] == undefined){ 
-        activities[mid] = new Array 
-      }      
-      activities[mid].push(line);
-    }
-  });
-
-  console.log("------ Mids collections is : " + mids.length)
-  if(mids.length > 0){
-    var existing_mids = walkSync(appRoot + "/traces/global");    
-    console.log("------ Existing MIDs is : " + existing_mids.length);
-    // latest upload from file
-    mids.forEach(function(mid){     
-      current_path = appRoot +  "/traces/global/"+ mid;      
-      var midFlow = null
-
-      console.log("------ Mid is : " + mid + " already existed : " + (existing_mids.indexOf(mid) > -1));
-      if (existing_mids.indexOf(mid) > -1){
-
-        var existing_activities = new json.File(appRoot +  "/traces/global/"+ mid +"/activities.json");
-        existing_activities.readSync();
-        console.log("------ existing_activities is : " + existing_activities.data.length);
-        
-        var full_activities = mergeActivities(existing_activities.data, activities[mid])
-        console.log("------ Accumulated records  : " + full_activities.length )
-        
-        midFlow = paymentFlow(mid, full_activities)
-        fs.writeFileSync(current_path +"/activities.json", JSON.stringify(full_activities) , ['utf-8','w']);
-      } else {
-        console.log("------ New activities records  : " + activities[mid].length)  
-        midFlow = paymentFlow(mid, activities[mid]);
-        if (!fs.existsSync(current_path)){ fs.mkdirSync(current_path); }              
-        fs.writeFileSync(current_path +"/activities.json", JSON.stringify(activities[mid]) , ['utf-8','as+']);
-      }
-
-      console.log("------ And finally flow : " + midFlow.length)
-      fs.writeFileSync(current_path +"/flow.json", JSON.stringify(midFlow) , ['utf-8','as+']);
-    });
-    
-    updateMidIndex(mids);    
-  } else{
-    console.log("File is empty !!!!")
-  }
-
-  return;
-}
-
 var beautify_scope = function(scope){
   var s = []
   s.push(scope.split('-')[0])
@@ -513,79 +523,5 @@ var beautify_scope = function(scope){
   })
 
   return s.join(" ");
-}
-
-// formatted mapping is :
-// 0 - timestamp
-// 1 - thread
-// 2 - scope
-// 3 - MID
-// 4 - service
-// 5 - activity
-var mapSPtrace = function(str){
-  formatted = new Array(6)
-  sind = splitter_index(str)
-  data = str.slice(4, sind)
-  //console.log(" Line " + lineNr + ":  " + data.length + " context: " + data )
-
-  formatted[0] = (str[0] + " " + str[1])
-  formatted[1] = str[3]
-  
-  if(data.length == 1){
-    formatted[2] = "GENERAL"           
-    formatted[3] = "NO MID"
-    formatted[4] = data[0]
-  }
-
-  if(data.length == 2){
-    formatted[2] = data[0]
-    formatted[3] = "NO MID"
-    formatted[4] = data[1]
-  }
-
-  if(data.length == 3){
-    formatted[2] = data[0]          
-    if(data[1].length > 10){formatted[3] = data[1] }else{formatted[3] = "NO MID"}            
-    formatted[4] = data[2]
-  }
-
-  formatted[5] = compose_activity(str, sind)   
-  return formatted;
-}
-
-var parseTrace = function(filename){ 
-  var lineNr = 0, flowData = [], context = "";
-  var s = fs.createReadStream(appRoot + "/traces/global/" + filename)
-    .pipe(es.split())
-    .pipe(es.mapSync(function(line){
-        // pause the readstream
-        s.pause();
-        lineNr += 1;
-        str = beautifier(line.split(/\s+/) );  
-        if ( str.length > 0 ){           
-          formatted = mapSPtrace(str);
-          flowData.push(formatted)          
-          s.resume(); 
-        } else { 
-          len = flowData.length; 
-          if(len > 0){
-            flowData[len-1] =  flowData[len-1] + " " + line.replace(/:/g, '').replace(/,/g, ' '); 
-          }          
-          s.resume();  
-        }
-    })
-    .on('error', function(err){
-        console.log('Error while reading file.', err);
-    })
-    .on('end', function(){
-        if(flowData.length > 0){    
-          console.log("-- Just before Payment Flow --")
-          storeFlowData(flowData)          
-          //fs.writeFileSync(appRoot + "/traces/global/traces_data.csv", flowData.join('\n') , 'utf-8');          
-        }        
-        console.log('Read entire file.')
-    })
-  );
-  
 }
 

@@ -1,0 +1,69 @@
+{
+  "name": "Flow Management - Repair and Schedule",
+  "guide_url": "",
+  "customization": "",
+  "template": "flowmanagement",
+  "description": "Flow management with Repair and Schedule as a terminate status",
+  "flowitems": [    
+    {
+      "type": "rule-system",
+      "group": "Flow Management",      
+      "timestamp": "",
+      "name": "Message Workflow Determination STP",
+      "description": "",
+      "uid": "messageworkflowdeterminationstp",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "rule-business-optional",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Position Figure Selection",
+      "description": "", 
+      "uid": "positionfigureselection",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "rule-business-optional",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Advising Type Selection Rule",
+      "description": "",
+      "uid": "advisingtypeselectionrule",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "interface",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Advising Interface",
+      "description": "",
+      "uid": "advisinginterface",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Repair",
+      "description": "Available action buttons are : Submit and Cancel",
+      "uid": "repair",
+      "features": "",
+      "activities": ""
+    } ,
+    {
+      "type": "status-message",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Schedule",
+      "description": "Available action button is Override",
+      "uid": "schedule",
+      "features": "",
+      "activities": ""
+    }         
+  ]
+}

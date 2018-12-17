@@ -1,0 +1,8 @@
+{
+  "basic_use_case": "Generate MT210",
+  "guide_url": "/docs/GPP Business Guide Single Payments.pdf",  
+  "template": "/flows/single_payment_workflow.json",
+  "use_case": "Notice to Receive",
+  "description": "GPP processes the message MT210 (notice to receive) for the following business scenarios: Service to Vostro Customer and Internal MT210 against Charges",
+  "flowgroups": ["Payment Initiation","Debit Side processing"]
+}

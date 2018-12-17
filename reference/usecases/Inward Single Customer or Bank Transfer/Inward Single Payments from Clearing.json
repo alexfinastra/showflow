@@ -1,0 +1,8 @@
+{
+  "basic_use_case": "Inward Single Payments from Clearing",
+  "guide_url": "/docs/GPP Business Guide Single Payments.pdf",  
+  "template": "/flows/single_payment_workflow.json",
+  "use_case": "Inward Single Customer or Bank Transfer",
+  "description": "This use case defines the inward single fund transfer initiated via local clearing for further credit to the local office customer account (beneficiary).",
+  "flowgroups": ["Payment Initiation","Debit Side processing"]
+}

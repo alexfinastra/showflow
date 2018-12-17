@@ -8,14 +8,17 @@ li.timeline-item
       p.small.mt-3
         span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 step : 
           b #{item["group"]}
-        span.ml-2.rounded.bg-light.text-dark.p-1.pl-2.pr-2 type : 
-          b #{item["type"]}
+      p.small.mt-3
+        span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 type : 
+          b #{item["type"]}      
       br
       p.small.small.text-light
         | #{item["description"]}
       br
-      button.btnSubflow.btn.btn-dark.float-right(type="button", data-uid=item["uid"], id=item["uid"])
+      if item["features"].indexOf("flowmanagement") > -1
+        include flowstopper
+      button.btn.btn-dark.float-right(type="button", data-uid=item["uid"], id=item["uid"], data-back="nothing", data-toggle="modal", data-target="#subflow")
         i.fas.fa-box-open
         span.ml-2 
-        | show inner flow
+        | show subflow
       
