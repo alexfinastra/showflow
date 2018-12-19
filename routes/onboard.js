@@ -257,27 +257,27 @@ var getDocument = function(env, mid){
   var doc_path = appRoot + "/temp/" + env + "/" + mid + ".json"
   if( !fs.existsSync(doc_path) ){
     date = new Date();
-    content =  {
+    return  {
       "mid": mid,
       "last_update": [date.getFullYear(),date.getMonth()+1,date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds(),],
       "activities": [],
       "flow": null
-    }
-    var dir = path.join(appRoot + '/temp/'  + env);
-    if (!fs.existsSync(dir)){   fs.mkdirSync(dir);  }
-    fs.writeFileSync(doc_path, JSON.stringify(content) , {encoding:'utf8',flag:'w+'});    
-  }  
-  
-  doc = new json.File(doc_path);
-  doc.readSync();
-  return doc.data;
+    }     
+  } else {
+    doc = new json.File(doc_path);
+    doc.readSync();
+    return doc.data;
+  }
 }
 
 var saveDoc = function(env, doc){
-  // update db with new document
-  var doc_path = appRoot + "/temp/" + env + "/" + doc["mid"] + ".json"
   console.log("----> Saving doc with flow :" + JSON.stringify(doc["flow"]) )
-  fs.writeFileSync(doc_path, JSON.stringify(doc) , {encoding:'utf8',flag:'w+'});    
+  if(doc["activities"].length > 0){
+    var dir = path.join(appRoot + '/temp/'  + env);
+    if (!fs.existsSync(dir)){   fs.mkdirSync(dir);  }
+    var doc_path = appRoot + "/temp/" + env + "/" + doc["mid"] + ".json"
+    fs.writeFileSync(doc_path, JSON.stringify(doc) , {encoding:'utf8',flag:'w+'});    
+  }
 }
 
 
