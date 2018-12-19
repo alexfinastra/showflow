@@ -2,8 +2,9 @@
   "name": "Flow Management - Repair and Business Flow Selection",
   "guide_url": "",
   "customization": "",
-  "template": "nothing",
+  "template": "/subflows/flowmanagement-repair-flow-selection.json",
   "description": "Flow management with Repair and Business Flow Selection as a terminate status",
+  "use_case": "subflow",
   "flowitems": [    
     {
       "type": "rule-system",

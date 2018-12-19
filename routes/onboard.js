@@ -8,13 +8,14 @@ var fs = require('fs');
 var fse = require('fs-extra')
 var es = require('event-stream');
 var moment = require('moment');
-//var Flow = require('../models/flow_type');
+
 var util = require('util');
 var path = require('path');
 var formidable = require('formidable');
 var readLineFile = require("read-line-file");
 var underscore = require("underscore");
 
+var Usecase = require('../models/usecase');
 
 router.get("/parsefile/:filename", function(req, res){
   console.log("Parse File request " + req.params.filename)
@@ -82,6 +83,7 @@ var parseTrace = function(filename){
         s.pause();
         lineNr += 1;
         str = beautifier(line.split(/\s+/) );          
+       
         if ( str.length > 0 ){           
           formatted = mapSPtrace(str);
           len = flowData.length; 
@@ -110,14 +112,13 @@ var parseTrace = function(filename){
     .on('end', function(){
         if(flowData.length > 0){    
           console.log("-- Just before Payment Flow --")
-          //storeFlowData(flowData)          
-          fs.writeFileSync(appRoot + "/temp/traces_data.csv", flowData.join('\n') , 'utf-8');          
+          storeFlowData(env, flowData);          
+          //fs.writeFileSync(appRoot + "/temp/traces_data.csv", flowData.join('\n') , 'utf-8');          
         }        
         console.log('Read entire file.')
     })
   );  
 }
-
 
 var beautifier = function(str){  
   if (isDate(str[0]) == false) { return [] }
@@ -168,6 +169,12 @@ var mapSPtrace = function(str){
   formatted[0] = (str[0] + " " + str[1])
   formatted[1] = str[3]
   
+  if(data.length == 0){
+    formatted[2] = "GENERAL"           
+    formatted[3] = "NO MID"
+    formatted[4] = str[sind-1]
+  }
+
   if(data.length == 1){
     formatted[2] = "GENERAL"           
     formatted[3] = "NO MID"
@@ -182,7 +189,11 @@ var mapSPtrace = function(str){
 
   if(data.length == 3){
     formatted[2] = data[0]          
-    if(data[1].length > 10){formatted[3] = data[1] }else{formatted[3] = "NO MID"}            
+    if(data[1].length > 10){
+      formatted[3] = data[1].indexOf('_') > -1 ? data[1].split('_')[1] : data[1]
+    }else{
+      formatted[3] = "NO MID"
+    }            
     formatted[4] = data[2]
   }
 
@@ -217,178 +228,59 @@ var compose_activity = function(str, ind){
 }
 
 
-var storeFlowData = function(flowData = []){
-  var mids = [];
-  var activities = {};  
-  
+var storeFlowData = function(env, flowData = []){
   console.log("------ And flow data length is " + flowData.length)
-  flowData.forEach(function(line){    
-    var mid = getMid(line);
+  var docs = {};
+
+  flowData.forEach(function(line){
+    var mid = line[3];
     if(mid != "NO MID"){
-      if(mids.indexOf(mid) == -1 ){ 
-        mids.push(mid); 
+      if(docs[mid] == undefined){
+        docs[mid] = getDocument(env, mid);
       }
-      
-      if(activities[mid] == undefined){ 
-        activities[mid] = new Array 
-      }      
-      activities[mid].push(line);
+      docs[mid]["activities"].push(line);
     }
-  });
-
-  console.log("------ Mids collections is : " + mids.length)
-  if(mids.length > 0){
-    var existing_mids = walkSync(appRoot + "/temp/global");    
-    console.log("------ Existing MIDs is : " + existing_mids.length);
-    // latest upload from file
-    mids.forEach(function(mid){     
-      current_path = appRoot +  "/traces/global/"+ mid;      
-      var midFlow = null
-
-      console.log("------ Mid is : " + mid + " already existed : " + (existing_mids.indexOf(mid) > -1));
-      if (existing_mids.indexOf(mid) > -1){
-
-        var existing_activities = new json.File(appRoot +  "/traces/global/"+ mid +"/activities.json");
-        existing_activities.readSync();
-        console.log("------ existing_activities is : " + existing_activities.data.length);
-        
-        var full_activities = mergeActivities(existing_activities.data, activities[mid])
-        console.log("------ Accumulated records  : " + full_activities.length )
-        
-        midFlow = paymentFlow(mid, full_activities)
-        fs.writeFileSync(current_path +"/activities.json", JSON.stringify(full_activities) , ['utf-8','w']);
-      } else {
-        console.log("------ New activities records  : " + activities[mid].length)  
-        midFlow = paymentFlow(mid, activities[mid]);
-        if (!fs.existsSync(current_path)){ fs.mkdirSync(current_path); }              
-        fs.writeFileSync(current_path +"/activities.json", JSON.stringify(activities[mid]) , ['utf-8','as+']);
-      }
-
-      console.log("------ And finally flow : " + midFlow.length)
-      fs.writeFileSync(current_path +"/flow.json", JSON.stringify(midFlow) , ['utf-8','as+']);
-    });
-    
-        
-  } else{
-    console.log("File is empty !!!!")
-  }
-
-  return;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// List all files in a directory in Node.js recursively in a synchronous fashion
-var walkSync = function(dir, filelist) {
-  var path = path || require('path');
-  var fs = fs || require('fs'),
-  files = fs.readdirSync(dir);
-  filelist = filelist || [];
-  files.forEach(function(file) {
-      if (fs.statSync(path.join(dir, file)).isDirectory()) {
-          //console.log("+++++++++++ " + file)
-          file_arr = file.split('\\')
-          filelist.push(file_arr[file_arr.length-1]);
-          filelist = walkSync(path.join(dir, file), filelist);
-      }
-  });
-  //console.log(" >>>>>>> files list " + filelist)
-  return filelist;
-}
-
-var history_nodes = function(mids){
-  var hnodes = []
-  var existing = walkSync(appRoot + "/traces/global")
-  if(existing.length > 0){
-    for(var i=0; i< existing.length; ++i) {
-      if(mids.indexOf(existing[i]) == -1){
-        hnodes.push({
-            "text": existing[i],
-            "selectable":true,
-            "key": existing[i],
-            "state":{
-               "selected":false
-            }
-        });  
-      } 
-    }
-  }
-  console.log("------ hisotric nodes " + hnodes.length);
-  return hnodes;     
-}
-
-var getMid = function(line){
-   var mid = "";
-   if(line.length > 0 ){
-    mid = line[3];
-
-    if(mid == undefined || mid == null || mid.length < 5){ 
-      mid = "NO MID"; 
-    } else {
-      if(mid.indexOf('_') > -1){
-        mida = mid.split('_'); 
-        mid = mida[1]; 
-      }
-    }
-  }
-  //console.log(" ******** Oh, MID!!! " + mid + " from : " + line[3]);
-  return mid;
-}
-
-var last_upload = function(mids){
-  if (mids.length > 0 ){
-    nodes = []
+  })
+  
+  var mids = Object.keys(docs)
+  console.log(" So far we have : " + mids.length)
+  if(mids.length > 0 ){
     mids.forEach(function(mid){
-       nodes.push({ "text": mid, "selectable": true, "key": mid, "state": {"selected":false} });
+      paymentFlow(docs[mid])
+      saveDoc(env, docs[mid])
     })
-    return {
-          "text":"<span class= 'ml-2'>Last upload ("+nodes.length+")</span>",
-          "key": 'latest' ,
-          "selectable":false,
-          "state":{
-             "expanded":false,
-             "selected":false
-          },
-          "nodes": nodes
-      }
-  } else {
-    return null;
   }
 }
 
-var history_payments = function(mids){
-  if (mids.length > 0 ){    
-    hnodes = history_nodes(mids)
-    if(hnodes.length > 0 ){
-      return {
-              "text": "<span class= 'ml-2'> History payments ("+hnodes.length+")</span>",
-              "key": 'history' ,
-              "selectable":false,
-              "state":{
-                 "expanded":false,
-                 "selected":false
-              },
-              "nodes": hnodes
-          }
-    } else {
-      return null;
+var getDocument = function(env, mid){
+  // collection name is env
+  var doc_path = appRoot + "/temp/" + env + "/" + mid + ".json"
+  if( !fs.existsSync(doc_path) ){
+    date = new Date();
+    content =  {
+      "mid": mid,
+      "last_update": [date.getFullYear(),date.getMonth()+1,date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds(),],
+      "activities": [],
+      "flow": null
     }
-  } else {
-    return null;
-  }
+    var dir = path.join(appRoot + '/temp/'  + env);
+    if (!fs.existsSync(dir)){   fs.mkdirSync(dir);  }
+    fs.writeFileSync(doc_path, JSON.stringify(content) , {encoding:'utf8',flag:'w+'});    
+  }  
+  
+  doc = new json.File(doc_path);
+  doc.readSync();
+  return doc.data;
 }
+
+var saveDoc = function(env, doc){
+  // update db with new document
+  var doc_path = appRoot + "/temp/" + env + "/" + doc["mid"] + ".json"
+  console.log("----> Saving doc with flow :" + JSON.stringify(doc["flow"]) )
+  fs.writeFileSync(doc_path, JSON.stringify(doc) , {encoding:'utf8',flag:'w+'});    
+}
+
+
 
 var getType = function(service){
   var flowTypes = [ 'activity',
@@ -409,7 +301,7 @@ var getType = function(service){
   return type
 }
 
-var to_flowitem = function(mid, line){
+var to_flowitem = function(line){
   return {
     "type": getType(line[4]), 
     "timestamp": line[0],
@@ -421,107 +313,62 @@ var to_flowitem = function(mid, line){
   } 
 }
 
-var paymentFlow = function(mid, activities){
-  var flowitems = new Array;
-  var previous = "";
-  var flowitem = null;
-
-  activities.forEach(function(line){
-    //console.log(previous + "-:-" + line[4]);
-    if(activities[activities.length-1] == line ){      
-      if(flowitem == null ){
-        flowitem = to_flowitem(mid, line) 
-      }
-      else if(previous.indexOf(line[4]) == -1 ){
-        //console.log("Push the item " + flowitem["uid"]);
-        flowitems.push(flowitem) 
-        flowitem = to_flowitem(mid, line)
-      } else {
-        flowitem["features"] = flowitem["features"] + "^^^"+ line[5];
-      }
-      //console.log("Push the last item " + flowitem["uid"]);
-      flowitems.push(flowitem) // the last      
-    }
-    else {
-      if(previous.indexOf(line[4]) == -1){
-        if(flowitem != null){ 
-          //console.log("Push the item " + flowitem["uid"]);
-          flowitems.push(flowitem) 
-        }
-        flowitem = to_flowitem(mid, line)
-        previous = line[4];
-      } else {
-        flowitem["features"] = flowitem["features"] + "^^^"+ line[5];    
-      } 
+var paymentFlow = function(doc){
+  var flowitems = [];  
+  // map flow items
+  doc["activities"].forEach(function(line){
+    service = line[4]
+    if(service.toLowerCase().indexOf('rule') > -1){
+      flowitems.push(to_flowitem(line))  
     }
   })
 
-  return {
-            "name": "Payment Flow",
-            "mid": mid,
-            "stp": "79%",
-            "customization": "0%",
-            "template": "single_payment_workflow",
-            "input": "",
+  var similarities = {};
+  usecases = walkSync(appRoot + "/reference/usecases/", [])
+  console.log("usecase ")
+  usecases.forEach(function(usecase_template){
+    var usecase = new Usecase(usecase_template);  
+    similarities[usecase._flow["name"]] = similarity_score(usecase._flow["items"], flowitems)
+  })
+
+  doc["flow"] =  {
+            "name": "Payment Flow - " + doc["mid"],            
+            "similarities": similarities,
             "flowitems": flowitems
           }
+
 }
 
-var updateMidIndex = function(mids){
-  fs.exists(appRoot + "/traces/global/mids_index.json", function(exists) {
-      if(exists) {
-        fs.unlinkSync(appRoot + "/traces/global/mids_index.json");              
-      }
-
-      var packages = [];
-      latest = last_upload(mids)
-      if(latest != null){
-        packages.push(latest)   
-      }      
-      historic = history_payments(mids)
-      if(historic != null){
-        packages.push(historic)
-      }
-      if(packages.length > 0){
-        fs.writeFileSync(appRoot + "/traces/global/mids_index.json", JSON.stringify(packages) , ['utf-8','as+']);  
-      }
-    }); 
+// similarity score check if items exists and located correctly in the flow
+var getSum = function(total, num){
+  return total + num;
 }
 
-var mergeActivities = function(existing_activities, activities){
-  var existing_longer = (existing_activities.length > activities.length);
-  var merged = existing_longer ? existing_activities : activities
-  var remained = existing_longer ? activities : existing_activities
+var similarity_score = function(usecase_items, pay_items){
+  var scores = [];
+  var uc_len = usecase_items.length;
+  var p_len = pay_items.length;
 
-  remained.forEach(function(ra){
-    var exists = underscore.find(merged, function(a){
-      all_match = true
-      for(var i=0; i<6; i++){
-        all_match = ( all_match && (a[i] == ra[i]) )
-      }
-      return all_match
-    })
-    
-    if(exists == undefined){
-      merged.push(ra)
+  for(var ind =0; ind < p_len; ind++){
+    pitem = pay_items[ind];
+    uc_index = usecase_items.indexOf(pitem)
+    scores.push([(uc_index != -1 ? 1 : 0 )+ (uc_index == ind ? 1 : 0)]);
+  }
+
+  return scores.reduce(getSum, 0) / (2 * uc_len);
+}
+
+// List all files in a directory in Node.js recursively in a synchronous fashion
+var walkSync = function(dir, filelist) {
+  var files = fs.readdirSync(dir);
+  filelist = filelist || [];
+  files.forEach(function(file) {
+    if (fs.statSync(path.join(dir, file)).isDirectory()) {
+      filelist = walkSync(path.join(dir, file), filelist);
+    } else {        
+      filelist.push(dir + "/" + file);
     }
-  })
-
-  merged = underscore.sortBy(merged, function(a){ return [a[0],a[1],a[4]].join('_') });
-  return merged;
+  });
+  //console.log(" >>>>>>> files list " + filelist)
+  return filelist;
 }
-
-var beautify_scope = function(scope){
-  var s = []
-  s.push(scope.split('-')[0])
-
-  scope_arr = scope.split('-')[1].split('_');
-  scope_arr.forEach(function(item){
-    if((item.match(/[0-9]/i) == null) && (item.indexOf('[') == -1) && (item.indexOf(']') == -1)){
-      s.push(item)
-    }
-  })
-
-  return s.join(" ");
-}
-

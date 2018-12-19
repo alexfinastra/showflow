@@ -2,8 +2,9 @@
   "name": "Flow Management - Repair and Schedule",
   "guide_url": "",
   "customization": "",
-  "template": "flowmanagement",
+  "template": "/subflows/flowmanagement-repair-schedule.json",
   "description": "Flow management with Repair and Schedule as a terminate status",
+  "use_case": "subflow",
   "flowitems": [    
     {
       "type": "rule-system",

@@ -2,8 +2,9 @@
   "name": "Incoming Risk Management",
   "guide_url": "",
   "customization": "",
-  "template": "incomingriskmanagement",
+  "template": "/subflows/incomingriskmanagement.json",
   "description": "Incoming Risk Management covers Private Integrated Services Network (PISN) logic and Liquidity and Risk Management, which is an optional part of the Single Payments Flow invocation.",
+  "use_case": "subflow",
   "flowitems": [    
     {
       "type": "rule-business-optional",

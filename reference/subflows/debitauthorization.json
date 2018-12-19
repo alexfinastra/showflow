@@ -2,8 +2,9 @@
   "name": "Debit Authorization",
   "guide_url": "",
   "customization": "",
-  "template": "debitauthorization",
+  "template": "/subflows/debitauthorization.json",
   "description": "GPP checks if the sender of the payment is authorized to debit the account which does not belong to the sender.",
+  "use_case": "subflow",
   "flowitems": [    
     {
       "type": "rule-business-optional",

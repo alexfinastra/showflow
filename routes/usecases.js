@@ -26,10 +26,18 @@ router.get('/tree', function(req, res){
 
 router.get('/template/:folder/:name', function(req, res, next) {
   var usecase_template = appRoot + "/reference/usecases/"+ req.params["folder"] + "/" + req.params["name"] 
-  console.log("Payment flow " + usecase_template);
+  console.log("Usecase flow " + usecase_template);
 
   var usecase = new Usecase(usecase_template);  
   res.render('usecases', { data: usecase._flow });     
+});
+
+router.get('/subflow/:name/:back', function(req, res, next) {
+  var usecase_template = appRoot + "/reference/subflows/"+ req.params["name"] + ".json"
+  console.log("Usecase flow " + usecase_template);
+
+  var usecase = new Usecase(usecase_template);  
+  res.render('subflow', { data: usecase._flow, back: req.params["back"]  });     
 });
 
 router.get('/current', function(req, res){  

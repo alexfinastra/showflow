@@ -2,8 +2,9 @@
   "name": "Flow Management - Dupex",
   "guide_url": "",
   "customization": "",
-  "template": "flowmanagement",
+  "template": "/subflows/flowmanagement-dupex.json",
   "description": "Flow management with Dupex as a terminate status",
+  "use_case": "subflow",
   "flowitems": [    
     {
       "type": "rule-system",

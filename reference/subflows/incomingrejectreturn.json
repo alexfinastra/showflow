@@ -2,8 +2,9 @@
   "name": "Incoming Reject Return",
   "guide_url": "",
   "customization": "",
-  "template": "incomingrejectreturn",
+  "template": "/subflows/incomingrejectreturn.json",
   "description": "GPP matches incoming reject and return payments with the outward payment processed and reverses the accounting.",
+  "use_case": "subflow",
   "flowitems": [    
     {
       "type": "service",

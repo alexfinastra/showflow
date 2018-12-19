@@ -12,15 +12,14 @@ function Payment(currentFlow = ""){
   console.log("++++++ Current Payment " + currentFlow)
   this._flow_template = new json.File(currentFlow);
   this._flow_template.readSync();
-
-  this._flow["name"] = this._flow_template.get("name")
+  flow = this._flow_template.get("flow")
   this._flow["mid"] = this._flow_template.get("mid")
-  this._flow["template"] = this._flow_template.get("template")
-  this._flow["customization"] = this._flow_template.get("customization")
-  this._flow["guide_url"] = this._flow_template.get("guide_url")
-  this._flow["description"] = this._flow_template.get("description")
-  this._flow["items"] = [];
-  this.buildFlow()
+
+  if(flow != undefined && flow != null){
+    this._flow["name"] = flow["name"]  
+    this._flow["similarities"] = flow["similarities"]
+    this._flow["items"] = flow["flowitems"];
+  }
 }
 
 method.loadItems = function(){  

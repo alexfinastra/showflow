@@ -23,7 +23,7 @@ function Usecase(currentFlow = ""){
   this._flow["flowgroups"] = this._flow_template.get("flowgroups")
   this._flow["items"] = [];
   console.log("Usecase is =>" + JSON.stringify(this._flow))
-  this.buildFlow()
+  this._flow["group_name"] == "subflow" ? this.buildSubFlow() : this.buildFlow()
 }
 
 method.loadItems = function(){  
@@ -38,6 +38,17 @@ method.loadItems = function(){
     this._flow["items"].push(item);
   }
 };
+
+method.buildSubFlow = function(){  
+  if(this._flow_template == null ) {return;}  
+  
+  var flowitems = this._flow_template.get("flowitems");
+  if(flowitems == null || flowitems.length == 0 ){ return; }
+ 
+  for(var i=0; i< flowitems.length; i++){    
+    this._flow["items"].push(flowitems[i])
+  }  
+}
 
 method.buildFlow = function(){  
   if(this._flow_template == null ) {return;}  

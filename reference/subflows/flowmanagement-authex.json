@@ -2,8 +2,9 @@
   "name": "Flow Management - Authentication Exception",
   "guide_url": "",
   "customization": "",
-  "template": "flowmanagement",
+  "template": "/subflows/flowmanagement-authex.json",
   "description": "Flow management with Authentication Exception as a terminate status",
+  "use_case": "subflow",
   "flowitems": [    
     {
       "type": "rule-system",

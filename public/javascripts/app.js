@@ -120,12 +120,12 @@ $(document).ready(function(){
 		arr = location.href.split("/")
 		if ( $.fn.dataTable.isDataTable( '#activities' ) ) {
 	    table = $('#activities').DataTable();					   
-    	table.ajax.url("/onboard/selectnode/step/" +  arr[5]).load();	        	
+    	table.ajax.url("/payments/tabledata/" +  arr[5] + "/" + arr[6]).load();	        	
 		}
 		else {
 		  table =  $('#activities').DataTable({
         serverSide: true,
-        ajax : "/onboard/selectnode/step/" +  arr[5],
+        ajax : "/payments/tabledata/" +  arr[5] + "/" + arr[6],
         columns: [				            
             { "data": "time" },
             { "data": "service" },			            
@@ -319,22 +319,20 @@ $(document).ready(function(){
 	        .modal('handleUpdate');
 	    });
 	});
-
+/*
 	$(document).on("click", "a[data-target='#subflow']", function(ev){
     ev.preventDefault();
-    if(this.dataset["back"] == 'nothing'){
-    	uid = back;
-    	back = this.dataset["back"];
-    } else {
-        uid = this.dataset["uid"];
-        back = this.dataset["back"];
-      }
+    if(($("#subflow").data('bs.modal') || {})._isShown ){
+    	$("#subflow").modal('dispose')
+    }
+    uid = this.dataset["uid"];
+    back = this.dataset["back"];
     // load the url and show modal on success
     $("#subflow .modal-body").load("/usecases/subflow/" + uid + "/" + back, function() { 
         setTimeout(function(){$("#subflow").modal("show"); }, 500);  
     });
 	});
-
+*/
 	$('#showTable').on('click', function(){
 		arr = location.href.split("/")
 		arr[6] = "table"		

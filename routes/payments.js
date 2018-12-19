@@ -24,7 +24,7 @@ router.get('/tree', function(req, res){
 });
 
 router.get('/flow/:env/:mid', function(req, res, next) {
-  var payment_flow = appRoot + "/temp/" + req.params["env"] + "/" + req.params["mid"] +"/flow.json" 
+  var payment_flow = appRoot + "/temp/" + req.params["env"] + "/" + req.params["mid"] +".json" 
   console.log("payment_flow :" + payment_flow) 
   var flow = new Payment(payment_flow);  
   console.log("Flow payments load :" + JSON.stringify(flow._flow)) 
@@ -32,12 +32,19 @@ router.get('/flow/:env/:mid', function(req, res, next) {
 });
 
 router.get("/activities/:env/:mid", function(req, res){
+  res.render('payments', { data: {
+      "mid": req.params["mid"],
+      "name": "Activities log"
+    }, view: "table" });
+});
+
+router.get("/tabledata/:env/:mid", function(req, res){
   console.log("Query  --< " + JSON.stringify(req.query))
   
-  var file_activities = new json.File(appRoot + "/temp/" + req.params["env"] + "/" + req.params["mid"] +"/activities.json" );
+  var file_activities = new json.File(appRoot + "/temp/" + req.params["env"] + "/" + req.params["mid"] +".json" );
   file_activities.readSync();
   activities = []
-  file_activities.data.forEach(function(line){ 
+  file_activities.get("activities").forEach(function(line){ 
     activities.push({        
       "time": (new Date(line[0])).toISOString().split('T')[1].split('Z')[0], 
       "service": line[4],               
@@ -45,6 +52,7 @@ router.get("/activities/:env/:mid", function(req, res){
     })
   })
 
+  console.log("activities --< " + activities.length)
   var query = req.query
   var total = activities.length    
   var filtered = 0;
@@ -64,16 +72,15 @@ router.get("/activities/:env/:mid", function(req, res){
       filtered = searched.length
     }
   }
-
-  res.render('payments', { data: {
-	  	"mid": req.params["mid"],
-	  	"name": "Activities log",
-	    "draw": parseInt(query["draw"]),
-	    "recordsTotal": total ,
-	    "recordsFiltered": filtered,    
-	    "data": data 
-	  }, view: "table" });
+  
+  res.json({
+    "draw": parseInt(query["draw"]),
+    "recordsTotal": total ,
+    "recordsFiltered": filtered,    
+    "data": data 
+  });
 })
+
 
 
 router.get('/compare/:env1/:mid1/:env2/:mid2', function(req, res, next) {
@@ -100,31 +107,28 @@ const to_tree = (dir, filelist = []) => {
     const dirent = fs.statSync(dirFile);
     if (dirent.isDirectory()) {
       //console.log('directory', path.join(dir, file));
-      
-      if(file.indexOf("189") == 0){
-				filelist.push({      
-				          "text": file,
-				          "selectable": true,
-				          "state": { "selected": false },
-				          "key": file
-				        });
-      } else {
-      	var odir = {
-	        "text" : "<span class= 'font-weight-bold ml-2'>" + file + "</span>",
-	        "key": file,
-	        "selectable": false,
-	        "state": {
-	          "expanded": false,
-	          "selected": false
-	        },
-	        "nodes" : []
-	      }
-	      odir["nodes"] = to_tree(dirFile, dir.files);
-	      filelist.push(odir);
+    	var odir = {
+        "text" : "<span class= 'font-weight-bold ml-2'>" + file + "</span>",
+        "key": file,
+        "selectable": false,
+        "state": {
+          "expanded": false,
+          "selected": false
+        },
+        "nodes" : []
       }
-      
+      odir["nodes"] = to_tree(dirFile, dir.files);
+      filelist.push(odir);
     } else {
       // do nothing with files
+      if(file.indexOf('json') > -1){
+            filelist.push({      
+                        "text": file.replace(".json", ""),
+                        "selectable": true,
+                        "state": { "selected": false },
+                        "key": file.replace(".json", "")
+                      });
+          }
     }
   }
   return filelist;

@@ -2,8 +2,9 @@
   "name": "Compliance Check",
   "guide_url": "",
   "customization": "",
-  "template": "compliancecheck",
+  "template": "/subflows/compliancecheck.json",
   "description": "GPP determines whether the payment is compliant as per regulations. GPP can interface with external compliance engines to perform the compliance check.",
+  "use_case": "subflow",
   "flowitems": [    
     {
       "type": "rule-business-mandatory",

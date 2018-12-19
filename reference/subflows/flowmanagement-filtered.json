@@ -2,8 +2,9 @@
   "name": "Flow Management - Filtered Messages",
   "guide_url": "",
   "customization": "",
-  "template": "flowmanagement",
+  "template": "/subflows/flowmanagement-filtered.json",
   "description": "Flow management with Filtered messages as a terminate status",
+  "use_case": "subflow",
   "flowitems": [    
     {
       "type": "rule-system",

@@ -2,8 +2,9 @@
   "name": "Message Duplicate Checking",
   "guide_url": "",
   "customization": "",
-  "template": "messageduplicatechecking",
+  "template": "/subflows/messageduplicatechecking.json",
   "description": "Duplicate checking is executed on payments that are either: 1. Received by GPP from external networks (ACH) or internal applications 2. Manually entered or handled by a user Based on the selected algorithm (key message fields such as message type, currency, amount and beneficiary), GPP examines every payment for possible duplication. If a payment is a duplicate, GPP routes the payment to the Dupex queue for manual handling.",
+  "use_case": "subflow",
   "flowitems": [    
     {
       "type": "rule-system",

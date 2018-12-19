@@ -2,8 +2,9 @@
   "name": "Value Date",
   "guide_url": "",
   "customization": "",
-  "template": "valuedate",
+  "template": "/subflows/valuedate.json",
   "description": "Value date determination is an integral part of MOP selection process. GPP calculates the value date and determines the best MOP with the earliest value date to process the payment.",
+  "use_case": "subflow",
   "flowitems": [    
     {
       "type": "service",

@@ -2,8 +2,9 @@
   "name": "Map Payment Info",
   "guide_url": "",
   "customization": "",
-  "template": "mappaymentinfo",
+  "template": "/subflows/mappaymentinfo.json",
   "description": "GPP derives and identifies fundamental payment attributes, for example, Message ID (uniquely identifies message in GPP), Local Office (for across legal entities or countries implementation), Department, Business Area, and Product. The message type of an incoming payment message may Fusion Global PayPlus | Single Payments | Business Guide Page 33 be set using the Inbound Message Type Selection rules, and the payment priority using the Prioritization business rules",
+  "use_case": "subflow",
   "flowitems": [    
     {
       "type": "service",

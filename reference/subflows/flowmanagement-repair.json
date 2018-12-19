@@ -2,8 +2,9 @@
   "name": "Flow Management - Repair",
   "guide_url": "",
   "customization": "",
-  "template": "flowmanagement",
+  "template": "/subflows/flowmanagement-repair.json",
   "description": "Flow management with Repair as a terminate status",
+  "use_case": "subflow",
   "flowitems": [    
     {
       "type": "rule-system",

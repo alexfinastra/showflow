@@ -2,8 +2,9 @@
   "name": "Cutoff Assessment",
   "guide_url": "",
   "customization": "",
-  "template": "cutoffassessment",
+  "template": "/subflows/cutoffassessment.json",
   "description": "GPP supports these cutoff types: 1. Processing cutoff: Required to set the time limit for processing any kind of payment within the local office. 2. Clearing cutoff: Required for local clearing (RTGS, low value clearing) payments. 3. Treasury/Currency cutoff: Also known as currency cutoff and is required for processing foreign currency cross border payments.",
+  "use_case": "subflow",
   "flowitems": [    
     {
       "type": "rule-business-optional",
