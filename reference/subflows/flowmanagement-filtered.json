@@ -1,4 +1,5 @@
 {
+  "type": "subflow",
   "name": "Flow Management - Filtered Messages",
   "guide_url": "",
   "customization": "",

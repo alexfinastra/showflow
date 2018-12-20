@@ -1,4 +1,5 @@
 {
+  "type": "subflow",
   "name": "Cutoff Assessment",
   "guide_url": "",
   "customization": "",

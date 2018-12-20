@@ -1,4 +1,5 @@
 {
+  "type": "subflow",
   "name": "Value Date",
   "guide_url": "",
   "customization": "",

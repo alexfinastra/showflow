@@ -69,7 +69,7 @@ $(document).ready(function(){
      cursorwidth: 4,
   });  
 
-  $("#treecots").niceScroll({
+  $("#flowmanagement").niceScroll({
      cursorcolor: '#FFFFFF',
      cursorwidth: 4,
   });
@@ -301,38 +301,47 @@ $(document).ready(function(){
 	});
 
 
-	var $modal = $('#subflow');
+	var $subflow_modal = $('#subflow');
+	var $flowmanagement_modal = $('#flowmanagement');
 	var uid = "";
 	var back = ""
 	// Show loader & then get content when modal is shown
-	$modal.on('show.bs.modal', function(e) {
+	$subflow_modal.on('show.bs.modal', function(e) {
 	  uid = $(e.relatedTarget).data('uid') != undefined ? $(e.relatedTarget).data('uid') : uid;
 	  back = $(e.relatedTarget).data('back') != undefined ? $(e.relatedTarget).data('back') : back;
+	  if(($("#flowmanagement").data('bs.modal') || {})._isShown ){
+    	$("#flowmanagement").modal('hide')
+    }
 	  $(this)
 	    .addClass('modal-scrollfix')
 	    .find('.modal-body')
 	    .html('loading...')
 	    .load("/usecases/subflow/" + uid + "/" + back, function() {
 	      // Use Bootstrap's built-in function to fix scrolling (to no avail)
-	      $modal
+	      $subflow_modal
 	        .removeClass('modal-scrollfix')
 	        .modal('handleUpdate');
 	    });
 	});
-/*
-	$(document).on("click", "a[data-target='#subflow']", function(ev){
-    ev.preventDefault();
-    if(($("#subflow").data('bs.modal') || {})._isShown ){
-    	$("#subflow").modal('dispose')
+
+	$flowmanagement_modal.on('show.bs.modal', function(e) {
+	  uid = $(e.relatedTarget).data('uid') != undefined ? $(e.relatedTarget).data('uid') : uid;
+	  back = $(e.relatedTarget).data('back') != undefined ? $(e.relatedTarget).data('back') : back;
+	  if(($("#subflow").data('bs.modal') || {})._isShown ){
+    	$("#subflow").modal('hide')
     }
-    uid = this.dataset["uid"];
-    back = this.dataset["back"];
-    // load the url and show modal on success
-    $("#subflow .modal-body").load("/usecases/subflow/" + uid + "/" + back, function() { 
-        setTimeout(function(){$("#subflow").modal("show"); }, 500);  
-    });
+	  $(this)
+	    .addClass('modal-scrollfix')
+	    .find('.modal-body')
+	    .html('loading...')
+	    .load("/usecases/subflow/" + uid + "/" + back, function() {
+	      // Use Bootstrap's built-in function to fix scrolling (to no avail)
+	      $flowmanagement_modal
+	        .removeClass('modal-scrollfix')
+	        .modal('handleUpdate');
+	    });
 	});
-*/
+
 	$('#showTable').on('click', function(){
 		arr = location.href.split("/")
 		arr[6] = "table"		

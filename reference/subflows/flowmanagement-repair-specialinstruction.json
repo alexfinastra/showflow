@@ -1,10 +1,10 @@
 {
   "type": "subflow",
-  "name": "Flow Management - Repair and Schedule",
+  "name": "Flow Management - Special Instruction and Validation",
   "guide_url": "",
   "customization": "",
-  "template": "/subflows/flowmanagement-repair-schedule.json",
-  "description": "Flow management with Repair and Schedule as a terminate status",
+  "template": "/subflows/flowmanagement-repair-specialinstruction.json",
+  "description": "Flow management with following statuses used as terminate status: Special Instruction, Repair, Cancel, Verify, Release",
   "use_case": "subflow",
   "flowitems": [    
     {
@@ -51,21 +51,51 @@
       "type": "status-message",
       "group": "Flow Management",       
       "timestamp": "",
+      "name": "Special Instruction",
+      "description": "Available action button is Override",
+      "uid": "specialinstruction",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Flow Management",       
+      "timestamp": "",
       "name": "Repair",
       "description": "Available action buttons are : Submit and Cancel",
       "uid": "repair",
       "features": "",
       "activities": ""
-    } ,
+    },
     {
       "type": "status-message",
       "group": "Flow Management",       
       "timestamp": "",
-      "name": "Schedule",
-      "description": "Available action button is Override",
-      "uid": "schedule",
+      "name": "Cancel",
+      "description": "",
+      "uid": "cancel",
       "features": "",
       "activities": ""
-    }         
+    },
+    {
+      "type": "status-message",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Verify",
+      "description": "Available action buttons are : Verify and Repair",
+      "uid": "verify",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Release",
+      "description": "Available action buttons are : Release and Repair",
+      "uid": "release",
+      "features": "",
+      "activities": ""
+    }    
   ]
 }

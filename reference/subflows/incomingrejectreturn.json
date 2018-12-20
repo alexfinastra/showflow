@@ -1,4 +1,5 @@
 {
+  "type": "subflow",
   "name": "Incoming Reject Return",
   "guide_url": "",
   "customization": "",

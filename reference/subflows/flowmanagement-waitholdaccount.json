@@ -1,10 +1,10 @@
 {
   "type": "subflow",
-  "name": "Flow Management - Dupex",
+  "name": "Flow Management - Wait Hold Account",
   "guide_url": "",
   "customization": "",
-  "template": "/subflows/flowmanagement-dupex.json",
-  "description": "Flow management with Dupex as a terminate status",
+  "template": "/subflows/flowmanagement-waitholdaccount.json",
+  "description": "Flow management with Wait Hold Account as a terminate status",
   "use_case": "subflow",
   "flowitems": [    
     {
@@ -51,9 +51,9 @@
       "type": "status-message",
       "group": "Flow Management",       
       "timestamp": "",
-      "name": "Dupex",
-      "description": "Available action buttons are : Accept and Cancel",
-      "uid": "dupex",
+      "name": "Wait Hold Account",
+      "description": "Available action buttons are : Force and Retry",
+      "uid": "repair",
       "features": "",
       "activities": ""
     }    

@@ -1,4 +1,5 @@
 {
+  "type": "subflow",
   "name": "Message Duplicate Checking",
   "guide_url": "",
   "customization": "",

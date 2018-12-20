@@ -85,10 +85,10 @@ router.get("/tabledata/:env/:mid", function(req, res){
 
 router.get('/compare/:env1/:mid1/:env2/:mid2', function(req, res, next) {
   console.log("00000000  " + JSON.stringify(req.params))
-  var payment_flow_left = appRoot + "/temp/"+ req.params["env1"] + "/" + req.params["mid1"] +"/flow.json" 
+  var payment_flow_left = appRoot + "/temp/"+ req.params["env1"] + "/" + req.params["mid1"] +".json" 
   var flow_left = new Payment(payment_flow_left);  
 
-  var payment_flow_right = appRoot + "/temp/"+ req.params["env2"] + "/" + req.params["mid2"] +"/flow.json" 
+  var payment_flow_right = appRoot + "/temp/"+ req.params["env2"] + "/" + req.params["mid2"] +".json" 
   var flow_right = new Payment(payment_flow_right);  
   //console.log("OPA DATA " + JSON.stringify(flow._flow)) 
   res.render('payments', { data_left: flow_left._flow, 

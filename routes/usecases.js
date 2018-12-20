@@ -40,32 +40,13 @@ router.get('/subflow/:name/:back', function(req, res, next) {
   res.render('subflow', { data: usecase._flow, back: req.params["back"]  });     
 });
 
-router.get('/current', function(req, res){  
-  var data = null
-  if (currentFlow != ""){
-    var flow = new Flow();
-    data = flow._flow
-  }
-  res.render('flow', { data: data});
-})
+router.get('/flows/:name', function(req, res, next) {
+  var usecase_template = appRoot + "/reference/flows/"+ req.params["name"]
+  console.log("Show full flow " + usecase_template);
 
-// need to add a flow index as input 
-router.get('/load/:folder/:file', function(req, res, next){		
-  //if(req.params.file.indexOf("template") > -1){
-    //var file = new tmp.File();
-    //var template = "flows/" + req.params.folder + "/" + req.params.file + ".json";   
-    //currentFlow = file.path;    
-    //fse.copySync(template, currentFlow);    
-  //}else{
-    
-  //}
-  
-	currentFlow = appRoot + "/flows/" + req.params.folder + "/" + req.params.file + ".json" ; 
-  var flow = new Flow();  
-  console.log("OPA DATA " + JSON.stringify(flow._flow))  
-	res.render('flow', { data: flow._flow});
+  var usecase = new Usecase(usecase_template);  
+  res.render('usecases', { data: usecase._flow  });     
 });
-
 
 
 module.exports = router;

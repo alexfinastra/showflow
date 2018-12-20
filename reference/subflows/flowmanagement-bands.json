@@ -1,10 +1,10 @@
 {
   "type": "subflow",
-  "name": "Flow Management - Dupex",
+  "name": "Flow Management - Bands",
   "guide_url": "",
   "customization": "",
-  "template": "/subflows/flowmanagement-dupex.json",
-  "description": "Flow management with Dupex as a terminate status",
+  "template": "/subflows/flowmanagement-bands.json",
+  "description": "Flow management with Bands as a terminate status",
   "use_case": "subflow",
   "flowitems": [    
     {
@@ -51,9 +51,9 @@
       "type": "status-message",
       "group": "Flow Management",       
       "timestamp": "",
-      "name": "Dupex",
-      "description": "Available action buttons are : Accept and Cancel",
-      "uid": "dupex",
+      "name": "Bands",
+      "description": "Available action button is Release",
+      "uid": "bands",
       "features": "",
       "activities": ""
     }    

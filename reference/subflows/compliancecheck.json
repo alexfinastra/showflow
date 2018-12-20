@@ -1,4 +1,5 @@
 {
+  "type": "subflow",
   "name": "Compliance Check",
   "guide_url": "",
   "customization": "",

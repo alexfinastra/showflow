@@ -1,8 +1,9 @@
 {
+  "type": "flow",
   "name": "Single Payment Workflow",
   "guide_url": "/docs/GPP Business Guide Single Payments.pdf",
   "customization": "0%",
-  "template": "/flows/single_payment_workflow.json",
+  "template": "",
   "description": "GPP Single Payments supports the following use cases : Inward and Outward Cross border payments: Serial, and Direct/Cover. Domestic Clearing: Direct/Indirect clearing member financial institutions. On-Us. Cross flows: Single Payments to Mass Payments; Single Payments to Immediate Payments, and vice versa. Multiple payments: Message Types MT101, and MT102",
   "flowitems": [    
     {
@@ -481,7 +482,7 @@
       "timestamp": "",
       "name": "Posting (Before Completion)",
       "description": "GPP triggers the relevant interface to perform the required posting.", 
-      "uid": "postingbeforecompletion",
+      "uid": "posting",
       "features": "",
       "activities": ""
     },
@@ -511,7 +512,7 @@
       "timestamp": "",
       "name": "Posting (Customer Leg)",
       "description": "GPP performs the customer leg posting. The customer can be debited either in a lump sum or individually for each payment.", 
-      "uid": "postingcustomerleg",
+      "uid": "posting",
       "features": "",
       "activities": ""
     },
@@ -541,7 +542,7 @@
       "timestamp": "",
       "name": "Posting (Individual Credit)",
       "description": "GPP triggers the relevant interface to perform required posting.", 
-      "uid": "postingindividualcredit",
+      "uid": "posting",
       "features": "",
       "activities": ""
     },
@@ -561,8 +562,8 @@
       "timestamp": "",
       "name": "Posting (Consolidated Credit)",
       "description": "GPP triggers the relevant interface to perform required posting.", 
-      "uid": "postingconsolidatedcredit",
-      "features": "",
+      "uid": "posting",
+      "features": "flowmanagement-complete",
       "activities": ""
     },
     {

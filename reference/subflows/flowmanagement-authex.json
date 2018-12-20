@@ -1,4 +1,5 @@
 {
+  "type": "subflow",
   "name": "Flow Management - Authentication Exception",
   "guide_url": "",
   "customization": "",

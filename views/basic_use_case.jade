@@ -2,12 +2,18 @@ block content
   .container 
     #subflow.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
       .modal-dialog.modal-dialog-centered.modal-lg(role="document")
+        .modal-body.bg-light
+    #flowmanagement.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
+      .modal-dialog.modal-dialog-centered.modal-lg(role="document")
         .modal-body.bg-light        
     .row#payflow_teplate
       .col-md-12.mt-5
         center.mt-5
           h1.display-4.col-auto #{data["name"]}
-          h5.mt-2.col-auto #{data["group_name"]} 
+          if data["type"] == "usecase"
+            h5.mt-2.col-auto #{data["group_name"]} 
+              a.btn.btn-link.text-success.font-weight-bold(href="/usecases" + data["template"])
+                | show full flow 
           br
           blockquote.blockquote.text-center
             p.mb-0 #{data["description"]}
@@ -16,12 +22,13 @@ block content
               cite(title='GPP Business Guide Single Payments')           
                 a.btn.btn-link(role="button", href=data["guide_url"],  target="_blank" ) GPP Business Guide Single Payments
           br
-          .mt-2.p-2(style="background: #ecf0f1;")
-            button#similarFlow.btn.btn-link.text-success.font-weight-bold
-              | Show list of payment flows
-            span similar to  
-            span.font-weight-bold #{data["name"]} 
-            span basic use case
+          if data["type"] == "usecase"
+            .mt-2.p-2(style="background: #ecf0f1;")
+              button#similarFlow.btn.btn-link.text-success.font-weight-bold
+                | Show list of payment flows
+              span similar to  
+              span.font-weight-bold #{data["name"]} 
+              span basic use case
         br        
         ul.timeline
           if data["items"] != null && data["items"] != undefined

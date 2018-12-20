@@ -111,9 +111,9 @@ var parseTrace = function(filename){
     })
     .on('end', function(){
         if(flowData.length > 0){    
-          console.log("-- Just before Payment Flow --")
-          storeFlowData(env, flowData);          
-          //fs.writeFileSync(appRoot + "/temp/traces_data.csv", flowData.join('\n') , 'utf-8');          
+          console.log("-- Just before Payment Flow --")                    
+          //fs.writeFileSync(appRoot + "/temp/traces_data.csv", flowData.join('\n') , 'utf-8'); 
+          storeFlowData(env, flowData);         
         }        
         console.log('Read entire file.')
     })
@@ -189,7 +189,7 @@ var mapSPtrace = function(str){
 
   if(data.length == 3){
     formatted[2] = data[0]          
-    if(data[1].length > 10){
+    if(data[1].length > 10 && /\d/.test(data[1])){
       formatted[3] = data[1].indexOf('_') > -1 ? data[1].split('_')[1] : data[1]
     }else{
       formatted[3] = "NO MID"

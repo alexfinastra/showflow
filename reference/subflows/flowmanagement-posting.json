@@ -1,10 +1,10 @@
 {
   "type": "subflow",
-  "name": "Flow Management - Dupex",
+  "name": "Flow Management - Posting",
   "guide_url": "",
   "customization": "",
-  "template": "/subflows/flowmanagement-dupex.json",
-  "description": "Flow management with Dupex as a terminate status",
+  "template": "/subflows/flowmanagement-posting.json",
+  "description": "Flow management with Posting as a terminate statuses",
   "use_case": "subflow",
   "flowitems": [    
     {
@@ -51,11 +51,31 @@
       "type": "status-message",
       "group": "Flow Management",       
       "timestamp": "",
-      "name": "Dupex",
-      "description": "Available action buttons are : Accept and Cancel",
-      "uid": "dupex",
+      "name": "Posting Restriction",
+      "description": "Available action buttons are : Override, Repair and Cancel",
+      "uid": "postingrestriction",
       "features": "",
       "activities": ""
-    }    
+    },
+    {
+      "type": "status-message",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Insufficient Funds",
+      "description": "Available action buttons are : Force and Retry",
+      "uid": "insufficientfunds",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Posting Exception",
+      "description": "Available action buttons are : Release and Cancel",
+      "uid": "postingexception",
+      "features": "",
+      "activities": ""
+    }     
   ]
 }

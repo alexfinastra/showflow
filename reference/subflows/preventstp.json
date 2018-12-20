@@ -1,0 +1,31 @@
+{
+  "type": "subflow",
+  "name": "Prevent STP",
+  "guide_url": "",
+  "customization": "",
+  "template": "/subflows/preventstp.json",
+  "description": "GPP provides a mechanism to attach special instructions to a specific payment. Payments with special instructions attached can be routed to specific manual queues for manual handling. Multiple special instructions can be attached to a single payment.",
+  "use_case": "subflow",
+  "flowitems": [    
+    {
+      "type": "rule-business-optional",
+      "group": "Prevent STP",      
+      "timestamp": "",
+      "name": "Special Instruction",
+      "description": "", 
+      "uid": "specialinstruction",
+      "features": "flowmanagement-repair-specialinstruction",
+      "activities": ""
+    },
+    {
+      "type": "rule-business-optional",
+      "group": "Prevent STP",      
+      "timestamp": "",
+      "name": "Validation",
+      "description": "", 
+      "uid": "validation",
+      "features": "flowmanagement-repair-specialinstruction",
+      "activities": ""    
+    }
+  ]
+}

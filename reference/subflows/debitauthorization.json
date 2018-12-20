@@ -1,4 +1,5 @@
 {
+  "type": "subflow",
   "name": "Debit Authorization",
   "guide_url": "",
   "customization": "",

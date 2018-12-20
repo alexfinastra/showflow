@@ -1,4 +1,5 @@
 {
+  "type": "subflow",
   "name": "Flow Management - Repair",
   "guide_url": "",
   "customization": "",

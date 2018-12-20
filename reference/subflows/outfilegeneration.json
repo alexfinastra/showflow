@@ -1,0 +1,91 @@
+{
+  "type": "subflow",
+  "name": "Out File Generation",
+  "guide_url": "",
+  "customization": "",
+  "template": "/subflows/outfilegeneration.json",
+  "description": "GPP routes all individual transactions to the Complete queue and creates the A message for file generation.",
+  "use_case": "subflow",
+  "flowitems": [       
+    {
+      "type": "service",
+      "group": "Out File Generation",      
+      "timestamp": "",
+      "name": "Create Outgoing File Summary Entry",
+      "description": "", 
+      "uid": "createoutgoingfilesummaryentry",
+      "features": "",
+      "activities": ""    
+    },
+    {
+      "type": "service",
+      "group": "Out File Generation",      
+      "timestamp": "",
+      "name": "Assosiate Pending Outgoing File",
+      "description": "", 
+      "uid": "assosiatependingoutgoingfile",
+      "features": "",
+      "activities": ""    
+    },
+    {
+      "type": "service",
+      "group": "Out File Generation",      
+      "timestamp": "",
+      "name": "Generate Out File ID",
+      "description": "", 
+      "uid": "generateoutfileid",
+      "features": "",
+      "activities": ""    
+    },
+    {
+      "type": "service",
+      "group": "Out File Generation",      
+      "timestamp": "",
+      "name": "Group Based On Out Grouping ID",
+      "description": "", 
+      "uid": "groupbasedonoutgroupingid",
+      "features": "",
+      "activities": ""    
+    },
+    {
+      "type": "service",
+      "group": "Out File Generation",      
+      "timestamp": "",
+      "name": "Transmission",
+      "description": "", 
+      "uid": "transmission",
+      "features": "",
+      "activities": ""    
+    },
+    {
+      "type": "status-message",
+      "group": "Out File Generation",       
+      "timestamp": "",
+      "name": "Sent",
+      "description": "",
+      "uid": "sent",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "service",
+      "group": "Out File Generation",      
+      "timestamp": "",
+      "name": "Handle CVF",
+      "description": "", 
+      "uid": "handlecvf",
+      "features": "",
+      "activities": ""    
+    },
+    {
+      "type": "status-message",
+      "group": "Out File Generation",       
+      "timestamp": "",
+      "name": "Complete",
+      "description": "",
+      "uid": "complete",
+      "features": "",
+      "activities": ""
+    }
+  ]
+}

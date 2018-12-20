@@ -1,4 +1,5 @@
 {
+  "type": "subflow",
   "name": "Flow Management - Repair and WaitRate",
   "guide_url": "",
   "customization": "",

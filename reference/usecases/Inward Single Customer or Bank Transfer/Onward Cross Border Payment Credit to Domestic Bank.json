@@ -1,4 +1,5 @@
 {
+  "type": "usecase",
   "basic_use_case": "Onward Cross Border Payment Credit to Domestic Bank",
   "guide_url": "/docs/GPP Business Guide Single Payments.pdf",  
   "template": "/flows/single_payment_workflow.json",

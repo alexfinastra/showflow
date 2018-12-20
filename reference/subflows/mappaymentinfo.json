@@ -1,4 +1,5 @@
 {
+  "type": "subflow",
   "name": "Map Payment Info",
   "guide_url": "",
   "customization": "",

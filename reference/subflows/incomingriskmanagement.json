@@ -1,4 +1,5 @@
 {
+  "type": "subflow",
   "name": "Incoming Risk Management",
   "guide_url": "",
   "customization": "",
