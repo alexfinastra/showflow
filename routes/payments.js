@@ -13,123 +13,106 @@ var path = require('path');
 var underscore = require("underscore");
 
 var Payment = require('../models/payment');
+var Storage = require('../middlewares/storage');
 
 router.get('/', function(req, res, next) {
   res.render('payments');      
 });
 
 router.get('/tree', function(req, res){
-  files = to_tree("temp/", [])  
-  res.json({tree: files});
+  var payments_strg = new Storage()
+  payments_strg.listDoc({}, {"env": 1, "mid": 1}, function(docs){
+    var env = "";
+    payments = [];
+    console.log("----> Selected from db " + docs.length)
+    docs.sort((a,b) => {a["env"]<b["env"] ? 1 : (a["env"]>b["env"] ? -1 : 0)}).forEach(function(doc){
+      console.log("-----> Received : " + doc["env"] + " - " + doc["mid"])
+      if(doc["env"] != env){
+        env = doc["env"];
+        payments.push({ "text" : "<span class= 'font-weight-bold ml-2'>" + env + "</span>",
+                        "key": env,
+                        "selectable": false,
+                        "state": { "expanded": false, "selected": false },
+                        "nodes" : []
+                      });
+       
+      }
+      payments[payments.length-1]["nodes"].push({"text": doc["mid"], "selectable": true, "state": { "selected": false }, "key": doc["mid"]});      
+    })
+    
+    res.json({tree: payments});  
+  });
 });
 
 router.get('/flow/:env/:mid', function(req, res, next) {
-  var payment_flow = appRoot + "/temp/" + req.params["env"] + "/" + req.params["mid"] +".json" 
-  console.log("payment_flow :" + payment_flow) 
-  var flow = new Payment(payment_flow);  
-  console.log("Flow payments load :" + JSON.stringify(flow._flow)) 
-  res.render('payments', { data: flow._flow, view: "flow" });     
+  var payment = new Payment(req.params["env"], req.params["mid"])
+  payment.loadFlow(function(flow){
+    console.log("-----> Get payment flow : " + JSON.stringify(flow))
+    flow["mid"] = req.params["mid"];
+    res.render('payments', { data: flow, view: "flow" });       
+  })
 });
 
 router.get("/activities/:env/:mid", function(req, res){
-  res.render('payments', { data: {
-      "mid": req.params["mid"],
-      "name": "Activities log"
-    }, view: "table" });
+  res.render('payments', { data: { "mid": req.params["mid"], "name": "Activities log" }, view: "table" });
 });
 
 router.get("/tabledata/:env/:mid", function(req, res){
   console.log("Query  --< " + JSON.stringify(req.query))
-  
-  var file_activities = new json.File(appRoot + "/temp/" + req.params["env"] + "/" + req.params["mid"] +".json" );
-  file_activities.readSync();
-  activities = []
-  file_activities.get("activities").forEach(function(line){ 
-    activities.push({        
-      "time": (new Date(line[0])).toISOString().split('T')[1].split('Z')[0], 
-      "service": line[4],               
-      "activity": line[5]
-    })
-  })
-
-  console.log("activities --< " + activities.length)
-  var query = req.query
-  var total = activities.length    
-  var filtered = 0;
-  data = [];
-  if(query["start"] && query["length"]){      
-    if(query["search"]["value"] == ""){
-      data = activities.slice(parseInt(query["start"]), parseInt(query["start"]) + parseInt(query["length"]))
-      filtered = total
-    } else {
-      searched = []
-      activities.forEach(function(a){
-        if(a["activity"].indexOf(query["search"]["value"]) != -1){
-          searched.push(a)
-        }
-      })
-      data = searched.slice(parseInt(query["start"]), parseInt(query["start"]) + parseInt(query["length"]))
-      filtered = searched.length
+  var payment = new Payment(req.params["env"], req.params["mid"]);
+  activities = payment.loadActivities(function(activities){
+    console.log("activities --< " + activities.length)
+    var query = req.query
+    var total = activities.length    
+    var filtered = 0;
+    data = [];
+    if(query["start"] && query["length"]){      
+      if(query["search"]["value"] == ""){
+        data = activities.slice(parseInt(query["start"]), parseInt(query["start"]) + parseInt(query["length"]))
+        filtered = total
+      } else {
+        searched = []
+        activities.forEach(function(a){
+          if(a["activity"].indexOf(query["search"]["value"]) != -1){
+            searched.push(a)
+          }
+        })
+        data = searched.slice(parseInt(query["start"]), parseInt(query["start"]) + parseInt(query["length"]))
+        filtered = searched.length
+      }
     }
-  }
-  
-  res.json({
-    "draw": parseInt(query["draw"]),
-    "recordsTotal": total ,
-    "recordsFiltered": filtered,    
-    "data": data 
+    
+    res_data = data.map(function(line){
+      return {        
+        "time": (new Date(line[0])).toISOString().split('T')[1].split('Z')[0], 
+        "service": line[4],               
+        "activity": line[5]
+      }
+    })
+    console.log("-----> Res data " + JSON.stringify(res_data))
+    res.json({
+      "draw": parseInt(query["draw"]),
+      "recordsTotal": total ,
+      "recordsFiltered": filtered,    
+      "data": res_data 
+    });
   });
 })
 
-
-
 router.get('/compare/:env1/:mid1/:env2/:mid2', function(req, res, next) {
-  console.log("00000000  " + JSON.stringify(req.params))
-  var payment_flow_left = appRoot + "/temp/"+ req.params["env1"] + "/" + req.params["mid1"] +".json" 
-  var flow_left = new Payment(payment_flow_left);  
+  console.log("-----> Comapre payemtns :" + JSON.stringify(req.params))
+  
+  var payment_left = new Payment(req.params["env1"], req.params["mid1"]);
+  var payment_right = new Payment(req.params["env2"], req.params["mid2"]);
 
-  var payment_flow_right = appRoot + "/temp/"+ req.params["env2"] + "/" + req.params["mid2"] +".json" 
-  var flow_right = new Payment(payment_flow_right);  
-  //console.log("OPA DATA " + JSON.stringify(flow._flow)) 
-  res.render('payments', { data_left: flow_left._flow, 
-                          view: "split",
-                          data_right: flow_right._flow                           
-                        });     
+  payment_left.loadFlow(function(flow_left){    
+    payment_right.loadFlow(function(flow_right){
+      flow_left["mid"] = req.params["mid1"];
+      flow_right["mid"] = req.params["mid2"];      
+      res.render('payments', {data_left: flow_left, data_right: flow_right, view: "split" });       
+    }) 
+  })
 });
 
 module.exports = router;
 
-
-const to_tree = (dir, filelist = []) => {
-  const files = fs.readdirSync(dir);
-  for (const file of files) {
-    const dirFile = path.join(dir, file);
-    const dirent = fs.statSync(dirFile);
-    if (dirent.isDirectory()) {
-      //console.log('directory', path.join(dir, file));
-    	var odir = {
-        "text" : "<span class= 'font-weight-bold ml-2'>" + file + "</span>",
-        "key": file,
-        "selectable": false,
-        "state": {
-          "expanded": false,
-          "selected": false
-        },
-        "nodes" : []
-      }
-      odir["nodes"] = to_tree(dirFile, dir.files);
-      filelist.push(odir);
-    } else {
-      // do nothing with files
-      if(file.indexOf('json') > -1){
-            filelist.push({      
-                        "text": file.replace(".json", ""),
-                        "selectable": true,
-                        "state": { "selected": false },
-                        "key": file.replace(".json", "")
-                      });
-          }
-    }
-  }
-  return filelist;
-};

@@ -12,8 +12,8 @@
 						h4.col-auto MID : #{data_left["mid"]}						
 						br 
 					ul.timeline(style="margin-top: 1.5rem;")
-						if data_left["items"] != null && data_left["items"] != undefined
-							each item in data_left["items"]  
+						if data_left["flowitems"] != null && data_left["flowitems"] != undefined
+							each item in data_left["flowitems"]  
 								include flow_item
 		#right.split(style="margin-left: 5px; background-color: honeydew; border: 1px solid seagreen;")
 			.row#payflow-right(style="margin: 5px;")
@@ -22,8 +22,8 @@
 						h4.col-auto MID : #{data_right["mid"]}
 						br 
 					ul.timeline(style="margin-top: 1.5rem;")
-						if data_right["items"] != null && data_right["items"] != undefined
-							each item in data_right["items"]  
+						if data_right["flowitems"] != null && data_right["flowitems"] != undefined
+							each item in data_right["flowitems"]  
 								include flow_item
 
 

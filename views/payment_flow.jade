@@ -13,7 +13,7 @@ block content
       .row#payflow
         .col-md-12.mt-5
           center.mt-5
-            h1.display-4.col-auto #{data["mid"]}
+            h1.display-4.col-auto #{mid}
             h5.mt-2.col-auto #{data["name"]} 
             br
             blockquote.blockquote.text-center
@@ -43,8 +43,8 @@ block content
               span to any payment from the payments list
           br        
           ul.timeline
-            if data["items"] != null && data["items"] != undefined
-              each item in data["items"]  
+            if data["flowitems"] != null && data["flowitems"] != undefined
+              each item in data["flowitems"]  
                include flow_item
           br          
  

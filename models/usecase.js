@@ -3,11 +3,6 @@ var path = require('path');
 var json = require('json-file');
 var method = Usecase.prototype
 
-
-var properties = require("../db/profile_index.json" ); 
-var services = require("../db/services_index.json" );
-var rules = new require("../db/rules_index.json" );  
-
 function Usecase(currentFlow = ""){  
   this._flow = {};
   if(currentFlow.length==0){return;}

@@ -16,6 +16,7 @@ var readLineFile = require("read-line-file");
 var underscore = require("underscore");
 
 var Usecase = require('../models/usecase');
+var Storage = require('../middlewares/storage');
 
 router.get("/parsefile/:filename", function(req, res){
   console.log("Parse File request " + req.params.filename)
@@ -115,7 +116,7 @@ var parseTrace = function(filename){
           //fs.writeFileSync(appRoot + "/temp/traces_data.csv", flowData.join('\n') , 'utf-8'); 
           storeFlowData(env, flowData);         
         }        
-        console.log('Read entire file.')
+        //onsole.log('Read entire file.')
     })
   );  
 }
@@ -230,15 +231,29 @@ var compose_activity = function(str, ind){
 
 var storeFlowData = function(env, flowData = []){
   console.log("------ And flow data length is " + flowData.length)
-  var docs = {};
+  var storage = new Storage();
+  var docs = {}; 
+  var new_mids = [];
 
   flowData.forEach(function(line){
     var mid = line[3];
     if(mid != "NO MID"){
       if(docs[mid] == undefined){
-        docs[mid] = getDocument(env, mid);
+        doc = storage.getDoc({ "env": env, "mid": mid }, function(doc){ docs[mid] = doc; })
+        if(doc == null){
+          docs[mid] = {
+            "env": env,
+            "mid": mid,
+            "last_update": [date.getFullYear(),date.getMonth()+1,date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds(),],
+            "activities": [],
+            "flow": null
+          };
+          new_mids.push(mid);
+        }        
+      } else {
+        docs[mid]["activities"].push(line);  
       }
-      docs[mid]["activities"].push(line);
+      
     }
   })
   
@@ -247,40 +262,31 @@ var storeFlowData = function(env, flowData = []){
   if(mids.length > 0 ){
     mids.forEach(function(mid){
       paymentFlow(docs[mid])
-      saveDoc(env, docs[mid])
+      saveDoc(env, docs[mid], (new_mids.indexOf(mid) > -1 ? true : false));
     })
   }
 }
 
-var getDocument = function(env, mid){
-  // collection name is env
-  var doc_path = appRoot + "/temp/" + env + "/" + mid + ".json"
-  if( !fs.existsSync(doc_path) ){
-    date = new Date();
-    return  {
-      "mid": mid,
-      "last_update": [date.getFullYear(),date.getMonth()+1,date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds(),],
-      "activities": [],
-      "flow": null
-    }     
-  } else {
-    doc = new json.File(doc_path);
-    doc.readSync();
-    return doc.data;
-  }
-}
-
-var saveDoc = function(env, doc){
-  console.log("----> Saving doc with flow :" + JSON.stringify(doc["flow"]) )
+var saveDoc = function(env, doc, newDoc = true){
+  //console.log("----> Saving doc with flow :" + JSON.stringify(doc["flow"]) )
   if(doc["activities"].length > 0){
-    var dir = path.join(appRoot + '/temp/'  + env);
-    if (!fs.existsSync(dir)){   fs.mkdirSync(dir);  }
-    var doc_path = appRoot + "/temp/" + env + "/" + doc["mid"] + ".json"
-    fs.writeFileSync(doc_path, JSON.stringify(doc) , {encoding:'utf8',flag:'w+'});    
+    var storage = new Storage();
+    if(newDoc){
+      storage.newDoc(doc, function(doc){
+        console.log("----> Created new doc :)")
+      })
+    } else {
+      storage.setDoc({"env": env, "mid": doc["mid"]}, {"activities": doc["activities"], "flow": doc["flow"]}, function(doc){
+        console.log("----> Update doc :)")
+      })  
+    }
+    
+    //var dir = path.join(appRoot + '/temp/'  + env);
+    //if (!fs.existsSync(dir)){   fs.mkdirSync(dir);  }
+    //var doc_path = appRoot + "/temp/" + env + "/" + doc["mid"] + ".json"
+    //fs.writeFileSync(doc_path, JSON.stringify(doc) , {encoding:'utf8',flag:'w+'});    
   }
 }
-
-
 
 var getType = function(service){
   var flowTypes = [ 'activity',
@@ -313,6 +319,7 @@ var to_flowitem = function(line){
   } 
 }
 
+// TODO! Trigger dialog flow with activity 
 var paymentFlow = function(doc){
   var flowitems = [];  
   // map flow items

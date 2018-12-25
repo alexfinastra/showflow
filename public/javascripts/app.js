@@ -13,30 +13,8 @@ function openSideBar(){
 
 function selectPaymentNode(data) {
   parent = $('#treeflows').treeview('getParent', data);
-  
-  //$('#payflow').hide();
-  //$('#activities').show();
   $('#sidebar').removeClass('active');
-
   $('.overlay').fadeOut();
-  //if ( $.fn.dataTable.isDataTable( '#activities' ) ) {
-  //  table = $('#activities').DataTable();
-  //  table.ajax.url("/payments/selectnode/" + parent["key"] + "/" +  data["key"]).load();             
-  //}
-  //else {
- //   table =  $('#activities').DataTable({
-  //  serverSide: true,
-  //  ajax : "/payments/selectnode/" + parent["key"] + "/" +  data["key"],
-  //   columns: [
-  //       { "data": "time" },
-  //       { "data": "service" },
-  //       { "data": "activity" }
-  //   ],
-  //   order: [[ 0, 'asc' ],[1, 'asc']],
-  //   displayLength: 10,
-  //   responsive: true
-  //   });
-  //}
   location.href = "/payments/flow/" + parent["key"] + "/" + data["key"];
 }
 
@@ -58,8 +36,7 @@ function rangeSlider(){
   });
 };
 
-$(document).ready(function(){	
-	
+$(document).ready(function(){		
 	$('#sidebar').css({'top': '68px'});		
 	var height = $('#sidebar').height() - $('#sidebar table thead tr th').height() - 68;
 	$('.table-fixed tbody').css({'height': (height + 'px')});

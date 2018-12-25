@@ -5,14 +5,26 @@ var debug = require('debug')('integration:server');
 var http = require('http');
 var fs = require('fs');
 const path = require('path');
+var mongodb = require("mongodb");
+var ObjectID = mongodb.ObjectID;
+
 
 let log = console.log.bind(console)
 
-  var port = normalizePort(process.env.PORT || '3000');
-  app.set('port', port);
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://heroku_lmc8x7v4:emjfkgue1ijf6jqi78aq519gvs@ds139614.mlab.com:39614/heroku_lmc8x7v4", { useNewUrlParser: true }, function (err, client) {
+  if (err) {
+    console.log(err);
+    process.exit(1);
+  }
+
+  // Save database object from the callback for reuse.
+  db = client.db();
+  console.log("Database connection ready");
 
   var server = http.createServer(app);
-  
   server.listen(port);
   server.on('error', onError);
   server.on('listening', function () {
@@ -20,6 +32,8 @@ let log = console.log.bind(console)
     var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
     console.log('Listening on ' + bind);
   });
+});
+  
 
 /**
  * Normalize a port into a number, string, or false.
