@@ -20,8 +20,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/tree', function(req, res){
-  var payments_strg = new Storage()
-  payments_strg.listDoc({}, {"env": 1, "mid": 1}, function(docs){
+  var payments_strg = new Storage();
+  console.log("-----> We should load payments from : " + payments_strg.collection)
+  payments_strg.listDoc({}, {"env":1,"mid":1,"_id":0}, function(docs){
     var env = "";
     payments = [];
     console.log("----> Selected from db " + docs.length)

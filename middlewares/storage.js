@@ -51,11 +51,11 @@ method.updateDoc = function(conditons, updatedDoc, cb){
 }
 
 method.listDoc = function(select, where, cb){
-	console.log("-----> listDoc conditons are:" + JSON.stringify(filter));
-	 db.collection(this.collection).find(where, select).toArray(function(err, docs) {     
+	console.log("-----> listDoc conditons are:" + select);
+	 db.collection(this.collection).find({}, select).toArray(function(err, docs) {     
     if (err == null) {
       if(docs == null || docs.length == 0 ){        
-        console.log("-----> There is no docs answering the filter !!!! :(");
+        console.log("-----> There is no docs answering the where !!!! :(");
       	cb([]);
       } else {
       	console.log("-----> The number of found Docs are :) " + docs.length);
