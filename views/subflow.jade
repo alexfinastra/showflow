@@ -1,22 +1,29 @@
 .container 
-  .row#payflow_subflow
-    .col-md-12.mt-3
-      center
-        h4.col-auto #{data["name"]}
-        br
-        blockquote.blockquote
-          p.mb-0.small.text-info #{data["description"]}  
-        if back != 'nothing'
-          a.btn.btn-dark.text-light(type="button", data-uid=data["template"], data-back="nothing", data-toggle="modal", data-target="#subflow")
-            i.fas.fa-arrow-left
-            span.ml-3    
-            | Back        
-      br     
-      ul.timeline
-        if data["items"] != null && data["items"] != undefined
-          each item in data["items"]  
-           include flow_item
-      br          
+  if data["items"] == null
+    .row#payflow_subflow
+      .col-md-12.mt-3
+        center
+          h4.mt-5 Sorry, could not find requested flow.
+          img.mt-5(src="/img/noflow.jpeg", width="300")
+  else
+    .row#payflow_subflow
+      .col-md-12.mt-3
+        center
+          h4.col-auto #{data["name"]}
+          br
+          blockquote.blockquote
+            p.mb-0.small.text-info #{data["description"]}  
+          if back != 'nothing'
+            a.btn.btn-dark.text-light(type="button", data-uid=data["template"], data-back="nothing", data-toggle="modal", data-target="#subflow")
+              i.fas.fa-arrow-left
+              span.ml-3    
+              | Back        
+        br     
+        ul.timeline
+          if data["items"] != null && data["items"] != undefined
+            each item in data["items"]  
+             include flow_item
+        br          
             
 
                

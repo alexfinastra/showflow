@@ -14,106 +14,80 @@ var underscore = require("underscore");
 
 var authentication_mdl = require('../middlewares/authentication');
 var Usecase = require('../models/usecase');
+var Storage = require('../middlewares/storage');
 
 router.get('/', function(req, res, next) {
   res.render('usecases', {data: null});      
 });
 
-router.get('/tree', function(req, res){  
-  files = to_tree("reference/usecases/", [])  
-  res.json({tree: files});
+router.get('/tree', function(req, res){
+  var usecases = [];
+  db.listCollections().toArray(function(err, collections){     
+    if(collections.length == 0){ res.json({tree: usecases}); }
+
+    relevant = collections.filter( function(c){ return c.name.indexOf("usecases") > -1 })
+    if(relevant.length == 0){ res.json({tree: usecases}); }
+
+    var total = relevant.length - 1;
+    relevant.forEach(function(collection, index){ 
+      console.log("-----> Load documents from collection " + collection.name + " " + index + " from " + total)
+      var storage = new Storage(collection.name);
+      var env = collection.name.replace("_usecases","");        
+        
+      storage.listDoc( {"uid":1,"group":1, "use_case":1, "_id":0}, {"type": "usecase"}, {"group": -1},  function(docs){
+        console.log("-----> Get list of "+ docs.length + " for " + env);
+        groups = [...new Set(docs.map(item => item["group"] ))];
+        usecases.push({ "text" : "<span class= 'font-weight-bold ml-2'>" + env + "</span>",
+                        "key": env,
+                        "selectable": false,
+                        "state": { "expanded": false, "selected": false },
+                        "nodes" : groups.map(function(g){
+                                      return {
+                                        "text": g, 
+                                        "selectable": false, 
+                                        "state": {"expanded": false, "selected": false }, 
+                                        "key": g,
+                                        "nodes": docs.filter(function(d){return d["group"] == g}).map(function(doc){
+                                          return {
+                                            "text": doc["use_case"], 
+                                            "selectable": true, 
+                                            "state": { "selected": false }, 
+                                            "key": doc["uid"]} 
+                                        })
+                                      } 
+                                    })
+                        });
+    
+          if(total == index){
+            res.json({tree: usecases});      
+          }
+        })
+    })
+  });
 });
 
-router.get('/template/:folder/:name', function(req, res, next) {
-  var usecase_template = appRoot + "/reference/usecases/"+ req.params["folder"] + "/" + req.params["name"] 
-  console.log("Usecase flow " + usecase_template);
-
-  var usecase = new Usecase(usecase_template);  
-  res.render('usecases', { data: usecase._flow });     
+router.get('/template/:env/:uid', function(req, res, next) {
+  var storage = new Storage(req.params["env"] + "_usecases");
+  storage.getDoc({"type": "usecase", "uid": req.params["uid"]}, function(doc){
+    var usecase = new Usecase(doc);  
+    res.render('usecases', { env: req.params["env"], data: usecase._flow });     
+  })
 });
 
-router.get('/subflow/:name/:back', function(req, res, next) {
-  var usecase_template = appRoot + "/reference/subflows/"+ req.params["name"] + ".json"
-  console.log("Usecase flow " + usecase_template);
-
-  var usecase = new Usecase(usecase_template);  
-  res.render('subflow', { data: usecase._flow, back: req.params["back"]  });     
+router.get('/subflow/:env/:uid/:back', function(req, res, next) {
+  var storage = new Storage(req.params["env"] + "_usecases");
+  storage.getDoc({"type": "subflow", "uid": req.params["uid"]}, function(doc){
+    var usecase = new Usecase(doc);  
+    res.render('subflow', {env: req.params["env"], data: usecase._flow, back: req.params["back"]  });     
+  })
 });
 
-router.get('/flows/:name', function(req, res, next) {
-  var usecase_template = appRoot + "/reference/flows/"+ req.params["name"]
-  console.log("Show full flow " + usecase_template);
-
-  var usecase = new Usecase(usecase_template);  
-  res.render('usecases', { data: usecase._flow  });     
+router.get('/flows/:env/:uid', function(req, res, next) {
+  var storage = new Storage(req.params["env"] + "_usecases");
+  storage.getDoc({"type": "usecase", "uid": req.params["uid"]}, function(doc){
+    var usecase = new Usecase(doc);  
+    res.render('usecases', {env: req.params["env"], data: usecase._flow });     
+  })     
 });
-
 
 module.exports = router;
-
-
-const to_tree = (dir, filelist = []) => {
-  const files = fs.readdirSync(dir);
-  for (const file of files) {
-    const dirFile = path.join(dir, file);
-    const dirent = fs.statSync(dirFile);
-    if (dirent.isDirectory()) {
-      console.log('directory', path.join(dir, file));
-      var odir = {
-        "text" : "<span class= 'font-weight-bold ml-2'>" + file + "</span>",
-        "key": file,
-        "selectable": false,
-        "state": {
-          "expanded": false,
-          "selected": false
-        },
-        "nodes" : []
-      }
-      odir["nodes"] = to_tree(dirFile, dir.files);
-      filelist.push(odir);
-    } else {
-      filelist.push({      
-          "text": file.replace(".json", ""),
-          "selectable": true,
-          "state": { "selected": false },
-          "key": file
-        });
-    }
-  }
-  return filelist;
-};
-
-
-var populate_rules = function(){
-  var rules = new json.File(appRoot + "/db/properties/rules_index.json" );
-  rules.readSync();
-
-  var ids = Object.keys(rules.data)
-  console.log(" +++ Keys are "+ ids)
-  for(var i=0; i<ids.length; i++){
-    rules.set(ids[i] + ".active", true)
-    rules.set(ids[i]+ ".connected", true)
-    rules.set(ids[i]+ ".req_fields", "")
-    rules.set(ids[i]+ ".auditmsg", [])
-    rules.set(ids[i]+ ".logpattern", [])
-    rules.set(ids[i]+ ".mid", [])
-    rules.set(ids[i]+ ".flow_item", {})
-    rules.set(ids[i]+ ".flow_item.step", 0)
-    rules.set(ids[i]+ ".flow_item.type", "rule" )
-    rules.set(ids[i]+ ".flow_item.title", rules.get(ids[i]+".name"))
-    rules.set(ids[i]+ ".flow_item.description", "")
-    rules.set(ids[i]+ ".flow_item.uid", ids[i])
-    rules.set(ids[i]+ ".flow_item.request_protocol", "Java")
-    rules.set(ids[i]+ ".flow_item.direction", "I")
-    rules.set(ids[i]+ ".flow_item.request_connections_point", "")
-    rules.set(ids[i]+ ".flow_item.interface_name", "Rules")
-    rules.set(ids[i]+ ".flow_item.status_class", "secondary")
-    rules.set(ids[i]+ ".flow_item.office", "***")
-    rules.set(ids[i]+ ".flow_item.interface_type", "Business Rule")
-    rules.set(ids[i]+ ".flow_item.interface_sub_type", "")
-    rules.set(ids[i]+ ".flow_item.request_format_type", "PDO")
-    rules.writeSync();
-  }
-  
-  
-}

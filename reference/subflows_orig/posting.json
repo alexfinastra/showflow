@@ -1,0 +1,61 @@
+{
+  "type": "subflow",
+  "name": "Posting",
+  "guide_url": "",
+  "customization": "",
+  "template": "/subflows/posting.json",
+  "description": "GPP triggers the relevant interface to perform the required posting.",
+  "use_case": "subflow",
+  "flowitems": [    
+    {
+      "type": "rule-system",
+      "group": "Posting",      
+      "timestamp": "",
+      "name": "Posting Type Selection",
+      "description": "", 
+      "uid": "postingtypeselection",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "rule-business-optional",
+      "group": "Posting",      
+      "timestamp": "",
+      "name": "Posting Suspence Account Selection",
+      "description": "", 
+      "uid": "postingsuspenceaccountselection",
+      "features": "",
+      "activities": ""    
+    },
+    {
+      "type": "rule-system",
+      "group": "Posting",      
+      "timestamp": "",
+      "name": "Inetrface Selection",
+      "description": "", 
+      "uid": "interfaceselection",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Posting",       
+      "timestamp": "",
+      "name": "Wait Posting",
+      "description": "Available action buttons are : Release and Cancel",
+      "uid": "waitposting",
+      "features": "",
+      "activities": ""
+    } ,
+    {
+      "type": "interface",
+      "group": "Posting",      
+      "timestamp": "",
+      "name": "Posting Interface",
+      "description": "", 
+      "uid": "interfaceposting",
+      "features": "flowmanagement-posting",
+      "activities": ""
+    }
+  ]
+}

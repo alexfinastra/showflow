@@ -21,12 +21,12 @@ var Storage = require('../middlewares/storage');
 router.get("/parsefile/:filename", function(req, res){
   console.log("Parse File request " + req.params.filename)
   // TODO should be backgroung task here
-  parseTrace(req.params.filename);
+  //parseTrace(req.params.filename);
   res.redirect("/usecases")
 })
 
 router.get("/upload", function(req, res, next){
-  res.redirect("usecases")
+  res.redirect("/usecases")
 });
 
 router.post('/upload/:uid', function(req, res){      
@@ -76,6 +76,7 @@ module.exports = router;
 ////////////////////////////////////////////////////////////////////////////////
 var parseTrace = function(filename){ 
   var lineNr = 0, flowData = [], context = "";
+  var new_mids = [];
   var env = filename.split('-')[0]
   var s = fs.createReadStream(appRoot + "/temp/" + filename)
     .pipe(es.split())
@@ -84,9 +85,13 @@ var parseTrace = function(filename){
         s.pause();
         lineNr += 1;
         str = beautifier(line.split(/\s+/) );          
-       
+        
         if ( str.length > 0 ){           
           formatted = mapSPtrace(str);
+          if (new_mids.indexOf(formatted[3]) == -1){
+            new_mids.push(Formatted[3]);
+          }
+
           len = flowData.length; 
           if(len > 0){
             if(formatted[4] == flowData[len-1][4]){
@@ -114,11 +119,58 @@ var parseTrace = function(filename){
         if(flowData.length > 0){    
           console.log("-- Just before Payment Flow --")                    
           //fs.writeFileSync(appRoot + "/temp/traces_data.csv", flowData.join('\n') , 'utf-8'); 
-          storeFlowData(env, flowData);         
+          storeFlowData(env, flowData, new_mids);         
         }        
         //onsole.log('Read entire file.')
     })
   );  
+}
+
+var parseFlowsXML = function(filename){
+  var lineNr = 0;
+  var flowBeans = [];
+
+  var env = filename.split('-')[0]
+  var s = fs.createReadStream(appRoot + "/temp/" + filename)
+    .pipe(es.split())
+    .pipe(es.mapSync(function(line){
+        // pause the readstream
+        s.pause();
+        lineNr += 1;
+        flowBeans.push(line);
+        s.resume();          
+    })
+    .on('error', function(err){
+        console.log('Error while reading file.', err);
+    })
+    .on('end', function(){
+        if(flowBeans.length > 0){    
+          console.log("-- Just before Payment Flow --")                    
+          //fs.writeFileSync(appRoot + "/temp/traces_data.csv", flowData.join('\n') , 'utf-8'); 
+          console.log("-----> Also wir haben ein Flow Beans :" + flowBeans.length)  
+          storeFlows(env, flowBeans);
+        }        
+        //onsole.log('Read entire file.')
+    })
+  );  
+}
+
+var storeFlows = function(env, flowBeans=[]){
+  var parser = new xml2js.Parser({"attrkey": "attr"});
+  parser.parseString(flowBeans.join("\n"), function (err, result) {
+    //console.dir(result["beans"]["bean"]);
+    if(result["beans"] != undefined && result["beans"]["bean"] != undefined){
+      console.log("-----> Die Anzahl der Bohnen ist gleich :" + result["beans"]["bean"].length)
+      result["beans"]["bean"].forEach(function(bean){
+        if(bean["attr"] != undefined){
+          console.log("-----> Die neu Bohnen ist : " + bean["attr"]["id"]);
+          console.dir(bean["property"]);  
+        }
+      })
+      
+    }
+  });
+
 }
 
 var beautifier = function(str){  
@@ -229,11 +281,10 @@ var compose_activity = function(str, ind){
 }
 
 
-var storeFlowData = function(env, flowData = []){
+var storeFlowData = function(env, flowData = [], new_mids = []){
   console.log("------ And flow data length is " + flowData.length)
   var storage = new Storage();
   var docs = {}; 
-  var new_mids = [];
 
   flowData.forEach(function(line){
     var mid = line[3];

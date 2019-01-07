@@ -1,6 +1,6 @@
 {
   "name": "showflow",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www"
@@ -43,7 +43,8 @@
     "tiny-worker": "^2.1.1",
     "underscore": "^1.9.1",
     "xlsx": "^0.11.10",
-    "xml-parse": "^0.3.1"
+    "xml-parse": "^0.3.1",
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
     "standard": "^10.0.3"

@@ -1,0 +1,31 @@
+{
+  "type": "subflow",
+  "name": "Debit Authorization",
+  "guide_url": "",
+  "customization": "",
+  "template": "/subflows/debitauthorization.json",
+  "description": "GPP checks if the sender of the payment is authorized to debit the account which does not belong to the sender.",
+  "use_case": "subflow",
+  "flowitems": [    
+    {
+      "type": "rule-business-optional",
+      "group": "Debit Authorization",      
+      "timestamp": "",
+      "name": "Debit Authorization Bypass",
+      "description": "", 
+      "uid": "debitauthorizationbypass",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "service",
+      "group": "Debit Authorization",      
+      "timestamp": "",
+      "name": "Debit Authorization",
+      "description": "", 
+      "uid": "debitauthorizationservice",
+      "features": "flowmanagement-repair",
+      "activities": ""    
+    }
+  ]
+}

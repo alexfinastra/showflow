@@ -20,28 +20,30 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/tree', function(req, res){
-  var payments_strg = new Storage();
-  console.log("-----> We should load payments from : " + payments_strg.collection)
-  payments_strg.listDoc({}, {"env":1,"mid":1,"_id":0}, function(docs){
-    var env = "";
-    payments = [];
-    console.log("----> Selected from db " + docs.length)
-    docs.sort((a,b) => {a["env"]<b["env"] ? 1 : (a["env"]>b["env"] ? -1 : 0)}).forEach(function(doc){
-      console.log("-----> Received : " + doc["env"] + " - " + doc["mid"])
-      if(doc["env"] != env){
-        env = doc["env"];
+  var payments = [];
+  db.listCollections().toArray(function(err, collections){ 
+    relevant = collections.filter( function(c){ return c.name.indexOf("payments") > -1 })
+    if(relevant.length == 0){ res.json({tree: payments}); }
+    
+    var total = relevant.length - 1;
+    relevant.forEach(function(collection, index){ 
+      console.log("-----> Load documents from collection " + collection.name + "")      
+      var strg = new Storage(collection.name);
+      var env = collection.name.replace("_payments","");        
+      
+      strg.listDoc( {"mid":1,"_id":0}, {}, {"last_update": -1},  function(docs){
+        console.log("-----> Get list of "+ docs.length + " for " + env);
         payments.push({ "text" : "<span class= 'font-weight-bold ml-2'>" + env + "</span>",
                         "key": env,
                         "selectable": false,
                         "state": { "expanded": false, "selected": false },
-                        "nodes" : []
+                        "nodes" : docs.map(function(doc){ return {"text": doc["mid"], "selectable": true, "state": { "selected": false }, "key": doc["mid"]} })
                       });
-       
-      }
-      payments[payments.length-1]["nodes"].push({"text": doc["mid"], "selectable": true, "state": { "selected": false }, "key": doc["mid"]});      
+        if(total == index){
+          res.json({tree: payments});      
+        }
+      })      
     })
-    
-    res.json({tree: payments});  
   });
 });
 

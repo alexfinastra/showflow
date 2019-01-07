@@ -1,0 +1,31 @@
+{
+  "type": "subflow",
+  "name": "subflow_name",
+  "guide_url": "",
+  "customization": "",
+  "template": "/subflows/template_name.json",
+  "description": "template_description",
+  "use_case": "subflow",
+  "flowitems": [    
+    {
+      "type": "rule-business-optional",
+      "group": "subflow_name",      
+      "timestamp": "",
+      "name": "item_name",
+      "description": "", 
+      "uid": "item_name_small",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "service",
+      "group": "subflow_name",      
+      "timestamp": "",
+      "name": "item_name",
+      "description": "", 
+      "uid": "item_name",
+      "features": "flowmanagement-repair",
+      "activities": ""    
+    }
+  ]
+}

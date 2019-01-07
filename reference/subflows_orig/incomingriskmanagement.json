@@ -1,0 +1,81 @@
+{
+  "type": "subflow",
+  "name": "Incoming Risk Management",
+  "guide_url": "",
+  "customization": "",
+  "template": "/subflows/incomingriskmanagement.json",
+  "description": "Incoming Risk Management covers Private Integrated Services Network (PISN) logic and Liquidity and Risk Management, which is an optional part of the Single Payments Flow invocation.",
+  "use_case": "subflow",
+  "flowitems": [    
+    {
+      "type": "rule-business-optional",
+      "group": "Incoming Risk Management",      
+      "timestamp": "",
+      "name": "Bypass party limits",
+      "description": "", 
+      "uid": "bypasspartylimits",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "service",
+      "group": "Incoming Risk Management",      
+      "timestamp": "",
+      "name": "Validate party limits",
+      "description": "", 
+      "uid": "validatepartylimits",
+      "features": "",
+      "activities": ""    
+    },
+    {
+      "type": "service",
+      "group": "Incoming Risk Management",      
+      "timestamp": "",
+      "name": "PI/SN matching process",
+      "description": "", 
+      "uid": "pisnmatchingprocess",
+      "features": "",
+      "activities": ""    
+    },
+    {
+      "type": "service",
+      "group": "Incoming Risk Management",      
+      "timestamp": "",
+      "name": "Sender Credit Line Check",
+      "description": "", 
+      "uid": "sendercreditlinecheck",
+      "features": "",
+      "activities": ""    
+    },
+    {
+      "type": "service",
+      "group": "Incoming Risk Management",      
+      "timestamp": "",
+      "name": "Anticipated Funds Matching",
+      "description": "", 
+      "uid": "anticipatedfundsmatching",
+      "features": "",
+      "activities": ""    
+    },
+    {
+      "type": "service",
+      "group": "Incoming Risk Management",      
+      "timestamp": "",
+      "name": "Settlement Confirmation Matching",
+      "description": "", 
+      "uid": "settlementconfirmationmatching",
+      "features": "",
+      "activities": ""    
+    },
+    {
+      "type": "service",
+      "group": "Incoming Risk Management",      
+      "timestamp": "",
+      "name": "Ledger Confirmation Matching",
+      "description": "", 
+      "uid": "ledgerconfirmationmatching",
+      "features": "",
+      "activities": ""    
+    }
+  ]
+}

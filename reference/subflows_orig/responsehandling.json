@@ -1,0 +1,61 @@
+{
+  "type": "subflow",
+  "name": "Response Handling",
+  "guide_url": "",
+  "customization": "",
+  "template": "/subflows/responsehandling.json",
+  "description": "GPP matches the response to the file.",
+  "use_case": "subflow",
+  "flowitems": [    
+    {
+      "type": "subflow",
+      "group": "Response Handling",      
+      "timestamp": "",
+      "name": "Fees",
+      "description": "GPP enables a financial institution to apply fees and charges for each transaction during the transaction processing.", 
+      "uid": "fees",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "rule-business-mandatory",
+      "group": "Response Handling",      
+      "timestamp": "",
+      "name": "Debit Transaction Code",
+      "description": "GPP provides rule based mechanism to assign the debit and credit transaction codes. The transaction codes can be set based on various payment attributes, for example, MOP, product code, currency. These transaction codes are used during posting.", 
+      "uid": "debittransactioncode",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "rule-business-mandatory",
+      "group": "Response Handling",      
+      "timestamp": "",
+      "name": "Credit Transaction Code",
+      "description": "GPP provides rule based mechanism to assign the debit and credit transaction codes. The transaction codes can be set based on various payment attributes, for example, MOP, product code, currency. These transaction codes are used during posting.", 
+      "uid": "credittransactioncode",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "subflow",
+      "group": "Response Handling",      
+      "timestamp": "",
+      "name": "Posting",
+      "description": "GPP triggers the relevant interface to perform the required posting.", 
+      "uid": "posting",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "service",
+      "group": "Response Handling",      
+      "timestamp": "",
+      "name": "Flow Management",
+      "description": "", 
+      "uid": "flowmanagement",
+      "features": "flowmanagement-rejected",
+      "activities": ""
+    }
+  ]
+}
