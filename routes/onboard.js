@@ -34,7 +34,7 @@ router.post('/upload/:uid', function(req, res){
   var filename = ""
 
   //form.multiples = true;
-  var dir = path.join(appRoot + '/temp/' );
+  var dir = path.join(appRoot + '/uploads/' );
   if (!fs.existsSync(dir)){   fs.mkdirSync(dir);  }
   form.uploadDir = dir;  
   form.env = req.params.uid

@@ -517,7 +517,7 @@ function startParser(){
 	  var filesPath = path.resolve(__dirname)
 		console.log("Start parser for : " + filesPath)
 		
-		var watcherLog = chokidar.watch(filesPath + "/temp/*.log" , {
+		var watcherLog = chokidar.watch(filesPath + "/uploads/*.log" , {
 		  ignored: /(^|[\/\\])\../,
 		  persistent: true
 		});
@@ -526,7 +526,7 @@ function startParser(){
 			console.log("Log file has been added :" + path);
 		});
 
-		var watcherXML = chokidar.watch(filesPath + "/temp/*.xml" , {
+		var watcherXML = chokidar.watch(filesPath + "/uploads/*.xml" , {
 		  ignored: /(^|[\/\\])\../,
 		  persistent: true
 		});
