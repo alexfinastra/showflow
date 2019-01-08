@@ -298,6 +298,7 @@ $(document).ready(function(){
 	      if(($subflow_modal.data('bs.modal') || {})._isShown == false){
 	      	$subflow_modal
 	        	.removeClass('modal-scrollfix')
+	        	.modal('handleUpdate')
 	        	.modal('show');
 	        }
 	    });
