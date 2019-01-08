@@ -19,7 +19,8 @@ var Usecase = require('../models/usecase');
 var Storage = require('../middlewares/storage');
 
 router.get("/parsefile/:filename", function(req, res){
-  console.log("Parse File request " + req.params.filename)
+  var dir = path.join(appRoot + '/uploads/' );
+  console.log("Parse File request " + req.params.filename + "file exists : " + fs.existsSync(dir + req.params.filename))
   // TODO should be backgroung task here
   //parseTrace(req.params.filename);
   res.redirect("/usecases")
