@@ -18,7 +18,8 @@
               i.fas.fa-arrow-left
               span.ml-3    
               | Back        
-        br     
+        br
+        - var subflow = true     
         ul.timeline
           if data["items"] != null && data["items"] != undefined
             each item in data["items"]  

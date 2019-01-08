@@ -17,8 +17,14 @@ li.timeline-item
       br
       if item["features"].indexOf("flowmanagement") > -1
         include flowstopper
-      button.btn.btn-dark.float-right.btn-subflow(type="button", data-env=env, data-uid=item["uid"], id=item["uid"], data-back="nothing", data-toggle="modal", data-target="#subflow")
-        i.fas.fa-box-open
-        span.ml-2 
-        | show subflow
+      if subflow == undefined
+        button.btn.btn-dark.float-right.btn-subflow(type="button", data-env=env, data-uid=item["uid"], id=item["uid"], data-back="nothing", data-toggle="modal", data-target="#subflow")
+          i.fas.fa-box-open
+          span.ml-2 
+          | show subflow
+      else
+        button.btn.btn-dark.float-right.btn-subflow(type="button", data-env=env, data-uid=item["uid"], id=item["uid"], data-back="nothing", data-target="#subflow")
+          i.fas.fa-box-open
+          span.ml-2 
+          | show subflow
       
