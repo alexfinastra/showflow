@@ -32,6 +32,7 @@ router.get("/upload", function(req, res, next){
 router.post('/upload/:uid', function(req, res){      
   var form = new formidable.IncomingForm();
   var filename = ""
+  var filepath = "";
 
   //form.multiples = true;
   var dir = path.join(appRoot + '/uploads/' );
@@ -53,6 +54,7 @@ router.post('/upload/:uid', function(req, res){
       }
       fs.renameSync(file.path, path.join(form.uploadDir, new_filename));
       filename = new_filename;
+      filepath = path.join(form.uploadDir, new_filename)
     }else{
       console.log("File was taken")
     } 
@@ -64,7 +66,7 @@ router.post('/upload/:uid', function(req, res){
 
   // once all the files have been uploaded, send a response to the client
   form.on('end', function() {     
-    console.log("End upload");  
+    console.log("End upload : " + filepath );  
     res.end(filename);
   });
 })

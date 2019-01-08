@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-4.2.xsd
+	    http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/jee
+		http://www.springframework.org/schema/jee/spring-jee-4.2.xsd         
+		http://cxf.apache.org/jaxws
+		http://cxf.apache.org/schemas/jaxws.xsd>
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.2.xsd ">
+
+
+	<bean id="OutwardImmediatePaymentsFlow"
+		class="backend.paymentprocess.flow.core.coordinator.ip.OutwardImmediatePaymentsFlow"
+		lazy-init="true">
+		<property name="flowName" value="Outward Immediate Payments"></property>
+		<property name="flowSteps">
+			<util:list>
+				<ref bean="paymentInitiationIPSubFlow" />
+				<ref bean="partyProcessingSRCFlowStep" />
+				<ref bean="debitCurrencyConversionFlowStep" />
+				<ref bean="mopSelectionFlowStep" />
+				<ref bean="partyDetailsEnrichmentFlowStep" />
+				<ref bean="creditCurrencyConversionFlowStep" />
+				<ref bean="destinationMOPSTPValidationFlowStep" /> 
+				<ref bean="debitTransactionCodeFlowStep" /> 
+				<ref bean="creditTransactionCodeFlowStep" />
+				<ref bean="validationRuleFlowStep" />
+				<ref bean="feesCalculationFlowStep" />
+				<ref bean="balanceInquiryFlowStep"/>
+				<ref bean="stopFlagsFlowStep" />
+				<ref bean="complianceCheckPrePostingFlowStep" />
+				<ref bean="OFACHitFlowStep"/>
+				<ref bean="capacityCheckFlowStep" />
+				<ref bean="postingFlowStep" />
+				<ref bean="manualPostingStepIP" />
+				<ref bean="transactionIDFormatValidationFlowStepIP" />
+				<ref bean="formatOutAndTransmissionNppIpOutwardFlowStep" />
+				<!-- Add new step wait ACK -->
+			</util:list>
+		</property>
+	</bean>
+	
+	<bean id="OutwardIPReturnFlow"
+		class="backend.paymentprocess.flow.core.coordinator.ip.OutwardImmediatePaymentsFlow"
+		lazy-init="true">
+		<property name="flowName" value="Outward IP Return"></property>
+		<property name="flowSteps">
+			<util:list>
+				<ref bean="paymentInitiationIPSubFlow" />
+			 	<ref bean="mappingAndMatchingFlowStep" />
+				<ref bean="partyProcessingSRCFlowStep" />
+				<ref bean="stopFlagsFlowStepIP" />
+				<ref bean="debitCurrencyConversionFlowStep" />
+				<ref bean="mopSelectionFlowStep" />
+				<ref bean="stopFlagsFlowStepIP" />
+				<ref bean="partyDetailsEnrichmentFlowStep" />
+				<ref bean="creditCurrencyConversionFlowStep" />
+				<ref bean="destinationMOPSTPValidationFlowStep" /> 
+				<ref bean="debitTransactionCodeFlowStep" /> 
+				<ref bean="creditTransactionCodeFlowStep" />
+				<ref bean="validationRuleFlowStep" />
+				<ref bean="feesCalculationFlowStep" />
+				<ref bean="balanceInquiryFlowStep"/>
+				<ref bean="stopFlagsFlowStep" />
+				<ref bean="complianceCheckPrePostingFlowStep" />
+				<ref bean="wareHouseImmediateFlowStep" />
+				<ref bean="OFACHitFlowStep"/> 
+				<ref bean="capacityCheckFlowStep" />
+				<ref bean="postingFlowStep" />
+				<ref bean="manualPostingStepIP" />
+				<ref bean="transactionIDFormatValidationFlowStepIP" />
+				<ref bean="formatOutAndTransmissionNppIpOutwardFlowStep" />
+			</util:list>
+		</property>
+	</bean>
+	
+	<bean id="GenericOutwardImmediatePaymentsFlow"
+		class="backend.paymentprocess.flow.core.coordinator.ip.OutwardImmediatePaymentsFlow"
+		lazy-init="true">
+		<property name="flowName" value="Generic Outward Immediate Payments"></property>
+		<property name="flowSteps">
+			<util:list>
+				<ref bean="paymentInitiationIPSubFlow" />
+ 				<ref bean="partyProcessingSRCFlowStep" />
+				<ref bean="stopFlagsFlowStepIP" />
+				<ref bean="debitCurrencyConversionFlowStep" />
+				<ref bean="mopSelectionFlowStep" />
+				<ref bean="checkClearingAbortNotificationStep" />
+				<ref bean="stopFlagsFlowStepIP" />
+				<ref bean="partyDetailsEnrichmentFlowStep" />
+				<ref bean="creditCurrencyConversionFlowStep" />
+				<ref bean="destinationMOPSTPValidationFlowStep" /> 
+				<ref bean="debitTransactionCodeFlowStep" /> 
+				<ref bean="creditTransactionCodeFlowStep" />
+				<ref bean="validationRuleFlowStep" />
+				<ref bean="feesCalculationFlowStep" />
+				<ref bean="ComplianceCheckPrePostingFlowStepIP" />
+				<ref bean="checkClearingAbortNotificationStep" />
+				<ref bean="BISubFlow"/>
+				<ref bean="ComplianceCheckPrePostingFlowStepIP" />
+				<ref bean="checkClearingAbortNotificationStep" />
+				<ref bean="wareHouseImmediateFlowStep" />
+				<ref bean="OFACHitFlowStep"/> 
+				<ref bean="checkClearingAbortNotificationStep" />
+				<ref bean="capacityCheckFlowStep" />
+				<ref bean="postingFlowStep" />
+				<ref bean="checkClearingAbortNotificationStep" />
+				<ref bean="manualPostingStepIP" />
+				<ref bean="checkClearingAbortNotificationStep" />
+				<ref bean="transactionIDFormatValidationFlowStepIP" />
+				<ref bean="formatOutAndTransmissionNppIpOutwardFlowStep" />
+				<ref bean="checkOutwardRemitanceNotificationsFlowStep" />
+			</util:list>
+		</property>
+	</bean>
+	
+	
+	<bean id="OutwardIpServiceMessagesFlow"   
+              class="backend.paymentprocess.flow.core.coordinator.ip.OutwardImmediatePaymentsFlow"
+              lazy-init="true">
+              <property name="flowName" value="Outward Ip Service Messages"></property>
+              <property name="flowSteps">
+                     <util:list>
+                           <ref bean="paymentInitiationIPSubFlowRFP" />
+                           <ref bean="paymentClassificationFlowStep" />				
+                           <ref bean="mappingAndMatchingFlowStep" />
+                           <ref bean="cancellationRequestValidationFlowStep" />
+                           <ref bean="CheckOrigStatusStepGeneric" />
+												   <ref bean="ComplianceCheckPrePostingFlowStepIP" />                           
+						                           <ref bean="mopSelectionFlowStep" />
+												   <ref bean="validationRuleFlowStep" />
+												   <ref bean="destinationMOPSTPValidationFlowStep" /> 
+												   <ref bean="transactionIDFormatValidationFlowStepIP" />
+                           <ref bean="formatOutAndTransmissionNppIpOutwardFlowStep" />
+                     </util:list>
+              </property>
+   </bean>
+
+  <bean id="paymentInitiationIPSubFlowRFP" class="backend.paymentprocess.flow.core.coordinator.GPPFlow"  
+		lazy-init="true" scope="prototype">
+		<property name="flowName" value="Payment Initiation (IP Pain014)"></property>
+		<property name="flowSteps">
+			<util:list>
+				<ref bean="mapPaymentInfoOutIPSubFlow" />
+				<ref bean="sourceMOPSTPValidationFlowStep" />
+				<ref bean="enrichAndRepairFlowStep" />
+				<ref bean="stpValidationFlowStep" />
+				<ref bean="duplicateCheckFlowStep" />
+			</util:list>
+		</property>
+	</bean> 
+	
+	<bean id="RequestForPaymentOutwardFlow"
+		class="backend.paymentprocess.flow.core.coordinator.ip.RequestForPaymentFlow"
+		lazy-init="true">
+		<property name="flowName" value="Request For Payment Outward"></property>
+		<property name="flowSteps">
+			<util:list>
+				<ref bean="paymentInitiationIPSubFlow" />
+				<ref bean="partyProcessingDDFlowStep" />
+				<ref bean="loadDebitCustomerFlowStep" />											
+				<ref bean="creditCustomerPopulationSubFlowIP" />
+				<ref bean="mopSelectionFlowStep" />
+				<ref bean="destinationMOPSTPValidationFlowStep" /> 
+				<ref bean="stopFlagsFlowStepIP" />
+				<ref bean="validationRuleFlowStep" />
+				<ref bean="preventSTPIPSubFlow" />
+				<ref bean="feesCalculationFlowStep" />
+				<ref bean="complianceCheckPrePostingFlowStep" />
+				<ref bean="wareHouseImmediateFlowStep" />
+				<ref bean="OFACHitFlowStep"/> 
+				<ref bean="transactionIDFormatValidationFlowStepIP" />
+				<ref bean="formatOutAndTransmissionNppIpOutwardFlowStep" />
+				<ref bean="responseMatchingCheckFlowStep" />
+			</util:list>
+		</property>
+	</bean>
+	
+	<bean id="IntermediateOutwardImmediatePaymentsFlow"
+              class="backend.paymentprocess.flow.core.coordinator.ip.CheckResponsesImmediatePaymentsFlow"
+              lazy-init="true">
+              <property name="flowName" value="Intermediate Outward Immediate Payments"></property>
+              <property name="flowSteps">
+                    <util:list>
+											<ref bean="checkCompliancResponseStep" />
+											<ref bean="checkClearingAbortNotificationStep" />
+											<ref bean="OFACHitFlowStep"/> 
+											<ref bean="BISubFlow"/>
+											<ref bean="checkClearingAbortNotificationStep" />
+											<ref bean="wareHouseImmediateFlowStep" />
+											<ref bean="capacityCheckFlowStep" />
+											<ref bean="postingFlowStep" />
+											<ref bean="checkClearingAbortNotificationStep" />
+											<ref bean="manualPostingStepIP" />
+											<ref bean="checkClearingAbortNotificationStep" />
+											<ref bean="transactionIDFormatValidationFlowStepIP" />
+											<ref bean="formatOutAndTransmissionNppIpOutwardFlowStep" />
+                    </util:list>
+              </property>
+  </bean>
+
+	<bean id="IntermediateOutwardIpServiceMessagesFlow"
+              class="backend.paymentprocess.flow.core.coordinator.ip.CheckResponsesImmediatePaymentsFlow"
+              lazy-init="true">
+              <property name="flowName" value="Intermediate Outward Ip Service Messages"></property>
+              <property name="flowSteps">
+                    <util:list>
+											 <ref bean="checkCompliancResponseStep" />
+											  <ref bean="checkClearingAbortNotificationStep" />
+											   <ref bean="OFACHitFlowStep"/> 
+						                       <ref bean="mopSelectionFlowStep" />
+											   <ref bean="validationRuleFlowStep" />
+											   <ref bean="destinationMOPSTPValidationFlowStep" /> 
+											   <ref bean="transactionIDFormatValidationFlowStepIP" />
+                       <ref bean="formatOutAndTransmissionNppIpOutwardFlowStep" />
+                    </util:list>
+              </property>
+       </bean>
+
+
+       <bean id="FinalOutwardImmediatePaymentsFlow"
+              class="backend.paymentprocess.flow.core.coordinator.ip.ClearingAckImmediatePaymentsFlow"
+              lazy-init="true">
+              <property name="flowName" value="Final Outward Immediate Payments"></property>
+              <property name="flowSteps">
+                     <util:list>
+                           <ref bean="postingFlowStep" />
+                           <ref bean="manualPostingStepIP" />
+                           <ref bean="transactionIDFormatValidationFlowStepIP" />
+                           <ref bean="formatOutAndTransmissionNppIpOutwardFlowStep" />
+                     </util:list>
+              </property>
+       </bean>
+	
+
+	<bean id="ClearingAckImmediatePaymentsFlow"
+		class="backend.paymentprocess.flow.core.coordinator.ip.ClearingAckImmediatePaymentsFlow"
+		lazy-init="true">
+		<property name="flowName" value="IP settlement notification"></property>
+		<property name="flowSteps">
+			<util:list>
+				<ref bean="afterAckPostingFlowStep" />
+				<ref bean="manualPostingStepIP" />
+			</util:list>
+		</property>
+	</bean>
+   
+	<bean id="mapPaymentInfoOutIPSubFlow" class="backend.paymentprocess.flow.core.coordinator.GPPFlow"
+		lazy-init="true" scope="prototype">
+		<property name="flowName" value="Map Payment Info (IP)"></property>
+		<property name="flowSteps">
+			<util:list>
+				<ref bean="departmentSelectionFlowStep" />
+				<ref bean="businessAreaSelectionFlowStep" />
+				<ref bean="productAreaSelectionFlowStep" />
+			</util:list>
+		</property>
+	</bean>
+
+	<bean id="mappingAndFormattingSubFlowIP" class="backend.paymentprocess.flow.core.coordinator.ip.MappingAndFormattingSubFlowIP" 
+		lazy-init="true" scope="prototype">
+		<property name="flowName" value="Map And Formatting"></property>
+		<property name="flowSteps">
+			<util:list>
+				<ref bean="partyDetailsEnrichmentFlowStep" />
+				<ref bean="baseCurrencyConversionFlowStep" />
+			</util:list>
+		</property>
+	</bean>
+	 <bean id="BISubFlow" class="backend.paymentprocess.flow.core.coordinator.ip.BISubFlow"  
+		lazy-init="true" scope="prototype">
+		<property name="flowName" value="BI Sub Flow"></property>
+		<property name="flowSteps">
+			<util:list>
+				<ref bean="balanceInquiryFlowStep"/>
+				<ref bean="stopFlagsFlowStep" />
+			</util:list>
+		</property>
+	</bean> 
+
+
+	<bean id="preventSTPIPSubFlow" class="backend.paymentprocess.flow.core.coordinator.GPPFlow"
+		lazy-init="true" scope="prototype">
+		<property name="flowName" value="Prevent STP"></property>
+		<property name="flowSteps">
+			<util:list>
+				<ref bean="specialInstructionsFlowStep" />
+				<ref bean="validationRuleFlowStep" />
+			</util:list>
+		</property>
+	</bean>
+	
+	<bean id="replayNakFlow" class="backend.paymentprocess.flow.core.coordinator.ip.ReplayNakFlow"
+		lazy-init="true" scope="prototype">
+		<property name="flowName" value="replay NAK"></property>
+		<property name="flowSteps">
+			<util:list>
+				<ref bean="resendClearingRequestFlowStep" />
+			</util:list>
+		</property>
+	</bean>
+	
+	<bean id="rejectServiceReleaseFlow" class="backend.paymentprocess.flow.core.coordinator.ip.RejectServiceRelease" lazy-init="true" scope="prototype">
+		<property name="flowName" value="reject service release flow"/>
+		<property name="flowSteps">
+			<util:list>
+				<ref bean="flowCompletionSubFlow" />
+			</util:list>
+		</property>
+	</bean>		
+	
+	<bean id="OutwardImmediatePaymentsAfterAckFlow"
+		class="backend.paymentprocess.flow.core.coordinator.ip.OutwardImmediatePaymentsAfterAckFlow"
+		lazy-init="true">
+		<property name="flowName" value="Outward Immediate Payments After Ack"></property>
+		<property name="flowSteps">
+			<util:list>
+				<ref bean="feesCalculationFlowStep" />
+				<ref bean="postingFlowStep" />
+			</util:list>
+		</property>
+	</bean>
+</beans>
