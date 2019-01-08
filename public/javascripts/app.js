@@ -286,6 +286,7 @@ $(document).ready(function(){
 	var env = "";
 	// Show loader & then get content when modal is shown
 	$(document).on("click", ".btn-subflow", function(e){	
+	  e.preventDefault();
 	  env = $(e.target).data('env') != undefined ? $(e.target).data('env') : env;
 	  uid = $(e.target).data('uid') != undefined ? $(e.target).data('uid') : uid;
 	  back = $(e.target).data('back') != undefined ? $(e.target).data('back') : back;	  
