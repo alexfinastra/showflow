@@ -1,17 +1,20 @@
-var chokidar = require('chokidar');
+var method = Parser.prototype
+
+//var chokidar = require('chokidar');
 var path = require('path');
 var fs = require('fs');
 var fse = require('fs-extra')
 var es = require('event-stream');
 var underscore = require("underscore");
-var mongodb = require("mongodb");
-var ObjectID = mongodb.ObjectID;
+//var mongodb = require("mongodb");
+//var ObjectID = mongodb.ObjectID;
 var xml2js = require('xml2js');
 var json = require('json-file');
 
-var Usecase = require('./models/usecase');
-var Storage = require('./middlewares/storage');
+var Usecase = require('../models/usecase');
+var Storage = require('./storage');
 
+function Parser(){  }
 ////////////////////////////////////////////////////////////////////////////////
 // Helper functions
 ////////////////////////////////////////////////////////////////////////////////
@@ -332,13 +335,14 @@ var walkSync = function(dir, filelist) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-var parseConfig = function(filename){ 
+parseConfig = function(filename, cb){ 
   console.log("----> XML configurate file: " + filename);
   var parser = new xml2js.Parser({attrkey: "attr"});
 	fs.readFile(filename, function(err, data) {
 	    parser.parseString(data, function (err, result) {
 	    		buildBusinessFlows(filename, result);
 	        fs.unlinkSync(filename);
+          cb();
 	    });
 	});
 }
@@ -400,7 +404,7 @@ var getFlowItem = function(group_name, flowId, uid){
       "activities": ""
     }   
   } else {
-    var fpath = path.resolve(__dirname) + "/reference/flowsteps/"+ group_name.replace(" ", "_") +"_flowsteps.json";
+    var fpath = appRoot + "/reference/flowsteps/"+ group_name.replace(" ", "_") +"_flowsteps.json";
     if (!fs.existsSync(fpath)) {fs.writeFileSync(fpath, JSON.stringify({}), 'utf-8');}
 
     var flowitems = new json.File(fpath);
@@ -503,6 +507,20 @@ var parseEnviromentFlows = function(result){
 	console.log("-----> Process file with environemnt flows");
 }
 
+method.parse = function(filename, cb){
+  if(filename.indexOf(".xml") > -1){
+    parseConfig(filename, cb);
+  }
+
+  if(filename.indexOf(".log") > -1){
+    parseTrace(filename, cb);
+  }
+}
+module.exports = Parser;
+
+
+
+/*
 function startParser(){
 	mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://heroku_lmc8x7v4:emjfkgue1ijf6jqi78aq519gvs@ds139614.mlab.com:39614/heroku_lmc8x7v4", { useNewUrlParser: true }, function (err, client) {
 	  if (err) {
@@ -538,3 +556,4 @@ function startParser(){
 }
 
 startParser();
+*/
