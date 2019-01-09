@@ -1,9 +1,0 @@
-{
-  "type": "usecase",
-  "basic_use_case": "Inward Return from Clearing",
-  "guide_url": "/docs/GPP Business Guide Single Payments.pdf",  
-  "template": "/flows/single_payment_workflow.json",
-  "use_case": "Inward Returns",
-  "description": "This use case defines the inward returns from clearing for an outward clearing payment.",
-  "flowgroups": ["Payment Initiation","Debit Side processing"]
-}

@@ -50,6 +50,7 @@ router.get('/tree', function(req, res){
                                         "nodes": docs.filter(function(d){return d["group"] == g}).map(function(doc){
                                           return {
                                             "text": doc["use_case"], 
+                                            "env": env,
                                             "selectable": true, 
                                             "state": { "selected": false }, 
                                             "key": doc["uid"]} 

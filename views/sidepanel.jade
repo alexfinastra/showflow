@@ -3,10 +3,12 @@
     h5#tree_title.mb-2
       | List of basic use cases
     span#mid-search.mr-1
-      p.font-weight-bold.mb-2.text-success Search by MID 
+      p.font-weight-bold.mb-2.text-success Search Flow 
       .d-flex.justify-content-between
-        input#input-search.text-success.w-100(type='text', placeholder=' MID to search...', value='')
-        button#btn-clear-search.btn.btn-sm.ml-1.mr-1.text-success(type='button')
+        input#inputsearch.text-success.w-100(type='text', placeholder=' search something ...', value='')
+        button#btnsearch.btn.btn-sm.btn-success.ml-1.mr-1.text-white(type='button') 
+          i.fas.fa-search
+        button#btnclearsearch.btn.btn-sm.ml-1.mr-1.text-success(type='button')
           i.fas.fa-sync
     span#similarity-search.mr-1
       p.font-weight-bold.mb-2.text-success Similar flows in %

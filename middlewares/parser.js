@@ -18,7 +18,7 @@ function Parser(){  }
 ////////////////////////////////////////////////////////////////////////////////
 // Helper functions
 ////////////////////////////////////////////////////////////////////////////////
-var parseTrace = function(filename){ 
+var parseTrace = function(filename, cb){ 
   var lineNr = 0, flowData = [], context = "";
   splitter = filename.indexOf('/') > -1 ? "/" : "\\"
   filename_arr = filename.split(splitter)
@@ -61,7 +61,8 @@ var parseTrace = function(filename){
           console.log("-- Just before Payment Flow --")                    
           //fs.writeFileSync(appRoot + "/temp/traces_data.csv", flowData.join('\n') , 'utf-8'); 
           storeFlowData(env, flowData); 
-          fs.unlinkSync(filename);        
+          fs.unlinkSync(filename);
+          cb();        
         }        
         //onsole.log('Read entire file.')
     })
@@ -182,37 +183,54 @@ var storeFlowData = function(env, flowData = []){
   var new_mids = [];
   var date = new Date();
 
-  flowData.forEach(function(line){
-    var mid = line[3];
-    if(mid != "NO MID"){
-      if(docs[mid] == undefined){
-        storage.getDoc({ "mid": mid }, function(doc){ 
-					if(doc == null){
-	          docs[mid] = {
-	            "mid": mid,
-	            "last_update": [date.getFullYear(),date.getMonth()+1,date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds()].join('_'),
-	            "activities": [],
-	            "flow": null
-	          };
-	          new_mids.push(mid);
-	        } else {
-	        	docs[mid] = doc; 	
-	        } 
-        })   
-      } else {
-        docs[mid]["activities"].push(line);  
+  var mids_arr = [...new Set(flowData.map(a => a[3]))];
+  storage.loadDocs({"mid": { "$in": mids_arr}}, function(db_docs){
+    console.log("-----> Loaded docs are >>" + db_docs.length);
+/*
+    flowData.forEach(function(line){
+      var mid = line[3];
+      if(mid != "NO MID"){
+        if(docs[mid] == undefined){
+          db_doc = db_docs.find(function(d){ return d["mid"] == mid})
+          if(db_doc == null){
+            docs[mid] = {
+              "mid": mid,
+              "last_update": [date.getFullYear(),date.getMonth()+1,date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds()].join('_'),
+              "activities": [],
+              "flow": null
+            };
+            new_mids.push(mid);
+          } else {
+            docs[mid] = db_doc;  
+          }
+          docs[mid]["activities"].push(line);   
+        } else {
+          docs[mid]["activities"].push(line);  
+        }
       }
-    }
-  })
-  
-  var mids = Object.keys(docs)
-  console.log(" So far we have : " + mids.length)
-  if(mids.length > 0 ){
-    mids.forEach(function(mid){
-     //paymentFlow(docs[mid])
-      saveDoc(env, docs[mid], (new_mids.indexOf(mid) > -1 ? true : false));
     })
-  }
+    
+    var mids = Object.keys(docs)
+    console.log(" So far we have : " + mids.length)
+    if(mids.length > 0 ){
+      mids.forEach(function(mid){
+       //paymentFlow(docs[mid])
+        saveDoc(env, docs[mid], (new_mids.indexOf(mid) > -1 ? true : false));
+      }) 
+
+
+
+
+https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x01200053AA442FB76B604EA365E4C578C2B42A&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FFunctional%20Core%20Processing%2FGPP-SP%204%2E6%2FBusiness%20Guides%2FGPP%20Business%20Guide%20Pricing%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FFunctional%20Core%20Processing%2FGPP-SP%204%2E6%2FBusiness%20Guides
+
+
+
+
+
+
+
+    }*/
+  })
 }
 
 var saveDoc = function(env, doc, newDoc = true){
@@ -365,13 +383,18 @@ var buildBusinessFlows = function(filename, jsonXML) {
 
 var to_usecase = function(group_name, flowId, flow){ 
   var flowsteps = to_flowsteps(group_name, flowId, flow["property"][1]);
+  var raw_name = flowId.split(/(?=[A-Z])/).join(" ")
+  var name = raw_name.charAt(0).toUpperCase() + raw_name.slice(1);  
+  var is_usecase = (flowId.toLowerCase().indexOf('subflow') == -1 ) ? true : false;
+  var type  = is_usecase ? "usecase" : "subflow";
+  var ref = getRef(group_name, type, flowId);
 
-  if(flowId.toLowerCase().indexOf('subflow') == -1 ){
+  if(is_usecase){    
     return {
-      "type": "usecase",
+      "type": type,
       "basic_use_case": group_name ,
-      "guide_url": "/docs/GPP Business Guide Single Payments.pdf", // should be a function of group_name
-      "description": "Defines the outward returns initiated by an operation user (GPP user) for an inward clearing payment", // should be a function of group_name
+      "guide_url": ref["guide_url"], 
+      "description": ref["description"],
       "group" : group_name,
       "uid": flowId, 
       "use_case": flow["property"][0]["attr"]["value"],
@@ -379,11 +402,11 @@ var to_usecase = function(group_name, flowId, flow){
     }
   } else {
     return {
-      "type": "subflow",
-      "name": flowId,
+      "type": type,
+      "name": name,
       "uid": flowId, 
-      "guide_url": "",
-      "description": "GPP supports these cutoff types: 1. Processing cutoff: Required to set the time limit for processing any kind of payment within the local office. 2. Clearing cutoff: Required for local clearing (RTGS, low value clearing) payments. 3. Treasury/Currency cutoff: Also known as currency cutoff and is required for processing foreign currency cross border payments.",
+      "guide_url": ref["guide_url"], 
+      "description": ref["description"],
       "group" : group_name,
       "use_case": "subflow",
       "flowsteps": flowsteps
@@ -391,32 +414,58 @@ var to_usecase = function(group_name, flowId, flow){
   }
 }
 
+var getRef = function(group_name, type, uid){
+  var fpath = appRoot + "/data/references/"+ group_name.replace(" ", "_") +"_references.json";
+  if (!fs.existsSync(fpath)) {fs.writeFileSync(fpath, JSON.stringify({}), 'utf-8');}
+  
+  var refs = new json.File(fpath);
+  refs.readSync();
+  ref = refs.get(uid);
+  if (ref == undefined ){      
+    ref = {
+      "type": type,
+      "description": "BA Help Is Required :)",
+      "guide_url": ""
+    };      
+    refs.set(uid, ref);
+    refs.writeSync(); 
+  }
+  return ref;
+}
+
 var getFlowItem = function(group_name, flowId, uid){
-  if(uid.toLowerCase().indexOf('subflow') > -1){
+  var raw_name = uid.split(/(?=[A-Z])/).join(" ")
+  var name = raw_name.charAt(0).toUpperCase() + raw_name.slice(1)  
+  var is_subflow = (uid.toLowerCase().indexOf('subflow') > -1) ? true : false;
+  var type  = is_subflow ? "subflow" : "";
+  var ref = getRef(group_name, type, uid);
+
+  if(is_subflow){   
     return  {
-      "type": "subflow",
+      "type": type,
       "group": flowId,      
       "timestamp": "",
-      "name": uid,
-      "description": "", 
+      "name": name,
+      "description": ref["description"], 
       "uid": uid,
       "features": "",
       "activities": ""
     }   
   } else {
-    var fpath = appRoot + "/reference/flowsteps/"+ group_name.replace(" ", "_") +"_flowsteps.json";
+    var fpath = appRoot + "/data/flowsteps/"+ group_name.replace(" ", "_") +"_flowsteps.json";
     if (!fs.existsSync(fpath)) {fs.writeFileSync(fpath, JSON.stringify({}), 'utf-8');}
 
     var flowitems = new json.File(fpath);
     flowitems.readSync();
-    flowstep = flowitems.get(uid);
+    flowstep = flowitems.get(uid);    
     if(flowstep == undefined){
+      
       flowstep = {
-        "type": "service",
+        "type": ref["type"],
         "group": flowId,      
         "timestamp": "",
-        "name": uid,
-        "description": "", 
+        "name": name,
+        "description": ref["description"], 
         "uid": uid,
         "features": "",
         "activities": ""

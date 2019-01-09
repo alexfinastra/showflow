@@ -1,9 +1,0 @@
-{
-  "type": "usecase",
-  "basic_use_case": "Onward Cross Border Payment Credit to Overseas Bank",
-  "guide_url": "/docs/GPP Business Guide Single Payments.pdf",  
-  "template": "/flows/single_payment_workflow.json",
-  "use_case": "Inward Single Customer or Bank Transfer",
-  "description": "This use case defines the onward single fund transfer coming from SWIFT for further credit to an overseas bank’s customer account (beneficiary) SWIFT.",
-  "flowgroups": ["Payment Initiation","Debit Side processing"]
-}

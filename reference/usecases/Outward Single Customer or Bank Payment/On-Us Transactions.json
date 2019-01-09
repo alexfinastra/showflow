@@ -1,9 +1,0 @@
-{
-  "type": "usecase",
-  "basic_use_case": "On-Us Transactions",
-  "guide_url": "/docs/GPP Business Guide Single Payments.pdf",  
-  "template": "/flows/single_payment_workflow.json",
-  "use_case": "Outward Single Customer or Bank Payment",
-  "description": "Defines the outward single payments initiated by internet banking channels, branch users, and GPP users (manual create) for credit to beneficiary in local bank’s Book.",
-  "flowgroups": ["Payment Initiation","Debit Side processing"]
-}

@@ -130,8 +130,8 @@ $(document).ready(function(){
 
 	$('#listFlows').on('click', function () { 	  
  	  openSideBar();
- 	  $('#tree_title').show();
-    $('#mid-search').hide();	
+ 	  $('#tree_title').hide();
+    $('#mid-search').show();	
     $('#similarity-search').hide();  
 		$.ajax({
 	    type: 'GET',
@@ -139,6 +139,7 @@ $(document).ready(function(){
 	    dataType: "json",
 	  })
 	  .done(function (response) {
+	    var $allmids = response.tree
 	    var $usecasesTree = $('#treeflows').treeview({
 	      data: response.tree,
 	      showCheckbox: false,
@@ -148,11 +149,38 @@ $(document).ready(function(){
         selectable: true,
         selectedIcon: 'fas fa-open',        
 	      onNodeSelected  : function(event, data) {	       
-        	parent = $('#treeflows').treeview('getParent', data); 
-        	gparent = $('#treeflows').treeview('getParent', parent); 
-        	location.href = "/usecases/template/"+ gparent["key"]+ "/" + data["key"];        		
+        	location.href = "/usecases/template/"+ data["env"]+ "/" + data["key"];         		
 	      }
 	    });
+
+	    var search = function(e) {
+	      var pattern = $('#inputsearch').val();
+	      var options = {
+	        ignoreCase: true,
+	        exactMatch: false,
+	        revealResults: true
+	      };
+	      $usecasesTree.treeview({data: $allmids})
+	      var results = $usecasesTree.treeview('search', [ pattern, options ]);
+	      $usecasesTree.treeview({data: results,
+	        onNodeSelected  : function (event, data) { 
+        		location.href = "/usecases/template/"+ data["env"]+ "/" + data["key"]; 
+		      }
+	      })
+
+	      var output = "<p class='small'>" + results.length + ' matches found</p>';
+	      $('#searchoutput').html(output);
+      }
+
+      $('#btnsearch').on('click', search);
+      $('#inputsearch').on('keyup', search);
+
+      $('#btnclearsearch').on('click', function (e) {
+        $usecasesTree.treeview('clearSearch');
+        $usecasesTree.treeview({data: $allmids})
+        $('#inputsearch').val('');
+        $('#searchoutput').html('');
+      });
 	  })
 	  .fail(function (response) {
 	      console.log(response);

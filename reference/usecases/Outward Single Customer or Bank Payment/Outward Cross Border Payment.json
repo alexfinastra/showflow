@@ -1,9 +1,0 @@
-{
-  "type": "usecase",
-  "basic_use_case": "Outward Cross Border Payment",
-  "guide_url": "/docs/GPP Business Guide Single Payments.pdf",  
-  "template": "/flows/single_payment_workflow.json",
-  "use_case": "Outward Single Customer or Bank Payment",
-  "description": "This use case defines the outward single fund transfer initiated by internet banking channels/ branch users/ GPP users (manual create) to be settled via SWIFT (either direct account relationship or via correspondent banking).",
-  "flowgroups": ["Payment Initiation","Debit Side processing"]
-}

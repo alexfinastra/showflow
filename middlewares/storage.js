@@ -5,7 +5,7 @@ function Storage(collection = 'payments'){
 }
 
 method.loadDocs = function(where, cb){
-  console.log("-----> [" +this.collection+ "] loadDocs all from this collection with where :" + where );
+  console.log("-----> [" +this.collection+ "] loadDocs all from this collection with where :" + JSON.stringify(where) );
 
   db.collection(this.collection).find(where).toArray(function(err, docs) {     
     if (err == null) {

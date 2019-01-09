@@ -48,10 +48,10 @@ a, a:hover, a:focus {
     SIDEBAR STYLE
 ----------------------------------------------------- */
 #sidebar {
-    width: 30%;
+    width: 25%;
     position: fixed;
     top: 0px;
-    left: -30%;
+    left: -25%;
     height: 100vh;
     z-index: 999;
     background: #fff;

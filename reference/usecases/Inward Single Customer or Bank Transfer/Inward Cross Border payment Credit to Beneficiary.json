@@ -1,9 +1,0 @@
-{
-  "type": "usecase",
-  "basic_use_case": "Inward Cross Border Payment Credit to Beneficiary",
-  "guide_url": "/docs/GPP Business Guide Single Payments.pdf",  
-  "template": "/flows/single_payment_workflow.json",
-  "use_case": "Inward Single Customer or Bank Transfer",
-  "description": "This use case defines the inward cross border fund transfer initiated by overseas bank via SWIFT for further credit to local office customer account (beneficiary).",
-  "flowgroups": ["Payment Initiation","Debit Side processing"]
-}
