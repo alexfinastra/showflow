@@ -71,9 +71,9 @@ method.updateDoc = function(conditons, updatedDoc, cb){
 }
 
 method.listDoc = function(select, where, order, cb){
-  console.log("-----> listDoc for " + this.collection);
+  console.log("-----> listDoc for " + this.collection + " wehere :" + JSON.stringify(where));
 
-	db.collection(this.collection).find(where, select).limit( 35 ).sort(order).toArray(function(err, docs) {     
+	db.collection(this.collection).find(where, select).sort(order).toArray(function(err, docs) {     
     if (err == null) {
       if(docs == null || docs.length == 0 ){        
         console.log("----->  There is no docs answering the where !!!! :(");

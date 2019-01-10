@@ -6,13 +6,13 @@ var method = Payment.prototype
 var Storage = require('../middlewares/storage');
 
 function Payment(env, mid){  
-  this.storage = new Storage(); 
+  this.storage = new Storage(env+"_payments"); 
   this.env = env;
   this.mid = mid;
 }
 
 method.loadFlow = function(cb){  
-  this.storage.getDoc({ "env": this.env, "mid": this.mid }, function(doc){
+  this.storage.getDoc({"mid": this.mid }, function(doc){
     if(doc != null){
       cb(doc["flow"]);  
     } else {
@@ -22,7 +22,7 @@ method.loadFlow = function(cb){
 }
 
 method.loadActivities = function(cb){
-  this.storage.getDoc({ "env": this.env, "mid": this.mid }, function(doc){
+  this.storage.getDoc({"mid": this.mid }, function(doc){
     if(doc != null){
       cb(doc["activities"]);  
     } else {

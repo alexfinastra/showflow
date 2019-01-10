@@ -186,26 +186,25 @@ var storeFlowData = function(env, flowData = []){
   var mids_arr = [...new Set(flowData.map(a => a[3]))];
   storage.loadDocs({"mid": { "$in": mids_arr}}, function(db_docs){
     console.log("-----> Loaded docs are >>" + db_docs.length);
-/*
+
     flowData.forEach(function(line){
       var mid = line[3];
       if(mid != "NO MID"){
         if(docs[mid] == undefined){
           db_doc = db_docs.find(function(d){ return d["mid"] == mid})
           if(db_doc == null){
-            docs[mid] = {
-              "mid": mid,
-              "last_update": [date.getFullYear(),date.getMonth()+1,date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds()].join('_'),
-              "activities": [],
-              "flow": null
-            };
+            docs[mid] = { "mid": mid,
+                          "last_update": [date.getFullYear(),date.getMonth()+1,date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds()].join('_'),
+                          "activities": [],
+                          "flow": null };
             new_mids.push(mid);
-          } else {
-            docs[mid] = db_doc;  
-          }
+          } else { 
+            docs[mid] = db_doc; 
+          }            
+        }
+
+        if(docs[mid]["activities"].indexOf(line) == -1){
           docs[mid]["activities"].push(line);   
-        } else {
-          docs[mid]["activities"].push(line);  
         }
       }
     })
@@ -214,22 +213,13 @@ var storeFlowData = function(env, flowData = []){
     console.log(" So far we have : " + mids.length)
     if(mids.length > 0 ){
       mids.forEach(function(mid){
-       //paymentFlow(docs[mid])
-        saveDoc(env, docs[mid], (new_mids.indexOf(mid) > -1 ? true : false));
-      }) 
-
-
-
-
-https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x01200053AA442FB76B604EA365E4C578C2B42A&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FFunctional%20Core%20Processing%2FGPP-SP%204%2E6%2FBusiness%20Guides%2FGPP%20Business%20Guide%20Pricing%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FFunctional%20Core%20Processing%2FGPP-SP%204%2E6%2FBusiness%20Guides
-
-
-
-
-
-
-
-    }*/
+        var currentDoc = docs[mid];
+        var is_NewDoc = (new_mids.indexOf(mid) > -1 ? true : false);
+        paymentFlow(env, currentDoc, function(currentDoc){
+          saveDoc(env, currentDoc, is_NewDoc);  
+        });
+      });
+    }
   })
 }
 
@@ -285,31 +275,57 @@ var to_flowitem = function(line){
   } 
 }
 
+// should retrive from flowsteps and references
+var to_flowstepitem = function(line){
+  flowstep = line[5].split(" ").find(function(a){ return a.indexOf("Step") > -1})
+  return {
+    "type": "service", 
+    "timestamp": line[0],
+    "name": line[4].split("_").join(" "),
+    "description": line[4], 
+    "uid": flowstep,
+    "features": "" ,
+    "activities": []
+  } 
+}
+
 // TODO! Trigger dialog flow with activity 
-var paymentFlow = function(doc){
+var paymentFlow = function(env, doc, cb){
   var flowitems = [];  
+  var pattern = [];
   // map flow items
   doc["activities"].forEach(function(line){
-    service = line[4]
+    service = line[4];
+    activity = line[5]
+
+    if(service.indexOf("AbstractFlowStep") > -1){      
+      flowitems.push(to_flowstepitem(line))
+      pattern.push(line[5].split(" ").find(function(w){ return w.indexOf("Step") > -1; }) )
+    }
+
     if(service.toLowerCase().indexOf('rule') > -1){
-      flowitems.push(to_flowitem(line))  
+      flowitems.push(to_flowitem(line));
     }
   })
 
-  var similarities = {};
-  usecases = walkSync("./reference/usecases/", [])
-  console.log("usecase ")
-  usecases.forEach(function(usecase_template){
-    var usecase = new Usecase(usecase_template);  
-    similarities[usecase._flow["name"]] = similarity_score(usecase._flow["items"], flowitems)
-  })
+  
+  var uc_storage = new  Storage(env+"_usecases")
+  uc_storage.listDoc( {"flow":1, "_id":0}, {"type": "usecase"}, {"group": -1},  function(usecases){
+    var similarities = {};
+    if(usecases.length > 0){
+      usecases.forEach(function(usecase){
+        similarities[usecase["use_case"]] = similarity_score(usecase, pattern)
+      })  
+    }   
 
-  doc["flow"] =  {
+    doc["flow"] =  {
             "name": "Payment Flow - " + doc["mid"],            
             "similarities": similarities,
-            "flowitems": flowitems
-          }
-
+            "flowitems": flowitems,
+            "pattern": pattern
+          };
+    cb(doc);
+  }) 
 }
 
 // similarity score check if items exists and located correctly in the flow
@@ -317,15 +333,15 @@ var getSum = function(total, num){
   return total + num;
 }
 
-var similarity_score = function(usecase_items, pay_items){
+var similarity_score = function(usecase, payment_pattern){
   var scores = [];
-  var uc_len = usecase_items.length;
-  var p_len = pay_items.length;
+  var uc_len = usecase["flow"].length;
+  var p_len = payment_pattern.length;
 
   for(var ind =0; ind < p_len; ind++){
-    pitem = pay_items[ind];
-    uc_index = usecase_items.indexOf(pitem)
-    scores.push([(uc_index != -1 ? 1 : 0 )+ (uc_index == ind ? 1 : 0)]);
+    pitem = payment_pattern[ind];
+    uc_index = usecase["flow"].indexOf(pitem)
+    scores.push([usecase["uid"], (uc_index != -1 ? 1 : 0 )+(uc_index == ind ? 1 : 0)]);
   }
 
   return scores.reduce(getSum, 0) / (2 * uc_len);
@@ -381,14 +397,29 @@ var buildBusinessFlows = function(filename, jsonXML) {
 	}
 }
 
-var to_usecase = function(group_name, flowId, flow){ 
-  var flowsteps = to_flowsteps(group_name, flowId, flow["property"][1]);
+var usecaseFlow = function(flowsteps){
+  var flow = []
+  flowsteps.forEach(function(step){
+    if(step["type"].indexOf("subflow") > -1){
+      var subflow = usecaseSubFlow(step)
+      flow.push(subflow);
+    } else {
+      flow.push(step["uid"])
+    }
+  });
+
+  return flow;
+}
+
+var to_usecase = function(group_name, flowId, bean){ 
+  var flowsteps = to_flowsteps(group_name, flowId, bean["property"][1]);  
   var raw_name = flowId.split(/(?=[A-Z])/).join(" ")
   var name = raw_name.charAt(0).toUpperCase() + raw_name.slice(1);  
   var is_usecase = (flowId.toLowerCase().indexOf('subflow') == -1 ) ? true : false;
   var type  = is_usecase ? "usecase" : "subflow";
   var ref = getRef(group_name, type, flowId);
 
+  console.log("-----> Build usecase of " + type + " with uid " + flowId + " and " + flowsteps.length + " flowsteps");
   if(is_usecase){    
     return {
       "type": type,
@@ -397,8 +428,9 @@ var to_usecase = function(group_name, flowId, flow){
       "description": ref["description"],
       "group" : group_name,
       "uid": flowId, 
-      "use_case": flow["property"][0]["attr"]["value"],
-      "flowsteps": flowsteps
+      "use_case": bean["property"][0]["attr"]["value"],
+      "flowsteps": flowsteps,
+      "flow": []
     }
   } else {
     return {
@@ -409,7 +441,8 @@ var to_usecase = function(group_name, flowId, flow){
       "description": ref["description"],
       "group" : group_name,
       "use_case": "subflow",
-      "flowsteps": flowsteps
+      "flowsteps": flowsteps,
+      "flow": []
       }
   }
 }
@@ -448,8 +481,7 @@ var getFlowItem = function(group_name, flowId, uid){
       "name": name,
       "description": ref["description"], 
       "uid": uid,
-      "features": "",
-      "activities": ""
+      "features": ""
     }   
   } else {
     var fpath = appRoot + "/data/flowsteps/"+ group_name.replace(" ", "_") +"_flowsteps.json";
@@ -467,8 +499,7 @@ var getFlowItem = function(group_name, flowId, uid){
         "name": name,
         "description": ref["description"], 
         "uid": uid,
-        "features": "",
-        "activities": ""
+        "features": ""
       }      
 
       flowitems.set(uid, flowstep);
@@ -515,26 +546,53 @@ var group_name = function(filename_arr){
   return group_arr.join(" ");
 }
 
-
-var saveBean = function(env, groupName, bean, docs){
+var parseBean = function(groupName, bean, cb){
   var flowId = bean["attr"]["id"] == undefined ? bean["attr"]["name"] : bean["attr"]["id"];
-  if(flowId == undefined){ return ;}
-
-  console.log("-----> Current group "+groupName+ " and flow " + flowId);
-  var storage = new Storage(env + "_usecases");
-  if(bean["property"] != undefined){
-    filtered = docs.find(function(doc){ return doc["uid"] == flowId;})      
-    if(filtered == undefined){
-      usecase = to_usecase(groupName, flowId, bean)
-      storage.newDoc(usecase, function(doc){
-        console.log("+++++> Callback from NEW Doc " );
-      })
-    } else {     
-      storage.updateDoc({"uid": filtered["uid"]}, {"flowitems": to_flowsteps(groupName, flowId, bean["property"][1])}, function(doc){
-        console.log("+++++> Callback from UPDATE doc  ")
-      }) 
-    }
+  console.log("\n\n-----> parsing Bean with uid " + flowId + " with bean property equals to >>" + bean["property"])
+  if(bean["property"] == undefined || flowId == undefined ){ 
+    cb(null);
+  } else {
+    var usecase = to_usecase(groupName, flowId, bean)
+    cb(usecase);
   }
+}
+
+var mapFlow = function(usecase, allcases, cb){
+  var flow = [];
+  console.log("-----> Mapping actual flow for "+ usecase["uid"] + " with " + usecase["flowsteps"] )
+  usecase["flowsteps"].forEach(function(item){
+    if(item["type"].indexOf("subflow") > -1){
+      var subflow = allcases.find(function(uc){ return uc["uid"] === item["uid"]})
+      if(subflow != undefined){
+        if(subflow["flow"].length == 0){
+          mapFlow(subflow, allcases, function(flow){ subflow["flow"] = flow.flat();  })
+        }
+        flow.push(subflow["flow"].flat())
+      }
+    } else{
+      flow.push(item["uid"])
+    }
+  })
+  cb(flow);
+}
+
+var saveUsecases = function(env, groupName, usecases, docs){
+  var storage = new Storage(env + "_usecases");
+  usecases.forEach(function(usecase){
+    console.log("-----> saving usecases >" + JSON.stringify(usecase))
+    mapFlow(usecase, usecases, function(flow){
+
+      var is_new = (docs.find(function(doc){ return doc["uid"] == usecase["uid"]; }) == undefined)      
+      if(is_new){
+        usecase["flow"] = flow.flat()
+        storage.newDoc(usecase, function(doc){ console.log("+++++> Callback from NEW Doc " ); })
+      } else{
+        storage.updateDoc({"uid": usecase["uid"]}, {"flowsteps": usecase["flowsteps"], "flow": flow.flat() }, function(doc){
+          console.log("+++++> Callback from UPDATE doc  ")
+        }) 
+      }
+    });
+  })
 }
 
 var parseBusinessFlows = function(filename, beansXML){
@@ -544,10 +602,17 @@ var parseBusinessFlows = function(filename, beansXML){
   var groupName = group_name(filename_arr);
   
   var storage = new Storage(env + "_usecases");  
-  storage.loadDocs({"group": groupName },function(docs){   
-    beansXML.forEach(function(bean){
-      //console.dir(bean);  
-      saveBean(env, groupName, bean, docs);
+  var usecases = [];
+  var beanParsed = 0;
+  storage.loadDocs({"group": groupName },function(docs){       
+    beansXML.forEach(function(bean, ind, array){
+      parseBean(groupName, bean, function(usecase){
+        beanParsed++ ;
+        if(usecase != null){ usecases.push(usecase); }  
+        if(beanParsed == array.length) {
+          console.log("------> Until now we have " + usecases.length + " usecases ") 
+          saveUsecases(env, groupName, usecases, docs); }
+      });
     })  
   })
 }
