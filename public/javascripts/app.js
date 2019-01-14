@@ -116,11 +116,11 @@ $(document).ready(function(){
 	}
 
 	$('#showActivities').on('click', function(){
-		location.href = location.href.replace("flow", "activities")
+		location.href = location.href.replace("/flow/", "/activities/")
 	});
 
 	$('#showFlow').on('click', function(){
-		location.href = location.href.replace("activities", "flow")
+		location.href = location.href.replace("/activities/", "/flow/")
 	});
 
 	$('#exitFlows').on('click', function(){		
