@@ -6,6 +6,7 @@ var fs = require('fs');
 var fse = require('fs-extra')
 var es = require('event-stream');
 var underscore = require("underscore");
+var _ = require('lodash');
 //var mongodb = require("mongodb");
 //var ObjectID = mongodb.ObjectID;
 var xml2js = require('xml2js');
@@ -59,7 +60,7 @@ var parseTrace = function(filename, cb){
     .on('end', function(){
         if(flowData.length > 0){    
           console.log("-- Just before Payment Flow --")                    
-          //fs.writeFileSync(appRoot + "/temp/traces_data.csv", flowData.join('\n') , 'utf-8'); 
+          //fs.writeFileSync(appRoot + "/temp/traces_data.csv", flowData.`in('\n') , 'utf-8'); 
           storeFlowData(env, flowData); 
           fs.unlinkSync(filename);
           cb();        
@@ -263,69 +264,125 @@ var getType = function(service){
   return type
 }
 
-var to_flowitem = function(line){
-  return {
-    "type": getType(line[4]), 
-    "timestamp": line[0],
-    "name": line[4].split("_").join(" "),
-    "description": line[4], 
-    "uid": line[4],
-    "features": "" ,
-    "activities": line[5].split("^^^")
-  } 
-}
-
 // should retrive from flowsteps and references
 var to_flowstepitem = function(line){
-  flowstep = line[5].split(" ").find(function(a){ return a.indexOf("Step") > -1})
-  return {
-    "type": "service", 
-    "timestamp": line[0],
-    "name": line[4].split("_").join(" "),
-    "description": line[4], 
-    "uid": flowstep,
-    "features": "" ,
-    "activities": []
-  } 
+  var activities_arr  = line[5].split(" ")
+  var uid = activities_arr.find(function(w){return w.indexOf("Flow") > -1 && w.indexOf("Step") > -1;})
+  walkSync("./data/flowsteps",[]).forEach(function(json_path){
+    var fpath = appRoot + "/" + json_path;
+    var steps = new json.File(fpath);
+    steps.readSync();
+    step = refs.get(uid);
+    if (step != undefined){
+      return {
+        "type": "service", 
+        "timestamp": line[0],
+        "name": step["name"],
+        "description": step["description"], 
+        "uid": uid,
+        "features": step["features"] ,
+        "activities": []
+      } 
+    }
+  });
+  return null;
+}
+
+var to_flowrule = function(line){
+  var rule_arr = line[5].split(";")
+  if(rule_arr.length > 0){
+    step = {}
+    var fpath = appRoot + "/data/references/rules_flowsteps.json";
+    var rules_steps = new json.File(fpath);
+    rules_steps.readSync();
+
+    rule_arr.forEach(function(rule){
+      var rdata =  rule.split(":");
+
+      //check for rulety
+      rdata.forEach(function(item){
+        if(item.indexOf("ruleType") > -1){ 
+          var ruleType = rdata[rdata.indexOf(item) + 1].trim(); 
+          step = rules_steps.get(ruleType)
+          if(step != undefined) {return step;}
+        }
+      })
+    })
+    return null;
+  } else {
+    return null;
+  }
+}
+
+var to_flowinterface = function(line){
+  return  {
+      "type": "interface",
+      "group": "Posting",      
+      "timestamp": "",
+      "name": "Posting Interface",
+      "description": "", 
+      "uid": "interfaceposting",
+      "features": "flowmanagement-posting",
+      "activities": ""
+    }
+}
+
+var filterActivities = function(doc, cb){
+  var flowitems = [];  
+  var pattern = [];
+  
+  // map flow items
+  doc["activities"].forEach(function(line){
+    var service = line[4];
+
+    if(service.toLowerCase() === "abstractflowstep"){      
+      var step_item = to_flowstepitem(line) 
+      if(step_item != null){ 
+        flowitems.push(step_item); 
+        pattern.push(step_item["name"])
+      }
+    }
+
+    if(service.toLowerCase() === 'boruleexecution' ){
+      var rule_item = to_flowrule(line);
+      if(rule_item != null){ flowitems.push(rule_item); }      
+    }
+
+    if(service.toLowerCase() === 'bointerface' ){
+      var iface_item = to_flowinterface(line);
+      if(iface_item != null){ flowitems.push(iface_item); }      
+    }
+
+    if(service.toLowerCase() === 'pdo'){
+      var lastItem = flowitems.pop();
+      lastItem["activities"].push(activity);
+      flowitems.push(lastItem);
+    }
+  })
+  cb(flowitems, pattern);
 }
 
 // TODO! Trigger dialog flow with activity 
 var paymentFlow = function(env, doc, cb){
-  var flowitems = [];  
-  var pattern = [];
-  // map flow items
-  doc["activities"].forEach(function(line){
-    service = line[4];
-    activity = line[5]
+  filterActivities(doc, function(flowitems, pattern){
+    var storage = new  Storage(env+"_usecases")
+    storage.listDoc( {"flow":1, "_id":0}, {"type": "usecase"}, {"group": -1},  function(usecases){
+      var similarities = {};
+      if(usecases.length > 0){
+        usecases.forEach(function(usecase){
+          similarities[usecase["use_case"]] = similarity_score(usecase, pattern)
+        })  
+      }   
 
-    if(service.indexOf("AbstractFlowStep") > -1){      
-      flowitems.push(to_flowstepitem(line))
-      pattern.push(line[5].split(" ").find(function(w){ return w.indexOf("Step") > -1; }) )
-    }
-
-    if(service.toLowerCase().indexOf('rule') > -1){
-      flowitems.push(to_flowitem(line));
-    }
+      doc["flow"] =  {
+              "name": "Payment Flow - " + doc["mid"],            
+              "similarities": similarities,
+              "flowitems": flowitems,
+              "pattern": pattern
+            };
+      cb(doc);
+    }) 
   })
-
-  
-  var uc_storage = new  Storage(env+"_usecases")
-  uc_storage.listDoc( {"flow":1, "_id":0}, {"type": "usecase"}, {"group": -1},  function(usecases){
-    var similarities = {};
-    if(usecases.length > 0){
-      usecases.forEach(function(usecase){
-        similarities[usecase["use_case"]] = similarity_score(usecase, pattern)
-      })  
-    }   
-
-    doc["flow"] =  {
-            "name": "Payment Flow - " + doc["mid"],            
-            "similarities": similarities,
-            "flowitems": flowitems,
-            "pattern": pattern
-          };
-    cb(doc);
-  }) 
 }
 
 // similarity score check if items exists and located correctly in the flow

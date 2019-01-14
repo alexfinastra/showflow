@@ -37,7 +37,15 @@ router.get('/tree', function(req, res){
                         "key": env,
                         "selectable": false,
                         "state": { "expanded": false, "selected": false },
-                        "nodes" : docs.map(function(doc){ return {"text": doc["mid"], "selectable": true, "state": { "selected": false }, "key": doc["mid"]} })
+                        "nodes" : docs.map(function(doc){ 
+                          return {
+                            "text": doc["mid"], 
+                            "selectable": true, 
+                            "state": { "selected": false }, 
+                            "key": doc["mid"],
+                            "env": env
+                          } 
+                        })
                       });
         if(total == index){
           res.json({tree: payments});      
@@ -76,7 +84,7 @@ router.get("/tabledata/:env/:mid", function(req, res){
       } else {
         searched = []
         activities.forEach(function(a){
-          if(a["activity"].indexOf(query["search"]["value"]) != -1){
+          if((a[4].indexOf(query["search"]["value"]) > -1) || (a[5].indexOf(query["search"]["value"]) > -1)  ){
             searched.push(a)
           }
         })

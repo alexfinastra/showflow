@@ -15,7 +15,7 @@ function selectPaymentNode(data) {
   parent = $('#treeflows').treeview('getParent', data);
   $('#sidebar').removeClass('active');
   $('.overlay').fadeOut();
-  location.href = "/payments/flow/" + parent["key"] + "/" + data["key"];
+  location.href = "/payments/flow/" + data["env"] + "/" + data["key"];
 }
 
 function rangeSlider(){

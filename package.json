@@ -25,6 +25,7 @@
     "jade": "~1.11.0",
     "jquery": "^3.2.1",
     "json-file": "^0.1.0",
+    "lodash": "^4.17.11",
     "method-override": "^2.3.9",
     "mkdirp": "^0.5.1",
     "moment": "^2.18.1",
