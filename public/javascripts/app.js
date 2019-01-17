@@ -107,7 +107,15 @@ $(document).ready(function(){
             { "data": "time" },
             { "data": "service" },			            
             { "data": "activity" }
-        ],        
+        ],
+        columnDefs: [
+            {
+                render: function (data, type, full, meta) {
+                    return "<div style='white-space:normal; width: 100%;'>" + data + "</div>";
+                },
+                targets: 2
+            }
+         ],        
         order: [[ 0, 'asc' ],[1, 'asc']],			        
         displayLength: 50,
         responsive: true
