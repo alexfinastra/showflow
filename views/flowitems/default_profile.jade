@@ -5,9 +5,10 @@ li.timeline-item
     .timeline-heading
       h5.timeline-title #{item["name"]}       
     .timeline-body
-      p.small.mt-3
-        span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 step : 
-          b #{item["group"]}        
+      if item["timestamp"].length > 0      
+        p.small.mt-3
+          span.rounded.bg-dark.text-light.p-1.pl-2.pr-2 timestamp : 
+            b #{item["timestamp"]}
       p.small.mt-3
         span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 type : 
           b #{item["type"]}

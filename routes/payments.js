@@ -84,7 +84,7 @@ router.get("/tabledata/:env/:mid", function(req, res){
       } else {
         searched = []
         activities.forEach(function(a){
-          if((a[4].indexOf(query["search"]["value"]) > -1) || (a[5].indexOf(query["search"]["value"]) > -1)  ){
+          if((a[4].toLowerCase().indexOf(query["search"]["value"].toLowerCase()) > -1) || (a[5].toLowerCase().indexOf(query["search"]["value"].toLowerCase()) > -1)  ){
             searched.push(a)
           }
         })

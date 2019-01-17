@@ -7,11 +7,8 @@ li.timeline-item
     .timeline-body
       if item["timestamp"].length > 0      
         p.small.mt-3
-          span.rounded.bg-secondary.text-light.p-1.pl-2.pr-2 timestamp : 
+          span.rounded.bg-dark.text-light.p-1.pl-2.pr-2 timestamp : 
             b #{item["timestamp"]}
-      p.small.mt-3
-        span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 step : 
-          b #{item["group"]}
       p.small.mt-3
         span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 type : 
           b #{item["type"]}

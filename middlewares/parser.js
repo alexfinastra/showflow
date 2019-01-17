@@ -49,7 +49,7 @@ var parseTrace = function(filename, cb){
           len = flowData.length; 
           if(len > 0){
             l = flowData[len-1].length
-            flowData[len-1][l-1] =  flowData[len-1][l-1] + " " + line.replace(/:/g, '').replace(/,/g, ' '); 
+            flowData[len-1][l-1] =  flowData[len-1][l-1] + " " + line //.replace(/:/g, '').replace(/,/g, ' '); 
           }          
           s.resume();  
         }
@@ -168,11 +168,11 @@ var compose_activity = function(str, ind){
   activity = ""
   for(i=ind; i<str.length; i++)
   {
-    fstr = str[i].replace(/:/g, '');
-    fstr = str[i].replace(/,/g, ' ');            
-    if(fstr.length > 0) {
-      activity = activity + " " + fstr
-    }
+    //fstr = str[i].replace(/:/g, '');
+    //fstr = str[i].replace(/,/g, ' ');            
+    //if(fstr.length > 0) {
+      activity = activity + " " + str[i];
+    //}
   }
   return activity
 }
@@ -233,7 +233,7 @@ var saveDoc = function(env, doc, newDoc = true){
         console.log("----> Created new doc :)")
       })
     } else {
-      storage.setDoc({"mid": doc["mid"]}, {"activities": doc["activities"], "flow": doc["flow"]}, function(doc){
+      storage.updateDoc({"mid": doc["mid"]}, {"activities": doc["activities"], "flow": doc["flow"]}, function(doc){
         console.log("----> Update doc :)")
       })  
     }
@@ -265,78 +265,169 @@ var getType = function(service){
 }
 
 // should retrive from flowsteps and references
-var to_flowstepitem = function(line){
+var to_flowstepitem = function(line, stepJsons){
   var activities_arr  = line[5].split(" ")
   var uid = activities_arr.find(function(w){return w.indexOf("Flow") > -1 && w.indexOf("Step") > -1;})
-  walkSync("./data/flowsteps",[]).forEach(function(json_path){
-    var fpath = appRoot + "/" + json_path;
-    var steps = new json.File(fpath);
-    steps.readSync();
-    step = refs.get(uid);
+  var item = null;
+  //console.log("-----> Convert flowstep with uid " + uid)
+  
+  stepJsons.forEach(function(steps){
+    step = steps.get(uid);    
     if (step != undefined){
-      return {
+      //console.log("-----> Found step" + JSON.stringify(step) )
+      item = {
         "type": "service", 
         "timestamp": line[0],
         "name": step["name"],
         "description": step["description"], 
         "uid": uid,
-        "features": step["features"] ,
+        "features": [], //step["features"] ,
         "activities": []
       } 
     }
   });
-  return null;
+  return item;
 }
 
-var to_flowrule = function(line){
-  var rule_arr = line[5].split(";")
-  if(rule_arr.length > 0){
-    step = {}
-    var fpath = appRoot + "/data/references/rules_flowsteps.json";
-    var rules_steps = new json.File(fpath);
-    rules_steps.readSync();
+var to_flowrule = function(line, rules){
+  var rule_arr = line[5].split(";");
+  var item = null;
 
-    rule_arr.forEach(function(rule){
-      var rdata =  rule.split(":");
-
-      //check for rulety
-      rdata.forEach(function(item){
-        if(item.indexOf("ruleType") > -1){ 
-          var ruleType = rdata[rdata.indexOf(item) + 1].trim(); 
-          step = rules_steps.get(ruleType)
-          if(step != undefined) {return step;}
+  if(rule_arr.length > 0){    
+    rule_arr.forEach(function(rule){      
+      if(rule != undefined && item == null){      
+        var rdata =  rule.split(":");
+        if(rdata.length > 0){      
+          rdata.forEach(function(data){      
+            if(data.indexOf("ruleType") > -1){               
+              var uid = rdata[rdata.length-1].trim();  
+              //console.log("+++++++++ ["+uid+"] rule 1 " + JSON.stringify(item) )
+              var rule = rules.get(uid); 
+              if(rule != undefined) { 
+                item = rule;
+                item["timestamp"] = line[0];
+                item["activities"].push(line[5]);
+              }
+              //console.log("+++++++++ ["+uid+"] rule 2 " + JSON.stringify(item) )
+            }
+          })
         }
-      })
-    })
-    return null;
-  } else {
-    return null;
-  }
+      }      
+    });
+  } 
+  
+  //console.log("-----> Found Rule " + JSON.stringify(item))      
+  return (item == undefined ? null : item );
+}
+var init_iface = function(line){
+  return  {
+        "type": "interface",
+        "group": "",      
+        "timestamp": line[0],
+        "name": "",
+        "description": "", 
+        "uid": "",
+        "features": [],
+        "activities": []
+      }
 }
 
-var to_flowinterface = function(line){
-  return  {
-      "type": "interface",
-      "group": "Posting",      
-      "timestamp": "",
-      "name": "Posting Interface",
-      "description": "", 
-      "uid": "interfaceposting",
-      "features": "flowmanagement-posting",
-      "activities": ""
-    }
+var interface_flow = function(line){
+  var item = null;
+  var activity = line[5].trim()
+  console.log("=====>>>> interface flow 1 activity >>" + activity)
+  var iface_arr = activity.split("."); 
+  console.log("=====>>>> interface flow 2 iface_arr >>" + iface_arr.length)
+  if(iface_arr.length > 0){
+    iface_arr.forEach(function(iface){
+      console.log("=====>>>> interface flow 3 iface >>" + iface)
+      if(iface != undefined){
+        var attrs = iface.split(",")
+        console.log("=====>>>> interface flow 4 attrs>>" + attrs.length)
+        attrs.forEach(function(attr){
+          if(attr.indexOf("Interface") > 1){
+            if(attr.indexOf("type") > -1 ){
+              if(item == null){item = init_iface(line)}            
+              if(attr.indexOf("sub") > -1){
+                item["group"] = attr.split(":").pop()
+                console.log("=====>>>> interface flow 6 Interface sub type >>" + JSON.stringify(item))
+              } else{
+                item["name"] = attr.split(":").pop()
+                console.log("=====>>>> interface flow 5 Interface type >>" + JSON.stringify(item))  
+              }
+            }
+          }
+
+          if( attr.indexOf("monitor") > 1 &&
+              attr.indexOf("field") > 1 &&
+              attr.indexOf("name") > 1){
+            if(item == null){item = init_iface(line)}            
+            item["uid"] = attr.split(":").pop().trim().split(" ").pop()
+            console.log("=====>>>> interface flow 7 monitor field name >>" + JSON.stringify(item))
+          }
+        })
+      }
+    })
+  }
+  console.log("=====>>>> interface flow 8 >>" + JSON.stringify(item))
+  return item;
+}
+
+var interface_request = function(line, ifaceItem){
+  ifaceItem["features"].push("request")
+  ifaceItem["activities"].push({"request": [line[5]]})
+  return ifaceItem
+}
+
+var interface_response = function(line, ifaceItem){
+  ifaceItem["features"].push("response")
+  ifaceItem["activities"].push({"response": [line[5]]})
+  return ifaceItem
+}
+
+var to_flowinterface = function(line, ifaceItem){      
+  var item = null;
+  activity = line[5].trim();
+  first_wrd = activity.split(":")[0] == "" ? activity.split(":")[1] : activity.split(":")[0]
+  if(first_wrd.indexOf("MID") > -1 ){
+    item = interface_flow(line)
+    console.log("****** >>>> ["+activity+"] Found Interface " + JSON.stringify(item)) 
+  }
+
+  //if(activity.indexOf("Request") > -1){
+  //  item = interface_request(line, ifaceItem)
+  //}
+  
+  //if(activity.indexOf("Response") > -1){
+  //  item = interface_response(line, ifaceItem)
+  //}
+  
+       
+  return (item == undefined ? null : item );
 }
 
 var filterActivities = function(doc, cb){
   var flowitems = [];  
   var pattern = [];
   
+  //load reference data
+  var files = walkSync("./data/flowsteps",[]);
+  var stepJsons = []
+  files.forEach(function(json_path){
+    var steps = new json.File(json_path);
+    steps.readSync();
+    stepJsons.push(steps);
+  })
+  var rules = new json.File("./data/references/rules_flowsteps.json");
+  rules.readSync();
+
   // map flow items
   doc["activities"].forEach(function(line){
     var service = line[4];
-
+    
     if(service.toLowerCase() === "abstractflowstep"){      
-      var step_item = to_flowstepitem(line) 
+      var step_item = to_flowstepitem(line, stepJsons) 
+      //console.log("-----> ["+service+"] Flow step ==> " + JSON.stringify(step_item))
       if(step_item != null){ 
         flowitems.push(step_item); 
         pattern.push(step_item["name"])
@@ -344,21 +435,39 @@ var filterActivities = function(doc, cb){
     }
 
     if(service.toLowerCase() === 'boruleexecution' ){
-      var rule_item = to_flowrule(line);
-      if(rule_item != null){ flowitems.push(rule_item); }      
+      var rule_item = to_flowrule(line, rules);
+      if(rule_item != null){
+       //console.log("****** ["+service+"] Added rule step ==> " + JSON.stringify(rule_item))
+       flowitems.push(rule_item); 
+     }      
     }
 
-    if(service.toLowerCase() === 'bointerface' ){
-      var iface_item = to_flowinterface(line);
-      if(iface_item != null){ flowitems.push(iface_item); }      
+    if(service.toLowerCase() === 'bointerfaces' ){
+      var ifaceItem = null
+      flowitems.forEach(function(item){ if(item["type"] == "interface") {ifaceItem = item} })
+      var iface_item = to_flowinterface(line, ifaceItem);
+      if(iface_item != null){ 
+        console.log("****** ["+service+"] Added Interface step ==> " + JSON.stringify(iface_item))
+        flowitems.push(iface_item); 
+      }      
     }
 
-    if(service.toLowerCase() === 'pdo'){
+    if(service.toLowerCase() === 'pdo' && flowitems.length > 0 ){
       var lastItem = flowitems.pop();
-      lastItem["activities"].push(activity);
+      //console.log("******** ["+service+"] PDO step PRE => " + JSON.stringify(lastItem))
+      if(lastItem["features"].indexOf("pdo") == -1){
+        lastItem["features"].push("pdo");
+        lastItem["activities"].push({"pdo" : [line[5]] });  
+      } else {
+        lastItem["activities"].forEach(function(a){
+          if(a["pdo"] != undefined){ a["pdo"].push(line[5])}
+        })
+      }
+      //console.log("******** ["+service+"] PDO step ==> " + JSON.stringify(lastItem))
       flowitems.push(lastItem);
     }
   })
+  console.log("-----> collected " + flowitems.length + " and pattern " + pattern.length);
   cb(flowitems, pattern);
 }
 
@@ -527,7 +636,7 @@ var getFlowItem = function(group_name, flowId, uid){
   var raw_name = uid.split(/(?=[A-Z])/).join(" ")
   var name = raw_name.charAt(0).toUpperCase() + raw_name.slice(1)  
   var is_subflow = (uid.toLowerCase().indexOf('subflow') > -1) ? true : false;
-  var type  = is_subflow ? "subflow" : "";
+  var type  = is_subflow ? "subflow" : "activity";
   var ref = getRef(group_name, type, uid);
 
   if(is_subflow){   
@@ -538,7 +647,7 @@ var getFlowItem = function(group_name, flowId, uid){
       "name": name,
       "description": ref["description"], 
       "uid": uid,
-      "features": ""
+      "features": []
     }   
   } else {
     var fpath = appRoot + "/data/flowsteps/"+ group_name.replace(" ", "_") +"_flowsteps.json";
@@ -556,7 +665,7 @@ var getFlowItem = function(group_name, flowId, uid){
         "name": name,
         "description": ref["description"], 
         "uid": uid,
-        "features": ""
+        "features": []
       }      
 
       flowitems.set(uid, flowstep);

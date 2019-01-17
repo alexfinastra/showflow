@@ -5,8 +5,8 @@
 			| The similarity between flows is 87%
 		br 
 	#splitview(style="margin-top: 3rem;")
-		#left.split    
-			.row#payflow-left(style="margin: 5px;")
+		#left.split  
+			.row#payflow-left(style="margin-left: 10px; width: 90%; float: left")
 				.col-md-12.mt-5                
 					center
 						h4.col-auto MID : #{data_left["mid"]}						
@@ -15,8 +15,8 @@
 						if data_left["flowitems"] != null && data_left["flowitems"] != undefined
 							each item in data_left["flowitems"]  
 								include flow_item
-		#right.split(style="margin-left: 5px; background-color: honeydew; border: 1px solid seagreen;")
-			.row#payflow-right(style="margin: 5px;")
+		#right.split(style="margin-left: 5px; background-color: honeydew; border-left: 5px dotted seagreen;")
+			.row#payflow-right(style="margin-right: 10px; width: 90%; float: right;")
 				.col-md-12.mt-5                
 					center
 						h4.col-auto MID : #{data_right["mid"]}

@@ -5,9 +5,10 @@ li.timeline-item
     .timeline-heading
       h5.text-light.timeline-title #{item["name"]}       
     .timeline-body
-      p.small.mt-3
-        span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 step : 
-          b #{item["group"]}
+      if item["timestamp"].length > 0      
+        p.small.mt-3
+          span.rounded.bg-dark.text-light.p-1.pl-2.pr-2 timestamp : 
+            b #{item["timestamp"]}
       p.small.mt-3
         span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 type : 
           b #{item["type"]}      
@@ -16,6 +17,8 @@ li.timeline-item
         | #{item["description"]}
       br
       if item["features"].indexOf("flowmanagement") > -1
+        include flowstopper
+      if item["features"].indexOf("pdo") > -1
         include flowstopper
       if subflow == undefined
         button.btn.btn-dark.float-right.btn-subflow(type="button", data-env=env, data-uid=item["uid"], id=item["uid"], data-back="nothing", data-toggle="modal", data-target="#subflow")
