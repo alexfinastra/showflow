@@ -756,10 +756,10 @@ var saveUsecases = function(env, groupName, usecases, docs){
 
       var is_new = (docs.find(function(doc){ return doc["uid"] == usecase["uid"]; }) == undefined)      
       if(is_new){
-        usecase["flow"] = flow.flat()
+        usecase["flow"] = flatten(flow)
         storage.newDoc(usecase, function(doc){ console.log("+++++> Callback from NEW Doc " ); })
       } else{
-        storage.updateDoc({"uid": usecase["uid"]}, {"flowsteps": usecase["flowsteps"], "flow": flow.flat() }, function(doc){
+        storage.updateDoc({"uid": usecase["uid"]}, {"flowsteps": usecase["flowsteps"], "flow": flatten(flow) }, function(doc){
           console.log("+++++> Callback from UPDATE doc  ")
         }) 
       }
