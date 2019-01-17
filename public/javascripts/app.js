@@ -268,9 +268,9 @@ $(document).ready(function(){
 	      onNodeSelected  : function(event, data) {	               	
         	parent = $('#treeflows').treeview('getParent', data); 
         	if(location.href.indexOf('flow') != -1){
-        		location.href = location.href.replace("flow", "compare") + "/" + parent["key"]+ "/" + data["key"]; 	
+        		location.href = location.href.replace("/flow/", "/compare/") + "/" + parent["key"]+ "/" + data["key"]; 	
         	} else{
-        		location.href = location.href.replace("activities", "compare") + "/" + parent["key"]+ "/" + data["key"]; 	
+        		location.href = location.href.replace("/activities/", "/compare/") + "/" + parent["key"]+ "/" + data["key"]; 	
         	}
 	      }
 	    });
