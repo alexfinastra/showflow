@@ -723,6 +723,12 @@ var parseBean = function(groupName, bean, cb){
   }
 }
 
+var flatten = function(list) {
+    return list.reduce(function (a, b) {
+        return a.concat(Array.isArray(b) ? flatten(b) : b);
+    }, []);
+}
+
 var mapFlow = function(usecase, allcases, cb){
   var flow = [];
   console.log("-----> Mapping actual flow for "+ usecase["uid"] + " with " + usecase["flowsteps"] )
@@ -731,9 +737,9 @@ var mapFlow = function(usecase, allcases, cb){
       var subflow = allcases.find(function(uc){ return uc["uid"] === item["uid"]})
       if(subflow != undefined){
         if(subflow["flow"].length == 0){
-          mapFlow(subflow, allcases, function(flow){ subflow["flow"] = flow.flat();  })
+          mapFlow(subflow, allcases, function(flow){ subflow["flow"] = flatten(flow);  })
         }
-        flow.push(subflow["flow"].flat())
+        flow.push(flatten(subflow["flow"]))
       }
     } else{
       flow.push(item["uid"])
