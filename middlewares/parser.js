@@ -21,9 +21,7 @@ function Parser(){  }
 ////////////////////////////////////////////////////////////////////////////////
 var parseTrace = function(filename, cb){ 
   var lineNr = 0, flowData = [], context = "";
-  splitter = filename.indexOf('/') > -1 ? "/" : "\\"
-  filename_arr = filename.split(splitter)
-  var env = filename_arr[filename_arr.length-1].split('-')[0];
+  var env = envName(filename);  
   var s = fs.createReadStream(filename)
     .pipe(es.split())
     .pipe(es.mapSync(function(line){
@@ -424,7 +422,8 @@ var filterActivities = function(doc, cb){
   // map flow items
   doc["activities"].forEach(function(line){
     var service = line[4];
-    
+    if( service == undefined || service == null) {return;}
+
     if(service.toLowerCase() === "abstractflowstep"){      
       var step_item = to_flowstepitem(line, stepJsons) 
       //console.log("-----> ["+service+"] Flow step ==> " + JSON.stringify(step_item))
@@ -768,9 +767,7 @@ var saveUsecases = function(env, groupName, usecases, docs){
 }
 
 var parseBusinessFlows = function(filename, beansXML){
-	splitter = filename.indexOf('/') > -1 ? "/" : "\\"
-  filename_arr = filename.split(splitter)
-  var env = filename_arr[filename_arr.length-1].split('-')[0];  
+	var env = envName(filename);  
   var groupName = group_name(filename_arr);
   
   var storage = new Storage(env + "_usecases");  
@@ -793,13 +790,30 @@ var parseEnviromentFlows = function(result){
 	console.log("-----> Process file with environemnt flows");
 }
 
+var envName = function(filename){
+  var splitter = filename.indexOf('/') > -1 ? "/" : "\\"
+  var filename_arr = filename.split(splitter);
+  var env = filename_arr[filename_arr.length-1].split('-')[0];  
+  return env;
+}
+
+
 method.parse = function(filename, cb){
   if(filename.indexOf(".xml") > -1){
     parseConfig(filename, cb);
   }
 
   if(filename.indexOf(".log") > -1){
-    parseTrace(filename, cb);
+    var env = envName(filename);
+    var storage = new Storage(env + "_usecases"); 
+    storage.collectionExists(function(exists){
+      if (exists){
+        parseTrace(filename, cb);    
+      } else{
+        console.log("Usecases collection does not exists could not apply matching :( ")
+        cb();
+      }
+    })    
   }
 }
 module.exports = Parser;

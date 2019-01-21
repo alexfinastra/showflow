@@ -4,6 +4,17 @@ function Storage(collection = 'payments'){
 	this.collection = collection  
 }
 
+method.collectionExists = function(cb){
+  console.log("-----> [" +this.collection+ "] check if collection Exists at all " );
+  var colName = this.collection;
+  db.listCollections().toArray(function(err, collections){     
+    if(collections.length == 0){ cb(false); }
+
+    relevant = collections.filter( function(c){ return c.name.indexOf(colName) > -1 })
+    cb(relevant.length == 0 ? false : true)
+  });
+}
+
 method.loadDocs = function(where, cb){
   console.log("-----> [" +this.collection+ "] loadDocs all from this collection with where :" + JSON.stringify(where) );
 
