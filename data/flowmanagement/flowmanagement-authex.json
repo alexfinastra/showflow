@@ -1,0 +1,61 @@
+{
+  "type": "subflow",
+  "name": "Flow Management - Authentication Exception",
+  "guide_url": "",
+  "customization": "",
+  "template": "/subflows/flowmanagement-authex.json",
+  "description": "Flow management with Authentication Exception as a terminate status",
+  "use_case": "subflow",
+  "flowsteps": [    
+    {
+      "type": "rule-system",
+      "group": "Flow Management",      
+      "timestamp": "",
+      "name": "Message Workflow Determination STP",
+      "description": "",
+      "uid": "messageworkflowdeterminationstp",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "rule-business-optional",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Position Figure Selection",
+      "description": "", 
+      "uid": "positionfigureselection",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "rule-business-optional",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Advising Type Selection Rule",
+      "description": "",
+      "uid": "advisingtypeselectionrule",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "interface",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Advising Interface",
+      "description": "",
+      "uid": "advisinginterface",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Authentication Exception",
+      "description": "Available action buttons is : Cancel",
+      "uid": "authenticationexception",
+      "features": "",
+      "activities": ""
+    }    
+  ]
+}

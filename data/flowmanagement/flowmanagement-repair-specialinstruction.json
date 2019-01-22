@@ -1,0 +1,101 @@
+{
+  "type": "subflow",
+  "name": "Flow Management - Special Instruction and Validation",
+  "guide_url": "",
+  "customization": "",
+  "template": "/subflows/flowmanagement-repair-specialinstruction.json",
+  "description": "Flow management with following statuses used as terminate status: Special Instruction, Repair, Cancel, Verify, Release",
+  "use_case": "subflow",
+  "flowsteps": [    
+    {
+      "type": "rule-system",
+      "group": "Flow Management",      
+      "timestamp": "",
+      "name": "Message Workflow Determination STP",
+      "description": "",
+      "uid": "messageworkflowdeterminationstp",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "rule-business-optional",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Position Figure Selection",
+      "description": "", 
+      "uid": "positionfigureselection",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "rule-business-optional",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Advising Type Selection Rule",
+      "description": "",
+      "uid": "advisingtypeselectionrule",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "interface",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Advising Interface",
+      "description": "",
+      "uid": "advisinginterface",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Special Instruction",
+      "description": "Available action button is Override",
+      "uid": "specialinstruction",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Repair",
+      "description": "Available action buttons are : Submit and Cancel",
+      "uid": "repair",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Cancel",
+      "description": "",
+      "uid": "cancel",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Verify",
+      "description": "Available action buttons are : Verify and Repair",
+      "uid": "verify",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Release",
+      "description": "Available action buttons are : Release and Repair",
+      "uid": "release",
+      "features": "",
+      "activities": ""
+    }    
+  ]
+}

@@ -308,7 +308,6 @@ $(document).ready(function(){
 
 
 	var $subflow_modal = $('#subflow');
-	var $flowmanagement_modal = $('#flowmanagement');
 	var uid = "";
 	var back = "";
 	var env = "";
@@ -332,6 +331,30 @@ $(document).ready(function(){
 	        }
 	    });
 	});
+
+
+	var $flowmanagement_modal = $('#flowmanagement');
+	$(document).on("click", ".btn-flowmanagement", function(e){	
+	  e.preventDefault();
+	  env = $(e.target).data('env') != undefined ? $(e.target).data('env') : env;
+	  uid = $(e.target).data('uid') != undefined ? $(e.target).data('uid') : uid;
+	  back = $(e.target).data('back') != undefined ? $(e.target).data('back') : back;	  
+	  $flowmanagement_modal
+	    .addClass('modal-scrollfix')
+	    .find('.modal-body')
+	    .html('loading...')
+	    .load("/usecases/flowmanagement/" + env + "/"+ uid + "/" + back, function() {
+	      // Use Bootstrap's built-in function to fix scrolling (to no avail)
+	      if(($flowmanagement_modal.data('bs.modal') || {})._isShown == false){
+	      	$flowmanagement_modal
+	        	.removeClass('modal-scrollfix')
+	        	.modal('handleUpdate')
+	        	.modal('show');
+	        }
+	    });
+	});
+
+
 
 
 	$('#showTable').on('click', function(){

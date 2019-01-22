@@ -91,4 +91,19 @@ router.get('/flows/:env/:uid', function(req, res, next) {
   })     
 });
 
+
+
+router.get('/flowmanagement/:env/:uid/:back', function(req, res, next) {
+  var flowmanagement = new json.File(appRoot + "/data/flowmanagement/"+ req.params["uid"] +".json");
+  flowmanagement.readSync();
+
+  if(flowmanagement != undefined){
+    var usecase = new Usecase(flowmanagement.data);
+    res.render('subflow', {env: req.params["env"], data: usecase._flow, back: req.params["back"]  });     
+  } else {
+    res.render('blank');
+  }  
+});
+
+
 module.exports = router;

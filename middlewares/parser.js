@@ -698,7 +698,9 @@ var to_flowsteps = function(group_name, flowId, steps){
   return flowitems;
 }
 
-var group_name = function(filename_arr){
+var group_name = function(filename){
+  var splitter = filename.indexOf('/') > -1 ? "/" : "\\"
+  var filename_arr = filename.split(splitter);
   var group_arr = []
   var env = filename_arr[filename_arr.length-1].split('-')[0]; 
   var group = filename_arr[filename_arr.length-1].replace(env, "").replace(".xml", "")
@@ -768,7 +770,7 @@ var saveUsecases = function(env, groupName, usecases, docs){
 
 var parseBusinessFlows = function(filename, beansXML){
 	var env = envName(filename);  
-  var groupName = group_name(filename_arr);
+  var groupName = group_name(filename);
   
   var storage = new Storage(env + "_usecases");  
   var usecases = [];

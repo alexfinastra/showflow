@@ -1,1 +1,941 @@
-{"stopFlagsFlowStepDebitAsap":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Stop Flags Flow Step Debit Asap","description":"BA Help Is Required :)","uid":"stopFlagsFlowStepDebitAsap","features":"","activities":""},"bulkMessageClassificationFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Bulk Message Classification Flow Step","description":"BA Help Is Required :)","uid":"bulkMessageClassificationFlowStep","features":"","activities":""},"mopSelectionFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Mop Selection Flow Step","description":"BA Help Is Required :)","uid":"mopSelectionFlowStep","features":"","activities":""},"partyIdentifierEnrichmentFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Party Identifier Enrichment Flow Step","description":"BA Help Is Required :)","uid":"partyIdentifierEnrichmentFlowStep","features":"","activities":""},"postMOPSelectionEnrichmentFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Post M O P Selection Enrichment Flow Step","description":"BA Help Is Required :)","uid":"postMOPSelectionEnrichmentFlowStep","features":"","activities":""},"stopAndPermitValidationFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Stop And Permit Validation Flow Step","description":"BA Help Is Required :)","uid":"stopAndPermitValidationFlowStep","features":"","activities":""},"mandateValidationFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Mandate Validation Flow Step","description":"BA Help Is Required :)","uid":"mandateValidationFlowStep","features":"","activities":""},"accountAdjustmentFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Account Adjustment Flow Step","description":"BA Help Is Required :)","uid":"accountAdjustmentFlowStep","features":"","activities":""},"destinationMOPSTPValidationFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Destination M O P S T P Validation Flow Step","description":"BA Help Is Required :)","uid":"destinationMOPSTPValidationFlowStep","features":"","activities":""},"stopFlagsFlowStepCreditAsap":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Stop Flags Flow Step Credit Asap","description":"BA Help Is Required :)","uid":"stopFlagsFlowStepCreditAsap","features":"","activities":""},"mopXSDValidationFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Mop X S D Validation Flow Step","description":"BA Help Is Required :)","uid":"mopXSDValidationFlowStep","features":"","activities":""},"generateRMsgIndexStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Generate R Msg Index Step","description":"BA Help Is Required :)","uid":"generateRMsgIndexStep","features":"","activities":""},"reinvokeDestinationPartyFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Reinvoke Destination Party Flow Step","description":"BA Help Is Required :)","uid":"reinvokeDestinationPartyFlowStep","features":"","activities":""},"transactionCodeMappingFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Transaction Code Mapping Flow Step","description":"BA Help Is Required :)","uid":"transactionCodeMappingFlowStep","features":"","activities":""},"postingAsapFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Posting Asap Flow Step","description":"BA Help Is Required :)","uid":"postingAsapFlowStep","features":"","activities":""},"matchToOutgoingRequestForChargesFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Match To Outgoing Request For Charges Flow Step","description":"BA Help Is Required :)","uid":"matchToOutgoingRequestForChargesFlowStep","features":"","activities":""},"slaFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Sla Flow Step","description":"BA Help Is Required :)","uid":"slaFlowStep","features":"","activities":""},"transferMethodFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Transfer Method Flow Step","description":"BA Help Is Required :)","uid":"transferMethodFlowStep","features":"","activities":""},"stopFlowOnHandoffFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Stop Flow On Handoff Flow Step","description":"BA Help Is Required :)","uid":"stopFlowOnHandoffFlowStep","features":"","activities":""},"timeHoldFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Time Hold Flow Step","description":"BA Help Is Required :)","uid":"timeHoldFlowStep","features":"","activities":""},"releaseBalanceInquiryFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Release Balance Inquiry Flow Step","description":"BA Help Is Required :)","uid":"releaseBalanceInquiryFlowStep","features":"","activities":""},"balanceInquiryFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Balance Inquiry Flow Step","description":"BA Help Is Required :)","uid":"balanceInquiryFlowStep","features":"","activities":""},"stopFlagsFlowStepAll":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Stop Flags Flow Step All","description":"BA Help Is Required :)","uid":"stopFlagsFlowStepAll","features":"","activities":""},"coverTransformationFlowStepGeneric":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Cover Transformation Flow Step Generic","description":"BA Help Is Required :)","uid":"coverTransformationFlowStepGeneric","features":"","activities":""},"generateDirectCoverIndepTransferFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Generate Direct Cover Indep Transfer Flow Step","description":"BA Help Is Required :)","uid":"generateDirectCoverIndepTransferFlowStep","features":"","activities":""},"complianceCheckPrePostingFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Compliance Check Pre Posting Flow Step","description":"BA Help Is Required :)","uid":"complianceCheckPrePostingFlowStep","features":"","activities":""},"wareHouseFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Ware House Flow Step","description":"BA Help Is Required :)","uid":"wareHouseFlowStep","features":"","activities":""},"currencyConversionExternalFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Currency Conversion External Flow Step","description":"BA Help Is Required :)","uid":"currencyConversionExternalFlowStep","features":"","activities":""},"executeExternalFXEngineFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Execute External F X Engine Flow Step","description":"BA Help Is Required :)","uid":"executeExternalFXEngineFlowStep","features":"","activities":""},"postingOptimisticModelFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Posting Optimistic Model Flow Step","description":"BA Help Is Required :)","uid":"postingOptimisticModelFlowStep","features":"","activities":""},"generateOutgoingRtnCoverFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Generate Outgoing Rtn Cover Flow Step","description":"BA Help Is Required :)","uid":"generateOutgoingRtnCoverFlowStep","features":"","activities":""},"generateDirectCoverDepTransferFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Generate Direct Cover Dep Transfer Flow Step","description":"BA Help Is Required :)","uid":"generateDirectCoverDepTransferFlowStep","features":"","activities":""},"bulkingCheckFlowStep":{"type":"activity","group":"highValueFlow","timestamp":"","name":"Bulking Check Flow Step","description":"BA Help Is Required :)","uid":"bulkingCheckFlowStep","features":"","activities":""},"baseCurrencyConversionFlowStep":{"type":"activity","group":"paymentInitiationHVSubFlow","timestamp":"","name":"Base Currency Conversion Flow Step","description":"BA Help Is Required :)","uid":"baseCurrencyConversionFlowStep","features":"","activities":""},"messageFilterFlowStep":{"type":"activity","group":"paymentInitiationHVSubFlow","timestamp":"","name":"Message Filter Flow Step","description":"BA Help Is Required :)","uid":"messageFilterFlowStep","features":"","activities":""},"sourceMOPSTPValidationFlowStep":{"type":"activity","group":"paymentInitiationHVSubFlow","timestamp":"","name":"Source M O P S T P Validation Flow Step","description":"BA Help Is Required :)","uid":"sourceMOPSTPValidationFlowStep","features":"","activities":""},"complianceCheckFlowStep":{"type":"activity","group":"paymentInitiationHVSubFlow","timestamp":"","name":"Compliance Check Flow Step","description":"BA Help Is Required :)","uid":"complianceCheckFlowStep","features":"","activities":""},"enrichAndRepairFlowStep":{"type":"activity","group":"paymentInitiationHVSubFlow","timestamp":"","name":"Enrich And Repair Flow Step","description":"BA Help Is Required :)","uid":"enrichAndRepairFlowStep","features":"","activities":""},"stpValidationFlowStep":{"type":"activity","group":"paymentInitiationHVSubFlow","timestamp":"","name":"Stp Validation Flow Step","description":"BA Help Is Required :)","uid":"stpValidationFlowStep","features":"","activities":""},"partyDetailsEnrichmentFlowStep":{"type":"activity","group":"paymentInitiationHVSubFlow","timestamp":"","name":"Party Details Enrichment Flow Step","description":"BA Help Is Required :)","uid":"partyDetailsEnrichmentFlowStep","features":"","activities":""},"duplicateCheckFlowStep":{"type":"activity","group":"paymentInitiationHVSubFlow","timestamp":"","name":"Duplicate Check Flow Step","description":"BA Help Is Required :)","uid":"duplicateCheckFlowStep","features":"","activities":""},"officeSLAFlowStep":{"type":"activity","group":"paymentInitiationHVSubFlow","timestamp":"","name":"Office S L A Flow Step","description":"BA Help Is Required :)","uid":"officeSLAFlowStep","features":"","activities":""},"incomingRejectReturnFlowStep":{"type":"activity","group":"paymentInitiationHVSubFlow","timestamp":"","name":"Incoming Reject Return Flow Step","description":"BA Help Is Required :)","uid":"incomingRejectReturnFlowStep","features":"","activities":""},"setBasicPropertiesFlowStep":{"type":"activity","group":"mapPaymentInfoHVSubFlow","timestamp":"","name":"Set Basic Properties Flow Step","description":"BA Help Is Required :)","uid":"setBasicPropertiesFlowStep","features":"","activities":""},"departmentSelectionFlowStep":{"type":"activity","group":"mapPaymentInfoHVSubFlow","timestamp":"","name":"Department Selection Flow Step","description":"BA Help Is Required :)","uid":"departmentSelectionFlowStep","features":"","activities":""},"businessAreaSelectionFlowStep":{"type":"activity","group":"mapPaymentInfoHVSubFlow","timestamp":"","name":"Business Area Selection Flow Step","description":"BA Help Is Required :)","uid":"businessAreaSelectionFlowStep","features":"","activities":""},"productAreaSelectionFlowStep":{"type":"activity","group":"mapPaymentInfoHVSubFlow","timestamp":"","name":"Product Area Selection Flow Step","description":"BA Help Is Required :)","uid":"productAreaSelectionFlowStep","features":"","activities":""},"partyProcessingSRCFlowStep":{"type":"activity","group":"partyProcessingSubFlow","timestamp":"","name":"Party Processing S R C Flow Step","description":"BA Help Is Required :)","uid":"partyProcessingSRCFlowStep","features":"","activities":""},"debitSLAFlowStep":{"type":"activity","group":"partyProcessingSubFlow","timestamp":"","name":"Debit S L A Flow Step","description":"BA Help Is Required :)","uid":"debitSLAFlowStep","features":"","activities":""},"paymentClassificationFlowStep":{"type":"activity","group":"partyProcessingSubFlow","timestamp":"","name":"Payment Classification Flow Step","description":"BA Help Is Required :)","uid":"paymentClassificationFlowStep","features":"","activities":""},"recallMatchingIndexFlowStep":{"type":"activity","group":"partyProcessingSubFlow","timestamp":"","name":"Recall Matching Index Flow Step","description":"BA Help Is Required :)","uid":"recallMatchingIndexFlowStep","features":"","activities":""},"priorityRuleFlowStep":{"type":"activity","group":"partyProcessingSubFlow","timestamp":"","name":"Priority Rule Flow Step","description":"BA Help Is Required :)","uid":"priorityRuleFlowStep","features":"","activities":""},"validatePartyLimitsFlowStep":{"type":"activity","group":"incomingRiskManagementSubFlow","timestamp":"","name":"Validate Party Limits Flow Step","description":"BA Help Is Required :)","uid":"validatePartyLimitsFlowStep","features":"","activities":""},"anticipatedFundsMatchingFlowStep":{"type":"activity","group":"incomingRiskManagementSubFlow","timestamp":"","name":"Anticipated Funds Matching Flow Step","description":"BA Help Is Required :)","uid":"anticipatedFundsMatchingFlowStep","features":"","activities":""},"directCoverMatchingFlowStep":{"type":"activity","group":"incomingRiskManagementSubFlow","timestamp":"","name":"Direct Cover Matching Flow Step","description":"BA Help Is Required :)","uid":"directCoverMatchingFlowStep","features":"","activities":""},"pisnMatchingFlowStep":{"type":"activity","group":"incomingRiskManagementSubFlow","timestamp":"","name":"Pisn Matching Flow Step","description":"BA Help Is Required :)","uid":"pisnMatchingFlowStep","features":"","activities":""},"senderCreditLineReplenishmentFlowStep":{"type":"activity","group":"incomingRiskManagementSubFlow","timestamp":"","name":"Sender Credit Line Replenishment Flow Step","description":"BA Help Is Required :)","uid":"senderCreditLineReplenishmentFlowStep","features":"","activities":""},"senderCreditLineCheckAndBlockFlowStep":{"type":"activity","group":"incomingRiskManagementSubFlow","timestamp":"","name":"Sender Credit Line Check And Block Flow Step","description":"BA Help Is Required :)","uid":"senderCreditLineCheckAndBlockFlowStep","features":"","activities":""},"settlementConfirmationMatchingFlowStep":{"type":"activity","group":"incomingRiskManagementSubFlow","timestamp":"","name":"Settlement Confirmation Matching Flow Step","description":"BA Help Is Required :)","uid":"settlementConfirmationMatchingFlowStep","features":"","activities":""},"ledgerConfirmationMatchingFlowStep":{"type":"activity","group":"incomingRiskManagementSubFlow","timestamp":"","name":"Ledger Confirmation Matching Flow Step","description":"BA Help Is Required :)","uid":"ledgerConfirmationMatchingFlowStep","features":"","activities":""},"compensationCalculationForOutgoingGeneratedPaymentsFlowStep":{"type":"activity","group":"feeHandlingSubFlow","timestamp":"","name":"Compensation Calculation For Outgoing Generated Payments Flow Step","description":"BA Help Is Required :)","uid":"compensationCalculationForOutgoingGeneratedPaymentsFlowStep","features":"","activities":""},"feesCalculationFlowStep":{"type":"activity","group":"feeHandlingSubFlow","timestamp":"","name":"Fees Calculation Flow Step","description":"BA Help Is Required :)","uid":"feesCalculationFlowStep","features":"","activities":""},"liquidityPrioritySelectionFlowStep":{"type":"activity","group":"liquiditySubFlow","timestamp":"","name":"Liquidity Priority Selection Flow Step","description":"BA Help Is Required :)","uid":"liquidityPrioritySelectionFlowStep","features":"","activities":""},"validatePartyLimitFlowStep":{"type":"activity","group":"liquiditySubFlow","timestamp":"","name":"Validate Party Limit Flow Step","description":"BA Help Is Required :)","uid":"validatePartyLimitFlowStep","features":"","activities":""},"validateReleaseBandsFlowStep":{"type":"activity","group":"liquiditySubFlow","timestamp":"","name":"Validate Release Bands Flow Step","description":"BA Help Is Required :)","uid":"validateReleaseBandsFlowStep","features":"","activities":""},"validateCapFlowStep":{"type":"activity","group":"liquiditySubFlow","timestamp":"","name":"Validate Cap Flow Step","description":"BA Help Is Required :)","uid":"validateCapFlowStep","features":"","activities":""},"generateDirectMessageFlowStep":{"type":"activity","group":"mappingAndFormattingSubFlow","timestamp":"","name":"Generate Direct Message Flow Step","description":"BA Help Is Required :)","uid":"generateDirectMessageFlowStep","features":"","activities":""},"generateUTRFlowStep":{"type":"activity","group":"mappingAndFormattingSubFlow","timestamp":"","name":"Generate U T R Flow Step","description":"BA Help Is Required :)","uid":"generateUTRFlowStep","features":"","activities":""},"findFirstInCreditChainFlowStep":{"type":"activity","group":"mappingAndFormattingSubFlow","timestamp":"","name":"Find First In Credit Chain Flow Step","description":"BA Help Is Required :)","uid":"findFirstInCreditChainFlowStep","features":"","activities":""},"mapAndFormatLoadCustomerFlowStep":{"type":"activity","group":"mappingAndFormattingSubFlow","timestamp":"","name":"Map And Format Load Customer Flow Step","description":"BA Help Is Required :)","uid":"mapAndFormatLoadCustomerFlowStep","features":"","activities":""},"mappingOutFlowStep":{"type":"activity","group":"mappingAndFormattingSubFlow","timestamp":"","name":"Mapping Out Flow Step","description":"BA Help Is Required :)","uid":"mappingOutFlowStep","features":"","activities":""},"transmissionFlowStep":{"type":"activity","group":"mappingAndFormattingSubFlow","timestamp":"","name":"Transmission Flow Step","description":"BA Help Is Required :)","uid":"transmissionFlowStep","features":"","activities":""},"generateInterofficeTransactionFlowStep":{"type":"activity","group":"mappingAndFormattingSubFlow","timestamp":"","name":"Generate Interoffice Transaction Flow Step","description":"BA Help Is Required :)","uid":"generateInterofficeTransactionFlowStep","features":"","activities":""},"flowManagementRulesFlowStep":{"type":"activity","group":"flowCompletionSubFlow","timestamp":"","name":"Flow Management Rules Flow Step","description":"BA Help Is Required :)","uid":"flowManagementRulesFlowStep","features":"","activities":""},"terminationFlowPostingFlowStep":{"type":"activity","group":"flowCompletionSubFlow","timestamp":"","name":"Termination Flow Posting Flow Step","description":"BA Help Is Required :)","uid":"terminationFlowPostingFlowStep","features":"","activities":""},"gpiSubStatusFlowStep":{"type":"activity","group":"flowCompletionSubFlow","timestamp":"","name":"Gpi Sub Status Flow Step","description":"BA Help Is Required :)","uid":"gpiSubStatusFlowStep","features":"","activities":""},"advisingAndNotificationFlowStep":{"type":"activity","group":"flowCompletionSubFlow","timestamp":"","name":"Advising And Notification Flow Step","description":"BA Help Is Required :)","uid":"advisingAndNotificationFlowStep","features":"","activities":""},"outGoingRejectReturnOriginalFlowStep":{"type":"activity","group":"flowCompletionSubFlow","timestamp":"","name":"Out Going Reject Return Original Flow Step","description":"BA Help Is Required :)","uid":"outGoingRejectReturnOriginalFlowStep","features":"","activities":""},"incomingRejectReturnOriginalFlowStep":{"type":"activity","group":"flowCompletionSubFlow","timestamp":"","name":"Incoming Reject Return Original Flow Step","description":"BA Help Is Required :)","uid":"incomingRejectReturnOriginalFlowStep","features":"","activities":""},"handleCutOffFlowStep":{"type":"activity","group":"flowCompletionSubFlow","timestamp":"","name":"Handle Cut Off Flow Step","description":"BA Help Is Required :)","uid":"handleCutOffFlowStep","features":"","activities":""},"debulkMessageFlowStep":{"type":"activity","group":"flowCompletionSubFlow","timestamp":"","name":"Debulk Message Flow Step","description":"BA Help Is Required :)","uid":"debulkMessageFlowStep","features":"","activities":""},"positionFigureSelectionFlowStep":{"type":"activity","group":"flowCompletionSubFlow","timestamp":"","name":"Position Figure Selection Flow Step","description":"BA Help Is Required :)","uid":"positionFigureSelectionFlowStep","features":"","activities":""},"handleRentas2AcknowledgmentFlowStepHV":{"type":"activity","group":"handleRentas2AcknowledgmentFlow","timestamp":"","name":"Handle Rentas2 Acknowledgment Flow Step H V","description":"BA Help Is Required :)","uid":"handleRentas2AcknowledgmentFlowStepHV","features":"","activities":""},"liveDollarTransactionFlowStep":{"type":"activity","group":"paymentInitiationHVSubFlow","timestamp":"","name":"Live Dollar Transaction Flow Step","description":"BA Help Is Required :)","uid":"liveDollarTransactionFlowStep","features":[]},"capacityCheckFlowStep":{"type":"activity","group":"liquiditySubFlow","timestamp":"","name":"Capacity Check Flow Step","description":"BA Help Is Required :)","uid":"capacityCheckFlowStep","features":[]},"mappingOutFlowStepHV":{"type":"activity","group":"mappingAndFormattingSubFlow","timestamp":"","name":"Mapping Out Flow Step H V","description":"BA Help Is Required :)","uid":"mappingOutFlowStepHV","features":[]},"findFirstInDebitChainFlowStep":{"type":"activity","group":"bankToClearingFlow","timestamp":"","name":"Find First In Debit Chain Flow Step","description":"BA Help Is Required :)","uid":"findFirstInDebitChainFlowStep","features":[]},"loadDebitCustomerFlowStep":{"type":"activity","group":"bankToClearingFlow","timestamp":"","name":"Load Debit Customer Flow Step","description":"BA Help Is Required :)","uid":"loadDebitCustomerFlowStep","features":[]},"findFirstInCreditChainFlowStepBankToClearingHV":{"type":"activity","group":"bankToClearingFlow","timestamp":"","name":"Find First In Credit Chain Flow Step Bank To Clearing H V","description":"BA Help Is Required :)","uid":"findFirstInCreditChainFlowStepBankToClearingHV","features":[]},"loadCreditCustomerFlowStep":{"type":"activity","group":"bankToClearingFlow","timestamp":"","name":"Load Credit Customer Flow Step","description":"BA Help Is Required :)","uid":"loadCreditCustomerFlowStep","features":[]},"bankToClearingAccountDerivationFlowStepHV":{"type":"activity","group":"bankToClearingFlow","timestamp":"","name":"Bank To Clearing Account Derivation Flow Step H V","description":"BA Help Is Required :)","uid":"bankToClearingAccountDerivationFlowStepHV","features":[]},"mopSelectionBankToClearingFlowStepHV":{"type":"activity","group":"bankToClearingFlow","timestamp":"","name":"Mop Selection Bank To Clearing Flow Step H V","description":"BA Help Is Required :)","uid":"mopSelectionBankToClearingFlowStepHV","features":[]},"destSTPValidationBankToClearingFlowStepHV":{"type":"activity","group":"bankToClearingFlow","timestamp":"","name":"Dest S T P Validation Bank To Clearing Flow Step H V","description":"BA Help Is Required :)","uid":"destSTPValidationBankToClearingFlowStepHV","features":[]},"setBankToClearingExternalAccountsHV":{"type":"activity","group":"bankToClearingFlow","timestamp":"","name":"Set Bank To Clearing External Accounts H V","description":"BA Help Is Required :)","uid":"setBankToClearingExternalAccountsHV","features":[]},"mappingOutFlowStepBankToClearing":{"type":"activity","group":"bankToClearingFlow","timestamp":"","name":"Mapping Out Flow Step Bank To Clearing","description":"BA Help Is Required :)","uid":"mappingOutFlowStepBankToClearing","features":[]}}
+{
+  "stopFlagsFlowStepDebitAsap": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Stop Flags Flow Step Debit Asap",
+    "description": "BA Help Is Required :)",
+    "uid": "stopFlagsFlowStepDebitAsap",
+    "features": "",
+    "activities": ""
+  },
+  "bulkMessageClassificationFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Bulk Message Classification Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "bulkMessageClassificationFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "mopSelectionFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Mop Selection Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "mopSelectionFlowStep",
+    "features": "flowmanagement-repair",
+    "activities": ""
+  },
+  "partyIdentifierEnrichmentFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Party Identifier Enrichment Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "partyIdentifierEnrichmentFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "postMOPSelectionEnrichmentFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Post M O P Selection Enrichment Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "postMOPSelectionEnrichmentFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "stopAndPermitValidationFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Stop And Permit Validation Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "stopAndPermitValidationFlowStep",
+    "features": "flowmanagement-repair-specialinstruction",
+    "activities": ""
+  },
+  "mandateValidationFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Mandate Validation Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "mandateValidationFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "accountAdjustmentFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Account Adjustment Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "accountAdjustmentFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "destinationMOPSTPValidationFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Destination M O P S T P Validation Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "destinationMOPSTPValidationFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "stopFlagsFlowStepCreditAsap": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Stop Flags Flow Step Credit Asap",
+    "description": "BA Help Is Required :)",
+    "uid": "stopFlagsFlowStepCreditAsap",
+    "features": "",
+    "activities": ""
+  },
+  "mopXSDValidationFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Mop X S D Validation Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "mopXSDValidationFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "generateRMsgIndexStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Generate R Msg Index Step",
+    "description": "BA Help Is Required :)",
+    "uid": "generateRMsgIndexStep",
+    "features": "",
+    "activities": ""
+  },
+  "reinvokeDestinationPartyFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Reinvoke Destination Party Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "reinvokeDestinationPartyFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "transactionCodeMappingFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Transaction Code Mapping Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "transactionCodeMappingFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "postingAsapFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Posting Asap Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "postingAsapFlowStep",
+    "features": "flowmanagement-posting",
+    "activities": ""
+  },
+  "matchToOutgoingRequestForChargesFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Match To Outgoing Request For Charges Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "matchToOutgoingRequestForChargesFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "slaFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Sla Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "slaFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "transferMethodFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Transfer Method Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "transferMethodFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "stopFlowOnHandoffFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Stop Flow On Handoff Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "stopFlowOnHandoffFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "timeHoldFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Time Hold Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "timeHoldFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "releaseBalanceInquiryFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Release Balance Inquiry Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "releaseBalanceInquiryFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "balanceInquiryFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Balance Inquiry Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "balanceInquiryFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "stopFlagsFlowStepAll": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Stop Flags Flow Step All",
+    "description": "BA Help Is Required :)",
+    "uid": "stopFlagsFlowStepAll",
+    "features": "",
+    "activities": ""
+  },
+  "coverTransformationFlowStepGeneric": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Cover Transformation Flow Step Generic",
+    "description": "BA Help Is Required :)",
+    "uid": "coverTransformationFlowStepGeneric",
+    "features": "",
+    "activities": ""
+  },
+  "generateDirectCoverIndepTransferFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Generate Direct Cover Indep Transfer Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "generateDirectCoverIndepTransferFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "complianceCheckPrePostingFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Compliance Check Pre Posting Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "complianceCheckPrePostingFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "wareHouseFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Ware House Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "wareHouseFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "currencyConversionExternalFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Currency Conversion External Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "currencyConversionExternalFlowStep",
+    "features": "flowmanagement-repair",
+    "activities": ""
+  },
+  "executeExternalFXEngineFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Execute External F X Engine Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "executeExternalFXEngineFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "postingOptimisticModelFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Posting Optimistic Model Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "postingOptimisticModelFlowStep",
+    "features": "flowmanagement-posting",
+    "activities": ""
+  },
+  "generateOutgoingRtnCoverFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Generate Outgoing Rtn Cover Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "generateOutgoingRtnCoverFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "generateDirectCoverDepTransferFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Generate Direct Cover Dep Transfer Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "generateDirectCoverDepTransferFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "bulkingCheckFlowStep": {
+    "type": "activity",
+    "group": "highValueFlow",
+    "timestamp": "",
+    "name": "Bulking Check Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "bulkingCheckFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "baseCurrencyConversionFlowStep": {
+    "type": "activity",
+    "group": "paymentInitiationHVSubFlow",
+    "timestamp": "",
+    "name": "Base Currency Conversion Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "baseCurrencyConversionFlowStep",
+    "features": "flowmanagement-repair-waitrate",
+    "activities": ""
+  },
+  "messageFilterFlowStep": {
+    "type": "activity",
+    "group": "paymentInitiationHVSubFlow",
+    "timestamp": "",
+    "name": "Message Filter Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "messageFilterFlowStep",
+    "features": "flowmanagement-filtered",
+    "activities": ""
+  },
+  "sourceMOPSTPValidationFlowStep": {
+    "type": "activity",
+    "group": "paymentInitiationHVSubFlow",
+    "timestamp": "",
+    "name": "Source M O P S T P Validation Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "sourceMOPSTPValidationFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "complianceCheckFlowStep": {
+    "type": "activity",
+    "group": "paymentInitiationHVSubFlow",
+    "timestamp": "",
+    "name": "Compliance Check Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "complianceCheckFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "enrichAndRepairFlowStep": {
+    "type": "activity",
+    "group": "paymentInitiationHVSubFlow",
+    "timestamp": "",
+    "name": "Enrich And Repair Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "enrichAndRepairFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "stpValidationFlowStep": {
+    "type": "activity",
+    "group": "paymentInitiationHVSubFlow",
+    "timestamp": "",
+    "name": "Stp Validation Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "stpValidationFlowStep",
+    "features": "flowmanagement-repair-flow-selection",
+    "activities": ""
+  },
+  "partyDetailsEnrichmentFlowStep": {
+    "type": "activity",
+    "group": "paymentInitiationHVSubFlow",
+    "timestamp": "",
+    "name": "Party Details Enrichment Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "partyDetailsEnrichmentFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "duplicateCheckFlowStep": {
+    "type": "activity",
+    "group": "paymentInitiationHVSubFlow",
+    "timestamp": "",
+    "name": "Duplicate Check Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "duplicateCheckFlowStep",
+    "features": "flowmanagement-dupex",
+    "activities": ""
+  },
+  "officeSLAFlowStep": {
+    "type": "activity",
+    "group": "paymentInitiationHVSubFlow",
+    "timestamp": "",
+    "name": "Office S L A Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "officeSLAFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "incomingRejectReturnFlowStep": {
+    "type": "activity",
+    "group": "paymentInitiationHVSubFlow",
+    "timestamp": "",
+    "name": "Incoming Reject Return Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "incomingRejectReturnFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "setBasicPropertiesFlowStep": {
+    "type": "activity",
+    "group": "mapPaymentInfoHVSubFlow",
+    "timestamp": "",
+    "name": "Set Basic Properties Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "setBasicPropertiesFlowStep",
+    "features": "flowmanagement-authex",
+    "activities": ""
+  },
+  "departmentSelectionFlowStep": {
+    "type": "activity",
+    "group": "mapPaymentInfoHVSubFlow",
+    "timestamp": "",
+    "name": "Department Selection Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "departmentSelectionFlowStep",
+    "features": "flowmanagement-repair",
+    "activities": ""
+  },
+  "businessAreaSelectionFlowStep": {
+    "type": "activity",
+    "group": "mapPaymentInfoHVSubFlow",
+    "timestamp": "",
+    "name": "Business Area Selection Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "businessAreaSelectionFlowStep",
+    "features": "flowmanagement-repair",
+    "activities": ""
+  },
+  "productAreaSelectionFlowStep": {
+    "type": "activity",
+    "group": "mapPaymentInfoHVSubFlow",
+    "timestamp": "",
+    "name": "Product Area Selection Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "productAreaSelectionFlowStep",
+    "features": "flowmanagement-repair",
+    "activities": ""
+  },
+  "partyProcessingSRCFlowStep": {
+    "type": "activity",
+    "group": "partyProcessingSubFlow",
+    "timestamp": "",
+    "name": "Party Processing S R C Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "partyProcessingSRCFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "debitSLAFlowStep": {
+    "type": "activity",
+    "group": "partyProcessingSubFlow",
+    "timestamp": "",
+    "name": "Debit S L A Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "debitSLAFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "paymentClassificationFlowStep": {
+    "type": "activity",
+    "group": "partyProcessingSubFlow",
+    "timestamp": "",
+    "name": "Payment Classification Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "paymentClassificationFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "recallMatchingIndexFlowStep": {
+    "type": "activity",
+    "group": "partyProcessingSubFlow",
+    "timestamp": "",
+    "name": "Recall Matching Index Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "recallMatchingIndexFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "priorityRuleFlowStep": {
+    "type": "activity",
+    "group": "partyProcessingSubFlow",
+    "timestamp": "",
+    "name": "Priority Rule Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "priorityRuleFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "validatePartyLimitsFlowStep": {
+    "type": "activity",
+    "group": "incomingRiskManagementSubFlow",
+    "timestamp": "",
+    "name": "Validate Party Limits Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "validatePartyLimitsFlowStep",
+    "features": "flowmanagement-waitlimit",
+    "activities": ""
+  },
+  "anticipatedFundsMatchingFlowStep": {
+    "type": "activity",
+    "group": "incomingRiskManagementSubFlow",
+    "timestamp": "",
+    "name": "Anticipated Funds Matching Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "anticipatedFundsMatchingFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "directCoverMatchingFlowStep": {
+    "type": "activity",
+    "group": "incomingRiskManagementSubFlow",
+    "timestamp": "",
+    "name": "Direct Cover Matching Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "directCoverMatchingFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "pisnMatchingFlowStep": {
+    "type": "activity",
+    "group": "incomingRiskManagementSubFlow",
+    "timestamp": "",
+    "name": "Pisn Matching Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "pisnMatchingFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "senderCreditLineReplenishmentFlowStep": {
+    "type": "activity",
+    "group": "incomingRiskManagementSubFlow",
+    "timestamp": "",
+    "name": "Sender Credit Line Replenishment Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "senderCreditLineReplenishmentFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "senderCreditLineCheckAndBlockFlowStep": {
+    "type": "activity",
+    "group": "incomingRiskManagementSubFlow",
+    "timestamp": "",
+    "name": "Sender Credit Line Check And Block Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "senderCreditLineCheckAndBlockFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "settlementConfirmationMatchingFlowStep": {
+    "type": "activity",
+    "group": "incomingRiskManagementSubFlow",
+    "timestamp": "",
+    "name": "Settlement Confirmation Matching Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "settlementConfirmationMatchingFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "ledgerConfirmationMatchingFlowStep": {
+    "type": "activity",
+    "group": "incomingRiskManagementSubFlow",
+    "timestamp": "",
+    "name": "Ledger Confirmation Matching Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "ledgerConfirmationMatchingFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "compensationCalculationForOutgoingGeneratedPaymentsFlowStep": {
+    "type": "activity",
+    "group": "feeHandlingSubFlow",
+    "timestamp": "",
+    "name": "Compensation Calculation For Outgoing Generated Payments Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "compensationCalculationForOutgoingGeneratedPaymentsFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "feesCalculationFlowStep": {
+    "type": "activity",
+    "group": "feeHandlingSubFlow",
+    "timestamp": "",
+    "name": "Fees Calculation Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "feesCalculationFlowStep",
+    "features": "flowmanagement-repair",
+    "activities": ""
+  },
+  "liquidityPrioritySelectionFlowStep": {
+    "type": "activity",
+    "group": "liquiditySubFlow",
+    "timestamp": "",
+    "name": "Liquidity Priority Selection Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "liquidityPrioritySelectionFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "validatePartyLimitFlowStep": {
+    "type": "activity",
+    "group": "liquiditySubFlow",
+    "timestamp": "",
+    "name": "Validate Party Limit Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "validatePartyLimitFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "validateReleaseBandsFlowStep": {
+    "type": "activity",
+    "group": "liquiditySubFlow",
+    "timestamp": "",
+    "name": "Validate Release Bands Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "validateReleaseBandsFlowStep",
+    "features": "flowmanagement-bands",
+    "activities": ""
+  },
+  "validateCapFlowStep": {
+    "type": "activity",
+    "group": "liquiditySubFlow",
+    "timestamp": "",
+    "name": "Validate Cap Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "validateCapFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "generateDirectMessageFlowStep": {
+    "type": "activity",
+    "group": "mappingAndFormattingSubFlow",
+    "timestamp": "",
+    "name": "Generate Direct Message Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "generateDirectMessageFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "generateUTRFlowStep": {
+    "type": "activity",
+    "group": "mappingAndFormattingSubFlow",
+    "timestamp": "",
+    "name": "Generate U T R Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "generateUTRFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "findFirstInCreditChainFlowStep": {
+    "type": "activity",
+    "group": "mappingAndFormattingSubFlow",
+    "timestamp": "",
+    "name": "Find First In Credit Chain Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "findFirstInCreditChainFlowStep",
+    "features": "flowmanagement-repair",
+    "activities": ""
+  },
+  "mapAndFormatLoadCustomerFlowStep": {
+    "type": "activity",
+    "group": "mappingAndFormattingSubFlow",
+    "timestamp": "",
+    "name": "Map And Format Load Customer Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "mapAndFormatLoadCustomerFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "mappingOutFlowStep": {
+    "type": "activity",
+    "group": "mappingAndFormattingSubFlow",
+    "timestamp": "",
+    "name": "Mapping Out Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "mappingOutFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "transmissionFlowStep": {
+    "type": "activity",
+    "group": "mappingAndFormattingSubFlow",
+    "timestamp": "",
+    "name": "Transmission Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "transmissionFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "generateInterofficeTransactionFlowStep": {
+    "type": "activity",
+    "group": "mappingAndFormattingSubFlow",
+    "timestamp": "",
+    "name": "Generate Interoffice Transaction Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "generateInterofficeTransactionFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "flowManagementRulesFlowStep": {
+    "type": "activity",
+    "group": "flowCompletionSubFlow",
+    "timestamp": "",
+    "name": "Flow Management Rules Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "flowManagementRulesFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "terminationFlowPostingFlowStep": {
+    "type": "activity",
+    "group": "flowCompletionSubFlow",
+    "timestamp": "",
+    "name": "Termination Flow Posting Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "terminationFlowPostingFlowStep",
+    "features": "flowmanagement-complete",
+    "activities": ""
+  },
+  "gpiSubStatusFlowStep": {
+    "type": "activity",
+    "group": "flowCompletionSubFlow",
+    "timestamp": "",
+    "name": "Gpi Sub Status Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "gpiSubStatusFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "advisingAndNotificationFlowStep": {
+    "type": "activity",
+    "group": "flowCompletionSubFlow",
+    "timestamp": "",
+    "name": "Advising And Notification Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "advisingAndNotificationFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "outGoingRejectReturnOriginalFlowStep": {
+    "type": "activity",
+    "group": "flowCompletionSubFlow",
+    "timestamp": "",
+    "name": "Out Going Reject Return Original Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "outGoingRejectReturnOriginalFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "incomingRejectReturnOriginalFlowStep": {
+    "type": "activity",
+    "group": "flowCompletionSubFlow",
+    "timestamp": "",
+    "name": "Incoming Reject Return Original Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "incomingRejectReturnOriginalFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "handleCutOffFlowStep": {
+    "type": "activity",
+    "group": "flowCompletionSubFlow",
+    "timestamp": "",
+    "name": "Handle Cut Off Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "handleCutOffFlowStep",
+    "features": "flowmanagement-repair-schedule",
+    "activities": ""
+  },
+  "debulkMessageFlowStep": {
+    "type": "activity",
+    "group": "flowCompletionSubFlow",
+    "timestamp": "",
+    "name": "Debulk Message Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "debulkMessageFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "positionFigureSelectionFlowStep": {
+    "type": "activity",
+    "group": "flowCompletionSubFlow",
+    "timestamp": "",
+    "name": "Position Figure Selection Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "positionFigureSelectionFlowStep",
+    "features": "",
+    "activities": ""
+  },
+  "handleRentas2AcknowledgmentFlowStepHV": {
+    "type": "activity",
+    "group": "handleRentas2AcknowledgmentFlow",
+    "timestamp": "",
+    "name": "Handle Rentas2 Acknowledgment Flow Step H V",
+    "description": "BA Help Is Required :)",
+    "uid": "handleRentas2AcknowledgmentFlowStepHV",
+    "features": "",
+    "activities": ""
+  },
+  "liveDollarTransactionFlowStep": {
+    "type": "activity",
+    "group": "paymentInitiationHVSubFlow",
+    "timestamp": "",
+    "name": "Live Dollar Transaction Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "liveDollarTransactionFlowStep",
+    "features": []
+  },
+  "capacityCheckFlowStep": {
+    "type": "activity",
+    "group": "liquiditySubFlow",
+    "timestamp": "",
+    "name": "Capacity Check Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "capacityCheckFlowStep",
+    "features": []
+  },
+  "mappingOutFlowStepHV": {
+    "type": "activity",
+    "group": "mappingAndFormattingSubFlow",
+    "timestamp": "",
+    "name": "Mapping Out Flow Step H V",
+    "description": "BA Help Is Required :)",
+    "uid": "mappingOutFlowStepHV",
+    "features": []
+  },
+  "findFirstInDebitChainFlowStep": {
+    "type": "activity",
+    "group": "bankToClearingFlow",
+    "timestamp": "",
+    "name": "Find First In Debit Chain Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "findFirstInDebitChainFlowStep",
+    "features": "flowmanagement-repair",
+    "activities": ""
+  },
+  "loadDebitCustomerFlowStep": {
+    "type": "activity",
+    "group": "bankToClearingFlow",
+    "timestamp": "",
+    "name": "Load Debit Customer Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "loadDebitCustomerFlowStep",
+    "features": "flowmanagement-repair"
+  },
+  "findFirstInCreditChainFlowStepBankToClearingHV": {
+    "type": "activity",
+    "group": "bankToClearingFlow",
+    "timestamp": "",
+    "name": "Find First In Credit Chain Flow Step Bank To Clearing H V",
+    "description": "BA Help Is Required :)",
+    "uid": "findFirstInCreditChainFlowStepBankToClearingHV",
+    "features": []
+  },
+  "loadCreditCustomerFlowStep": {
+    "type": "activity",
+    "group": "bankToClearingFlow",
+    "timestamp": "",
+    "name": "Load Credit Customer Flow Step",
+    "description": "BA Help Is Required :)",
+    "uid": "loadCreditCustomerFlowStep",
+    "features": []
+  },
+  "bankToClearingAccountDerivationFlowStepHV": {
+    "type": "activity",
+    "group": "bankToClearingFlow",
+    "timestamp": "",
+    "name": "Bank To Clearing Account Derivation Flow Step H V",
+    "description": "BA Help Is Required :)",
+    "uid": "bankToClearingAccountDerivationFlowStepHV",
+    "features": "flowmanagement-repair"
+  },
+  "mopSelectionBankToClearingFlowStepHV": {
+    "type": "activity",
+    "group": "bankToClearingFlow",
+    "timestamp": "",
+    "name": "Mop Selection Bank To Clearing Flow Step H V",
+    "description": "BA Help Is Required :)",
+    "uid": "mopSelectionBankToClearingFlowStepHV",
+    "features": "flowmanagement-repair"
+  },
+  "destSTPValidationBankToClearingFlowStepHV": {
+    "type": "activity",
+    "group": "bankToClearingFlow",
+    "timestamp": "",
+    "name": "Dest S T P Validation Bank To Clearing Flow Step H V",
+    "description": "BA Help Is Required :)",
+    "uid": "destSTPValidationBankToClearingFlowStepHV",
+    "features": []
+  },
+  "setBankToClearingExternalAccountsHV": {
+    "type": "activity",
+    "group": "bankToClearingFlow",
+    "timestamp": "",
+    "name": "Set Bank To Clearing External Accounts H V",
+    "description": "BA Help Is Required :)",
+    "uid": "setBankToClearingExternalAccountsHV",
+    "features": "flowmanagement-repair"
+  },
+  "mappingOutFlowStepBankToClearing": {
+    "type": "activity",
+    "group": "bankToClearingFlow",
+    "timestamp": "",
+    "name": "Mapping Out Flow Step Bank To Clearing",
+    "description": "BA Help Is Required :)",
+    "uid": "mappingOutFlowStepBankToClearing",
+    "features": []
+  }
+}

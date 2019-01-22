@@ -1,0 +1,61 @@
+{
+  "type": "subflow",
+  "name": "Flow Management - Filtered Messages",
+  "guide_url": "",
+  "customization": "",
+  "template": "/subflows/flowmanagement-filtered.json",
+  "description": "Flow management with Filtered messages as a terminate status",
+  "use_case": "subflow",
+  "flowsteps": [    
+    {
+      "type": "rule-system",
+      "group": "Flow Management",      
+      "timestamp": "",
+      "name": "Message Workflow Determination STP",
+      "description": "",
+      "uid": "messageworkflowdeterminationstp",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "rule-business-optional",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Position Figure Selection",
+      "description": "", 
+      "uid": "positionfigureselection",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "rule-business-optional",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Advising Type Selection Rule",
+      "description": "",
+      "uid": "advisingtypeselectionrule",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "interface",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Advising Interface",
+      "description": "",
+      "uid": "advisinginterface",
+      "features": "",
+      "activities": ""
+    },
+    {
+      "type": "status-message",
+      "group": "Flow Management",       
+      "timestamp": "",
+      "name": "Filtered Messages",
+      "description": "Available action buttons are : Release and Cancel",
+      "uid": "filtered",
+      "features": "",
+      "activities": ""
+    }    
+  ]
+}
