@@ -280,7 +280,7 @@ var to_flowstepitem = function(line, stepJsons){
         "description": step["description"], 
         "uid": uid,
         "features": [], //step["features"] ,
-        "activities": []
+        "activities": {}
       } 
     }
   });
@@ -304,7 +304,7 @@ var to_flowrule = function(line, rules){
               if(rule != undefined) { 
                 item = rule;
                 item["timestamp"] = line[0];
-                item["activities"].push(line[5]);
+                item = add_feature(line, item, "rule")
               }
               //console.log("+++++++++ ["+uid+"] rule 2 " + JSON.stringify(item) )
             }
@@ -326,32 +326,32 @@ var init_iface = function(line){
         "description": "", 
         "uid": "",
         "features": [],
-        "activities": []
+        "activities": {}
       }
 }
 
 var interface_flow = function(line){
   var item = null;
   var activity = line[5].trim()
-  console.log("=====>>>> interface flow 1 activity >>" + activity)
+  //console.log("=====>>>> interface flow 1 activity >>" + activity)
   var iface_arr = activity.split("."); 
-  console.log("=====>>>> interface flow 2 iface_arr >>" + iface_arr.length)
+  //console.log("=====>>>> interface flow 2 iface_arr >>" + iface_arr.length)
   if(iface_arr.length > 0){
     iface_arr.forEach(function(iface){
-      console.log("=====>>>> interface flow 3 iface >>" + iface)
+      //console.log("=====>>>> interface flow 3 iface >>" + iface)
       if(iface != undefined){
         var attrs = iface.split(",")
-        console.log("=====>>>> interface flow 4 attrs>>" + attrs.length)
+        //console.log("=====>>>> interface flow 4 attrs>>" + attrs.length)
         attrs.forEach(function(attr){
           if(attr.indexOf("Interface") > 1){
             if(attr.indexOf("type") > -1 ){
               if(item == null){item = init_iface(line)}            
               if(attr.indexOf("sub") > -1){
                 item["group"] = attr.split(":").pop()
-                console.log("=====>>>> interface flow 6 Interface sub type >>" + JSON.stringify(item))
+                //console.log("=====>>>> interface flow 6 Interface sub type >>" + JSON.stringify(item))
               } else{
                 item["name"] = attr.split(":").pop()
-                console.log("=====>>>> interface flow 5 Interface type >>" + JSON.stringify(item))  
+                //console.log("=====>>>> interface flow 5 Interface type >>" + JSON.stringify(item))  
               }
             }
           }
@@ -361,26 +361,32 @@ var interface_flow = function(line){
               attr.indexOf("name") > 1){
             if(item == null){item = init_iface(line)}            
             item["uid"] = attr.split(":").pop().trim().split(" ").pop()
-            console.log("=====>>>> interface flow 7 monitor field name >>" + JSON.stringify(item))
+            //console.log("=====>>>> interface flow 7 monitor field name >>" + JSON.stringify(item))
           }
         })
       }
     })
   }
+
+  if (item != null){
+    if(activity.indexOf("Request") > -1){ item = add_feature(line, item, "request") }
+  
+    if(activity.indexOf("Response") > -1){item = add_feature(line, item , "response")}
+  }
   console.log("=====>>>> interface flow 8 >>" + JSON.stringify(item))
   return item;
 }
 
-var interface_request = function(line, ifaceItem){
-  ifaceItem["features"].push("request")
-  ifaceItem["activities"].push({"request": [line[5]]})
-  return ifaceItem
-}
-
-var interface_response = function(line, ifaceItem){
-  ifaceItem["features"].push("response")
-  ifaceItem["activities"].push({"response": [line[5]]})
-  return ifaceItem
+var add_feature = function(line, item, type){  
+  console.log("@@@@@@@ >> Add feature " + type + " with value :" + line[5] )
+  if(item["features"].indexOf(type) == -1){
+    item["features"].push(type);
+    item["activities"][type] = []
+    item["activities"][type].push(line[5]);  
+  } else {
+    item["activities"][type].push(line[5]);  
+  }
+  return item;
 }
 
 var to_flowinterface = function(line, ifaceItem){      
@@ -392,15 +398,6 @@ var to_flowinterface = function(line, ifaceItem){
     console.log("****** >>>> ["+activity+"] Found Interface " + JSON.stringify(item)) 
   }
 
-  //if(activity.indexOf("Request") > -1){
-  //  item = interface_request(line, ifaceItem)
-  //}
-  
-  //if(activity.indexOf("Response") > -1){
-  //  item = interface_response(line, ifaceItem)
-  //}
-  
-       
   return (item == undefined ? null : item );
 }
 
@@ -454,14 +451,7 @@ var filterActivities = function(doc, cb){
     if(service.toLowerCase() === 'pdo' && flowitems.length > 0 ){
       var lastItem = flowitems.pop();
       //console.log("******** ["+service+"] PDO step PRE => " + JSON.stringify(lastItem))
-      if(lastItem["features"].indexOf("pdo") == -1){
-        lastItem["features"].push("pdo");
-        lastItem["activities"].push({"pdo" : [line[5]] });  
-      } else {
-        lastItem["activities"].forEach(function(a){
-          if(a["pdo"] != undefined){ a["pdo"].push(line[5])}
-        })
-      }
+      lastItem = add_feature(line, lastItem, "pdo")
       //console.log("******** ["+service+"] PDO step ==> " + JSON.stringify(lastItem))
       flowitems.push(lastItem);
     }

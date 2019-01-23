@@ -18,6 +18,11 @@ li.timeline-item
       br
       if item["features"].indexOf("flowmanagement") > -1
         include flowstopper
+      if item["features"].indexOf("pdo") > -1
+        button.btn.btn-light.font-weight-bold.text-success.float-right.btn-details.btn-sm(type="button", data-env=env, data-mid=mid, data-uid=item["uid"], data-view="pdo", data-toggle="modal", data-target="#details")
+          i.far.fa-file-alt
+          span.ml-2.bold 
+          | payment data
       a.btn.btn-dark.float-right.hidden(href='#')
         i.fas.fa-info
         span.ml-2 

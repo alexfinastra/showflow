@@ -11,6 +11,8 @@
 					center
 						h4.col-auto MID : #{data_left["mid"]}						
 						br 
+					- var env = data_left["env"]
+					- var mid = data_left["mid"]
 					ul.timeline(style="margin-top: 1.5rem;")
 						if data_left["flowitems"] != null && data_left["flowitems"] != undefined
 							each item in data_left["flowitems"]  
@@ -21,6 +23,8 @@
 					center
 						h4.col-auto MID : #{data_right["mid"]}
 						br 
+					- var env = data_right["env"]
+					- var mid = data_right["mid"]
 					ul.timeline(style="margin-top: 1.5rem;")
 						if data_right["flowitems"] != null && data_right["flowitems"] != undefined
 							each item in data_right["flowitems"]  

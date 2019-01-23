@@ -1,0 +1,13 @@
+.container
+  .table-responsive
+    center(style="margin-top: 1rem; margin-bottom: 2rem;")    
+      h3.mt-2.col-auto #{data["step"]["name"]} 
+      h5.mt-1.col-auto #{view} data      
+    center
+      table.table
+        tbody          
+        each item in data["details"]
+          tr
+            td
+              #{item}
+             

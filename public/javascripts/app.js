@@ -56,6 +56,11 @@ $(document).ready(function(){
      cursorwidth: 4,
   });
 
+  $("#details").niceScroll({
+     cursorcolor: '#FFFFFF',
+     cursorwidth: 4,
+  });
+
 	$('#dismiss, .overlay').on('click', function () {
 	  $('#sidebar').removeClass('active');
 	  $('.overlay').fadeOut();
@@ -311,6 +316,8 @@ $(document).ready(function(){
 	var uid = "";
 	var back = "";
 	var env = "";
+	var mid="";
+	var view = "";
 	// Show loader & then get content when modal is shown
 	$(document).on("click", ".btn-subflow", function(e){	
 	  e.preventDefault();
@@ -354,7 +361,27 @@ $(document).ready(function(){
 	    });
 	});
 
-
+	var $details_modal = $('#details');
+	$(document).on("click", ".btn-details", function(e){	
+	  e.preventDefault();
+	  env = $(e.target).data('env') != undefined ? $(e.target).data('env') : env;
+	  mid = $(e.target).data('mid') != undefined ? $(e.target).data('mid') : mid;
+	  uid = $(e.target).data('uid') != undefined ? $(e.target).data('uid') : uid;
+	  view = $(e.target).data('view') != undefined ? $(e.target).data('view') : view;
+	  $details_modal
+	    .addClass('modal-scrollfix')
+	    .find('.modal-body')
+	    .html('loading...')
+	    .load("/payments/details/" + env + "/"+ mid + "/" + uid  + "/" + view , function() {
+	      // Use Bootstrap's built-in function to fix scrolling (to no avail)
+	      if(($details_modal.data('bs.modal') || {})._isShown == false){
+	      	$details_modal
+	        	.removeClass('modal-scrollfix')
+	        	.modal('handleUpdate')
+	        	.modal('show');
+	        }
+	    });
+	});
 
 
 	$('#showTable').on('click', function(){

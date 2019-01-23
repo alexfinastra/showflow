@@ -1,0 +1,12 @@
+if view != null
+  case view
+    when "pdo"
+      include details_table
+    when "rule"
+      include details_table
+    when "interface"
+      include details_xml
+    default
+      include blank
+else
+  include blank 

@@ -1,2108 +1,1460 @@
 {
-   "1":{
-      "type":"rule-business-mandatory",
-      "timestamp":"",
-      "name":"Department",
-      "description":"",
-      "uid":"1",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "2":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Custom Filter",
-      "description":"",
-      "uid":"2",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "3":{
-      "type":"rule-business-mandatory",
-      "timestamp":"",
-      "name":"MOP Selection",
-      "description":"",
-      "uid":"3",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "6":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Fee formula",
-      "description":"",
-      "uid":"6",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "12":{
-      "type":"rule-business-mandatory",
-      "timestamp":"",
-      "name":"Product",
-      "description":"",
-      "uid":"12",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "15":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Message workflow determination - STP",
-      "description":"",
-      "uid":"15",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "18":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Completion processing",
-      "description":"",
-      "uid":"18",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "19":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Daily limit",
-      "description":"",
-      "uid":"19",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "20":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Validation",
-      "description":"",
-      "uid":"20",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "21":{
-      "type":"rule-business-mandatory",
-      "timestamp":"",
-      "name":"Compliance validation",
-      "description":"",
-      "uid":"21",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "23":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Special instruction",
-      "description":"",
-      "uid":"23",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "24":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Pricing product",
-      "description":"",
-      "uid":"24",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "25":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Fee type",
-      "description":"",
-      "uid":"25",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "26":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Message filter",
-      "description":"",
-      "uid":"26",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "27":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Crisis Hold Check",
-      "description":"",
-      "uid":"27",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "30":{
-      "type":"rule-business-mandatory",
-      "timestamp":"",
-      "name":"Business area",
-      "description":"",
-      "uid":"30",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "31":{
-      "type":"rule-business-mandatory",
-      "timestamp":"",
-      "name":"Debit Transaction code",
-      "description":"",
-      "uid":"31",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "32":{
-      "type":"rule-business-mandatory",
-      "timestamp":"",
-      "name":"Credit Transaction code",
-      "description":"",
-      "uid":"32",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "34":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Timed hold",
-      "description":"",
-      "uid":"34",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "35":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Bypass hold",
-      "description":"",
-      "uid":"35",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "36":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Account debit authorization",
-      "description":"",
-      "uid":"36",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "41":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"SLA selection",
-      "description":"",
-      "uid":"41",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "44":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Prioritization",
-      "description":"",
-      "uid":"44",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "45":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Base condition",
-      "description":"",
-      "uid":"45",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "47":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"BI-Bypass",
-      "description":"",
-      "uid":"47",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "49":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Message search",
-      "description":"",
-      "uid":"49",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "50":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Fee bypass",
-      "description":"",
-      "uid":"50",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "52":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Liquidity release",
-      "description":"",
-      "uid":"52",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "53":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Outbound mapping profile",
-      "description":"",
-      "uid":"53",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "57":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Fee account determination",
-      "description":"",
-      "uid":"57",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "66":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Direct debit authorization",
-      "description":"",
-      "uid":"66",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "70":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Adjust totals counters",
-      "description":"",
-      "uid":"70",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "99":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Authorization step selection",
-      "description":"",
-      "uid":"99",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "100":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Calendar selection",
-      "description":"",
-      "uid":"100",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "101":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Processing cutoff",
-      "description":"",
-      "uid":"101",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "102":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Treasury cutoff",
-      "description":"",
-      "uid":"102",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "103":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Clearing cutoff",
-      "description":"",
-      "uid":"103",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "104":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Missed processing cutoff",
-      "description":"",
-      "uid":"104",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "105":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Missed treasury cutoff",
-      "description":"",
-      "uid":"105",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "106":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Missed clearing cut-off",
-      "description":"",
-      "uid":"106",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "107":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Message screen set selection",
-      "description":"",
-      "uid":"107",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "108":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Message fields sets selection",
-      "description":"",
-      "uid":"108",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "109":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Message buttons sets selection",
-      "description":"",
-      "uid":"109",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "110":{
-      "type":"rule-business-mandatory",
-      "timestamp":"",
-      "name":"Rate usage for base amount conversion",
-      "description":"",
-      "uid":"110",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "111":{
-      "type":"rule-business-mandatory",
-      "timestamp":"",
-      "name":"Rate usage for credit side conversion",
-      "description":"",
-      "uid":"111",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "112":{
-      "type":"rule-business-mandatory",
-      "timestamp":"",
-      "name":"Rate usage for debit side conversion",
-      "description":"",
-      "uid":"112",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "114":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Inbound message type selection",
-      "description":"",
-      "uid":"114",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "115":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"MOP validation",
-      "description":"",
-      "uid":"115",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "117":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Message type selection",
-      "description":"",
-      "uid":"117",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "121":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Outgoing format",
-      "description":"",
-      "uid":"121",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "122":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Debit authorization bypass",
-      "description":"",
-      "uid":"122",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "123":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Account lookup",
-      "description":"",
-      "uid":"123",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "124":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Field verification profile selection",
-      "description":"",
-      "uid":"124",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "125":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Message workflow determination - Manual",
-      "description":"",
-      "uid":"125",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "127":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Incoming batch filter",
-      "description":"",
-      "uid":"127",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "129":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Bypass Mandate Check",
-      "description":"",
-      "uid":"129",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "137":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Bulking sending time",
-      "description":"",
-      "uid":"137",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "138":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Out bulk grouping ID selection",
-      "description":"",
-      "uid":"138",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "139":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Sub-batch grouping ID",
-      "description":"",
-      "uid":"139",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "140":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Sub-batch grouping ID selection",
-      "description":"",
-      "uid":"140",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "141":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Incoming file filter",
-      "description":"",
-      "uid":"141",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "142":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Outgoing file filter",
-      "description":"",
-      "uid":"142",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "143":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Sub-batch filter",
-      "description":"",
-      "uid":"143",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "144":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Group ID - Out",
-      "description":"",
-      "uid":"144",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "145":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Repair and enrichment selection",
-      "description":"",
-      "uid":"145",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "146":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Repair and enrichment",
-      "description":"",
-      "uid":"146",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "147":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"File priority",
-      "description":"",
-      "uid":"147",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "148":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Payment classification",
-      "description":"",
-      "uid":"148",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "149":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Transaction generation mapping rules",
-      "description":"",
-      "uid":"149",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "150":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Generate transaction selection",
-      "description":"",
-      "uid":"150",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "151":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Request for charges validation",
-      "description":"",
-      "uid":"151",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "152":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Matching check profile selection",
-      "description":"",
-      "uid":"152",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "153":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Matching index",
-      "description":"",
-      "uid":"153",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "154":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Automatic matching algorithm",
-      "description":"",
-      "uid":"154",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "155":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Manual matching algorithm",
-      "description":"",
-      "uid":"155",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "156":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Matching mapping rules",
-      "description":"",
-      "uid":"156",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "157":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Cancellation request validation",
-      "description":"",
-      "uid":"157",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "158":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Business flow selection",
-      "description":"",
-      "uid":"158",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "159":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Dual control",
-      "description":"",
-      "uid":"159",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "160":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Mapping out",
-      "description":"",
-      "uid":"160",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "161":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Mapping out selection",
-      "description":"",
-      "uid":"161",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "162":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Debit hold until time",
-      "description":"",
-      "uid":"162",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "163":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Credit hold until time",
-      "description":"",
-      "uid":"163",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "164":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Office hold until time",
-      "description":"",
-      "uid":"164",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "165":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Payment Transformation",
-      "description":"",
-      "uid":"165",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "166":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Payment transformation",
-      "description":"",
-      "uid":"166",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "167":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Message format validation",
-      "description":"",
-      "uid":"167",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "168":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Credit party chain enrichment",
-      "description":"",
-      "uid":"168",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "169":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Transaction generation mapping selection rules",
-      "description":"",
-      "uid":"169",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "170":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Credit account enrichment",
-      "description":"",
-      "uid":"170",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "171":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Debit account enrichment",
-      "description":"",
-      "uid":"171",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "172":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Advising type selection rule",
-      "description":"",
-      "uid":"172",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "173":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"STP rules selection",
-      "description":"",
-      "uid":"173",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "174":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Payment type selection",
-      "description":"",
-      "uid":"174",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "175":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"STP validation",
-      "description":"",
-      "uid":"175",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "176":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"STP field validation",
-      "description":"",
-      "uid":"176",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "177":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"STP field mapping rules",
-      "description":"",
-      "uid":"177",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "178":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"STP field mapping selection rules",
-      "description":"",
-      "uid":"178",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "179":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Payment type mapping rules",
-      "description":"",
-      "uid":"179",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "180":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"STP mapping rules",
-      "description":"",
-      "uid":"180",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "181":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"STP mapping selection rules",
-      "description":"",
-      "uid":"181",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "182":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"SLA- Generic-office",
-      "description":"",
-      "uid":"182",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "183":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"SLA- Debit party",
-      "description":"",
-      "uid":"183",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "184":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"SLA- Credit party",
-      "description":"",
-      "uid":"184",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "185":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Company Limit check",
-      "description":"",
-      "uid":"185",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "186":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Party details enrichment",
-      "description":"",
-      "uid":"186",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "187":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Interface Initial Reroute",
-      "description":"",
-      "uid":"187",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "188":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Suspense account Enrichment",
-      "description":"",
-      "uid":"188",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "189":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Interface Selection",
-      "description":"",
-      "uid":"189",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "190":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Self Learning Fields control",
-      "description":"",
-      "uid":"190",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "191":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Number of Approval",
-      "description":"",
-      "uid":"191",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "192":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"MOP STP Profile Selection",
-      "description":"",
-      "uid":"192",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "193":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Mandate validation",
-      "description":"",
-      "uid":"193",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "194":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Batch validation",
-      "description":"",
-      "uid":"194",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "195":{
-      "type":"rule-business-mandatory",
-      "timestamp":"",
-      "name":"Own Correspondent Bank Selection",
-      "description":"",
-      "uid":"195",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "196":{
-      "type":"rule-business-mandatory",
-      "timestamp":"",
-      "name":"Value date determination selection",
-      "description":"",
-      "uid":"196",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "197":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"MOP min-max profile selection",
-      "description":"",
-      "uid":"197",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "198":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Position figure selection",
-      "description":"",
-      "uid":"198",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "199":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Bypass Bands",
-      "description":"",
-      "uid":"199",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "200":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Account derivation method",
-      "description":"",
-      "uid":"200",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "201":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Destination department",
-      "description":"",
-      "uid":"201",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "202":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Interface Group Selection",
-      "description":"",
-      "uid":"202",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "203":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Bypass technical validations",
-      "description":"",
-      "uid":"203",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "204":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Output Format Selection",
-      "description":"",
-      "uid":"204",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "205":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Bypass Posting",
-      "description":"",
-      "uid":"205",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "206":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Posting Type Selection",
-      "description":"",
-      "uid":"206",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "207":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Posting Suspense Account Selection",
-      "description":"",
-      "uid":"207",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "208":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Party limit message filter",
-      "description":"",
-      "uid":"208",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "209":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Group of parties definition",
-      "description":"",
-      "uid":"209",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "210":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Party limit bypass validation",
-      "description":"",
-      "uid":"210",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "211":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Bypass party limit",
-      "description":"",
-      "uid":"211",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "212":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Payment Cap Selection",
-      "description":"",
-      "uid":"212",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "213":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Adjust Basic Properties",
-      "description":"",
-      "uid":"213",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "214":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Enrich Basic Properties",
-      "description":"",
-      "uid":"214",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "215":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Value Date determination",
-      "description":"",
-      "uid":"215",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "216":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"MOP release date selection",
-      "description":"",
-      "uid":"216",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "217":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Source MOP STP Profile Selection",
-      "description":"",
-      "uid":"217",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "219":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Transfer method selection rule",
-      "description":"",
-      "uid":"219",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "220":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Liquidity Priority Selection",
-      "description":"",
-      "uid":"220",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "221":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Assembly sending time selection",
-      "description":"",
-      "uid":"221",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "222":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Bypass step",
-      "description":"",
-      "uid":"222",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "223":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Assembly profile selection",
-      "description":"",
-      "uid":"223",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "224":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"Out file header enrichment selection",
-      "description":"",
-      "uid":"224",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "225":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Out file header enrichment",
-      "description":"",
-      "uid":"225",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "226":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Tax Code",
-      "description":"",
-      "uid":"226",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "227":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Mop bulking profile selection",
-      "description":"",
-      "uid":"227",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "233":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Report Sending Preferences profile selection",
-      "description":"",
-      "uid":"233",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "234":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Report Sending time selection",
-      "description":"",
-      "uid":"234",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "237":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Channel selection",
-      "description":"",
-      "uid":"237",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "238":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"File Workflow determination - Manual",
-      "description":"",
-      "uid":"238",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "239":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"File Processing Cutoff",
-      "description":"",
-      "uid":"239",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "240":{
-      "type":"rule-system",
-      "timestamp":"",
-      "name":"File Workflow determination - STP",
-      "description":"",
-      "uid":"240",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "242":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Override MOP Cycle",
-      "description":"",
-      "uid":"242",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "244":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"File Authorization step selection",
-      "description":"",
-      "uid":"244",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "245":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Channel Settings Selection",
-      "description":"",
-      "uid":"245",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "249":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Entity Custom Filter",
-      "description":"",
-      "uid":"249",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "251":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Assembly Grouping Out Id",
-      "description":"",
-      "uid":"251",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "257":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Clearing hold until time",
-      "description":"",
-      "uid":"257",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "999":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Search screen filters - Active DB",
-      "description":"",
-      "uid":"999",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "1000":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Search screen filters - History DB",
-      "description":"",
-      "uid":"1000",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "1001":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Search screen filters  -Template",
-      "description":"",
-      "uid":"1001",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   },
-   "1002":{
-      "type":"rule-business-optional",
-      "timestamp":"",
-      "name":"Search screen filters - Mass Payments DB",
-      "description":"",
-      "uid":"1002",
-      "features":[
-
-      ],
-      "activities":[
-
-      ]
-   }
+  "1": {
+    "type": "rule-business-mandatory",
+    "timestamp": "",
+    "name": "Department",
+    "description": "",
+    "uid": "1",
+    "features": [],
+    "activities": {}
+  },
+  "2": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Custom Filter",
+    "description": "",
+    "uid": "2",
+    "features": [],
+    "activities": {}
+  },
+  "3": {
+    "type": "rule-business-mandatory",
+    "timestamp": "",
+    "name": "MOP Selection",
+    "description": "",
+    "uid": "3",
+    "features": [],
+    "activities": {}
+  },
+  "6": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Fee formula",
+    "description": "",
+    "uid": "6",
+    "features": [],
+    "activities": {}
+  },
+  "12": {
+    "type": "rule-business-mandatory",
+    "timestamp": "",
+    "name": "Product",
+    "description": "",
+    "uid": "12",
+    "features": [],
+    "activities": {}
+  },
+  "15": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Message workflow determination - STP",
+    "description": "",
+    "uid": "15",
+    "features": [],
+    "activities": {}
+  },
+  "18": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Completion processing",
+    "description": "",
+    "uid": "18",
+    "features": [],
+    "activities": {}
+  },
+  "19": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Daily limit",
+    "description": "",
+    "uid": "19",
+    "features": [],
+    "activities": {}
+  },
+  "20": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Validation",
+    "description": "",
+    "uid": "20",
+    "features": [],
+    "activities": {}
+  },
+  "21": {
+    "type": "rule-business-mandatory",
+    "timestamp": "",
+    "name": "Compliance validation",
+    "description": "",
+    "uid": "21",
+    "features": [],
+    "activities": {}
+  },
+  "23": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Special instruction",
+    "description": "",
+    "uid": "23",
+    "features": [],
+    "activities": {}
+  },
+  "24": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Pricing product",
+    "description": "",
+    "uid": "24",
+    "features": [],
+    "activities": {}
+  },
+  "25": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Fee type",
+    "description": "",
+    "uid": "25",
+    "features": [],
+    "activities": {}
+  },
+  "26": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Message filter",
+    "description": "",
+    "uid": "26",
+    "features": [],
+    "activities": {}
+  },
+  "27": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Crisis Hold Check",
+    "description": "",
+    "uid": "27",
+    "features": [],
+    "activities": {}
+  },
+  "30": {
+    "type": "rule-business-mandatory",
+    "timestamp": "",
+    "name": "Business area",
+    "description": "",
+    "uid": "30",
+    "features": [],
+    "activities": {}
+  },
+  "31": {
+    "type": "rule-business-mandatory",
+    "timestamp": "",
+    "name": "Debit Transaction code",
+    "description": "",
+    "uid": "31",
+    "features": [],
+    "activities": {}
+  },
+  "32": {
+    "type": "rule-business-mandatory",
+    "timestamp": "",
+    "name": "Credit Transaction code",
+    "description": "",
+    "uid": "32",
+    "features": [],
+    "activities": {}
+  },
+  "34": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Timed hold",
+    "description": "",
+    "uid": "34",
+    "features": [],
+    "activities": {}
+  },
+  "35": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Bypass hold",
+    "description": "",
+    "uid": "35",
+    "features": [],
+    "activities": {}
+  },
+  "36": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Account debit authorization",
+    "description": "",
+    "uid": "36",
+    "features": [],
+    "activities": {}
+  },
+  "41": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "SLA selection",
+    "description": "",
+    "uid": "41",
+    "features": [],
+    "activities": {}
+  },
+  "44": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Prioritization",
+    "description": "",
+    "uid": "44",
+    "features": [],
+    "activities": {}
+  },
+  "45": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Base condition",
+    "description": "",
+    "uid": "45",
+    "features": [],
+    "activities": {}
+  },
+  "47": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "BI-Bypass",
+    "description": "",
+    "uid": "47",
+    "features": [],
+    "activities": {}
+  },
+  "49": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Message search",
+    "description": "",
+    "uid": "49",
+    "features": [],
+    "activities": {}
+  },
+  "50": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Fee bypass",
+    "description": "",
+    "uid": "50",
+    "features": [],
+    "activities": {}
+  },
+  "52": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Liquidity release",
+    "description": "",
+    "uid": "52",
+    "features": [],
+    "activities": {}
+  },
+  "53": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Outbound mapping profile",
+    "description": "",
+    "uid": "53",
+    "features": [],
+    "activities": {}
+  },
+  "57": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Fee account determination",
+    "description": "",
+    "uid": "57",
+    "features": [],
+    "activities": {}
+  },
+  "66": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Direct debit authorization",
+    "description": "",
+    "uid": "66",
+    "features": [],
+    "activities": {}
+  },
+  "70": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Adjust totals counters",
+    "description": "",
+    "uid": "70",
+    "features": [],
+    "activities": {}
+  },
+  "99": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Authorization step selection",
+    "description": "",
+    "uid": "99",
+    "features": [],
+    "activities": {}
+  },
+  "100": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Calendar selection",
+    "description": "",
+    "uid": "100",
+    "features": [],
+    "activities": {}
+  },
+  "101": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Processing cutoff",
+    "description": "",
+    "uid": "101",
+    "features": [],
+    "activities": {}
+  },
+  "102": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Treasury cutoff",
+    "description": "",
+    "uid": "102",
+    "features": [],
+    "activities": {}
+  },
+  "103": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Clearing cutoff",
+    "description": "",
+    "uid": "103",
+    "features": [],
+    "activities": {}
+  },
+  "104": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Missed processing cutoff",
+    "description": "",
+    "uid": "104",
+    "features": [],
+    "activities": {}
+  },
+  "105": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Missed treasury cutoff",
+    "description": "",
+    "uid": "105",
+    "features": [],
+    "activities": {}
+  },
+  "106": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Missed clearing cut-off",
+    "description": "",
+    "uid": "106",
+    "features": [],
+    "activities": {}
+  },
+  "107": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Message screen set selection",
+    "description": "",
+    "uid": "107",
+    "features": [],
+    "activities": {}
+  },
+  "108": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Message fields sets selection",
+    "description": "",
+    "uid": "108",
+    "features": [],
+    "activities": {}
+  },
+  "109": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Message buttons sets selection",
+    "description": "",
+    "uid": "109",
+    "features": [],
+    "activities": {}
+  },
+  "110": {
+    "type": "rule-business-mandatory",
+    "timestamp": "",
+    "name": "Rate usage for base amount conversion",
+    "description": "",
+    "uid": "110",
+    "features": [],
+    "activities": {}
+  },
+  "111": {
+    "type": "rule-business-mandatory",
+    "timestamp": "",
+    "name": "Rate usage for credit side conversion",
+    "description": "",
+    "uid": "111",
+    "features": [],
+    "activities": {}
+  },
+  "112": {
+    "type": "rule-business-mandatory",
+    "timestamp": "",
+    "name": "Rate usage for debit side conversion",
+    "description": "",
+    "uid": "112",
+    "features": [],
+    "activities": {}
+  },
+  "114": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Inbound message type selection",
+    "description": "",
+    "uid": "114",
+    "features": [],
+    "activities": {}
+  },
+  "115": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "MOP validation",
+    "description": "",
+    "uid": "115",
+    "features": [],
+    "activities": {}
+  },
+  "117": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Message type selection",
+    "description": "",
+    "uid": "117",
+    "features": [],
+    "activities": {}
+  },
+  "121": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Outgoing format",
+    "description": "",
+    "uid": "121",
+    "features": [],
+    "activities": {}
+  },
+  "122": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Debit authorization bypass",
+    "description": "",
+    "uid": "122",
+    "features": [],
+    "activities": {}
+  },
+  "123": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Account lookup",
+    "description": "",
+    "uid": "123",
+    "features": [],
+    "activities": {}
+  },
+  "124": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Field verification profile selection",
+    "description": "",
+    "uid": "124",
+    "features": [],
+    "activities": {}
+  },
+  "125": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Message workflow determination - Manual",
+    "description": "",
+    "uid": "125",
+    "features": [],
+    "activities": {}
+  },
+  "127": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Incoming batch filter",
+    "description": "",
+    "uid": "127",
+    "features": [],
+    "activities": {}
+  },
+  "129": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Bypass Mandate Check",
+    "description": "",
+    "uid": "129",
+    "features": [],
+    "activities": {}
+  },
+  "137": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Bulking sending time",
+    "description": "",
+    "uid": "137",
+    "features": [],
+    "activities": {}
+  },
+  "138": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Out bulk grouping ID selection",
+    "description": "",
+    "uid": "138",
+    "features": [],
+    "activities": {}
+  },
+  "139": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Sub-batch grouping ID",
+    "description": "",
+    "uid": "139",
+    "features": [],
+    "activities": {}
+  },
+  "140": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Sub-batch grouping ID selection",
+    "description": "",
+    "uid": "140",
+    "features": [],
+    "activities": {}
+  },
+  "141": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Incoming file filter",
+    "description": "",
+    "uid": "141",
+    "features": [],
+    "activities": {}
+  },
+  "142": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Outgoing file filter",
+    "description": "",
+    "uid": "142",
+    "features": [],
+    "activities": {}
+  },
+  "143": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Sub-batch filter",
+    "description": "",
+    "uid": "143",
+    "features": [],
+    "activities": {}
+  },
+  "144": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Group ID - Out",
+    "description": "",
+    "uid": "144",
+    "features": [],
+    "activities": {}
+  },
+  "145": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Repair and enrichment selection",
+    "description": "",
+    "uid": "145",
+    "features": [],
+    "activities": {}
+  },
+  "146": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Repair and enrichment",
+    "description": "",
+    "uid": "146",
+    "features": [],
+    "activities": {}
+  },
+  "147": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "File priority",
+    "description": "",
+    "uid": "147",
+    "features": [],
+    "activities": {}
+  },
+  "148": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Payment classification",
+    "description": "",
+    "uid": "148",
+    "features": [],
+    "activities": {}
+  },
+  "149": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Transaction generation mapping rules",
+    "description": "",
+    "uid": "149",
+    "features": [],
+    "activities": {}
+  },
+  "150": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Generate transaction selection",
+    "description": "",
+    "uid": "150",
+    "features": [],
+    "activities": {}
+  },
+  "151": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Request for charges validation",
+    "description": "",
+    "uid": "151",
+    "features": [],
+    "activities": {}
+  },
+  "152": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Matching check profile selection",
+    "description": "",
+    "uid": "152",
+    "features": [],
+    "activities": {}
+  },
+  "153": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Matching index",
+    "description": "",
+    "uid": "153",
+    "features": [],
+    "activities": {}
+  },
+  "154": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Automatic matching algorithm",
+    "description": "",
+    "uid": "154",
+    "features": [],
+    "activities": {}
+  },
+  "155": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Manual matching algorithm",
+    "description": "",
+    "uid": "155",
+    "features": [],
+    "activities": {}
+  },
+  "156": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Matching mapping rules",
+    "description": "",
+    "uid": "156",
+    "features": [],
+    "activities": {}
+  },
+  "157": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Cancellation request validation",
+    "description": "",
+    "uid": "157",
+    "features": [],
+    "activities": {}
+  },
+  "158": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Business flow selection",
+    "description": "",
+    "uid": "158",
+    "features": [],
+    "activities": {}
+  },
+  "159": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Dual control",
+    "description": "",
+    "uid": "159",
+    "features": [],
+    "activities": {}
+  },
+  "160": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Mapping out",
+    "description": "",
+    "uid": "160",
+    "features": [],
+    "activities": {}
+  },
+  "161": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Mapping out selection",
+    "description": "",
+    "uid": "161",
+    "features": [],
+    "activities": {}
+  },
+  "162": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Debit hold until time",
+    "description": "",
+    "uid": "162",
+    "features": [],
+    "activities": {}
+  },
+  "163": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Credit hold until time",
+    "description": "",
+    "uid": "163",
+    "features": [],
+    "activities": {}
+  },
+  "164": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Office hold until time",
+    "description": "",
+    "uid": "164",
+    "features": [],
+    "activities": {}
+  },
+  "165": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Payment Transformation",
+    "description": "",
+    "uid": "165",
+    "features": [],
+    "activities": {}
+  },
+  "166": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Payment transformation",
+    "description": "",
+    "uid": "166",
+    "features": [],
+    "activities": {}
+  },
+  "167": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Message format validation",
+    "description": "",
+    "uid": "167",
+    "features": [],
+    "activities": {}
+  },
+  "168": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Credit party chain enrichment",
+    "description": "",
+    "uid": "168",
+    "features": [],
+    "activities": {}
+  },
+  "169": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Transaction generation mapping selection rules",
+    "description": "",
+    "uid": "169",
+    "features": [],
+    "activities": {}
+  },
+  "170": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Credit account enrichment",
+    "description": "",
+    "uid": "170",
+    "features": [],
+    "activities": {}
+  },
+  "171": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Debit account enrichment",
+    "description": "",
+    "uid": "171",
+    "features": [],
+    "activities": {}
+  },
+  "172": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Advising type selection rule",
+    "description": "",
+    "uid": "172",
+    "features": [],
+    "activities": {}
+  },
+  "173": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "STP rules selection",
+    "description": "",
+    "uid": "173",
+    "features": [],
+    "activities": {}
+  },
+  "174": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Payment type selection",
+    "description": "",
+    "uid": "174",
+    "features": [],
+    "activities": {}
+  },
+  "175": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "STP validation",
+    "description": "",
+    "uid": "175",
+    "features": [],
+    "activities": {}
+  },
+  "176": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "STP field validation",
+    "description": "",
+    "uid": "176",
+    "features": [],
+    "activities": {}
+  },
+  "177": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "STP field mapping rules",
+    "description": "",
+    "uid": "177",
+    "features": [],
+    "activities": {}
+  },
+  "178": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "STP field mapping selection rules",
+    "description": "",
+    "uid": "178",
+    "features": [],
+    "activities": {}
+  },
+  "179": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Payment type mapping rules",
+    "description": "",
+    "uid": "179",
+    "features": [],
+    "activities": {}
+  },
+  "180": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "STP mapping rules",
+    "description": "",
+    "uid": "180",
+    "features": [],
+    "activities": {}
+  },
+  "181": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "STP mapping selection rules",
+    "description": "",
+    "uid": "181",
+    "features": [],
+    "activities": {}
+  },
+  "182": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "SLA- Generic-office",
+    "description": "",
+    "uid": "182",
+    "features": [],
+    "activities": {}
+  },
+  "183": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "SLA- Debit party",
+    "description": "",
+    "uid": "183",
+    "features": [],
+    "activities": {}
+  },
+  "184": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "SLA- Credit party",
+    "description": "",
+    "uid": "184",
+    "features": [],
+    "activities": {}
+  },
+  "185": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Company Limit check",
+    "description": "",
+    "uid": "185",
+    "features": [],
+    "activities": {}
+  },
+  "186": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Party details enrichment",
+    "description": "",
+    "uid": "186",
+    "features": [],
+    "activities": {}
+  },
+  "187": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Interface Initial Reroute",
+    "description": "",
+    "uid": "187",
+    "features": [],
+    "activities": {}
+  },
+  "188": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Suspense account Enrichment",
+    "description": "",
+    "uid": "188",
+    "features": [],
+    "activities": {}
+  },
+  "189": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Interface Selection",
+    "description": "",
+    "uid": "189",
+    "features": [],
+    "activities": {}
+  },
+  "190": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Self Learning Fields control",
+    "description": "",
+    "uid": "190",
+    "features": [],
+    "activities": {}
+  },
+  "191": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Number of Approval",
+    "description": "",
+    "uid": "191",
+    "features": [],
+    "activities": {}
+  },
+  "192": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "MOP STP Profile Selection",
+    "description": "",
+    "uid": "192",
+    "features": [],
+    "activities": {}
+  },
+  "193": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Mandate validation",
+    "description": "",
+    "uid": "193",
+    "features": [],
+    "activities": {}
+  },
+  "194": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Batch validation",
+    "description": "",
+    "uid": "194",
+    "features": [],
+    "activities": {}
+  },
+  "195": {
+    "type": "rule-business-mandatory",
+    "timestamp": "",
+    "name": "Own Correspondent Bank Selection",
+    "description": "",
+    "uid": "195",
+    "features": [],
+    "activities": {}
+  },
+  "196": {
+    "type": "rule-business-mandatory",
+    "timestamp": "",
+    "name": "Value date determination selection",
+    "description": "",
+    "uid": "196",
+    "features": [],
+    "activities": {}
+  },
+  "197": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "MOP min-max profile selection",
+    "description": "",
+    "uid": "197",
+    "features": [],
+    "activities": {}
+  },
+  "198": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Position figure selection",
+    "description": "",
+    "uid": "198",
+    "features": [],
+    "activities": {}
+  },
+  "199": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Bypass Bands",
+    "description": "",
+    "uid": "199",
+    "features": [],
+    "activities": {}
+  },
+  "200": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Account derivation method",
+    "description": "",
+    "uid": "200",
+    "features": [],
+    "activities": {}
+  },
+  "201": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Destination department",
+    "description": "",
+    "uid": "201",
+    "features": [],
+    "activities": {}
+  },
+  "202": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Interface Group Selection",
+    "description": "",
+    "uid": "202",
+    "features": [],
+    "activities": {}
+  },
+  "203": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Bypass technical validations",
+    "description": "",
+    "uid": "203",
+    "features": [],
+    "activities": {}
+  },
+  "204": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Output Format Selection",
+    "description": "",
+    "uid": "204",
+    "features": [],
+    "activities": {}
+  },
+  "205": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Bypass Posting",
+    "description": "",
+    "uid": "205",
+    "features": [],
+    "activities": {}
+  },
+  "206": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Posting Type Selection",
+    "description": "",
+    "uid": "206",
+    "features": [],
+    "activities": {}
+  },
+  "207": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Posting Suspense Account Selection",
+    "description": "",
+    "uid": "207",
+    "features": [],
+    "activities": {}
+  },
+  "208": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Party limit message filter",
+    "description": "",
+    "uid": "208",
+    "features": [],
+    "activities": {}
+  },
+  "209": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Group of parties definition",
+    "description": "",
+    "uid": "209",
+    "features": [],
+    "activities": {}
+  },
+  "210": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Party limit bypass validation",
+    "description": "",
+    "uid": "210",
+    "features": [],
+    "activities": {}
+  },
+  "211": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Bypass party limit",
+    "description": "",
+    "uid": "211",
+    "features": [],
+    "activities": {}
+  },
+  "212": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Payment Cap Selection",
+    "description": "",
+    "uid": "212",
+    "features": [],
+    "activities": {}
+  },
+  "213": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Adjust Basic Properties",
+    "description": "",
+    "uid": "213",
+    "features": [],
+    "activities": {}
+  },
+  "214": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Enrich Basic Properties",
+    "description": "",
+    "uid": "214",
+    "features": [],
+    "activities": {}
+  },
+  "215": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Value Date determination",
+    "description": "",
+    "uid": "215",
+    "features": [],
+    "activities": {}
+  },
+  "216": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "MOP release date selection",
+    "description": "",
+    "uid": "216",
+    "features": [],
+    "activities": {}
+  },
+  "217": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Source MOP STP Profile Selection",
+    "description": "",
+    "uid": "217",
+    "features": [],
+    "activities": {}
+  },
+  "219": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Transfer method selection rule",
+    "description": "",
+    "uid": "219",
+    "features": [],
+    "activities": {}
+  },
+  "220": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Liquidity Priority Selection",
+    "description": "",
+    "uid": "220",
+    "features": [],
+    "activities": {}
+  },
+  "221": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Assembly sending time selection",
+    "description": "",
+    "uid": "221",
+    "features": [],
+    "activities": {}
+  },
+  "222": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Bypass step",
+    "description": "",
+    "uid": "222",
+    "features": [],
+    "activities": {}
+  },
+  "223": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Assembly profile selection",
+    "description": "",
+    "uid": "223",
+    "features": [],
+    "activities": {}
+  },
+  "224": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "Out file header enrichment selection",
+    "description": "",
+    "uid": "224",
+    "features": [],
+    "activities": {}
+  },
+  "225": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Out file header enrichment",
+    "description": "",
+    "uid": "225",
+    "features": [],
+    "activities": {}
+  },
+  "226": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Tax Code",
+    "description": "",
+    "uid": "226",
+    "features": [],
+    "activities": {}
+  },
+  "227": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Mop bulking profile selection",
+    "description": "",
+    "uid": "227",
+    "features": [],
+    "activities": {}
+  },
+  "233": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Report Sending Preferences profile selection",
+    "description": "",
+    "uid": "233",
+    "features": [],
+    "activities": {}
+  },
+  "234": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Report Sending time selection",
+    "description": "",
+    "uid": "234",
+    "features": [],
+    "activities": {}
+  },
+  "237": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Channel selection",
+    "description": "",
+    "uid": "237",
+    "features": [],
+    "activities": {}
+  },
+  "238": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "File Workflow determination - Manual",
+    "description": "",
+    "uid": "238",
+    "features": [],
+    "activities": {}
+  },
+  "239": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "File Processing Cutoff",
+    "description": "",
+    "uid": "239",
+    "features": [],
+    "activities": {}
+  },
+  "240": {
+    "type": "rule-system",
+    "timestamp": "",
+    "name": "File Workflow determination - STP",
+    "description": "",
+    "uid": "240",
+    "features": [],
+    "activities": {}
+  },
+  "242": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Override MOP Cycle",
+    "description": "",
+    "uid": "242",
+    "features": [],
+    "activities": {}
+  },
+  "244": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "File Authorization step selection",
+    "description": "",
+    "uid": "244",
+    "features": [],
+    "activities": {}
+  },
+  "245": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Channel Settings Selection",
+    "description": "",
+    "uid": "245",
+    "features": [],
+    "activities": {}
+  },
+  "249": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Entity Custom Filter",
+    "description": "",
+    "uid": "249",
+    "features": [],
+    "activities": {}
+  },
+  "251": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Assembly Grouping Out Id",
+    "description": "",
+    "uid": "251",
+    "features": [],
+    "activities": {}
+  },
+  "257": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Clearing hold until time",
+    "description": "",
+    "uid": "257",
+    "features": [],
+    "activities": {}
+  },
+  "999": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Search screen filters - Active DB",
+    "description": "",
+    "uid": "999",
+    "features": [],
+    "activities": {}
+  },
+  "1000": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Search screen filters - History DB",
+    "description": "",
+    "uid": "1000",
+    "features": [],
+    "activities": {}
+  },
+  "1001": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Search screen filters  -Template",
+    "description": "",
+    "uid": "1001",
+    "features": [],
+    "activities": {}
+  },
+  "1002": {
+    "type": "rule-business-optional",
+    "timestamp": "",
+    "name": "Search screen filters - Mass Payments DB",
+    "description": "",
+    "uid": "1002",
+    "features": [],
+    "activities": {}
+  }
 }

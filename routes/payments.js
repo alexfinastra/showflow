@@ -60,12 +60,26 @@ router.get('/flow/:env/:mid', function(req, res, next) {
   payment.loadFlow(function(flow){
     console.log("-----> Get payment flow : " + JSON.stringify(flow))
     flow["mid"] = req.params["mid"];
-    res.render('payments', { data: flow, view: "flow" });       
+    flow["env"] = req.params["env"];
+    res.render('payments', { data: flow, view: "flow", env: req.params["env"], mid: req.params["mid"] });       
   })
 });
 
 router.get("/activities/:env/:mid", function(req, res){
   res.render('payments', { data: { "mid": req.params["mid"], "name": "Activities log" }, view: "table" });
+});
+
+router.get("/details/:env/:mid/:uid/:view", function(req, res){
+  var payment = new Payment(req.params["env"], req.params["mid"])
+  var view = req.params["view"];
+  payment.loadDetails(view, req.params["uid"], function(step, details){
+    console.log("-----> Get DETAILS : " + JSON.stringify(details))
+    if(step == null){
+      res.render('blank')
+    } else {
+      res.render('details', { data: { "step": step, "details": details }, view: view });          
+    }    
+  })
 });
 
 router.get("/tabledata/:env/:mid", function(req, res){
@@ -119,7 +133,9 @@ router.get('/compare/:env1/:mid1/:env2/:mid2', function(req, res, next) {
   payment_left.loadFlow(function(flow_left){    
     payment_right.loadFlow(function(flow_right){
       flow_left["mid"] = req.params["mid1"];
-      flow_right["mid"] = req.params["mid2"];      
+      flow_right["mid"] = req.params["mid2"]; 
+      flow_left["env"] = req.params["env1"];
+      flow_right["env"] = req.params["env2"];       
       res.render('payments', {data_left: flow_left, data_right: flow_right, view: "split" });       
     }) 
   })

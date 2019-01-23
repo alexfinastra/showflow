@@ -1,6 +1,9 @@
 extends layout
 
-block content  
+block content 
+  #details.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
+    .modal-dialog.modal-dialog-centered.modal-lg(role="document")
+      .modal-body.bg-light  
   if view != null
     case view
       when "table"
@@ -8,7 +11,7 @@ block content
       when "split"
         include splitview
       when "flow"
-        include payment_flow
+        include payment_flow      
       default
         include blank
   else

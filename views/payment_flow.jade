@@ -44,6 +44,8 @@ block content
           br        
           ul.timeline
             if data["flowitems"] != null && data["flowitems"] != undefined
+              - var env = data["env"]
+              - var mid = data["mid"]
               each item in data["flowitems"]  
                include flow_item
           br          
