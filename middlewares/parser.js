@@ -215,7 +215,9 @@ var storeFlowData = function(env, flowData = []){
         var currentDoc = docs[mid];
         var is_NewDoc = (new_mids.indexOf(mid) > -1 ? true : false);
         paymentFlow(env, currentDoc, function(currentDoc){
-          saveDoc(env, currentDoc, is_NewDoc);  
+          if(currentDoc["flow"]["flowitems"].length > 0){
+            saveDoc(env, currentDoc, is_NewDoc);    
+          }
         });
       });
     }
@@ -227,11 +229,13 @@ var saveDoc = function(env, doc, newDoc = true){
   if(doc["activities"].length > 0){
     var storage = new Storage(env + "_payments");
     if(newDoc){
+      doc["activities"] = []
       storage.newDoc(doc, function(doc){
         console.log("----> Created new doc :)")
       })
     } else {
-      storage.updateDoc({"mid": doc["mid"]}, {"activities": doc["activities"], "flow": doc["flow"]}, function(doc){
+      //storage.updateDoc({"mid": doc["mid"]}, {"activities": doc["activities"], "flow": doc["flow"]}, function(doc){
+        storage.updateDoc({"mid": doc["mid"]}, {"activities": [], "flow": doc["flow"]}, function(doc){
         console.log("----> Update doc :)")
       })  
     }
@@ -262,13 +266,17 @@ var getType = function(service){
   return type
 }
 
+
+
 // should retrive from flowsteps and references
 var to_flowstepitem = function(line, stepJsons){
   var activities_arr  = line[5].split(" ")
   var uid = activities_arr.find(function(w){return w.indexOf("Flow") > -1 && w.indexOf("Step") > -1;})
   var item = null;
-  //console.log("-----> Convert flowstep with uid " + uid)
-  
+
+  console.log("-----> Convert flowstep with uid " + uid)
+  if(uid == undefined || uid == null) { return item;}
+
   stepJsons.forEach(function(steps){
     step = steps.get(uid);    
     if (step != undefined){
@@ -378,7 +386,7 @@ var interface_flow = function(line){
 }
 
 var add_feature = function(line, item, type){  
-  console.log("@@@@@@@ >> Add feature " + type + " with value :" + line[5] )
+  //console.log("@@@@@@@ >> Add feature " + type + " with value :" + line[5] )
   if(item["features"].indexOf(type) == -1){
     item["features"].push(type);
     item["activities"][type] = []
@@ -401,6 +409,18 @@ var to_flowinterface = function(line, ifaceItem){
   return (item == undefined ? null : item );
 }
 
+var itemExists = function(flowitems, item){
+  var ret = false;
+  if(flowitems != undefined && flowitems.length == 0) {return ret;}
+
+  flowitems.forEach(function(fitem){
+    if(ret && fitem["type"] == item["type"] && fitem["timestamp"] == item["timestamp"] && fitem["uid"] == item["uid"]){
+      ret = true;
+    }
+  })
+  return ret;
+}
+
 var filterActivities = function(doc, cb){
   var flowitems = [];  
   var pattern = [];
@@ -416,33 +436,44 @@ var filterActivities = function(doc, cb){
   var rules = new json.File("./data/references/rules_flowsteps.json");
   rules.readSync();
 
+  // exisitng flow items
+  var old_flowitems = []
+  if(doc["flow"] != undefined && doc["flow"]["flowitems"] != undefined){
+    if(doc["flow"]["flowitems"].length > 0){
+      old_flowitems = doc["flow"]["flowitems"]
+    }
+  }
+  
+
   // map flow items
   doc["activities"].forEach(function(line){
     var service = line[4];
     if( service == undefined || service == null) {return;}
 
     if(service.toLowerCase() === "abstractflowstep"){      
+      console.log("-----> ["+service+"] Abstract Flow step ==> " + line)
       var step_item = to_flowstepitem(line, stepJsons) 
       //console.log("-----> ["+service+"] Flow step ==> " + JSON.stringify(step_item))
-      if(step_item != null){ 
+      if(step_item != null && itemExists(old_flowitems, step_item) == false){ 
         flowitems.push(step_item); 
-        pattern.push(step_item["name"])
+        pattern.push(step_item["name"].split(" ").join("").toLowerCase())
       }
     }
 
     if(service.toLowerCase() === 'boruleexecution' ){
       var rule_item = to_flowrule(line, rules);
-      if(rule_item != null){
+      if(rule_item != null && itemExists(old_flowitems, rule_item) == false){
        //console.log("****** ["+service+"] Added rule step ==> " + JSON.stringify(rule_item))
        flowitems.push(rule_item); 
      }      
     }
 
+
     if(service.toLowerCase() === 'bointerfaces' ){
       var ifaceItem = null
       flowitems.forEach(function(item){ if(item["type"] == "interface") {ifaceItem = item} })
       var iface_item = to_flowinterface(line, ifaceItem);
-      if(iface_item != null){ 
+      if(iface_item != null  && itemExists(old_flowitems, iface_item) == false){ 
         console.log("****** ["+service+"] Added Interface step ==> " + JSON.stringify(iface_item))
         flowitems.push(iface_item); 
       }      
@@ -464,14 +495,19 @@ var filterActivities = function(doc, cb){
 var paymentFlow = function(env, doc, cb){
   filterActivities(doc, function(flowitems, pattern){
     var storage = new  Storage(env+"_usecases")
-    storage.listDoc( {"flow":1, "_id":0}, {"type": "usecase"}, {"group": -1},  function(usecases){
-      var similarities = {};
+    storage.listDoc( {"uid":1, "use_case":1,"flow":1, "_id":0}, {"type": "usecase"}, {"group": -1},  function(usecases){
+      var similarities = [];
       if(usecases.length > 0){
         usecases.forEach(function(usecase){
-          similarities[usecase["use_case"]] = similarity_score(usecase, pattern)
-        })  
+          var score = similarity_score(usecase, pattern)
+          if(score > 0){
+            similarities.push([usecase["uid"], usecase["use_case"], parseInt(score*100)])
+          }
+          
+        })          
       }   
 
+      console.log("^^^^^^^ >> Similarities "+ JSON.stringify(similarities));
       doc["flow"] =  {
               "name": "Payment Flow - " + doc["mid"],            
               "similarities": similarities,
@@ -488,18 +524,19 @@ var getSum = function(total, num){
   return total + num;
 }
 
-var similarity_score = function(usecase, payment_pattern){
+var similarity_score = function(usecase, pattern){
   var scores = [];
-  var uc_len = usecase["flow"].length;
-  var p_len = payment_pattern.length;
+  var f_len = usecase["flow"].length;
+  var p_len = pattern.length;
 
+  if(f_len < p_len) { return 0; }
   for(var ind =0; ind < p_len; ind++){
-    pitem = payment_pattern[ind];
-    uc_index = usecase["flow"].indexOf(pitem)
-    scores.push([usecase["uid"], (uc_index != -1 ? 1 : 0 )+(uc_index == ind ? 1 : 0)]);
+    var pitem = pattern[ind];
+    var f_index = usecase["flow"].indexOf(pitem);
+    scores.push( (f_index != -1 ? 1 : 0 )+(f_index == ind ? 1 : 0));
   }
 
-  return scores.reduce(getSum, 0) / (2 * uc_len);
+  return scores.reduce(getSum, 0) / (2 * f_len);
 }
 
 // List all files in a directory in Node.js recursively in a synchronous fashion
@@ -733,7 +770,7 @@ var mapFlow = function(usecase, allcases, cb){
         flow.push(flatten(subflow["flow"]))
       }
     } else{
-      flow.push(item["uid"])
+      flow.push(item["uid"].toLowerCase())
     }
   })
   cb(flow);

@@ -6,20 +6,8 @@
       br
       blockquote.blockquote.text-center
         p.mb-0 
-          span
-            | Current flow is similar to to following basic use cases with respective similarity percentage  
-            a.btn-outline-primary(href='/usecases/template/#{data["template"]}') #{data["template"]}  
-            | with 
-            span.font-weight-bold #{data["customization"]} 
-            | of similarity,                   
-            a.btn-outline-primary(href='/usecases/template/#{data["template"]}') #{data["template"]}  
-            | with 
-            span.font-weight-bold #{data["customization"]} 
-            | of similarity,
-            a.btn-outline-primary(href='/usecases/template/#{data["template"]}') #{data["template"]}  
-            | with 
-            span.font-weight-bold #{data["customization"]} 
-            | of similarity.
+          span            
+            | A list of activities filtered by MID and orderd by timestamp. Activity actions applied to messages are grouped by services. Like multiple fields mapping in PDO or fields slected for rule evaluation. 
         footer.blockquote-footer
           | build for  
           cite(title='activities log')           

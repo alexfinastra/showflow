@@ -36,7 +36,7 @@ method.loadDetails = function(feature, uid, cb){
     if(doc != null){
       flowitems = doc["flow"]["flowitems"]
       flowitem = flowitems.find(function(i){ return i["uid"] == uid})
-      details = beautifyDetails(feature, flowitem["activities"][feature])
+      details = validateDetails(feature, flowitem["activities"][feature])
       cb(flowitem, details);  
     } else {
       cb(null, []);
@@ -44,7 +44,7 @@ method.loadDetails = function(feature, uid, cb){
   });
 }
 
-var beautifyDetails = function(feature, value){
+var validateDetails = function(feature, value){
   var val = [];
   console.log(">>>>>>>> Details >>" + value);
   if(value != undefined && value.length > 0){
@@ -67,18 +67,54 @@ var beautifyDetails = function(feature, value){
 }
 
 var beautifyPDO = function(value){
-  var arr = String(value).split(": PDO")
-  return arr
+  var arr = []
+  for(var i=0; i<value.length; i++){
+    var cur = value[i]
+    var cur_arr = String(cur).split(": PDO")    
+    if(cur_arr.length > 0){ 
+      for (var ii=0; ii<cur_arr.length; ii++) {
+        if(cur_arr[ii].trim().length > 0 ){ arr.push(cur_arr[ii]);}
+      };
+    }
+  }
+
+  return flatten(arr);
 }
 
 var beautifyRule = function(value){
-  var arr = String(value).split(": [BORuleExecution.executeRule()] :")
-  return arr
+  var arr = []
+  for(var i=0; i<value.length; i++){
+    var cur = value[i]
+    var cur_arr = String(cur).split(": [BORuleExecution.executeRule()] :")    
+    if(cur_arr.length > 0){ 
+      for (var ii=0; ii<cur_arr.length; ii++) {
+        if(cur_arr[ii].trim().length > 0 ){ arr.push(cur_arr[ii]);}
+      };
+    }
+  }
+  
+  return flatten(arr);
 }
 
 var beautifyXML = function(value){
-  var arr = String(value).split(":")
-  return arr
+  var arr = []
+  for(var i=0; i<value.length; i++){
+    var cur = value[i]
+    var cur_arr = String(cur).split(":")    
+    if(cur_arr.length > 0){ 
+      for (var ii=0; ii<cur_arr.length; ii++) {
+        if(cur_arr[ii].trim().length > 0 ){ arr.push(cur_arr[ii]);}
+      };
+    }
+  }
+  
+  return flatten(arr);
+}
+
+var flatten = function(list) {
+    return list.reduce(function (a, b) {
+        return a.concat(Array.isArray(b) ? flatten(b) : b);
+    }, []);
 }
 
 module.exports = Payment;

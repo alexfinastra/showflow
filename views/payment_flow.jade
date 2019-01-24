@@ -13,29 +13,25 @@ block content
       .row#payflow
         .col-md-12.mt-5
           center.mt-5
-            h1.display-4.col-auto #{mid}
+            h1.display-4.col-auto #{data["mid"]}
             h5.mt-2.col-auto #{data["name"]} 
             br
             blockquote.blockquote.text-center
               p.mb-0 
                 span
-                  | Current flow is similar to to following basic use cases with respective similarity percentage  
-                  a.btn-outline-primary(href='/usecases/template/#{data["template"]}') #{data["template"]}  
-                  | with 
-                  span.font-weight-bold #{data["customization"]} 
-                  | of similarity,                   
-                  a.btn-outline-primary(href='/usecases/template/#{data["template"]}') #{data["template"]}  
-                  | with 
-                  span.font-weight-bold #{data["customization"]} 
-                  | of similarity,
-                  a.btn-outline-primary(href='/usecases/template/#{data["template"]}') #{data["template"]}  
-                  | with 
-                  span.font-weight-bold #{data["customization"]} 
-                  | of similarity.
-              footer.blockquote-footer
-                | based on  
-                cite(title='activities log')           
-                  button#showActivities.btn.btn-link Activities for payment with MID #{data["mid"]}
+                  if data["similarities"] != null && data["similarities"] != undefined && data["similarities"].length > 0
+                    | Current flow is similar to to following basic use cases with respective percentage similarity   
+                    each similar in data["similarities"]
+                      a.btn-outline-primary(href='/usecases/template/#{data["env"]}/#{similar[0]}') #{similar[1]}  
+                      | with 
+                      span.font-weight-bold #{similar[2]} % 
+                      | of similarity,  
+                  else
+                    | Current flow does not match to any exisitng use case in ShowFlow.                   
+              //footer.blockquote-footer
+              //  | based on  
+              //  cite(title='activities log')           
+              //    button#showActivities.btn.btn-link Activities for payment with MID #{data["mid"]}
             br
             .mt-2.p-2(style="background: #ecf0f1;")
               button#compareFlow.btn.btn-link.text-success.font-weight-bold

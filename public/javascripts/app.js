@@ -295,6 +295,7 @@ $(document).ready(function(){
 	    dataType: "json",
 	  })
 	  .done(function (response) {	
+	  	var $similarmids = response.tree
 	    var $similarTree = $('#treeflows').treeview({
 	      data: response.tree,
 	      showCheckbox: false,
@@ -308,6 +309,25 @@ $(document).ready(function(){
         	location.href = "/payments/flow/"+ parent["key"]+ "/" + data["key"]; 
 	      }
 	    });
+
+	    var search = function(e) {
+	      var pattern = $('#similarityRange').val();
+	      var options = {
+	        ignoreCase: true,
+	        exactMatch: false,
+	        revealResults: true
+	      };
+	      $similarTree.treeview({data: $similarmids})
+	      var results = $similarTree.treeview('search', [ pattern, options ]);
+	      $similarTree.treeview({data: results,
+	        onNodeSelected  : function (event, data) { 
+		      	parent = $('#treeflows').treeview('getParent', data); 
+        		location.href = "/payments/flow/"+ parent["key"]+ "/" + data["key"]; 
+		      }
+	      })
+      }
+
+      $('#similarityRange').on('change', search);      
 	  });
 	});
 
