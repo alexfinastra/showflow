@@ -46,22 +46,21 @@ method.loadDetails = function(feature, uid, cb){
 
 var validateDetails = function(feature, activities){
   var val = [];
-  console.log(">>>>>>>> Valid Details ["+feature+"] >>" + JSON.stringify(activities) );
+  //console.log(">>>>>>>> Valid Details ["+feature+"] >>" + JSON.stringify(activities) );
   if(activities != undefined ){
     switch(feature){
       case "pdo":
-        console.log(">>>>>>>> PDO ["+feature+"] >>" + JSON.stringify(activities[feature]) );
+        //console.log(">>>>>>>> PDO ["+feature+"] >>" + JSON.stringify(activities[feature]) );
         val = beautifyPDO(activities[feature]);
         break;
       case "rule":
-        console.log(">>>>>>>> RULE ["+feature+"] >>" + JSON.stringify(activities[feature]) );
+        //console.log(">>>>>>>> RULE ["+feature+"] >>" + JSON.stringify(activities[feature]) );
         val = beautifyRule(activities[feature]);
         break;
       case "interface":
-        console.log(">>>>>>>> INTERFACE ["+feature+"] >>" + JSON.stringify(activities) );
-        val.push( beautifyXML(activities["request"]) )
-        val.push( beautifyXML(activities["response"]) )
-        val = flatten(val);
+        //console.log(">>>>>>>> INTERFACE ["+feature+"] >>" + JSON.stringify(activities) );
+        val.push(["request", beautifyXML(activities["request"]) ])
+        val.push(["response", beautifyXML(activities["response"]) ])
         break;
       default:
         console.log(">>>>>>>> DEFAULT ["+feature+"] >>" + JSON.stringify(activities) );
