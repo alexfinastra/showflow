@@ -3,5 +3,18 @@
     center(style="margin-top: 6rem; margin-bottom: 4rem;")    
       h1.display-4.col-auto #{data["mid"]}
       h5.mt-2.col-auto #{data["name"]} 
-    pre(lang="xml")
-      details
+    .container
+  .table-responsive
+    center(style="margin-top: 1rem; margin-bottom: 2rem;")    
+      h3.mt-2.col-auto #{data["step"]["name"]} 
+      h5.mt-1.col-auto #{view} data      
+    center
+      table.table
+        tbody          
+        each item in data["details"]
+          tr
+            td
+              div *
+            td
+              div #{item}
+             

@@ -36,7 +36,7 @@ method.loadDetails = function(feature, uid, cb){
     if(doc != null){
       flowitems = doc["flow"]["flowitems"]
       flowitem = flowitems.find(function(i){ return i["uid"] == uid})
-      details = validateDetails(feature, flowitem["activities"][feature])
+      details = validateDetails(feature, flowitem["activities"])
       cb(flowitem, details);  
     } else {
       cb(null, []);
@@ -44,25 +44,31 @@ method.loadDetails = function(feature, uid, cb){
   });
 }
 
-var validateDetails = function(feature, value){
+var validateDetails = function(feature, activities){
   var val = [];
-  console.log(">>>>>>>> Details >>" + value);
-  if(value != undefined && value.length > 0){
+  console.log(">>>>>>>> Valid Details ["+feature+"] >>" + JSON.stringify(activities) );
+  if(activities != undefined ){
     switch(feature){
       case "pdo":
-        val = beautifyPDO(value);
+        console.log(">>>>>>>> PDO ["+feature+"] >>" + JSON.stringify(activities[feature]) );
+        val = beautifyPDO(activities[feature]);
         break;
       case "rule":
-        val = beautifyRule(value);
+        console.log(">>>>>>>> RULE ["+feature+"] >>" + JSON.stringify(activities[feature]) );
+        val = beautifyRule(activities[feature]);
         break;
-      case "request":
-        val = beautifyXML(value);
+      case "interface":
+        console.log(">>>>>>>> INTERFACE ["+feature+"] >>" + JSON.stringify(activities) );
+        val.push( beautifyXML(activities["request"]) )
+        val.push( beautifyXML(activities["response"]) )
+        val = flatten(val);
         break;
-      case "response":
-        val = beautifyXML(value);
+      default:
+        console.log(">>>>>>>> DEFAULT ["+feature+"] >>" + JSON.stringify(activities) );
         break;
     }
   }
+
   return val;
 }
 
@@ -100,7 +106,7 @@ var beautifyXML = function(value){
   var arr = []
   for(var i=0; i<value.length; i++){
     var cur = value[i]
-    var cur_arr = String(cur).split(":")    
+    var cur_arr = String(cur).split("\n")    
     if(cur_arr.length > 0){ 
       for (var ii=0; ii<cur_arr.length; ii++) {
         if(cur_arr[ii].trim().length > 0 ){ arr.push(cur_arr[ii]);}

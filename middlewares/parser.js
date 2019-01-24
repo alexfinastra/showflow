@@ -359,18 +359,20 @@ var interface_flow = function(line){
                 //console.log("=====>>>> interface flow 6 Interface sub type >>" + JSON.stringify(item))
               } else{
                 item["name"] = attr.split(":").pop()
+                item["uid"] =  attr.split(":").pop().trim().toLowerCase()
                 //console.log("=====>>>> interface flow 5 Interface type >>" + JSON.stringify(item))  
               }
             }
           }
 
+          /*
           if( attr.indexOf("monitor") > 1 &&
               attr.indexOf("field") > 1 &&
               attr.indexOf("name") > 1){
             if(item == null){item = init_iface(line)}            
             item["uid"] = attr.split(":").pop().trim().split(" ").pop()
             //console.log("=====>>>> interface flow 7 monitor field name >>" + JSON.stringify(item))
-          }
+          }*/
         })
       }
     })
