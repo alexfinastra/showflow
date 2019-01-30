@@ -7,7 +7,7 @@ function openSideBar(){
 	  $('#sidebar').addClass('active'); 	  	
     $('.overlay').fadeIn();
     $('.collapse.in').toggleClass('in');
-    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+    $('a[aria-expanded=true]').attr('aria-expanded', 'false');    
 	} 
 }
 
@@ -16,6 +16,12 @@ function selectPaymentNode(data) {
   $('#sidebar').removeClass('active');
   $('.overlay').fadeOut();
   location.href = "/payments/flow/" + data["env"] + "/" + data["key"];
+}
+
+function selectPaymentNodeCompare(data) { 	
+	$('#sidebar').removeClass('active');
+  $('.overlay').fadeOut();
+  location.href = location.href.replace("/flow/", "/compare/") + "/" + data["env"]+ "/" + data["key"]; 
 }
 
 function rangeSlider(){
@@ -36,16 +42,111 @@ function rangeSlider(){
   });
 };
 
-$(document).ready(function(){		
-	$('#sidebar').css({'top': '68px'});		
-	var height = $('#sidebar').height() - $('#sidebar table thead tr th').height() - 68;
-	$('.table-fixed tbody').css({'height': (height + 'px')});
-	
-	$("#sidebar").niceScroll({
-     cursorcolor: '#FFFFFF',
-     cursorwidth: 4,
-  });  
+function lazyLoadMID(node, display) {
+	var nurl = '/payments/tree/' + node["key"] + "/" + ((node["mid"] != undefined )?  node["mid"] : 'blank');
+	$.ajax({
+    type: 'GET',
+    url: nurl,
+    dataType: "json",
+  })
+  .done(function (response) {	
+  	 display(response.nodes);
+  });
+};
 
+function lazyLoadScore(node, display) {
+	var usecase = location.href.split("/").pop();
+	var nurl = '/payments/tree/' + node["key"] + "/" + usecase + "/" + ((node["score"] != undefined )?  node["score"] : '1')
+	$.ajax({
+    type: 'GET',
+    url: nurl,
+    dataType: "json",
+  })
+  .done(function (response) {	
+  	 display(response.nodes);
+  });
+}
+
+function buildPaymentsTree(data, type = 'payments', compare = false){
+	var lazyLoadFunc = (type.indexOf('payments') != -1 ) ? lazyLoadMID : lazyLoadScore ;
+	return $('#treeflows').treeview({
+	      data: data,
+	      showCheckbox: false,
+	      lazyLoad: lazyLoadFunc,
+	      showIcon: true,
+        backColor: "#fafafa",
+        showBorder: false,
+        selectable: true,
+        selectedIcon: 'fas fa-open',        
+	      onNodeSelected  : function (event, data) { 
+	      	if(compare){
+	      		selectPaymentNodeCompare(data);
+	      	} else {
+		      	selectPaymentNode(data);
+		      }
+	      }
+	    });
+};
+
+function searchBy(ext){
+	$.ajax({
+	    type: 'GET',
+	    url: '/payments' + ext,
+	    dataType: "json",
+	  })
+		.done(function (response) {
+	    $paymentsTree = buildPaymentsTree(response.tree);
+	  })
+	  .fail(function (response) {
+	      console.log(response);
+	  });
+}
+
+function searchMID(e){
+	var pattern = $('#inputsearch').val();
+	searchBy("/bymid/"+pattern);
+}
+
+function searchScore(e){
+	var pattern = $('#similarityRange').val();
+	var usecase = location.href.split("/").pop() 
+	searchBy("/byscore/"+ usecase +"/"+ pattern);
+}
+
+
+function displayPaymentsTree(type, compare = false){
+	$.ajax({
+	    type: 'GET',
+	    url: '/payments/tree',
+	    dataType: "json",
+	  })
+	  .done(function (response) {
+	    var $paymentsTree = buildPaymentsTree(response.tree, type, compare);
+      if(type.indexOf('score') != -1){
+	  		$('#similarityRange').on('change', searchScore); 
+	  	}
+
+      if(type.indexOf('payments') != -1){
+		  	$('#btnsearch').on('click', searchMID);
+
+	      $('#btnclearsearch').on('click', function (e) {
+	        $('#inputsearch').val('');
+	        searchBy('/tree');
+	      });	
+	  	}
+	  })
+	  .fail(function (response) {
+	      console.log(response);
+	  });
+}
+
+		
+
+$(document).ready(function(){		
+	//$('#sidebar').css({'top': '68px'});		
+	//var height = $('#sidebar').height() - $('#sidebar table thead tr th').height() - 68;
+	//$('.table-fixed tbody').css({'height': (height + 'px')});
+	
   $("#flowmanagement").niceScroll({
      cursorcolor: '#FFFFFF',
      cursorwidth: 4,
@@ -147,6 +248,7 @@ $(document).ready(function(){
 	    var $allmids = response.tree
 	    var $usecasesTree = $('#treeflows').treeview({
 	      data: response.tree,
+	      levels: 1,
 	      showCheckbox: false,
 	      showIcon: true,
         backColor: "#fafafa",
@@ -165,20 +267,20 @@ $(document).ready(function(){
 	        exactMatch: false,
 	        revealResults: true
 	      };
-	      $usecasesTree.treeview({data: $allmids})
+	      //$usecasesTree.treeview({data: $allmids})
 	      var results = $usecasesTree.treeview('search', [ pattern, options ]);
-	      $usecasesTree.treeview({data: results,
-	        onNodeSelected  : function (event, data) { 
-        		location.href = "/usecases/template/"+ data["env"]+ "/" + data["key"]; 
-		      }
-	      })
+	      //$usecasesTree.treeview({data: results,
+	        //onNodeSelected  : function (event, data) { 
+        		//location.href = "/usecases/template/"+ data["env"]+ "/" + data["key"]; 
+		      //}
+	      //})
 
-	      var output = "<p class='small'>" + results.length + ' matches found</p>';
-	      $('#searchoutput').html(output);
+	      //var output = "<p class='small'>" + results.length + ' matches found</p>';
+	      //$('#searchoutput').html(output);
       }
 
       $('#btnsearch').on('click', search);
-      $('#inputsearch').on('keyup', search);
+      //$('#inputsearch').on('keyup', search);
 
       $('#btnclearsearch').on('click', function (e) {
         $usecasesTree.treeview('clearSearch');
@@ -186,6 +288,11 @@ $(document).ready(function(){
         $('#inputsearch').val('');
         $('#searchoutput').html('');
       });
+
+      $(".treeview").niceScroll({
+		     cursorcolor: '#FFFFFF',
+		     cursorwidth: 4,
+		  });
 	  })
 	  .fail(function (response) {
 	      console.log(response);
@@ -196,140 +303,27 @@ $(document).ready(function(){
  	  openSideBar();
  	  $('#tree_title').hide();
     $('#mid-search').show();	
-    $('#similarity-search').hide();  
-		$.ajax({
-	    type: 'GET',
-	    url: '/payments/tree',
-	    dataType: "json",
-	  })
-	  .done(function (response) {
-	    var $allmids = response.tree;	    
-	    var $paymentsTree = $('#treeflows').treeview({
-	      data: response.tree,
-	      showCheckbox: false,
-	      showIcon: true,
-        backColor: "#fafafa",
-        showBorder: false,
-        selectable: true,
-        selectedIcon: 'fas fa-open',        
-	      onNodeSelected  : function (event, data) { 
-	      	selectPaymentNode(data);
-	      }
-	    });
-
-		  var search = function(e) {
-	      var pattern = $('#inputsearch').val();
-	      var options = {
-	        ignoreCase: true,
-	        exactMatch: false,
-	        revealResults: true
-	      };
-	      $paymentsTree.treeview({data: $allmids})
-	      var results = $paymentsTree.treeview('search', [ pattern, options ]);
-	      $paymentsTree.treeview({data: results,
-	        onNodeSelected  : function (event, data) { 
-		      	selectPaymentNode(data);
-		      }
-	      })
-
-	      var output = "<p class='small'>" + results.length + ' matches found</p>';
-	      $('#searchoutput').html(output);
-      }
-
-      $('#btnsearch').on('click', search);
-      $('#inputsearch').on('keyup', search);
-
-      $('#btnclearsearch').on('click', function (e) {
-        $paymentsTree.treeview('clearSearch');
-        $paymentsTree.treeview({data: $allmids})
-        $('#inputsearch').val('');
-        $('#searchoutput').html('');
-      });
-	  })
-	  .fail(function (response) {
-	      console.log(response);
-	  });
+    $('#similarity-search').hide(); 
+    displayPaymentsTree('payments');
 	});
 	
-	$('#compareFlow').on('click', function () {
- 	 	openSideBar();
- 	 	$('#tree_title').hide();
-    $('#mid-search').show();	
-    $('#similarity-search').hide();   	  
- 	  $.ajax({
-	    type: 'GET',
-	    url: '/payments/tree',
-	    dataType: "json",
-	  })
-	  .done(function (response) {	       
-	    var $searchableTree = $('#treeflows').treeview({
-	      data: response.tree,
-	      showCheckbox: false,
-	      showIcon: true,
-        backColor: "#fafafa",
-        showBorder: false,
-        selectable: true,
-        selectedIcon: 'fas fa-open',
-	      onNodeSelected  : function(event, data) {	               	
-        	parent = $('#treeflows').treeview('getParent', data); 
-        	if(location.href.indexOf('flow') != -1){
-        		location.href = location.href.replace("/flow/", "/compare/") + "/" + parent["key"]+ "/" + data["key"]; 	
-        	} else{
-        		location.href = location.href.replace("/activities/", "/compare/") + "/" + parent["key"]+ "/" + data["key"]; 	
-        	}
-	      }
-	    });
-	  });
-	});	
-
-
 	$('#similarFlow').on('click', function () {
  	 	openSideBar();
  	  $('#tree_title').hide();
     $('#mid-search').hide();	
     $('#similarity-search').show();   
     rangeSlider();
- 	  $.ajax({
-	    type: 'GET',
-	    url: '/payments/tree',
-	    dataType: "json",
-	  })
-	  .done(function (response) {	
-	  	var $similarmids = response.tree
-	    var $similarTree = $('#treeflows').treeview({
-	      data: response.tree,
-	      showCheckbox: false,
-	      showIcon: true,
-        backColor: "#fafafa",
-        showBorder: false,
-        selectable: true,
-        selectedIcon: 'fas fa-open',
-	      onNodeSelected  : function(event, data) {	       
-        	parent = $('#treeflows').treeview('getParent', data); 
-        	location.href = "/payments/flow/"+ parent["key"]+ "/" + data["key"]; 
-	      }
-	    });
-
-	    var search = function(e) {
-	      var pattern = $('#similarityRange').val();
-	      var options = {
-	        ignoreCase: true,
-	        exactMatch: false,
-	        revealResults: true
-	      };
-	      $similarTree.treeview({data: $similarmids})
-	      var results = $similarTree.treeview('search', [ pattern, options ]);
-	      $similarTree.treeview({data: results,
-	        onNodeSelected  : function (event, data) { 
-		      	parent = $('#treeflows').treeview('getParent', data); 
-        		location.href = "/payments/flow/"+ parent["key"]+ "/" + data["key"]; 
-		      }
-	      })
-      }
-
-      $('#similarityRange').on('change', search);      
-	  });
+ 	  displayPaymentsTree('score');
 	});
+
+	$('#compareFlow').on('click', function () {
+ 	 	openSideBar();
+ 	 	$('#tree_title').hide();
+    $('#mid-search').show();	
+    $('#similarity-search').hide();  
+    displayPaymentsTree('payments', true); 	   	  
+	});	
+
 
 
 	var $subflow_modal = $('#subflow');

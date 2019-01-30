@@ -338,20 +338,46 @@ table.table tr:hover td a.hoverbutton {
   border-radius:0px
 }
 
-.treeview .list-group-item{
-  cursor:pointer
+.treeview .list-group-item {
+  cursor: pointer;
 }
-.treeview span.indent{
-  margin-left:10px;
-  margin-right:10px
+
+.treeview span.indent {
+  margin-left: 10px;
+  margin-right: 10px;
 }
-.treeview span.icon{
-  width:12px;
-  margin-right:5px
+
+
+.treeview span.icon {
+  width: 12px;
+  margin-right: 5px;
 }
-.treeview .node-disabled{
-  color:silver;
-  cursor:not-allowed
+
+.treeview .node-disabled {
+  color: silver;
+  cursor: not-allowed;
+}
+
+.treeview .node-hidden {
+  display: none;
+}
+
+.treeview span.image {
+  display: inline-block;
+  width: 12px;
+  height: 1.19em;
+  vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  line-height: 1em;
+}
+
+.treeview span.icon.node-icon-background {
+  padding: 2px 2px 2px 2px;
+  width: calc(1em + 4px);
+  height: calc(1em + 4px);
+  line-height: 1em;
 }
 
 .node-tree, .node-editflow{  

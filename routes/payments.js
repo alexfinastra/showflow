@@ -19,39 +19,131 @@ router.get('/', function(req, res, next) {
   res.render('payments');      
 });
 
+
+
+router.get('/bymid/:mid', function(req, res){
+  var payments = [];
+  db.listCollections().toArray(function(err, collections){ 
+    relevant = collections.filter( function(c){ return c.name.indexOf("payments") > -1 })
+    if(relevant.length == 0){ res.json({tree: payments}); }
+    
+    var ind = 0;
+    for(var i=0; i<relevant.length; i++){
+      collection = relevant[i];
+      var env = collection.name.replace("_payments","");        
+      payments.push({ "text" : "<span class= 'font-weight-bold ml-2'>" + env + "</span>",
+                      "key": env,
+                      "mid": req.params["mid"],
+                      "selectable": false,
+                      "lazyLoad": true,
+                      "state": { "expanded": false, "selected": false },
+                      "nodes" : []
+                    });  
+    }
+    res.json({tree: payments});
+  });
+})
+
+router.get('/tree/:env/:mid', function(req, res){
+  var nodes= []
+  var env = req.params["env"];
+  var mid = req.params["mid"];
+  var storage = new Storage(env + "_payments");
+
+  var where = (mid == 'blank') ? {} : {"mid" : {"$regex" : ".*"+mid+".*"}}
+  storage.listDoc( {"mid":1,"_id":0}, where, {"last_update": -1},  function(docs){
+    console.log("-----> ["+env+"] Received number of docs " + docs.length)
+    if(docs.length > 0){
+      nodes = docs.map(function(doc){  return {
+                                                    "text": doc["mid"], 
+                                                    "selectable": true, 
+                                                    "state": { "selected": false }, 
+                                                    "key": doc["mid"],
+                                                    "env": env
+                                                    } 
+                                        })       
+      res.json({nodes: nodes});
+    } else {
+      res.json({nodes: nodes});
+    }
+  })
+})
+
+
+router.get('/byscore/:usecase/:score', function(req, res){
+  var payments = [];
+  db.listCollections().toArray(function(err, collections){ 
+    relevant = collections.filter( function(c){ return c.name.indexOf("payments") > -1 })
+    if(relevant.length == 0){ res.json({tree: payments}); }
+    
+    var ind = 0;
+    for(var i=0; i<relevant.length; i++){
+      collection = relevant[i];
+      var env = collection.name.replace("_payments","");        
+      payments.push({ "text" : "<span class= 'font-weight-bold ml-2'>" + env + "</span>",
+                      "key": env,
+                      "usecase": req.params["usecase"],
+                      "score": req.params["score"],
+                      "selectable": false,
+                      "lazyLoad": true,
+                      "state": { "expanded": false, "selected": false },
+                      "nodes" : []
+                    });  
+    }
+    res.json({tree: payments});
+  });
+})
+
+router.get('/tree/:env/:usecase/:score', function(req, res){
+  var nodes= []
+  var env = req.params["env"];
+  var usecase = req.params["usecase"];
+  var score = req.params["score"];
+  var storage = new Storage(env + "_payments");
+  var where = {"flow.similarities": {"$gt": []} }
+  storage.listDoc({"flow.similarities": 1, "mid": 1, "_id" :0}, where, {"last_update": -1},  function(docs){
+    console.log("-----> ["+env+"] Received Usecase number of docs " + docs.length)
+    if(docs.length > 0){
+      relevant = docs.filter( function(d){ return (d["flow"]["similarities"][0].indexOf(usecase) != -1) && (parseInt(d["flow"]["similarities"][2], 10) > parseInt(score, 10)) })
+      console.log("-----> ["+usecase + ":" + score + "] Whoa Docs>" + docs.length + " relevant>" + relevant.length);
+      if(relevant.length > 0){
+        nodes = relevant.map(function(doc){  return {
+                                                    "text": doc["mid"], 
+                                                    "selectable": true, 
+                                                    "tags": [doc["flow"]["similarities"][2] + "%"],
+                                                    "state": { "selected": false }, 
+                                                    "key": doc["mid"],
+                                                    "env": env
+                                                    } 
+                                        })         
+      }      
+      res.json({nodes: nodes});
+    } else {
+      res.json({nodes: nodes});
+    }
+  })
+})
+
+
 router.get('/tree', function(req, res){
   var payments = [];
   db.listCollections().toArray(function(err, collections){ 
     relevant = collections.filter( function(c){ return c.name.indexOf("payments") > -1 })
     if(relevant.length == 0){ res.json({tree: payments}); }
     
-    var total = relevant.length - 1;
-    relevant.forEach(function(collection, index){ 
-      console.log("-----> Load documents from collection " + collection.name + "")      
-      var strg = new Storage(collection.name);
+    var ind = 0;
+    for(var i=0; i<relevant.length; i++){
+      collection = relevant[i];
       var env = collection.name.replace("_payments","");        
-      
-      strg.listDoc( {"mid":1,"_id":0}, {}, {"last_update": -1},  function(docs){
-        console.log("-----> Get list of "+ docs.length + " for " + env);
-        payments.push({ "text" : "<span class= 'font-weight-bold ml-2'>" + env + "</span>",
-                        "key": env,
-                        "selectable": false,
-                        "state": { "expanded": false, "selected": false },
-                        "nodes" : docs.map(function(doc){ 
-                          return {
-                            "text": doc["mid"], 
-                            "selectable": true, 
-                            "state": { "selected": false }, 
-                            "key": doc["mid"],
-                            "env": env
-                          } 
-                        })
-                      });
-        if(total == index){
-          res.json({tree: payments});      
-        }
-      })      
-    })
+      payments.push({ "text" : "<span class= 'font-weight-bold ml-2'>" + env + "</span>",
+                      "key": env,
+                      "selectable": false,
+                      "lazyLoad": true,
+                      "state": { "expanded": false, "selected": false },
+                      "nodes" : []
+                    });  
+    }
+    res.json({tree: payments});
   });
 });
 
