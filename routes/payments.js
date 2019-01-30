@@ -102,22 +102,33 @@ router.get('/tree/:env/:usecase/:score', function(req, res){
   var storage = new Storage(env + "_payments");
   var where = {"flow.similarities": {"$gt": []} }
   storage.listDoc({"flow.similarities": 1, "mid": 1, "_id" :0}, where, {"last_update": -1},  function(docs){
-    console.log("-----> ["+env+"] Received Usecase number of docs " + docs.length)
+    console.log("-----> ["+env+"] Received Usecase ("+usecase+") number of docs " + docs.length)
     if(docs.length > 0){
-      relevant = docs.filter( function(d){ return (d["flow"]["similarities"][0].indexOf(usecase) != -1) && (parseInt(d["flow"]["similarities"][2], 10) > parseInt(score, 10)) })
+      var relevant = []
+      for(var i=0; i< docs.length; i++){
+        var s = docs[i]["flow"]["similarities"];
+        for(var j=0; j<s.length; j++){
+          if((s[j][0].indexOf(usecase) != -1) &&(s[j][2] >= parseInt(score, 10))){
+            relevant.push([docs[i], s[j][2]])
+          }
+        }        
+      }
       console.log("-----> ["+usecase + ":" + score + "] Whoa Docs>" + docs.length + " relevant>" + relevant.length);
       if(relevant.length > 0){
         nodes = relevant.map(function(doc){  return {
-                                                    "text": doc["mid"], 
+                                                    "text": doc[0]["mid"], 
                                                     "selectable": true, 
-                                                    "tags": [doc["flow"]["similarities"][2] + "%"],
+                                                    "tags": [doc[1]+" %"],
                                                     "state": { "selected": false }, 
-                                                    "key": doc["mid"],
+                                                    "key": doc[0]["mid"],
                                                     "env": env
                                                     } 
                                         })         
-      }      
-      res.json({nodes: nodes});
+        res.json({nodes: nodes});
+      }  else{
+        res.json({nodes: nodes});
+      }     
+      
     } else {
       res.json({nodes: nodes});
     }

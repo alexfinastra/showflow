@@ -77,7 +77,9 @@ function buildPaymentsTree(data, type = 'payments', compare = false){
         backColor: "#fafafa",
         showBorder: false,
         selectable: true,
-        selectedIcon: 'fas fa-open',        
+        selectedIcon: 'fas fa-open', 
+        showTags: true,
+        tagsClass: 'badge badge-pill badge-success float-right mr-5 p-2',       
 	      onNodeSelected  : function (event, data) { 
 	      	if(compare){
 	      		selectPaymentNodeCompare(data);
@@ -88,14 +90,14 @@ function buildPaymentsTree(data, type = 'payments', compare = false){
 	    });
 };
 
-function searchBy(ext){
+function searchBy(ext, type){
 	$.ajax({
 	    type: 'GET',
 	    url: '/payments' + ext,
 	    dataType: "json",
 	  })
 		.done(function (response) {
-	    $paymentsTree = buildPaymentsTree(response.tree);
+	    $paymentsTree = buildPaymentsTree(response.tree, type);
 	  })
 	  .fail(function (response) {
 	      console.log(response);
@@ -104,13 +106,13 @@ function searchBy(ext){
 
 function searchMID(e){
 	var pattern = $('#inputsearch').val();
-	searchBy("/bymid/"+pattern);
+	searchBy("/bymid/"+pattern, 'payments');
 }
 
 function searchScore(e){
 	var pattern = $('#similarityRange').val();
 	var usecase = location.href.split("/").pop() 
-	searchBy("/byscore/"+ usecase +"/"+ pattern);
+	searchBy("/byscore/"+ usecase +"/"+ pattern, 'score');
 }
 
 
