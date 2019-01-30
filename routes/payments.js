@@ -139,22 +139,25 @@ router.get('/tree/:env/:usecase/:score', function(req, res){
 router.get('/tree', function(req, res){
   var payments = [];
   db.listCollections().toArray(function(err, collections){ 
-    relevant = collections.filter( function(c){ return c.name.indexOf("payments") > -1 })
-    if(relevant.length == 0){ res.json({tree: payments}); }
-    
-    var ind = 0;
-    for(var i=0; i<relevant.length; i++){
-      collection = relevant[i];
-      var env = collection.name.replace("_payments","");        
-      payments.push({ "text" : "<span class= 'font-weight-bold ml-2'>" + env + "</span>",
-                      "key": env,
-                      "selectable": false,
-                      "lazyLoad": true,
-                      "state": { "expanded": false, "selected": false },
-                      "nodes" : []
-                    });  
+    relevant = collections.filter( function(c){ return c.name.indexOf("payments") != -1 })
+    console.log("-----> Relevant collection for payments is " + relevant.length)
+    if(relevant.length == 0){ 
+      res.json({tree: payments}); 
+    } else{
+      var ind = 0;
+      for(var i=0; i<relevant.length; i++){
+        collection = relevant[i];
+        var env = collection.name.replace("_payments","");        
+        payments.push({ "text" : "<span class= 'font-weight-bold ml-2'>" + env + "</span>",
+                        "key": env,
+                        "selectable": false,
+                        "lazyLoad": true,
+                        "state": { "expanded": false, "selected": false },
+                        "nodes" : []
+                      });  
+      }
+      res.json({tree: payments});
     }
-    res.json({tree: payments});
   });
 });
 
@@ -238,11 +241,50 @@ router.get('/compare/:env1/:mid1/:env2/:mid2', function(req, res, next) {
       flow_left["mid"] = req.params["mid1"];
       flow_right["mid"] = req.params["mid2"]; 
       flow_left["env"] = req.params["env1"];
-      flow_right["env"] = req.params["env2"];       
-      res.render('payments', {data_left: flow_left, data_right: flow_right, view: "split" });       
+      flow_right["env"] = req.params["env2"]; 
+      var score = Math.round(similarity_score(flow_left["pattern"], flow_right["pattern"]) * 100);
+      console.log("------> left " + flow_left["pattern"] + " and right " + flow_right["pattern"] + " matched with " + score)     
+      res.render('payments', {data_left: flow_left, data_right: flow_right, score: score, view: "split" });       
     }) 
   })
 });
 
 module.exports = router;
 
+var common_pattern = function(pattern_left, pattern_right){
+  let a = new Set(pattern_left);
+  let b = new Set(pattern_right);
+  let intersection = new Set(
+      [...a].filter(x => b.has(x)));
+  return intersection;
+}
+
+var getSum = function(total, num){
+  return total + num;
+}
+
+var similarity_score = function(pattern_left, pattern_right){
+  var scores = [];
+  var l_len = pattern_left.length;
+  var r_len = pattern_right.length;
+
+  if(l_len == 0 || r_len == 0) { return 0; }
+
+  if(l_len > r_len){
+    short_arr = pattern_right;
+    long_arr = pattern_left;
+    len = r_len;
+  } else {
+    short_arr = pattern_left;
+    long_arr = pattern_right;
+    len = l_len;
+  }
+
+  for(var i =0; i < len; i++){
+    var item = short_arr[i];
+    var index = long_arr.indexOf(item);
+    scores.push( (index != -1 ? 1 : 0 )+(index == i ? 1 : 0));    
+  }
+  
+  return scores.reduce(getSum, 0) / (2 * long_arr.length);
+}
