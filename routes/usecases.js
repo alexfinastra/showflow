@@ -16,11 +16,11 @@ var authentication_mdl = require('../middlewares/authentication');
 var Usecase = require('../models/usecase');
 var Storage = require('../middlewares/storage');
 
-router.get('/', function(req, res, next) {
+router.get('/',authentication_mdl.is_login,function(req, res, next) {
   res.render('usecases', {data: null});      
 });
 
-router.get('/tree', function(req, res){
+router.get('/tree',authentication_mdl.is_login, function(req, res){
   var usecases = [];
   db.listCollections().toArray(function(err, collections){     
     if(collections.length == 0){ res.json({tree: usecases}); }
@@ -67,7 +67,7 @@ router.get('/tree', function(req, res){
   });
 });
 
-router.get('/template/:env/:uid', function(req, res, next) {
+router.get('/template/:env/:uid',authentication_mdl.is_login, function(req, res, next) {
   var storage = new Storage(req.params["env"] + "_usecases");
   storage.getDoc({"type": "usecase", "uid": req.params["uid"]}, function(doc){
     var usecase = new Usecase(doc);  
@@ -75,7 +75,7 @@ router.get('/template/:env/:uid', function(req, res, next) {
   })
 });
 
-router.get('/subflow/:env/:uid/:back', function(req, res, next) {
+router.get('/subflow/:env/:uid/:back',authentication_mdl.is_login, function(req, res, next) {
   var storage = new Storage(req.params["env"] + "_usecases");
   storage.getDoc({"type": "subflow", "uid": req.params["uid"]}, function(doc){
     var usecase = new Usecase(doc);  
@@ -83,7 +83,7 @@ router.get('/subflow/:env/:uid/:back', function(req, res, next) {
   })
 });
 
-router.get('/flows/:env/:uid', function(req, res, next) {
+router.get('/flows/:env/:uid',authentication_mdl.is_login, function(req, res, next) {
   var storage = new Storage(req.params["env"] + "_usecases");
   storage.getDoc({"type": "usecase", "uid": req.params["uid"]}, function(doc){
     var usecase = new Usecase(doc);  
@@ -93,7 +93,7 @@ router.get('/flows/:env/:uid', function(req, res, next) {
 
 
 
-router.get('/flowmanagement/:env/:uid/:back', function(req, res, next) {
+router.get('/flowmanagement/:env/:uid/:back',authentication_mdl.is_login, function(req, res, next) {
   var flowmanagement = new json.File(appRoot + "/data/flowmanagement/"+ req.params["uid"] +".json");
   flowmanagement.readSync();
 

@@ -116,9 +116,9 @@ body {
 }
 
 .login-block{
-  background: #FE5E41;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #F3C178, #FE5E41);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #F3C178, #FE5E41); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #C0C0C0;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #F8F8F8, #C0C0C0);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #F8F8F8, #C0C0C0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   float:left;
   width:100%;
   padding : 50px 0;

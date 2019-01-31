@@ -834,7 +834,7 @@ method.parse = function(filename, cb){
     parseConfig(filename, cb);
   }
 
-  if(filename.indexOf(".log") > -1){
+  if(filename.indexOf(".log") != -1 || filename.indexOf(".txt") != -1){
     var env = envName(filename);
     var storage = new Storage(env + "_usecases"); 
     storage.collectionExists(function(exists){
@@ -845,7 +845,11 @@ method.parse = function(filename, cb){
         cb();
       }
     })    
+  } else {
+    cb();
   }
+
+
 }
 module.exports = Parser;
 

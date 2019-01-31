@@ -148,6 +148,7 @@ $(document).ready(function(){
 	//$('#sidebar').css({'top': '68px'});		
 	//var height = $('#sidebar').height() - $('#sidebar table thead tr th').height() - 68;
 	//$('.table-fixed tbody').css({'height': (height + 'px')});
+	$('[data-toggle="popover"]').popover();
 	
   $("#flowmanagement").niceScroll({
      cursorcolor: '#FFFFFF',

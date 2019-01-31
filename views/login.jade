@@ -5,31 +5,35 @@ html
     link(rel='stylesheet', href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ", crossorigin="anonymous")     
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Spicy+Rice')
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Ubuntu:700')
+    link(rel='stylesheet', href='/stylesheets/alertify.css')
+
     link(rel='stylesheet', href='/stylesheets/login.css')  
-    script(src="/javascripts/jquery-3.2.1.min.js")    
-  body
-    section.login-block
+    script(src="/javascripts/jquery-3.2.1.min.js")
+    script(src="/javascripts/alertify.js")    
+  body    
+    section.login-block      
       .container
         .row
           .col-md-4.login-sec
             h2.text-center(style="font-size: 3rem;") Show Flow
-            p.text-center.mb-5
-              | Create a visual flow that a payment had undergone.
-            form.login-form(action="/login", method="post")
+            h5.text-center.mb-5(style="color: #00A878;")
+              | Create a visual flow that a payment had undergone.            
+            br
+            form.login-form.text-center(action="/login", method="post")
               .form-group
-                label(for='exampleInputEmail1') username
-                input.form-control(type='text', placeholder='', name="user")
+                label(for='exampleInputEmail1') email address
+                input.form-control.form-field-invalid(type='text', placeholder='', name="email")
+                small#emailHelpBlock.form-text.text-muted
+                  | please fill Finastra email
+                if(message != undefined && message.length > 0)
+                  include alertify
               .form-group
-                label(for='exampleInputPassword1') password
-                input.form-control(type='password', placeholder='', name="pass")
-              .form-check
-                label.form-check-label
-                  input.form-check-input(type='checkbox')
-                  small Remember Me
-                button.btn.btn-login.float-right(type='submit', style="font-weight:600;") Submit
+                button.btn.btn-login(type='submit', style="font-weight:600;") Submit
             .copy-text
               | Created with 
               i.fa.fa-heart
               |  by 
               a(href='http://grafreez.com') Grafreez.com
           .col-md-8.banner-sec
+
+        

@@ -12,16 +12,17 @@ var util = require('util');
 var path = require('path');
 var underscore = require("underscore");
 
+var authentication_mdl = require('../middlewares/authentication');
 var Payment = require('../models/payment');
 var Storage = require('../middlewares/storage');
 
-router.get('/', function(req, res, next) {
+router.get('/',authentication_mdl.is_login, function(req, res, next) {
   res.render('payments');      
 });
 
 
 
-router.get('/bymid/:mid', function(req, res){
+router.get('/bymid/:mid',authentication_mdl.is_login, function(req, res){
   var payments = [];
   db.listCollections().toArray(function(err, collections){ 
     relevant = collections.filter( function(c){ return c.name.indexOf("payments") > -1 })
@@ -44,7 +45,7 @@ router.get('/bymid/:mid', function(req, res){
   });
 })
 
-router.get('/tree/:env/:mid', function(req, res){
+router.get('/tree/:env/:mid',authentication_mdl.is_login, function(req, res){
   var nodes= []
   var env = req.params["env"];
   var mid = req.params["mid"];
@@ -70,7 +71,7 @@ router.get('/tree/:env/:mid', function(req, res){
 })
 
 
-router.get('/byscore/:usecase/:score', function(req, res){
+router.get('/byscore/:usecase/:score',authentication_mdl.is_login, function(req, res){
   var payments = [];
   db.listCollections().toArray(function(err, collections){ 
     relevant = collections.filter( function(c){ return c.name.indexOf("payments") > -1 })
@@ -94,7 +95,7 @@ router.get('/byscore/:usecase/:score', function(req, res){
   });
 })
 
-router.get('/tree/:env/:usecase/:score', function(req, res){
+router.get('/tree/:env/:usecase/:score',authentication_mdl.is_login, function(req, res){
   var nodes= []
   var env = req.params["env"];
   var usecase = req.params["usecase"];
@@ -136,7 +137,7 @@ router.get('/tree/:env/:usecase/:score', function(req, res){
 })
 
 
-router.get('/tree', function(req, res){
+router.get('/tree',authentication_mdl.is_login, function(req, res){
   var payments = [];
   db.listCollections().toArray(function(err, collections){ 
     relevant = collections.filter( function(c){ return c.name.indexOf("payments") != -1 })
@@ -161,7 +162,7 @@ router.get('/tree', function(req, res){
   });
 });
 
-router.get('/flow/:env/:mid', function(req, res, next) {
+router.get('/flow/:env/:mid',authentication_mdl.is_login, function(req, res, next) {
   var payment = new Payment(req.params["env"], req.params["mid"])
   payment.loadFlow(function(flow){
     console.log("-----> Get payment flow : " + JSON.stringify(flow))
@@ -171,11 +172,11 @@ router.get('/flow/:env/:mid', function(req, res, next) {
   })
 });
 
-router.get("/activities/:env/:mid", function(req, res){
+router.get("/activities/:env/:mid",authentication_mdl.is_login, function(req, res){
   res.render('payments', { data: { "mid": req.params["mid"], "name": "Activities log" }, view: "table" });
 });
 
-router.get("/details/:env/:mid/:uid/:view", function(req, res){
+router.get("/details/:env/:mid/:uid/:view",authentication_mdl.is_login, function(req, res){
   var payment = new Payment(req.params["env"], req.params["mid"])
   var view = req.params["view"];
   payment.loadDetails(view, req.params["uid"], function(step, details){
@@ -188,7 +189,7 @@ router.get("/details/:env/:mid/:uid/:view", function(req, res){
   })
 });
 
-router.get("/tabledata/:env/:mid", function(req, res){
+router.get("/tabledata/:env/:mid",authentication_mdl.is_login, function(req, res){
   console.log("Query  --< " + JSON.stringify(req.query))
   var payment = new Payment(req.params["env"], req.params["mid"]);
   activities = payment.loadActivities(function(activities){
@@ -230,7 +231,7 @@ router.get("/tabledata/:env/:mid", function(req, res){
   });
 })
 
-router.get('/compare/:env1/:mid1/:env2/:mid2', function(req, res, next) {
+router.get('/compare/:env1/:mid1/:env2/:mid2',authentication_mdl.is_login, function(req, res, next) {
   console.log("-----> Comapre payemtns :" + JSON.stringify(req.params))
   
   var payment_left = new Payment(req.params["env1"], req.params["mid1"]);
