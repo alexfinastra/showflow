@@ -142,20 +142,15 @@ function displayPaymentsTree(type, compare = false){
 	  });
 }
 
-		
-
-$(document).ready(function(){		
-	//$('#sidebar').css({'top': '68px'});		
-	//var height = $('#sidebar').height() - $('#sidebar table thead tr th').height() - 68;
-	//$('.table-fixed tbody').css({'height': (height + 'px')});
-	$('[data-toggle="popover"]').popover();
 	
-  $("#flowmanagement").niceScroll({
-     cursorcolor: '#FFFFFF',
-     cursorwidth: 4,
-  });
 
-  $("#subflow").niceScroll({
+$(document).ready(function(){			
+	//$('[data-toggle="popover"]').popover();
+
+	//$.fn.editable.defaults.mode = 'inline';
+	$('.description').editable();	
+
+  $("#flowmanagement").niceScroll({
      cursorcolor: '#FFFFFF',
      cursorwidth: 4,
   });
@@ -352,7 +347,12 @@ $(document).ready(function(){
 	        	.removeClass('modal-scrollfix')
 	        	.modal('handleUpdate')
 	        	.modal('show');
-	        }
+	        $('.description').editable();	
+		      $subflow_modal.niceScroll({
+				     cursorcolor: '#FFFFFF',
+				     cursorwidth: 4,
+				  });
+	      }
 	    });
 	});
 

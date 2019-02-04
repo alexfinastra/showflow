@@ -410,4 +410,6 @@ table.table tr:hover td a.hoverbutton {
   white-space: nowrap; 
 }
 
-
+.modal-scrollfix {
+    overflow-y: hidden;
+}

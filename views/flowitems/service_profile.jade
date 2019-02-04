@@ -12,9 +12,9 @@ li.timeline-item
       p.small.mt-3
         span.rounded.bg-light.text-dark.p-1.pl-2.pr-2 type : 
           b #{item["type"]}
-      br
-      - var descid = "service_description_" + item["group"] + "_" + item["uid"];
-      p.small.text-light(id= descid, data-toggle="popover")
+      br 
+      - var url = "/usecases/references/" + item["group_name"]    
+      p.small.text-light.description(data-type="textarea", data-pk=item["uid"], data-url= url, data-title="Service description")
         | #{item["description"]}
       br
       if item["features"].indexOf("flowmanagement") > -1

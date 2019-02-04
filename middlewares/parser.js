@@ -642,7 +642,7 @@ var to_usecase = function(group_name, flowId, bean){
 }
 
 var getRef = function(group_name, type, uid){
-  var fpath = appRoot + "/data/references/"+ group_name.replace(" ", "_") +"_references.json";
+  var fpath = appRoot + "/data/references/"+ group_name.replace(/ /g, "_") +"_references.json";
   if (!fs.existsSync(fpath)) {fs.writeFileSync(fpath, JSON.stringify({}), 'utf-8');}
   
   var refs = new json.File(fpath);
@@ -678,7 +678,7 @@ var getFlowItem = function(group_name, flowId, uid){
       "features": []
     }   
   } else {
-    var fpath = appRoot + "/data/flowsteps/"+ group_name.replace(" ", "_") +"_flowsteps.json";
+    var fpath = appRoot + "/data/flowsteps/"+ group_name.replace(/ /g, "_") +"_flowsteps.json";
     if (!fs.existsSync(fpath)) {fs.writeFileSync(fpath, JSON.stringify({}), 'utf-8');}
 
     var flowitems = new json.File(fpath);

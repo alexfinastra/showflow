@@ -28,7 +28,7 @@
 
   <meta name="viewport" content="width=device-width">
   
-  <title>x-editable/loading.gif at develop · Talv/x-editable</title>
+  <title>x-editable/clear.png at develop · Talv/x-editable</title>
     <meta name="description" content="In-place editing with Twitter Bootstrap, jQuery UI or pure jQuery - Talv/x-editable">
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
   <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
@@ -38,10 +38,10 @@
     <meta property="og:image" content="https://avatars0.githubusercontent.com/u/6976458?s=400&amp;v=4" /><meta property="og:site_name" content="GitHub" /><meta property="og:type" content="object" /><meta property="og:title" content="Talv/x-editable" /><meta property="og:url" content="https://github.com/Talv/x-editable" /><meta property="og:description" content="In-place editing with Twitter Bootstrap, jQuery UI or pure jQuery - Talv/x-editable" />
 
   <link rel="assets" href="https://github.githubassets.com/">
-  <link rel="web-socket" href="wss://live.github.com/_sockets/VjI6MzQ0NTcwNzU3OmNlZGQyOTEzNzJkYTU1NWY3NDBmNWIzNGRhYTBjNjMzZjAxMGNmZGEzNDYwZjNlOTNkYTcwZGYyNWIwMmE4YTM=--dca9cf755139640cf4a913cf0a57f311dce72252">
+  <link rel="web-socket" href="wss://live.github.com/_sockets/VjI6MzQ0NTcwNzU3OjkyYjJiNWUzZTA1MjcxYzRhY2U4ZWY4OWZiMDAxOTNiMDVhNjhjNTA5ODIzOTE5NjNjZDBjYjFhMWY4ODQ4OTM=--c11757dd3a8d1e8d1371b48a1777fbab6d40765c">
   <meta name="pjax-timeout" content="1000">
   <link rel="sudo-modal" href="/sessions/sudo_modal">
-  <meta name="request-id" content="C725:320B:336E44:57FC98:5C530D86" data-pjax-transient>
+  <meta name="request-id" content="C725:320B:3373C5:580302:5C530D8E" data-pjax-transient>
 
 
   
@@ -52,7 +52,7 @@
     <meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
     <meta name="google-site-verification" content="GXs5KoUUkNCoaAZn7wPN-t01Pywp9M3sEjnt_3_ZWPc">
 
-  <meta name="octolytics-host" content="collector.githubapp.com" /><meta name="octolytics-app-id" content="github" /><meta name="octolytics-event-url" content="https://collector.githubapp.com/github-external/browser_event" /><meta name="octolytics-dimension-request_id" content="C725:320B:336E44:57FC98:5C530D86" /><meta name="octolytics-dimension-region_edge" content="iad" /><meta name="octolytics-dimension-region_render" content="iad" /><meta name="octolytics-actor-id" content="35795698" /><meta name="octolytics-actor-login" content="alexfinastra" /><meta name="octolytics-actor-hash" content="4e6e02d96e7b54c3e887d392a427cb375a3392fbde4aeec988dd5d29a2343b2a" />
+  <meta name="octolytics-host" content="collector.githubapp.com" /><meta name="octolytics-app-id" content="github" /><meta name="octolytics-event-url" content="https://collector.githubapp.com/github-external/browser_event" /><meta name="octolytics-dimension-request_id" content="C725:320B:3373C5:580302:5C530D8E" /><meta name="octolytics-dimension-region_edge" content="iad" /><meta name="octolytics-dimension-region_render" content="iad" /><meta name="octolytics-actor-id" content="35795698" /><meta name="octolytics-actor-login" content="alexfinastra" /><meta name="octolytics-actor-hash" content="4e6e02d96e7b54c3e887d392a427cb375a3392fbde4aeec988dd5d29a2343b2a" />
 <meta name="analytics-location" content="/&lt;user-name&gt;/&lt;repo-name&gt;/blob/show" data-pjax-transient="true" />
 
 
@@ -71,7 +71,7 @@
     <meta name="user-login" content="alexfinastra">
 
       <meta name="expected-hostname" content="github.com">
-    <meta name="js-proxy-site-detection-payload" content="NzVkNjE2YTc4MzNmZGYwMjc0NTU3N2E2NTMxM2E4OWVkYTRiNGVkZGEwODcwZWNkNzlkNGU4ZjI3ZWQ2OWM4Ynx7InJlbW90ZV9hZGRyZXNzIjoiMjEzLjguODQuMjAyIiwicmVxdWVzdF9pZCI6IkM3MjU6MzIwQjozMzZFNDQ6NTdGQzk4OjVDNTMwRDg2IiwidGltZXN0YW1wIjoxNTQ4OTQ2ODMwLCJob3N0IjoiZ2l0aHViLmNvbSJ9">
+    <meta name="js-proxy-site-detection-payload" content="NTUxNTgxMTVlODc5NWIyMmNkNTJjNmMxZTUyM2NkOThkZTdhYWVlOTFmZTg3NGNiNDgwMWUxOTcyZmYwYTFiYXx7InJlbW90ZV9hZGRyZXNzIjoiMjEzLjguODQuMjAyIiwicmVxdWVzdF9pZCI6IkM3MjU6MzIwQjozMzczQzU6NTgwMzAyOjVDNTMwRDhFIiwidGltZXN0YW1wIjoxNTQ4OTQ2ODQxLCJob3N0IjoiZ2l0aHViLmNvbSJ9">
 
     <meta name="enabled-features" content="UNIVERSE_BANNER,MARKETPLACE_PLAN_RESTRICTION_EDITOR,NOTIFY_ON_BLOCK,RELATED_ISSUES,MARKETPLACE_INSIGHTS_V2">
 
@@ -87,7 +87,7 @@
   <meta name="octolytics-dimension-user_id" content="6976458" /><meta name="octolytics-dimension-user_login" content="Talv" /><meta name="octolytics-dimension-repository_id" content="117306904" /><meta name="octolytics-dimension-repository_nwo" content="Talv/x-editable" /><meta name="octolytics-dimension-repository_public" content="true" /><meta name="octolytics-dimension-repository_is_fork" content="true" /><meta name="octolytics-dimension-repository_parent_id" content="6761380" /><meta name="octolytics-dimension-repository_parent_nwo" content="vitalets/x-editable" /><meta name="octolytics-dimension-repository_network_root_id" content="6761380" /><meta name="octolytics-dimension-repository_network_root_nwo" content="vitalets/x-editable" /><meta name="octolytics-dimension-repository_explore_github_marketplace_ci_cta_shown" content="false" />
 
 
-    <link rel="canonical" href="https://github.com/Talv/x-editable/blob/develop/dist/bootstrap4-editable/img/loading.gif" data-pjax-transient>
+    <link rel="canonical" href="https://github.com/Talv/x-editable/blob/develop/dist/bootstrap4-editable/img/clear.png" data-pjax-transient>
 
 
   <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
@@ -156,7 +156,7 @@
           aria-autocomplete="list"
           aria-controls="jump-to-results"
           aria-label="Search or jump to…"
-          data-jump-to-suggestions-path="/_graphql/GetSuggestedNavigationDestinations#csrf-token=jvEHRgr1Mf0NlnA5RNbEj+Qhrc2RoHYLW1Ek0y8hmioPh8YWf5KHQ0biBd2GGDwIpBJvWSt5Ea3/1UFj68FkWA=="
+          data-jump-to-suggestions-path="/_graphql/GetSuggestedNavigationDestinations#csrf-token=Xsm/8/0Ndv4ln7WPAqng/kgxyJ4SM1o3WeuUZL3SkEzfv36jiGrAQG7rwGvAZxh5CAIKCqjqPZH9b/HUeTJuPg=="
           spellcheck="false"
           autocomplete="off"
           >
@@ -379,7 +379,7 @@
       </div>
     </summary>
     <details-dialog class="anim-fade-in fast Box Box--overlay" role="dialog" tabindex="-1">
-      <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="position-relative flex-auto js-user-status-form" action="/users/status?compact=1&amp;link_mentions=0&amp;truncate=1" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="put" /><input type="hidden" name="authenticity_token" value="y+OU1W5DCxi5R1F2kdA0PlVYPGaF7fmOs4H1amJBxee4jU6K3fOHrIuAflLUVLSpq82OU1E8JbpkoBZ2Dz8yAw==" />
+      <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="position-relative flex-auto js-user-status-form" action="/users/status?compact=1&amp;link_mentions=0&amp;truncate=1" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="put" /><input type="hidden" name="authenticity_token" value="zJ7hUa8gVCkf+clkRYlx/rFe0JG9BzVY6Vwx3NwSW4K/8DsOHJDYnS0+5kAADfFpT8tipGnW6Ww+fdLAsWysZg==" />
         <div class="Box-header">
           <button class="Box-btn-octicon js-toggle-user-status-edit btn-octicon float-right" type="reset" aria-label="Close dialog" data-close-dialog>
             <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>
@@ -494,7 +494,7 @@
         <div role="none" class="dropdown-divider"></div>
         <a role="menuitem" class="dropdown-item" href="https://help.github.com" data-ga-click="Header, go to help, text:help">Help</a>
         <a role="menuitem" class="dropdown-item" href="/settings/profile" data-ga-click="Header, go to settings, icon:settings">Settings</a>
-        <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="logout-form" action="/logout" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="RjZoD6C4ID1Vxl75uMgwNsR61GSOTggamAHz5drQI/gG2pfQB9KjoAT4oIk/nTbeitA4AfOM2BWeJHwbOOrg3Q==" />
+        <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="logout-form" action="/logout" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="Dz9//LalTY0RdkqSJAAl2XKe5DzaHn5ThTuhcU73rX1P04AjEc/OEEBItOKjVSMxPDQIWafcrlyDHi6PrM1uWA==" />
           
           <button type="submit" class="dropdown-item dropdown-signout" data-ga-click="Header, sign out, icon:logout" role="menuitem">
             Sign out
@@ -506,7 +506,7 @@
 
 
 
-        <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="sr-only right-0" action="/logout" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="o+a5KITluU7Q2NK4sHuOBiHd37xSv2rEgVN65XppNt/jCkb3I48604HmLMg3Lojub3cz2S99usuHdvUbmFP1+g==" />
+        <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="sr-only right-0" action="/logout" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="CRqNIlJlsqc3vYn8QgBtfWP5JFhoGaGM2veYwzWNAL5J9nL99Q8xOmaDd4zFVWuVLVPIPRXbcYPc0hc917fDmw==" />
           <button type="submit" class="dropdown-item dropdown-signout" data-ga-click="Header, sign out, icon:logout">
             Sign out
           </button>
@@ -544,7 +544,7 @@
 
       <ul class="pagehead-actions">
   <li>
-        <!-- '"` --><!-- </textarea></xmp> --></option></form><form data-remote="true" class="js-social-form js-social-container" action="/notifications/subscribe" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="48e6c9263JuueyVa1uoGRpUla/DYr4+tQtF5xAFCgkiksbF2OtVdBBGlAQQszu7YDm1QVNBxXDVFn71Ra4bM+A==" />      <input type="hidden" name="repository_id" id="repository_id" value="117306904" class="form-control" />
+        <!-- '"` --><!-- </textarea></xmp> --></option></form><form data-remote="true" class="js-social-form js-social-container" action="/notifications/subscribe" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="Md6GzIdzfxA72m7cQ0a7KgHITdh7n4aG9Gh57/Ilw4d2qI3JYBz+j4QESoK5YlO0moB2fHNBVR7zJr16mOGNNw==" />      <input type="hidden" name="repository_id" id="repository_id" value="117306904" class="form-control" />
 
       <details class="details-reset details-overlay select-menu float-left">
         <summary class="btn btn-sm btn-with-count select-menu-button" data-ga-click="Repository, click Watch settings, action:blob#show">
@@ -618,7 +618,7 @@
 
   <li>
       <div class="js-toggler-container js-social-container starring-container ">
-    <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="starred js-social-form" action="/Talv/x-editable/unstar" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="TNB900VK6jISkIyf0ohw5/zafno73fGQw+UEFO8etUdXKYgPapbp2aBKXCfsjABwOZuN1wp+BSQQy7JFvHNPtw==" />
+    <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="starred js-social-form" action="/Talv/x-editable/unstar" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="ybE02CPqM3GFXmmKT7OnXkgQBsIUuBQIT6+YfGorZ1PSSMEEDDYwmjeEuTJxt9fJjVH1byUb4LycgS4tOUadow==" />
       <input type="hidden" name="context" value="repository"></input>
       <button
         type="submit"
@@ -633,7 +633,7 @@
           38
         </a>
 </form>
-    <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="unstarred js-social-form" action="/Talv/x-editable/star" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="wNGaDN6ToyeWO3jjWmm/5CmTHPR05VA/2rxy/5C8KfuekMOa7NQxfKluDrVc7coMxAkwoLepsv6DDq0T6gNAVA==" />
+    <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="unstarred js-social-form" action="/Talv/x-editable/star" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="U69JP40W5ilTIaDdO/0rm7N46UWY6jg57S6o+GKN1D0N7hCpv1F0cmx01os9eV5zXuLFEVum2vi0nHcUGDK9kg==" />
       <input type="hidden" name="context" value="repository"></input>
       <button
         type="submit"
@@ -652,7 +652,7 @@
   </li>
 
   <li>
-          <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="btn-with-count" action="/Talv/x-editable/fork" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="JBSvVK6QBXb3amw4RYokemD1wyaHOSvtTmnYwlRfjZu6CpzrmfDKvGmPeK0NmtYRAQaj5Ke9FMebASFoGlm9AA==" />
+          <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="btn-with-count" action="/Talv/x-editable/fork" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="FTng7g7eYrk/B+FN59lKIhQH3XsIFI6g0KqsAS7tVo2LJ9NROb6tc6Hi9divybhJdfS9uSiQsYoFwlWrYOtmFg==" />
             <button
                 type="submit"
                 class="btn btn-sm btn-with-count"
@@ -735,16 +735,16 @@
 
 
   
-    <a class="d-none js-permalink-shortcut" data-hotkey="y" href="/Talv/x-editable/blob/553be0d42e2130aca503fe4621ba3003fa8fb727/dist/bootstrap4-editable/img/loading.gif">Permalink</a>
+    <a class="d-none js-permalink-shortcut" data-hotkey="y" href="/Talv/x-editable/blob/553be0d42e2130aca503fe4621ba3003fa8fb727/dist/bootstrap4-editable/img/clear.png">Permalink</a>
 
-    <!-- blob contrib key: blob_contributors:v21:0009fa7699f53dd98fcf3e54bb8148a5 -->
+    <!-- blob contrib key: blob_contributors:v21:c3117a2d6d573ea5e0c92cbe9944cbf6 -->
 
     
 
     <div class="file-navigation">
       
 <div class="select-menu branch-select-menu js-menu-container js-select-menu float-left js-load-contents"
-  data-contents-url="/Talv/x-editable/ref-list/develop/dist/bootstrap4-editable/img/loading.gif?source_action=show&amp;source_controller=blob">
+  data-contents-url="/Talv/x-editable/ref-list/develop/dist/bootstrap4-editable/img/clear.png?source_action=show&amp;source_controller=blob">
   <button class="btn btn-sm select-menu-button js-menu-target css-truncate" data-hotkey="w"
     
     type="button" aria-label="Switch branches or tags" aria-expanded="false" aria-haspopup="true">
@@ -774,7 +774,7 @@
         </clipboard-copy>
       </div>
       <div id="blob-path" class="breadcrumb">
-        <span class="repo-root js-repo-root"><span class="js-path-segment"><a data-pjax="true" href="/Talv/x-editable"><span>x-editable</span></a></span></span><span class="separator">/</span><span class="js-path-segment"><a data-pjax="true" href="/Talv/x-editable/tree/develop/dist"><span>dist</span></a></span><span class="separator">/</span><span class="js-path-segment"><a data-pjax="true" href="/Talv/x-editable/tree/develop/dist/bootstrap4-editable"><span>bootstrap4-editable</span></a></span><span class="separator">/</span><span class="js-path-segment"><a data-pjax="true" href="/Talv/x-editable/tree/develop/dist/bootstrap4-editable/img"><span>img</span></a></span><span class="separator">/</span><strong class="final-path">loading.gif</strong>
+        <span class="repo-root js-repo-root"><span class="js-path-segment"><a data-pjax="true" href="/Talv/x-editable"><span>x-editable</span></a></span></span><span class="separator">/</span><span class="js-path-segment"><a data-pjax="true" href="/Talv/x-editable/tree/develop/dist"><span>dist</span></a></span><span class="separator">/</span><span class="js-path-segment"><a data-pjax="true" href="/Talv/x-editable/tree/develop/dist/bootstrap4-editable"><span>bootstrap4-editable</span></a></span><span class="separator">/</span><span class="js-path-segment"><a data-pjax="true" href="/Talv/x-editable/tree/develop/dist/bootstrap4-editable/img"><span>img</span></a></span><span class="separator">/</span><strong class="final-path">clear.png</strong>
       </div>
     </div>
 
@@ -838,18 +838,18 @@
 
 
     <div class="BtnGroup">
-      <a id="raw-url" class="btn btn-sm BtnGroup-item" href="/Talv/x-editable/raw/develop/dist/bootstrap4-editable/img/loading.gif">Download</a>
-      <a rel="nofollow" class="btn btn-sm BtnGroup-item" href="/Talv/x-editable/commits/develop/dist/bootstrap4-editable/img/loading.gif">History</a>
+      <a id="raw-url" class="btn btn-sm BtnGroup-item" href="/Talv/x-editable/raw/develop/dist/bootstrap4-editable/img/clear.png">Download</a>
+      <a rel="nofollow" class="btn btn-sm BtnGroup-item" href="/Talv/x-editable/commits/develop/dist/bootstrap4-editable/img/clear.png">History</a>
     </div>
 
         <a class="btn-octicon tooltipped tooltipped-nw"
-           href="x-github-client://openRepo/https://github.com/Talv/x-editable?branch=develop&amp;filepath=dist%2Fbootstrap4-editable%2Fimg%2Floading.gif"
+           href="x-github-client://openRepo/https://github.com/Talv/x-editable?branch=develop&amp;filepath=dist%2Fbootstrap4-editable%2Fimg%2Fclear.png"
            aria-label="Open this file in GitHub Desktop"
            data-ga-click="Repository, open with desktop, type:windows">
             <svg class="octicon octicon-device-desktop" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M15 2H1c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h5.34c-.25.61-.86 1.39-2.34 2h8c-1.48-.61-2.09-1.39-2.34-2H15c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm0 9H1V3h14v8z"/></svg>
         </a>
 
-        <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="inline-form" action="/Talv/x-editable/delete/develop/dist/bootstrap4-editable/img/loading.gif" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="2bCKHFdwLoZ1zXpx6Y1mKOihSPi0Sxhoi9ZaeLHz5bz1Gma13EOLYMsHDq7+EyXVxO5DyiszOIp570KOv/mlMw==" />
+        <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="inline-form" action="/Talv/x-editable/delete/develop/dist/bootstrap4-editable/img/clear.png" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="r66/EGfzE+trIv9HHNCHMJQCqkoKKv6RlVgPVma+uUs0sWxUr0ByxNbkn5R+CHklSJDdvJMR89uPxz8cXNjCdQ==" />
           <button class="btn-octicon btn-octicon-danger tooltipped tooltipped-nw" type="submit"
             aria-label="Fork this project and delete the file" data-disable-with>
             <svg class="octicon octicon-trashcan" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"/></svg>
@@ -857,7 +857,7 @@
 </form>  </div>
 
   <div class="file-info">
-    1.81 KB
+    509 Bytes
   </div>
 </div>
 
@@ -865,7 +865,7 @@
 
   <div itemprop="text" class="blob-wrapper data type-text ">
       <div class="image">
-          <span class="border-wrap"><img src="/Talv/x-editable/blob/develop/dist/bootstrap4-editable/img/loading.gif?raw=true" alt="loading.gif"></span>
+          <span class="border-wrap"><img src="/Talv/x-editable/blob/develop/dist/bootstrap4-editable/img/clear.png?raw=true" alt="clear.png"></span>
       </div>
   </div>
 
@@ -897,7 +897,7 @@
 <div class="footer container-lg px-3" role="contentinfo">
   <div class="position-relative d-flex flex-justify-between pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
     <ul class="list-style-none d-flex flex-wrap ">
-      <li class="mr-3">&copy; 2019 <span title="0.26541s from unicorn-77876fd7fd-c5kbc">GitHub</span>, Inc.</li>
+      <li class="mr-3">&copy; 2019 <span title="0.41679s from unicorn-6c4dd6445-7lrgk">GitHub</span>, Inc.</li>
         <li class="mr-3"><a data-ga-click="Footer, go to terms, text:terms" href="https://github.com/site/terms">Terms</a></li>
         <li class="mr-3"><a data-ga-click="Footer, go to privacy, text:privacy" href="https://github.com/site/privacy">Privacy</a></li>
         <li class="mr-3"><a data-ga-click="Footer, go to security, text:security" href="https://github.com/security">Security</a></li>

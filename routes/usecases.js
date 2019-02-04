@@ -106,4 +106,21 @@ router.get('/flowmanagement/:env/:uid/:back',authentication_mdl.is_login, functi
 });
 
 
+router.post('/references/:group_name',authentication_mdl.is_login,function(req, res, next) {
+  console.log("-----> Reference Update receive " + JSON.stringify(req.body))
+  var fpath = appRoot + "/data/references/"+ req.params["group_name"] +"_references.json";    
+  var refs = new json.File(fpath);
+  refs.readSync();
+  var ref = refs.get(req.body["pk"]); 
+  if(ref != undefined){
+    ref["description"] = req.body["value"]
+    refs.set(req.body["pk"], ref);
+    refs.writeSync();
+    res.json({success: true})
+  } else {
+    res.json({success: false})
+  }
+      
+});
+
 module.exports = router;
