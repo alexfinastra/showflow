@@ -1,1 +1,317 @@
-{"paymentInitiationIPSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"partyProcessingSRCFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"debitCurrencyConversionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"mopSelectionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"partyDetailsEnrichmentFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"creditCurrencyConversionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"destinationMOPSTPValidationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"debitTransactionCodeFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"creditTransactionCodeFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"validationRuleFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"feesCalculationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"balanceInquiryFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"stopFlagsFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"complianceCheckPrePostingFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"OFACHitFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"capacityCheckFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"postingFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"manualPostingStepIP":{"type":"","description":"BA Help Is Required :)","guide_url":""},"transactionIDFormatValidationFlowStepIP":{"type":"","description":"BA Help Is Required :)","guide_url":""},"formatOutAndTransmissionNppIpOutwardFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"OutwardImmediatePaymentsFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"mappingAndMatchingFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"stopFlagsFlowStepIP":{"type":"","description":"BA Help Is Required :)","guide_url":""},"wareHouseImmediateFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"OutwardIPReturnFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"checkClearingAbortNotificationStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"ComplianceCheckPrePostingFlowStepIP":{"type":"","description":"BA Help Is Required :)","guide_url":""},"BISubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"checkOutwardRemitanceNotificationsFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"GenericOutwardImmediatePaymentsFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"paymentInitiationIPSubFlowRFP":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"paymentClassificationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"cancellationRequestValidationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"CheckOrigStatusStepGeneric":{"type":"","description":"BA Help Is Required :)","guide_url":""},"OutwardIpServiceMessagesFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"mapPaymentInfoOutIPSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"sourceMOPSTPValidationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"enrichAndRepairFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"stpValidationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"duplicateCheckFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"partyProcessingDDFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"loadDebitCustomerFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"creditCustomerPopulationSubFlowIP":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"preventSTPIPSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"responseMatchingCheckFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"RequestForPaymentOutwardFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"checkCompliancResponseStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"IntermediateOutwardImmediatePaymentsFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"IntermediateOutwardIpServiceMessagesFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"FinalOutwardImmediatePaymentsFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"afterAckPostingFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"ClearingAckImmediatePaymentsFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"departmentSelectionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"businessAreaSelectionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"productAreaSelectionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"baseCurrencyConversionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"mappingAndFormattingSubFlowIP":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"specialInstructionsFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"resendClearingRequestFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"replayNakFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"flowCompletionSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"rejectServiceReleaseFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"OutwardImmediatePaymentsAfterAckFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""}}
+{
+  "paymentInitiationIPSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "partyProcessingSRCFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "debitCurrencyConversionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "mopSelectionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "partyDetailsEnrichmentFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "creditCurrencyConversionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "destinationMOPSTPValidationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "debitTransactionCodeFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "creditTransactionCodeFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "validationRuleFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "feesCalculationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "balanceInquiryFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "stopFlagsFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "complianceCheckPrePostingFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "OFACHitFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "capacityCheckFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "postingFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "manualPostingStepIP": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "transactionIDFormatValidationFlowStepIP": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "formatOutAndTransmissionNppIpOutwardFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "OutwardImmediatePaymentsFlow": {
+    "type": "usecase",
+    "description": "Fusion Global PAYplus (GPP) immediate payments product offering enables financial institutions to connect to specific clearings. It   provides financial institutions the capabilities to receive, process, and send Real-time credit transfer payments and payment related messages, while integrating with financial institution’s channels and back-office systems and adhering to the service level agreement (SLA) defined by the industry for the Real-time scheme.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20Generic%20Functions%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  },
+  "mappingAndMatchingFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "stopFlagsFlowStepIP": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "wareHouseImmediateFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "OutwardIPReturnFlow": {
+    "type": "usecase",
+    "description": "Fusion Global PAYplus (GPP) immediate payments product offering enables financial institutions to connect to specific clearings. It   provides financial institutions the capabilities to receive, process, and send Real-time credit transfer payments and payment related messages, while integrating with financial institution’s channels and back-office systems and adhering to the service level agreement (SLA) defined by the industry for the Real-time scheme.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20Generic%20Functions%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  },
+  "checkClearingAbortNotificationStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "ComplianceCheckPrePostingFlowStepIP": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "BISubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "checkOutwardRemitanceNotificationsFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "GenericOutwardImmediatePaymentsFlow": {
+    "type": "usecase",
+    "description": "Fusion Global PAYplus (GPP) immediate payments product offering enables financial institutions to connect to specific clearings. It   provides financial institutions the capabilities to receive, process, and send Real-time credit transfer payments and payment related messages, while integrating with financial institution’s channels and back-office systems and adhering to the service level agreement (SLA) defined by the industry for the Real-time scheme.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20Generic%20Functions%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  },
+  "paymentInitiationIPSubFlowRFP": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "paymentClassificationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "cancellationRequestValidationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "CheckOrigStatusStepGeneric": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "OutwardIpServiceMessagesFlow": {
+    "type": "usecase",
+    "description": "Fusion Global PAYplus (GPP) immediate payments product offering enables financial institutions to connect to specific clearings. It   provides financial institutions the capabilities to receive, process, and send Real-time credit transfer payments and payment related messages, while integrating with financial institution’s channels and back-office systems and adhering to the service level agreement (SLA) defined by the industry for the Real-time scheme.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20Generic%20Functions%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  },
+  "mapPaymentInfoOutIPSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "sourceMOPSTPValidationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "enrichAndRepairFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "stpValidationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "duplicateCheckFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "partyProcessingDDFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "loadDebitCustomerFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "creditCustomerPopulationSubFlowIP": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "preventSTPIPSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "responseMatchingCheckFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "RequestForPaymentOutwardFlow": {
+    "type": "usecase",
+    "description": "Fusion Global PAYplus (GPP) immediate payments product offering enables financial institutions to connect to specific clearings. It   provides financial institutions the capabilities to receive, process, and send Real-time credit transfer payments and payment related messages, while integrating with financial institution’s channels and back-office systems and adhering to the service level agreement (SLA) defined by the industry for the Real-time scheme.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20Generic%20Functions%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  },
+  "checkCompliancResponseStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "IntermediateOutwardImmediatePaymentsFlow": {
+    "type": "usecase",
+    "description": "Fusion Global PAYplus (GPP) immediate payments product offering enables financial institutions to connect to specific clearings. It   provides financial institutions the capabilities to receive, process, and send Real-time credit transfer payments and payment related messages, while integrating with financial institution’s channels and back-office systems and adhering to the service level agreement (SLA) defined by the industry for the Real-time scheme.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20Generic%20Functions%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  },
+  "IntermediateOutwardIpServiceMessagesFlow": {
+    "type": "usecase",
+    "description": "Fusion Global PAYplus (GPP) immediate payments product offering enables financial institutions to connect to specific clearings. It   provides financial institutions the capabilities to receive, process, and send Real-time credit transfer payments and payment related messages, while integrating with financial institution’s channels and back-office systems and adhering to the service level agreement (SLA) defined by the industry for the Real-time scheme.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20Generic%20Functions%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  },
+  "FinalOutwardImmediatePaymentsFlow": {
+    "type": "usecase",
+    "description": "Fusion Global PAYplus (GPP) immediate payments product offering enables financial institutions to connect to specific clearings. It   provides financial institutions the capabilities to receive, process, and send Real-time credit transfer payments and payment related messages, while integrating with financial institution’s channels and back-office systems and adhering to the service level agreement (SLA) defined by the industry for the Real-time scheme.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20Generic%20Functions%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  },
+  "afterAckPostingFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "ClearingAckImmediatePaymentsFlow": {
+    "type": "usecase",
+    "description": "Fusion Global PAYplus (GPP) immediate payments product offering enables financial institutions to connect to specific clearings. It   provides financial institutions the capabilities to receive, process, and send Real-time credit transfer payments and payment related messages, while integrating with financial institution’s channels and back-office systems and adhering to the service level agreement (SLA) defined by the industry for the Real-time scheme.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20Generic%20Functions%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  },
+  "departmentSelectionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "businessAreaSelectionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "productAreaSelectionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "baseCurrencyConversionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "mappingAndFormattingSubFlowIP": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "specialInstructionsFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "resendClearingRequestFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "replayNakFlow": {
+    "type": "usecase",
+    "description": "Fusion Global PAYplus (GPP) immediate payments product offering enables financial institutions to connect to specific clearings. It   provides financial institutions the capabilities to receive, process, and send Real-time credit transfer payments and payment related messages, while integrating with financial institution’s channels and back-office systems and adhering to the service level agreement (SLA) defined by the industry for the Real-time scheme.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20Generic%20Functions%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  },
+  "flowCompletionSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "rejectServiceReleaseFlow": {
+    "type": "usecase",
+    "description": "Fusion Global PAYplus (GPP) immediate payments product offering enables financial institutions to connect to specific clearings. It   provides financial institutions the capabilities to receive, process, and send Real-time credit transfer payments and payment related messages, while integrating with financial institution’s channels and back-office systems and adhering to the service level agreement (SLA) defined by the industry for the Real-time scheme.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20Generic%20Functions%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  },
+  "OutwardImmediatePaymentsAfterAckFlow": {
+    "type": "usecase",
+    "description": "Fusion Global PAYplus (GPP) immediate payments product offering enables financial institutions to connect to specific clearings. It   provides financial institutions the capabilities to receive, process, and send Real-time credit transfer payments and payment related messages, while integrating with financial institution’s channels and back-office systems and adhering to the service level agreement (SLA) defined by the industry for the Real-time scheme.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20Generic%20Functions%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  }
+}

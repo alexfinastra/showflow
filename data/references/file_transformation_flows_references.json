@@ -1,1 +1,352 @@
-{"mapPaymentInfoMPSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"baseCurrencyConversionFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"enrichAndRepairFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"partyDetailsEnrichmentFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"duplicateCheckFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"crisisCheckFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"paymentClassificationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"findFirstInDebitChainFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"debitAccountDerivationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"debitAuthorizationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"mopSelectionFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"destinationMOPSTPValidationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"trnOutputFormatSelectionFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"preventSTPSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"origPmtToIncomingFeedbackPmtMatchingFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"bulkingCheckFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"SingleTransactionFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"CompressFileFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"OutgoingPhysicalFileTransformationFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"DecompressFileFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"FileDisassembleService":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"PhysicalFileFieldsMapping":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"PhysicalFileDepartmentSelection":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"PhysicalFileSummaryCreation":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"FileSummaryCreateOrUpdateForPackagesFailedOnDisassembler":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"IncomingPhysicalFileTransformationFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"IncomingTransactionFileTransformationFlow":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"RestartIncomingLogicalFileTransformationFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"FileSummaryCreation":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"txFileFormatIdentificationSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"FileDepartmentSelection":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"fileValidationSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"txFilePartyDerivationSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"FilePriority":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"FileDuplicateCheck":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"FileCanonicalTransformationService":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"FilePartyDerivation":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"FileLoadParty":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"txFileIdetifyFormatPropertiesSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"FormatDetectionService":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"FileSummaryUpdate":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"FileValidationService":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"ackFileFormatIdentificationSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"IncomingAckFileTransformationFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"ackFileIdetifyFormatPropertiesSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"AssemblingProfileSelection":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"HeaderEnrichment":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"FileOutgoingTransformationService":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"FileProcessingCutoffRulesEvaluation":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"OutgoingFileValidationService":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"FileCutoffCheck":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"SingleFileAssembly":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"PrepareForAssembly":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"OutgoingTransactionFileTransformationFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"AdjustBasicProperties":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"LoadAndValidateChannelPreferences":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"AckOutputFormatSelection":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"ReportSendingPreferencesProfileSelection":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"ReportSendingTimeSelection":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"OutgoingAckFileTransformationFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"IndividualTransactionCancellation":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"BatchCancellation":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"FileCancellation":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"ManualFileCancellationFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"IndividualTransactionCancellationSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"FileCancellationSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"FileCancellationWithIndividualsSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"BatchCancellationSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"SingleFileAssembleActionFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"SingleFileAssembleActionFlowAck":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""}}
+{
+  "mapPaymentInfoMPSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "baseCurrencyConversionFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "enrichAndRepairFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "partyDetailsEnrichmentFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "duplicateCheckFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "crisisCheckFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "paymentClassificationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "findFirstInDebitChainFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "debitAccountDerivationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "debitAuthorizationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "mopSelectionFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "destinationMOPSTPValidationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "trnOutputFormatSelectionFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "preventSTPSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "origPmtToIncomingFeedbackPmtMatchingFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "bulkingCheckFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "SingleTransactionFlow": {
+    "type": "usecase",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "CompressFileFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "OutgoingPhysicalFileTransformationFlow": {
+    "type": "usecase",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "DecompressFileFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FileDisassembleService": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "PhysicalFileFieldsMapping": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "PhysicalFileDepartmentSelection": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "PhysicalFileSummaryCreation": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FileSummaryCreateOrUpdateForPackagesFailedOnDisassembler": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "IncomingPhysicalFileTransformationFlow": {
+    "type": "usecase",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "IncomingTransactionFileTransformationFlow": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "RestartIncomingLogicalFileTransformationFlow": {
+    "type": "usecase",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FileSummaryCreation": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "txFileFormatIdentificationSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FileDepartmentSelection": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "fileValidationSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "txFilePartyDerivationSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FilePriority": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FileDuplicateCheck": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FileCanonicalTransformationService": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FilePartyDerivation": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FileLoadParty": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "txFileIdetifyFormatPropertiesSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FormatDetectionService": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FileSummaryUpdate": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FileValidationService": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "ackFileFormatIdentificationSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "IncomingAckFileTransformationFlow": {
+    "type": "usecase",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "ackFileIdetifyFormatPropertiesSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "AssemblingProfileSelection": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "HeaderEnrichment": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FileOutgoingTransformationService": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FileProcessingCutoffRulesEvaluation": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "OutgoingFileValidationService": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FileCutoffCheck": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "SingleFileAssembly": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "PrepareForAssembly": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "OutgoingTransactionFileTransformationFlow": {
+    "type": "usecase",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "AdjustBasicProperties": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "LoadAndValidateChannelPreferences": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "AckOutputFormatSelection": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "ReportSendingPreferencesProfileSelection": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "ReportSendingTimeSelection": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "OutgoingAckFileTransformationFlow": {
+    "type": "usecase",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "IndividualTransactionCancellation": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "BatchCancellation": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FileCancellation": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "ManualFileCancellationFlow": {
+    "type": "usecase",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "IndividualTransactionCancellationSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FileCancellationSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "FileCancellationWithIndividualsSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "BatchCancellationSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "SingleFileAssembleActionFlow": {
+    "type": "usecase",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "SingleFileAssembleActionFlowAck": {
+    "type": "usecase",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  }
+}

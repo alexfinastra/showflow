@@ -1,1 +1,627 @@
-{"paymentInitiationSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"sourcePaymentProcessingCTSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"destinationPaymentProcessingSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"postMOPselectionSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"preProcessingMassPaymentDDFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"preProcessingMassPaymentCTFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"mapPaymentInfoMPSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"baseCurrencyConversionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"enrichAndRepairFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"partyDetailsEnrichmentFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"sourceMOPSTPValidationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"origPmtToIncomingFeedbackPmtMatchingFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"officeSLAFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"batchControlDerivationFlowStepMP":{"type":"","description":"BA Help Is Required :)","guide_url":""},"departmentSelectionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"businessAreaSelectionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"productAreaSelectionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"mapMandateInfoMPSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"creditCustomerPopulationSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"creditCurrencyConversionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"duplicateCheckFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"slaFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"sourcePaymentProcessingDDSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"debitCustomerPopulationSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"debitCurrencyConversionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"debitSLAFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"InactiveBehaviourFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"InterfaceTimeOutFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"findFirstInDebitChainFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"loadDebitCustomerFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"debitAccountDerivationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"debitAuthorizationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"findFirstInCreditChainFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"loadCreditCustomerFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"creditAccountDerivationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"mopSelectionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"destinationMOPSTPValidationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"mopXSDValidationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"stopAndPermitValidationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"mandateValidationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"trnOutputFormatSelectionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"transferMethodFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"destinationCurrencyConversionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"preventSTPSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"feesCalculationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"handleWaitBehaviorFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"timeHoldFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"SubBatchSrcPartySubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"transactionCodeMappingFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"debitFeesCalculationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"balanceInquiryFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"complianceCheckFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"wareHouseFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"currencyConversionExternalFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"postingFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"subBatchGenerationMassPaymentFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"calculateMopValueDateFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"creditAccountEnrichmentFlowStepMP":{"type":"","description":"BA Help Is Required :)","guide_url":""},"GenerateUTRFlowStepMP":{"type":"","description":"BA Help Is Required :)","guide_url":""},"generateRMsgIndexStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"MPhandOffAndAccountingSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"preventSTPPaymentSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"postingSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"performBulkingCheckFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"changeStatusFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"formatOutAndTransmissionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"subBatchCompletionMassPaymentFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"specialInstructionsFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"validationRuleFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"NotificationExecutionStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"IncomingTransactionNotificationFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"mpIndividualPaymentUserActionFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"mpIndividualPaymentUserActionFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"mpIndividualPaymentApproveRefuseCancelAdvisinglFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"mpIndividualPaymentApproveRefuseCancelSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"suspendMandateMopSelectionStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"suspendMandateSetMatchingIndexStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"suspendMandateBulkingCheckFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"MPSuspendMandateFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"setBasicPropertiesFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"incomingSuspendMandateStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"MPIncomingSuspendMandateFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"mandateAckMatchingMessageStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"advisingAndNotificationFlowStepMandate":{"type":"","description":"BA Help Is Required :)","guide_url":""},"nonAccountingMPMandateAckFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"paymentInitiationNonAccountingSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"debitCustomerPopulationNonAccountingSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"destinationPaymentProcessingNonAccountingSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"postMOPselectionNonAccountingSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"formatOutAndTransmissionMandateOutwardFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"processingMassPaymentNonAccountingFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"processingMassPaymentNonAccountingAuthorizationFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"MandateCancellationMatchingStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"creditCustomerPopulationFlowSteps":{"type":"","description":"BA Help Is Required :)","guide_url":""},"creditCustomerPopulationNonAccountingSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"stopFlagsFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"calculateReleaseDateStepMP":{"type":"","description":"BA Help Is Required :)","guide_url":""},"outwardBasicNonAccountingSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"flowManagementRulesFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"outwardAckRTNonAccountingSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"bulkingCheckFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"outwardSendoutNonAccountingSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"batchLoadPartyAndDeriveAccountSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"batchEnrichAndRepairFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"batchPartyDetailEnrichmentFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"batchPreventSTPSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"batchFlowManagmentSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"processingBatchFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"batchSpecialInstructionsFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"batchValidationRuleFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"batchWorkflowDeterminationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"batchAdvisingAndNotificationFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"debitTransactionCodeFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"creditTransactionCodeFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"crisisCheckFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"compensationCalculationForOutgoingGeneratedPaymentsFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"outgoingRequestForChargesFlowStep":{"type":"","description":"BA Help Is Required :)","guide_url":""},"LoadSrcPartyForSMessageSubFlow":{"type":"subflow","description":"BA Help Is Required :)","guide_url":""},"generateIncomingRMsgIndexStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"liveDollarTransactionFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"destinationPartyProcessingFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"determineBatchBookingFlowStepMP":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"agentFeesCalculationFlowStepMP":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"DateAndMopValidationsForSubBatch":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"DateAndMopValidationsForIndividual":{"type":"activity","description":"BA Help Is Required :)","guide_url":""}}
+{
+  "paymentInitiationSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "sourcePaymentProcessingCTSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "destinationPaymentProcessingSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "postMOPselectionSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "preProcessingMassPaymentDDFlow": {
+    "type": "usecase",
+    "description": "An initiating party (creditor) sends collection instructions to the bank requesting the transfer of funds from a debtor account to a creditor account. In a mass payment scenario, the initiating party, such as a FI customer or clearing partner, sends a file containing multiple direct debit transactions. The transactions instruct the FI to collect funds from multiple debtor accounts,held at clearing participant banks, and credit a single creditor account.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Mass%20Payments/GPP-SP%204.6/Business%20Guide/GPP%20Business%20Guide%20Mass%20Payments%20-%20DD.pdf"
+  },
+  "preProcessingMassPaymentCTFlow": {
+    "type": "usecase",
+    "description": "An initiating party (debtor) sends payment instructions to the bank ordering the transfer of funds from a debtor account to a creditor account. For Mass Payments, the FI receives a file containing multiple credit transactions. The transactions instruct the FI to transfer funds from a single debtor account to multiple creditor accounts held at clearing participant FIs. ",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Mass%20Payments/GPP-SP%204.6/Business%20Guide/GPP%20Business%20Guide%20Mass%20Payments%20Credit%20Transfer.pdf"
+  },
+  "mapPaymentInfoMPSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "baseCurrencyConversionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "enrichAndRepairFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "partyDetailsEnrichmentFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "sourceMOPSTPValidationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "origPmtToIncomingFeedbackPmtMatchingFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "officeSLAFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "batchControlDerivationFlowStepMP": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "departmentSelectionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "businessAreaSelectionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "productAreaSelectionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "mapMandateInfoMPSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "creditCustomerPopulationSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "creditCurrencyConversionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "duplicateCheckFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "slaFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "sourcePaymentProcessingDDSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "debitCustomerPopulationSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "debitCurrencyConversionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "debitSLAFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "InactiveBehaviourFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "InterfaceTimeOutFlow": {
+    "type": "usecase",
+    "description": "An initiating party (debtor) sends payment instructions to the bank ordering the transfer of funds from a debtor account to a creditor account. For Mass Payments, the FI receives a file containing multiple credit transactions. The transactions instruct the FI to transfer funds from a single debtor account to multiple creditor accounts held at clearing participant FIs. ",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Mass%20Payments/GPP-SP%204.6/Business%20Guide/GPP%20Business%20Guide%20Mass%20Payments%20Credit%20Transfer.pdf"
+  },
+  "findFirstInDebitChainFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "loadDebitCustomerFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "debitAccountDerivationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "debitAuthorizationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "findFirstInCreditChainFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "loadCreditCustomerFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "creditAccountDerivationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "mopSelectionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "destinationMOPSTPValidationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "mopXSDValidationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "stopAndPermitValidationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "mandateValidationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "trnOutputFormatSelectionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "transferMethodFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "destinationCurrencyConversionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "preventSTPSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "feesCalculationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "handleWaitBehaviorFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "timeHoldFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "SubBatchSrcPartySubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "transactionCodeMappingFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "debitFeesCalculationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "balanceInquiryFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "complianceCheckFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "wareHouseFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "currencyConversionExternalFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "postingFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "subBatchGenerationMassPaymentFlow": {
+    "type": "usecase",
+    "description": "An initiating party (debtor) sends payment instructions to the bank ordering the transfer of funds from a debtor account to a creditor account. For Mass Payments, the FI receives a file containing multiple credit transactions. The transactions instruct the FI to transfer funds from a single debtor account to multiple creditor accounts held at clearing participant FIs. ",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Mass%20Payments/GPP-SP%204.6/Business%20Guide/GPP%20Business%20Guide%20Mass%20Payments%20Credit%20Transfer.pdf"
+  },
+  "calculateMopValueDateFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "creditAccountEnrichmentFlowStepMP": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "GenerateUTRFlowStepMP": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "generateRMsgIndexStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "MPhandOffAndAccountingSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "preventSTPPaymentSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "postingSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "performBulkingCheckFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "changeStatusFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "formatOutAndTransmissionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "subBatchCompletionMassPaymentFlow": {
+    "type": "usecase",
+    "description": "An initiating party (debtor) sends payment instructions to the bank ordering the transfer of funds from a debtor account to a creditor account. For Mass Payments, the FI receives a file containing multiple credit transactions. The transactions instruct the FI to transfer funds from a single debtor account to multiple creditor accounts held at clearing participant FIs. ",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Mass%20Payments/GPP-SP%204.6/Business%20Guide/GPP%20Business%20Guide%20Mass%20Payments%20Credit%20Transfer.pdf"
+  },
+  "specialInstructionsFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "validationRuleFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "NotificationExecutionStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "IncomingTransactionNotificationFlow": {
+    "type": "usecase",
+    "description": "An initiating party (debtor) sends payment instructions to the bank ordering the transfer of funds from a debtor account to a creditor account. For Mass Payments, the FI receives a file containing multiple credit transactions. The transactions instruct the FI to transfer funds from a single debtor account to multiple creditor accounts held at clearing participant FIs. ",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Mass%20Payments/GPP-SP%204.6/Business%20Guide/GPP%20Business%20Guide%20Mass%20Payments%20Credit%20Transfer.pdf"
+  },
+  "mpIndividualPaymentUserActionFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "mpIndividualPaymentUserActionFlow": {
+    "type": "usecase",
+    "description": "An initiating party (debtor) sends payment instructions to the bank ordering the transfer of funds from a debtor account to a creditor account. For Mass Payments, the FI receives a file containing multiple credit transactions. The transactions instruct the FI to transfer funds from a single debtor account to multiple creditor accounts held at clearing participant FIs. ",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Mass%20Payments/GPP-SP%204.6/Business%20Guide/GPP%20Business%20Guide%20Mass%20Payments%20Credit%20Transfer.pdf"
+  },
+  "mpIndividualPaymentApproveRefuseCancelAdvisinglFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "mpIndividualPaymentApproveRefuseCancelSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "suspendMandateMopSelectionStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "suspendMandateSetMatchingIndexStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "suspendMandateBulkingCheckFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "MPSuspendMandateFlow": {
+    "type": "usecase",
+    "description": "An initiating party (creditor) sends collection instructions to the bank requesting the transfer of funds from a debtor account to a creditor account. In a mass payment scenario, the initiating party, such as a FI customer or clearing partner, sends a file containing multiple direct debit transactions. The transactions instruct the FI to collect funds from multiple debtor accounts,held at clearing participant banks, and credit a single creditor account.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Mass%20Payments/GPP-SP%204.6/Business%20Guide/GPP%20Business%20Guide%20Mass%20Payments%20-%20DD.pdf"
+  },
+  "setBasicPropertiesFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "incomingSuspendMandateStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "MPIncomingSuspendMandateFlow": {
+    "type": "usecase",
+    "description": "An initiating party (creditor) sends collection instructions to the bank requesting the transfer of funds from a debtor account to a creditor account. In a mass payment scenario, the initiating party, such as a FI customer or clearing partner, sends a file containing multiple direct debit transactions. The transactions instruct the FI to collect funds from multiple debtor accounts,held at clearing participant banks, and credit a single creditor account.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Mass%20Payments/GPP-SP%204.6/Business%20Guide/GPP%20Business%20Guide%20Mass%20Payments%20-%20DD.pdf"
+  },
+  "mandateAckMatchingMessageStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "advisingAndNotificationFlowStepMandate": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "nonAccountingMPMandateAckFlow": {
+    "type": "usecase",
+    "description": "An initiating party (creditor) sends collection instructions to the bank requesting the transfer of funds from a debtor account to a creditor account. In a mass payment scenario, the initiating party, such as a FI customer or clearing partner, sends a file containing multiple direct debit transactions. The transactions instruct the FI to collect funds from multiple debtor accounts,held at clearing participant banks, and credit a single creditor account.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Mass%20Payments/GPP-SP%204.6/Business%20Guide/GPP%20Business%20Guide%20Mass%20Payments%20-%20DD.pdf"
+  },
+  "paymentInitiationNonAccountingSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "debitCustomerPopulationNonAccountingSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "destinationPaymentProcessingNonAccountingSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "postMOPselectionNonAccountingSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "formatOutAndTransmissionMandateOutwardFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "processingMassPaymentNonAccountingFlow": {
+    "type": "usecase",
+    "description": "An initiating party (debtor) sends payment instructions to the bank ordering the transfer of funds from a debtor account to a creditor account. For Mass Payments, the FI receives a file containing multiple credit transactions. The transactions instruct the FI to transfer funds from a single debtor account to multiple creditor accounts held at clearing participant FIs. ",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Mass%20Payments/GPP-SP%204.6/Business%20Guide/GPP%20Business%20Guide%20Mass%20Payments%20Credit%20Transfer.pdf"
+  },
+  "processingMassPaymentNonAccountingAuthorizationFlow": {
+    "type": "usecase",
+    "description": "An initiating party (debtor) sends payment instructions to the bank ordering the transfer of funds from a debtor account to a creditor account. For Mass Payments, the FI receives a file containing multiple credit transactions. The transactions instruct the FI to transfer funds from a single debtor account to multiple creditor accounts held at clearing participant FIs. ",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Mass%20Payments/GPP-SP%204.6/Business%20Guide/GPP%20Business%20Guide%20Mass%20Payments%20Credit%20Transfer.pdf"
+  },
+  "MandateCancellationMatchingStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "creditCustomerPopulationFlowSteps": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "creditCustomerPopulationNonAccountingSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "stopFlagsFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "calculateReleaseDateStepMP": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "outwardBasicNonAccountingSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "flowManagementRulesFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "outwardAckRTNonAccountingSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "bulkingCheckFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "outwardSendoutNonAccountingSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "batchLoadPartyAndDeriveAccountSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "batchEnrichAndRepairFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "batchPartyDetailEnrichmentFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "batchPreventSTPSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "batchFlowManagmentSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "processingBatchFlow": {
+    "type": "usecase",
+    "description": "An initiating party (debtor) sends payment instructions to the bank ordering the transfer of funds from a debtor account to a creditor account. For Mass Payments, the FI receives a file containing multiple credit transactions. The transactions instruct the FI to transfer funds from a single debtor account to multiple creditor accounts held at clearing participant FIs. ",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Mass%20Payments/GPP-SP%204.6/Business%20Guide/GPP%20Business%20Guide%20Mass%20Payments%20Credit%20Transfer.pdf"
+  },
+  "batchSpecialInstructionsFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "batchValidationRuleFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "batchWorkflowDeterminationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "batchAdvisingAndNotificationFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "debitTransactionCodeFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "creditTransactionCodeFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "crisisCheckFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "compensationCalculationForOutgoingGeneratedPaymentsFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "outgoingRequestForChargesFlowStep": {
+    "type": "",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "LoadSrcPartyForSMessageSubFlow": {
+    "type": "subflow",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "generateIncomingRMsgIndexStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "liveDollarTransactionFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "destinationPartyProcessingFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "determineBatchBookingFlowStepMP": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "agentFeesCalculationFlowStepMP": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "DateAndMopValidationsForSubBatch": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "DateAndMopValidationsForIndividual": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  }
+}

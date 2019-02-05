@@ -1,1 +1,192 @@
-{"receivingBankValidationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"departmentSelectionFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"baseCurrencyConversionFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"enrichAndRepairFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"recallMatchingIndexFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"stpValidationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"duplicateCheckFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"debitAccountDerivationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"creditAccountSelectionFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"mopSelectionFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"destinationMOPSTPValidationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"drCRTransactionCodeRulesFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"creditFeesCalculationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"stopFlagsFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"complianceCheckFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"postingFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"changeStatusFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"g3CTIFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"instructionIdGenerationFlowStepG3":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"advisingAndNotificationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"debitAccountSelectionFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"creditPartyDerivationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"capacityCheckFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"debitFeesCalculationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"formatOutAndTransmissionFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"g3CTOFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"creditAccountDerivationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"mandateValidationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"g3DDIFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"messageClassificationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"responseMatchingCheckFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"cancellationRequestValidationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"matchingEvaluationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"reversePostingFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"setMessageStatusFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"g3ReversalFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"answerGenerationFlowStep":{"type":"activity","description":"BA Help Is Required :)","guide_url":""},"g3CancellationFlow":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""}}
+{
+  "receivingBankValidationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "departmentSelectionFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "baseCurrencyConversionFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "enrichAndRepairFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "recallMatchingIndexFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "stpValidationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "duplicateCheckFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "debitAccountDerivationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "creditAccountSelectionFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "mopSelectionFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "destinationMOPSTPValidationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "drCRTransactionCodeRulesFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "creditFeesCalculationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "stopFlagsFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "complianceCheckFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "postingFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "changeStatusFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "g3CTIFlow": {
+    "type": "usecase",
+    "description": "Immediate processing is for low value, Real-Time payment transfers, between participating banks. G3 is one type of an Immediate Payment Process.  G3 is Singapore’s Payment infrastructure services offered by Singapore Automated Clearing House (SACH). G3 payments are low-value, Real-Time transactions for which end user should receive a response within a defined period of time (for example, 15 seconds) that the transaction has been completed successfully. This functional specification details the transaction flow and processing for the different types of Real-Time transactions between G3 Clearing and the Member Bank who are participating in G3.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20for%20Singapore%20%28G3%29%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  },
+  "instructionIdGenerationFlowStepG3": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "advisingAndNotificationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "debitAccountSelectionFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "creditPartyDerivationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "capacityCheckFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "debitFeesCalculationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "formatOutAndTransmissionFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "g3CTOFlow": {
+    "type": "usecase",
+    "description": "Immediate processing is for low value, Real-Time payment transfers, between participating banks. G3 is one type of an Immediate Payment Process.  G3 is Singapore’s Payment infrastructure services offered by Singapore Automated Clearing House (SACH). G3 payments are low-value, Real-Time transactions for which end user should receive a response within a defined period of time (for example, 15 seconds) that the transaction has been completed successfully. This functional specification details the transaction flow and processing for the different types of Real-Time transactions between G3 Clearing and the Member Bank who are participating in G3.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20for%20Singapore%20%28G3%29%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  },
+  "creditAccountDerivationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "mandateValidationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "g3DDIFlow": {
+    "type": "usecase",
+    "description": "Immediate processing is for low value, Real-Time payment transfers, between participating banks. G3 is one type of an Immediate Payment Process.  G3 is Singapore’s Payment infrastructure services offered by Singapore Automated Clearing House (SACH). G3 payments are low-value, Real-Time transactions for which end user should receive a response within a defined period of time (for example, 15 seconds) that the transaction has been completed successfully. This functional specification details the transaction flow and processing for the different types of Real-Time transactions between G3 Clearing and the Member Bank who are participating in G3.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20for%20Singapore%20%28G3%29%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  },
+  "messageClassificationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "responseMatchingCheckFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "cancellationRequestValidationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "matchingEvaluationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "reversePostingFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "setMessageStatusFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "g3ReversalFlow": {
+    "type": "usecase",
+    "description": "BA Help Is Required :)",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20for%20Singapore%20%28G3%29%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  },
+  "answerGenerationFlowStep": {
+    "type": "activity",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "g3CancellationFlow": {
+    "type": "usecase",
+    "description": "Immediate processing is for low value, Real-Time payment transfers, between participating banks. G3 is one type of an Immediate Payment Process.  G3 is Singapore’s Payment infrastructure services offered by Singapore Automated Clearing House (SACH). G3 payments are low-value, Real-Time transactions for which end user should receive a response within a defined period of time (for example, 15 seconds) that the transaction has been completed successfully. This functional specification details the transaction flow and processing for the different types of Real-Time transactions between G3 Clearing and the Member Bank who are participating in G3.",
+    "guide_url": "https://finastra.sharepoint.com/Structured/gpsil/PaymentsSbuIL/Product/Product%20Offerings/Forms/AllItems.aspx?FolderCTID=0x012000B0C77E2C40BE0C42B07C834D0008F829&id=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide%2FGPP%20Business%20Guide%20Immediate%20Payment%20for%20Singapore%20%28G3%29%2Epdf&parent=%2FStructured%2Fgpsil%2FPaymentsSbuIL%2FProduct%2FProduct%20Offerings%2FImmediate%20Payments%2FGPP-SP%204%2E6%2FBusiness%20Guide"
+  }
+}

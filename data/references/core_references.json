@@ -1,1 +1,12 @@
-{"flowContextFactoryFactory":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""},"flowInvoker":{"type":"usecase","description":"BA Help Is Required :)","guide_url":""}}
+{
+  "flowContextFactoryFactory": {
+    "type": "usecase",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  },
+  "flowInvoker": {
+    "type": "usecase",
+    "description": "BA Help Is Required :)",
+    "guide_url": ""
+  }
+}

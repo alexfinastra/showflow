@@ -136,7 +136,7 @@ function sendMail(user, res){
 	  from: 'finastra.integration.team@gmail.com',
 	  to: user["email"],
 	  subject: 'ShowFlow access link :)',
-	  text: " Please follow the link : https://paymentflow.herokuapp.com/confirmation/"+user["email"]+"/"+user["verify_code"]
+	  text: "Hello, \n\nPlease follow the link : https://paymentflow.herokuapp.com/confirmation/"+user["email"]+"/"+user["verify_code"] + " to login. \n\nThank you, \nShowFlow Team."
 	};
 
 	transporter.sendMail(mailOptions, function(error, info){
