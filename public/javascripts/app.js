@@ -155,11 +155,6 @@ $(document).ready(function(){
      cursorwidth: 4,
   });
 
-  $("#details").niceScroll({
-     cursorcolor: '#FFFFFF',
-     cursorwidth: 4,
-  });
-
 	$('#dismiss, .overlay').on('click', function () {
 	  $('#sidebar').removeClass('active');
 	  $('.overlay').fadeOut();
@@ -346,13 +341,15 @@ $(document).ready(function(){
 	      	$subflow_modal
 	        	.removeClass('modal-scrollfix')
 	        	.modal('handleUpdate')
-	        	.modal('show');
-	        $('.description').editable();	
-		      $subflow_modal.niceScroll({
+	        	.modal({ 	backdrop: 'static',
+                    	keyboard: true, 
+                    	show: true });	
+	      }
+	      $('.modal-body').niceScroll({
 				     cursorcolor: '#FFFFFF',
 				     cursorwidth: 4,
 				  });
-	      }
+				$('.description').editable();	
 	    });
 	});
 
@@ -390,13 +387,19 @@ $(document).ready(function(){
 	    .find('.modal-body')
 	    .html('loading...')
 	    .load("/payments/details/" + env + "/"+ mid + "/" + uid  + "/" + view , function() {
-	      // Use Bootstrap's built-in function to fix scrolling (to no avail)
+	        // Use Bootstrap's built-in function to fix scrolling (to no avail)
 	      if(($details_modal.data('bs.modal') || {})._isShown == false){
 	      	$details_modal
 	        	.removeClass('modal-scrollfix')
 	        	.modal('handleUpdate')
-	        	.modal('show');
-	        }
+	        	.modal({ 	backdrop: 'static',
+                    	keyboard: true, 
+                    	show: true });	
+	      }
+	      $('.modal-body').niceScroll({
+				     cursorcolor: '#FFFFFF',
+				     cursorwidth: 4,
+				  });
 	    });
 	});
 
