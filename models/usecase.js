@@ -14,30 +14,42 @@ function Usecase(doc){
     this._flow["name"] = doc["name"]
   }
 
-  var group_name = doc["group"].replace(/ /g, "_")
-  var fpath = appRoot + "/data/references/"+ group_name +"_references.json";    
-  var refs = new json.File(fpath);
-  refs.readSync();
-  ref = refs.get(doc["uid"]); 
-  
-  if (ref != undefined ){  
-    this._flow["guide_url"] = ref["guide_url"]
-    this._flow["description"] = ref["description"]   
-  } else {
-    this._flow["guide_url"] = doc["guide_url"]
-    this._flow["description"] = doc["description"] 
-  }
+  var group_name = doc["group"]!= undefined ? doc["group"].replace(/ /g, "_") : undefined
+  if(group_name != undefined){
+    var fpath = appRoot + "/data/references/"+ group_name +"_references.json";    
+    var refs = new json.File(fpath);
+    refs.readSync();
+    ref = refs.get(doc["uid"]); 
+    
+    if (ref != undefined ){  
+      this._flow["guide_url"] = ref["guide_url"]
+      this._flow["description"] = ref["description"]   
+    } else {
+      this._flow["guide_url"] = doc["guide_url"]
+      this._flow["description"] = doc["description"] 
+    }
 
-  this._flow["items"] = [];  
-  if(doc["flowsteps"].length > 0){
-    for(var i=0; i< doc["flowsteps"].length; i++){
-      var step =  doc["flowsteps"][i]         
-      var r = refs.get(step["uid"]);      
-      if(r != undefined) {step["description"] = r["description"] ;}      
-      step["group_name"] = group_name;
-      this._flow["items"].push(step)
-    }  
+    this._flow["items"] = [];  
+    if(doc["flowsteps"].length > 0){
+      for(var i=0; i< doc["flowsteps"].length; i++){
+        var step =  doc["flowsteps"][i]         
+        var r = refs.get(step["uid"]);      
+        if(r != undefined) {step["description"] = r["description"] ;}      
+        step["group_name"] = group_name;
+        this._flow["items"].push(step)
+      }  
+    }
+  } else {
+    this._flow["description"] = doc["description"]
+    this._flow["items"] = [];  
+    if(doc["flowsteps"].length > 0){
+      for(var i=0; i< doc["flowsteps"].length; i++){
+        var step =  doc["flowsteps"][i]                 
+        this._flow["items"].push(step)
+      }  
+    }
   }
+  
 }
 
 module.exports = Usecase;

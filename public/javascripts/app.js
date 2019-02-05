@@ -360,18 +360,27 @@ $(document).ready(function(){
 	  env = $(e.target).data('env') != undefined ? $(e.target).data('env') : env;
 	  uid = $(e.target).data('uid') != undefined ? $(e.target).data('uid') : uid;
 	  back = $(e.target).data('back') != undefined ? $(e.target).data('back') : back;	  
+	  if(($subflow_modal.data('bs.modal') || {})._isShown == true){
+	  	$subflow_modal.modal('hide')
+	  }
 	  $flowmanagement_modal
 	    .addClass('modal-scrollfix')
 	    .find('.modal-body')
 	    .html('loading...')
 	    .load("/usecases/flowmanagement/" + env + "/"+ uid + "/" + back, function() {
-	      // Use Bootstrap's built-in function to fix scrolling (to no avail)
+	        // Use Bootstrap's built-in function to fix scrolling (to no avail)
 	      if(($flowmanagement_modal.data('bs.modal') || {})._isShown == false){
 	      	$flowmanagement_modal
 	        	.removeClass('modal-scrollfix')
 	        	.modal('handleUpdate')
-	        	.modal('show');
-	        }
+	        	.modal({ 	backdrop: 'static',
+                    	keyboard: true, 
+                    	show: true });	
+	      }
+	      $('.modal-body').niceScroll({
+				     cursorcolor: '#FFFFFF',
+				     cursorwidth: 4,
+				  });
 	    });
 	});
 
