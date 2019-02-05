@@ -830,26 +830,25 @@ var envName = function(filename){
 
 
 method.parse = function(filename, cb){
-  if(filename.indexOf(".xml") > -1){
+  if(filename.indexOf(".xml") != -1){
     parseConfig(filename, cb);
   }
-
-  if(filename.indexOf(".log") != -1 || filename.indexOf(".txt") != -1){
-    var env = envName(filename);
-    var storage = new Storage(env + "_usecases"); 
-    storage.collectionExists(function(exists){
-      if (exists){
-        parseTrace(filename, cb);    
-      } else{
-        console.log("Usecases collection does not exists could not apply matching :( ")
-        cb();
-      }
-    })    
-  } else {
-    cb();
+  else{
+    if(filename.indexOf(".log") != -1 || filename.indexOf(".txt") != -1){
+      var env = envName(filename);
+      var storage = new Storage(env + "_usecases"); 
+      storage.collectionExists(function(exists){
+        if (exists){
+          parseTrace(filename, cb);    
+        } else{
+          console.log("Usecases collection does not exists could not apply matching :( ")
+          cb();
+        }
+      })    
+    } else {
+      cb();
+    }
   }
-
-
 }
 module.exports = Parser;
 
