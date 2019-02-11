@@ -166,6 +166,10 @@ $(document).ready(function(){
 		})
 	}
 
+	if($('.timeline').length > 0){
+		$('#searchbtn').prop('disabled', false);
+		$('#searchtxt').prop('readonly', false);
+	}
 
 	// upload log file with progress
 	$('input#logs-upload[type=file]').change(function(){		

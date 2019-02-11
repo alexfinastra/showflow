@@ -7,6 +7,9 @@ nav.navbar.fixed-top.navbar-expand-lg.navbar-light.bg-light.justify-content-betw
         #listFlows.dropdown-item Business Flows
         #listPayments.dropdown-item Payment Flows
         #exitFlows.dropdown-item Exit
+    form#searchform.form-inline.my-2.my-lg-0
+      input#searchtxt.form-control.mr-sm-2(type='search', placeholder='search rule, name or functionality', aria-label='Search', style="width: 30rem;", readonly)
+      button#searchbtn.btn.btn-outline-success.my-2.my-sm-0(type='submit', disabled) Search Flow
     span.nav-item
       button.btn.btn-outline-success(type="button", data-toggle="modal", data-target="#uploadModal") Upload files
 
